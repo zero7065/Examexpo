@@ -178,9 +178,9 @@ const Dashboard = () => {
           
           {/* Community & Referral */}
           <div className="grid md:grid-cols-2 gap-4">
-            {/* WhatsApp Group */}
+            {/* WhatsApp */}
             <a 
-              href="https://chat.whatsapp.com/example" 
+              href="https://wa.me/2348127636057?text=Hey%20from%20ExamPadi!%20I%27m%20ready%20to%20ace%20my%20exams%20💪"
               target="_blank"
               rel="noopener noreferrer"
               className="glass-card p-6 border-green-500/20 bg-green-500/5 hover:border-green-500/40 transition-all group"
@@ -192,8 +192,8 @@ const Dashboard = () => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-text">Join Study Group</h3>
-                  <p className="text-xs text-text-muted">Connect with fellow students</p>
+                  <h3 className="text-lg font-bold text-text">Chat with Us</h3>
+                  <p className="text-xs text-text-muted">Get help, share feedback</p>
                 </div>
               </div>
             </a>
