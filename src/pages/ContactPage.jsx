@@ -105,7 +105,7 @@ const ContactPage = () => {
       <div className="mt-10 glass-card p-6">
         <h3 className="font-bold mb-4">Other ways to reach us:</h3>
         <div className="space-y-3 text-text-muted">
-          <p>📧 Email: support@exampadi.ai</p>
+          <p>📧 Email: jadai7065@gmail.com</p>
           <p>📱 WhatsApp: +234 700 EXAMPADI</p>
         </div>
       </div>

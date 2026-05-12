@@ -145,7 +145,7 @@ const LandingPage = () => {
           <span>·</span>
           <Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
           <span>·</span>
-          <a href="mailto:support@jadai.dev" className="hover:text-primary transition-colors">Contact</a>
+          <a href="mailto:jadai7065@gmail.com" className="hover:text-primary transition-colors">Contact</a>
         </div>
         <p className="text-text-muted text-sm font-medium">© 2025 ExamPadi AI by Jadai Studios · jadai.dev</p>
       </footer>

@@ -23,7 +23,7 @@ export default function PrivacyPage() {
       <div className="space-y-8 text-text-muted leading-relaxed">
         <section>
           <h2 className="text-xl font-bold text-text mb-3">1. Who We Are</h2>
-          <p>ExamPadi AI is operated by Jadai Studios. We build AI-powered study tools for Nigerian students preparing for JAMB and WAEC exams. Contact us at: <a href="mailto:support@jadai.dev" className="text-primary hover:underline">support@jadai.dev</a></p>
+          <p>ExamPadi AI is operated by Jadai Studios. We build AI-powered study tools for Nigerian students preparing for JAMB and WAEC exams. Contact us at: <a href="mailto:jadai7065@gmail.com" className="text-primary hover:underline">jadai7065@gmail.com</a></p>
         </section>
 
         <section>
@@ -65,7 +65,7 @@ export default function PrivacyPage() {
             <li>Request deletion of your account and all associated data</li>
             <li>Opt out of non-essential communications</li>
           </ul>
-          <p className="mt-2">Email <a href="mailto:support@jadai.dev" className="text-primary hover:underline">support@jadai.dev</a> for any of the above.</p>
+          <p className="mt-2">Email <a href="mailto:jadai7065@gmail.com" className="text-primary hover:underline">jadai7065@gmail.com</a> for any of the above.</p>
         </section>
 
         <section>

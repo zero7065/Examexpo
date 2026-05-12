@@ -73,7 +73,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="text-xl font-bold text-text mb-3">8. Termination</h2>
-          <p>We reserve the right to suspend or terminate accounts that violate these terms, without refund. You may delete your account at any time by contacting <a href="mailto:support@jadai.dev" className="text-primary hover:underline">support@jadai.dev</a>.</p>
+          <p>We reserve the right to suspend or terminate accounts that violate these terms, without refund. You may delete your account at any time by contacting <a href="mailto:jadai7065@gmail.com" className="text-primary hover:underline">jadai7065@gmail.com</a>.</p>
         </section>
 
         <section>
@@ -88,7 +88,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="text-xl font-bold text-text mb-3">11. Contact</h2>
-          <p>Questions? Email us at <a href="mailto:support@jadai.dev" className="text-primary hover:underline">support@jadai.dev</a></p>
+          <p>Questions? Email us at <a href="mailto:jadai7065@gmail.com" className="text-primary hover:underline">jadai7065@gmail.com</a></p>
         </section>
       </div>
 
