@@ -84,6 +84,25 @@ function loginUser(email, password) {
   return sessionUser;
 }
 
+function resetPassword(email, newPassword) {
+  const users = getUsers();
+  const userIndex = users.findIndex(u => u.email === email);
+  
+  if (userIndex === -1) {
+    throw new Error("No account found with this email");
+  }
+  
+  users[userIndex].password = newPassword;
+  saveUsers(users);
+  
+  return true;
+}
+
+function findUserByEmail(email) {
+  const users = getUsers();
+  return users.find(u => u.email === email);
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -184,7 +203,9 @@ export function AuthProvider({ children }) {
       login, 
       logout, 
       updateUser,
-      isPro 
+      isPro,
+      resetPassword: (email, newPassword) => resetPassword(email, newPassword),
+      findUserByEmail: (email) => findUserByEmail(email)
     }}>
       {children}
     </AuthContext.Provider>

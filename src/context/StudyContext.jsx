@@ -32,6 +32,7 @@ function studyReducer(state, action) {
         },
       };
     case "END_SESSION":
+      localStorage.removeItem("exampadi_active_session");
       return { ...state, currentSession: null, history: [...state.history, action.payload] };
     case "LOAD_HISTORY":
       return { ...state, history: action.payload };
@@ -89,15 +90,40 @@ export const StudyProvider = ({ children }) => {
   const [state, dispatch] = useReducer(studyReducer, initialState);
   const isConfigured = db !== null && db !== undefined;
 
-  // Load history from localStorage on mount
+  // Load history and resume session from localStorage on mount
   useEffect(() => {
     const session = localStorage.getItem("exampadi_session");
     if (session) {
       const user = JSON.parse(session);
       const history = getLocalSessions(user.id);
       dispatch({ type: "LOAD_HISTORY", payload: history });
+      
+      // Resume any active session
+      const savedSession = localStorage.getItem("exampadi_active_session");
+      if (savedSession) {
+        try {
+          const activeSession = JSON.parse(savedSession);
+          // Only resume if less than 24 hours old
+          if (Date.now() - activeSession.startTime < 24 * 60 * 60 * 1000) {
+            dispatch({ type: "START_SESSION", payload: activeSession });
+          } else {
+            localStorage.removeItem("exampadi_active_session");
+          }
+        } catch (e) {
+          localStorage.removeItem("exampadi_active_session");
+        }
+      }
     }
   }, []);
+
+  // Save active session to localStorage on change
+  useEffect(() => {
+    if (state.currentSession) {
+      localStorage.setItem("exampadi_active_session", JSON.stringify(state.currentSession));
+    } else {
+      localStorage.removeItem("exampadi_active_session");
+    }
+  }, [state.currentSession]);
 
   const startSession = (sessionData) => {
     let questions = sessionData.questions;
@@ -145,6 +171,26 @@ export const StudyProvider = ({ children }) => {
     dispatch({ type: "NEXT_QUESTION" });
   };
 
+  const resumeSession = () => {
+    const savedSession = localStorage.getItem("exampadi_active_session");
+    if (savedSession) {
+      try {
+        const activeSession = JSON.parse(savedSession);
+        if (Date.now() - activeSession.startTime < 24 * 60 * 60 * 1000) {
+          dispatch({ type: "START_SESSION", payload: activeSession });
+          return true;
+        }
+      } catch (e) {
+        console.error("Failed to resume session", e);
+      }
+    }
+    return false;
+  };
+
+  const clearActiveSession = () => {
+    localStorage.removeItem("exampadi_active_session");
+  };
+
   const saveSessionToFirestore = async (userId, sessionResult) => {
     // Try Firebase first, fall back to localStorage
     if (isConfigured && db) {
@@ -183,6 +229,8 @@ export const StudyProvider = ({ children }) => {
       submitAnswer,
       nextQuestion,
       saveSessionToFirestore,
+      resumeSession,
+      clearActiveSession,
     }}>
       {children}
     </StudyContext.Provider>

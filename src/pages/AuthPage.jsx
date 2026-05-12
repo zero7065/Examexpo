@@ -8,10 +8,10 @@ import { Eye, EyeOff } from "lucide-react";
 export default function AuthPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, login, register } = useAuth();
+  const { user, login, register, resetPassword, findUserByEmail } = useAuth();
   const [mode, setMode] = useState("signin");
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "", newPassword: "" });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
@@ -49,6 +49,35 @@ export default function AuthPage() {
     } catch (err) {
       toast({ message: err.message, type: "error" });
       setErrors({ general: err.message });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleForgotPassword() {
+    if (!form.email.trim()) {
+      setErrors({ email: "Enter your email address" });
+      return;
+    }
+    if (!form.newPassword || form.newPassword.length < 6) {
+      setErrors({ newPassword: "New password must be at least 6 characters" });
+      return;
+    }
+    
+    setLoading(true);
+    try {
+      const existingUser = findUserByEmail(form.email);
+      if (!existingUser) {
+        toast({ message: "If an account exists, password has been reset", type: "success" });
+        setMode("signin");
+        return;
+      }
+      resetPassword(form.email, form.newPassword);
+      toast({ message: "Password reset successful! Sign in with new password.", type: "success" });
+      setMode("signin");
+      setForm(f => ({ ...f, password: "", newPassword: "" }));
+    } catch (err) {
+      toast({ message: err.message, type: "error" });
     } finally {
       setLoading(false);
     }
@@ -98,7 +127,7 @@ export default function AuthPage() {
             ExamPadi AI
           </h1>
           <p style={{ color: "#888", fontSize: 14, marginTop: 4 }}>
-            {mode === "signup" ? "Create your account — it's free" : "Welcome back, let's practice"}
+            {mode === "signup" ? "Create your account — it's free" : mode === "forgot" ? "Reset your password" : "Welcome back, let's practice"}
           </p>
         </div>
 
@@ -110,7 +139,7 @@ export default function AuthPage() {
           marginBottom: 24,
         }}>
           {[["signin", "Sign In"], ["signup", "Sign Up"]].map(([m, label]) => (
-            <button key={m} onClick={() => { setMode(m); setErrors({}); }}
+            <button key={m} onClick={() => { setMode(m); setErrors({}); setForm(f => ({ ...f, newPassword: "" })); }}
               style={{
                 flex: 1, padding: "10px 0", border: "none", borderRadius: 10,
                 background: mode === m ? "#6C3CE9" : "transparent",
@@ -122,6 +151,15 @@ export default function AuthPage() {
             </button>
           ))}
         </div>
+
+        {mode === "forgot" && (
+          <p style={{ textAlign: "center", marginBottom: 16 }}>
+            <button onClick={() => { setMode("signin"); setErrors({}); setForm(f => ({ ...f, newPassword: "" })); }}
+              style={{ background: "none", border: "none", color: "#6C3CE9", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 13 }}>
+              ← Back to Sign In
+            </button>
+          </p>
+        )}
 
         {errors.general && (
           <div style={{
@@ -185,8 +223,32 @@ export default function AuthPage() {
         </div>
         {errors.password && <p style={{ color: "#FF4D6A", fontSize: 12, margin: "0 0 12px" }}>{errors.password}</p>}
 
+        {mode === "forgot" && (
+          <>
+            <input
+              type="password"
+              placeholder="New password (min 6 chars)"
+              value={form.newPassword}
+              onChange={e => setForm(f => ({ ...f, newPassword: e.target.value }))}
+              style={inputStyle("newPassword")}
+            />
+            {errors.newPassword && <p style={{ color: "#FF4D6A", fontSize: 12, margin: "0 0 12px" }}>{errors.newPassword}</p>}
+          </>
+        )}
+
+        {mode === "signin" && (
+          <p style={{ textAlign: "right", marginBottom: 16 }}>
+            <button 
+              onClick={() => { setMode("forgot"); setErrors({}); }}
+              style={{ background: "none", border: "none", color: "#6C3CE9", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}
+            >
+              Forgot password?
+            </button>
+          </p>
+        )}
+
         <button
-          onClick={handleSubmit}
+          onClick={mode === "forgot" ? handleForgotPassword : handleSubmit}
           disabled={loading}
           style={{
             width: "100%", padding: "14px", borderRadius: 12, border: "none",
@@ -195,7 +257,7 @@ export default function AuthPage() {
             fontWeight: 800, fontSize: 16, cursor: loading ? "not-allowed" : "pointer",
             fontFamily: "inherit", marginBottom: 16, transition: "all 0.2s",
           }}>
-          {loading ? "Please wait..." : mode === "signup" ? "Create Account" : "Sign In"}
+          {loading ? "Please wait..." : mode === "signup" ? "Create Account" : mode === "forgot" ? "Reset Password" : "Sign In"}
         </button>
 
         <p style={{ textAlign: "center", color: "#888", fontSize: 13, marginTop: 20 }}>

@@ -7,7 +7,7 @@ import { BookOpen, Target, Calendar, Clock, CheckCircle, ArrowRight, Loader2, Sp
 import { useNavigate } from "react-router-dom";
 
 const StudyPlanPage = () => {
-  const { user, isPro } = useAuth();
+  const { user, isPro, updateUser } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -46,6 +46,11 @@ const StudyPlanPage = () => {
       // Save plan
       setStudyPlan(plan);
       localStorage.setItem(`ep-study-plan-${user?.email}`, JSON.stringify(plan));
+      
+      // Also save exam date to user profile
+      if (updateUser) {
+        updateUser({ examDate });
+      }
       toast({ message: "Your personalized study plan is ready!", type: "success" });
     } catch (err) {
       toast({ message: "Could not generate plan. Please try again.", type: "error" });

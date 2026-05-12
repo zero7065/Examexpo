@@ -1,7 +1,9 @@
 // src/pages/StatsPage.jsx
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
+import { useStudy } from "../context/StudyContext";
 import { getStudyTip } from "../groq";
 import { 
   BarChart3, 
@@ -12,13 +14,15 @@ import {
   Loader2, 
   AlertCircle,
   ChevronRight,
-  BookOpen
+  BookOpen,
+  ArrowUpRight
 } from "lucide-react";
-import ProGate from "../components/ProGate";
 
 const StatsPage = () => {
   const { user, isPro } = useAuth();
   const { toast } = useToast();
+  const { history } = useStudy();
+  const navigate = useNavigate();
   const [loadingAdvice, setLoadingAdvice] = useState(false);
   const [advice, setAdvice] = useState([]);
 
@@ -103,8 +107,8 @@ const StatsPage = () => {
       <div className="grid md:grid-cols-3 gap-6">
         <StatsCard 
           label="Overall Accuracy" 
-          value="71%" 
-          description="You are performing better than 84% of students." 
+          value={user?.totalQuestionsAnswered > 0 ? Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 100) + "%" : "0%"} 
+          description="Based on all questions answered" 
           icon={<Target className="text-primary" size={24} />} 
         />
         <StatsCard 
@@ -115,11 +119,24 @@ const StatsPage = () => {
         />
         <StatsCard 
           label="Predicted JAMB Score" 
-          value="284" 
+          value={user?.totalQuestionsAnswered > 0 ? Math.min(400, Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 400)) : "0"} 
           description="Based on your current performance trends." 
           icon={<TrendingUp className="text-blue-400" size={24} />} 
         />
       </div>
+
+      {/* Score History Chart */}
+      {history && history.length > 0 && (
+        <div className="glass-card p-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-black text-text flex items-center gap-3">
+              <TrendingUp className="text-accent" size={24} />
+              Score Trend (Last 10 Sessions)
+            </h2>
+          </div>
+          <ScoreChart sessions={history.slice(-10)} />
+        </div>
+      )}
 
       <div className="grid lg:grid-cols-3 gap-10">
         {/* Subject Breakdown */}
@@ -207,6 +224,96 @@ const StatsPage = () => {
             )}
           </div>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const ScoreChart = ({ sessions }) => {
+  if (!sessions || sessions.length === 0) {
+    return (
+      <div className="text-center py-8 text-text-muted">
+        Complete some practice sessions to see your score trend!
+      </div>
+    );
+  }
+
+  // Calculate scores as percentages
+  const scores = sessions.map(s => ({
+    score: s.totalQuestions > 0 ? Math.round((s.correctAnswers / s.totalQuestions) * 100) : 0,
+    date: new Date(s.completedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short" }),
+    subject: s.subjects?.[0] || "Mixed"
+  }));
+
+  const maxScore = 100;
+  const width = 100;
+  const height = 60;
+  const padding = 10;
+  const chartWidth = width - padding * 2;
+  const chartHeight = height - padding * 2;
+
+  // Create SVG path for the line
+  const points = scores.map((s, i) => {
+    const x = padding + (i / Math.max(scores.length - 1, 1)) * chartWidth;
+    const y = padding + chartHeight - (s.score / maxScore) * chartHeight;
+    return `${x},${y}`;
+  }).join(" ");
+
+  // Create area fill path
+  const areaPath = `M ${padding},${padding + chartHeight} ${points} L ${padding + chartWidth},${padding + chartHeight} Z`;
+
+  return (
+    <div className="space-y-6">
+      <div className="relative h-48 w-full">
+        <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full" preserveAspectRatio="none">
+          {/* Grid lines */}
+          <line x1={padding} y1={padding} x2={padding + chartWidth} y2={padding} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
+          <line x1={padding} y1={padding + chartHeight/2} x2={padding + chartWidth} y2={padding + chartHeight/2} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
+          <line x1={padding} y1={padding + chartHeight} x2={padding + chartWidth} y2={padding + chartHeight} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
+          
+          {/* Area fill */}
+          <path d={areaPath} fill="url(#scoreGradient)" opacity="0.3" />
+          
+          {/* Line */}
+          <polyline 
+            points={points} 
+            fill="none" 
+            stroke="#00E5A0" 
+            strokeWidth="1" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+          />
+          
+          {/* Data points */}
+          {scores.map((s, i) => {
+            const x = padding + (i / Math.max(scores.length - 1, 1)) * chartWidth;
+            const y = padding + chartHeight - (s.score / maxScore) * chartHeight;
+            return (
+              <g key={i}>
+                <circle cx={x} cy={y} r="2" fill="#00E5A0" />
+                <title>{`${s.subject}: ${s.score}%`}</title>
+              </g>
+            );
+          })}
+          
+          {/* Gradient definition */}
+          <defs>
+            <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#00E5A0" />
+              <stop offset="100%" stopColor="#00E5A0" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      
+      {/* Legend */}
+      <div className="flex flex-wrap gap-4 justify-center">
+        {scores.map((s, i) => (
+          <div key={i} className="text-center">
+            <div className="text-xs text-text-muted">{s.date}</div>
+            <div className="text-lg font-black text-text">{s.score}%</div>
+          </div>
+        ))}
       </div>
     </div>
   );
