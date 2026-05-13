@@ -55,12 +55,13 @@ const Navbar = () => {
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-black text-black">E</div>
             <h1 className="text-xl font-black tracking-tight text-text">ExamPadi <span className="text-primary">AI</span></h1>
           </Link>
-          <button 
-            onClick={toggle}
-            className="p-2 hover:bg-subtle rounded-lg transition-colors text-text-muted hover:text-primary"
-          >
-            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+           <button 
+             onClick={toggle}
+             aria-label="Toggle theme"
+             className="p-2 hover:bg-subtle rounded-lg transition-colors text-text-muted hover:text-primary"
+           >
+             {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+           </button>
         </div>
 
         <div className="flex-1 space-y-2">

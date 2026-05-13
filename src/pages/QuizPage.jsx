@@ -17,6 +17,7 @@ const QuizPage = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isReady, setIsReady] = useState(false);
+  const [timerActive, setTimerActive] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -24,26 +25,52 @@ const QuizPage = () => {
   const [loadingExplanation, setLoadingExplanation] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
 
+  // Call this when user clicks "Start Quiz" or selects first answer:
+  const startTimer = () => {
+    setIsReady(true);
+    setTimerActive(true);
+    setTimeLeft(30 * 60);
+  };
+
+  // Only tick when timerActive is true:
+  useEffect(() => {
+    if (!timerActive) return;
+    const interval = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) { 
+          clearInterval(interval); 
+          handleFinish(); 
+          return 0; 
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [timerActive]);
+
   useEffect(() => {
     if (!currentSession) {
       navigate("/select");
       return;
     }
-    // Small delay to ensure session is fully initialized
-    const timer = setTimeout(() => {
-      setIsReady(true);
-      const totalTime = 30 * 60;
-      setTimeLeft(totalTime);
-    }, 100);
-    return () => clearTimeout(timer);
+    // Reset timer state when session changes
+    setIsReady(false);
+    setTimerActive(false);
+    setTimeLeft(0);
   }, [currentSession, navigate]);
 
+  const QuizSkeleton = () => (
+    <div className="min-h-screen bg-bg flex items-center justify-center animate-pulse space-y-4 p-6">
+      <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+      <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+      {[...Array(4)].map((_, i) => (
+        <div key={i} className="h-10 bg-gray-200 rounded-lg w-full"></div>
+      ))}
+    </div>
+  );
+
   if (!isReady) {
-    return (
-      <div className="min-h-screen bg-bg flex items-center justify-center">
-        <div className="text-primary font-bold text-xl">Loading questions...</div>
-      </div>
-    );
+    return <QuizSkeleton />;
   }
 
   if (!currentSession) return null;
@@ -56,7 +83,7 @@ const QuizPage = () => {
 
     const proStatus = isPro();
 
-    const usage = await checkAndIncrementUsage(user.uid, proStatus);
+     const usage = await checkAndIncrementUsage(user.id, proStatus);
     if (!usage.allowed) {
       toast({ message: `Daily question limit (${usage.limit}) reached. Upgrade to Pro!`, type: "warning" });
       navigate("/payment");
@@ -68,7 +95,7 @@ const QuizPage = () => {
     
     setLoadingExplanation(true);
     try {
-      const aiLimit = await checkAndIncrementAILimit(user.uid, proStatus);
+       const aiLimit = await checkAndIncrementAILimit(user.id, proStatus);
       if (!aiLimit.allowed) {
         setExplanation(`AI Explanations limit (${aiLimit.limit}/day) reached. Upgrade to Pro for unlimited AI Tutor.`);
       } else {
@@ -129,7 +156,7 @@ const QuizPage = () => {
       }))
     };
 
-    await saveSessionToFirestore(user.uid, result);
+     await saveSessionToFirestore(user.id, result);
     
     // Also save to localStorage for history tracking
     const existingSessions = localStorage.getItem(`ep-sessions-${user.email}`);
@@ -195,15 +222,18 @@ const QuizPage = () => {
                   else statusClass = "border-border opacity-40";
                 }
 
-                return (
-                  <button
-                    key={key}
-                    disabled={isChecked}
-                    onClick={() => {
-                      setSelectedOption(key);
-                    }}
-                    className={`flex items-center gap-6 p-6 rounded-2xl border transition-all text-left group ${statusClass}`}
-                  >
+                 return (
+                   <button
+                     key={key}
+                     disabled={isChecked}
+                     onClick={() => {
+                       setSelectedOption(key);
+                       if (!timerActive && !isChecked) {
+                         startTimer();
+                       }
+                     }}
+                     className={`flex items-center gap-6 p-6 rounded-2xl border transition-all text-left group ${statusClass}`}
+                   >
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-black text-xl transition-colors ${
                       selectedOption === key ? 'bg-primary text-black' : 'bg-white/5 text-text-muted group-hover:bg-white/10'
                     }`}>

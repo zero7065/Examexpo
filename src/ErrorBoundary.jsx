@@ -8,8 +8,10 @@ export default class ErrorBoundary extends Component {
     return { error };
   }
 
-  componentDidCatch(error, info) {
-    console.error("ErrorBoundary caught:", error, info);
+componentDidCatch(error, info) {
+    if (import.meta.env.DEV) {
+      console.error("ErrorBoundary caught:", error, info);
+    }
   }
 
   render() {

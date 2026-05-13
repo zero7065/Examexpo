@@ -324,12 +324,13 @@ const Dashboard = () => {
                   }
                 </p>
                 {user?.streak >= 3 && (
-                  <button 
-                    onClick={handleClaimStreak}
-                    className="w-full py-3 bg-accent/20 border border-accent/40 text-accent font-bold rounded-xl text-sm hover:bg-accent/30 transition-all"
-                  >
-                    🎁 Claim Streak Rewards
-                  </button>
+                   <button 
+                     onClick={handleClaimStreak}
+                     aria-label="Claim streak reward"
+                     className="w-full py-3 bg-accent/20 border border-accent/40 text-accent font-bold rounded-xl text-sm hover:bg-accent/30 transition-all"
+                   >
+                     🎁 Claim Streak Rewards
+                   </button>
                 )}
               </div>
             </div>

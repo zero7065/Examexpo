@@ -146,49 +146,71 @@ export default function PastQuestionsPage() {
         </div>
       )}
 
-      {/* Questions */}
-      <div className="space-y-6">
-        {questions.map((q, i) => (
-          <div key={q.id} className="glass-card p-8 animate-slide-up">
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-xs font-black uppercase tracking-widest text-text-muted">
-                Question {i + 1} · {q.topic}
-              </span>
-              <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest ${
-                q.difficulty === "hard" ? "bg-danger/10 text-danger" : q.difficulty === "medium" ? "bg-accent/10 text-accent" : "bg-primary/10 text-primary"
-              }`}>
-                {q.difficulty}
-              </span>
-            </div>
-            
-            <p className="text-lg font-bold leading-relaxed mb-8">{q.question}</p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              {Object.entries(q.options).map(([key, val]) => (
-                <div key={key} className={`p-4 rounded-xl border transition-all ${
-                  revealed[q.id] && key === q.correctAnswer ? "border-primary bg-primary/5 text-primary" : "border-white/5 bg-bg-3 text-text"
-                }`}>
-                  <strong className="font-black mr-2">{key})</strong> {val}
-                </div>
-              ))}
-            </div>
-
-            <button onClick={() => toggleReveal(q.id)} className="btn-secondary w-full flex items-center justify-center gap-2">
-              <HelpCircle size={18} />
-              {revealed[q.id] ? "Hide Explanation" : "Reveal Answer & Explanation"}
-            </button>
-
-            {revealed[q.id] && (
-              <div className="mt-6 p-6 bg-primary/5 rounded-2xl border border-primary/10 animate-in fade-in slide-in-from-top-4 duration-300">
-                <div className="text-primary font-black uppercase tracking-widest text-xs mb-2">Correct Answer</div>
-                <div className="text-xl font-bold mb-4">{q.correctAnswer}) {q.options[q.correctAnswer]}</div>
-                <div className="h-px bg-primary/10 mb-4"></div>
-                <p className="text-text-muted leading-relaxed italic">"{q.explanation}"</p>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+       {/* Questions */}
+       <div className="space-y-6">
+         {questions.length === 0 ? (
+           <div className="flex flex-col items-center justify-center py-16 text-center">
+             <span className="text-5xl mb-4">🔍</span>
+             <h3 className="text-lg font-semibold text-gray-700 mb-2">
+               No questions found
+             </h3>
+             <p className="text-gray-500 mb-4">
+               Try adjusting your subject, year, or exam type filter.
+             </p>
+             <button
+               onClick={() => {
+                 setExam("JAMB");
+                 setSubject("");
+                 setYear(2024);
+               }}
+               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+             >
+               Clear Filters
+             </button>
+           </div>
+         ) : (
+           questions.map((q, i) => (
+             <div key={q.id} className="glass-card p-8 animate-slide-up">
+               <div className="flex items-center justify-between mb-6">
+                 <span className="text-xs font-black uppercase tracking-widest text-text-muted">
+                   Question {i + 1} · {q.topic}
+                 </span>
+                 <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest ${
+                   q.difficulty === "hard" ? "bg-danger/10 text-danger" : q.difficulty === "medium" ? "bg-accent/10 text-accent" : "bg-primary/10 text-primary"
+                 }`}>
+                   {q.difficulty}
+                 </span>
+               </div>
+               
+               <p className="text-lg font-bold leading-relaxed mb-8">{q.question}</p>
+               
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                 {Object.entries(q.options).map(([key, val]) => (
+                   <div key={key} className={`p-4 rounded-xl border transition-all ${
+                     revealed[q.id] && key === q.correctAnswer ? "border-primary bg-primary/5 text-primary" : "border-white/5 bg-bg-3 text-text"
+                   }`}>
+                     <strong className="font-black mr-2">{key})</strong> {val}
+                   </div>
+                 ))}
+               </div>
+   
+               <button onClick={() => toggleReveal(q.id)} className="btn-secondary w-full flex items-center justify-center gap-2">
+                 <HelpCircle size={18} />
+                 {revealed[q.id] ? "Hide Explanation" : "Reveal Answer & Explanation"}
+               </button>
+   
+               {revealed[q.id] && (
+                 <div className="mt-6 p-6 bg-primary/5 rounded-2xl border border-primary/10 animate-in fade-in slide-in-from-top-4 duration-300">
+                   <div className="text-primary font-black uppercase tracking-widest text-xs mb-2">Correct Answer</div>
+                   <div className="text-xl font-bold mb-4">{q.correctAnswer}) {q.options[q.correctAnswer]}</div>
+                   <div className="h-px bg-primary/10 mb-4"></div>
+                   <p className="text-text-muted leading-relaxed italic">"{q.explanation}"</p>
+                 </div>
+               )}
+             </div>
+           ))
+         )}
+       </div>
     </div>
   );
 }

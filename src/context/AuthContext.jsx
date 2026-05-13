@@ -3,8 +3,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
-const TEST_ADMIN_EMAIL = "test@admin.com";
-const TEST_ADMIN_PASSWORD = "testadmin123";
+async function hashPassword(password) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 function getUsers() {
   try {
@@ -34,21 +39,21 @@ function clearSession() {
   localStorage.removeItem("exampadi_session");
 }
 
-function createUser(email, password, name) {
+async function createUser(email, password, name) {
   const users = getUsers();
   if (users.find(u => u.email === email)) {
     throw new Error("Email already registered");
   }
   
+  const hashedPassword = await hashPassword(password);
+  
   const newUser = {
     id: Date.now().toString(),
     email,
-    password,
+    password: hashedPassword,
     name: name || "Student",
-    plan: email === TEST_ADMIN_EMAIL ? "pro" : "free",
-    planExpiry: email === TEST_ADMIN_EMAIL 
-      ? new Date(Date.now() + 365*24*60*60*1000).toISOString() 
-      : null,
+    plan: "free",
+    planExpiry: null,
     totalQuestionsAnswered: 0,
     totalCorrect: 0,
     totalSessions: 0,
@@ -69,11 +74,16 @@ function createUser(email, password, name) {
   return sessionUser;
 }
 
-function loginUser(email, password) {
+async function loginUser(email, password) {
   const users = getUsers();
-  const user = users.find(u => u.email === email && u.password === password);
+  const user = users.find(u => u.email === email);
   
   if (!user) {
+    throw new Error("Invalid email or password");
+  }
+  
+  const hashedInput = await hashPassword(password);
+  if (user.password !== hashedInput) {
     throw new Error("Invalid email or password");
   }
   
@@ -84,7 +94,7 @@ function loginUser(email, password) {
   return sessionUser;
 }
 
-function resetPassword(email, newPassword) {
+async function resetPassword(email, newPassword) {
   const users = getUsers();
   const userIndex = users.findIndex(u => u.email === email);
   
@@ -92,7 +102,8 @@ function resetPassword(email, newPassword) {
     throw new Error("No account found with this email");
   }
   
-  users[userIndex].password = newPassword;
+  const hashedPassword = await hashPassword(newPassword);
+  users[userIndex].password = hashedPassword;
   saveUsers(users);
   
   return true;
@@ -122,24 +133,8 @@ export function AuthProvider({ children }) {
     return newUser;
   }
 
-  function login(email, password) {
-    // Test admin check
-    if (email === TEST_ADMIN_EMAIL && password === TEST_ADMIN_PASSWORD) {
-      const users = getUsers();
-      let testAdmin = users.find(u => u.email === TEST_ADMIN_EMAIL);
-      
-      if (!testAdmin) {
-        testAdmin = createUser(TEST_ADMIN_EMAIL, TEST_ADMIN_PASSWORD, "Test Admin");
-      } else {
-        const sessionUser = { ...testAdmin };
-        delete sessionUser.password;
-        saveSession(sessionUser);
-        setUser(sessionUser);
-      }
-      return sessionUser;
-    }
-    
-    const loggedInUser = loginUser(email, password);
+  async function login(email, password) {
+    const loggedInUser = await loginUser(email, password);
     setUser(loggedInUser);
     return loggedInUser;
   }

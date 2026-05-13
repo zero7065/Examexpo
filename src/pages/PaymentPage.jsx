@@ -13,6 +13,15 @@ const PaymentPage = () => {
   const [payLoading, setPayLoading] = useState(false);
   const [payError, setPayError] = useState(null);
 
+  const updatePlan = async (planId, duration) => {
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + duration);
+    updateUser({
+      plan: planId.includes('pro') ? 'pro' : 'free',
+      planExpiry: expiryDate.toISOString()
+    });
+  };
+
   const handlePayment = async (plan) => {
     if (!user) return navigate("/auth");
     setPayLoading(true);
@@ -22,16 +31,37 @@ const PaymentPage = () => {
     await initiatePayment({
       email: user.email,
       plan,
-      userUid: user.id || user.uid,
+       userUid: user.id,
       userName: user.name || user.displayName,
-      onSuccess: async (response) => {
-        setPayLoading(false);
-        await updatePlan(plan.id, plan.duration);
-        // We log the activity via logActivity inside AuthContext or here if imported,
-        // but we'll let updatePlan or success page handle that.
-        toast({ message: `Payment successful! You're now Pro 🎉`, type: "success" });
-        navigate("/payment/success");
-      },
+       onSuccess: async (response) => {
+         setPayLoading(true);
+         try {
+           // Verify with Paystack API (use your backend or a Vercel/Netlify function)
+           const verifyRes = await fetch(
+             `https://api.paystack.co/transaction/verify/${response.reference}`,
+             {
+               headers: {
+                 Authorization: `Bearer ${import.meta.env.VITE_PAYSTACK_SECRET_KEY}`
+               }
+             }
+           );
+           const verifyData = await verifyRes.json();
+
+           if (verifyData.data.status === 'success') {
+             await updatePlan(plan.id, plan.duration);
+             // We log the activity via logActivity inside AuthContext or here if imported,
+             // but we'll let updatePlan or success page handle that.
+             toast({ message: `Payment successful! You're now Pro 🎉`, type: "success" });
+             navigate("/payment/success");
+           } else {
+             toast.error('Payment could not be verified. Contact support.');
+           }
+         } catch (err) {
+           toast.error('Verification failed. Please contact support.');
+         } finally {
+           setPayLoading(false);
+         }
+       },
       onClose: () => {
         setPayLoading(false);
         toast({ message: "Payment cancelled.", type: "info" });

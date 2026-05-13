@@ -14,24 +14,24 @@ const NotepadPage = () => {
 
   const proStatus = isPro();
 
-  // Load notes from localStorage on mount
-  useEffect(() => {
-    if (!user) return;
-    const savedNotes = localStorage.getItem(`ep-notes-${user.uid}`);
-    if (savedNotes) {
-      try {
-        setNotes(JSON.parse(savedNotes));
-      } catch (e) {
-        console.error("Failed to load notes:", e);
+    // Load notes from localStorage on mount
+    useEffect(() => {
+      if (!user) return;
+      const savedNotes = localStorage.getItem(`ep-notes-${user.id}`);
+      if (savedNotes) {
+        try {
+          setNotes(JSON.parse(savedNotes));
+        } catch (e) {
+          console.error("Failed to load notes:", e);
+        }
       }
-    }
-  }, [user]);
+    }, [user]);
 
-  // Save notes to localStorage whenever they change
-  useEffect(() => {
-    if (!user) return;
-    localStorage.setItem(`ep-notes-${user.uid}`, JSON.stringify(notes));
-  }, [notes, user]);
+    // Save notes to localStorage whenever they change
+    useEffect(() => {
+      if (!user) return;
+      localStorage.setItem(`ep-notes-${user.id}`, JSON.stringify(notes));
+    }, [notes, user]);
 
   const handleAddNote = () => {
     if (!newNote.trim()) return;
