@@ -27,10 +27,12 @@ export default function LivePulse() {
             height: 2, background: item.color,
           }} />
           <div style={{
-            fontSize: 30, fontWeight: 800,
+            fontSize: 30,
+            fontWeight: 800,
             color: "var(--text)",
             fontFamily: "'JetBrains Mono', 'Fira Mono', monospace",
-            lineHeight: 1, marginBottom: 6,
+            lineHeight: 1,
+            marginBottom: 6,
           }}>
             {item.value}
           </div>
