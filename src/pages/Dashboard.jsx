@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getUserProfile } from "../lib/userProfile";
 import {
@@ -17,6 +17,7 @@ const SUBJECT_ICONS = {
 export default function Dashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -76,12 +77,13 @@ export default function Dashboard() {
         .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
         .scrollbar-thin::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
         @media (max-width: 768px) {
-          .sidebar { display: none; }
-          .mobile-nav { display: flex; }
+          .sidebar { display: none !important; }
+          .mobile-nav { display: flex !important; }
+          .main-content { margin-left: 0 !important; padding: 16px !important; }
         }
         @media (min-width: 769px) {
-          .sidebar { display: flex; }
-          .mobile-nav { display: none; }
+          .sidebar { display: flex !important; }
+          .mobile-nav { display: none !important; }
         }
       `}</style>
 
@@ -108,12 +110,12 @@ export default function Dashboard() {
         </div>
 
         <nav style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
-          <NavItem icon={LayoutDashboard} label="Home" active />
-          <NavItem icon={BookOpen} label="Practice" onClick={() => navigate("/select")} />
-          <NavItem icon={GraduationCap} label="Mock Exam" onClick={() => navigate("/cbt")} />
-          <NavItem icon={Brain} label="AI Tutor" onClick={() => navigate("/ai-tutor")} />
-          <NavItem icon={TrendingUp} label="Progress" onClick={() => navigate("/stats")} />
-          <NavItem icon={Settings} label="Settings" onClick={() => navigate("/profile")} />
+          <NavItem icon={LayoutDashboard} label="Home" path="/dashboard" active={location.pathname === "/dashboard"} onClick={() => navigate("/dashboard")} />
+          <NavItem icon={BookOpen} label="Practice" path="/practice" active={location.pathname === "/practice" || location.pathname === "/select"} onClick={() => navigate("/practice")} />
+          <NavItem icon={GraduationCap} label="Mock Exam" path="/cbt" active={location.pathname === "/cbt"} onClick={() => navigate("/cbt")} />
+          <NavItem icon={Brain} label="AI Tutor" path="/ai-tutor" active={location.pathname === "/ai-tutor"} onClick={() => navigate("/ai-tutor")} />
+          <NavItem icon={TrendingUp} label="Progress" path="/stats" active={location.pathname === "/stats"} onClick={() => navigate("/stats")} />
+          <NavItem icon={Settings} label="Settings" path="/profile" active={location.pathname === "/profile"} onClick={() => navigate("/profile")} />
         </nav>
 
         <div style={{ borderTop: "1px solid #1e1e2a", paddingTop: 20 }}>
@@ -144,13 +146,14 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content */}
-      <div style={{ flex: 1, marginLeft: 260, padding: "24px 32px", maxWidth: 1200, margin: "0 auto" }}>
+      <div className="main-content" style={{ flex: 1, marginLeft: 260, padding: "24px 32px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         
         {/* Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
           <div>
             <h1 style={{ fontSize: 24, fontWeight: 700, color: "#fff", margin: 0 }}>
-              {getGreeting()} 👋
+              {getGreeting()}, {user?.displayName?.split(" ")[0] || "Student"} 👋
             </h1>
           </div>
           <div style={{ display: "flex", gap: 16 }}>
@@ -200,6 +203,7 @@ export default function Dashboard() {
                 transition: "all 0.2s", cursor: "pointer",
                 borderLeft: "4px solid #6C3CE9"
               }}
+              onClick={() => navigate(`/practice?subject=${encodeURIComponent(subj)}`)}
               onMouseOver={(e) => {
                 e.currentTarget.style.boxShadow = "0 8px 32px rgba(108,60,233,0.15)";
                 e.currentTarget.style.borderColor = "#6C3CE9";
@@ -230,11 +234,13 @@ export default function Dashboard() {
         </div>
 
         {/* Daily Challenge */}
-        <div style={{
-          background: "linear-gradient(135deg, #1a0a3a 0%, #0d1a3a 100%)",
-          borderRadius: 16, padding: 24, marginBottom: 40, display: "flex", alignItems: "center", justifyContent: "space-between",
-          border: "1px solid #333", position: "relative", overflow: "hidden"
-        }}>
+        <div
+          onClick={() => navigate("/practice")}
+          style={{
+            background: "linear-gradient(135deg, #1a0a3a 0%, #0d1a3a 100%)",
+            borderRadius: 16, padding: 24, marginBottom: 40, display: "flex", alignItems: "center", justifyContent: "space-between",
+            border: "1px solid #333", position: "relative", overflow: "hidden", cursor: "pointer"
+          }}>
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 4, background: "#D4A853" }} />
           <div>
             <div style={{ color: "#D4A853", fontWeight: 700, fontSize: 14, marginBottom: 4, display: "flex", alignItems: "center", gap: 8 }}>
@@ -252,11 +258,13 @@ export default function Dashboard() {
 
         {/* AI Tutor & Recent Activity */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
-          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 24, border: "1px solid #6C3CE9" }}>
+          <div
+            onClick={() => navigate("/ai-tutor")}
+            style={{ background: "#121218", border: "1px solid #6C3CE9", borderRadius: 16, padding: 24, cursor: "pointer" }}>
             <h3 style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Ask AI Tutor</h3>
             <p style={{ color: "#888", fontSize: 13, marginBottom: 16 }}>Get instant explanations for any topic or question</p>
             <div style={{ display: "flex", gap: 8 }}>
-              <input type="text" placeholder="Ask anything... e.g. Explain Newton's 3rd law" style={{
+              <input type="text" placeholder="Ask anything... e.g. Explain Newton's 3rd law" readOnly style={{
                 flex: 1, background: "#0a0a0f", border: "1px solid #333", borderRadius: 8, padding: "10px 12px", color: "#fff", outline: "none", fontSize: 13
               }} />
               <button style={{ background: "#6C3CE9", border: "none", borderRadius: 8, padding: "0 16px", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center" }}>
@@ -272,17 +280,18 @@ export default function Dashboard() {
           </div>
         </div>
 
+        </div>
       </div>
 
-      {/* Mobile Nav (Simplified Placeholder) */}
+      {/* Mobile Nav */}
       <div className="mobile-nav" style={{
         position: "fixed", bottom: 0, left: 0, right: 0, background: "#0d0d12", borderTop: "1px solid #1e1e2a",
         padding: "12px 24px", display: "flex", justifyContent: "space-around", zIndex: 100
       }}>
-         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#6C3CE9" }}>
+         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: location.pathname === "/dashboard" ? "#6C3CE9" : "#666" }}>
             <LayoutDashboard size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Home</span>
          </div>
-         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/select")}>
+         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/practice")}>
             <BookOpen size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Practice</span>
          </div>
          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/ai-tutor")}>

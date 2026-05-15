@@ -10,6 +10,7 @@ import AuthPage from "./pages/AuthPage";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import SubjectSelector from "./pages/SubjectSelector";
+import Practice from "./pages/Practice";
 import QuizPage from "./pages/QuizPage";
 import CBTSimulator from "./pages/CBTSimulator";
 import ResultPage from "./pages/ResultPage";
@@ -50,6 +51,7 @@ function App() {
                   <Route index element={<Dashboard />} />
                 </Route>
                 <Route path="/select" element={<ProtectedRoute><SubjectSelector /></ProtectedRoute>} />
+                <Route path="/practice" element={<ProtectedRoute><Practice /></ProtectedRoute>} />
                 <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
                 <Route path="/cbt" element={<ProtectedRoute><CBTSimulator /></ProtectedRoute>} />
                 <Route path="/result" element={<ProtectedRoute><ResultPage /></ProtectedRoute>} />

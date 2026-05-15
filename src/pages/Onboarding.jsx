@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { createUserProfile } from "../lib/userProfile";
+import { createUserProfile, getUserProfile } from "../lib/userProfile";
 import { useToast } from "../components/Toast";
 import { Check, ChevronRight, Target, GraduationCap, BookOpen, PenTool, ArrowRight } from "lucide-react";
 
@@ -30,7 +30,33 @@ export default function Onboarding() {
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
-  
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    async function checkAlreadyOnboarded() {
+      if (!user) { setChecking(false); return; }
+      try {
+        const profile = await getUserProfile(user.uid);
+        if (profile?.onboarded) {
+          navigate("/dashboard", { replace: true });
+          return;
+        }
+      } catch (e) {
+        // No profile yet - fresh user, allow onboarding
+      }
+      setChecking(false);
+    }
+    checkAlreadyOnboarded();
+  }, [user, navigate]);
+
+  if (checking) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}>
+        Loading...
+      </div>
+    );
+  }
+
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     exam: null,
