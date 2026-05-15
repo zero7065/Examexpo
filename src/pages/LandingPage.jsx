@@ -1,15 +1,11 @@
-// src/pages/LandingPage.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, Zap, ShieldCheck, History, Award, BookOpen, ChevronRight, PlayCircle } from "lucide-react";
 import LivePulse from "../components/LivePulse";
-import ActivityToast from "../components/ActivityToast";
-import AnnouncementBanner from "../components/AnnouncementBanner";
 
 const LandingPage = () => {
   return (
     <div className="md:-ml-64 bg-bg min-h-screen font-sora selection:bg-primary/30">
-      {/* Hero Section */}
       <header className="relative pt-32 pb-24 px-6 text-center overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--primary-dim),_transparent_70%)] opacity-40 -z-10"></div>
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 -z-20"></div>
@@ -42,7 +38,6 @@ const LandingPage = () => {
             </a>
           </div>
 
-          {/* Exam Images Grid */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="rounded-2xl overflow-hidden h-40 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
               <div className="text-center p-4">
@@ -74,7 +69,6 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* Static social proof */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-border pt-16">
             <StatItem value="1.9M+" label="JAMB Candidates" />
             <StatItem value="2024" label="Latest Past Questions" />
@@ -84,7 +78,6 @@ const LandingPage = () => {
         </div>
       </header>
 
-      {/* Live Platform Pulse — real Firestore data */}
       <section className="max-w-5xl mx-auto px-6">
         <p style={{
           textAlign: "center",
@@ -95,12 +88,11 @@ const LandingPage = () => {
           textTransform: "uppercase",
           marginBottom: 4,
         }}>
-          What's happening right now
+          What's inside
         </p>
         <LivePulse />
       </section>
 
-      {/* Feature Section */}
       <section id="features" className="py-32 px-6 bg-bg-2 relative">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-24 space-y-4">
@@ -119,7 +111,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-32 px-6">
         <div className="max-w-5xl mx-auto glass-card p-12 md:p-24 text-center space-y-8 relative overflow-hidden bg-gradient-to-br from-primary-dim to-transparent border-primary/20">
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 rounded-full blur-[100px]"></div>
@@ -134,7 +125,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-16 border-t border-border text-center space-y-4">
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-black text-black text-sm">E</div>
@@ -149,10 +139,6 @@ const LandingPage = () => {
         </div>
         <p className="text-text-muted text-sm font-medium">© 2025 ExamPadi AI by Jadai Studios · jadai.dev</p>
       </footer>
-
-      {/* Live Activity Toast */}
-      <ActivityToast />
-      <AnnouncementBanner />
     </div>
   );
 };
