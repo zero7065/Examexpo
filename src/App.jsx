@@ -1,16 +1,13 @@
-// src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
 import { StudyProvider } from "./context/StudyContext";
 import { ThemeProvider } from "./context/ThemeContext";
-import { ToastProvider } from "./components/Toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 
 // Pages
-import LandingPage from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage";
+import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import SubjectSelector from "./pages/SubjectSelector";
 import QuizPage from "./pages/QuizPage";
@@ -35,47 +32,46 @@ import InstallPrompt from "./components/InstallPrompt";
 function App() {
   return (
     <ThemeProvider>
-      <ToastProvider>
-        <AuthProvider>
-          <StudyProvider>
-            <Router>
-              <div className="flex flex-col md:flex-row min-h-screen bg-bg text-text selection:bg-primary/30">
-                <Navbar />
-                <main className="flex-1 md:ml-64 pb-20 md:pb-0">
-                <InstallPrompt />
-                <Routes>
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/auth" element={<AuthPage />} />
-                    <Route path="/privacy" element={<PrivacyPage />} />
-                    <Route path="/terms" element={<TermsPage />} />
+      <StudyProvider>
+        <Router>
+          <div className="flex flex-col md:flex-row min-h-screen bg-bg text-text selection:bg-primary/30">
+            <Navbar />
+            <main className="flex-1 md:ml-64 pb-20 md:pb-0">
+            <InstallPrompt />
+            <Routes>
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/onboarding" element={<Onboarding />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/terms" element={<TermsPage />} />
 
-                    {/* Protected Routes */}
-                    <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                    <Route path="/select" element={<ProtectedRoute><SubjectSelector /></ProtectedRoute>} />
-                    <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
-                    <Route path="/cbt" element={<ProtectedRoute requiresPro><CBTSimulator /></ProtectedRoute>} />
-                    <Route path="/result" element={<ProtectedRoute><ResultPage /></ProtectedRoute>} />
-                    <Route path="/stats" element={<ProtectedRoute requiresPro><StatsPage /></ProtectedRoute>} />
-                    <Route path="/past-questions" element={<ProtectedRoute><PastQuestionsPage /></ProtectedRoute>} />
-                    <Route path="/notepad" element={<ProtectedRoute><NotepadPage /></ProtectedRoute>} />
-                    <Route path="/study-plan" element={<ProtectedRoute requiresPro><StudyPlanPage /></ProtectedRoute>} />
-                    <Route path="/history" element={<ProtectedRoute><SessionHistoryPage /></ProtectedRoute>} />
-                    <Route path="/help" element={<ProtectedRoute><HelpPage /></ProtectedRoute>} />
-                    <Route path="/ai-tutor" element={<ProtectedRoute><AITutorPage /></ProtectedRoute>} />
-                    <Route path="/contact" element={<ProtectedRoute><ContactPage /></ProtectedRoute>} />
-                    <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
-                    <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />
-                    <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+                {/* Protected Routes */}
+                <Route path="/dashboard" element={<ProtectedRoute />}>
+                  <Route index element={<Dashboard />} />
+                </Route>
+                <Route path="/select" element={<ProtectedRoute><SubjectSelector /></ProtectedRoute>} />
+                <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
+                <Route path="/cbt" element={<ProtectedRoute><CBTSimulator /></ProtectedRoute>} />
+                <Route path="/result" element={<ProtectedRoute><ResultPage /></ProtectedRoute>} />
+                <Route path="/stats" element={<ProtectedRoute><StatsPage /></ProtectedRoute>} />
+                <Route path="/past-questions" element={<ProtectedRoute><PastQuestionsPage /></ProtectedRoute>} />
+                <Route path="/notepad" element={<ProtectedRoute><NotepadPage /></ProtectedRoute>} />
+                <Route path="/study-plan" element={<ProtectedRoute><StudyPlanPage /></ProtectedRoute>} />
+                <Route path="/history" element={<ProtectedRoute><SessionHistoryPage /></ProtectedRoute>} />
+                <Route path="/help" element={<ProtectedRoute><HelpPage /></ProtectedRoute>} />
+                <Route path="/ai-tutor" element={<ProtectedRoute><AITutorPage /></ProtectedRoute>} />
+                <Route path="/contact" element={<ProtectedRoute><ContactPage /></ProtectedRoute>} />
+                <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
+                <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />
+                <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
-                    {/* 404 - Redirect to home */}
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                  </Routes>
-                </main>
-              </div>
-            </Router>
-          </StudyProvider>
-        </AuthProvider>
-      </ToastProvider>
+                {/* 404 - Redirect to home */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </main>
+          </div>
+        </Router>
+      </StudyProvider>
     </ThemeProvider>
   );
 }

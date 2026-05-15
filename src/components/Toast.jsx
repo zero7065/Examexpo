@@ -1,57 +1,57 @@
-// src/components/Toast.jsx
 import { createContext, useContext, useState, useCallback } from "react";
 
 const ToastContext = createContext();
 
+const typeColors = {
+  success: "#00E5A0",
+  error: "#FF4D6A",
+  info: "#6C3CE9",
+};
+
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
-  const toast = useCallback(({ message, type = "info", duration = 3500 }) => {
+  const toast = useCallback(({ message, type = "info" }) => {
     const id = Date.now() + Math.random();
     setToasts(t => [...t, { id, message, type }]);
-    setTimeout(() => setToasts(t => t.filter(x => x.id !== id)), duration);
+    setTimeout(() => setToasts(t => t.filter(x => x.id !== id)), 3000);
   }, []);
-
-  const icons = { success: "✅", error: "❌", info: "💡", warning: "⚠️" };
-  const colors = {
-    success: "#00E5A0",
-    error: "#FF4D6A",
-    info: "#4D9EFF",
-    warning: "#FFB800"
-  };
 
   return (
     <ToastContext.Provider value={{ toast }}>
       {children}
       <div style={{
-        position: "fixed", bottom: 24, right: 24, zIndex: 9999,
-        display: "flex", flexDirection: "column", gap: 10,
-        maxWidth: 320, width: "calc(100vw - 48px)"
+        position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)",
+        zIndex: 9999, display: "flex", flexDirection: "column", gap: 8,
+        maxWidth: 400, width: "calc(100vw - 48px)",
       }}>
         {toasts.map(t => (
           <div key={t.id} style={{
-            background: "var(--bg-2)",
-            border: `1px solid ${colors[t.type]}44`,
-            borderLeft: `4px solid ${colors[t.type]}`,
+            background: "#1a1a1f",
+            border: "1px solid #333",
             borderRadius: 10,
-            padding: "12px 16px",
+            padding: "12px 18px",
             display: "flex",
             alignItems: "center",
             gap: 10,
-            boxShadow: "var(--card-shadow)",
-            animation: "slideIn 0.25s ease",
-            color: "var(--text)",
+            boxShadow: "0 4px 24px rgba(0,0,0,0.5)",
+            animation: "toastSlideUp 0.25s ease",
+            color: "#fff",
             fontSize: 14,
+            fontFamily: "system-ui, sans-serif",
           }}>
-            <span>{icons[t.type]}</span>
+            <span style={{
+              width: 8, height: 8, borderRadius: "50%",
+              background: typeColors[t.type], flexShrink: 0,
+            }} />
             <span>{t.message}</span>
           </div>
         ))}
       </div>
       <style>{`
-        @keyframes slideIn {
-          from { transform: translateX(100%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
+        @keyframes toastSlideUp {
+          from { transform: translateY(20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
         }
       `}</style>
     </ToastContext.Provider>

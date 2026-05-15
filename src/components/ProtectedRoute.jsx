@@ -1,27 +1,40 @@
-// src/components/ProtectedRoute.jsx
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useOnboarding } from "../hooks/useOnboarding";
 
-const ProtectedRoute = ({ children, requiresPro = false }) => {
-  const { user, isPro, loading } = useAuth();
+export default function ProtectedRoute() {
+  const { user, loading: authLoading } = useAuth();
+  const { onboarded, loading: onboardingLoading } = useOnboarding();
 
-  if (loading) {
+  if (authLoading || onboardingLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-surface">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      <div style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#0a0a0f",
+      }}>
+        <div style={{
+          width: 40,
+          height: 40,
+          border: "3px solid #333",
+          borderTopColor: "#6C3CE9",
+          borderRadius: "50%",
+          animation: "spinner 0.8s linear infinite",
+        }} />
+        <style>{`@keyframes spinner { to { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }
 
   if (!user) {
-    return <Navigate to="/auth" />;
+    return <Navigate to="/auth" replace />;
   }
 
-  if (requiresPro && !isPro()) {
-    return <Navigate to="/payment" />;
+  if (!onboarded) {
+    return <Navigate to="/onboarding" replace />;
   }
 
-  return children;
-};
-
-export default ProtectedRoute;
+  return <Outlet />;
+}

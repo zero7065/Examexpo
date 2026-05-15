@@ -1,388 +1,327 @@
-// src/pages/Dashboard.jsx
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import ActivityToast from "../components/ActivityToast";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useToast } from "../components/Toast";
-import DashboardCustomizer, { DEFAULT_WIDGETS } from "../components/DashboardCustomizer";
-import WelcomeModal from "../components/WelcomeModal";
-import ProGate from "../components/ProGate";
-import { 
-  BookOpen, 
-  Zap, 
-  History, 
-  Target, 
-  TrendingUp, 
-  Settings, 
-  ChevronRight, 
-  Sparkles,
-  Award,
-  Crown,
-  Calendar
+import { getUserProfile } from "../lib/userProfile";
+import {
+  LayoutDashboard, BookOpen, GraduationCap, Brain, TrendingUp, Settings,
+  LogOut, Target, Calendar, CheckCircle, Zap, Send, ChevronRight
 } from "lucide-react";
 
-const Dashboard = () => {
-  const { user, isPro } = useAuth();
-  const { toast } = useToast();
-  const navigate = useNavigate();
-  const [isCustomizing, setIsCustomizing] = useState(false);
-  const [widgets, setWidgets] = useState(() => {
-    const saved = localStorage.getItem("ep-dashboard-widgets");
-    return saved ? JSON.parse(saved) : DEFAULT_WIDGETS;
-  });
+const SUBJECT_ICONS = {
+  English: "📖", Maths: "🔢", Physics: "⚛️", Chemistry: "🧪", Biology: "🧬",
+  Economics: "💰", Government: "🏛️", Literature: "📚", CRS: "✝️", Geography: "🌍",
+  Commerce: "📊", Accounting: "🧾", "Further Maths": "📐", "Agricultural Science": "🌾", "Technical Drawing": "📏",
+  "Business Management": "💼",
+};
 
-  const [counters, setCounters] = useState({ q: 0, s: 0 });
+export default function Dashboard() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const qInterval = setInterval(() => {
-      setCounters(prev => ({
-        ...prev,
-        q: prev.q < (user?.totalQuestionsAnswered || 0) ? prev.q + 1 : prev.q
-      }));
-    }, 20);
-    return () => clearInterval(qInterval);
+    async function fetchProfile() {
+      if (user) {
+        try {
+          const data = await getUserProfile(user.uid);
+          setProfile(data);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      setLoading(false);
+    }
+    fetchProfile();
   }, [user]);
 
-  const avgScore = user?.totalQuestionsAnswered > 0 
-    ? Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 100) 
-    : 0;
-    
-  const stats = [
-    { id: "stats", label: "Questions Answered", value: counters.q, icon: BookOpen, color: "text-blue-400", bg: "bg-blue-400/10" },
-    { id: "streak", label: "Daily Streak", value: `${user?.streak || 0} Days`, icon: Zap, color: "text-accent", bg: "bg-accent/10" },
-    { id: "avg", label: "Average Score", value: `${avgScore}%`, icon: Target, color: "text-primary", bg: "bg-primary/10" },
-    { id: "sessions", label: "Total Sessions", value: user?.totalSessions || 0, icon: History, color: "text-purple-400", bg: "bg-purple-400/10" },
-  ];
+  function getGreeting() {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good morning";
+    if (hour < 18) return "Good afternoon";
+    return "Good evening";
+  }
 
-  const visibleWidgets = widgets.filter(w => w.enabled).map(w => w.id);
-  const proStatus = isPro();
+  function handleLogout() {
+    logout();
+    navigate("/auth");
+  }
 
-  const handleClaimStreak = () => {
-    toast({ 
-      message: `🎉 Day ${user?.streak} Streak Claimed! +50 bonus questions added!`, 
-      type: "success",
-      duration: 8000 
-    });
-  };
+  function getScoreColor(score) {
+    if (score < 200) return "#FF4D6A";
+    if (score < 250) return "#FF9F43";
+    if (score < 320) return "#00E5A0";
+    return "#D4A853";
+  }
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}>
+        Loading...
+      </div>
+    );
+  }
+
+  const subjects = profile?.subjects || [];
+  const exam = profile?.exam || "JAMB";
+  const targetScore = profile?.targetScore || 280;
+  const streak = profile?.streak || 0;
+  const xp = profile?.xp || 0;
 
   return (
-    <div className="p-6 md:p-10 max-w-7xl mx-auto space-y-10 animate-fade">
-      <WelcomeModal />
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <h1 className="text-4xl font-black mb-2 tracking-tight">
-            Hi, {user?.name?.split(" ")[0] || "Student"} 👋
-          </h1>
-          <p className="text-text-muted font-medium flex items-center gap-2">
-            <Sparkles size={16} className="text-primary" />
-            "Success is the sum of small efforts, repeated day in and day out."
-          </p>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        .scrollbar-thin::-webkit-scrollbar { width: 6px; }
+        .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+        .scrollbar-thin::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        @media (max-width: 768px) {
+          .sidebar { display: none; }
+          .mobile-nav { display: flex; }
+        }
+        @media (min-width: 769px) {
+          .sidebar { display: flex; }
+          .mobile-nav { display: none; }
+        }
+      `}</style>
+
+      {/* Sidebar */}
+      <div className="sidebar" style={{
+        width: 260,
+        background: "#0d0d12",
+        borderRight: "1px solid #1e1e2a",
+        flexDirection: "column",
+        padding: "24px 16px",
+        position: "fixed",
+        height: "100vh",
+        display: "flex",
+        zIndex: 50,
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 40, padding: "0 8px" }}>
+          <div style={{
+            width: 36, height: 36, background: "linear-gradient(135deg, #6C3CE9, #D4A853)",
+            borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 18
+          }}>
+            E
+          </div>
+          <span style={{ fontSize: 18, fontWeight: 700, color: "#fff" }}>ExamPadi</span>
         </div>
-        
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={() => setIsCustomizing(true)}
-            className="p-3 bg-bg-2 border border-border rounded-xl text-text-muted hover:text-primary transition-colors"
+
+        <nav style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
+          <NavItem icon={LayoutDashboard} label="Home" active />
+          <NavItem icon={BookOpen} label="Practice" onClick={() => navigate("/select")} />
+          <NavItem icon={GraduationCap} label="Mock Exam" onClick={() => navigate("/cbt")} />
+          <NavItem icon={Brain} label="AI Tutor" onClick={() => navigate("/ai-tutor")} />
+          <NavItem icon={TrendingUp} label="Progress" onClick={() => navigate("/stats")} />
+          <NavItem icon={Settings} label="Settings" onClick={() => navigate("/profile")} />
+        </nav>
+
+        <div style={{ borderTop: "1px solid #1e1e2a", paddingTop: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16, padding: "0 8px" }}>
+            <div style={{
+              width: 40, height: 40, borderRadius: "50%", background: "#6C3CE9",
+              display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 600
+            }}>
+              {user?.displayName?.[0] || "U"}
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 14, fontWeight: 600 }}>{user?.displayName?.split(" ")[0] || "Student"}</div>
+              <div style={{ fontSize: 12, color: "#D4A853", background: "rgba(212,168,83,0.1)", padding: "2px 6px", borderRadius: 4, display: "inline-block", marginTop: 2 }}>
+                {exam}
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={handleLogout}
+            style={{
+              width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "10px 12px",
+              background: "transparent", border: "none", color: "#888", cursor: "pointer", borderRadius: 8, transition: "all 0.2s"
+            }}
           >
-            <Settings size={20} />
+            <LogOut size={18} /> <span style={{ fontSize: 14 }}>Logout</span>
           </button>
-          {user?.plan === "free" && (
-            <Link to="/payment" className="bg-accent/10 border border-accent/20 px-6 py-3 rounded-xl flex items-center gap-3">
-              <div className="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center text-accent">
-                <Crown size={18} />
-              </div>
-              <div>
-                <div className="text-[10px] font-black uppercase tracking-widest text-accent">Free Limit</div>
-                <div className="text-sm font-bold text-text">0 / 30 Questions</div>
-              </div>
-            </Link>
-          )}
-        </div>
-      </header>
-
-      {visibleWidgets.includes("stats") && (
-        <>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {stats.map((stat, i) => {
-              const Icon = stat.icon;
-              return (
-                <div key={i} className="glass-card p-6 group hover:border-primary/30 transition-all">
-                  <div className={`w-12 h-12 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                    <Icon size={24} />
-                  </div>
-                  <div className="text-3xl font-black text-text mb-1 font-mono">{stat.value}</div>
-                  <div className="text-[10px] text-text-muted font-black uppercase tracking-widest">{stat.label}</div>
-                </div>
-              );
-            })}
-          </div>
-          
-          {/* Empty State for New Users */}
-          {(!user?.totalSessions || user.totalSessions === 0) && (
-            <div className="glass-card p-8 text-center border-primary/20 bg-primary/5">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Sparkles size={32} className="text-primary" />
-              </div>
-              <h3 className="text-xl font-bold text-text mb-2">Ready to Start Your Journey?</h3>
-              <p className="text-text-muted mb-6 max-w-md mx-auto">
-                Complete your first practice session to see your stats here. Choose a subject and begin practicing now!
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Link 
-                  to="/select" 
-                  className="bg-primary text-bg px-8 py-3 rounded-xl font-bold hover:bg-primary/90 transition-colors"
-                >
-                  Start Practice
-                </Link>
-                <Link 
-                  to="/past-questions" 
-                  className="glass-card px-8 py-3 rounded-xl font-bold text-text hover:border-primary/30 transition-colors"
-                >
-                  Browse Questions
-                </Link>
-              </div>
-            </div>
-          )}
-          
-          {/* Exam Countdown */}
-          {user?.examDate && (
-            <div className="glass-card p-6 border-accent/20 bg-accent/5">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 bg-accent/10 rounded-2xl flex items-center justify-center">
-                  <Calendar size={28} className="text-accent" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-xs text-text-muted font-black uppercase tracking-widest mb-1">Exam Countdown</div>
-                  <div className="text-2xl font-black text-text">
-                    {(() => {
-                      const examDate = new Date(user.examDate);
-                      const today = new Date();
-                      const diffTime = examDate - today;
-                      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                      if (diffDays < 0) return "Exam passed";
-                      if (diffDays === 0) return "Exam today!";
-                      if (diffDays === 1) return "1 day to go";
-                      return `${diffDays} days to go`;
-                    })()}
-                  </div>
-                </div>
-                <Link 
-                  to="/study-plan" 
-                  className="text-accent hover:underline text-sm font-bold"
-                >
-                  View Plan →
-                </Link>
-              </div>
-            </div>
-          )}
-          
-          {/* Community & Referral */}
-          <div className="grid md:grid-cols-2 gap-4">
-            {/* WhatsApp */}
-            <a 
-              href="https://wa.me/2348127636057?text=Hey%20from%20ExamPadi!%20I%27m%20ready%20to%20ace%20my%20exams%20💪"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-card p-6 border-green-500/20 bg-green-500/5 hover:border-green-500/40 transition-all group"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-green-500/10 rounded-2xl flex items-center justify-center text-green-500 group-hover:scale-110 transition-transform">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-text">Chat with Us</h3>
-                  <p className="text-xs text-text-muted">Get help, share feedback</p>
-                </div>
-              </div>
-            </a>
-
-            {/* Referral */}
-            <button 
-              onClick={() => {
-                const referralCode = user?.id?.slice(-6) || "EXAMPADI";
-                const shareText = `🎓 Join me on ExamPadi AI - the best JAMB & WAEC prep app! Use my link: https://exampadi.jadai.dev?ref=${referralCode}`;
-                if (navigator.share) {
-                  navigator.share({ text: shareText });
-                } else {
-                  navigator.clipboard.writeText(shareText);
-                  toast({ message: "Referral link copied! Share with friends", type: "success" });
-                }
-              }}
-              className="glass-card p-6 border-primary/20 bg-primary/5 hover:border-primary/40 transition-all group text-left"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="18" cy="5" r="3"/>
-                    <circle cx="6" cy="12" r="3"/>
-                    <circle cx="18" cy="19" r="3"/>
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-text">Invite Friends</h3>
-                  <p className="text-xs text-text-muted">Get 3 days Pro free</p>
-                </div>
-              </div>
-            </button>
-          </div>
-        </>
-      )}
-
-      <div className="grid lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <ActionCard 
-              to="/select"
-              title="Practice Mode"
-              description="Master specific subjects at your own pace."
-              icon={<BookOpen size={24} />}
-              color="text-primary"
-              bg="bg-primary/5"
-              border="border-primary/20"
-            />
-            <ActionCard 
-              to="/select?mode=cbt"
-              title="CBT Simulator"
-              description="Experience the real JAMB exam environment."
-              icon={<Zap size={24} />}
-              color="text-accent"
-              bg="bg-accent/5"
-              border="border-accent/20"
-              isPro={proStatus}
-            />
-            <ActionCard 
-              to="/past-questions"
-              title="Past Questions"
-              description="2014–2024 JAMB & WAEC past questions."
-              icon={<History size={24} />}
-              color="text-blue-400"
-              bg="bg-blue-400/5"
-              border="border-blue-400/20"
-            />
-            <ActionCard 
-              to="/past-questions?mode=predictions"
-              title="Likely Questions"
-              description="AI analysis of likely upcoming exam topics."
-              icon={<Sparkles size={24} />}
-              color="text-purple-400"
-              bg="bg-purple-400/5"
-              border="border-purple-400/20"
-              isPro={proStatus}
-            />
-          </div>
-
-          {visibleWidgets.includes("recentSessions") && (
-            <div className="glass-card overflow-hidden">
-              <div className="p-6 border-b border-border flex items-center justify-between">
-                <h3 className="font-bold text-lg flex items-center gap-2">
-                  <TrendingUp size={20} className="text-primary" />
-                  Recent Sessions
-                </h3>
-                <Link to="/stats" className="text-primary text-xs font-bold hover:underline">View Detailed Stats</Link>
-              </div>
-              <div className="p-10 text-center space-y-4">
-                <div className="w-16 h-16 bg-subtle rounded-full flex items-center justify-center mx-auto text-text-muted">
-                  <History size={32} />
-                </div>
-                <p className="text-text-muted text-sm max-w-xs mx-auto">No recent practice sessions. Your progress will appear here as you study.</p>
-                <Link to="/select" className="btn-secondary py-2 px-6 text-xs inline-block">Start Your First Session</Link>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="space-y-8">
-          {visibleWidgets.includes("streak") && (
-            <div className="glass-card p-8 text-center space-y-6">
-              <h3 className="font-black text-xs uppercase tracking-widest text-text-muted">7-Day Streak</h3>
-              <div className="flex justify-between items-center">
-                {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => {
-                  const currentStreak = user?.streak || 0;
-                  const isActive = i < currentStreak;
-                  return (
-                    <div key={i} className="flex flex-col items-center gap-2">
-                      <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-[10px] font-black ${
-                        isActive ? 'bg-primary border-primary text-black' : 'border-border text-text-muted'
-                      }`}>
-                        {isActive ? '✓' : ''}
-                      </div>
-                      <span className="text-[10px] font-bold text-text-muted">{day}</span>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="h-px bg-border"></div>
-              <div className="space-y-3">
-                <p className="text-sm font-medium">
-                  {user?.streak > 0 
-                    ? <>You're on a <span className="text-primary font-bold">{user.streak} day</span> streak! Keep going! 🔥</>
-                    : <>Start your streak today! Complete a session to begin.</>
-                  }
-                </p>
-                {user?.streak >= 3 && (
-                   <button 
-                     onClick={handleClaimStreak}
-                     aria-label="Claim streak reward"
-                     className="w-full py-3 bg-accent/20 border border-accent/40 text-accent font-bold rounded-xl text-sm hover:bg-accent/30 transition-all"
-                   >
-                     🎁 Claim Streak Rewards
-                   </button>
-                )}
-              </div>
-            </div>
-          )}
-
-          {visibleWidgets.includes("predictions") && (
-            proStatus ? (
-              <div className="bg-gradient-to-br from-indigo-600 to-purple-800 p-8 rounded-3xl relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 group-hover:scale-125 transition-transform duration-500"></div>
-                <div className="relative z-10 space-y-4">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white">
-                    <Award size={24} />
-                  </div>
-                  <h3 className="text-2xl font-black text-white leading-tight">Exam Target: 300+</h3>
-                  <p className="text-indigo-100 text-xs leading-relaxed">Your personalized AI study plan and predicted topics for 2025.</p>
-                  <button onClick={() => navigate("/study-plan")} className="bg-white text-indigo-900 w-full py-3 rounded-xl font-black text-xs flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform">
-                    View Study Plan
-                    <ChevronRight size={16} />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="glass-card overflow-hidden">
-                <ProGate feature="AI Study Plan" />
-              </div>
-            )
-          )}
         </div>
       </div>
 
-      <DashboardCustomizer 
-        isOpen={isCustomizing} 
-        onClose={() => setIsCustomizing(false)} 
-        onUpdate={setWidgets} 
-      />
+      {/* Main Content */}
+      <div style={{ flex: 1, marginLeft: 260, padding: "24px 32px", maxWidth: 1200, margin: "0 auto" }}>
+        
+        {/* Header */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
+          <div>
+            <h1 style={{ fontSize: 24, fontWeight: 700, color: "#fff", margin: 0 }}>
+              {getGreeting()} 👋
+            </h1>
+          </div>
+          <div style={{ display: "flex", gap: 16 }}>
+            <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
+              <span>🔥</span> <span style={{ fontWeight: 600 }}>{streak} day streak</span>
+            </div>
+            <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
+              <Zap size={16} color="#D4A853" /> <span style={{ fontWeight: 600 }}>{xp} XP</span>
+            </div>
+          </div>
+        </div>
 
-      <ActivityToast />
+        {/* Hero Stats */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginBottom: 40 }}>
+          <StatCard 
+            icon={Target} 
+            label="Target Score" 
+            value={targetScore} 
+            subtext={exam === "JAMB" ? "JAMB Score" : "Target Grade"}
+            color="#6C3CE9"
+          />
+          <StatCard 
+            icon={Calendar} 
+            label="Days to Exam" 
+            value="--" 
+            subtext="Set exam date"
+            color="#00E5A0"
+          />
+          <StatCard 
+            icon={CheckCircle} 
+            label="Questions Done" 
+            value="0" 
+            subtext="Keep going!"
+            color="#D4A853"
+          />
+        </div>
+
+        {/* Subject Cards */}
+        <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20 }}>Your Subjects</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20, marginBottom: 40 }}>
+          {subjects.length === 0 ? (
+             <p style={{ color: "#666" }}>No subjects selected. Go to settings to update.</p>
+          ) : (
+            subjects.map((subj) => (
+              <div key={subj} style={{
+                background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 20,
+                transition: "all 0.2s", cursor: "pointer",
+                borderLeft: "4px solid #6C3CE9"
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.boxShadow = "0 8px 32px rgba(108,60,233,0.15)";
+                e.currentTarget.style.borderColor = "#6C3CE9";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = "#1e1e2a";
+              }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span style={{ fontSize: 24 }}>{SUBJECT_ICONS[subj] || "📚"}</span>
+                    <span style={{ fontWeight: 600, fontSize: 16 }}>{subj}</span>
+                  </div>
+                </div>
+                <div style={{ height: 6, background: "#1e1e2a", borderRadius: 3, marginBottom: 12, overflow: "hidden" }}>
+                  <div style={{ width: "0%", height: "100%", background: "#6C3CE9", borderRadius: 3 }} />
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 13, color: "#888" }}>
+                  <span>0 questions done</span>
+                  <button style={{ background: "none", border: "none", color: "#6C3CE9", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+                    Start <ChevronRight size={14} />
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Daily Challenge */}
+        <div style={{
+          background: "linear-gradient(135deg, #1a0a3a 0%, #0d1a3a 100%)",
+          borderRadius: 16, padding: 24, marginBottom: 40, display: "flex", alignItems: "center", justifyContent: "space-between",
+          border: "1px solid #333", position: "relative", overflow: "hidden"
+        }}>
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 4, background: "#D4A853" }} />
+          <div>
+            <div style={{ color: "#D4A853", fontWeight: 700, fontSize: 14, marginBottom: 4, display: "flex", alignItems: "center", gap: 8 }}>
+              <Zap size={16} /> DAILY CHALLENGE
+            </div>
+            <div style={{ fontSize: 18, fontWeight: 600, color: "#fff", marginBottom: 4 }}>10 mixed questions</div>
+            <div style={{ color: "#888", fontSize: 13 }}>15 mins · 2x XP today</div>
+          </div>
+          <button style={{
+            background: "transparent", border: "1px solid #D4A853", color: "#D4A853", padding: "10px 20px", borderRadius: 10, fontWeight: 600, cursor: "pointer"
+          }}>
+            Start Challenge →
+          </button>
+        </div>
+
+        {/* AI Tutor & Recent Activity */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
+          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 24, border: "1px solid #6C3CE9" }}>
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Ask AI Tutor</h3>
+            <p style={{ color: "#888", fontSize: 13, marginBottom: 16 }}>Get instant explanations for any topic or question</p>
+            <div style={{ display: "flex", gap: 8 }}>
+              <input type="text" placeholder="Ask anything... e.g. Explain Newton's 3rd law" style={{
+                flex: 1, background: "#0a0a0f", border: "1px solid #333", borderRadius: 8, padding: "10px 12px", color: "#fff", outline: "none", fontSize: 13
+              }} />
+              <button style={{ background: "#6C3CE9", border: "none", borderRadius: 8, padding: "0 16px", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center" }}>
+                <Send size={16} />
+              </button>
+            </div>
+          </div>
+
+          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 24, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+             <div style={{ fontSize: 32, marginBottom: 12 }}>🚀</div>
+             <h3 style={{ fontSize: 16, fontWeight: 600, color: "#fff", marginBottom: 8 }}>No activity yet</h3>
+             <p style={{ color: "#666", fontSize: 13 }}>Start your first practice session!</p>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Mobile Nav (Simplified Placeholder) */}
+      <div className="mobile-nav" style={{
+        position: "fixed", bottom: 0, left: 0, right: 0, background: "#0d0d12", borderTop: "1px solid #1e1e2a",
+        padding: "12px 24px", display: "flex", justifyContent: "space-around", zIndex: 100
+      }}>
+         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#6C3CE9" }}>
+            <LayoutDashboard size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Home</span>
+         </div>
+         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/select")}>
+            <BookOpen size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Practice</span>
+         </div>
+         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/ai-tutor")}>
+            <Brain size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>AI</span>
+         </div>
+         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/profile")}>
+            <Settings size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Settings</span>
+         </div>
+      </div>
+
     </div>
   );
-};
+}
 
-const ActionCard = ({ to, title, description, icon, color, bg, border, isPro }) => (
-  <Link to={to} className={`glass-card p-6 border-2 border-transparent hover:${border} hover:${bg} transition-all group relative overflow-hidden`}>
-    <div className={`w-12 h-12 ${bg} ${color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-      {icon}
+function NavItem({ icon: Icon, label, active, onClick }) {
+  return (
+    <button onClick={onClick} style={{
+      display: "flex", alignItems: "center", gap: 12, padding: "12px 16px",
+      background: active ? "rgba(108,60,233,0.1)" : "transparent",
+      border: "none", borderRadius: 12, color: active ? "#fff" : "#888",
+      cursor: "pointer", width: "100%", textAlign: "left", transition: "all 0.2s"
+    }}>
+      <Icon size={20} color={active ? "#6C3CE9" : "#888"} />
+      <span style={{ fontWeight: active ? 600 : 500, fontSize: 14 }}>{label}</span>
+    </button>
+  );
+}
+
+function StatCard({ icon: Icon, label, value, subtext, color }) {
+  return (
+    <div style={{
+      background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 20,
+      borderLeft: `4px solid ${color}`, display: "flex", flexDirection: "column", gap: 8
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#888", fontSize: 13 }}>
+        <Icon size={16} color={color} /> {label}
+      </div>
+      <div style={{ fontSize: 32, fontWeight: 800, color: "#fff" }}>{value}</div>
+      <div style={{ fontSize: 12, color: "#666" }}>{subtext}</div>
     </div>
-    <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-      {title}
-      {isPro && <span className="bg-accent/10 text-accent text-[8px] px-2 py-0.5 rounded-full uppercase tracking-widest font-black border border-accent/20">Pro</span>}
-    </h3>
-    <p className="text-text-muted text-sm leading-relaxed">{description}</p>
-  </Link>
-);
-
-export default Dashboard;
+  );
+}

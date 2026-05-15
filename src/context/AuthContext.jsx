@@ -1,176 +1,57 @@
-// src/context/AuthContext.jsx - Fully offline with localStorage
 import { createContext, useContext, useEffect, useState } from "react";
+import {
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  updatePassword,
+} from "firebase/auth";
+import { auth } from "../firebase";
 
 const AuthContext = createContext();
-
-async function hashPassword(password) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(password);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-function getUsers() {
-  try {
-    return JSON.parse(localStorage.getItem("exampadi_users") || "[]");
-  } catch {
-    return [];
-  }
-}
-
-function saveUsers(users) {
-  localStorage.setItem("exampadi_users", JSON.stringify(users));
-}
-
-function getCurrentSession() {
-  try {
-    return JSON.parse(localStorage.getItem("exampadi_session") || "null");
-  } catch {
-    return null;
-  }
-}
-
-function saveSession(user) {
-  localStorage.setItem("exampadi_session", JSON.stringify(user));
-}
-
-function clearSession() {
-  localStorage.removeItem("exampadi_session");
-}
-
-async function createUser(email, password, name) {
-  const users = getUsers();
-  if (users.find(u => u.email === email)) {
-    throw new Error("Email already registered");
-  }
-  
-  const hashedPassword = await hashPassword(password);
-  
-  const newUser = {
-    id: Date.now().toString(),
-    email,
-    password: hashedPassword,
-    name: name || "Student",
-    plan: "free",
-    planExpiry: null,
-    totalQuestionsAnswered: 0,
-    totalCorrect: 0,
-    totalSessions: 0,
-    totalStudyTimeSeconds: 0,
-    streak: 0,
-    longestStreak: 0,
-    lastActiveDate: null,
-    joinedAt: new Date().toISOString(),
-  };
-  
-  users.push(newUser);
-  saveUsers(users);
-  
-  const sessionUser = { ...newUser };
-  delete sessionUser.password;
-  saveSession(sessionUser);
-  
-  return sessionUser;
-}
-
-async function loginUser(email, password) {
-  const users = getUsers();
-  const user = users.find(u => u.email === email);
-  
-  if (!user) {
-    throw new Error("Invalid email or password");
-  }
-  
-  const hashedInput = await hashPassword(password);
-  if (user.password !== hashedInput) {
-    throw new Error("Invalid email or password");
-  }
-  
-  const sessionUser = { ...user };
-  delete sessionUser.password;
-  saveSession(sessionUser);
-  
-  return sessionUser;
-}
-
-async function resetPassword(email, newPassword) {
-  const users = getUsers();
-  const userIndex = users.findIndex(u => u.email === email);
-  
-  if (userIndex === -1) {
-    throw new Error("No account found with this email");
-  }
-  
-  const hashedPassword = await hashPassword(newPassword);
-  users[userIndex].password = hashedPassword;
-  saveUsers(users);
-  
-  return true;
-}
-
-function findUserByEmail(email) {
-  const users = getUsers();
-  return users.find(u => u.email === email);
-}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing session on load
-    const session = getCurrentSession();
-    if (session) {
-      setUser(session);
-    }
-    setLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser);
+      setLoading(false);
+    });
+    return unsubscribe;
   }, []);
 
-  function register(email, password, name) {
-    const newUser = createUser(email, password, name);
-    setUser(newUser);
-    return newUser;
+  async function register(email, password, name) {
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(cred.user, { displayName: name });
+    setUser({ ...cred.user, displayName: name });
   }
 
   async function login(email, password) {
-    const loggedInUser = await loginUser(email, password);
-    setUser(loggedInUser);
-    return loggedInUser;
+    await signInWithEmailAndPassword(auth, email, password);
   }
 
-  function logout() {
-    clearSession();
+  async function logout() {
+    await signOut(auth);
     setUser(null);
   }
 
-  function updateUser(updates) {
-    if (!user) return;
-    
-    const users = getUsers();
-    const userIndex = users.findIndex(u => u.id === user.id);
-    
-    if (userIndex !== -1) {
-      users[userIndex] = { ...users[userIndex], ...updates };
-      saveUsers(users);
-      
-      const updatedUser = { ...user, ...updates };
-      delete updatedUser.password;
-      saveSession(updatedUser);
-      setUser(updatedUser);
+  async function resetPassword(email, newPassword) {
+    try {
+      const cred = await signInWithEmailAndPassword(auth, email, newPassword);
+      await updatePassword(cred.user, newPassword);
+    } catch {
+      throw new Error("No account found with this email");
     }
   }
 
-  function isPro() {
-    if (!user) return false;
-    if (user.plan === "pro") {
-      if (!user.planExpiry) return true;
-      return new Date(user.planExpiry) > new Date();
-    }
-    return false;
+  function findUserByEmail(email) {
+    if (user && user.email === email) return user;
+    return null;
   }
 
-  // Full-screen loader
   if (loading) {
     return (
       <div style={{
@@ -182,26 +63,24 @@ export function AuthProvider({ children }) {
         flexDirection: "column",
         gap: 16,
       }}>
-        <div style={{ fontSize: 52 }}>🎓</div>
+        <div style={{
+          width: 36,
+          height: 36,
+          border: "3px solid #333",
+          borderTopColor: "#6C3CE9",
+          borderRadius: "50%",
+          animation: "spin 0.8s linear infinite",
+        }} />
         <p style={{ color: "#888", fontFamily: "system-ui, sans-serif", fontSize: 15 }}>
           Loading ExamPadi...
         </p>
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      loading, 
-      register, 
-      login, 
-      logout, 
-      updateUser,
-      isPro,
-      resetPassword: (email, newPassword) => resetPassword(email, newPassword),
-      findUserByEmail: (email) => findUserByEmail(email)
-    }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword, findUserByEmail }}>
       {children}
     </AuthContext.Provider>
   );
