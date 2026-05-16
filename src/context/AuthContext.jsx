@@ -65,6 +65,10 @@ export function AuthProvider({ children }) {
     if (user) setUser({ ...user, ...data });
   }
 
+  function isPro() {
+    return user?.plan === "pro" && user?.planExpiry && new Date(user.planExpiry) > new Date();
+  }
+
   if (loading) {
     return (
       <div style={{
@@ -93,7 +97,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword, findUserByEmail, refreshProfile, updateUser, profileVersion }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword, findUserByEmail, refreshProfile, updateUser, profileVersion, isPro }}>
       {children}
     </AuthContext.Provider>
   );
