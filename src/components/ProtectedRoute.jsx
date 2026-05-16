@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useOnboarding } from "../hooks/useOnboarding";
 
-export default function ProtectedRoute() {
+export default function ProtectedRoute({ children }) {
   const { user, loading: authLoading } = useAuth();
   const { onboarded, loading: onboardingLoading } = useOnboarding();
 
@@ -36,5 +36,5 @@ export default function ProtectedRoute() {
     return <Navigate to="/onboarding" replace />;
   }
 
-  return <Outlet />;
+  return children || <Outlet />;
 }
