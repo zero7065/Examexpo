@@ -23,6 +23,7 @@ export default function PracticeSession() {
   const [proReason, setProReason] = useState(null);
   const [questions, setQuestions] = useState(sessionData?.questions || []);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [redirected, setRedirected] = useState(false);
   const [answers, setAnswers] = useState({});
   const [flagged, setFlagged] = useState(new Set());
   const [revealed, setRevealed] = useState({});
@@ -40,7 +41,9 @@ export default function PracticeSession() {
   const current = questions[currentIndex];
 
   useEffect(() => {
-    if (!sessionData?.questions?.length) {
+    if (!sessionData?.questions?.length && !redirected) {
+      setRedirected(true);
+      toast({ message: "Select a subject to start practicing", type: "warning" });
       navigate("/question-bank", { replace: true });
       return;
     }

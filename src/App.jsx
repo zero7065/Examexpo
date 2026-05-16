@@ -24,6 +24,9 @@ import StudyPlanPage from "./pages/StudyPlanPage";
 import SessionHistoryPage from "./pages/SessionHistoryPage";
 import HelpPage from "./pages/HelpPage";
 import AITutorPage from "./pages/AITutorPage";
+import MockExam from "./pages/MockExam";
+import MockSummary from "./pages/MockSummary";
+import AITutor from "./pages/AITutor";
 import ContactPage from "./pages/ContactPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
@@ -67,7 +70,9 @@ function App() {
                 <Route path="/study-plan" element={<ProtectedRoute><StudyPlanPage /></ProtectedRoute>} />
                 <Route path="/history" element={<ProtectedRoute><SessionHistoryPage /></ProtectedRoute>} />
                 <Route path="/help" element={<ProtectedRoute><HelpPage /></ProtectedRoute>} />
-                <Route path="/ai-tutor" element={<ProtectedRoute><AITutorPage /></ProtectedRoute>} />
+                <Route path="/mock-exam" element={<ProtectedRoute><MockExam /></ProtectedRoute>} />
+                <Route path="/mock-summary" element={<ProtectedRoute><MockSummary /></ProtectedRoute>} />
+                <Route path="/ai-tutor" element={<ProtectedRoute><AITutor /></ProtectedRoute>} />
                 <Route path="/contact" element={<ProtectedRoute><ContactPage /></ProtectedRoute>} />
                 <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
                 <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />

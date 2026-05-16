@@ -122,8 +122,8 @@ export default function Dashboard() {
           <NavItem icon={LayoutDashboard} label="Home" path="/dashboard" active={location.pathname === "/dashboard"} onClick={() => navigate("/dashboard")} />
           <NavItem icon={BookOpen} label="Practice" path="/practice-select" active={location.pathname === "/practice-select" || location.pathname === "/select"} onClick={() => navigate("/practice-select")} />
           <NavItem icon={Library} label="Question Bank" path="/question-bank" active={location.pathname === "/question-bank"} onClick={() => navigate("/question-bank")} />
-          <NavItem icon={GraduationCap} label="Mock Exam" path="/cbt" active={location.pathname === "/cbt"} onClick={() => navigate("/cbt")} />
-          <NavItem icon={Brain} label="AI Tutor" path="/ai-tutor" active={location.pathname === "/ai-tutor"} onClick={() => navigate("/ai-tutor")} />
+          <NavItem icon={GraduationCap} label="Mock Exam" path="/mock-exam" active={location.pathname === "/mock-exam"} onClick={() => navigate("/mock-exam")} />
+          <NavItem icon={Brain} label={isPro ? "AI Tutor ✨" : "AI Tutor 🔒"} path="/ai-tutor" active={location.pathname === "/ai-tutor"} onClick={() => navigate("/ai-tutor")} />
           <NavItem icon={TrendingUp} label="Progress" path="/stats" active={location.pathname === "/stats"} onClick={() => navigate("/stats")} />
           <NavItem icon={Settings} label="Settings" path="/profile" active={location.pathname === "/profile"} onClick={() => navigate("/profile")} />
         </nav>
