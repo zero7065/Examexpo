@@ -1,25 +1,21 @@
-// src/pages/NotFoundPage.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NotFoundPage() {
+  const navigate = useNavigate();
+  useEffect(() => { document.title = "404 — ExamPadi AI"; }, []);
+
   return (
-    <div className="min-h-screen bg-bg flex items-center justify-center p-6">
-      <div className="text-center max-w-md space-y-6">
-        <div style={{ fontSize: 72 }}>🎓</div>
-        <h1 className="text-6xl font-black text-text">404</h1>
-        <h2 className="text-2xl font-bold text-text">Page Not Found</h2>
-        <p className="text-text-muted leading-relaxed">
-          This page doesn't exist — but your exam score can. Let's get back to studying.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
-          <Link to="/" className="btn-primary px-8 py-3 text-sm font-bold">
-            Go to Homepage
-          </Link>
-          <Link to="/dashboard" className="btn-secondary px-8 py-3 text-sm font-bold">
-            Open Dashboard
-          </Link>
+    <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <div style={{ textAlign: "center", maxWidth: 400 }}>
+        <div style={{ fontSize: 80, fontWeight: 900, background: "linear-gradient(135deg, #6C3CE9, #D4A853)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", lineHeight: 1, marginBottom: 8 }}>
+          404
         </div>
+        <h2 style={{ color: "#fff", fontSize: 22, fontWeight: 700, margin: "0 0 8px" }}>Page not found</h2>
+        <p style={{ color: "#888", fontSize: 14, marginBottom: 24 }}>This page doesn't exist — but your exam score can. Let's get back to studying.</p>
+        <button onClick={() => navigate("/dashboard")} style={{ padding: "12px 28px", borderRadius: 10, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "inherit" }}>
+          Go Home →
+        </button>
       </div>
     </div>
   );
