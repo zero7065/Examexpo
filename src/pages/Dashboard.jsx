@@ -4,10 +4,11 @@ import { useAuth } from "../context/AuthContext";
 import { getUserProfile } from "../lib/userProfile";
 import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit } from "../lib/usageTracker";
+import { getRandomQuestions } from "../data/questions/index";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import {
   LayoutDashboard, BookOpen, GraduationCap, Brain, TrendingUp, Settings,
-  LogOut, Target, Calendar, CheckCircle, Zap, Send, ChevronRight, Crown
+  LogOut, Target, Calendar, CheckCircle, Zap, Send, ChevronRight, Crown, Library
 } from "lucide-react";
 
 const SUBJECT_ICONS = {
@@ -119,7 +120,8 @@ export default function Dashboard() {
 
         <nav style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8 }}>
           <NavItem icon={LayoutDashboard} label="Home" path="/dashboard" active={location.pathname === "/dashboard"} onClick={() => navigate("/dashboard")} />
-          <NavItem icon={BookOpen} label="Practice" path="/practice" active={location.pathname === "/practice" || location.pathname === "/select"} onClick={() => navigate("/practice")} />
+          <NavItem icon={BookOpen} label="Practice" path="/practice-select" active={location.pathname === "/practice-select" || location.pathname === "/select"} onClick={() => navigate("/practice-select")} />
+          <NavItem icon={Library} label="Question Bank" path="/question-bank" active={location.pathname === "/question-bank"} onClick={() => navigate("/question-bank")} />
           <NavItem icon={GraduationCap} label="Mock Exam" path="/cbt" active={location.pathname === "/cbt"} onClick={() => navigate("/cbt")} />
           <NavItem icon={Brain} label="AI Tutor" path="/ai-tutor" active={location.pathname === "/ai-tutor"} onClick={() => navigate("/ai-tutor")} />
           <NavItem icon={TrendingUp} label="Progress" path="/stats" active={location.pathname === "/stats"} onClick={() => navigate("/stats")} />
@@ -265,7 +267,7 @@ export default function Dashboard() {
                 transition: "all 0.2s", cursor: "pointer",
                 borderLeft: "4px solid #6C3CE9"
               }}
-              onClick={() => navigate(`/practice?subject=${encodeURIComponent(subj)}`)}
+              onClick={() => navigate("/practice", { state: { questions: getRandomQuestions(subj, 10), subject: subj, mode: "practice" } })}
               onMouseOver={(e) => {
                 e.currentTarget.style.boxShadow = "0 8px 32px rgba(108,60,233,0.15)";
                 e.currentTarget.style.borderColor = "#6C3CE9";
@@ -297,7 +299,7 @@ export default function Dashboard() {
 
         {/* Daily Challenge */}
         <div
-          onClick={() => navigate("/practice")}
+          onClick={() => navigate("/practice-select")}
           style={{
             background: "linear-gradient(135deg, #1a0a3a 0%, #0d1a3a 100%)",
             borderRadius: 16, padding: 24, marginBottom: 40, display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -356,8 +358,11 @@ export default function Dashboard() {
          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: location.pathname === "/dashboard" ? "#6C3CE9" : "#666" }}>
             <LayoutDashboard size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Home</span>
          </div>
-         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/practice")}>
+         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/practice-select")}>
             <BookOpen size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Practice</span>
+         </div>
+         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/question-bank")}>
+            <Library size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>QBank</span>
          </div>
          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/ai-tutor")}>
             <Brain size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>AI</span>

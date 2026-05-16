@@ -29,6 +29,9 @@ import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import InstallPrompt from "./components/InstallPrompt";
+import QuestionBank from "./pages/QuestionBank";
+import PracticeSession from "./pages/PracticeSession";
+import SessionSummary from "./pages/SessionSummary";
 
 function App() {
   return (
@@ -51,7 +54,10 @@ function App() {
                   <Route index element={<Dashboard />} />
                 </Route>
                 <Route path="/select" element={<ProtectedRoute><SubjectSelector /></ProtectedRoute>} />
-                <Route path="/practice" element={<ProtectedRoute><Practice /></ProtectedRoute>} />
+                <Route path="/practice-select" element={<ProtectedRoute><Practice /></ProtectedRoute>} />
+                <Route path="/practice" element={<ProtectedRoute><PracticeSession /></ProtectedRoute>} />
+                <Route path="/question-bank" element={<ProtectedRoute><QuestionBank /></ProtectedRoute>} />
+                <Route path="/session-summary" element={<ProtectedRoute><SessionSummary /></ProtectedRoute>} />
                 <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
                 <Route path="/cbt" element={<ProtectedRoute><CBTSimulator /></ProtectedRoute>} />
                 <Route path="/result" element={<ProtectedRoute><ResultPage /></ProtectedRoute>} />
