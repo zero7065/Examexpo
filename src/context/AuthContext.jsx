@@ -14,6 +14,7 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [profileVersion, setProfileVersion] = useState(0);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -52,6 +53,18 @@ export function AuthProvider({ children }) {
     return null;
   }
 
+  async function refreshProfile() {
+    if (auth.currentUser) {
+      await auth.currentUser.reload();
+      setUser({ ...auth.currentUser });
+    }
+    setProfileVersion(v => v + 1);
+  }
+
+  function updateUser(data) {
+    if (user) setUser({ ...user, ...data });
+  }
+
   if (loading) {
     return (
       <div style={{
@@ -80,7 +93,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword, findUserByEmail }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword, findUserByEmail, refreshProfile, updateUser, profileVersion }}>
       {children}
     </AuthContext.Provider>
   );

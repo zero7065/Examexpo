@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getUserProfile } from "../lib/userProfile";
+import { useSubscription } from "../hooks/useSubscription";
+import { checkQuestionLimit } from "../lib/usageTracker";
+import ProUpgradeModal from "../components/ProUpgradeModal";
 import {
   LayoutDashboard, BookOpen, GraduationCap, Brain, TrendingUp, Settings,
-  LogOut, Target, Calendar, CheckCircle, Zap, Send, ChevronRight
+  LogOut, Target, Calendar, CheckCircle, Zap, Send, ChevronRight, Crown
 } from "lucide-react";
 
 const SUBJECT_ICONS = {
@@ -18,8 +21,11 @@ export default function Dashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { isPro, daysLeft, loading: subLoading } = useSubscription();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showProModal, setShowProModal] = useState(false);
+  const [questionsLeft, setQuestionsLeft] = useState({ used: 0, limit: 15 });
 
   useEffect(() => {
     async function fetchProfile() {
@@ -27,6 +33,8 @@ export default function Dashboard() {
         try {
           const data = await getUserProfile(user.uid);
           setProfile(data);
+          const ql = await checkQuestionLimit(user.uid);
+          setQuestionsLeft(ql);
         } catch (e) {
           console.error(e);
         }
@@ -118,13 +126,25 @@ export default function Dashboard() {
           <NavItem icon={Settings} label="Settings" path="/profile" active={location.pathname === "/profile"} onClick={() => navigate("/profile")} />
         </nav>
 
-        <div style={{ borderTop: "1px solid #1e1e2a", paddingTop: 20 }}>
+          <div style={{ borderTop: "1px solid #1e1e2a", paddingTop: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16, padding: "0 8px" }}>
-            <div style={{
-              width: 40, height: 40, borderRadius: "50%", background: "#6C3CE9",
-              display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 600
-            }}>
-              {user?.displayName?.[0] || "U"}
+            <div style={{ position: "relative" }}>
+              <div style={{
+                width: 40, height: 40, borderRadius: "50%", background: "#6C3CE9",
+                display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 600
+              }}>
+                {user?.displayName?.[0] || "U"}
+              </div>
+              {isPro && (
+                <div style={{
+                  position: "absolute", top: -4, right: -4, width: 18, height: 18,
+                  borderRadius: "50%", background: "linear-gradient(135deg, #D4A853, #B8933F)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 9, fontWeight: 800, color: "#0a0a0f", border: "2px solid #0d0d12",
+                }}>
+                  P
+                </div>
+              )}
             </div>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 14, fontWeight: 600 }}>{user?.displayName?.split(" ")[0] || "Student"}</div>
@@ -149,6 +169,37 @@ export default function Dashboard() {
       <div className="main-content" style={{ flex: 1, marginLeft: 260, padding: "24px 32px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         
+        {/* Pro Banner (free users only) */}
+        {!isPro && (
+          <div style={{
+            background: "linear-gradient(90deg, #1a0a3a, #0d1a3a)", borderRadius: 16,
+            padding: "16px 20px", marginBottom: 24, display: "flex", alignItems: "center",
+            justifyContent: "space-between", border: "1px solid #2a1a4a", position: "relative",
+            overflow: "hidden",
+          }}>
+            <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 3, background: "#D4A853" }} />
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <Crown size={20} color="#D4A853" />
+              <div>
+                <div style={{ color: "#fff", fontSize: 14, fontWeight: 600 }}>
+                  🚀 You're on the Free plan
+                </div>
+                <div style={{ color: "#888", fontSize: 12 }}>Unlock everything with Pro</div>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowProModal(true)}
+              style={{
+                background: "transparent", border: "1px solid #D4A853", color: "#D4A853",
+                padding: "8px 16px", borderRadius: 10, fontWeight: 700, fontSize: 13,
+                cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap",
+              }}
+            >
+              Upgrade Now →
+            </button>
+          </div>
+        )}
+
         {/* Header */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
           <div>
@@ -156,13 +207,24 @@ export default function Dashboard() {
               {getGreeting()}, {user?.displayName?.split(" ")[0] || "Student"} 👋
             </h1>
           </div>
-          <div style={{ display: "flex", gap: 16 }}>
+          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
             <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
               <span>🔥</span> <span style={{ fontWeight: 600 }}>{streak} day streak</span>
             </div>
             <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
               <Zap size={16} color="#D4A853" /> <span style={{ fontWeight: 600 }}>{xp} XP</span>
             </div>
+            {!isPro && (
+              <div style={{
+                background: "rgba(255,77,106,0.08)", border: "1px solid rgba(255,77,106,0.2)",
+                padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8, cursor: "pointer",
+              }}
+              onClick={() => setShowProModal(true)}>
+                <div style={{ fontSize: 13, color: "#FF6B6B", fontWeight: 500, display: "flex", alignItems: "center", gap: 6 }}>
+                  <span>{questionsLeft.limit - questionsLeft.used} questions left</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -282,6 +344,9 @@ export default function Dashboard() {
 
         </div>
       </div>
+
+      {/* Pro Upgrade Modal */}
+      <ProUpgradeModal open={showProModal} onClose={() => setShowProModal(false)} dismissible />
 
       {/* Mobile Nav */}
       <div className="mobile-nav" style={{

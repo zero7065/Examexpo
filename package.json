@@ -12,6 +12,7 @@
   "dependencies": {
     "@fingerprintjs/fingerprintjs": "^5.2.0",
     "@google/generative-ai": "^0.24.1",
+    "@paystack/inline-js": "^2.22.2",
     "canvas-confetti": "^1.9.4",
     "firebase": "^12.13.0",
     "lucide-react": "^1.14.0",
