@@ -80,6 +80,20 @@ export default function PracticeSession() {
     return () => clearInterval(timerRef.current);
   }, []);
 
+  // Keyboard shortcuts: 1-4 → select options A-D, Space → next question
+  useEffect(() => {
+    function handleKey(e) {
+      if (sessionComplete || limitBlocked) return;
+      const keyMap = { "1": "A", "2": "B", "3": "C", "4": "D" };
+      if (keyMap[e.key] && current && !revealed[current.id]) {
+        e.preventDefault();
+        handleSelect(keyMap[e.key]);
+      }
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [current, revealed, sessionComplete, limitBlocked, handleSelect]);
+
   const formatTime = useCallback((secs) => {
     const m = Math.floor(secs / 60);
     const s = secs % 60;

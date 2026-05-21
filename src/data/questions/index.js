@@ -140,8 +140,16 @@ export function getTopics(subject) {
   return [...topics];
 }
 
+const SUBJECT_ALIASES = {
+  maths: "Mathematics",
+  "further maths": "Further Mathematics",
+  "use of english": "English",
+  "use of english language": "English",
+};
+
 export function getRandomQuestions(subject, count) {
-  const subjectQuestions = allQuestions.filter(q => q.subject === subject);
+  const normalized = SUBJECT_ALIASES[subject.toLowerCase()] || subject;
+  const subjectQuestions = allQuestions.filter(q => q.subject === normalized);
   const shuffled = [...subjectQuestions].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, Math.min(count, shuffled.length));
 }

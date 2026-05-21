@@ -56,8 +56,21 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; letter-spacing: -0.02em; }
 /* Mobile bottom nav safe area */
 @media (max-width: 768px) {
   body { padding-bottom: 70px; }
+  .sidebar { display: none !important; }
 }
-
 @media (min-width: 769px) {
   body { padding-bottom: 0; }
+  .bottom-nav { display: none !important; }
+}
+
+/* Responsive page padding via class */
+.page-content { padding: 24px 32px; }
+@media (max-width: 768px) {
+  .page-content { padding: 16px; }
+}
+
+/* Utility: card grid */
+.card-grid { display: grid; gap: 20px; }
+@media (min-width: 768px) {
+  .card-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 }

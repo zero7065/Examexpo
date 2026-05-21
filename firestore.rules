@@ -1,34 +1,48 @@
-/*
-  ExamPadi AI — Firestore Security Rules
-  ========================================
-  WARNING: Payment verification is currently optimistic (client-side).
-  Before taking real payments in production, replace with a Firebase
-  Cloud Function webhook that verifies transactions via Paystack's server.
-  See: https://paystack.com/docs/api/transaction-verify/
-
-  Until then, payments/{paymentId} is create-by-owner, read-by-owner only.
-  No update or delete allowed on payment records.
-*/
-
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // Users — full access to own doc only
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, write: if request.auth.uid == userId;
     }
+
+    // Sessions — read/write own sessions
+    match /sessions/{sessionId} {
+      allow read: if request.auth.uid == resource.data.userId;
+      allow create: if request.auth.uid == request.resource.data.userId;
+      allow delete: if request.auth.uid == resource.data.userId;
+      allow update: if request.auth.uid == resource.data.userId;
+    }
+
+    // Mock exams — read/write own
+    match /mockExams/{mockId} {
+      allow read: if request.auth.uid == resource.data.userId;
+      allow create: if request.auth.uid == request.resource.data.userId;
+      allow delete: if request.auth.uid == resource.data.userId;
+      allow update: if request.auth.uid == resource.data.userId;
+    }
+
+    // User-specific subcollections
+    match /users/{userId}/sessions/{sessionId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
+    // Payments — owner read, admin write only
     match /payments/{paymentId} {
-      allow create: if request.auth != null
-        && request.resource.data.userId == request.auth.uid;
-      allow read: if request.auth != null
-        && resource.data.userId == request.auth.uid;
-      allow update, delete: if false;
+      allow read: if request.auth.uid == resource.data.userId;
+      allow write: if request.auth.token.admin == true;
     }
+
+    // Questions — anyone authenticated can read
     match /questions/{questionId} {
       allow read: if request.auth != null;
-      allow write: if false;
+      allow write: if request.auth.token.admin == true;
     }
-    match /userSessions/{userId}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+    // Deny everything else
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

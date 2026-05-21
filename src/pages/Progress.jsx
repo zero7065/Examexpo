@@ -36,7 +36,7 @@ export default function Progress() {
   const [displayMocks, setDisplayMocks] = useState(0);
   const [newAchievements, setNewAchievements] = useState([]);
   const [mockPage, setMockPage] = useState(1);
-  const animRef = useRef(null);
+  const animRefs = useRef([]);
 
   useEffect(() => { document.title = "Progress — ExamPadi AI"; }, []);
 
@@ -82,12 +82,20 @@ export default function Progress() {
       setLoading(false);
     }
     fetch();
-    return () => { if (animRef.current) clearInterval(animRef.current); };
+    return () => { animRefs.current.forEach(cancelAnimationFrame); };
   }, [user]);
 
   function animateNumber(setter, target) {
-    let cur = 0, step = 0;
-    const int = setInterval(() => { step++; cur = Math.min(Math.ceil((target / 60) * step), target); setter(cur); if (step >= 60) clearInterval(int); }, 25);
+    const start = performance.now();
+    const duration = 1000;
+    function frame(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const cur = Math.round(target * progress);
+      setter(cur);
+      if (progress < 1) animRefs.current.push(requestAnimationFrame(frame));
+    }
+    animRefs.current.push(requestAnimationFrame(frame));
   }
 
   const totalXP = profile?.totalXP || 0;

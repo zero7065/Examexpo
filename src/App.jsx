@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { StudyProvider } from "./context/StudyContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -9,36 +9,47 @@ import ScrollToTop from "./components/ScrollToTop";
 import InstallPrompt from "./components/InstallPrompt";
 import { useAuth } from "./context/AuthContext";
 
-// Pages
+// Critical path — direct imports
 import AuthPage from "./pages/AuthPage";
-import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
-import SubjectSelector from "./pages/SubjectSelector";
-import Practice from "./pages/Practice";
-import QuizPage from "./pages/QuizPage";
-import CBTSimulator from "./pages/CBTSimulator";
-import ResultPage from "./pages/ResultPage";
-import StatsPage from "./pages/StatsPage";
-import PastQuestionsPage from "./pages/PastQuestionsPage";
-import PaymentPage from "./pages/PaymentPage";
-import PaymentSuccess from "./pages/PaymentSuccess";
-import ProfilePage from "./pages/ProfilePage";
-import NotepadPage from "./pages/NotepadPage";
-import StudyPlanPage from "./pages/StudyPlanPage";
-import SessionHistoryPage from "./pages/SessionHistoryPage";
-import HelpPage from "./pages/HelpPage";
-import ContactPage from "./pages/ContactPage";
-import PrivacyPage from "./pages/PrivacyPage";
-import TermsPage from "./pages/TermsPage";
-import QuestionBank from "./pages/QuestionBank";
-import PracticeSession from "./pages/PracticeSession";
-import SessionSummary from "./pages/SessionSummary";
-import MockExam from "./pages/MockExam";
-import MockSummary from "./pages/MockSummary";
-import AITutor from "./pages/AITutor";
-import Progress from "./pages/Progress";
-import Settings from "./pages/Settings";
+import Onboarding from "./pages/Onboarding";
 import NotFoundPage from "./pages/NotFoundPage";
+
+// Everything else lazy-loaded
+const SubjectSelector = lazy(() => import("./pages/SubjectSelector"));
+const Practice = lazy(() => import("./pages/Practice"));
+const QuizPage = lazy(() => import("./pages/QuizPage"));
+const CBTSimulator = lazy(() => import("./pages/CBTSimulator"));
+const ResultPage = lazy(() => import("./pages/ResultPage"));
+const StatsPage = lazy(() => import("./pages/StatsPage"));
+const PastQuestionsPage = lazy(() => import("./pages/PastQuestionsPage"));
+const PaymentPage = lazy(() => import("./pages/PaymentPage"));
+const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const NotepadPage = lazy(() => import("./pages/NotepadPage"));
+const StudyPlanPage = lazy(() => import("./pages/StudyPlanPage"));
+const SessionHistoryPage = lazy(() => import("./pages/SessionHistoryPage"));
+const HelpPage = lazy(() => import("./pages/HelpPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const TermsPage = lazy(() => import("./pages/TermsPage"));
+const QuestionBank = lazy(() => import("./pages/QuestionBank"));
+const PracticeSession = lazy(() => import("./pages/PracticeSession"));
+const SessionSummary = lazy(() => import("./pages/SessionSummary"));
+const MockExam = lazy(() => import("./pages/MockExam"));
+const MockSummary = lazy(() => import("./pages/MockSummary"));
+const AITutor = lazy(() => import("./pages/AITutor"));
+const Progress = lazy(() => import("./pages/Progress"));
+const Settings = lazy(() => import("./pages/Settings"));
+
+function PageLoader() {
+  return (
+    <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid #1e1e2a", borderTopColor: "#6C3CE9", animation: "spin 0.8s linear infinite" }} />
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
+}
 
 function AuthAwareRoutes() {
   const { user, loading } = useAuth();
@@ -74,6 +85,7 @@ function AuthAwareRoutes() {
       <ScrollToTop />
       <main className="flex-1 md:ml-64 pb-20 md:pb-0">
         <InstallPrompt />
+        <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <Navigate to="/auth" replace />} />
           <Route path="/auth" element={<AuthPage />} />
@@ -112,6 +124,7 @@ function AuthAwareRoutes() {
           {/* 404 */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        </Suspense>
         <BottomNav />
       </main>
     </div>

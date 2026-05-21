@@ -547,6 +547,13 @@ export function getQuestionsFromBank({ subject, year, exam, count = 10, difficul
     if (yearPool.length >= 3) pool = yearPool;
   }
 
+  // Normalize: ensure both `answer` and `correctAnswer` exist for compatibility
+  pool = pool.map(q => ({
+    ...q,
+    answer: q.answer || q.correctAnswer,
+    correctAnswer: q.correctAnswer || q.answer,
+  }));
+
   // Shuffle and return
   const shuffled = [...pool].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, Math.min(count, shuffled.length));

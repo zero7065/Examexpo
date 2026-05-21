@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { usePaystack } from "../hooks/usePaystack";
 import { PLANS } from "../config/plans";
@@ -8,6 +8,14 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
   const { user } = useAuth();
   const [billing, setBilling] = useState("yearly");
   const { initializePayment, loading } = usePaystack();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
+
+  useEffect(() => {
+    if (!open) return;
+    const handler = () => setIsMobile(window.innerWidth <= 640);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, [open]);
 
   if (!open) return null;
 
@@ -41,18 +49,30 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
     <div style={{
       position: "fixed", inset: 0, zIndex: 9999,
       background: "rgba(0,0,0,0.85)", backdropFilter: "blur(8px)",
-      display: "flex", alignItems: "center", justifyContent: "center",
-      padding: "16px", fontFamily: "'Inter', system-ui, sans-serif",
+      display: "flex", alignItems: isMobile ? "flex-end" : "center", justifyContent: "center",
+      padding: isMobile ? "0" : "16px",
+      fontFamily: "'Inter', system-ui, sans-serif",
+      animation: "modalFade 0.2s ease-out",
     }}>
+      <style>{`
+        @keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes modalSlideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+      `}</style>
       {/* Gradient border wrapper */}
       <div style={{
         background: "linear-gradient(135deg, #6C3CE9, #D4A853)",
-        padding: 1, borderRadius: 28, maxWidth: 560, width: "100%",
+        padding: 1,
+        borderRadius: isMobile ? "24px 24px 0 0" : 28,
+        maxWidth: isMobile ? "100%" : 560,
+        width: "100%",
         boxShadow: "0 24px 80px rgba(108,60,233,0.3), 0 0 60px rgba(212,168,83,0.1)",
+        animation: "modalSlideUp 0.3s ease-out",
       }}>
         <div style={{
-          background: "#0d0d12", borderRadius: 27, padding: "32px 28px",
-          position: "relative", maxHeight: "90vh", overflowY: "auto",
+          background: "#0d0d12",
+          borderRadius: isMobile ? "23px 23px 0 0" : 27,
+          padding: isMobile ? "24px 20px" : "32px 28px",
+          position: "relative", maxHeight: isMobile ? "80vh" : "90vh", overflowY: "auto",
         }}>
           {/* Close button */}
           {dismissible && (

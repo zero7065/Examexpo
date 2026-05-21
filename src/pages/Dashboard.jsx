@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { getUserProfile } from "../lib/userProfile";
 import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit } from "../lib/usageTracker";
-import { getRandomQuestions } from "../data/questions/index";
+import { getQuestionsFromBank } from "../data/questionBank";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import {
   LayoutDashboard, BookOpen, GraduationCap, Brain, TrendingUp, Settings,
@@ -249,8 +249,8 @@ export default function Dashboard() {
           <StatCard 
             icon={CheckCircle} 
             label="Questions Done" 
-            value="0" 
-            subtext="Keep going!"
+            value={profile?.totalQuestionsAnswered || 0} 
+            subtext={profile?.totalQuestionsAnswered ? "Keep going!" : "Start practicing!"}
             color="#D4A853"
           />
         </div>
@@ -267,7 +267,10 @@ export default function Dashboard() {
                 transition: "all 0.2s", cursor: "pointer",
                 borderLeft: "4px solid #6C3CE9"
               }}
-              onClick={() => navigate("/practice", { state: { questions: getRandomQuestions(subj, 10), subject: subj, mode: "practice" } })}
+              onClick={() => {
+  const qs = getQuestionsFromBank({ subject: subj, count: 10, exam: profile?.exam || "JAMB" });
+  navigate("/practice", { state: { questions: qs, subject: subj, mode: "practice" } });
+}}
               onMouseOver={(e) => {
                 e.currentTarget.style.boxShadow = "0 8px 32px rgba(108,60,233,0.15)";
                 e.currentTarget.style.borderColor = "#6C3CE9";

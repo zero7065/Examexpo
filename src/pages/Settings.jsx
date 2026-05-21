@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile, updateUserProfile } from "../lib/userProfile";
-import { doc, updateDoc, collection, getDocs, writeBatch } from "firebase/firestore";
+import { useToast } from "../components/Toast";
+import { doc, updateDoc, collection, getDocs, writeBatch, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import { updateProfile } from "firebase/auth";
 import ProUpgradeModal from "../components/ProUpgradeModal";
@@ -27,6 +28,7 @@ export default function Settings() {
   const { user, logout } = useAuth();
   const { isPro, daysLeft, loading: subLoading } = useSubscription();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [profile, setProfile] = useState(null);
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState("");
@@ -53,7 +55,7 @@ export default function Settings() {
 
   async function updateFirestore(data) {
     if (!user) return;
-    try { await updateUserProfile(user.uid, data); } catch (e) { console.warn("Settings save error:", e); }
+    try { await updateUserProfile(user.uid, data); } catch (e) { console.warn("Settings save error:", e); toast({ message: "Failed to save — check your connection", type: "error" }); }
   }
 
   function handleNameSave() {
@@ -63,8 +65,10 @@ export default function Settings() {
 
   function handleTargetSave(val) {
     const n = parseInt(val);
-    if (n >= 150 && n <= 400) updateFirestore({ targetScore: n });
     setTargetInput(val);
+    if (n < 150 || n > 400 || isNaN(n)) return;
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => updateFirestore({ targetScore: n }), 800);
   }
 
   function handleSubjectToggle(subj) {
@@ -84,10 +88,10 @@ export default function Settings() {
     if (resetInput !== "RESET" || !user) return;
     try {
       const batch = writeBatch(db);
-      const sesSnap = await getDocs(collection(db, "sessions"));
-      sesSnap.forEach(d => { if (d.data().userId === user.uid) batch.delete(d.ref); });
-      const mockSnap = await getDocs(collection(db, "mockExams"));
-      mockSnap.forEach(d => { if (d.data().userId === user.uid) batch.delete(d.ref); });
+      const sesSnap = await getDocs(query(collection(db, "sessions"), where("userId", "==", user.uid)));
+      sesSnap.forEach(d => batch.delete(d.ref));
+      const mockSnap = await getDocs(query(collection(db, "mockExams"), where("userId", "==", user.uid)));
+      mockSnap.forEach(d => batch.delete(d.ref));
       await batch.commit();
       await updateDoc(doc(db, "users", user.uid), { totalQuestionsAnswered: 0, totalXP: 0, totalSessions: 0, mockExamsCompleted: 0 });
       setShowResetConfirm(false);
