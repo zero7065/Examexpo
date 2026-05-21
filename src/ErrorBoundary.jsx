@@ -22,42 +22,41 @@ componentDidCatch(error, info) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "var(--bg, #0a0a0f)",
-          fontFamily: "system-ui, sans-serif",
+          background: "#0a0a0f",
+          fontFamily: "'Inter', system-ui, sans-serif",
           padding: 24,
         }}>
           <div style={{ textAlign: "center", maxWidth: 480 }}>
-            <div style={{ fontSize: 56, marginBottom: 16 }}>💥</div>
-            <h2 style={{ color: "var(--text, #fff)", fontSize: 24, fontWeight: 800, marginBottom: 8 }}>
+            <div style={{ fontSize: 56, marginBottom: 16 }}>⚠️</div>
+            <h2 style={{ color: "#fff", fontSize: 24, fontWeight: 800, marginBottom: 8 }}>
               Something went wrong
             </h2>
-            <p style={{
-              color: "var(--text-muted, #888)",
-              fontSize: 14,
+            <pre style={{
+              color: "#FF4D6A",
+              fontSize: 13,
               marginBottom: 24,
-              background: "rgba(255,255,255,0.05)",
+              background: "#1a1a1f",
               padding: "12px 16px",
               borderRadius: 8,
               fontFamily: "monospace",
               wordBreak: "break-word",
+              overflow: "auto",
+              maxWidth: 500,
             }}>
               {this.state.error.message}
-            </p>
+            </pre>
             <button
               onClick={() => window.location.reload()}
               style={{
                 padding: "14px 32px",
                 borderRadius: 12,
-                background: "var(--primary, #00E5A0)",
+                background: "#6C3CE9",
                 border: "none",
                 fontWeight: 700,
                 fontSize: 15,
                 cursor: "pointer",
-                color: "#000",
-                transition: "opacity 0.2s",
+                color: "#fff",
               }}
-              onMouseOver={e => e.target.style.opacity = 0.85}
-              onMouseOut={e => e.target.style.opacity = 1}
             >
               Reload App
             </button>
