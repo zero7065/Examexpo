@@ -125,7 +125,7 @@ export const StudyProvider = ({ children }) => {
     }
   }, [state.currentSession]);
 
-  const startSession = (sessionData) => {
+  const startSession = async (sessionData) => {
     let questions = sessionData.questions;
     const isRealArray = Array.isArray(questions) && questions.length > 0 && questions[0]?.question;
 
@@ -142,7 +142,7 @@ export const StudyProvider = ({ children }) => {
         count: sessionData.count || 10,
       });
 
-      if (questions.length === 0) {
+      if (!questions || questions.length === 0) {
         questions = getQuestionsFromBank({
           subject: subjectName,
           exam: sessionData.exam,
@@ -150,6 +150,8 @@ export const StudyProvider = ({ children }) => {
         });
       }
     }
+
+    if (!questions) questions = [];
 
     dispatch({
       type: "START_SESSION",

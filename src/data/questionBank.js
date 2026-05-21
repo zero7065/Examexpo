@@ -519,286 +519,15 @@ export const NABTEB_SUBJECTS = [
 // QUERY FUNCTIONS
 // ============================================================
 
-export async function getQuestionsFromBank({ subject, year, exam, count = 10, difficulty = null }) {
-  // Map subject names to file names
-  const subjectFileMap = {
-    "Use of English Language": "UseOfEnglishLanguage",
-    "Mathematics": "Mathematics",
-    "Physics": "Physics",
-    "Chemistry": "Chemistry",
-    "Biology": "Biology",
-    "Economics": "Economics",
-    "Government": "Government",
-    "Computer Craft Practice": "ComputerCraftPractice",
-    "Auto Mechanics Work": "AutoMechanicsWork"
-  };
-  
-  // Handle special cases
-  if (subject.includes("(2025)")) {
-    const baseSubject = subject.replace(" (2025)", "");
-    if (subjectFileMap[baseSubject]) {
-      try {
-        const module = await import(`./questions/${subjectFileMap[baseSubject]}.js`);
-        let pool = module.default || [];
-        
-        // Filter by exam
-        if (exam && pool.length > 0) {
-          pool = pool.filter(q => q.exam === exam);
-        }
-        
-        // Filter by difficulty
-        if (difficulty && pool.length > 0) {
-          pool = pool.filter(q => q.difficulty === difficulty);
-        }
-        
-        // Filter by year - prioritize exact year, then any recent
-        if (year && pool.length > 0) {
-          const yearPool = pool.filter(q => q.year === year);
-          if (yearPool.length >= 3) pool = yearPool;
-        }
-        
-        if (pool.length === 0) {
-          // Last resort: return anything for this subject
-          for (const [key, value] of Object.entries(QUESTION_BANK)) {
-            if (key.toLowerCase().includes(baseSubject.toLowerCase())) {
-              pool = value;
-              break;
-            }
-          }
-        }
-        
-        // Shuffle and return
-        const shuffled = [...pool].sort(() => Math.random() - 0.5);
-        return shuffled.slice(0, Math.min(count, shuffled.length));
-      } catch (error) {
-        console.warn(`Failed to load ${subject} questions from module, falling back to main question bank:`, error);
-        // Fall back to original logic
-        let pool = QUESTION_BANK[subject] || [];
-        
-        // If no exact match, search for partial match
-        if (pool.length === 0) {
-          for (const [key, value] of Object.entries(QUESTION_BANK)) {
-            if (key.toLowerCase().includes(subject.toLowerCase()) || 
-                subject.toLowerCase().includes(key.toLowerCase())) {
-              pool = value;
-              break;
-            }
-          }
-        }
+export function getQuestionsFromBank({ subject, year, exam, count = 10, difficulty = null }) {
+  let pool = [];
 
-        // Filter by exam
-        if (exam && pool.length > 0) {
-          pool = pool.filter(q => q.exam === exam);
-        }
-        
-        // Filter by difficulty
-        if (difficulty && pool.length > 0) {
-          pool = pool.filter(q => q.difficulty === difficulty);
-        }
-        
-        // Filter by year - prioritize exact year, then any recent
-        if (year && pool.length > 0) {
-          const yearPool = pool.filter(q => q.year === year);
-          if (yearPool.length >= 3) pool = yearPool;
-        }
-        
-        if (pool.length === 0) {
-          // Last resort: return anything for this subject
-          for (const [key, value] of Object.entries(QUESTION_BANK)) {
-            if (key.toLowerCase().includes(subject.toLowerCase())) {
-              pool = value;
-              break;
-            }
-          }
-        }
-        
-        // Shuffle and return
-        const shuffled = [...pool].sort(() => Math.random() - 0.5);
-        return shuffled.slice(0, Math.min(count, shuffled.length));
-      }
-    }
-  }
-  
-  // Handle WAEC subjects
-  if (subject.includes("(WAEC)")) {
-    const baseSubject = subject.replace(" (WAEC)", "");
-    if (subjectFileMap[baseSubject]) {
-      try {
-        const module = await import(`./questions/${subjectFileMap[baseSubject]}.js`);
-        let pool = module.default || [];
-        
-        // Filter by exam
-        if (exam && pool.length > 0) {
-          pool = pool.filter(q => q.exam === exam);
-        }
-        
-        // Filter by difficulty
-        if (difficulty && pool.length > 0) {
-          pool = pool.filter(q => q.difficulty === difficulty);
-        }
-        
-        // Filter by year - prioritize exact year, then any recent
-        if (year && pool.length > 0) {
-          const yearPool = pool.filter(q => q.year === year);
-          if (yearPool.length >= 3) pool = yearPool;
-        }
-        
-        if (pool.length === 0) {
-          // Last resort: return anything for this subject
-          for (const [key, value] of Object.entries(QUESTION_BANK)) {
-            if (key.toLowerCase().includes(baseSubject.toLowerCase())) {
-              pool = value;
-              break;
-            }
-          }
-        }
-        
-        // Shuffle and return
-        const shuffled = [...pool].sort(() => Math.random() - 0.5);
-        return shuffled.slice(0, Math.min(count, shuffled.length));
-      } catch (error) {
-        console.warn(`Failed to load ${subject} questions from module, falling back to main question bank:`, error);
-        // Fall back to original logic
-        let pool = QUESTION_BANK[subject] || [];
-        
-        // If no exact match, search for partial match
-        if (pool.length === 0) {
-          for (const [key, value] of Object.entries(QUESTION_BANK)) {
-            if (key.toLowerCase().includes(subject.toLowerCase()) || 
-                subject.toLowerCase().includes(key.toLowerCase())) {
-              pool = value;
-              break;
-            }
-          }
-        }
-
-        // Filter by exam
-        if (exam && pool.length > 0) {
-          pool = pool.filter(q => q.exam === exam);
-        }
-        
-        // Filter by difficulty
-        if (difficulty && pool.length > 0) {
-          pool = pool.filter(q => q.difficulty === difficulty);
-        }
-        
-        // Filter by year - prioritize exact year, then any recent
-        if (year && pool.length > 0) {
-          const yearPool = pool.filter(q => q.year === year);
-          if (yearPool.length >= 3) pool = yearPool;
-        }
-        
-        if (pool.length === 0) {
-          // Last resort: return anything for this subject
-          for (const [key, value] of Object.entries(QUESTION_BANK)) {
-            if (key.toLowerCase().includes(subject.toLowerCase())) {
-              pool = value;
-              break;
-            }
-          }
-        }
-        
-        // Shuffle and return
-        const shuffled = [...pool].sort(() => Math.random() - 0.5);
-        return shuffled.slice(0, Math.min(count, shuffled.length));
-      }
-    }
-  }
-  
-  // Handle regular subjects
-  if (subjectFileMap[subject]) {
-    try {
-      const module = await import(`./questions/${subjectFileMap[subject]}.js`);
-      let pool = module.default || [];
-      
-      // Filter by exam
-      if (exam && pool.length > 0) {
-        pool = pool.filter(q => q.exam === exam);
-      }
-      
-      // Filter by difficulty
-      if (difficulty && pool.length > 0) {
-        pool = pool.filter(q => q.difficulty === difficulty);
-      }
-      
-      // Filter by year - prioritize exact year, then any recent
-      if (year && pool.length > 0) {
-        const yearPool = pool.filter(q => q.year === year);
-        if (yearPool.length >= 3) pool = yearPool;
-      }
-      
-      if (pool.length === 0) {
-        // Last resort: return anything for this subject
-        for (const [key, value] of Object.entries(QUESTION_BANK)) {
-          if (key.toLowerCase().includes(subject.toLowerCase())) {
-            pool = value;
-            break;
-          }
-        }
-      }
-      
-      // Shuffle and return
-      const shuffled = [...pool].sort(() => Math.random() - 0.5);
-      return shuffled.slice(0, Math.min(count, shuffled.length));
-    } catch (error) {
-      console.warn(`Failed to load ${subject} questions from module, falling back to main question bank:`, error);
-      // Fall back to original logic
-      let pool = QUESTION_BANK[subject] || [];
-      
-      // If no exact match, search for partial match
-      if (pool.length === 0) {
-        for (const [key, value] of Object.entries(QUESTION_BANK)) {
-          if (key.toLowerCase().includes(subject.toLowerCase()) || 
-              subject.toLowerCase().includes(key.toLowerCase())) {
-            pool = value;
-            break;
-          }
-        }
-      }
-
-      // Filter by exam
-      if (exam && pool.length > 0) {
-        pool = pool.filter(q => q.exam === exam);
-      }
-      
-      // Filter by difficulty
-      if (difficulty && pool.length > 0) {
-        pool = pool.filter(q => q.difficulty === difficulty);
-      }
-      
-      // Filter by year - prioritize exact year, then any recent
-      if (year && pool.length > 0) {
-        const yearPool = pool.filter(q => q.year === year);
-        if (yearPool.length >= 3) pool = yearPool;
-      }
-      
-      if (pool.length === 0) {
-        // Last resort: return anything for this subject
-        for (const [key, value] of Object.entries(QUESTION_BANK)) {
-          if (key.toLowerCase().includes(subject.toLowerCase())) {
-            pool = value;
-            break;
-          }
-        }
-      }
-      
-      // Shuffle and return
-      const shuffled = [...pool].sort(() => Math.random() - 0.5);
-      return shuffled.slice(0, Math.min(count, shuffled.length));
-    }
-  }
-  
-  // Original fallback logic
-  let pool = QUESTION_BANK[subject] || [];
-  
-  // If no exact match, search for partial match
-  if (pool.length === 0) {
-    for (const [key, value] of Object.entries(QUESTION_BANK)) {
-      if (key.toLowerCase().includes(subject.toLowerCase()) || 
-          subject.toLowerCase().includes(key.toLowerCase())) {
-        pool = value;
-        break;
-      }
+  // Collect all questions matching the subject from QUESTION_BANK
+  for (const [key, value] of Object.entries(QUESTION_BANK)) {
+    if (key.toLowerCase() === subject.toLowerCase() ||
+        key.toLowerCase().includes(subject.toLowerCase()) ||
+        subject.toLowerCase().includes(key.toLowerCase())) {
+      pool = pool.concat(value);
     }
   }
 
@@ -806,28 +535,18 @@ export async function getQuestionsFromBank({ subject, year, exam, count = 10, di
   if (exam && pool.length > 0) {
     pool = pool.filter(q => q.exam === exam);
   }
-  
+
   // Filter by difficulty
   if (difficulty && pool.length > 0) {
     pool = pool.filter(q => q.difficulty === difficulty);
   }
-  
+
   // Filter by year - prioritize exact year, then any recent
   if (year && pool.length > 0) {
     const yearPool = pool.filter(q => q.year === year);
     if (yearPool.length >= 3) pool = yearPool;
   }
-  
-  if (pool.length === 0) {
-    // Last resort: return anything for this subject
-    for (const [key, value] of Object.entries(QUESTION_BANK)) {
-      if (key.toLowerCase().includes(subject.toLowerCase())) {
-        pool = value;
-        break;
-      }
-    }
-  }
-  
+
   // Shuffle and return
   const shuffled = [...pool].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, Math.min(count, shuffled.length));

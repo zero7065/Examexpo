@@ -33,7 +33,14 @@ export default function PracticeSession() {
   const [showHint, setShowHint] = useState({});
   const [sessionComplete, setSessionComplete] = useState(false);
   const [limitBlocked, setLimitBlocked] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
   const timerRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth > 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const mode = sessionData?.mode || MODE_PRACTICE;
   const subject = sessionData?.subject || "Mixed";
@@ -153,6 +160,11 @@ export default function PracticeSession() {
     });
   }
 
+  function handleClosePro() {
+    setShowProModal(false);
+    if (limitBlocked) navigate("/dashboard");
+  }
+
   function handleConfirmEnd() {
     const unanswered = Object.keys(answers).length;
     if (unanswered < questions.length) {
@@ -202,10 +214,10 @@ export default function PracticeSession() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }}>
-      <div style={{ display: "flex", flexDirection: window.innerWidth > 768 ? "row" : "column", minHeight: "100vh" }}>
+      <div style={{ display: "flex", flexDirection: isDesktop ? "row" : "column", minHeight: "100vh" }}>
         
         {/* Left Panel */}
-        <div style={{ flex: 1, padding: "20px 24px", maxWidth: window.innerWidth > 768 ? "calc(100% - 220px)" : "100%" }}>
+        <div style={{ flex: 1, padding: "20px 24px", maxWidth: isDesktop ? "calc(100% - 220px)" : "100%" }}>
           {/* Progress + Timer */}
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
             <div style={{ flex: 1, height: 6, background: "#1e1e2a", borderRadius: 3, overflow: "hidden" }}>
@@ -229,7 +241,7 @@ export default function PracticeSession() {
               <h2 style={{ fontSize: 18, fontWeight: 700, lineHeight: 1.6, marginBottom: 24, margin: "0 0 24px", color: "#fff" }}>{current.question}</h2>
 
               {/* Options */}
-              <div style={{ display: "grid", gridTemplateColumns: window.innerWidth > 768 ? "1fr 1fr" : "1fr", gap: 10, marginBottom: 24 }}>
+              <div style={{ display: "grid", gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr", gap: 10, marginBottom: 24 }}>
                 {Object.entries(current.options).map(([key, val]) => (
                   <button key={key} onClick={() => handleSelect(key)} style={getOptionStyle(key)} disabled={!!revealed[current.id]}>
                     <span style={{ width: 28, height: 28, borderRadius: 8, ...getBadgeStyle(key), fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{key}</span>
@@ -289,7 +301,7 @@ export default function PracticeSession() {
         </div>
 
         {/* Right Panel - Navigator */}
-        {window.innerWidth > 768 && (
+        {isDesktop && (
           <div style={{ width: 220, background: "#0d0d12", borderLeft: "1px solid #1e1e2a", padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>Questions</div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 6 }}>
@@ -322,7 +334,7 @@ export default function PracticeSession() {
         )}
       </div>
 
-      <ProUpgradeModal open={showProModal} onClose={() => { setShowProModal(false); if (limitBlocked) navigate("/dashboard"); }} reason={proReason} dismissible />
+      <ProUpgradeModal open={showProModal} onClose={handleClosePro} reason={proReason} dismissible />
     </div>
   );
 }

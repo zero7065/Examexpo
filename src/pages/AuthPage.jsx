@@ -38,17 +38,16 @@ export default function AuthPage() {
 
     try {
       if (mode === "signup") {
-        register(form.email, form.password, form.name);
+        await register(form.email, form.password, form.name);
         toast({ message: `Account created! Welcome, ${form.name}`, type: "success" });
-        navigate("/dashboard");
       } else {
-        login(form.email, form.password);
+        await login(form.email, form.password);
         toast({ message: `Welcome back! Let's practice`, type: "success" });
-        navigate("/dashboard");
       }
     } catch (err) {
-      toast({ message: err.message, type: "error" });
-      setErrors({ general: err.message });
+      const msg = err.code === 'auth/invalid-credential' ? 'Incorrect email or password.' : err.message;
+      toast({ message: msg, type: "error" });
+      setErrors({ general: msg });
     } finally {
       setLoading(false);
     }
