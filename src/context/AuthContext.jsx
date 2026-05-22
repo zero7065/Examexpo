@@ -7,7 +7,8 @@ import {
   updateProfile,
   updatePassword,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -27,6 +28,15 @@ export function AuthProvider({ children }) {
   async function register(email, password, name) {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(cred.user, { displayName: name });
+    // Ensure a Firestore profile doc exists so re-login recognizes the account
+    await setDoc(doc(db, "users", cred.user.uid), {
+      email,
+      name,
+      exam: null,
+      subjects: [],
+      onboarded: false,
+      createdAt: serverTimestamp(),
+    }, { merge: true });
     setUser({ ...cred.user, displayName: name });
   }
 
@@ -35,7 +45,11 @@ export function AuthProvider({ children }) {
   }
 
   async function logout() {
-    await signOut(auth);
+    try {
+      await signOut(auth);
+    } catch (e) {
+      console.error("Logout error:", e);
+    }
     setUser(null);
   }
 

@@ -107,7 +107,7 @@ const Navbar = () => {
             )}
             
             <button
-              onClick={() => { logout(); navigate("/"); }}
+              onClick={async () => { await logout(); navigate("/auth"); }}
               className="flex items-center gap-3 px-4 py-3 w-full text-text-muted hover:text-danger transition-colors font-bold"
             >
               <LogOut size={20} />

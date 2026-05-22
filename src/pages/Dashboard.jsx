@@ -52,8 +52,8 @@ export default function Dashboard() {
     return "Good evening";
   }
 
-  function handleLogout() {
-    logout();
+  async function handleLogout() {
+    await logout();
     navigate("/auth");
   }
 

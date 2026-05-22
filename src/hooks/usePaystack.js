@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { doc, setDoc, updateDoc, serverTimestamp, collection } from "firebase/firestore";
+import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { PLANS } from "../config/plans";
 import { useToast } from "../components/Toast";
@@ -20,33 +20,20 @@ export function usePaystack() {
   }
 
   async function verifyPayment(reference, plan, userId) {
-    try {
-      const endDate = calculateEndDate(plan);
-      const paymentRef = doc(collection(db, "payments"), reference);
-      await setDoc(paymentRef, {
-        userId,
-        reference,
+    const endDate = calculateEndDate(plan);
+    // Optimistically activate Pro. Cloud Function webhook verifies server-side
+    // and writes the verified payment record to `payments/{reference}`.
+    await updateDoc(doc(db, "users", userId), {
+      subscription: {
         plan,
-        amount: PLANS[plan].price,
-        status: "pending_verification",
-        createdAt: serverTimestamp(),
-        paystackReference: reference,
-      });
-      await updateDoc(doc(db, "users", userId), {
-        subscription: {
-          plan,
-          status: "active",
-          reference,
-          startDate: serverTimestamp(),
-          endDate,
-          autoRenew: true,
-        },
-      });
-      toast({ message: "🎉 Pro activated! Welcome to ExamPadi Pro", type: "success" });
-    } catch (err) {
-      console.error("verifyPayment error:", err);
-      toast({ message: "Payment recorded but profile update failed. Contact support.", type: "error" });
-    }
+        status: "active",
+        reference,
+        startDate: serverTimestamp(),
+        endDate,
+        autoRenew: true,
+      },
+    });
+    toast({ message: "Pro activated! Welcome to ExamPadi Pro", type: "success" });
   }
 
   function initializePayment({ plan, userEmail, userId, userName }) {

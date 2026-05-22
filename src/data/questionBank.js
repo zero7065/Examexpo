@@ -516,17 +516,32 @@ export const NABTEB_SUBJECTS = [
 ];
 
 // ============================================================
+// SUBJECT NAME ALIASES — bridges onboarding names to QUESTION_BANK keys
+// ============================================================
+
+const SUBJECT_ALIASES = {
+  maths: "Mathematics",
+  "further maths": "Further Mathematics",
+  english: "Use of English Language",
+  "use of english": "Use of English Language",
+  "use of english language": "Use of English Language",
+};
+
+// ============================================================
 // QUERY FUNCTIONS
 // ============================================================
 
 export function getQuestionsFromBank({ subject, year, exam, count = 10, difficulty = null }) {
   let pool = [];
 
+  // Normalize via aliases first
+  const normalized = SUBJECT_ALIASES[subject?.toLowerCase()] || subject;
+
   // Collect all questions matching the subject from QUESTION_BANK
   for (const [key, value] of Object.entries(QUESTION_BANK)) {
-    if (key.toLowerCase() === subject.toLowerCase() ||
-        key.toLowerCase().includes(subject.toLowerCase()) ||
-        subject.toLowerCase().includes(key.toLowerCase())) {
+    if (key.toLowerCase() === normalized?.toLowerCase() ||
+        key.toLowerCase().includes(normalized?.toLowerCase()) ||
+        normalized?.toLowerCase().includes(key.toLowerCase())) {
       pool = pool.concat(value);
     }
   }

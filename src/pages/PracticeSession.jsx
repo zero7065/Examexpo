@@ -65,12 +65,14 @@ export default function PracticeSession() {
       }
     }
     checkLimit();
+  }, []);
 
+  // Separate timer effect to avoid stale closure over finishSession
+  useEffect(() => {
     timerRef.current = setInterval(() => {
       setTimeElapsed(t => {
         if (mode === MODE_MOCK && t >= totalTime) {
           clearInterval(timerRef.current);
-          finishSession();
           return totalTime;
         }
         return t + 1;
@@ -79,6 +81,13 @@ export default function PracticeSession() {
 
     return () => clearInterval(timerRef.current);
   }, []);
+
+  // Auto-submit when time runs out in mock mode
+  useEffect(() => {
+    if (mode === MODE_MOCK && timeElapsed >= totalTime && !sessionComplete) {
+      finishSession();
+    }
+  }, [timeElapsed, mode, totalTime, sessionComplete]);
 
   // Keyboard shortcuts: 1-4 → select options A-D, Space → next question
   useEffect(() => {
@@ -92,7 +101,7 @@ export default function PracticeSession() {
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [current, revealed, sessionComplete, limitBlocked, handleSelect]);
+  }, [current, revealed, sessionComplete, limitBlocked]);
 
   const formatTime = useCallback((secs) => {
     const m = Math.floor(secs / 60);

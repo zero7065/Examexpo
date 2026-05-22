@@ -100,7 +100,7 @@ export default function Settings() {
     } catch (e) { console.warn("Reset error:", e); }
   }
 
-  function handleLogout() { logout(); navigate("/auth"); }
+  async function handleLogout() { await logout(); navigate("/auth"); }
 
   return (
     <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", padding: "24px 32px" }}>

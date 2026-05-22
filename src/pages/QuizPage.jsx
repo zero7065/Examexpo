@@ -83,7 +83,7 @@ const QuizPage = () => {
 
     const proStatus = isPro();
 
-     const usage = await checkAndIncrementUsage(user.id, proStatus);
+     const usage = await checkAndIncrementUsage(user.uid, proStatus);
     if (!usage.allowed) {
       toast({ message: `Daily question limit (${usage.limit}) reached. Upgrade to Pro!`, type: "warning" });
       navigate("/payment");
@@ -95,7 +95,7 @@ const QuizPage = () => {
     
     setLoadingExplanation(true);
     try {
-       const aiLimit = await checkAndIncrementAILimit(user.id, proStatus);
+       const aiLimit = await checkAndIncrementAILimit(user.uid, proStatus);
       if (!aiLimit.allowed) {
         setExplanation(`AI Explanations limit (${aiLimit.limit}/day) reached. Upgrade to Pro for unlimited AI Tutor.`);
       } else {
@@ -156,10 +156,10 @@ const QuizPage = () => {
       }))
     };
 
-     await saveSessionToFirestore(user.id, result);
+     await saveSessionToFirestore(user.uid, result);
     
     // Also save to localStorage for history tracking
-    const existingSessions = localStorage.getItem(`ep-sessions-${user.email}`);
+    const existingSessions = localStorage.getItem(`ep-sessions-${user.uid}`);
     const sessions = existingSessions ? JSON.parse(existingSessions) : [];
     sessions.unshift({ ...result, completedAt: new Date().toISOString() });
     localStorage.setItem(`ep-sessions-${user.email}`, JSON.stringify(sessions.slice(0, 50))); // Keep last 50
