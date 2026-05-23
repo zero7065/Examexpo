@@ -1,5 +1,4 @@
 // src/pages/TermsPage.jsx
-import React from "react";
 import { Link } from "react-router-dom";
 import { FileText } from "lucide-react";
 

@@ -5,7 +5,10 @@ import { getUserProfile } from "../lib/userProfile";
 import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit } from "../lib/usageTracker";
 import { getQuestionsFromBank } from "../data/questionBank";
+import { useNotifications } from "../hooks/useNotifications";
 import ProUpgradeModal from "../components/ProUpgradeModal";
+import ResumeBanner from "../components/ResumeBanner";
+import NotificationPrompt from "../components/NotificationPrompt";
 import {
   LayoutDashboard, BookOpen, GraduationCap, Brain, TrendingUp, Settings,
   LogOut, Target, Calendar, CheckCircle, Zap, Send, ChevronRight, Crown, Library
@@ -171,6 +174,9 @@ export default function Dashboard() {
       <div className="main-content" style={{ flex: 1, marginLeft: 260, padding: "24px 32px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         
+        <ResumeBanner />
+        <NotificationPrompt />
+
         {/* Pro Banner (free users only) */}
         {!isPro && (
           <div style={{

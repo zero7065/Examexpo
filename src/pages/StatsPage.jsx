@@ -1,5 +1,5 @@
 // src/pages/StatsPage.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
@@ -54,7 +54,7 @@ const StatsPage = () => {
             label="Study Streak" 
             value={user?.streak || 0} 
             description="Days in a row" 
-            icon={<TrendingUp className="text-blue-400" size={24} />} 
+            icon={<TrendingUp className="text-accent" size={24} />} 
           />
         </div>
 
@@ -74,7 +74,7 @@ const StatsPage = () => {
   const performance = [
     { subject: "English", score: 78, trend: "+5%", color: "text-primary", bg: "bg-primary/10" },
     { subject: "Mathematics", score: 62, trend: "-2%", color: "text-accent", bg: "bg-accent/10" },
-    { subject: "Physics", score: 85, trend: "+12%", color: "text-blue-400", bg: "bg-blue-400/10" },
+    { subject: "Physics", score: 85, trend: "+12%", color: "text-primary", bg: "bg-primary/10" },
     { subject: "Chemistry", score: 45, trend: "0%", color: "text-danger", bg: "bg-danger/10" },
   ];
 

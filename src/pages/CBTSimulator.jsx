@@ -1,5 +1,5 @@
 // src/pages/CBTSimulator.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStudy } from "../context/StudyContext";
 import { useAuth } from "../context/AuthContext";
@@ -76,7 +76,7 @@ const CBTSimulator = () => {
       }))
     };
 
-    await saveSessionToFirestore(user.id, result);
+    await saveSessionToFirestore(user.uid, result);
     navigate("/result", { state: { result } });
   };
 
@@ -109,7 +109,7 @@ const CBTSimulator = () => {
           </div>
           <button 
             onClick={handleFinish} 
-            className="btn-primary bg-danger text-white hover:bg-red-600 px-8 h-12 flex items-center gap-3 shadow-xl shadow-danger/20"
+            className="btn-primary bg-danger text-white px-8 h-12 flex items-center gap-3 shadow-xl shadow-danger/20"
           >
             <Send size={18} />
             Submit

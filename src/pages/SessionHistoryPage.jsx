@@ -1,10 +1,11 @@
-// src/pages/SessionHistoryPage.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { History, ChevronRight, Calendar, Clock, Target, BookOpen, Search } from "lucide-react";
+import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+import { History, ChevronRight, Calendar, Clock, Target, BookOpen } from "lucide-react";
 
-const SessionHistoryPage = () => {
+export default function SessionHistoryPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [sessions, setSessions] = useState([]);
@@ -12,192 +13,179 @@ const SessionHistoryPage = () => {
   const [selectedSession, setSelectedSession] = useState(null);
 
   useEffect(() => {
-    // Load sessions from localStorage (since Firestore might not have all)
-    const savedSessions = localStorage.getItem(`ep-sessions-${user?.email}`);
-    if (savedSessions) {
+    async function fetchSessions() {
+      if (!user) { setLoading(false); return; }
       try {
-        setSessions(JSON.parse(savedSessions));
-      } catch (e) {}
+        const q = query(
+          collection(db, "sessions"),
+          where("userId", "==", user.uid),
+          orderBy("completedAt", "desc"),
+          limit(50)
+        );
+        const snap = await getDocs(q);
+        const firestoreSessions = [];
+        snap.forEach(d => firestoreSessions.push({ id: d.id, ...d.data() }));
+
+        const savedSessions = localStorage.getItem(`ep-sessions-${user.uid}`);
+        if (savedSessions) {
+          try {
+            const local = JSON.parse(savedSessions);
+            const merged = [...firestoreSessions];
+            local.forEach(ls => {
+              if (!merged.find(m => m.completedAt === ls.completedAt)) {
+                merged.push(ls);
+              }
+            });
+            setSessions(merged);
+          } catch { setSessions(firestoreSessions); }
+        } else {
+          setSessions(firestoreSessions);
+        }
+      } catch { setSessions([]); }
+      setLoading(false);
     }
-    setLoading(false);
+    fetchSessions();
   }, [user]);
 
   const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
   };
 
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}m ${secs}s`;
+  const formatTime = (s) => {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}m ${sec}s`;
   };
 
   const getScoreColor = (score) => {
-    if (score >= 80) return "text-success";
-    if (score >= 60) return "text-primary";
-    if (score >= 50) return "text-accent";
-    return "text-danger";
+    if (score >= 80) return "#4ADE80";
+    if (score >= 60) return "#6C3CE9";
+    if (score >= 50) return "#D4A853";
+    return "#FF4D6A";
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-bg flex items-center justify-center">
-        <div className="text-primary font-bold text-xl">Loading your history...</div>
+      <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter', system-ui, sans-serif" }}>
+        <div style={{ color: "#6C3CE9", fontWeight: 700, fontSize: 20 }}>Loading your history...</div>
+      </div>
+    );
+  }
+
+  if (!sessions.length) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+        <div style={{ textAlign: "center", maxWidth: 500 }}>
+          <div style={{ width: 80, height: 80, background: "rgba(255,255,255,0.05)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
+            <History size={40} color="#888" />
+          </div>
+          <h2 style={{ fontSize: 24, fontWeight: 800, margin: "0 0 16px" }}>No Sessions Yet</h2>
+          <p style={{ color: "#888", marginBottom: 32, lineHeight: 1.5 }}>You haven't completed any practice sessions yet. Start your first session to build your history.</p>
+          <button onClick={() => navigate("/select")} style={{ padding: "14px 32px", borderRadius: 12, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 15, fontFamily: "inherit" }}>
+            Start Practicing
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-6 md:p-10 space-y-10 animate-fade">
-      <header>
-        <h1 className="text-4xl font-black mb-2">Your Study History</h1>
-        <p className="text-text-muted font-medium">
-          Review all your practice sessions, track your progress over time
-        </p>
-      </header>
+    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", padding: "24px 32px" }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+        <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 8 }}>Your Study History</h1>
+        <p style={{ color: "#888", fontWeight: 500, marginBottom: 40 }}>Review all your practice sessions, track your progress over time</p>
 
-      {sessions.length === 0 ? (
-        <div className="glass-card p-16 text-center">
-          <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
-            <History className="text-text-muted" size={40} />
-          </div>
-          <h2 className="text-2xl font-black mb-4">No Sessions Yet</h2>
-          <p className="text-text-muted mb-8 max-w-md mx-auto">
-            You haven't completed any practice sessions yet. Start your first session to build your history.
-          </p>
-          <button onClick={() => navigate("/select")} className="btn-primary px-8 py-4">
-            Start Practicing
-          </button>
-        </div>
-      ) : (
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 32, alignItems: "start" }}>
           {/* Sessions List */}
-          <div className="lg:col-span-2 space-y-4">
-            <h2 className="text-xl font-black flex items-center gap-3">
-              <BookOpen className="text-primary" size={24} />
+          <div>
+            <h2 style={{ fontSize: 20, fontWeight: 700, display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+              <BookOpen size={24} color="#6C3CE9" />
               Past Sessions ({sessions.length})
             </h2>
-            
-            {sessions.map((session, index) => (
-              <div 
-                key={index}
-                onClick={() => setSelectedSession(session)}
-                className={`glass-card p-6 cursor-pointer hover:border-primary/30 transition-all ${
-                  selectedSession?.index === index ? "border-primary" : ""
-                }`}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div className="font-bold text-lg mb-1">{session.exam} - {session.mode}</div>
-                    <div className="flex items-center gap-4 text-sm text-text-muted">
-                      <span className="flex items-center gap-1">
-                        <Calendar size={14} />
-                        {formatDate(session.completedAt || new Date().toISOString())}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock size={14} />
-                        {formatTime(session.timeSpentSeconds || 0)}
-                      </span>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {sessions.map((session, i) => (
+                <div key={i} onClick={() => setSelectedSession(session)}
+                  style={{
+                    background: "#121218", border: selectedSession === session ? "1px solid #6C3CE9" : "1px solid #1e1e2a",
+                    borderRadius: 16, padding: 24, cursor: "pointer", transition: "border 0.2s",
+                  }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
+                    <div>
+                      <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 4 }}>{session.exam || "Practice"} - {session.mode || "practice"}</div>
+                      <div style={{ display: "flex", gap: 16, fontSize: 13, color: "#888" }}>
+                        <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                          <Calendar size={14} /> {formatDate(session.completedAt?.toDate?.() || session.completedAt || new Date().toISOString())}
+                        </span>
+                        <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                          <Clock size={14} /> {formatTime(session.timeSpentSeconds || session.timeSeconds || 0)}
+                        </span>
+                      </div>
+                    </div>
+                    <div style={{ textAlign: "right" }}>
+                      <div style={{ fontSize: 30, fontWeight: 800, color: getScoreColor(session.percentageScore || session.score || 0) }}>
+                        {Math.round(session.percentageScore || session.score || 0)}%
+                      </div>
+                      <div style={{ fontSize: 11, color: "#888", fontWeight: 700 }}>
+                        {session.correctAnswers || session.correct || 0}/{session.totalQuestions || session.total || 0} correct
+                      </div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className={`text-3xl font-black ${getScoreColor(session.percentageScore)}`}>
-                      {Math.round(session.percentageScore)}%
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <div style={{ display: "flex", gap: 8 }}>
+                      {(session.subjects || []).slice(0, 3).map((s, j) => (
+                        <span key={j} style={{ padding: "4px 10px", borderRadius: 20, background: "rgba(255,255,255,0.05)", color: "#888", fontSize: 11 }}>
+                          {typeof s === "object" ? s.name || s.id : s}
+                        </span>
+                      ))}
                     </div>
-                    <div className="text-xs text-text-muted font-bold">
-                      {session.correctAnswers}/{session.totalQuestions} correct
-                    </div>
+                    <ChevronRight size={20} color="#888" />
                   </div>
                 </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-2">
-                    {session.subjects?.slice(0, 3).map((s, i) => (
-                      <span key={i} className="bg-white/5 text-text-muted text-xs px-3 py-1 rounded-full">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                  <ChevronRight className="text-text-muted" size={20} />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           {/* Session Details */}
-          <div className="space-y-6">
-            <h3 className="text-lg font-black">Session Details</h3>
-            
+          <div>
+            <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 20 }}>Session Details</h3>
             {selectedSession ? (
-              <div className="glass-card p-6 space-y-6">
-                <div className="text-center border-b border-border pb-6">
-                  <div className="text-5xl font-black mb-2 text-primary">
-                    {Math.round(selectedSession.percentageScore)}%
+              <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 24 }}>
+                <div style={{ textAlign: "center", borderBottom: "1px solid #1e1e2a", paddingBottom: 24, marginBottom: 24 }}>
+                  <div style={{ fontSize: 48, fontWeight: 800, color: "#6C3CE9", marginBottom: 8 }}>
+                    {Math.round(selectedSession.percentageScore || selectedSession.score || 0)}%
                   </div>
-                  <div className="text-text-muted">
-                    Score: {selectedSession.score} / 400
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="flex justify-between">
-                    <span className="text-text-muted">Questions</span>
-                    <span className="font-bold">{selectedSession.totalQuestions}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-text-muted">Correct</span>
-                    <span className="font-bold text-success">{selectedSession.correctAnswers}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-text-muted">Wrong</span>
-                    <span className="font-bold text-danger">
-                      {selectedSession.totalQuestions - selectedSession.correctAnswers}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-text-muted">Time Spent</span>
-                    <span className="font-bold">{formatTime(selectedSession.timeSpentSeconds || 0)}</span>
+                  <div style={{ color: "#888", fontSize: 14 }}>
+                    Score: {selectedSession.score || 0} / 400
                   </div>
                 </div>
-
-                <button 
-                  onClick={() => navigate("/result", { state: { result: selectedSession } })}
-                  className="btn-primary w-full"
-                >
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {[
+                    { label: "Questions", value: selectedSession.totalQuestions || selectedSession.total || 0 },
+                    { label: "Correct", value: selectedSession.correctAnswers || selectedSession.correct || 0, color: "#4ADE80" },
+                    { label: "Wrong", value: (selectedSession.totalQuestions || selectedSession.total || 0) - (selectedSession.correctAnswers || selectedSession.correct || 0), color: "#FF4D6A" },
+                    { label: "Time Spent", value: formatTime(selectedSession.timeSpentSeconds || selectedSession.timeSeconds || 0) },
+                  ].map((item, j) => (
+                    <div key={j} style={{ display: "flex", justifyContent: "space-between", padding: "4px 0" }}>
+                      <span style={{ color: "#888", fontSize: 13 }}>{item.label}</span>
+                      <span style={{ fontWeight: 700, color: item.color || "#fff", fontSize: 13 }}>{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+                <button onClick={() => navigate("/result", { state: { result: selectedSession } })}
+                  style={{ width: "100%", marginTop: 20, padding: "12px", borderRadius: 12, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 14, fontFamily: "inherit" }}>
                   View Full Review
                 </button>
-
-                {selectedSession.questionLog && (
-                  <div className="space-y-3 pt-4 border-t border-border">
-                    <div className="text-sm font-bold text-text-muted mb-3">Question Breakdown</div>
-                    {selectedSession.questionLog.slice(0, 5).map((q, i) => (
-                      <div key={i} className="flex items-center justify-between text-sm">
-                        <span className="text-text-muted">Q{i + 1}</span>
-                        <span className={q.isCorrect ? "text-success" : "text-danger"}>
-                          {q.isCorrect ? "✓" : "✗"}
-                        </span>
-                      </div>
-                    ))}
-                    {selectedSession.questionLog.length > 5 && (
-                      <div className="text-xs text-text-muted text-center pt-2">
-                        + {selectedSession.questionLog.length - 5} more questions
-                      </div>
-                    )}
-                  </div>
-                )}
               </div>
             ) : (
-              <div className="glass-card p-8 text-center text-text-muted">
-                <Target size={40} className="mx-auto mb-4 opacity-50" />
-                <p>Click on a session to see details</p>
+              <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 32, textAlign: "center" }}>
+                <Target size={40} color="#888" style={{ opacity: 0.5, marginBottom: 16 }} />
+                <p style={{ color: "#888", fontSize: 14 }}>Click on a session to see details</p>
               </div>
             )}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
-};
-
-export default SessionHistoryPage;
+}

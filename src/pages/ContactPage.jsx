@@ -1,5 +1,5 @@
 // src/pages/ContactPage.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { Mail, MessageCircle, Send, CheckCircle } from "lucide-react";

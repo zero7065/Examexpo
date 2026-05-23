@@ -1,5 +1,5 @@
 // src/components/Timer.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Timer as TimerIcon } from "lucide-react";
 
 const Timer = ({ initialSeconds, onTimeUp, warningAt = 120 }) => {

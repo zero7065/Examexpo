@@ -83,7 +83,7 @@ function AuthAwareRoutes() {
     <div className="flex flex-col md:flex-row min-h-screen bg-bg text-text selection:bg-primary/30">
       <Navbar />
       <ScrollToTop />
-      <main className="flex-1 md:ml-64 pb-20 md:pb-0">
+      <main key={location.pathname} className="flex-1 md:ml-64 pb-20 md:pb-0 animate-fade">
         <InstallPrompt />
         <Suspense fallback={<PageLoader />}>
         <Routes>

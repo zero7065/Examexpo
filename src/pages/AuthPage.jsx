@@ -45,7 +45,13 @@ export default function AuthPage() {
         toast({ message: `Welcome back! Let's practice`, type: "success" });
       }
     } catch (err) {
-      const msg = err.code === 'auth/invalid-credential' ? 'Incorrect email or password.' : err.message;
+      const code = err.code;
+      const msg = code === 'auth/invalid-credential' ? 'Incorrect email or password.'
+        : code === 'auth/email-already-in-use' ? 'An account with this email already exists. Sign in instead.'
+        : code === 'auth/too-many-requests' ? 'Too many attempts. Try again later.'
+        : code === 'auth/user-not-found' ? 'No account found with this email.'
+        : code === 'auth/wrong-password' ? 'Incorrect password.'
+        : err.message;
       toast({ message: msg, type: "error" });
       setErrors({ general: msg });
     } finally {

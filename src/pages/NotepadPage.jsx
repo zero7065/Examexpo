@@ -1,5 +1,5 @@
 // src/pages/NotepadPage.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import ProGate from "../components/ProGate";

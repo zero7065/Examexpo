@@ -2,13 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
+import { useNotifications } from "../hooks/useNotifications";
 import { getUserProfile, updateUserProfile } from "../lib/userProfile";
 import { useToast } from "../components/Toast";
 import { doc, updateDoc, collection, getDocs, writeBatch, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import { updateProfile } from "firebase/auth";
 import ProUpgradeModal from "../components/ProUpgradeModal";
-import { User, BookOpen, CreditCard, Bell, Sliders, AlertTriangle, LogOut, ChevronRight, Check, Pencil } from "lucide-react";
+import { User, BookOpen, CreditCard, Bell, Sliders, AlertTriangle, LogOut, ChevronRight, Check, Pencil, Clock } from "lucide-react";
 
 const SUBJECT_OPTIONS = ["English", "Maths", "Physics", "Chemistry", "Biology", "Economics", "Government", "Literature", "CRS", "Geography", "Commerce", "Accounting", "Further Maths", "Agricultural Science", "Technical Drawing", "Business Management"];
 const EXAM_OPTIONS = ["JAMB", "WAEC", "NABTEB", "POST-UTME"];
@@ -27,6 +28,7 @@ function Toggle({ value, onChange }) {
 export default function Settings() {
   const { user, logout } = useAuth();
   const { isPro, daysLeft, loading: subLoading } = useSubscription();
+  const { permission: notifPermission, requestPermission, scheduleReminder } = useNotifications();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [profile, setProfile] = useState(null);
@@ -171,10 +173,33 @@ export default function Settings() {
 
         {/* Notifications */}
         <Section title="Notifications">
+          {notifPermission !== "granted" && (
+            <div style={{ marginBottom: 12 }}>
+              <button onClick={requestPermission} style={{
+                padding: "8px 16px", borderRadius: 8, background: "#6C3CE9",
+                border: "none", color: "#fff", fontWeight: 600, fontSize: 12,
+                cursor: "pointer", fontFamily: "inherit",
+              }}>
+                Enable Browser Notifications
+              </button>
+            </div>
+          )}
           <ToggleRow label="Daily study reminder" value={preferences.dailyReminder} onChange={v => handlePref("dailyReminder", v)} />
+          {preferences.dailyReminder && (
+            <Row label="Reminder time">
+              <select value={preferences.reminderTime || "18:00"} onChange={e => handlePref("reminderTime", e.target.value)} style={{
+                background: "#1a1a1f", border: "1px solid #333", borderRadius: 6,
+                color: "#fff", padding: "6px 10px", fontSize: 13, outline: "none", fontFamily: "inherit",
+              }}>
+                {["09:00","12:00","15:00","18:00","20:00","22:00"].map(t => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
+            </Row>
+          )}
           <ToggleRow label="Streak alerts" value={preferences.streakAlerts} onChange={v => handlePref("streakAlerts", v)} />
           <ToggleRow label="New questions available" value={preferences.newQuestions} onChange={v => handlePref("newQuestions", v)} />
-          <p style={{ color: "#555", fontSize: 11, marginTop: 8 }}>Push notifications require app install</p>
+          <p style={{ color: "#555", fontSize: 11, marginTop: 8 }}>Notifications work on all modern browsers</p>
         </Section>
 
         {/* Study Preferences */}

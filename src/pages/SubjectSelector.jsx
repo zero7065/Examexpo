@@ -1,5 +1,5 @@
 // src/pages/SubjectSelector.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useStudy } from "../context/StudyContext";
 import { useToast } from "../components/Toast";

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, browserLocalPersistence, setPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
@@ -18,6 +18,9 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 const analytics = getAnalytics(app);
+
+// Persist auth across browser restarts (remember me)
+setPersistence(auth, browserLocalPersistence).catch(() => {});
 
 export const isFirebaseConfigured = true;
 export { app, auth, db, googleProvider, analytics };

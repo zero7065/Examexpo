@@ -1,5 +1,5 @@
 // src/pages/QuizPage.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStudy } from "../context/StudyContext";
 import { useAuth } from "../context/AuthContext";
@@ -60,11 +60,11 @@ const QuizPage = () => {
   }, [currentSession, navigate]);
 
   const QuizSkeleton = () => (
-    <div className="min-h-screen bg-bg flex items-center justify-center animate-pulse space-y-4 p-6">
-      <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-      <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+    <div className="min-h-screen bg-bg flex flex-col items-center justify-center gap-4 p-6">
+      <div className="h-4 shimmer rounded w-3/4"></div>
+      <div className="h-4 shimmer rounded w-1/2"></div>
       {[...Array(4)].map((_, i) => (
-        <div key={i} className="h-10 bg-gray-200 rounded-lg w-full"></div>
+        <div key={i} className="h-10 shimmer rounded-lg w-full"></div>
       ))}
     </div>
   );
@@ -162,7 +162,7 @@ const QuizPage = () => {
     const existingSessions = localStorage.getItem(`ep-sessions-${user.uid}`);
     const sessions = existingSessions ? JSON.parse(existingSessions) : [];
     sessions.unshift({ ...result, completedAt: new Date().toISOString() });
-    localStorage.setItem(`ep-sessions-${user.email}`, JSON.stringify(sessions.slice(0, 50))); // Keep last 50
+    localStorage.setItem(`ep-sessions-${user.uid}`, JSON.stringify(sessions.slice(0, 50))); // Keep last 50
     
     toast({ message: "Session saved! Check your history for review.", type: "success" });
     navigate("/result", { state: { result } });
@@ -308,7 +308,7 @@ const QuizPage = () => {
             ) : (
               <button 
                 onClick={handleNext}
-                className="btn-primary w-full sm:px-12 flex items-center gap-2 bg-indigo-500 text-white shadow-xl shadow-indigo-500/20"
+                className="btn-primary w-full sm:px-12 flex items-center gap-2 shadow-xl shadow-primary/20"
               >
                 {isLastQuestion ? "View Results" : "Next Question"}
                 <ChevronRight size={20} />

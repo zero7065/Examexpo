@@ -1,5 +1,5 @@
 // src/pages/PaymentSuccess.jsx
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { Crown, CheckCircle2, ChevronRight, Sparkles, Zap, Award } from "lucide-react";

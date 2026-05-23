@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
 
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Theme CSS Variables ─── */
+:root {
+  --bg: #0a0a0f;
+  --bg-2: #121218;
+  --bg-3: #1a1a1f;
+  --subtle: #1e1e2a;
+  --border: #1e1e2a;
+  --text: #ffffff;
+  --text-muted: #888888;
+  --primary: #6C3CE9;
+  --primary-dim: rgba(108,60,233,0.1);
+  --accent: #D4A853;
+  --accent-dim: rgba(212,168,83,0.1);
+  --danger: #FF4D6A;
+  --success: #4ADE80;
+  --card-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+
 * { box-sizing: border-box; }
 
 body {
@@ -68,6 +89,66 @@ h1, h2, h3, h4, h5, h6 { font-weight: 700; letter-spacing: -0.02em; }
 @media (max-width: 768px) {
   .page-content { padding: 16px; }
 }
+
+/* ─── Custom Component Classes ─── */
+.glass-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--text-muted); }
+.btn-secondary:disabled { opacity: 0.2; cursor: not-allowed; }
+
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-3);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border 0.2s;
+}
+.input-field:focus { border-color: var(--primary); }
 
 /* Utility: card grid */
 .card-grid { display: grid; gap: 20px; }

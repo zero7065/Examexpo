@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
+import { useNotifications } from "../hooks/useNotifications";
 import { getRandomQuestions } from "../data/questions/index";
 import { doc, updateDoc, addDoc, collection, increment, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
@@ -18,6 +19,7 @@ export default function SessionSummary() {
   const [expandedReview, setExpandedReview] = useState(null);
   const animRef = useRef(null);
   const [saved, setSaved] = useState(false);
+  const { sendNotification } = useNotifications();
 
   useEffect(() => {
     if (!data) { navigate("/dashboard", { replace: true }); return; }
@@ -69,6 +71,14 @@ export default function SessionSummary() {
 
         await updateStreak(user.uid);
         setSaved(true);
+
+        // Notify on completion
+        sendNotification({
+          title: "Session Complete! 🎯",
+          body: `${subject}: ${score}% (${correct}/${total} correct)`,
+          url: "/dashboard",
+          tag: "session-complete",
+        });
       } catch (e) {
         console.warn("Failed to save session:", e);
       }

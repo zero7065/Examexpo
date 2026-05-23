@@ -89,6 +89,27 @@ export default function PracticeSession() {
     }
   }, [timeElapsed, mode, totalTime, sessionComplete]);
 
+  // Save ongoing session to localStorage for resume
+  useEffect(() => {
+    if (sessionComplete || !questions.length) return;
+    const sessionState = {
+      questions,
+      answers,
+      currentIndex,
+      subject,
+      mode,
+      startTime: sessionData?.startTime || Date.now(),
+    };
+    try { localStorage.setItem("exampadi_active_session", JSON.stringify(sessionState)); } catch {}
+  }, [answers, currentIndex, questions, subject, mode, sessionComplete, sessionData]);
+
+  // Clear saved session on completion
+  useEffect(() => {
+    if (sessionComplete) {
+      try { localStorage.removeItem("exampadi_active_session"); } catch {}
+    }
+  }, [sessionComplete]);
+
   // Keyboard shortcuts: 1-4 → select options A-D, Space → next question
   useEffect(() => {
     function handleKey(e) {

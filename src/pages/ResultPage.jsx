@@ -1,5 +1,5 @@
 // src/pages/ResultPage.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useToast } from "../components/Toast";
 import { Share2, Check } from "lucide-react";

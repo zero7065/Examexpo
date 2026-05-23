@@ -1,5 +1,5 @@
 // src/context/StudyContext.jsx - Works without Firebase (uses localStorage)
-import React, { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 import { db } from "../firebase";
 import { getQuestionsFromBank } from "../data/questionBank";
 
