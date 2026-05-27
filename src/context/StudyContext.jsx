@@ -1,6 +1,7 @@
 // src/context/StudyContext.jsx - Works without Firebase (uses localStorage)
 import { createContext, useContext, useReducer, useEffect } from "react";
 import { db } from "../firebase";
+import { doc, setDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { getQuestionsFromBank } from "../data/questionBank";
 
 const StudyContext = createContext();
@@ -197,8 +198,6 @@ export const StudyProvider = ({ children }) => {
     // Try Firebase first, fall back to localStorage
     if (isConfigured && db) {
       try {
-        const { doc, setDoc, updateDoc, increment, collection, addDoc, serverTimestamp } = require("firebase/firestore");
-        
         const sessionRef = collection(db, "users", userId, "sessions");
         await addDoc(sessionRef, {
           ...sessionResult,

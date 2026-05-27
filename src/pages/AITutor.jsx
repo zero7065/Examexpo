@@ -6,6 +6,7 @@ import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
 import { chatWithTutor } from "../lib/gemini";
 import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
+import { logActivity } from "../lib/activityLog";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import { Send, Sparkles, Bot, Plus, ChevronRight } from "lucide-react";
 
@@ -101,6 +102,8 @@ export default function AITutor() {
     const aiMsg = { id: Date.now() + 1, role: "ai", content: response, timestamp: new Date().toISOString() };
     setMessages(prev => [...prev, aiMsg]);
     setLoading(false);
+
+    logActivity({ action: "ai_chat", userId: user?.uid, email: user?.email, details: { subject: activeSubject, questionLength: msg.trim().length } });
   }
 
   function handleKeyDown(e) {

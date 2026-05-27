@@ -53,8 +53,7 @@ const QuizPage = () => {
       navigate("/select");
       return;
     }
-    // Reset timer state when session changes
-    setIsReady(false);
+    setIsReady(true);
     setTimerActive(false);
     setTimeLeft(0);
   }, [currentSession, navigate]);

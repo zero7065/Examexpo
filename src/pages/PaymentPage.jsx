@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { PLANS, initiatePayment } from "../paystack";
 import { Check, Crown, Zap, ShieldCheck, Sparkles, ChevronRight, Loader2, Award } from "lucide-react";
+import { logActivity } from "../lib/activityLog";
 
 const PaymentPage = () => {
   const { user, updateUser } = useAuth();
@@ -47,12 +48,11 @@ const PaymentPage = () => {
            );
            const verifyData = await verifyRes.json();
 
-           if (verifyData.data.status === 'success') {
-             await updatePlan(plan.id, plan.duration);
-             // We log the activity via logActivity inside AuthContext or here if imported,
-             // but we'll let updatePlan or success page handle that.
-             toast({ message: `Payment successful! You're now Pro 🎉`, type: "success" });
-             navigate("/payment/success");
+            if (verifyData.data.status === 'success') {
+              await updatePlan(plan.id, plan.duration);
+              logActivity({ action: "payment", userId: user.uid, email: user.email, details: { plan: plan.id, planName: plan.name, amount: plan.amount } });
+              toast({ message: `Payment successful! You're now Pro 🎉`, type: "success" });
+              navigate("/payment/success");
            } else {
              toast.error('Payment could not be verified. Contact support.');
            }

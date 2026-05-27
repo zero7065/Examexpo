@@ -18,7 +18,6 @@ import NotFoundPage from "./pages/NotFoundPage";
 // Everything else lazy-loaded
 const SubjectSelector = lazy(() => import("./pages/SubjectSelector"));
 const Practice = lazy(() => import("./pages/Practice"));
-const QuizPage = lazy(() => import("./pages/QuizPage"));
 const CBTSimulator = lazy(() => import("./pages/CBTSimulator"));
 const ResultPage = lazy(() => import("./pages/ResultPage"));
 const StatsPage = lazy(() => import("./pages/StatsPage"));
@@ -41,6 +40,7 @@ const MockSummary = lazy(() => import("./pages/MockSummary"));
 const AITutor = lazy(() => import("./pages/AITutor"));
 const Progress = lazy(() => import("./pages/Progress"));
 const Settings = lazy(() => import("./pages/Settings"));
+const AdminPage = lazy(() => import("./pages/AdminPage"));
 
 function PageLoader() {
   return (
@@ -71,7 +71,6 @@ function AuthAwareRoutes() {
       "/progress": "Progress — ExamPadi AI",
       "/settings": "Settings — ExamPadi AI",
       "/select": "Select Subjects — ExamPadi AI",
-      "/quiz": "Quiz — ExamPadi AI",
       "/cbt": "CBT Simulator — ExamPadi AI",
       "/stats": "Statistics — ExamPadi AI",
       "/profile": "Profile — ExamPadi AI",
@@ -102,7 +101,6 @@ function AuthAwareRoutes() {
           <Route path="/practice" element={<ProtectedRoute><PracticeSession /></ProtectedRoute>} />
           <Route path="/question-bank" element={<ProtectedRoute><QuestionBank /></ProtectedRoute>} />
           <Route path="/session-summary" element={<ProtectedRoute><SessionSummary /></ProtectedRoute>} />
-          <Route path="/quiz" element={<ProtectedRoute><QuizPage /></ProtectedRoute>} />
           <Route path="/cbt" element={<ProtectedRoute><CBTSimulator /></ProtectedRoute>} />
           <Route path="/result" element={<ProtectedRoute><ResultPage /></ProtectedRoute>} />
           <Route path="/stats" element={<ProtectedRoute><StatsPage /></ProtectedRoute>} />
@@ -116,6 +114,7 @@ function AuthAwareRoutes() {
           <Route path="/ai-tutor" element={<ProtectedRoute><AITutor /></ProtectedRoute>} />
           <Route path="/progress" element={<ProtectedRoute><Progress /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
           <Route path="/contact" element={<ProtectedRoute><ContactPage /></ProtectedRoute>} />
           <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
           <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />

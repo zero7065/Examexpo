@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useStudy } from "../context/StudyContext";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { getUserProfile } from "../lib/userProfile";
 import { getQuestionsFromBank } from "../data/questionBank";
 import { generateQuestionsWithAI } from "../lib/questions";
-import { Search, ChevronRight, Zap, BookOpen, Loader2, CheckCircle2, Clock } from "lucide-react";
+import { ChevronRight, Zap, BookOpen, Loader2, CheckCircle2, Clock } from "lucide-react";
 
 const SUBJECT_MAP = {
   English: "Use of English Language", Maths: "Mathematics", Physics: "Physics",
@@ -24,7 +23,6 @@ export default function Practice() {
   const [searchParams] = useSearchParams();
   const subjectParam = searchParams.get("subject");
 
-  const { startSession } = useStudy();
   const [profile, setProfile] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(subjectParam || "");
   const [mode, setMode] = useState("practice");
@@ -48,11 +46,6 @@ export default function Practice() {
   }, [subjectParam]);
 
   const userSubjects = profile?.subjects || [];
-
-  function getSubjectId(name) {
-    const mapped = SUBJECT_MAP[name] || name;
-    return mapped.toLowerCase().replace(/\s+/g, "-");
-  }
 
   function getSubjectIcon(name) {
     const icons = {
@@ -92,16 +85,16 @@ export default function Practice() {
         return;
       }
 
-      startSession({
-        exam: profile?.exam || "JAMB",
-        mode,
-        subjects: [{ id: getSubjectId(selectedSubject), name: subjectName }],
-        count: questions.length,
-        questions,
-      });
-
       toast({ message: `Starting ${mode} session 🔥`, type: "success" });
-      navigate("/quiz");
+      navigate("/practice", {
+        state: {
+          exam: profile?.exam || "JAMB",
+          mode,
+          questions,
+          subject: subjectName,
+          startTime: Date.now(),
+        }
+      });
     } catch (e) {
       toast({ message: "Failed to start session", type: "error" });
     } finally {

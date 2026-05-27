@@ -7,6 +7,7 @@ import { getRandomQuestions } from "../data/questions/index";
 import { doc, updateDoc, addDoc, collection, increment, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { updateStreak } from "../lib/userProfile";
+import { logActivity } from "../lib/activityLog";
 import { ArrowLeft, RotateCcw, Share2, Sparkles, CheckCircle2, XCircle } from "lucide-react";
 
 export default function SessionSummary() {
@@ -71,6 +72,8 @@ export default function SessionSummary() {
 
         await updateStreak(user.uid);
         setSaved(true);
+
+        logActivity({ action: "session_complete", userId: user.uid, email: user.email, details: { subject: data.subject, score: data.score, correct: data.correct, total: data.total, xp: data.xpEarned } });
 
         // Notify on completion
         sendNotification({

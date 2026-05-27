@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { createUserProfile, getUserProfile } from "../lib/userProfile";
 import { useToast } from "../components/Toast";
+import { logActivity } from "../lib/activityLog";
 import { Check, ChevronRight, Target, GraduationCap, BookOpen, PenTool, ArrowRight } from "lucide-react";
 
 const EXAMS = [
@@ -110,6 +111,7 @@ export default function Onboarding() {
         targetScore: formData.exam === "jamb" ? formData.targetScore : formData.targetScore,
         targetGrade: formData.exam !== "jamb" ? formData.targetGrade : null,
       });
+      logActivity({ action: "onboarding_complete", userId: user.uid, email: user.email, details: { exam: formData.exam, subjects: formData.subjects, targetScore: formData.targetScore } });
       toast({ message: "Profile created! Let's go 🚀", type: "success" });
       navigate("/dashboard");
     } catch (error) {

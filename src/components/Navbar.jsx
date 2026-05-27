@@ -2,6 +2,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
+import { isAdmin } from "../lib/activityLog";
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -17,7 +18,8 @@ import {
   Clock,
   HelpCircle,
   Bot,
-  MessageSquare
+  MessageSquare,
+  Shield
 } from "lucide-react";
 
 const Navbar = () => {
@@ -38,6 +40,7 @@ const Navbar = () => {
     { name: "Help", path: "/help", icon: HelpCircle },
     { name: "Contact", path: "/contact", icon: MessageSquare },
     { name: "Profile", path: "/profile", icon: User },
+    ...(isAdmin(user) ? [{ name: "Admin", path: "/admin", icon: Shield }] : []),
   ] : [];
 
   // Hide entirely on Landing Page if user prefers a cleaner look, 

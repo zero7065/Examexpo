@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { logActivity } from "../lib/activityLog";
 
 const AuthContext = createContext();
 
@@ -26,27 +27,48 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function register(email, password, name) {
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    let cred;
+    try {
+      cred = await createUserWithEmailAndPassword(auth, email, password);
+    } catch (e) {
+      if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
+        throw new Error("Firebase Email/Password auth is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Email/Password.");
+      }
+      throw e;
+    }
     await updateProfile(cred.user, { displayName: name });
-    // Ensure a Firestore profile doc exists so re-login recognizes the account
     await setDoc(doc(db, "users", cred.user.uid), {
       email,
       name,
+      role: "user",
       exam: null,
       subjects: [],
       onboarded: false,
       createdAt: serverTimestamp(),
     }, { merge: true });
     setUser({ ...cred.user, displayName: name });
+    logActivity({ action: "register", userId: cred.user.uid, email, details: { name } });
   }
 
   async function login(email, password) {
-    await signInWithEmailAndPassword(auth, email, password);
+    let cred;
+    try {
+      cred = await signInWithEmailAndPassword(auth, email, password);
+    } catch (e) {
+      if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
+        throw new Error("Firebase Email/Password auth is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Email/Password.");
+      }
+      throw e;
+    }
+    logActivity({ action: "login", userId: cred.user.uid, email });
   }
 
   async function logout() {
+    const uid = auth.currentUser?.uid;
+    const email = auth.currentUser?.email;
     try {
       await signOut(auth);
+      if (uid) logActivity({ action: "logout", userId: uid, email });
     } catch (e) {
       console.error("Logout error:", e);
     }
@@ -83,6 +105,10 @@ export function AuthProvider({ children }) {
     return user?.plan === "pro" && user?.planExpiry && new Date(user.planExpiry) > new Date();
   }
 
+  function getUserRole() {
+    return user?.role || "user";
+  }
+
   if (loading) {
     return (
       <div style={{
@@ -111,7 +137,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword, findUserByEmail, refreshProfile, updateUser, profileVersion, isPro }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword, findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole }}>
       {children}
     </AuthContext.Provider>
   );
