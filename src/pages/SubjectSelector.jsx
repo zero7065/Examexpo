@@ -1,7 +1,6 @@
 // src/pages/SubjectSelector.jsx
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useStudy } from "../context/StudyContext";
 import { useToast } from "../components/Toast";
 import { JAMB_SUBJECTS, WAEC_SUBJECTS } from "../data/subjects";
 import { getQuestionsFromBank, NABTEB_SUBJECTS } from "../data/questionBank";
@@ -27,7 +26,6 @@ const SubjectSelector = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { startSession } = useStudy();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -57,21 +55,23 @@ const SubjectSelector = () => {
     try {
       const subjectObjects = selectedSubjects.map(id => subjects.find(s => s.id === id));
       const questionCount = mode === "cbt" ? 40 : 20;
-      
-      startSession({
-        exam,
-        mode,
-        subjects: subjectObjects,
-        count: questionCount,
-        questions: getQuestionsFromBank({
-          subject: subjectObjects[0].name,
-          exam: exam,
-          count: questionCount
-        })
+      const questions = getQuestionsFromBank({
+        subject: subjectObjects[0].name,
+        exam: exam,
+        count: questionCount
       });
 
       toast({ message: "Questions generated! Let's go 🔥", type: "success" });
-      navigate(mode === "cbt" ? "/cbt" : "/quiz");
+      navigate(mode === "cbt" ? "/cbt" : "/practice", {
+        state: {
+          exam,
+          mode,
+          questions,
+          subject: subjectObjects[0].name,
+          subjects: subjectObjects,
+          startTime: Date.now(),
+        }
+      });
     } catch (error) {
       toast({ message: error.message, type: "error" });
     } finally {

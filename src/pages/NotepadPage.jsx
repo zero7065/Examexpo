@@ -17,7 +17,7 @@ const NotepadPage = () => {
     // Load notes from localStorage on mount
     useEffect(() => {
       if (!user) return;
-      const savedNotes = localStorage.getItem(`ep-notes-${user.id}`);
+      const savedNotes = localStorage.getItem(`ep-notes-${user.uid}`);
       if (savedNotes) {
         try {
           setNotes(JSON.parse(savedNotes));
@@ -30,7 +30,7 @@ const NotepadPage = () => {
     // Save notes to localStorage whenever they change
     useEffect(() => {
       if (!user) return;
-      localStorage.setItem(`ep-notes-${user.id}`, JSON.stringify(notes));
+      localStorage.setItem(`ep-notes-${user.uid}`, JSON.stringify(notes));
     }, [notes, user]);
 
   const handleAddNote = () => {

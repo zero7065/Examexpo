@@ -1,32 +1,35 @@
 // src/pages/CBTSimulator.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useStudy } from "../context/StudyContext";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
+import { doc, updateDoc, addDoc, collection, increment, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
 import Timer from "../components/Timer";
 import ProGate from "../components/ProGate";
 import { ChevronLeft, ChevronRight, Flag, Send, AlertCircle, Monitor, BookOpen } from "lucide-react";
 
 const CBTSimulator = () => {
-  const { currentSession, submitAnswer, saveSessionToFirestore } = useStudy();
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  const sessionData = location.state;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flagged, setFlagged] = useState(new Set());
   const [answers, setAnswers] = useState({});
+  const [redirected, setRedirected] = useState(false);
 
   useEffect(() => {
-    if (!currentSession || currentSession.mode !== "cbt") {
+    if (!sessionData?.questions?.length && !redirected) {
+      setRedirected(true);
       navigate("/select?mode=cbt");
       return;
     }
-    toast({ message: "CBT Simulation active. Good luck! 🖥️", type: "success" });
-  }, [currentSession, navigate, toast]);
+  }, [sessionData, navigate, redirected]);
 
-  if (!currentSession) return null;
+  if (!sessionData?.questions?.length) return null;
 
   const isPro = user?.plan === "pro" && user?.planExpiry && new Date(user.planExpiry) > new Date();
   if (!isPro) return (
@@ -35,12 +38,12 @@ const CBTSimulator = () => {
     </div>
   );
 
-  const currentQuestion = currentSession.questions[currentIndex];
+  const questions = sessionData.questions;
+  const currentQuestion = questions[currentIndex];
 
   const handleOptionSelect = (option) => {
     const newAnswers = { ...answers, [currentIndex]: option };
     setAnswers(newAnswers);
-    submitAnswer(currentIndex, option);
     toast({ message: `Answer marked for Q${currentIndex + 1}`, type: "info" });
   };
 
@@ -54,19 +57,19 @@ const CBTSimulator = () => {
   const handleFinish = async () => {
     if (!window.confirm("Are you sure you want to submit your exam?")) return;
 
-    const correctAnswers = currentSession.questions.filter((q, i) => answers[i] === q.correctAnswer).length;
+    const correctAnswers = questions.filter((q, i) => answers[i] === q.correctAnswer).length;
 
     const result = {
-      exam: currentSession.exam,
+      exam: sessionData.exam,
       mode: "cbt",
-      subjects: currentSession.subjects.map(s => s.id),
-      totalQuestions: currentSession.questions.length,
+      subjects: sessionData.subjects?.map(s => s.id) || [],
+      totalQuestions: questions.length,
       correctAnswers,
-      score: (correctAnswers / currentSession.questions.length) * 400,
-      percentageScore: (correctAnswers / currentSession.questions.length) * 100,
-      timeSpentSeconds: 120 * 60, // Fixed for CBT
-      questions: currentSession.questions,
-      questionLog: currentSession.questions.map((q, i) => ({
+      score: (correctAnswers / questions.length) * 400,
+      percentageScore: (correctAnswers / questions.length) * 100,
+      timeSpentSeconds: 120 * 60,
+      questions: questions,
+      questionLog: questions.map((q, i) => ({
         questionId: q.id,
         subject: q.subject,
         userAnswer: answers[i],
@@ -76,7 +79,23 @@ const CBTSimulator = () => {
       }))
     };
 
-    await saveSessionToFirestore(user.uid, result);
+    try {
+      if (db && user) {
+        await addDoc(collection(db, "sessions"), {
+          ...result,
+          userId: user.uid,
+          completedAt: serverTimestamp(),
+        });
+        await updateDoc(doc(db, "users", user.uid), {
+          totalQuestionsAnswered: increment(questions.length),
+          totalSessions: increment(1),
+          lastActive: serverTimestamp(),
+        });
+      }
+    } catch (e) {
+      console.warn("Failed to save CBT session:", e);
+    }
+
     navigate("/result", { state: { result } });
   };
 
@@ -89,12 +108,12 @@ const CBTSimulator = () => {
             <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center font-black text-black">E</div>
             <div>
               <div className="text-[10px] font-black text-text-muted uppercase tracking-widest leading-none mb-1">CBT Simulation</div>
-              <div className="text-sm font-black text-text">{currentSession.exam} 2025 UTME</div>
+              <div className="text-sm font-black text-text">{sessionData.exam} 2025 UTME</div>
             </div>
           </div>
           
           <div className="hidden lg:flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl border border-white/5">
-            {currentSession.subjects.map((s, i) => (
+            {sessionData.subjects.map((s, i) => (
               <span key={s.id} className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-lg ${i === 0 ? 'bg-primary text-black' : 'text-text-muted'}`}>
                 {s.name}
               </span>
@@ -129,7 +148,7 @@ const CBTSimulator = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3 text-text-muted">
                 <Monitor size={18} />
-                <span className="text-xs font-black uppercase tracking-widest">Question {currentIndex + 1} of {currentSession.questions.length}</span>
+                <span className="text-xs font-black uppercase tracking-widest">Question {currentIndex + 1} of {questions.length}</span>
               </div>
               <div className="flex items-center gap-3 text-text-muted">
                 <BookOpen size={18} />
@@ -176,7 +195,7 @@ const CBTSimulator = () => {
           </h3>
 
           <div className="grid grid-cols-5 gap-3">
-            {currentSession.questions.map((_, i) => (
+            {questions.map((_, i) => (
               <button
                 key={i}
                 onClick={() => {
@@ -215,7 +234,7 @@ const CBTSimulator = () => {
                 <div className="w-3 h-3 bg-border rounded-full"></div>
                 <span className="text-xs font-black uppercase tracking-widest text-text-muted">Total</span>
               </div>
-              <span className="font-black font-mono">{currentSession.questions.length}</span>
+              <span className="font-black font-mono">{questions.length}</span>
             </div>
           </div>
 
@@ -250,7 +269,7 @@ const CBTSimulator = () => {
             Previous
           </button>
           <button 
-            disabled={currentIndex === currentSession.questions.length - 1}
+            disabled={currentIndex === questions.length - 1}
             onClick={() => setCurrentIndex(prev => prev + 1)}
             className="btn-primary h-14 px-10 flex items-center gap-3 disabled:opacity-20 shadow-xl shadow-primary/20"
           >

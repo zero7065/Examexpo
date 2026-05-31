@@ -32,7 +32,7 @@ const PaymentPage = () => {
     await initiatePayment({
       email: user.email,
       plan,
-       userUid: user.id,
+       userUid: user.uid,
       userName: user.name || user.displayName,
        onSuccess: async (response) => {
          setPayLoading(true);
