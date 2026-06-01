@@ -8,7 +8,7 @@ import { Eye, EyeOff } from "lucide-react";
 export default function AuthPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { user, login, register, resetPassword, findUserByEmail } = useAuth();
+  const { user, login, register, resetPassword } = useAuth();
   const [mode, setMode] = useState("signin");
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "", newPassword: "" });
@@ -51,6 +51,7 @@ export default function AuthPage() {
         : code === 'auth/too-many-requests' ? 'Too many attempts. Try again later.'
         : code === 'auth/user-not-found' ? 'No account found with this email.'
         : code === 'auth/wrong-password' ? 'Incorrect password.'
+        : err.message.includes('auth is not enabled') ? 'Email/Password login is not enabled. Ask the admin to enable it in Firebase Console → Authentication.'
         : err.message;
       toast({ message: msg, type: "error" });
       setErrors({ general: msg });
@@ -64,21 +65,11 @@ export default function AuthPage() {
       setErrors({ email: "Enter your email address" });
       return;
     }
-    if (!form.newPassword || form.newPassword.length < 6) {
-      setErrors({ newPassword: "New password must be at least 6 characters" });
-      return;
-    }
     
     setLoading(true);
     try {
-      const existingUser = findUserByEmail(form.email);
-      if (!existingUser) {
-        toast({ message: "If an account exists, password has been reset", type: "success" });
-        setMode("signin");
-        return;
-      }
-      resetPassword(form.email, form.newPassword);
-      toast({ message: "Password reset successful! Sign in with new password.", type: "success" });
+      await resetPassword(form.email);
+      toast({ message: "Password reset email sent! Check your inbox.", type: "success" });
       setMode("signin");
       setForm(f => ({ ...f, password: "", newPassword: "" }));
     } catch (err) {
@@ -144,7 +135,7 @@ export default function AuthPage() {
           marginBottom: 24,
         }}>
           {[["signin", "Sign In"], ["signup", "Sign Up"]].map(([m, label]) => (
-            <button key={m} onClick={() => { setMode(m); setErrors({}); setForm(f => ({ ...f, newPassword: "" })); }}
+            <button key={m} onClick={() => { setMode(m); setErrors({}); }}
               style={{
                 flex: 1, padding: "10px 0", border: "none", borderRadius: 10,
                 background: mode === m ? "#6C3CE9" : "transparent",
@@ -159,7 +150,7 @@ export default function AuthPage() {
 
         {mode === "forgot" && (
           <p style={{ textAlign: "center", marginBottom: 16 }}>
-            <button onClick={() => { setMode("signin"); setErrors({}); setForm(f => ({ ...f, newPassword: "" })); }}
+            <button onClick={() => { setMode("signin"); setErrors({}); }}
               style={{ background: "none", border: "none", color: "#6C3CE9", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 13 }}>
               ← Back to Sign In
             </button>
@@ -229,16 +220,9 @@ export default function AuthPage() {
         {errors.password && <p style={{ color: "#FF4D6A", fontSize: 12, margin: "0 0 12px" }}>{errors.password}</p>}
 
         {mode === "forgot" && (
-          <>
-            <input
-              type="password"
-              placeholder="New password (min 6 chars)"
-              value={form.newPassword}
-              onChange={e => setForm(f => ({ ...f, newPassword: e.target.value }))}
-              style={inputStyle("newPassword")}
-            />
-            {errors.newPassword && <p style={{ color: "#FF4D6A", fontSize: 12, margin: "0 0 12px" }}>{errors.newPassword}</p>}
-          </>
+          <p style={{ color: "#888", fontSize: 13, marginBottom: 16, lineHeight: 1.5 }}>
+            Enter your email above and we'll send a password reset link.
+          </p>
         )}
 
         {mode === "signin" && (

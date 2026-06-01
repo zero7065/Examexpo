@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
-  updatePassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
@@ -75,12 +75,17 @@ export function AuthProvider({ children }) {
     setUser(null);
   }
 
-  async function resetPassword(email, newPassword) {
+  async function resetPassword(email) {
     try {
-      const cred = await signInWithEmailAndPassword(auth, email, newPassword);
-      await updatePassword(cred.user, newPassword);
-    } catch {
-      throw new Error("No account found with this email");
+      await sendPasswordResetEmail(auth, email);
+    } catch (e) {
+      if (e.code === 'auth/user-not-found') {
+        throw new Error("No account found with this email");
+      }
+      if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
+        throw new Error("Firebase Email/Password auth is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Email/Password.");
+      }
+      throw new Error("Failed to send reset email. Check your email address and try again.");
     }
   }
 
