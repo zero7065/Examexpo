@@ -3,6 +3,10 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 import { isAdmin } from "../lib/activityLog";
+
+function checkAdmin(user) {
+  try { return typeof isAdmin === 'function' && isAdmin(user); } catch { return false; }
+}
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -23,6 +27,7 @@ import {
 } from "lucide-react";
 
 const Navbar = () => {
+  try {
   const { user, logout, isPro } = useAuth();
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
@@ -40,7 +45,7 @@ const Navbar = () => {
     { name: "Help", path: "/help", icon: HelpCircle },
     { name: "Contact", path: "/contact", icon: MessageSquare },
     { name: "Profile", path: "/profile", icon: User },
-    ...(isAdmin(user) ? [{ name: "Admin", path: "/admin", icon: Shield }] : []),
+    ...(checkAdmin(user) ? [{ name: "Admin", path: "/admin", icon: Shield }] : []),
   ] : [];
 
   // Hide entirely on Landing Page if user prefers a cleaner look, 
@@ -155,6 +160,12 @@ const Navbar = () => {
       )}
     </>
   );
+  } catch (e) {
+    console.error("Navbar crash:", e);
+    return <nav style={{ height: 64, background: "#0d0d12", display: "flex", alignItems: "center", justifyContent: "center", borderBottom: "1px solid #1e1e2a" }}>
+      <span style={{ color: "#888", fontSize: 13 }}>ExamPadi AI</span>
+    </nav>;
+  }
 };
 
 export default Navbar;

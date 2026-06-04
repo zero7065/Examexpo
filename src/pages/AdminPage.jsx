@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
-import { isAdmin, logActivity } from "../lib/activityLog";
+import { isAdmin as _isAdmin, logActivity } from "../lib/activityLog";
+const isAdmin = typeof _isAdmin === 'function' ? _isAdmin : () => false;
 import { Shield, Users, Activity, BookOpen, Crown, ArrowLeft, RefreshCw } from "lucide-react";
 
 export default function AdminPage() {
