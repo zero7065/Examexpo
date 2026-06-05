@@ -39,17 +39,28 @@ exports.paystackWebhook = onRequest(
 
     if (event.event === "charge.success") {
       const { reference, metadata, amount, status } = event.data;
-      const userId = metadata?.userId;
-      const plan = metadata?.plan;
+
+      // Parse metadata from both formats:
+      // 1. Top-level keys: { userId, plan } — used by usePaystack.js hook
+      // 2. custom_fields array: [{ variable_name, value }] — used by paystack.js / PaymentPage
+      let userId = metadata?.userId;
+      let plan = metadata?.plan;
+
+      if (!userId || !plan) {
+        const fields = metadata?.custom_fields || [];
+        userId = userId || fields.find(f => f.variable_name === "user_uid")?.value;
+        plan = plan || fields.find(f => f.variable_name === "plan_id")?.value;
+      }
 
       if (!userId || !plan || !reference) {
-        logger.error("Missing userId, plan, or reference in webhook payload");
+        logger.error("Missing userId, plan, or reference in webhook payload", { metadata: JSON.stringify(metadata) });
         res.status(400).send("Bad Request");
         return;
       }
 
       const now = admin.firestore.Timestamp.now();
-      const endDate = plan === "pro_yearly"
+      const isYearly = plan === "pro_yearly" || plan === "proYearly";
+      const endDate = isYearly
         ? new Date(now.toDate().setFullYear(now.toDate().getFullYear() + 1))
         : new Date(now.toDate().setMonth(now.toDate().getMonth() + 1));
 

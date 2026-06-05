@@ -1,7 +1,7 @@
 // src/utils/saveSession.js
 import { doc, setDoc, updateDoc, increment, serverTimestamp, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { logActivity } from "./logActivity";
+import { logActivity } from "../lib/activityLog";
 
 export async function saveSession({ uid, exam, mode, subjects, year, questions, answers, timeSpentSeconds }) {
   const sessionId = `session_${Date.now()}`;

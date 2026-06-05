@@ -85,6 +85,9 @@ export async function initiatePayment({ email, plan, userUid, userName, onSucces
       firstname: userName?.split(" ")[0] || "",
       lastname: userName?.split(" ")[1] || "",
       metadata: {
+        userId: userUid,
+        plan: plan.id,
+        duration: plan.duration,
         custom_fields: [
           { display_name: "User UID", variable_name: "user_uid", value: userUid },
           { display_name: "Plan", variable_name: "plan_id", value: plan.id },

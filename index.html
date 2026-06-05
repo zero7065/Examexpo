@@ -48,8 +48,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://js.paystack.co/v1/inline.js"></script>
   <!-- Google Analytics (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_MEASUREMENT_ID%"></script>
-  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '%VITE_GA_MEASUREMENT_ID%', { send_page_view: false });</script>
+  <script>window.GA_ID = "%VITE_GA_MEASUREMENT_ID%"; if (window.GA_ID && window.GA_ID.startsWith("G-")) { document.write(`<script async src="https://www.googletagmanager.com/gtag/js?id=${window.GA_ID}"><\/script>`); }</script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} if (window.GA_ID && window.GA_ID.startsWith("G-")) { gtag('js', new Date()); gtag('config', window.GA_ID, { send_page_view: false }); }</script>
 </head>
 <body>
   <div id="root"></div>

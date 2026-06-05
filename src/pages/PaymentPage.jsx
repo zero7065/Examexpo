@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
+import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
 import { PLANS, initiatePayment } from "../paystack";
 import { Check, Crown, Zap, ShieldCheck, Sparkles, ChevronRight, Loader2, Award } from "lucide-react";
 import { logActivity } from "../lib/activityLog";
@@ -14,13 +16,32 @@ const PaymentPage = () => {
   const [payLoading, setPayLoading] = useState(false);
   const [payError, setPayError] = useState(null);
 
-  const updatePlan = async (planId, duration) => {
+  const activatePro = async (planId, duration, reference) => {
     const expiryDate = new Date();
+    expiryDate.setHours(23, 59, 59, 999);
     expiryDate.setDate(expiryDate.getDate() + duration);
+
     updateUser({
       plan: planId.includes('pro') ? 'pro' : 'free',
       planExpiry: expiryDate.toISOString()
     });
+
+    if (db && user) {
+      try {
+        await updateDoc(doc(db, "users", user.uid), {
+          subscription: {
+            plan: planId,
+            status: "active",
+            reference,
+            startDate: serverTimestamp(),
+            endDate: expiryDate,
+            autoRenew: true,
+          },
+        });
+      } catch (e) {
+        console.warn("Failed to write subscription to Firestore:", e);
+      }
+    }
   };
 
   const handlePayment = async (plan) => {
@@ -32,36 +53,21 @@ const PaymentPage = () => {
     await initiatePayment({
       email: user.email,
       plan,
-       userUid: user.uid,
+      userUid: user.uid,
       userName: user.name || user.displayName,
-       onSuccess: async (response) => {
-         setPayLoading(true);
-         try {
-           // Verify with Paystack API (use your backend or a Vercel/Netlify function)
-           const verifyRes = await fetch(
-             `https://api.paystack.co/transaction/verify/${response.reference}`,
-             {
-               headers: {
-                 Authorization: `Bearer ${import.meta.env.VITE_PAYSTACK_SECRET_KEY}`
-               }
-             }
-           );
-           const verifyData = await verifyRes.json();
-
-            if (verifyData.data.status === 'success') {
-              await updatePlan(plan.id, plan.duration);
-              logActivity({ action: "payment", userId: user.uid, email: user.email, details: { plan: plan.id, planName: plan.name, amount: plan.amount } });
-              toast({ message: `Payment successful! You're now Pro 🎉`, type: "success" });
-              navigate("/payment/success");
-           } else {
-             toast.error('Payment could not be verified. Contact support.');
-           }
-         } catch (err) {
-           toast.error('Verification failed. Please contact support.');
-         } finally {
-           setPayLoading(false);
-         }
-       },
+      onSuccess: async (response) => {
+        setPayLoading(true);
+        try {
+          await activatePro(plan.id, plan.duration, response.reference);
+          logActivity({ action: "payment", userId: user.uid, email: user.email, details: { plan: plan.id, planName: plan.name, reference: response.reference } });
+          toast({ message: `Payment successful! You're now Pro 🎉`, type: "success" });
+          navigate("/payment/success");
+        } catch (err) {
+          toast({ message: 'Activation failed. Please contact support.', type: "error" });
+        } finally {
+          setPayLoading(false);
+        }
+      },
       onClose: () => {
         setPayLoading(false);
         toast({ message: "Payment cancelled.", type: "info" });

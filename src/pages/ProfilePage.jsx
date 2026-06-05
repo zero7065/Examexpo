@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 
 const ProfilePage = () => {
-  const { user, userData, logout, deleteAccount } = useAuth();
+  const { user, logout } = useAuth();
   const { theme, toggle } = useTheme();
   const [isDeleting, setIsDeleting] = React.useState(false);
   const [deleteError, setDeleteError] = React.useState(null);
@@ -31,9 +31,13 @@ const ProfilePage = () => {
     }
     setIsDeleting(true);
     setDeleteError(null);
-    const res = await deleteAccount();
-    if (res?.success === false) {
-      setDeleteError(res.error);
+    try {
+      if (user) {
+        await user.delete();
+      }
+      await logout();
+    } catch (err) {
+      setDeleteError("Delete failed. Contact support@exampadi.com.");
       setIsDeleting(false);
     }
   };
@@ -49,25 +53,25 @@ const ProfilePage = () => {
         {/* Profile Card */}
         <div className="lg:col-span-1 space-y-8">
           <div className="glass-card p-10 text-center space-y-6 relative overflow-hidden">
-            {userData?.plan === 'pro' && (
+            {user?.plan === 'pro' && (
               <div className="absolute top-4 right-4 text-accent">
                 <Crown size={24} />
               </div>
             )}
             
             <div className="w-24 h-24 bg-primary/20 rounded-3xl flex items-center justify-center mx-auto text-primary font-black text-4xl shadow-xl shadow-primary/10">
-              {userData?.displayName?.charAt(0) || user?.email?.charAt(0).toUpperCase()}
+              {user?.displayName?.charAt(0) || user?.email?.charAt(0).toUpperCase()}
             </div>
             
             <div className="space-y-1">
-              <h2 className="text-2xl font-black text-text">{userData?.displayName || "Student"}</h2>
+              <h2 className="text-2xl font-black text-text">{user?.displayName || "Student"}</h2>
               <p className="text-text-muted text-sm font-medium">{user?.email}</p>
             </div>
 
             <div className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest inline-block ${
-              userData?.plan === 'pro' ? 'bg-accent/10 text-accent border border-accent/20' : 'bg-white/5 text-text-muted border border-border'
+              user?.plan === 'pro' ? 'bg-accent/10 text-accent border border-accent/20' : 'bg-white/5 text-text-muted border border-border'
             }`}>
-              {userData?.plan === 'pro' ? 'Pro Member' : 'Free Member'}
+              {user?.plan === 'pro' ? 'Pro Member' : 'Free Member'}
             </div>
           </div>
 
@@ -111,14 +115,14 @@ const ProfilePage = () => {
             <div className="glass-card p-8 space-y-8">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                  <h4 className="text-2xl font-black mb-2">Current Plan: <span className={userData?.plan === 'pro' ? 'text-accent' : 'text-text-muted'}>{userData?.plan === 'pro' ? 'ExamPadi Pro' : 'Basic (Free)'}</span></h4>
+                  <h4 className="text-2xl font-black mb-2">Current Plan: <span className={user?.plan === 'pro' ? 'text-accent' : 'text-text-muted'}>{user?.plan === 'pro' ? 'ExamPadi Pro' : 'Basic (Free)'}</span></h4>
                   <p className="text-text-muted text-sm font-medium max-w-sm">
-                    {userData?.plan === 'pro' 
+                    {user?.plan === 'pro' 
                       ? "Your premium features are active until 2025. You have unlimited daily questions."
                       : "You are currently on the free tier limited to 30 questions daily. Upgrade to remove limits."}
                   </p>
                 </div>
-                {userData?.plan !== 'pro' && (
+                {user?.plan !== 'pro' && (
                   <Link to="/payment" className="btn-primary px-8 h-14 whitespace-nowrap shadow-xl shadow-primary/20">Upgrade Now</Link>
                 )}
               </div>
@@ -126,9 +130,9 @@ const ProfilePage = () => {
               <div className="h-px bg-border"></div>
 
               <div className="grid sm:grid-cols-2 gap-6">
-                <PlanBenefit icon={<Zap size={16} />} text="Unlimited Questions" active={userData?.plan === 'pro'} />
-                <PlanBenefit icon={<Award size={16} />} text="CBT Sim Mode" active={userData?.plan === 'pro'} />
-                <PlanBenefit icon={<User size={16} />} text="Weak Topic AI" active={userData?.plan === 'pro'} />
+                <PlanBenefit icon={<Zap size={16} />} text="Unlimited Questions" active={user?.plan === 'pro'} />
+                <PlanBenefit icon={<Award size={16} />} text="CBT Sim Mode" active={user?.plan === 'pro'} />
+                <PlanBenefit icon={<User size={16} />} text="Weak Topic AI" active={user?.plan === 'pro'} />
                 <PlanBenefit icon={<Settings size={16} />} text="Custom Dashboard" active={true} />
               </div>
             </div>

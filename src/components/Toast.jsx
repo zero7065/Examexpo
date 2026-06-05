@@ -5,6 +5,7 @@ const ToastContext = createContext();
 const typeColors = {
   success: "#00E5A0",
   error: "#FF4D6A",
+  warning: "#FF9F43",
   info: "#6C3CE9",
 };
 
