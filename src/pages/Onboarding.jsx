@@ -32,6 +32,14 @@ export default function Onboarding() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [checking, setChecking] = useState(true);
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    exam: null,
+    subjects: [],
+    targetScore: 280,
+    targetGrade: "C",
+  });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function checkAlreadyOnboarded() {
@@ -57,15 +65,6 @@ export default function Onboarding() {
       </div>
     );
   }
-
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    exam: null,
-    subjects: [],
-    targetScore: 280,
-    targetGrade: "C",
-  });
-  const [loading, setLoading] = useState(false);
 
   const totalSteps = 4;
   const subjects = formData.exam ? SUBJECTS[formData.exam] : [];
