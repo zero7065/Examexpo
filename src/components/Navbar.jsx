@@ -27,12 +27,14 @@ import {
 } from "lucide-react";
 
 const Navbar = () => {
-  try {
+  // Hooks MUST be outside try/catch to prevent React error #310
+  // (hook count changing between renders when catch block runs)
   const { user, logout, isPro } = useAuth();
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
+  try {
   const proStatus = isPro();
 
   const navItems = user ? [
