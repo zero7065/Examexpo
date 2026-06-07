@@ -27,14 +27,10 @@ import {
 } from "lucide-react";
 
 const Navbar = () => {
-  // Hooks MUST be outside try/catch to prevent React error #310
-  // (hook count changing between renders when catch block runs)
   const { user, logout, isPro } = useAuth();
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-
-  try {
   const proStatus = isPro();
 
   const navItems = user ? [
@@ -50,9 +46,6 @@ const Navbar = () => {
     ...(checkAdmin(user) ? [{ name: "Admin", path: "/admin", icon: Shield }] : []),
   ] : [];
 
-  // Hide entirely on Landing Page if user prefers a cleaner look, 
-  // but we need it for theme toggle and branding.
-  // Actually, we'll keep it but modify styles for landing page.
   const isLanding = location.pathname === "/";
 
   return (
@@ -162,12 +155,6 @@ const Navbar = () => {
       )}
     </>
   );
-  } catch (e) {
-    console.error("Navbar crash:", e);
-    return <nav style={{ height: 64, background: "#0d0d12", display: "flex", alignItems: "center", justifyContent: "center", borderBottom: "1px solid #1e1e2a" }}>
-      <span style={{ color: "#888", fontSize: 13 }}>ExamPadi AI</span>
-    </nav>;
-  }
 };
 
 export default Navbar;
