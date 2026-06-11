@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { StudyProvider } from "./context/StudyContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -10,6 +10,7 @@ import InstallPrompt from "./components/InstallPrompt";
 import { useAuth } from "./context/AuthContext";
 
 // Critical path — direct imports
+import LandingPage from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage";
 import Dashboard from "./pages/Dashboard";
 import Onboarding from "./pages/Onboarding";
@@ -58,6 +59,7 @@ function AuthAwareRoutes() {
   useEffect(() => {
     if (loading) { document.title = "ExamPadi AI"; return; }
     const titles = {
+      "/": "ExamPadi AI — Ace Your Exams",
       "/auth": "Sign In — ExamPadi AI",
       "/onboarding": "Get Started — ExamPadi AI",
       "/dashboard": "Dashboard — ExamPadi AI",
@@ -82,11 +84,11 @@ function AuthAwareRoutes() {
     <div className="flex flex-col md:flex-row min-h-screen bg-bg text-text selection:bg-primary/30">
       <Navbar />
       <ScrollToTop />
-      <main key={location.pathname} className="flex-1 md:ml-64 pb-20 md:pb-0 animate-fade">
+      <main key={location.pathname} className={`flex-1 ${location.pathname === "/" ? "" : "md:ml-64 pb-20 md:pb-0"} animate-fade`}>
         <InstallPrompt />
         <Suspense fallback={<PageLoader />}>
         <Routes>
-          <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <Navigate to="/auth" replace />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/privacy" element={<PrivacyPage />} />

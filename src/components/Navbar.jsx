@@ -48,10 +48,12 @@ const Navbar = () => {
 
   const isLanding = location.pathname === "/";
 
+  if (isLanding && !user) return null;
+
   return (
     <>
       {/* Desktop Sidebar */}
-      <nav className={`hidden md:flex flex-col w-64 h-screen bg-bg-2 border-r border-border fixed left-0 top-0 p-6 z-50 ${isLanding && !user ? 'bg-transparent border-none' : ''}`}>
+      <nav className="hidden md:flex flex-col w-64 h-screen bg-bg-2 border-r border-border fixed left-0 top-0 p-6 z-50">
         <div className="flex items-center justify-between mb-10 px-2">
           <Link to="/" className="flex items-center gap-3">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-black text-black">E</div>
