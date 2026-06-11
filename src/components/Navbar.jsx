@@ -123,8 +123,14 @@ const Navbar = () => {
 
       {/* Mobile Bottom Bar - Only show if logged in */}
       {user && (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-bg-2/80 border-t border-border flex items-center justify-around p-3 z-50 backdrop-blur-xl">
-          {navItems.map((item) => {
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-bg-2/80 border-t border-border flex items-center justify-around p-3 z-50 backdrop-blur-xl safe-bottom">
+          {[
+            { name: "Home", path: "/dashboard", icon: LayoutDashboard },
+            { name: "Practice", path: "/select", icon: Zap },
+            { name: "AI Tutor", path: "/ai-tutor", icon: Bot },
+            { name: "Stats", path: "/stats", icon: BarChart3 },
+            { name: "Profile", path: "/profile", icon: User },
+          ].map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
             return (

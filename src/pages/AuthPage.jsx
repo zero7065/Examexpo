@@ -1,4 +1,3 @@
-// src/pages/AuthPage.jsx - Fully offline with localStorage
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -11,7 +10,7 @@ export default function AuthPage() {
   const { user, login, register, resetPassword } = useAuth();
   const [mode, setMode] = useState("signin");
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", password: "", newPassword: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
@@ -42,7 +41,7 @@ export default function AuthPage() {
         toast({ message: `Account created! Welcome, ${form.name}`, type: "success" });
       } else {
         await login(form.email, form.password);
-        toast({ message: `Welcome back! Let's practice`, type: "success" });
+        toast({ message: "Welcome back! Let's practice", type: "success" });
       }
     } catch (err) {
       const code = err.code;
@@ -65,13 +64,13 @@ export default function AuthPage() {
       setErrors({ email: "Enter your email address" });
       return;
     }
-    
+
     setLoading(true);
     try {
       await resetPassword(form.email);
       toast({ message: "Password reset email sent! Check your inbox.", type: "success" });
       setMode("signin");
-      setForm(f => ({ ...f, password: "", newPassword: "" }));
+      setForm(f => ({ ...f, password: "" }));
     } catch (err) {
       toast({ message: err.message, type: "error" });
     } finally {
@@ -83,20 +82,21 @@ export default function AuthPage() {
     width: "100%",
     padding: "14px 16px",
     borderRadius: 10,
-    border: `1.5px solid ${errors[field] ? "#FF4D6A" : "#333"}`,
-    background: "#1a1a1f",
-    color: "#fff",
+    border: `1.5px solid ${errors[field] ? "var(--danger)" : "var(--border)"}`,
+    background: "var(--bg-3)",
+    color: "var(--text)",
     fontSize: 15,
     fontFamily: "inherit",
     outline: "none",
     boxSizing: "border-box",
     marginBottom: errors[field] ? 4 : 16,
+    transition: "border 0.2s",
   });
 
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#0a0a0f",
+      background: "var(--bg)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -105,31 +105,31 @@ export default function AuthPage() {
       <div style={{
         width: "100%",
         maxWidth: 420,
-        background: "#121218",
-        border: "1px solid #222",
+        background: "var(--bg-2)",
+        border: "1px solid var(--border)",
         borderRadius: 20,
         padding: "40px 32px",
-        boxShadow: "0 4px 24px rgba(0,0,0,0.5)",
+        boxShadow: "var(--card-shadow)",
       }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <div style={{
             width: 56, height: 56, borderRadius: 16,
-            background: "#6C3CE9", display: "inline-flex",
+            background: "var(--primary)", display: "inline-flex",
             alignItems: "center", justifyContent: "center",
             fontWeight: 900, fontSize: 28, color: "#fff",
             marginBottom: 12
           }}>E</div>
-          <h1 style={{ color: "#fff", fontSize: 24, fontWeight: 800, margin: 0 }}>
+          <h1 style={{ color: "var(--text)", fontSize: 24, fontWeight: 800, margin: 0 }}>
             ExamPadi AI
           </h1>
-          <p style={{ color: "#888", fontSize: 14, marginTop: 4 }}>
+          <p style={{ color: "var(--text-muted)", fontSize: 14, marginTop: 4 }}>
             {mode === "signup" ? "Create your account — it's free" : mode === "forgot" ? "Reset your password" : "Welcome back, let's practice"}
           </p>
         </div>
 
         <div style={{
           display: "flex",
-          background: "#1a1a1f",
+          background: "var(--bg-3)",
           borderRadius: 12,
           padding: 4,
           marginBottom: 24,
@@ -138,8 +138,8 @@ export default function AuthPage() {
             <button key={m} onClick={() => { setMode(m); setErrors({}); }}
               style={{
                 flex: 1, padding: "10px 0", border: "none", borderRadius: 10,
-                background: mode === m ? "#6C3CE9" : "transparent",
-                color: mode === m ? "#fff" : "#888",
+                background: mode === m ? "var(--primary)" : "transparent",
+                color: mode === m ? "#fff" : "var(--text-muted)",
                 fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
                 fontSize: 14, transition: "all 0.2s",
               }}>
@@ -151,7 +151,7 @@ export default function AuthPage() {
         {mode === "forgot" && (
           <p style={{ textAlign: "center", marginBottom: 16 }}>
             <button onClick={() => { setMode("signin"); setErrors({}); }}
-              style={{ background: "none", border: "none", color: "#6C3CE9", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 13 }}>
+              style={{ background: "none", border: "none", color: "var(--primary)", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 13 }}>
               ← Back to Sign In
             </button>
           </p>
@@ -159,8 +159,8 @@ export default function AuthPage() {
 
         {errors.general && (
           <div style={{
-            padding: "12px 16px", borderRadius: 10, background: "#FF4D6A15",
-            border: "1px solid #FF4D6A44", color: "#FF4D6A",
+            padding: "12px 16px", borderRadius: 10, background: "var(--danger-dim)",
+            border: "1px solid var(--danger)", color: "var(--danger)",
             fontSize: 14, marginBottom: 16,
           }}>
             {errors.general}
@@ -176,7 +176,7 @@ export default function AuthPage() {
               onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
               style={inputStyle("name")}
             />
-            {errors.name && <p style={{ color: "#FF4D6A", fontSize: 12, margin: "0 0 12px" }}>{errors.name}</p>}
+            {errors.name && <p style={{ color: "var(--danger)", fontSize: 12, margin: "0 0 12px" }}>{errors.name}</p>}
           </>
         )}
 
@@ -187,7 +187,7 @@ export default function AuthPage() {
           onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
           style={inputStyle("email")}
         />
-        {errors.email && <p style={{ color: "#FF4D6A", fontSize: 12, margin: "0 0 12px" }}>{errors.email}</p>}
+        {errors.email && <p style={{ color: "var(--danger)", fontSize: 12, margin: "0 0 12px" }}>{errors.email}</p>}
 
         <div style={{ position: "relative" }}>
           <input
@@ -208,7 +208,7 @@ export default function AuthPage() {
               background: "none",
               border: "none",
               cursor: "pointer",
-              color: "#888",
+              color: "var(--text-muted)",
               padding: 4,
               display: "flex",
               alignItems: "center",
@@ -217,19 +217,19 @@ export default function AuthPage() {
             {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>
         </div>
-        {errors.password && <p style={{ color: "#FF4D6A", fontSize: 12, margin: "0 0 12px" }}>{errors.password}</p>}
+        {errors.password && <p style={{ color: "var(--danger)", fontSize: 12, margin: "0 0 12px" }}>{errors.password}</p>}
 
         {mode === "forgot" && (
-          <p style={{ color: "#888", fontSize: 13, marginBottom: 16, lineHeight: 1.5 }}>
+          <p style={{ color: "var(--text-muted)", fontSize: 13, marginBottom: 16, lineHeight: 1.5 }}>
             Enter your email above and we'll send a password reset link.
           </p>
         )}
 
         {mode === "signin" && (
           <p style={{ textAlign: "right", marginBottom: 16 }}>
-            <button 
+            <button
               onClick={() => { setMode("forgot"); setErrors({}); }}
-              style={{ background: "none", border: "none", color: "#6C3CE9", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}
+              style={{ background: "none", border: "none", color: "var(--primary)", fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}
             >
               Forgot password?
             </button>
@@ -241,18 +241,18 @@ export default function AuthPage() {
           disabled={loading}
           style={{
             width: "100%", padding: "14px", borderRadius: 12, border: "none",
-            background: loading ? "#333" : "#6C3CE9",
-            color: loading ? "#666" : "#fff",
+            background: loading ? "var(--bg-3)" : "var(--primary)",
+            color: loading ? "var(--text-muted)" : "#fff",
             fontWeight: 800, fontSize: 16, cursor: loading ? "not-allowed" : "pointer",
             fontFamily: "inherit", marginBottom: 16, transition: "all 0.2s",
           }}>
           {loading ? "Please wait..." : mode === "signup" ? "Create Account" : mode === "forgot" ? "Reset Password" : "Sign In"}
         </button>
 
-        <p style={{ textAlign: "center", color: "#888", fontSize: 13, marginTop: 20 }}>
+        <p style={{ textAlign: "center", color: "var(--text-muted)", fontSize: 13, marginTop: 20 }}>
           {mode === "signin"
-            ? <>Don't have an account? <button onClick={() => setMode("signup")} style={{ background: "none", border: "none", color: "#6C3CE9", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 13 }}>Sign Up free</button></>
-            : <>Already have an account? <button onClick={() => setMode("signin")} style={{ background: "none", border: "none", color: "#6C3CE9", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 13 }}>Sign In</button></>
+            ? <>Don't have an account? <button onClick={() => setMode("signup")} style={{ background: "none", border: "none", color: "var(--primary)", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 13 }}>Sign Up free</button></>
+            : <>Already have an account? <button onClick={() => setMode("signin")} style={{ background: "none", border: "none", color: "var(--primary)", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 13 }}>Sign In</button></>
           }
         </p>
       </div>

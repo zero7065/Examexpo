@@ -60,7 +60,7 @@ export default function Onboarding() {
 
   if (checking) {
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}>
+      <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text)" }}>
         Loading...
       </div>
     );
@@ -107,7 +107,7 @@ export default function Onboarding() {
       await createUserProfile(user.uid, {
         exam: formData.exam,
         subjects: formData.subjects,
-        targetScore: formData.exam === "jamb" ? formData.targetScore : formData.targetScore,
+        targetScore: formData.exam === "jamb" ? formData.targetScore : null,
         targetGrade: formData.exam !== "jamb" ? formData.targetGrade : null,
       });
       logActivity({ action: "onboarding_complete", userId: user.uid, email: user.email, details: { exam: formData.exam, subjects: formData.subjects, targetScore: formData.targetScore } });
@@ -124,7 +124,7 @@ export default function Onboarding() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#0a0a0f",
+      background: "var(--bg)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -139,8 +139,8 @@ export default function Onboarding() {
       `}</style>
 
       <div style={{
-        background: "#121218",
-        border: "1px solid #222",
+        background: "var(--bg-2)",
+        border: "1px solid var(--border)",
         borderRadius: 24,
         maxWidth: 520,
         width: "100%",
@@ -154,7 +154,7 @@ export default function Onboarding() {
               width: s === step ? 32 : 8,
               height: 8,
               borderRadius: 4,
-              background: s <= step ? "#6C3CE9" : "#333",
+              background: s <= step ? "var(--primary)" : "var(--border)",
               transition: "all 0.3s ease",
             }} />
           ))}
@@ -163,10 +163,10 @@ export default function Onboarding() {
         {/* Step 1: Choose Exam */}
         {step === 1 && (
           <div style={{ animation: "fadeIn 0.4s ease" }}>
-            <h2 style={{ color: "#fff", fontSize: 24, fontWeight: 700, marginBottom: 8, textAlign: "center" }}>
+            <h2 style={{ color: "var(--text)", fontSize: 24, fontWeight: 700, marginBottom: 8, textAlign: "center" }}>
               Choose Your Exam
             </h2>
-            <p style={{ color: "#888", textAlign: "center", marginBottom: 24 }}>
+            <p style={{ color: "var(--text-muted)", textAlign: "center", marginBottom: 24 }}>
               Select the exam you're preparing for
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -179,8 +179,8 @@ export default function Onboarding() {
                     alignItems: "center",
                     gap: 16,
                     padding: "16px 20px",
-                    background: formData.exam === exam.id ? "rgba(108,60,233,0.15)" : "#1a1a1f",
-                    border: formData.exam === exam.id ? "2px solid #D4A853" : "1px solid #2a2a35",
+                    background: formData.exam === exam.id ? "var(--primary-dim)" : "var(--bg-3)",
+                    border: formData.exam === exam.id ? "2px solid var(--accent)" : "1px solid var(--border)",
                     borderRadius: 16,
                     cursor: "pointer",
                     textAlign: "left",
@@ -189,10 +189,10 @@ export default function Onboarding() {
                 >
                   <span style={{ fontSize: 24 }}>{exam.icon}</span>
                   <div style={{ flex: 1 }}>
-                    <div style={{ color: "#fff", fontWeight: 600, fontSize: 15 }}>{exam.title}</div>
-                    <div style={{ color: "#666", fontSize: 12, marginTop: 2 }}>{exam.subtitle}</div>
+                    <div style={{ color: "var(--text)", fontWeight: 600, fontSize: 15 }}>{exam.title}</div>
+                    <div style={{ color: "var(--text-muted)", fontSize: 12, marginTop: 2 }}>{exam.subtitle}</div>
                   </div>
-                  {formData.exam === exam.id && <Check size={20} color="#D4A853" />}
+                  {formData.exam === exam.id && <Check size={20} color="var(--accent)" />}
                 </button>
               ))}
             </div>
@@ -203,8 +203,8 @@ export default function Onboarding() {
                 marginTop: 24,
                 width: "100%",
                 padding: "14px 24px",
-                background: formData.exam ? "#6C3CE9" : "#333",
-                color: formData.exam ? "#fff" : "#666",
+                background: formData.exam ? "var(--primary)" : "var(--border)",
+                color: formData.exam ? "#fff" : "var(--text-muted)",
                 border: "none",
                 borderRadius: 12,
                 fontWeight: 600,
@@ -225,10 +225,10 @@ export default function Onboarding() {
         {/* Step 2: Pick Subjects */}
         {step === 2 && (
           <div style={{ animation: "fadeIn 0.4s ease" }}>
-            <h2 style={{ color: "#fff", fontSize: 24, fontWeight: 700, marginBottom: 8, textAlign: "center" }}>
+            <h2 style={{ color: "var(--text)", fontSize: 24, fontWeight: 700, marginBottom: 8, textAlign: "center" }}>
               Pick Your Subjects
             </h2>
-            <p style={{ color: "#888", textAlign: "center", marginBottom: 24 }}>
+            <p style={{ color: "var(--text-muted)", textAlign: "center", marginBottom: 24 }}>
               Select at least 3 subjects for {formData.exam?.toUpperCase()}
             </p>
             <div style={{
@@ -246,10 +246,10 @@ export default function Onboarding() {
                   onClick={() => handleSubjectToggle(subject)}
                   style={{
                     padding: "10px 16px",
-                    background: formData.subjects.includes(subject) ? "#6C3CE9" : "#1a1a1f",
-                    border: formData.subjects.includes(subject) ? "1px solid #6C3CE9" : "1px solid #2a2a35",
+                    background: formData.subjects.includes(subject) ? "var(--primary)" : "var(--bg-3)",
+                    border: formData.subjects.includes(subject) ? "1px solid var(--primary)" : "1px solid var(--border)",
                     borderRadius: 20,
-                    color: formData.subjects.includes(subject) ? "#fff" : "#ccc",
+                    color: formData.subjects.includes(subject) ? "#fff" : "var(--text-muted)",
                     fontSize: 13,
                     fontWeight: 500,
                     cursor: "pointer",
@@ -265,7 +265,7 @@ export default function Onboarding() {
                 </button>
               ))}
             </div>
-            <div style={{ textAlign: "center", marginTop: 16, color: formData.subjects.length >= 3 ? "#00E5A0" : "#666", fontSize: 14 }}>
+            <div style={{ textAlign: "center", marginTop: 16, color: formData.subjects.length >= 3 ? "var(--success)" : "var(--text-muted)", fontSize: 14 }}>
               {formData.subjects.length} selected
             </div>
             <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
@@ -275,9 +275,9 @@ export default function Onboarding() {
                   flex: 1,
                   padding: "14px 24px",
                   background: "transparent",
-                  border: "1px solid #333",
+                  border: "1px solid var(--border)",
                   borderRadius: 12,
-                  color: "#fff",
+                  color: "var(--text)",
                   fontWeight: 600,
                   cursor: "pointer",
                 }}
@@ -290,8 +290,8 @@ export default function Onboarding() {
                 style={{
                   flex: 1,
                   padding: "14px 24px",
-                  background: canProceedStep2() ? "#6C3CE9" : "#333",
-                  color: canProceedStep2() ? "#fff" : "#666",
+                  background: canProceedStep2() ? "var(--primary)" : "var(--border)",
+                  color: canProceedStep2() ? "#fff" : "var(--text-muted)",
                   border: "none",
                   borderRadius: 12,
                   fontWeight: 600,
@@ -311,10 +311,10 @@ export default function Onboarding() {
         {/* Step 3: Target Score */}
         {step === 3 && (
           <div style={{ animation: "fadeIn 0.4s ease" }}>
-            <h2 style={{ color: "#fff", fontSize: 24, fontWeight: 700, marginBottom: 8, textAlign: "center" }}>
+            <h2 style={{ color: "var(--text)", fontSize: 24, fontWeight: 700, marginBottom: 8, textAlign: "center" }}>
               Set Your Target
             </h2>
-            <p style={{ color: "#888", textAlign: "center", marginBottom: 32 }}>
+            <p style={{ color: "var(--text-muted)", textAlign: "center", marginBottom: 32 }}>
               {formData.exam === "jamb" ? "What's your target JAMB score?" : "What's your target grade?"}
             </p>
 
@@ -341,22 +341,11 @@ export default function Onboarding() {
                     height: 8,
                     borderRadius: 4,
                     appearance: "none",
-                    background: `linear-gradient(to right, #FF4D6A 0%, #FF9F43 33%, #00E5A0 66%, #D4A853 100%)`,
+                    background: `linear-gradient(to right, var(--danger) 0%, #FF9F43 33%, var(--success) 66%, var(--accent) 100%)`,
                     cursor: "pointer",
                     outline: "none",
                   }}
                 />
-                <style>{`
-                  input[type="range"]::-webkit-slider-thumb {
-                    appearance: none;
-                    width: 24px;
-                    height: 24px;
-                    background: #fff;
-                    border-radius: 50%;
-                    cursor: pointer;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-                  }
-                `}</style>
                 <p style={{
                   textAlign: "center",
                   marginTop: 16,
@@ -380,10 +369,10 @@ export default function Onboarding() {
                     onClick={() => setFormData({ ...formData, targetGrade: grade })}
                     style={{
                       padding: "16px",
-                      background: formData.targetGrade === grade ? "rgba(108,60,233,0.15)" : "#1a1a1f",
-                      border: formData.targetGrade === grade ? "2px solid #6C3CE9" : "1px solid #2a2a35",
+                      background: formData.targetGrade === grade ? "var(--primary-dim)" : "var(--bg-3)",
+                      border: formData.targetGrade === grade ? "2px solid var(--primary)" : "1px solid var(--border)",
                       borderRadius: 12,
-                      color: formData.targetGrade === grade ? "#fff" : "#ccc",
+                      color: formData.targetGrade === grade ? "var(--text)" : "var(--text-muted)",
                       fontSize: 20,
                       fontWeight: 700,
                       cursor: "pointer",
@@ -391,7 +380,7 @@ export default function Onboarding() {
                     }}
                   >
                     {grade}
-                    <div style={{ fontSize: 10, fontWeight: 400, marginTop: 4, color: "#666" }}>
+                    <div style={{ fontSize: 10, fontWeight: 400, marginTop: 4, color: "var(--text-muted)" }}>
                       {grade === "A" ? "Excellent" : grade === "B" ? "Very Good" : grade === "C" ? "Good" : grade === "D" ? "Pass" : "Needs Work"}
                     </div>
                   </button>
@@ -406,9 +395,9 @@ export default function Onboarding() {
                   flex: 1,
                   padding: "14px 24px",
                   background: "transparent",
-                  border: "1px solid #333",
+                  border: "1px solid var(--border)",
                   borderRadius: 12,
-                  color: "#fff",
+                  color: "var(--text)",
                   fontWeight: 600,
                   cursor: "pointer",
                 }}
@@ -420,7 +409,7 @@ export default function Onboarding() {
                 style={{
                   flex: 1,
                   padding: "14px 24px",
-                  background: "#6C3CE9",
+                  background: "var(--primary)",
                   color: "#fff",
                   border: "none",
                   borderRadius: 12,
@@ -445,7 +434,7 @@ export default function Onboarding() {
               width: 100,
               height: 100,
               margin: "0 auto 24px",
-              background: "linear-gradient(135deg, #6C3CE9 0%, #D4A853 100%)",
+              background: "linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)",
               borderRadius: 24,
               display: "flex",
               alignItems: "center",
@@ -453,13 +442,13 @@ export default function Onboarding() {
             }}>
               <BookOpen size={48} color="#fff" />
             </div>
-            <h2 style={{ color: "#fff", fontSize: 28, fontWeight: 800, marginBottom: 12 }}>
+            <h2 style={{ color: "var(--text)", fontSize: 28, fontWeight: 800, marginBottom: 12 }}>
               You're all set, {user?.displayName?.split(" ")[0] || "Student"} 🚀
             </h2>
-            <p style={{ color: "#888", fontSize: 16, marginBottom: 8 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: 16, marginBottom: 8 }}>
               Your personalized study plan is ready.
             </p>
-            <p style={{ color: "#6C3CE9", fontSize: 18, fontWeight: 600, marginBottom: 32 }}>
+            <p style={{ color: "var(--primary)", fontSize: 18, fontWeight: 600, marginBottom: 32 }}>
               Let's crush that {formData.exam === "jamb" ? `${formData.targetScore} score` : `${formData.targetGrade} grade`}!
             </p>
             <button
@@ -467,8 +456,8 @@ export default function Onboarding() {
               disabled={loading}
               style={{
                 padding: "16px 32px",
-                background: "linear-gradient(135deg, #D4A853 0%, #B8933F 100%)",
-                color: "#0a0a0f",
+                background: "var(--landing-gradient-2)",
+                color: "#fff",
                 border: "none",
                 borderRadius: 14,
                 fontSize: 16,

@@ -359,28 +359,6 @@ export default function Dashboard() {
       {/* Pro Upgrade Modal */}
       <ProUpgradeModal open={showProModal} onClose={() => setShowProModal(false)} dismissible />
 
-      {/* Mobile Nav */}
-      <div className="mobile-nav" style={{
-        position: "fixed", bottom: 0, left: 0, right: 0, background: "#0d0d12", borderTop: "1px solid #1e1e2a",
-        padding: "12px 24px", display: "flex", justifyContent: "space-around", zIndex: 100
-      }}>
-         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: location.pathname === "/dashboard" ? "#6C3CE9" : "#666" }}>
-            <LayoutDashboard size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Home</span>
-         </div>
-         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/practice-select")}>
-            <BookOpen size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Practice</span>
-         </div>
-         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/question-bank")}>
-            <Library size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>QBank</span>
-         </div>
-         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/ai-tutor")}>
-            <Brain size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>AI</span>
-         </div>
-         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", color: "#666" }} onClick={() => navigate("/profile")}>
-            <Settings size={20} /> <span style={{ fontSize: 10, marginTop: 4 }}>Settings</span>
-         </div>
-      </div>
-
     </div>
   );
 }

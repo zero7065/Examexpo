@@ -7,6 +7,7 @@ import { AuthProvider } from './context/AuthContext'
 import { initMonitoring } from './lib/monitoring'
 import { isAdmin } from './lib/activityLog'
 import './index.css'
+// App.css was removed — all styles are in index.css
 
 // Init Sentry monitoring (reads VITE_SENTRY_DSN)
 initMonitoring();

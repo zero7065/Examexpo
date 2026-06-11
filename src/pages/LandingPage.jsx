@@ -9,12 +9,12 @@ import {
 } from "lucide-react";
 
 const features = [
-  { icon: BookOpen, title: "Real Past Questions", description: "Thousands of JAMB, WAEC & NABTEB questions from 2014–2026 with detailed AI explanations.", color: "#6C3CE9" },
-  { icon: Brain, title: "AI Tutor", description: "Get instant step-by-step explanations. Ask anything, anytime.", color: "#00E5A0" },
-  { icon: GraduationCap, title: "CBT Simulator", description: "Real exam environment with timed sessions and instant scoring.", color: "#D4A853" },
-  { icon: TrendingUp, title: "Smart Analytics", description: "Track your strengths, weaknesses, and improvement over time.", color: "#FF9F43" },
-  { icon: Trophy, title: "Gamified Learning", description: "Earn XP, badges, and compete on leaderboards. Stay motivated.", color: "#FF4D6A" },
-  { icon: Target, title: "Study Plans", description: "Personalized study schedules tailored to your exam date.", color: "#00B4D8" },
+  { icon: BookOpen, title: "Real Past Questions", description: "Thousands of JAMB, WAEC & NABTEB questions from 2014–2026 with detailed AI explanations.", color: "#5a7a5a" },
+  { icon: Brain, title: "AI Tutor", description: "Get instant step-by-step explanations. Ask anything, anytime.", color: "#5a8a5a" },
+  { icon: GraduationCap, title: "CBT Simulator", description: "Real exam environment with timed sessions and instant scoring.", color: "#8a7a5a" },
+  { icon: TrendingUp, title: "Smart Analytics", description: "Track your strengths, weaknesses, and improvement over time.", color: "#7a8a5a" },
+  { icon: Trophy, title: "Gamified Learning", description: "Earn XP, badges, and compete on leaderboards. Stay motivated.", color: "#9a6a5a" },
+  { icon: Target, title: "Study Plans", description: "Personalized study schedules tailored to your exam date.", color: "#5a7a7a" },
 ];
 
 const stats = [
@@ -97,7 +97,7 @@ function StarRating({ rating }) {
   return (
     <div style={{ display: "flex", gap: 2 }}>
       {Array.from({ length: 5 }, (_, i) => (
-        <Star key={i} size={14} fill={i < rating ? "#D4A853" : "none"} color={i < rating ? "#D4A853" : "#333"} />
+        <Star key={i} size={14} fill={i < rating ? "var(--lp-accent)" : "none"} color={i < rating ? "var(--lp-accent)" : "#d4d4d0"} />
       ))}
     </div>
   );
@@ -113,17 +113,17 @@ export default function LandingPage() {
     <div className="landing-page">
       <style>{`
         .landing-page {
-          --lp-bg: #f8f9fc;
+          --lp-bg: #f4f4f0;
           --lp-surface: #ffffff;
-          --lp-text: #0f172a;
-          --lp-text-secondary: #475569;
-          --lp-primary: #6C3CE9;
-          --lp-primary-light: #8B5CF6;
-          --lp-accent: #D4A853;
-          --lp-border: #e2e8f0;
-          --lp-gradient-1: linear-gradient(135deg, #6C3CE9, #a855f7);
-          --lp-gradient-2: linear-gradient(135deg, #D4A853, #f59e0b);
-          --lp-gradient-3: linear-gradient(135deg, #00E5A0, #10b981);
+          --lp-text: #1a1a1a;
+          --lp-text-secondary: #6b6b6b;
+          --lp-primary: #5a7a5a;
+          --lp-primary-light: #7a9a6a;
+          --lp-accent: #8a7a5a;
+          --lp-border: #d4d4d0;
+          --lp-gradient-1: linear-gradient(135deg, #5a7a5a, #7a9a6a);
+          --lp-gradient-2: linear-gradient(135deg, #8a7a5a, #a0906a);
+          --lp-gradient-3: linear-gradient(135deg, #5a8a5a, #7aaa7a);
           font-family: 'Inter', system-ui, sans-serif;
           background: var(--lp-bg);
           color: var(--lp-text);
@@ -145,8 +145,8 @@ export default function LandingPage() {
           50% { transform: translateY(-12px); }
         }
         @keyframes lpPulseGlow {
-          0%, 100% { box-shadow: 0 0 20px rgba(108,60,233,0.3); }
-          50% { box-shadow: 0 0 40px rgba(108,60,233,0.6); }
+          0%, 100% { box-shadow: 0 0 20px rgba(90,122,90,0.3); }
+          50% { box-shadow: 0 0 40px rgba(90,122,90,0.6); }
         }
         @keyframes lpShimmer {
           0% { background-position: -200% center; }
@@ -225,7 +225,7 @@ export default function LandingPage() {
                   color: "var(--lp-text-secondary)", textDecoration: "none",
                   transition: "all 0.2s",
                 }}
-                  onMouseOver={e => e.currentTarget.style.background = "rgba(108,60,233,0.08)"}
+                  onMouseOver={e => e.currentTarget.style.background = "rgba(90,122,90,0.08)"}
                   onMouseOut={e => e.currentTarget.style.background = "transparent"}
                 >{item}</a>
               ))}
@@ -262,17 +262,17 @@ export default function LandingPage() {
       {/* ─── HERO ─── */}
       <section style={{
         padding: "160px 0 80px",
-        background: "linear-gradient(180deg, #f0eaff 0%, var(--lp-bg) 100%)",
+        background: "linear-gradient(180deg, #eef4ea 0%, var(--lp-bg) 100%)",
         position: "relative", overflow: "hidden",
       }}>
         <div style={{
           position: "absolute", top: -100, right: -100, width: 400, height: 400,
-          borderRadius: "50%", background: "radial-gradient(circle, rgba(108,60,233,0.12) 0%, transparent 70%)",
+          borderRadius: "50%", background: "radial-gradient(circle, rgba(90,122,90,0.12) 0%, transparent 70%)",
           pointerEvents: "none",
         }} />
         <div style={{
           position: "absolute", bottom: -60, left: -60, width: 300, height: 300,
-          borderRadius: "50%", background: "radial-gradient(circle, rgba(212,168,83,0.1) 0%, transparent 70%)",
+          borderRadius: "50%", background: "radial-gradient(circle, rgba(138,122,90,0.1) 0%, transparent 70%)",
           pointerEvents: "none",
         }} />
         <div className="lp-container" style={{ position: "relative", zIndex: 1 }}>
@@ -280,7 +280,7 @@ export default function LandingPage() {
             <div className="lp-animate-in" style={{
               display: "inline-flex", alignItems: "center", gap: 6,
               padding: "6px 16px 6px 6px", borderRadius: 100,
-              background: "rgba(108,60,233,0.1)", border: "1px solid rgba(108,60,233,0.2)",
+              background: "rgba(90,122,90,0.1)", border: "1px solid rgba(90,122,90,0.2)",
               marginBottom: 24, fontSize: 13, fontWeight: 600, color: "var(--lp-primary)",
             }}>
               <span style={{
@@ -309,11 +309,11 @@ export default function LandingPage() {
                   display: "inline-flex", alignItems: "center", gap: 8,
                   padding: "16px 32px", borderRadius: 14, fontSize: 16, fontWeight: 700,
                   background: "var(--lp-gradient-1)", color: "#fff", textDecoration: "none",
-                  boxShadow: "0 8px 32px rgba(108,60,233,0.3)",
+                  boxShadow: "0 8px 32px rgba(90,122,90,0.3)",
                   transition: "all 0.2s",
                 }}
-                  onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 40px rgba(108,60,233,0.4)"; }}
-                  onMouseOut={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(108,60,233,0.3)"; }}
+                  onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 40px rgba(90,122,90,0.4)"; }}
+                  onMouseOut={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(90,122,90,0.3)"; }}
                 >
                   Go to Dashboard <ArrowRight size={18} />
                 </Link>
@@ -323,11 +323,11 @@ export default function LandingPage() {
                     display: "inline-flex", alignItems: "center", gap: 8,
                     padding: "16px 32px", borderRadius: 14, fontSize: 16, fontWeight: 700,
                     background: "var(--lp-gradient-1)", color: "#fff", textDecoration: "none",
-                    boxShadow: "0 8px 32px rgba(108,60,233,0.3)",
+                    boxShadow: "0 8px 32px rgba(90,122,90,0.3)",
                     transition: "all 0.2s",
                   }}
-                    onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 40px rgba(108,60,233,0.4)"; }}
-                    onMouseOut={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(108,60,233,0.3)"; }}
+                    onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 40px rgba(90,122,90,0.4)"; }}
+                    onMouseOut={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(90,122,90,0.3)"; }}
                   >
                     Start Free <ArrowRight size={18} />
                   </Link>
@@ -338,7 +338,7 @@ export default function LandingPage() {
                     border: "1px solid var(--lp-border)",
                     transition: "all 0.2s",
                   }}
-                    onMouseOver={e => { e.currentTarget.style.borderColor = "var(--lp-primary)"; e.currentTarget.style.background = "rgba(108,60,233,0.04)"; }}
+                    onMouseOver={e => { e.currentTarget.style.borderColor = "var(--lp-primary)"; e.currentTarget.style.background = "rgba(90,122,90,0.04)"; }}
                     onMouseOut={e => { e.currentTarget.style.borderColor = "var(--lp-border)"; e.currentTarget.style.background = "var(--lp-surface)"; }}
                   >
                     Learn More
@@ -394,7 +394,7 @@ export default function LandingPage() {
               </div>
             ))}
             <div className="lp-bento-wide lp-animate-in lp-delay-3" style={{
-              background: "linear-gradient(135deg, #6C3CE9, #a855f7)", borderRadius: 20,
+              background: "var(--lp-gradient-1)", borderRadius: 20,
               padding: 32, color: "#fff", position: "relative", overflow: "hidden",
             }}>
               <div style={{ position: "relative", zIndex: 1 }}>
@@ -480,7 +480,7 @@ export default function LandingPage() {
                   background: "var(--lp-gradient-1)", color: "#fff",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: 20, fontWeight: 900, margin: "0 auto 20px",
-                  boxShadow: "0 8px 24px rgba(108,60,233,0.25)",
+                  boxShadow: "0 8px 24px rgba(90,122,90,0.25)",
                 }}>{item.step}</div>
                 <item.icon size={28} color="var(--lp-primary)" style={{ marginBottom: 12 }} />
                 <h3 style={{ fontSize: 18, fontWeight: 700, margin: "0 0 8px" }}>{item.title}</h3>
@@ -531,7 +531,7 @@ export default function LandingPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, maxWidth: 960, margin: "0 auto" }}>
             {plans.map((plan, i) => (
               <div key={plan.name} className={`lp-animate-in ${`lp-delay-${i + 1}`}`} style={{
-                background: plan.popular ? "linear-gradient(135deg, #6C3CE9, #a855f7)" : "var(--lp-surface)",
+                background: plan.popular ? "var(--lp-gradient-1)" : "var(--lp-surface)",
                 borderRadius: 20, padding: 32,
                 border: plan.popular ? "none" : "1px solid var(--lp-border)",
                 position: "relative", overflow: "hidden",
@@ -616,7 +616,7 @@ export default function LandingPage() {
 
       {/* ─── FINAL CTA ─── */}
       <section className="lp-section" style={{
-        background: "linear-gradient(135deg, #6C3CE9, #a855f7)",
+        background: "var(--lp-gradient-1)",
         textAlign: "center", color: "#fff",
       }}>
         <div className="lp-container">

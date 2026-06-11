@@ -6,6 +6,7 @@ import {
   signOut,
   updateProfile,
   sendPasswordResetEmail,
+  deleteUser,
 } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
@@ -34,18 +35,26 @@ export function AuthProvider({ children }) {
       if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
         throw new Error("Firebase Email/Password auth is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Email/Password.");
       }
+      if (e.code === 'auth/email-already-in-use') {
+        throw e;
+      }
       throw e;
     }
-    await updateProfile(cred.user, { displayName: name });
-    await setDoc(doc(db, "users", cred.user.uid), {
-      email,
-      name,
-      role: "user",
-      exam: null,
-      subjects: [],
-      onboarded: false,
-      createdAt: serverTimestamp(),
-    }, { merge: true });
+    try {
+      await updateProfile(cred.user, { displayName: name });
+      await setDoc(doc(db, "users", cred.user.uid), {
+        email,
+        name,
+        role: "user",
+        exam: null,
+        subjects: [],
+        onboarded: false,
+        createdAt: serverTimestamp(),
+      }, { merge: true });
+    } catch (e) {
+      try { await deleteUser(cred.user); } catch (_) {}
+      throw new Error("Failed to create profile. Please try again.");
+    }
     setUser({ ...cred.user, displayName: name });
     logActivity({ action: "register", userId: cred.user.uid, email, details: { name } });
   }

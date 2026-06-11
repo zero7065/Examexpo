@@ -4,7 +4,6 @@ import { StudyProvider } from "./context/StudyContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
-import BottomNav from "./components/BottomNav";
 import ScrollToTop from "./components/ScrollToTop";
 import InstallPrompt from "./components/InstallPrompt";
 import { useAuth } from "./context/AuthContext";
@@ -84,7 +83,7 @@ function AuthAwareRoutes() {
     <div className="flex flex-col md:flex-row min-h-screen bg-bg text-text selection:bg-primary/30">
       <Navbar />
       <ScrollToTop />
-      <main key={location.pathname} className={`flex-1 ${location.pathname === "/" ? "" : "md:ml-64 pb-20 md:pb-0"} animate-fade`}>
+      <main className={`flex-1 ${location.pathname === "/" ? "" : "md:ml-64 pb-20 md:pb-0"} animate-fade`}>
         <InstallPrompt />
         <Suspense fallback={<PageLoader />}>
         <Routes>
@@ -126,7 +125,6 @@ function AuthAwareRoutes() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         </Suspense>
-        <BottomNav />
       </main>
     </div>
   );
