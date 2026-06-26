@@ -1,0 +1,67 @@
+import { doc, setDoc, collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
+
+let pending = [];
+
+export function queueFirestoreWrite(path, data) {
+  if (navigator.onLine) {
+    try {
+      setDoc(doc(db, path), data);
+      return;
+    } catch (e) {
+      console.warn('Firestore write failed, queueing:', e);
+    }
+  }
+  pending.push({ path, data, timestamp: Date.now() });
+  localStorage.setItem('exampadi_offline_queue', JSON.stringify(pending));
+}
+
+export function queueFirestoreAdd(collectionPath, data) {
+  if (navigator.onLine) {
+    try {
+      addDoc(collection(db, collectionPath), data);
+      return;
+    } catch (e) {
+      console.warn('Firestore add failed, queueing:', e);
+    }
+  }
+  pending.push({ collectionPath, data, timestamp: Date.now(), isAdd: true });
+  localStorage.setItem('exampadi_offline_queue', JSON.stringify(pending));
+}
+
+export function flushQueue() {
+  if (pending.length === 0) {
+    const saved = localStorage.getItem('exampadi_offline_queue');
+    if (saved) {
+      try { pending = JSON.parse(saved); } catch { pending = []; }
+    }
+  }
+  if (!navigator.onLine || pending.length === 0) return;
+
+  const failed = [];
+
+  pending.forEach(op => {
+    try {
+      if (op.isAdd) {
+        addDoc(collection(db, op.collectionPath), op.data);
+      } else {
+        setDoc(doc(db, op.path), op.data);
+      }
+    } catch {
+      failed.push(op);
+    }
+  });
+
+  pending = failed;
+  localStorage.setItem('exampadi_offline_queue', JSON.stringify(pending));
+}
+
+// Auto-flush when back online
+if (typeof window !== 'undefined') {
+  window.addEventListener('online', flushQueue);
+
+  const saved = localStorage.getItem('exampadi_offline_queue');
+  if (saved) {
+    try { pending = JSON.parse(saved); } catch { pending = []; }
+  }
+}
