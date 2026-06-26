@@ -1,0 +1,84 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Student profile and progress data",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "xp": { "type": "number", "description": "Total experience points" },
+        "streakCount": { "type": "number" },
+        "lastActiveDate": { "type": "string", "format": "date-time" },
+        "subjects": { 
+          "type": "array", 
+          "items": { "type": "string" },
+          "description": "Subjects the student is registered for (e.g., Mathematics, English)"
+        },
+        "subscriptionStatus": { "type": "string", "enum": ["free", "premium"] },
+        "whatsappNumber": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Diagnostic": {
+      "title": "Diagnostic",
+      "description": "Initial assessment results to identify weaknesses",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "subject": { "type": "string" },
+        "scores": { 
+          "type": "object",
+          "description": "Topic-wise scores in percentage"
+        },
+        "weakTopics": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Question": {
+      "title": "Question",
+      "description": "JAMB/WAEC question pool",
+      "type": "object",
+      "properties": {
+        "text": { "type": "string" },
+        "options": { "type": "array", "items": { "type": "string" } },
+        "correctOption": { "type": "number" },
+        "explanation": { "type": "string" },
+        "subject": { "type": "string" },
+        "topic": { "type": "string" },
+        "difficulty": { "type": "number", "description": "1 (easy) to 5 (hard)" }
+      }
+    },
+    "DailyQuestion": {
+      "title": "DailyQuestion",
+      "description": "Questions sent via WhatsApp for reinforcement",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "questionId": { "type": "string" },
+        "sentAt": { "type": "string", "format": "date-time" },
+        "answered": { "type": "boolean" },
+        "isCorrect": { "type": "boolean" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data"
+    },
+    "/users/{userId}/diagnostics/{diagnosticId}": {
+      "schema": "Diagnostic",
+      "description": "Assessment history"
+    },
+    "/questions/{questionId}": {
+      "schema": "Question",
+      "description": "Bank of practice questions"
+    },
+    "/daily_questions/{logId}": {
+      "schema": "DailyQuestion",
+      "description": "WhatsApp interaction logs"
+    }
+  }
+}

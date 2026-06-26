@@ -1,0 +1,6 @@
+{
+  "name": "Sidekick",
+  "description": "AI-powered JAMB/WAEC tutor with adaptive learning, diagnostics, XP tracking, and WhatsApp integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
