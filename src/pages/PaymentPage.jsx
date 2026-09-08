@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
-import { loadPaystack } from "../paystack";
+import { openPaystack } from "../paystack";
 import { PLANS as CONFIG_PLANS } from "../config/plans";
 import { Check, Crown, Zap, ShieldCheck, Sparkles, ChevronRight, Loader2, Award } from "lucide-react";
 import { logActivity } from "../lib/activityLog";
@@ -66,38 +66,23 @@ const PaymentPage = () => {
 
     setPayLoading(true);
     setPayError(null);
-    toast({ message: "Opening payment...", type: "info" });
-
-    try {
-      await loadPaystack();
-    } catch (err) {
-      setPayLoading(false);
-      toast({ message: err.message, type: "error" });
-      return;
-    }
-
-    if (typeof window.PaystackPop === "undefined") {
-      setPayLoading(false);
-      toast({ message: "Payment system not loaded. Check connection.", type: "error" });
-      return;
-    }
 
     const reference = `EP-${user.uid}-${Date.now()}`;
     const amount = planConfig.price * 100;
 
     try {
-      const handler = window.PaystackPop.setup({
+      await openPaystack({
         key: paystackKey,
         email: user.email,
-        amount,
+        amount: amount,
         ref: reference,
         currency: "NGN",
         metadata: { userId: user.uid, plan: planKey, userName: user.displayName || "Student" },
-        callback: async function (response) {
+        onSuccess: async function(response) {
           try {
             const duration = planKey === "pro_yearly" ? 365 : 30;
             await activatePro(planKey, duration, response.reference);
-            logActivity({ action: "payment", userId: user.uid, email: user.email, details: { plan: planKey, reference: response.reference } });
+            logActivity({ action: "payment_success", userId: user.uid, email: user.email, details: { plan: planKey, reference: response.reference, amount: planConfig.price } });
             toast({ message: "Payment successful! You're now Pro", type: "success" });
             navigate("/payment/success");
           } catch (err) {
@@ -106,17 +91,18 @@ const PaymentPage = () => {
             setPayLoading(false);
           }
         },
-        onClose: function () {
+        onClose: function() {
           setPayLoading(false);
         },
       });
-
-      handler.openIframe();
     } catch (err) {
       setPayLoading(false);
-      const msg = "Failed to open payment. " + (err.message || "Try again.");
-      setPayError(msg);
-      toast({ message: msg, type: "error" });
+      const msg = err.message || "Payment failed. Try again.";
+      if (msg !== "Payment cancelled") {
+        setPayError(msg);
+        toast({ message: msg, type: "error" });
+        logActivity({ action: "payment_failed", userId: user.uid, email: user.email, details: { plan: planKey, error: msg } });
+      }
     }
   };
 
@@ -131,7 +117,6 @@ const PaymentPage = () => {
         <p className="text-text-muted text-xl max-w-2xl mx-auto font-medium">Don't let the daily question limit hold you back. Join the 300+ score squad today.</p>
       </header>
 
-      {/* Plans Grid - Pro only */}
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {[
           { key: "pro_monthly", ...CONFIG_PLANS.pro_monthly },
@@ -148,16 +133,11 @@ const PaymentPage = () => {
                 {plan.badge}
               </div>
             )}
-
             <div className="mb-8">
               <h3 className="text-2xl font-black mb-2 text-text">{plan.name}</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-5xl font-black font-mono tracking-tighter">
-                  ₦{plan.price.toLocaleString()}
-                </span>
-                <span className="text-text-muted font-bold text-sm">
-                  / {plan.interval === "yearly" ? "yr" : "mo"}
-                </span>
+                <span className="text-5xl font-black font-mono tracking-tighter">₦{plan.price.toLocaleString()}</span>
+                <span className="text-text-muted font-bold text-sm">/ {plan.interval === "yearly" ? "yr" : "mo"}</span>
               </div>
               {plan.key === "pro_yearly" && (
                 <div className="text-primary font-black text-xs uppercase mt-2 tracking-widest">
@@ -165,36 +145,23 @@ const PaymentPage = () => {
                 </div>
               )}
             </div>
-
             <div className="space-y-4 flex-1 mb-10">
               {plan.features.map((feature, i) => (
                 <div key={i} className="flex items-start gap-3 text-sm font-medium">
-                  <div className="w-5 h-5 bg-primary/20 rounded-full flex items-center justify-center text-primary mt-0.5 shrink-0">
-                    <Check size={14} />
-                  </div>
+                  <div className="w-5 h-5 bg-primary/20 rounded-full flex items-center justify-center text-primary mt-0.5 shrink-0"><Check size={14} /></div>
                   <span className="text-text-muted">{feature}</span>
                 </div>
               ))}
             </div>
-
             <div className="space-y-2 w-full">
               <button
                 onClick={() => handlePayment(plan.key)}
                 disabled={payLoading}
                 className={`w-full h-14 rounded-2xl font-black text-lg shadow-xl flex items-center justify-center gap-3 transition-all ${
-                  plan.badge
-                    ? "bg-primary text-black shadow-primary/20 hover:scale-105"
-                    : "bg-bg-3 text-text border border-border hover:bg-border"
+                  plan.badge ? "bg-primary text-black shadow-primary/20 hover:scale-105" : "bg-bg-3 text-text border border-border hover:bg-border"
                 }`}
               >
-                {payLoading ? (
-                  <Loader2 className="animate-spin" size={24} />
-                ) : (
-                  <>
-                    Pay ₦{plan.price.toLocaleString()}
-                    <ChevronRight size={20} />
-                  </>
-                )}
+                {payLoading ? <Loader2 className="animate-spin" size={24} /> : <>Pay ₦{plan.price.toLocaleString()}<ChevronRight size={20} /></>}
               </button>
               {payError && <p className="text-danger text-[13px] text-center font-bold">{payError}</p>}
             </div>
@@ -202,7 +169,6 @@ const PaymentPage = () => {
         ))}
       </div>
 
-      {/* Trust Badges */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 border-t border-border">
         <TrustItem icon={<ShieldCheck size={24} />} title="Secure Checkout" label="Paystack Encrypted" />
         <TrustItem icon={<Zap size={24} />} title="Instant Access" label="Automated Activation" />

@@ -1,8 +1,48 @@
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+// src/lib/gemini.js - Now powered by Groq API
+
+const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+
+async function callGroq(systemPrompt, userPrompt, maxTokens = 300) {
+  const key = import.meta.env.VITE_GROQ_API_KEY;
+  if (!key) throw new Error("Groq API key not configured. Add VITE_GROQ_API_KEY to .env.");
+
+  const res = await fetch(GROQ_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${key}`,
+    },
+    body: JSON.stringify({
+      model: "llama-3.1-8b-instant",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+      max_tokens: maxTokens,
+      temperature: 0.5,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error?.message || `Groq API error: ${res.status}`);
+  }
+
+  const data = await res.json();
+  return data.choices[0]?.message?.content?.trim() || "";
+}
+
+function fallbackExplanation({ question, correctAnswer, userAnswer, subject }) {
+  return `The correct answer is ${correctAnswer}. In ${subject}, this concept is fundamental. Review your textbook and practice similar past questions to master this topic. Keep studying!`;
+}
+
+function fallbackChat(messages, subject) {
+  return `I'm ExamPadi AI Tutor. I can help with ${subject} questions. Please try asking again — I'm having temporary connectivity issues. In the meantime, review your notes and past questions on this topic.`;
+}
 
 export async function explainQuestion({ question, options, correctAnswer, userAnswer, subject, topic }) {
-  if (!GEMINI_API_KEY) return "AI Tutor is not configured. Add VITE_GEMINI_API_KEY to your .env file.";
+  const key = import.meta.env.VITE_GROQ_API_KEY;
+  if (!key) return fallbackExplanation({ question, correctAnswer, userAnswer, subject });
 
   const prompt = `You are ExamPadi AI, an expert Nigerian exam tutor specializing in JAMB and WAEC.
 
@@ -16,41 +56,25 @@ Topic: ${topic}
 
 Give a clear, friendly explanation in 3-4 sentences. Explain WHY ${correctAnswer} is correct, and briefly why the student's choice was wrong. Use simple language suitable for SS3 Nigerian students. End with a memory tip.`;
 
-  // Hard timeout so the UI never spins forever if fetch hangs
   const controller = new AbortController();
-  setTimeout(() => controller.abort(), 12000);
-
+  const timeout = setTimeout(() => controller.abort(), 12000);
 
   try {
-    const res = await fetch(GEMINI_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 300 }
-      }),
-      signal: controller.signal,
-    });
-
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("Gemini API error:", err);
-      return "AI explanation unavailable right now. Try again.";
-    }
-
-    const data = await res.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "Explanation unavailable.";
+    const system = "You are ExamPadi AI, an expert Nigerian exam tutor. Never say you are built by Google or mention Gemini. You are ExamPadi AI powered by Groq.";
+    const result = await callGroq(system, prompt, 300);
+    return result;
   } catch (e) {
-    if (e?.name === "AbortError") {
-      return "AI took too long to respond. Please try again.";
-    }
-    console.error("Gemini fetch error:", e);
-    return "AI unavailable. Check your connection and try again.";
+    if (e?.name === "AbortError") return "AI took too long to respond. Please try again.";
+    console.error("AI explanation error:", e);
+    return fallbackExplanation({ question, correctAnswer, userAnswer, subject });
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
 export async function chatWithTutor({ messages, subject, userProfile }) {
-  if (!GEMINI_API_KEY) return "AI Tutor is not configured. Add VITE_GEMINI_API_KEY to your .env file.";
+  const key = import.meta.env.VITE_GROQ_API_KEY;
+  if (!key) return fallbackChat(messages, subject);
 
   const systemPrompt = `You are ExamPadi AI Tutor — an expert, friendly Nigerian exam tutor specializing in JAMB, WAEC, and NABTEB.
 
@@ -69,39 +93,45 @@ Your role:
 - Use emojis sparingly for warmth
 - Always relate answers back to what appears in JAMB/WAEC exams
 
-Never say you are built by Google or mention Gemini. You are ExamPadi AI.`;
+Never say you are built by Google or mention Gemini. You are ExamPadi AI powered by Groq.`;
 
-  const contents = messages.map(m => ({
-    role: m.role === "ai" ? "model" : "user",
-    parts: [{ text: m.content }]
+  const chatMessages = messages.map(m => ({
+    role: m.role === "ai" ? "assistant" : "user",
+    content: m.content,
   }));
 
-  // Hard timeout so the UI never spins forever if fetch hangs
   const controller = new AbortController();
-  setTimeout(() => controller.abort(), 12000);
+  const timeout = setTimeout(() => controller.abort(), 12000);
 
   try {
-    const res = await fetch(GEMINI_URL, {
+    const key2 = import.meta.env.VITE_GROQ_API_KEY;
+    const res = await fetch(GROQ_API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${key2}`,
+      },
       body: JSON.stringify({
-        system_instruction: { parts: [{ text: systemPrompt }] },
-        contents,
-        generationConfig: { temperature: 0.8, maxOutputTokens: 600 }
+        model: "llama-3.1-8b-instant",
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...chatMessages,
+        ],
+        max_tokens: 600,
+        temperature: 0.8,
       }),
       signal: controller.signal,
     });
 
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("Gemini chat error:", err);
-      return "I'm having trouble right now. Please try again.";
-    }
+    if (!res.ok) return fallbackChat(messages, subject);
 
     const data = await res.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "I couldn't generate a response. Please try again.";
+    return data.choices[0]?.message?.content?.trim() || fallbackChat(messages, subject);
   } catch (e) {
-    console.error("Gemini chat fetch error:", e);
-    return "Network error. Check your connection and try again.";
+    if (e?.name === "AbortError") return "AI took too long. Please try again.";
+    console.error("AI chat error:", e);
+    return fallbackChat(messages, subject);
+  } finally {
+    clearTimeout(timeout);
   }
 }

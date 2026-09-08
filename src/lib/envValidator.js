@@ -7,15 +7,14 @@ const REQUIRED_ENVS = {
   VITE_FIREBASE_API_KEY: { required: false, desc: 'Firebase API Key for auth/database' },
   VITE_FIREBASE_AUTH_DOMAIN: { required: false, desc: 'Firebase auth domain' },
   VITE_FIREBASE_PROJECT_ID: { required: false, desc: 'Firebase project ID' },
-  VITE_GEMINI_API_KEY: { required: false, desc: 'Google Gemini API key for AI explanations' },
-  VITE_GROQ_API_KEY: { required: false, desc: 'Groq API key for AI tutor (fallback)' },
+  VITE_GROQ_API_KEY: { required: false, desc: 'Groq API key for AI tutor and explanations' },
   VITE_PAYSTACK_PUBLIC_KEY: { required: false, desc: 'Paystack public sandbox/live key for payments' },
   VITE_SENTRY_DSN: { required: false, desc: 'Sentry DSN for error tracking' },
   VITE_GA_MEASUREMENT_ID: { required: false, desc: 'Google Analytics measurement ID' },
 };
 
 const FEATURE_FLAGS = {
-  AI_TUTOR: ['VITE_GEMINI_API_KEY', 'VITE_GROQ_API_KEY'],
+  AI_TUTOR: ['VITE_GROQ_API_KEY'],
   PAYMENTS: ['VITE_PAYSTACK_PUBLIC_KEY'],
   ERROR_TRACKING: ['VITE_SENTRY_DSN'],
   ANALYTICS: ['VITE_GA_MEASUREMENT_ID'],

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { PLANS } from "../config/plans";
-import { loadPaystack } from "../paystack";
+import { openPaystack } from "../paystack";
 import { useToast } from "../components/Toast";
 import { useAuth } from "../context/AuthContext";
 
@@ -37,7 +37,7 @@ export function usePaystack() {
           },
         });
       } catch (e) {
-        console.warn("Failed to write subscription to Firestore:", e);
+        console.warn("Failed to write subscription:", e);
       }
     }
     try {
@@ -46,7 +46,7 @@ export function usePaystack() {
         planExpiry: endDate.toISOString(),
       });
     } catch (e) {
-      console.warn("Failed to update AuthContext:", e);
+      console.warn("Failed to update user:", e);
     }
     toast({ message: "Pro activated! Welcome to ExamPadi Pro", type: "success" });
   }
@@ -54,20 +54,13 @@ export function usePaystack() {
   async function initializePayment({ plan, userEmail, userId, userName }) {
     const paystackKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
     if (!paystackKey) {
-      toast({ message: "Paystack public key is missing. Add VITE_PAYSTACK_PUBLIC_KEY to your .env file.", type: "error" });
+      toast({ message: "Paystack key missing. Add VITE_PAYSTACK_PUBLIC_KEY to .env.", type: "error" });
       return;
     }
 
-    // Load Paystack script
-    try {
-      await loadPaystack();
-    } catch (err) {
-      toast({ message: err.message, type: "error" });
-      return;
-    }
-
-    if (typeof window.PaystackPop === "undefined") {
-      toast({ message: "Payment system not loaded. Check your connection and try again.", type: "error" });
+    const planData = PLANS[plan];
+    if (!planData || planData.price <= 0) {
+      toast({ message: "Invalid plan selected.", type: "error" });
       return;
     }
 
@@ -75,42 +68,36 @@ export function usePaystack() {
     setError(null);
 
     const reference = `EP-${userId}-${Date.now()}`;
-    const amount = (PLANS[plan]?.price || 0) * 100;
-
-    if (amount <= 0) {
-      setLoading(false);
-      toast({ message: "Invalid plan selected.", type: "error" });
-      return;
-    }
+    const amount = planData.price * 100;
 
     try {
-      const handler = window.PaystackPop.setup({
+      await openPaystack({
         key: paystackKey,
         email: userEmail,
-        amount,
+        amount: amount,
         ref: reference,
         currency: "NGN",
         metadata: { userId, plan, userName },
-        callback: async function (response) {
+        onSuccess: async function(response) {
           try {
             await verifyPayment(response.reference, plan, userId);
           } catch (e) {
-            console.error("Payment verification error:", e);
+            console.error("Verify error:", e);
             toast({ message: "Payment received but activation failed. Contact support.", type: "error" });
           } finally {
             setLoading(false);
           }
         },
-        onClose: function () {
+        onClose: function() {
           setLoading(false);
         },
       });
-
-      handler.openIframe();
     } catch (err) {
-      console.error("Paystack setup error:", err);
       setLoading(false);
-      toast({ message: "Failed to open payment. " + (err.message || "Try again."), type: "error" });
+      const msg = err.message || "Payment failed. Try again.";
+      if (msg !== "Payment cancelled") {
+        toast({ message: msg, type: "error" });
+      }
     }
   }
 
