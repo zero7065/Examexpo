@@ -1,5 +1,5 @@
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp, increment } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 import { PLANS } from "../config/plans";
 
 function getToday() {

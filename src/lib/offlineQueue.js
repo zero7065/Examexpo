@@ -1,5 +1,5 @@
 import { doc, setDoc, collection, addDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 
 let pending = [];
 

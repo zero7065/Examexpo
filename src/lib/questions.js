@@ -1,5 +1,5 @@
 import { collection, getDocs, query, where, limit as firestoreLimit, doc, setDoc, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 import { getQuestionsFromBank } from "../data/questionBank";
 
 export async function getQuestions(subject, topic, count = 10) {

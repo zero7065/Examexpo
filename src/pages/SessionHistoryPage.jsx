@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { collection, query, where, orderBy, limit, getDocs } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 import { History, ChevronRight, Calendar, Clock, Target, BookOpen } from "lucide-react";
 
 export default function SessionHistoryPage() {

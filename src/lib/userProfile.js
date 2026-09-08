@@ -1,5 +1,5 @@
 import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 
 export async function createUserProfile(uid, data) {
   const userDoc = doc(db, "users", uid);

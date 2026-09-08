@@ -2,7 +2,7 @@ import {
   doc, setDoc, getDoc, getDocs, updateDoc, deleteDoc,
   collection, query, where, orderBy, serverTimestamp
 } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 
 // ============================================================
 // PARTNERS

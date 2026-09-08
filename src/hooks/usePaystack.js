@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 import { PLANS } from "../config/plans";
 import { openPaystack } from "../paystack";
 import { useToast } from "../components/Toast";

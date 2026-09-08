@@ -1,6 +1,6 @@
 // src/context/StudyContext.jsx - Works without Firebase (uses localStorage)
 import { createContext, useContext, useReducer, useEffect } from "react";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 import { doc, setDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { getQuestionsFromBank } from "../data/questionBank";
 

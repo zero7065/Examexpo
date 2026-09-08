@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
 import { getUserProfile } from "../lib/userProfile";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 import { PLANS } from "../config/plans";
 
 export function useSubscription() {

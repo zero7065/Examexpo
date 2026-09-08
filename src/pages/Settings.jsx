@@ -6,7 +6,7 @@ import { useNotifications } from "../hooks/useNotifications";
 import { getUserProfile, updateUserProfile } from "../lib/userProfile";
 import { useToast } from "../components/Toast";
 import { doc, updateDoc, collection, getDocs, writeBatch, query, where } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 import { updateProfile } from "firebase/auth";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import { User, BookOpen, CreditCard, Bell, Sliders, AlertTriangle, LogOut, ChevronRight, Check, Pencil, Clock } from "lucide-react";

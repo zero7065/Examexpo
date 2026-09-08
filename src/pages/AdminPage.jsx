@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, query, orderBy, limit, getDocs, doc, updateDoc, serverTimestamp, where } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
 import { isAdmin as _isAdmin, logActivity } from "../lib/activityLog";
 const isAdmin = typeof _isAdmin === 'function' ? _isAdmin : () => false;
