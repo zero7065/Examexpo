@@ -8,8 +8,8 @@ import {
   sendPasswordResetEmail,
   deleteUser,
 } from "firebase/auth";
-import { auth, db } from "../firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { auth, db, signInWithGoogle as firebaseGoogleSignIn } from "../firebaseConfig";
+import { doc, setDoc, serverTimestamp, getDoc } from "firebase/firestore";
 import { logActivity } from "../lib/activityLog";
 
 const AuthContext = createContext();
@@ -70,6 +70,37 @@ export function AuthProvider({ children }) {
       throw e;
     }
     logActivity({ action: "login", userId: cred.user.uid, email });
+  }
+
+  async function signInWithGoogle() {
+    let result;
+    try {
+      result = await firebaseGoogleSignIn();
+    } catch (e) {
+      if (e.code === 'auth/popup-closed-by-user') {
+        throw new Error("Sign-in cancelled");
+      }
+      if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
+        throw new Error("Google sign-in is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Google.");
+      }
+      throw e;
+    }
+    const googleUser = result.user;
+    const userDocRef = doc(db, "users", googleUser.uid);
+    const existingDoc = await getDoc(userDocRef).catch(() => null);
+    if (!existingDoc || !existingDoc.exists()) {
+      await setDoc(userDocRef, {
+        email: googleUser.email,
+        name: googleUser.displayName || "",
+        role: "user",
+        exam: null,
+        subjects: [],
+        onboarded: false,
+        createdAt: serverTimestamp(),
+      }, { merge: true });
+    }
+    logActivity({ action: "register", userId: googleUser.uid, email: googleUser.email, details: { name: googleUser.displayName, provider: "google" } });
+    setUser({ ...googleUser, displayName: googleUser.displayName });
   }
 
   async function logout() {
@@ -151,7 +182,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword, findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole }}>
+    <AuthContext.Provider value={{ user, loading, login, signInWithGoogle, register, logout, resetPassword, findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole }}>
       {children}
     </AuthContext.Provider>
   );
