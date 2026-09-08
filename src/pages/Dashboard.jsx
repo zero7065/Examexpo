@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useToast } from "../components/Toast";
 import { getUserProfile } from "../lib/userProfile";
 import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit } from "../lib/usageTracker";
@@ -23,6 +24,7 @@ const SUBJECT_ICONS = {
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
+  const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
   const { isPro, daysLeft, loading: subLoading } = useSubscription();
@@ -48,6 +50,7 @@ export default function Dashboard() {
           setQuestionsLeft(ql);
         } catch (e) {
           console.error(e);
+          toast({ message: "Failed to load profile data. Please refresh.", type: "error" });
         }
       }
       setLoading(false);
@@ -63,8 +66,13 @@ export default function Dashboard() {
   }
 
   async function handleLogout() {
-    await logout();
-    navigate("/auth");
+    try {
+      await logout();
+      navigate("/auth");
+    } catch (e) {
+      console.error("Logout failed:", e);
+      toast({ message: "Failed to sign out. Please try again.", type: "error" });
+    }
   }
 
   function getScoreColor(score) {

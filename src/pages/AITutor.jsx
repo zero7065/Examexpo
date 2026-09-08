@@ -79,31 +79,37 @@ export default function AITutor() {
     const msg = text || input;
     if (!msg.trim() || loading) return;
 
-    // Pro check
-    if (!isPro) {
-      const limit = await checkAILimit(user?.uid);
-      if (!limit.allowed) { setShowProModal(true); return; }
+    try {
+      // Pro check
+      if (!isPro) {
+        const limit = await checkAILimit(user?.uid);
+        if (!limit.allowed) { setShowProModal(true); return; }
+      }
+
+      const userMsg = { id: Date.now(), role: "user", content: msg.trim(), timestamp: new Date().toISOString() };
+      setMessages(prev => [...prev, userMsg]);
+      setInput("");
+      setLoading(true);
+
+      if (user && !isPro) trackAIMessage(user.uid);
+
+      const allMsgs = [...messages, userMsg];
+      const response = await chatWithTutor({
+        messages: allMsgs,
+        subject: activeSubject,
+        userProfile: { name: user?.displayName || "Student", exam: profile?.exam || "JAMB", targetScore: profile?.targetScore || 300 },
+      });
+
+      const aiMsg = { id: Date.now() + 1, role: "ai", content: response, timestamp: new Date().toISOString() };
+      setMessages(prev => [...prev, aiMsg]);
+      setLoading(false);
+
+      logActivity({ action: "ai_chat", userId: user?.uid, email: user?.email, details: { subject: activeSubject, questionLength: msg.trim().length } });
+    } catch (e) {
+      console.error("AI chat failed:", e);
+      toast({ message: "Failed to get AI response. Please try again.", type: "error" });
+      setLoading(false);
     }
-
-    const userMsg = { id: Date.now(), role: "user", content: msg.trim(), timestamp: new Date().toISOString() };
-    setMessages(prev => [...prev, userMsg]);
-    setInput("");
-    setLoading(true);
-
-    if (user && !isPro) trackAIMessage(user.uid);
-
-    const allMsgs = [...messages, userMsg];
-    const response = await chatWithTutor({
-      messages: allMsgs,
-      subject: activeSubject,
-      userProfile: { name: user?.displayName || "Student", exam: profile?.exam || "JAMB", targetScore: profile?.targetScore || 300 },
-    });
-
-    const aiMsg = { id: Date.now() + 1, role: "ai", content: response, timestamp: new Date().toISOString() };
-    setMessages(prev => [...prev, aiMsg]);
-    setLoading(false);
-
-    logActivity({ action: "ai_chat", userId: user?.uid, email: user?.email, details: { subject: activeSubject, questionLength: msg.trim().length } });
   }
 
   function handleKeyDown(e) {

@@ -179,7 +179,14 @@ export function doc(dbInst, collectionName, docId) {
 function isDocRef(v) { return v && v._type === "doc"; }
 function isCollRef(v) { return v && v._type === "collection"; }
 
-export function collection(dbInst, name) {
+export function collection(dbInst, name, subId, subName) {
+  // Support subcollection paths: collection(db, "users", userId, "sessions")
+  if (subId && subName) {
+    return { _type: "collection", name: `${name}_${subId}_${subName}` };
+  }
+  if (subId) {
+    return { _type: "collection", name: `${name}_${subId}` };
+  }
   return { _type: "collection", name };
 }
 

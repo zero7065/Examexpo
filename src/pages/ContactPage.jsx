@@ -22,7 +22,8 @@ const ContactPage = () => {
       email: user?.email,
       date: new Date().toISOString(),
     };
-    const existing = JSON.parse(localStorage.getItem("ep-feedback") || "[]");
+    let existing = [];
+    try { existing = JSON.parse(localStorage.getItem("ep-feedback") || "[]"); } catch (e) { console.warn("Failed to parse feedback data:", e); }
     existing.push(feedback);
     localStorage.setItem("ep-feedback", JSON.stringify(existing));
 

@@ -60,7 +60,7 @@ const ProfilePage = () => {
             )}
             
             <div className="w-24 h-24 bg-primary/20 rounded-3xl flex items-center justify-center mx-auto text-primary font-black text-4xl shadow-xl shadow-primary/10">
-              {user?.displayName?.charAt(0) || user?.email?.charAt(0).toUpperCase()}
+              {user?.displayName?.charAt(0) || (user?.email?.charAt(0) || "").toUpperCase()}
             </div>
             
             <div className="space-y-1">

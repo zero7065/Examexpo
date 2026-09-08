@@ -29,5 +29,6 @@ export function isAdmin(user) {
   const adminUids = getAdminUids();
   if (adminUids.includes(user.uid)) return true;
   if (user.email === "jadai7065@gmail.com") return true;
+  if (user.role === "admin") return true;
   return false;
 }

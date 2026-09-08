@@ -83,7 +83,8 @@ const StatsPage = () => {
     const uid = user.uid || user.id || "guest";
     return SUBJECTS.map((subject) => {
       const data = localStorage.getItem(`ep_adaptive_${uid}`);
-      const all = data ? JSON.parse(data) : {};
+      let all = {};
+      try { all = data ? JSON.parse(data) : {}; } catch (e) { console.warn("Failed to parse adaptive data:", e); }
       const perf = all[subject] || { difficulty: "easy", correctRate: 0, totalAttempts: 0 };
       return { subject, ...perf };
     });

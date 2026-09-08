@@ -52,6 +52,7 @@ export default function Onboarding() {
         }
       } catch (e) {
         // No profile yet - fresh user, allow onboarding
+        console.debug("No existing profile found:", e?.message);
       }
       setChecking(false);
     }

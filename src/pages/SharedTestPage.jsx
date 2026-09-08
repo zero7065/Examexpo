@@ -23,7 +23,7 @@ export default function SharedTestPage() {
 
   useEffect(() => {
     if (!test) { navigate("/study-partners"); return; }
-    const qs = getQuestionsFromBank(test.subject, test.questionCount);
+    const qs = getQuestionsFromBank({ subject: test.subject, count: test.questionCount || 10 });
     setQuestions(qs);
     setTimeLeft(test.timeLimit);
     // Load partner results if test is completed

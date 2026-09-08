@@ -64,11 +64,15 @@ export default function PracticeSession() {
 
     async function checkLimit() {
       if (!user || isPro) return;
-      const check = await checkQuestionLimit(user.uid);
-      if (!check.allowed) {
-        setLimitBlocked(true);
-        setProReason("questions");
-        toast({ message: "Daily question limit reached. Upgrade to Pro!", type: "warning" });
+      try {
+        const check = await checkQuestionLimit(user.uid);
+        if (!check.allowed) {
+          setLimitBlocked(true);
+          setProReason("questions");
+          toast({ message: "Daily question limit reached. Upgrade to Pro!", type: "warning" });
+        }
+      } catch (e) {
+        console.warn("Failed to check question limit:", e);
       }
     }
     checkLimit();
@@ -145,27 +149,33 @@ export default function PracticeSession() {
   }
 
   async function handleAskAI() {
-    if (!isPro) {
-      const limit = await checkAILimit(user?.uid);
-      if (!limit.allowed) { setProReason("ai"); setShowProModal(true); return; }
+    try {
+      if (!isPro) {
+        const limit = await checkAILimit(user?.uid);
+        if (!limit.allowed) { setProReason("ai"); setShowProModal(true); return; }
+      }
+
+      if (loadingAI) return;
+      setLoadingAI(current.id);
+
+      if (user && !isPro) trackAIMessage(user.uid);
+
+      const explanation = await explainQuestion({
+        question: current.question,
+        options: current.options,
+        correctAnswer: current.answer,
+        userAnswer: answers[current.id],
+        subject: current.subject,
+        topic: current.topic,
+      });
+
+      setAiExplanations(prev => ({ ...prev, [current.id]: explanation }));
+      setLoadingAI(null);
+    } catch (e) {
+      console.error("AI explanation failed:", e);
+      toast({ message: "Failed to get AI explanation. Please try again.", type: "error" });
+      setLoadingAI(null);
     }
-
-    if (loadingAI) return;
-    setLoadingAI(current.id);
-
-    if (user && !isPro) trackAIMessage(user.uid);
-
-    const explanation = await explainQuestion({
-      question: current.question,
-      options: current.options,
-      correctAnswer: current.answer,
-      userAnswer: answers[current.id],
-      subject: current.subject,
-      topic: current.topic,
-    });
-
-    setAiExplanations(prev => ({ ...prev, [current.id]: explanation }));
-    setLoadingAI(null);
   }
 
   function toggleFlag() {

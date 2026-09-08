@@ -102,7 +102,7 @@ export default function Settings() {
     } catch (e) { console.warn("Reset error:", e); }
   }
 
-  async function handleLogout() { await logout(); navigate("/auth"); }
+  async function handleLogout() { try { await logout(); navigate("/auth"); } catch (e) { console.error("Logout failed:", e); } }
 
   return (
     <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", padding: "24px 32px" }}>

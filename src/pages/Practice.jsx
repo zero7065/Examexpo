@@ -31,10 +31,14 @@ export default function Practice() {
   useEffect(() => {
     async function loadProfile() {
       if (user) {
-        const p = await getUserProfile(user.uid);
-        setProfile(p);
-        if (!subjectParam && p?.subjects?.length) {
-          setSelectedSubject(p.subjects[0]);
+        try {
+          const p = await getUserProfile(user.uid);
+          setProfile(p);
+          if (!subjectParam && p?.subjects?.length) {
+            setSelectedSubject(p.subjects[0]);
+          }
+        } catch (e) {
+          console.warn("Failed to load profile:", e);
         }
       }
     }

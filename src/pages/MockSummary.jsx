@@ -197,7 +197,7 @@ export default function MockSummary() {
           {weakTopics?.length > 0 && <button onClick={() => navigate("/practice", { state: { questions: getRandomQuestions(subjects?.[0] || "Biology", 10), subject: subjects?.[0] || "Biology", mode: "practice" } })} style={{ padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Practice Weak Topics</button>}
           <button onClick={() => navigate("/dashboard")} style={{ padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}><ArrowLeft size={18} style={{ verticalAlign: "middle", marginRight: 8 }} /> Back to Dashboard</button>
           <WhatsAppShareButton
-            result={{ percentageScore: percentage, correctAnswers: correctAnswers, totalQuestions: totalQuestions, timeSpentSeconds: timeSpentSeconds }}
+            result={{ percentageScore: overallScore || 0, correctAnswers: correct || 0, totalQuestions: totalQuestions || 0, timeSpentSeconds: timeUsed || 0 }}
             type="mock"
             style={{ width: "100%", justifyContent: "center" }}
           />

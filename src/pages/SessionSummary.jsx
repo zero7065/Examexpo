@@ -78,8 +78,8 @@ export default function SessionSummary() {
 
         // Notify on completion
         sendNotification({
-          title: "Session Complete! 🎯",
-          body: `${subject}: ${score}% (${correct}/${total} correct)`,
+          title: "Session Complete!",
+          body: `${data?.subject || "Session"}: ${data?.score || 0}% (${data?.correct || 0}/${data?.total || 0} correct)`,
           url: "/dashboard",
           tag: "session-complete",
         });

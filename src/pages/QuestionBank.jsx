@@ -25,7 +25,7 @@ export default function QuestionBank() {
   });
 
   useEffect(() => {
-    if (user) getUserProfile(user.uid).then(setProfile).catch(() => {});
+    if (user) getUserProfile(user.uid).then(setProfile).catch(e => { console.warn("Failed to load profile:", e); });
   }, [user]);
 
   const userSubjects = profile?.subjects || [];

@@ -93,9 +93,10 @@ export default function ResultPage() {
   useEffect(() => {
     if (!result) { navigate("/dashboard"); return; }
     const tier = getResultTier(result.percentageScore);
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       toast({ message: `${tier.emoji} ${tier.title} — ${Math.round(result.percentageScore)}% scored`, type: "success", duration: 5000 });
     }, 500);
+    return () => clearTimeout(timer);
   }, []);
 
   if (!result) return null;

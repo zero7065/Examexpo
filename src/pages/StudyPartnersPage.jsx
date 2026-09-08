@@ -60,6 +60,7 @@ export default function StudyPartnersPage() {
       setLeaderboard(lb);
     } catch (e) {
       console.error(e);
+      toast({ message: "Failed to load study partners data.", type: "error" });
     } finally {
       setLoading(false);
     }

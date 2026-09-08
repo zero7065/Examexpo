@@ -39,7 +39,7 @@ export default function MockExam() {
   const timerRef = useRef(null);
 
   useEffect(() => {
-    if (user) getUserProfile(user.uid).then(p => { setProfile(p); if (p?.subjects?.length) setSelectedSubjects([p.subjects[0]]); }).catch(() => {});
+    if (user) getUserProfile(user.uid).then(p => { setProfile(p); if (p?.subjects?.length) setSelectedSubjects([p.subjects[0]]); }).catch(e => { console.warn("Failed to load profile:", e); });
   }, [user]);
 
   const userSubjects = profile?.subjects || [];
