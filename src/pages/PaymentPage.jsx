@@ -5,7 +5,8 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
-import { PLANS, initiatePayment } from "../paystack";
+import { loadPaystack } from "../paystack";
+import { PLANS as CONFIG_PLANS } from "../config/plans";
 import { Check, Crown, Zap, ShieldCheck, Sparkles, ChevronRight, Loader2, Award } from "lucide-react";
 import { logActivity } from "../lib/activityLog";
 
@@ -21,7 +22,6 @@ const PaymentPage = () => {
     expiryDate.setHours(23, 59, 59, 999);
     expiryDate.setDate(expiryDate.getDate() + duration);
 
-    // Write subscription to Firestore FIRST so useSubscription re-fetch sees it
     if (db && user) {
       try {
         await updateDoc(doc(db, "users", user.uid), {
@@ -30,56 +30,94 @@ const PaymentPage = () => {
             status: "active",
             reference,
             startDate: serverTimestamp(),
-            endDate: expiryDate,
+            endDate: expiryDate.toISOString(),
             autoRenew: true,
           },
         });
       } catch (e) {
-        console.warn("Failed to write subscription to Firestore:", e);
+        console.warn("Failed to write subscription:", e);
       }
     }
 
-    // Then update AuthContext so the UI reflects Pro status
-    updateUser({
-      plan: planId.includes('pro') ? 'pro' : 'free',
-      planExpiry: expiryDate.toISOString()
-    });
+    try {
+      updateUser({
+        plan: planId.includes("pro") ? "pro" : "free",
+        planExpiry: expiryDate.toISOString(),
+      });
+    } catch (e) {
+      console.warn("Failed to update AuthContext:", e);
+    }
   };
 
-  const handlePayment = async (plan) => {
+  const handlePayment = async (planKey) => {
     if (!user) return navigate("/auth");
+
+    const planConfig = CONFIG_PLANS[planKey];
+    if (!planConfig || planConfig.price <= 0) {
+      toast({ message: "Invalid plan selected.", type: "error" });
+      return;
+    }
+
+    const paystackKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+    if (!paystackKey) {
+      toast({ message: "Paystack key missing. Add VITE_PAYSTACK_PUBLIC_KEY to .env.", type: "error" });
+      return;
+    }
+
     setPayLoading(true);
     setPayError(null);
     toast({ message: "Opening payment...", type: "info" });
 
-    await initiatePayment({
-      email: user.email,
-      plan,
-      userUid: user.uid,
-      userName: user.name || user.displayName,
-      onSuccess: async (response) => {
-        setPayLoading(true);
-        try {
-          await activatePro(plan.id, plan.duration, response.reference);
-          logActivity({ action: "payment", userId: user.uid, email: user.email, details: { plan: plan.id, planName: plan.name, reference: response.reference } });
-          toast({ message: "Payment successful! You're now Pro", type: "success" });
-          navigate("/payment/success");
-        } catch (err) {
-          toast({ message: 'Activation failed. Please contact support.', type: "error" });
-        } finally {
+    try {
+      await loadPaystack();
+    } catch (err) {
+      setPayLoading(false);
+      toast({ message: err.message, type: "error" });
+      return;
+    }
+
+    if (typeof window.PaystackPop === "undefined") {
+      setPayLoading(false);
+      toast({ message: "Payment system not loaded. Check connection.", type: "error" });
+      return;
+    }
+
+    const reference = `EP-${user.uid}-${Date.now()}`;
+    const amount = planConfig.price * 100;
+
+    try {
+      const handler = window.PaystackPop.setup({
+        key: paystackKey,
+        email: user.email,
+        amount,
+        ref: reference,
+        currency: "NGN",
+        metadata: { userId: user.uid, plan: planKey, userName: user.displayName || "Student" },
+        callback: async function (response) {
+          try {
+            const duration = planKey === "pro_yearly" ? 365 : 30;
+            await activatePro(planKey, duration, response.reference);
+            logActivity({ action: "payment", userId: user.uid, email: user.email, details: { plan: planKey, reference: response.reference } });
+            toast({ message: "Payment successful! You're now Pro", type: "success" });
+            navigate("/payment/success");
+          } catch (err) {
+            toast({ message: "Activation failed. Contact support.", type: "error" });
+          } finally {
+            setPayLoading(false);
+          }
+        },
+        onClose: function () {
           setPayLoading(false);
-        }
-      },
-      onClose: () => {
-        setPayLoading(false);
-        toast({ message: "Payment cancelled.", type: "info" });
-      },
-      onError: (err) => {
-        setPayLoading(false);
-        setPayError(err.message);
-        toast({ message: err.message, type: "error" });
-      },
-    });
+        },
+      });
+
+      handler.openIframe();
+    } catch (err) {
+      setPayLoading(false);
+      const msg = "Failed to open payment. " + (err.message || "Try again.");
+      setPayError(msg);
+      toast({ message: msg, type: "error" });
+    }
   };
 
   return (
@@ -93,13 +131,16 @@ const PaymentPage = () => {
         <p className="text-text-muted text-xl max-w-2xl mx-auto font-medium">Don't let the daily question limit hold you back. Join the 300+ score squad today.</p>
       </header>
 
-      {/* Plans Grid */}
-      <div className="grid md:grid-cols-3 gap-8">
-        {Object.values(PLANS).map((plan) => (
-          <div 
-            key={plan.id}
-            className={`glass-card p-10 relative overflow-hidden flex flex-col group transition-all duration-500 hover:-translate-y-2 ${
-              plan.badge ? 'border-primary/40 ring-1 ring-primary/20 bg-primary-dim' : 'border-border'
+      {/* Plans Grid - Pro only */}
+      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {[
+          { key: "pro_monthly", ...CONFIG_PLANS.pro_monthly },
+          { key: "pro_yearly", ...CONFIG_PLANS.pro_yearly },
+        ].map((plan) => (
+          <div
+            key={plan.key}
+            className={`glass-card p-8 md:p-10 relative overflow-hidden flex flex-col group transition-all duration-500 hover:-translate-y-2 ${
+              plan.badge ? "border-primary/40 ring-1 ring-primary/20 bg-primary-dim" : "border-border"
             }`}
           >
             {plan.badge && (
@@ -111,11 +152,17 @@ const PaymentPage = () => {
             <div className="mb-8">
               <h3 className="text-2xl font-black mb-2 text-text">{plan.name}</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-5xl font-black font-mono tracking-tighter">{plan.displayPrice}</span>
-                <span className="text-text-muted font-bold text-sm">/ {plan.duration === 365 ? 'yr' : plan.duration === 90 ? '3mo' : 'mo'}</span>
+                <span className="text-5xl font-black font-mono tracking-tighter">
+                  ₦{plan.price.toLocaleString()}
+                </span>
+                <span className="text-text-muted font-bold text-sm">
+                  / {plan.interval === "yearly" ? "yr" : "mo"}
+                </span>
               </div>
-              {plan.savings && (
-                <div className="text-primary font-black text-xs uppercase mt-2 tracking-widest">{plan.savings}</div>
+              {plan.key === "pro_yearly" && (
+                <div className="text-primary font-black text-xs uppercase mt-2 tracking-widest">
+                  Save ₦{(CONFIG_PLANS.pro_monthly.price * 12 - plan.price).toLocaleString()}
+                </div>
               )}
             </div>
 
@@ -131,18 +178,20 @@ const PaymentPage = () => {
             </div>
 
             <div className="space-y-2 w-full">
-              <button 
-                onClick={() => handlePayment(plan)}
+              <button
+                onClick={() => handlePayment(plan.key)}
                 disabled={payLoading}
                 className={`w-full h-14 rounded-2xl font-black text-lg shadow-xl flex items-center justify-center gap-3 transition-all ${
-                  plan.badge 
-                  ? 'bg-primary text-black shadow-primary/20 hover:scale-105' 
-                  : 'bg-bg-3 text-text border border-border hover:bg-border'
+                  plan.badge
+                    ? "bg-primary text-black shadow-primary/20 hover:scale-105"
+                    : "bg-bg-3 text-text border border-border hover:bg-border"
                 }`}
               >
-                {payLoading ? <Loader2 className="animate-spin" size={24} /> : (
+                {payLoading ? (
+                  <Loader2 className="animate-spin" size={24} />
+                ) : (
                   <>
-                    Pay {plan.displayPrice}
+                    Pay ₦{plan.price.toLocaleString()}
                     <ChevronRight size={20} />
                   </>
                 )}
