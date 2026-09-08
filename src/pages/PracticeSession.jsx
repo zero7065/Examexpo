@@ -6,7 +6,9 @@ import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit, trackQuestion, checkAILimit, trackAIMessage } from "../lib/usageTracker";
 import { explainQuestion } from "../lib/gemini";
 import ProUpgradeModal from "../components/ProUpgradeModal";
-import { ChevronRight, Sparkles, AlertCircle, CheckCircle2, XCircle, Flag, BookOpen } from "lucide-react";
+import { Whiteboard } from "../components/Whiteboard";
+import { useHint } from "../hooks/useHints";
+import { ChevronRight, Sparkles, AlertCircle, CheckCircle2, XCircle, Flag, BookOpen, Lightbulb, PenTool } from "lucide-react";
 
 const MODE_MOCK = "mock";
 const MODE_PRACTICE = "practice";
@@ -34,7 +36,12 @@ export default function PracticeSession() {
   const [sessionComplete, setSessionComplete] = useState(false);
   const [limitBlocked, setLimitBlocked] = useState(false);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
+  const [eliminated, setEliminated] = useState({});
+  const [whiteboardOpen, setWhiteboardOpen] = useState(false);
   const timerRef = useRef(null);
+
+  const sessionId = sessionData?.startTime || "practice_session";
+  const hintState = useHint(sessionId);
 
   useEffect(() => {
     const handleResize = () => setIsDesktop(window.innerWidth > 768);
@@ -67,7 +74,6 @@ export default function PracticeSession() {
     checkLimit();
   }, []);
 
-  // Separate timer effect to avoid stale closure over finishSession
   useEffect(() => {
     timerRef.current = setInterval(() => {
       setTimeElapsed(t => {
@@ -82,14 +88,12 @@ export default function PracticeSession() {
     return () => clearInterval(timerRef.current);
   }, []);
 
-  // Auto-submit when time runs out in mock mode
   useEffect(() => {
     if (mode === MODE_MOCK && timeElapsed >= totalTime && !sessionComplete) {
       finishSession();
     }
   }, [timeElapsed, mode, totalTime, sessionComplete]);
 
-  // Save ongoing session to localStorage for resume
   useEffect(() => {
     if (sessionComplete || !questions.length) return;
     const sessionState = {
@@ -103,14 +107,12 @@ export default function PracticeSession() {
     try { localStorage.setItem("exampadi_active_session", JSON.stringify(sessionState)); } catch {}
   }, [answers, currentIndex, questions, subject, mode, sessionComplete, sessionData]);
 
-  // Clear saved session on completion
   useEffect(() => {
     if (sessionComplete) {
       try { localStorage.removeItem("exampadi_active_session"); } catch {}
     }
   }, [sessionComplete]);
 
-  // Keyboard shortcuts: 1-4 → select options A-D, Space → next question
   useEffect(() => {
     function handleKey(e) {
       if (sessionComplete || limitBlocked) return;
@@ -143,7 +145,6 @@ export default function PracticeSession() {
   }
 
   async function handleAskAI() {
-    // For non-Pro users, allow AI until their limit is reached (same UX as AITutor)
     if (!isPro) {
       const limit = await checkAILimit(user?.uid);
       if (!limit.allowed) { setProReason("ai"); setShowProModal(true); return; }
@@ -179,6 +180,35 @@ export default function PracticeSession() {
     if (idx >= 0 && idx < questions.length) setCurrentIndex(idx);
   }
 
+  function handleUseHint() {
+    if (!current || revealed[current.id]) return;
+    if (!hintState.canUse) {
+      toast({ message: "No hints remaining this session", type: "warning" });
+      return;
+    }
+
+    const correctKey = current.answer;
+    const optionKeys = Object.keys(current.options).filter(k => k !== correctKey);
+    const alreadyEliminated = eliminated[current.id] || [];
+
+    const available = optionKeys.filter(k => !alreadyEliminated.includes(k));
+    if (available.length < 2) {
+      toast({ message: "Not enough wrong answers to eliminate", type: "info" });
+      return;
+    }
+
+    const shuffled = [...available].sort(() => Math.random() - 0.5);
+    const toEliminate = shuffled.slice(0, 2);
+
+    if (hintState.use()) {
+      setEliminated(prev => ({
+        ...prev,
+        [current.id]: [...(prev[current.id] || []), ...toEliminate],
+      }));
+      toast({ message: `Hint used! ${hintState.remaining - 1} hints remaining`, type: "success" });
+    }
+  }
+
   function finishSession() {
     if (timerRef.current) clearInterval(timerRef.current);
 
@@ -193,6 +223,7 @@ export default function PracticeSession() {
       .map(q => q.topic);
 
     setSessionComplete(true);
+    hintState.reset();
     navigate("/session-summary", {
       state: {
         subject,
@@ -207,6 +238,7 @@ export default function PracticeSession() {
         timeSeconds: timeElapsed,
         xpEarned: xp,
         weakTopics: [...new Set(weakTopics)],
+        hintsUsed: hintState.used,
       }
     });
   }
@@ -228,6 +260,11 @@ export default function PracticeSession() {
     const base = { padding: "14px 16px", borderRadius: 12, border: "1.5px solid #333", background: "#1a1a1f", cursor: "pointer", display: "flex", alignItems: "center", gap: 12, transition: "all 0.25s ease", textAlign: "left", fontFamily: "inherit" };
     const selected = answers[current?.id] === key;
     const isCorrect = key === current?.answer;
+    const isEliminated = eliminated[current?.id]?.includes(key);
+
+    if (isEliminated) {
+      return { ...base, opacity: 0.2, pointerEvents: "none", textDecoration: "line-through" };
+    }
 
     if (!revealed[current?.id]) {
       if (selected) return { ...base, border: "1.5px solid #6C3CE9", background: "rgba(108,60,233,0.2)" };
@@ -286,6 +323,21 @@ export default function PracticeSession() {
                 <span style={{ color: "#666", fontSize: 12 }}>{current.subject} · {current.topic}</span>
                 <span style={{ width: 8, height: 8, borderRadius: "50%", background: current.difficulty === "easy" ? "#4ADE80" : current.difficulty === "medium" ? "#FF9F43" : "#FF4D6A" }} />
                 <span style={{ fontSize: 11, color: "#888", textTransform: "capitalize" }}>{current.difficulty}</span>
+                <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
+                  <button
+                    onClick={handleUseHint}
+                    disabled={!!revealed[current.id] || !hintState.canUse}
+                    style={{ padding: "4px 12px", borderRadius: 8, background: "rgba(212,168,83,0.1)", border: "1px solid rgba(212,168,83,0.3)", color: hintState.canUse && !revealed[current.id] ? "#D4A853" : "#555", cursor: hintState.canUse && !revealed[current.id] ? "pointer" : "not-allowed", fontSize: 11, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}
+                  >
+                    <Lightbulb size={12} /> Use Hint ({hintState.remaining})
+                  </button>
+                  <button
+                    onClick={() => setWhiteboardOpen(true)}
+                    style={{ padding: "4px 12px", borderRadius: 8, background: "rgba(108,60,233,0.1)", border: "1px solid rgba(108,60,233,0.3)", color: "#6C3CE9", cursor: "pointer", fontSize: 11, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}
+                  >
+                    <PenTool size={12} /> Whiteboard
+                  </button>
+                </div>
               </div>
 
               {/* Question text */}
@@ -294,7 +346,7 @@ export default function PracticeSession() {
               {/* Options */}
               <div style={{ display: "grid", gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr", gap: 10, marginBottom: 24 }}>
                 {Object.entries(current.options).map(([key, val]) => (
-                  <button key={key} onClick={() => handleSelect(key)} style={getOptionStyle(key)} disabled={!!revealed[current.id]}>
+                  <button key={key} onClick={() => handleSelect(key)} style={getOptionStyle(key)} disabled={!!revealed[current.id] || eliminated[current.id]?.includes(key)}>
                     <span style={{ width: 28, height: 28, borderRadius: 8, ...getBadgeStyle(key), fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{key}</span>
                     <span style={{ fontSize: 14, flex: 1 }}>{val}</span>
                     {revealed[current.id] && key === current.answer && <CheckCircle2 size={18} color="#4ADE80" />}
@@ -384,6 +436,22 @@ export default function PracticeSession() {
           </div>
         )}
       </div>
+
+      {/* Whiteboard toggle FAB */}
+      <button
+        onClick={() => setWhiteboardOpen(true)}
+        style={{
+          position: "fixed", bottom: 24, right: 24, zIndex: 9998,
+          width: 48, height: 48, borderRadius: "50%",
+          background: "#6C3CE9", border: "none", color: "#fff", cursor: "pointer",
+          display: whiteboardOpen ? "none" : "flex",
+          alignItems: "center", justifyContent: "center",
+          boxShadow: "0 4px 20px rgba(108,60,233,0.5)",
+        }}
+        title="Whiteboard & Calculator"
+      >
+        <PenTool size={22} />
+      </button>
 
       <ProUpgradeModal open={showProModal} onClose={handleClosePro} reason={proReason} dismissible />
     </div>

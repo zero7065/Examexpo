@@ -1,23 +1,51 @@
-// src/pages/StatsPage.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useStudy } from "../context/StudyContext";
 import { getStudyTip } from "../groq";
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Target, 
-  Brain, 
-  Sparkles, 
-  Loader2, 
+import { getAdaptiveQuestions, getRecommendation } from "../lib/adaptiveEngine";
+import { getXpProfile, getHighscore, getDailyXp } from "../lib/xpSystem";
+import { getAssignmentHistory } from "../lib/assignmentSystem";
+import {
+  BarChart3,
+  TrendingUp,
+  Target,
+  Brain,
+  Sparkles,
+  Loader2,
   AlertCircle,
   ChevronRight,
   BookOpen,
-  ArrowUpRight
+  ArrowUpRight,
+  Trophy,
+  Flame,
+  Zap,
+  Clock,
+  CheckCircle2,
+  XCircle,
+  AlertTriangle,
+  Star,
+  Medal,
+  Crown,
 } from "lucide-react";
 import { WhatsAppShareButton } from "../components/WhatsAppShare";
+
+const SUBJECTS = ["English", "Mathematics", "Physics", "Chemistry"];
+
+const DIFFICULTY_META = {
+  easy: { label: "Beginner", color: "text-green-400", bg: "bg-green-400/10", icon: "🟢" },
+  medium: { label: "Intermediate", color: "text-yellow-400", bg: "bg-yellow-400/10", icon: "🟡" },
+  hard: { label: "Advanced", color: "text-red-400", bg: "bg-red-400/10", icon: "🔴" },
+};
+
+const LEVEL_NAMES = [
+  "Newcomer",
+  "Learner",
+  "Scholar",
+  "Expert",
+  "Master",
+];
 
 const StatsPage = () => {
   const { user, isPro } = useAuth();
@@ -28,8 +56,55 @@ const StatsPage = () => {
   const [advice, setAdvice] = useState([]);
 
   const proStatus = isPro();
-  
-  // Free users get basic analytics
+
+  const xpProfile = proStatus ? useMemo(() => getXpProfile(user?.uid || user?.id || "guest"), [user]) : null;
+  const highscore = proStatus ? useMemo(() => getHighscore(user?.uid || user?.id || "guest"), [user]) : null;
+  const dailyXp = proStatus ? useMemo(() => getDailyXp(user?.uid || user?.id || "guest"), [user]) : null;
+  const recommendation = proStatus ? useMemo(() => getRecommendation(user?.uid || user?.id || "guest"), [user]) : null;
+  const assignments = proStatus ? useMemo(() => getAssignmentHistory(user?.uid || user?.id || "guest"), [user]) : null;
+
+  const levelProgress = useMemo(() => {
+    if (!xpProfile) return 0;
+    const thresholds = [
+      { min: 0, max: 99 },
+      { min: 100, max: 299 },
+      { min: 300, max: 599 },
+      { min: 600, max: 999 },
+      { min: 1000, max: Infinity },
+    ];
+    const t = thresholds[xpProfile.level - 1] || thresholds[0];
+    const range = t.max === Infinity ? 200 : t.max - t.min;
+    const progress = xpProfile.totalXp - t.min;
+    return Math.min(100, Math.round((progress / range) * 100));
+  }, [xpProfile]);
+
+  const subjectDifficulties = useMemo(() => {
+    if (!user?.uid) return [];
+    const uid = user.uid || user.id || "guest";
+    return SUBJECTS.map((subject) => {
+      const data = localStorage.getItem(`ep_adaptive_${uid}`);
+      const all = data ? JSON.parse(data) : {};
+      const perf = all[subject] || { difficulty: "easy", correctRate: 0, totalAttempts: 0 };
+      return { subject, ...perf };
+    });
+  }, [user]);
+
+  const overdueAssignments = useMemo(() => {
+    if (!assignments) return [];
+    return assignments.filter(
+      (a) =>
+        (a.status === "pending" || a.status === "active") &&
+        Date.now() > a.deadline
+    );
+  }, [assignments]);
+
+  const completedAssignments = useMemo(() => {
+    if (!assignments) return [];
+    return assignments.filter(
+      (a) => a.status === "passed" || a.status === "failed"
+    );
+  }, [assignments]);
+
   if (!proStatus) {
     return (
       <div className="max-w-6xl mx-auto p-6 md:p-10 space-y-10 animate-fade">
@@ -39,55 +114,84 @@ const StatsPage = () => {
         </header>
 
         <div className="grid md:grid-cols-3 gap-6">
-          <StatsCard 
-            label="Total Questions" 
-            value={user?.totalQuestionsAnswered || 0} 
-            description="Questions answered so far" 
-            icon={<BookOpen className="text-primary" size={24} />} 
+          <StatsCard
+            label="Total Questions"
+            value={user?.totalQuestionsAnswered || 0}
+            description="Questions answered so far"
+            icon={<BookOpen className="text-primary" size={24} />}
           />
-          <StatsCard 
-            label="Average Score" 
-            value={user?.totalQuestionsAnswered > 0 ? Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 100) + "%" : "0%"} 
-            description="Your average performance" 
-            icon={<Target className="text-accent" size={24} />} 
+          <StatsCard
+            label="Average Score"
+            value={user?.totalQuestionsAnswered > 0 ? Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 100) + "%" : "0%"}
+            description="Your average performance"
+            icon={<Target className="text-accent" size={24} />}
           />
-          <StatsCard 
-            label="Study Streak" 
-            value={user?.streak || 0} 
-            description="Days in a row" 
-            icon={<TrendingUp className="text-accent" size={24} />} 
+          <StatsCard
+            label="Study Streak"
+            value={user?.streak || 0}
+            description="Days in a row"
+            icon={<TrendingUp className="text-accent" size={24} />}
           />
         </div>
 
         <div className="glass-card p-8 text-center">
-          <h3 className="text-xl font-bold mb-4">Unlock Full Analytics</h3>
-          <p className="text-text-muted mb-6 max-w-md mx-auto">
-            Get detailed subject breakdown, AI-powered weak topic analysis, and personalized study tips with Pro.
+          <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <Crown className="text-primary" size={32} />
+          </div>
+          <h3 className="text-xl font-black mb-2">Unlock Full Analytics</h3>
+          <p className="text-text-muted mb-6 max-w-md mx-auto text-sm leading-relaxed">
+            Get XP tracking, adaptive learning insights, brain maps, assignment history, and AI-powered analysis with Pro.
           </p>
-          <button onClick={() => navigate("/payment")} className="btn-primary px-8">
-            Upgrade to Pro - ₦3,000/mo
-          </button>
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-3 text-xs max-w-sm mx-auto mb-6">
+              <div className="flex items-center gap-2 text-text-muted">
+                <Zap size={14} className="text-yellow-400" /> XP & Leveling
+              </div>
+              <div className="flex items-center gap-2 text-text-muted">
+                <Brain size={14} className="text-primary" /> Brain Map
+              </div>
+              <div className="flex items-center gap-2 text-text-muted">
+                <TrendingUp size={14} className="text-green-400" /> Score Trends
+              </div>
+              <div className="flex items-center gap-2 text-text-muted">
+                <BarChart3 size={14} className="text-blue-400" /> Subject Mastery
+              </div>
+            </div>
+            <button onClick={() => navigate("/payment")} className="btn-primary px-8">
+              Upgrade to Pro — ₦3,000/mo
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
-  const performance = [
-    { subject: "English", score: 78, trend: "+5%", color: "text-primary", bg: "bg-primary/10" },
-    { subject: "Mathematics", score: 62, trend: "-2%", color: "text-accent", bg: "bg-accent/10" },
-    { subject: "Physics", score: 85, trend: "+12%", color: "text-primary", bg: "bg-primary/10" },
-    { subject: "Chemistry", score: 45, trend: "0%", color: "text-danger", bg: "bg-danger/10" },
-  ];
+  const performance = SUBJECTS.map((subject) => {
+    const perf = subjectDifficulties.find((s) => s.subject === subject) || { correctRate: 0, difficulty: "easy" };
+    const score = Math.round(perf.correctRate * 100);
+    let trend = "0%";
+    const historySessions = (history || []).filter((h) => h.subjects?.includes(subject));
+    if (historySessions.length >= 2) {
+      const recent = historySessions.slice(-2);
+      const prev = recent[0].totalQuestions > 0 ? Math.round((recent[0].correctAnswers / recent[0].totalQuestions) * 100) : 0;
+      const curr = recent[1].totalQuestions > 0 ? Math.round((recent[1].correctAnswers / recent[1].totalQuestions) * 100) : 0;
+      const diff = curr - prev;
+      trend = diff >= 0 ? `+${diff}%` : `${diff}%`;
+    }
+    return { subject, score, trend, difficulty: perf.difficulty, attempts: perf.totalAttempts };
+  });
 
   const fetchAdvice = async () => {
     setLoadingAdvice(true);
     try {
+      const weakTopics = subjectDifficulties
+        .filter((s) => s.correctRate < 0.6)
+        .map((s) => s.subject);
       const resp = await getStudyTip(
-        "General",
-        ["Quadratic Equations", "Organic Chemistry", "Concord in English"]
+        recommendation?.subject || "General",
+        weakTopics.length > 0 ? weakTopics : ["Quadratic Equations", "Organic Chemistry", "Concord in English"]
       );
-      // Safely wrap string response into the expected array format to prevent crashes
-      const formattedAdvice = typeof resp === 'string' ? [{ topic: "Study Advice", tips: [resp] }] : resp;
+      const formattedAdvice = typeof resp === "string" ? [{ topic: "Study Advice", tips: [resp] }] : resp;
       setAdvice(formattedAdvice);
       toast({ message: "AI Study Advice Generated! 🧠", type: "success" });
     } catch (err) {
@@ -104,26 +208,83 @@ const StatsPage = () => {
         <p className="text-text-muted font-medium">Deep insights into your learning journey and subject mastery.</p>
       </header>
 
+      {/* Overdue Alert */}
+      {overdueAssignments.length > 0 && (
+        <div className="glass-card p-4 border-danger/30 bg-danger/5 flex items-center gap-4">
+          <AlertTriangle className="text-danger shrink-0" size={24} />
+          <div>
+            <p className="font-black text-sm text-danger">Overdue Assignment{overdueAssignments.length > 1 ? "s" : ""}</p>
+            <p className="text-xs text-text-muted">{overdueAssignments.length} assignment{overdueAssignments.length > 1 ? "s have" : " has"} passed the deadline.</p>
+          </div>
+        </div>
+      )}
+
       {/* Top Overview Grid */}
       <div className="grid md:grid-cols-3 gap-6">
-        <StatsCard 
-          label="Overall Accuracy" 
-          value={user?.totalQuestionsAnswered > 0 ? Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 100) + "%" : "0%"} 
-          description="Based on all questions answered" 
-          icon={<Target className="text-primary" size={24} />} 
+        <StatsCard
+          label="Overall Accuracy"
+          value={user?.totalQuestionsAnswered > 0 ? Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 100) + "%" : "0%"}
+          description="Based on all questions answered"
+          icon={<Target className="text-primary" size={24} />}
         />
-        <StatsCard 
-          label="Syllabus Coverage" 
-          value="42%" 
-          description="Focused practice on 12 key topics remaining." 
-          icon={<BookOpen className="text-accent" size={24} />} 
+        <StatsCard
+          label="Syllabus Coverage"
+          value="42%"
+          description="Focused practice on 12 key topics remaining."
+          icon={<BookOpen className="text-accent" size={24} />}
         />
-        <StatsCard 
-          label="Predicted JAMB Score" 
-          value={user?.totalQuestionsAnswered > 0 ? Math.min(400, Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 400)) : "0"} 
-          description="Based on your current performance trends." 
-          icon={<TrendingUp className="text-blue-400" size={24} />} 
+        <StatsCard
+          label="Predicted JAMB Score"
+          value={user?.totalQuestionsAnswered > 0 ? Math.min(400, Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 400)) : "0"}
+          description="Based on your current performance trends."
+          icon={<TrendingUp className="text-blue-400" size={24} />}
         />
+      </div>
+
+      {/* XP Profile Card */}
+      <div className="glass-card p-8 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-black text-text flex items-center gap-3">
+            <Zap className="text-yellow-400" size={24} />
+            XP Profile
+          </h2>
+          <span className="text-xs font-black uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full">
+            Level {xpProfile?.level || 1} — {LEVEL_NAMES[(xpProfile?.level || 1) - 1]}
+          </span>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-6">
+          <div className="space-y-2">
+            <p className="text-xs font-black uppercase tracking-widest text-text-muted">Total XP</p>
+            <p className="text-3xl font-black font-mono text-yellow-400">{xpProfile?.totalXp || 0}</p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-xs font-black uppercase tracking-widest text-text-muted flex items-center gap-2">
+              <Trophy size={12} /> Highscore
+            </p>
+            <p className="text-3xl font-black font-mono text-accent">{highscore || 0}</p>
+          </div>
+          <div className="space-y-2">
+            <p className="text-xs font-black uppercase tracking-widest text-text-muted flex items-center gap-2">
+              <Flame size={12} /> Today's XP
+            </p>
+            <p className="text-3xl font-black font-mono text-orange-400">{dailyXp || 0}</p>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex justify-between text-xs font-black">
+            <span className="text-text-muted">Level {xpProfile?.level || 1}</span>
+            <span className="text-text-muted">Level {(xpProfile?.level || 1) + 1}</span>
+          </div>
+          <div className="h-3 bg-white/5 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-yellow-400 to-primary rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(250,204,21,0.3)]"
+              style={{ width: `${levelProgress}%` }}
+            ></div>
+          </div>
+          <p className="text-[10px] text-text-muted text-right">{levelProgress}% to next level</p>
+        </div>
       </div>
 
       {/* Score History Chart */}
@@ -146,7 +307,7 @@ const StatsPage = () => {
         <WhatsAppShareButton
           result={{
             streak: user?.streak,
-            xp: user?.totalXP || user?.xp,
+            xp: user?.totalXP || user?.xp || xpProfile?.totalXp || 0,
             totalQuestionsAnswered: user?.totalQuestionsAnswered,
           }}
           type="progress"
@@ -163,25 +324,36 @@ const StatsPage = () => {
           </h2>
           <div className="glass-card overflow-hidden">
             <div className="p-8 space-y-8">
-              {performance.map((item, i) => (
-                <div key={i} className="space-y-4">
-                  <div className="flex justify-between items-end">
-                    <div>
-                      <h4 className="font-bold text-lg">{item.subject}</h4>
-                      <span className={`text-[10px] font-black uppercase tracking-widest ${item.trend.startsWith('+') ? 'text-success' : 'text-danger'}`}>
-                        Trend: {item.trend}
-                      </span>
+              {performance.map((item, i) => {
+                const diffMeta = DIFFICULTY_META[item.difficulty] || DIFFICULTY_META.easy;
+                return (
+                  <div key={i} className="space-y-4">
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <h4 className="font-bold text-lg">{item.subject}</h4>
+                        <div className="flex items-center gap-3 mt-1">
+                          <span className={`text-[10px] font-black uppercase tracking-widest ${item.trend.startsWith("+") ? "text-success" : "text-danger"}`}>
+                            Trend: {item.trend}
+                          </span>
+                          <span className={`text-[10px] font-black uppercase tracking-widest ${diffMeta.color} ${diffMeta.bg} px-2 py-0.5 rounded-full`}>
+                            {diffMeta.icon} {diffMeta.label}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-black font-mono">{item.score}%</div>
+                        <div className="text-[10px] text-text-muted">{item.attempts} attempts</div>
+                      </div>
                     </div>
-                    <div className="text-2xl font-black font-mono">{item.score}%</div>
+                    <div className="h-3 bg-white/5 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full ${item.score >= 70 ? "bg-primary" : item.score >= 40 ? "bg-yellow-400" : "bg-danger"} transition-all duration-1000 shadow-[0_0_10px_rgba(0,0,0,0.3)]`}
+                        style={{ width: `${item.score}%` }}
+                      ></div>
+                    </div>
                   </div>
-                  <div className="h-3 bg-white/5 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full ${item.bg.replace('/10', '')} transition-all duration-1000 shadow-[0_0_10px_rgba(0,0,0,0.3)]`} 
-                      style={{ width: `${item.score}%` }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
             <div className="bg-white/5 p-6 text-center">
               <button className="text-primary text-sm font-black uppercase tracking-widest hover:underline">View All Subjects</button>
@@ -195,23 +367,69 @@ const StatsPage = () => {
             <Brain className="text-primary" size={24} />
             AI Weak Topic Lab
           </h2>
-          
-          <div className="glass-card p-8 border-primary/20 bg-primary-dim space-y-8 relative overflow-hidden">
+
+          <div className="glass-card p-8 border-primary/20 bg-primary-dim space-y-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-20">
               <Sparkles className="text-primary" size={48} />
             </div>
 
-            <div className="space-y-4">
-              <h3 className="text-xl font-black text-text">Identify Your Blocker</h3>
-              <p className="text-text-muted text-sm leading-relaxed">Let AI analyze your last 100 answers to find exactly where you're losing marks.</p>
+            {/* Recommendation */}
+            <div className="space-y-3">
+              <h3 className="text-xl font-black text-text">Smart Recommendation</h3>
+              {recommendation?.subject ? (
+                <div className="bg-white/5 rounded-xl p-4 space-y-2">
+                  <p className="text-sm font-bold text-primary">{recommendation.subject}</p>
+                  <p className="text-xs text-text-muted leading-relaxed">{recommendation.reason}</p>
+                  <span className={`inline-block text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${DIFFICULTY_META[recommendation.difficulty]?.color || "text-text-muted"} ${DIFFICULTY_META[recommendation.difficulty]?.bg || "bg-white/5"}`}>
+                    {DIFFICULTY_META[recommendation.difficulty]?.label || recommendation.difficulty}
+                  </span>
+                </div>
+              ) : (
+                <p className="text-xs text-text-muted">Complete some practice to get recommendations.</p>
+              )}
             </div>
 
-            <button 
+            {/* Brain Map */}
+            <div className="space-y-3">
+              <h3 className="text-sm font-black text-text uppercase tracking-widest">Your Brain Map</h3>
+              <div className="space-y-2">
+                {subjectDifficulties.map((s) => {
+                  const rate = Math.round(s.correctRate * 100);
+                  const isStrong = rate >= 70;
+                  const isWeak = rate < 40;
+                  return (
+                    <div key={s.subject} className="flex items-center gap-3 bg-white/5 rounded-lg p-3">
+                      <span className={isStrong ? "text-green-400" : isWeak ? "text-red-400" : "text-yellow-400"}>
+                        {isStrong ? <CheckCircle2 size={16} /> : isWeak ? <XCircle size={16} /> : <Target size={16} />}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs font-bold truncate">{s.subject}</span>
+                          <span className={`text-[10px] font-black ${isStrong ? "text-green-400" : isWeak ? "text-red-400" : "text-yellow-400"}`}>
+                            {rate}%
+                          </span>
+                        </div>
+                        <div className="h-1.5 bg-white/5 rounded-full overflow-hidden mt-1">
+                          <div
+                            className={`h-full rounded-full transition-all duration-500 ${isStrong ? "bg-green-400" : isWeak ? "bg-red-400" : "bg-yellow-400"}`}
+                            style={{ width: `${rate}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <button
               onClick={fetchAdvice}
               disabled={loadingAdvice}
               className="btn-primary w-full shadow-xl shadow-primary/20 flex items-center justify-center gap-3"
             >
-              {loadingAdvice ? <Loader2 className="animate-spin" size={24} /> : (
+              {loadingAdvice ? (
+                <Loader2 className="animate-spin" size={24} />
+              ) : (
                 <>
                   <Sparkles size={20} />
                   Analyze My Weakness
@@ -241,6 +459,77 @@ const StatsPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Assignment History */}
+      <div className="space-y-8">
+        <h2 className="text-2xl font-black text-text flex items-center gap-3">
+          <Medal className="text-primary" size={24} />
+          Assignment History
+        </h2>
+
+        {completedAssignments.length === 0 ? (
+          <div className="glass-card p-8 text-center">
+            <Clock className="text-text-muted mx-auto mb-4" size={32} />
+            <p className="text-text-muted font-medium">No assignments completed yet.</p>
+            <p className="text-text-muted text-xs mt-2">Complete assignments to track your progress here.</p>
+          </div>
+        ) : (
+          <div className="glass-card overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="border-b border-white/5">
+                    <th className="p-4 text-[10px] font-black uppercase tracking-widest text-text-muted">Subject</th>
+                    <th className="p-4 text-[10px] font-black uppercase tracking-widest text-text-muted">Score</th>
+                    <th className="p-4 text-[10px] font-black uppercase tracking-widest text-text-muted">Status</th>
+                    <th className="p-4 text-[10px] font-black uppercase tracking-widest text-text-muted">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {completedAssignments.slice().reverse().map((a) => (
+                    <tr key={a.id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                      <td className="p-4">
+                        <span className="font-bold text-sm">{a.subject}</span>
+                      </td>
+                      <td className="p-4">
+                        <span className="font-black font-mono text-lg">{a.score}%</span>
+                      </td>
+                      <td className="p-4">
+                        <span className={`inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full ${a.status === "passed" ? "text-green-400 bg-green-400/10" : "text-red-400 bg-red-400/10"}`}>
+                          {a.status === "passed" ? <CheckCircle2 size={12} /> : <XCircle size={12} />}
+                          {a.status === "passed" ? "Passed" : "Failed"}
+                        </span>
+                      </td>
+                      <td className="p-4 text-xs text-text-muted">
+                        {a.submittedAt ? new Date(a.submittedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "—"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {overdueAssignments.length > 0 && (
+          <div className="space-y-3">
+            <h3 className="text-sm font-black uppercase tracking-widest text-danger flex items-center gap-2">
+              <AlertTriangle size={14} /> Overdue
+            </h3>
+            {overdueAssignments.map((a) => (
+              <div key={a.id} className="glass-card p-4 border-danger/20 bg-danger/5 flex items-center justify-between">
+                <div>
+                  <p className="font-bold text-sm">{a.subject}</p>
+                  <p className="text-[10px] text-text-muted">Deadline passed</p>
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-danger bg-danger/10 px-2 py-0.5 rounded-full">
+                  Overdue
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -254,11 +543,10 @@ const ScoreChart = ({ sessions }) => {
     );
   }
 
-  // Calculate scores as percentages
-  const scores = sessions.map(s => ({
+  const scores = sessions.map((s) => ({
     score: s.totalQuestions > 0 ? Math.round((s.correctAnswers / s.totalQuestions) * 100) : 0,
     date: new Date(s.completedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short" }),
-    subject: s.subjects?.[0] || "Mixed"
+    subject: s.subjects?.[0] || "Mixed",
   }));
 
   const maxScore = 100;
@@ -268,39 +556,35 @@ const ScoreChart = ({ sessions }) => {
   const chartWidth = width - padding * 2;
   const chartHeight = height - padding * 2;
 
-  // Create SVG path for the line
-  const points = scores.map((s, i) => {
-    const x = padding + (i / Math.max(scores.length - 1, 1)) * chartWidth;
-    const y = padding + chartHeight - (s.score / maxScore) * chartHeight;
-    return `${x},${y}`;
-  }).join(" ");
+  const points = scores
+    .map((s, i) => {
+      const x = padding + (i / Math.max(scores.length - 1, 1)) * chartWidth;
+      const y = padding + chartHeight - (s.score / maxScore) * chartHeight;
+      return `${x},${y}`;
+    })
+    .join(" ");
 
-  // Create area fill path
   const areaPath = `M ${padding},${padding + chartHeight} ${points} L ${padding + chartWidth},${padding + chartHeight} Z`;
 
   return (
     <div className="space-y-6">
       <div className="relative h-48 w-full">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full" preserveAspectRatio="none">
-          {/* Grid lines */}
           <line x1={padding} y1={padding} x2={padding + chartWidth} y2={padding} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
-          <line x1={padding} y1={padding + chartHeight/2} x2={padding + chartWidth} y2={padding + chartHeight/2} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
+          <line x1={padding} y1={padding + chartHeight / 2} x2={padding + chartWidth} y2={padding + chartHeight / 2} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
           <line x1={padding} y1={padding + chartHeight} x2={padding + chartWidth} y2={padding + chartHeight} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
-          
-          {/* Area fill */}
+
           <path d={areaPath} fill="url(#scoreGradient)" opacity="0.3" />
-          
-          {/* Line */}
-          <polyline 
-            points={points} 
-            fill="none" 
-            stroke="#00E5A0" 
-            strokeWidth="1" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
+
+          <polyline
+            points={points}
+            fill="none"
+            stroke="#00E5A0"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
-          
-          {/* Data points */}
+
           {scores.map((s, i) => {
             const x = padding + (i / Math.max(scores.length - 1, 1)) * chartWidth;
             const y = padding + chartHeight - (s.score / maxScore) * chartHeight;
@@ -311,8 +595,7 @@ const ScoreChart = ({ sessions }) => {
               </g>
             );
           })}
-          
-          {/* Gradient definition */}
+
           <defs>
             <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#00E5A0" />
@@ -321,8 +604,7 @@ const ScoreChart = ({ sessions }) => {
           </defs>
         </svg>
       </div>
-      
-      {/* Legend */}
+
       <div className="flex flex-wrap gap-4 justify-center">
         {scores.map((s, i) => (
           <div key={i} className="text-center">

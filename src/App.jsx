@@ -46,6 +46,7 @@ const LeaderboardPage = lazy(() => import("./pages/LeaderboardPage"));
 const MasteryPage = lazy(() => import("./pages/MasteryPage"));
 const StudyPartnersPage = lazy(() => import("./pages/StudyPartnersPage"));
 const SharedTestPage = lazy(() => import("./pages/SharedTestPage"));
+const AssignmentPage = lazy(() => import("./pages/AssignmentPage"));
 
 function PageLoader() {
   return (
@@ -82,6 +83,7 @@ function AuthAwareRoutes() {
       "/profile": "Profile — ExamPadi AI",
       "/study-partners": "Study Partners — ExamPadi AI",
       "/shared-test": "Shared Test — ExamPadi AI",
+      "/assignment": "Assignment — ExamPadi AI",
     };
     document.title = titles[location.pathname] || "ExamPadi AI";
   }, [location.pathname, loading]);
@@ -129,6 +131,7 @@ function AuthAwareRoutes() {
           <Route path="/mastery" element={<ProtectedRoute><MasteryPage /></ProtectedRoute>} />
           <Route path="/study-partners" element={<ProtectedRoute><StudyPartnersPage /></ProtectedRoute>} />
           <Route path="/shared-test" element={<ProtectedRoute><SharedTestPage /></ProtectedRoute>} />
+          <Route path="/assignment" element={<ProtectedRoute><AssignmentPage /></ProtectedRoute>} />
           <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 

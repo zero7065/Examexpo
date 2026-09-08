@@ -20,7 +20,8 @@ import {
   MessageSquare,
   Trophy,
   Target,
-  Users
+  Users,
+  ClipboardList
 } from "lucide-react";
 
 const Navbar = () => {
@@ -40,6 +41,7 @@ const Navbar = () => {
     { name: "Leaderboard", path: "/leaderboard", icon: Trophy },
     { name: "Mastery", path: "/mastery", icon: Target },
     { name: "Partners", path: "/study-partners", icon: Users, requiresPro: true },
+    { name: "Assignment", path: "/assignment", icon: ClipboardList, requiresPro: true },
     { name: "Help", path: "/help", icon: HelpCircle },
     { name: "Contact", path: "/contact", icon: MessageSquare },
     { name: "Profile", path: "/profile", icon: User },
