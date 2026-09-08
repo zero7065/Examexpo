@@ -5,7 +5,7 @@ import { getUserProfile } from "../lib/userProfile";
 import { getRandomQuestions } from "../data/questions/index";
 import { ACHIEVEMENTS } from "../config/achievements";
 import { collection, query, where, orderBy, limit, getDocs, doc, updateDoc, arrayUnion } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebaseConfig";
 import { ChevronRight, TrendingUp, Target, Zap, BookOpen, BarChart3, Flame, Trophy, Crown } from "lucide-react";
 
 const SUBJECT_ICONS = {

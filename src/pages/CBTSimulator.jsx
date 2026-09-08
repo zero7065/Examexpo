@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
 import { doc, updateDoc, addDoc, collection, increment, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebaseConfig";
 import Timer from "../components/Timer";
 import ProGate from "../components/ProGate";
 import { ChevronLeft, ChevronRight, Flag, Send, AlertCircle, Monitor, BookOpen } from "lucide-react";

@@ -1,6 +1,6 @@
 // src/utils/saveSession.js
 import { doc, setDoc, updateDoc, increment, serverTimestamp, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebaseConfig";
 import { logActivity } from "../lib/activityLog";
 
 export async function saveSession({ uid, exam, mode, subjects, year, questions, answers, timeSpentSeconds }) {

@@ -5,7 +5,7 @@ import { useToast } from "../components/Toast";
 import { useNotifications } from "../hooks/useNotifications";
 import { getRandomQuestions } from "../data/questions/index";
 import { doc, updateDoc, addDoc, collection, increment, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebaseConfig";
 import { updateStreak } from "../lib/userProfile";
 import { logActivity } from "../lib/activityLog";
 import { ArrowLeft, RotateCcw, Share2, Sparkles, CheckCircle2, XCircle } from "lucide-react";
