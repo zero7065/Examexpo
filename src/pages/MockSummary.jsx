@@ -8,6 +8,7 @@ import { db } from "../firebase";
 import { updateStreak } from "../lib/userProfile";
 import { logActivity } from "../lib/activityLog";
 import { ArrowLeft, RotateCcw, Share2, ChevronDown, ChevronUp, Target, Zap, Clock, CheckCircle2, XCircle } from "lucide-react";
+import { WhatsAppShareButton } from "../components/WhatsAppShare";
 
 const SCORE_COLORS = { low: "#FF4D6A", mid: "#FF9F43", good: "#00E5A0", elite: "#D4A853" };
 
@@ -195,7 +196,11 @@ export default function MockSummary() {
           <button onClick={handleRetake} style={{ padding: 14, borderRadius: 12, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "inherit" }}><RotateCcw size={18} style={{ verticalAlign: "middle", marginRight: 8 }} /> Retake Exam</button>
           {weakTopics?.length > 0 && <button onClick={() => navigate("/practice", { state: { questions: getRandomQuestions(subjects?.[0] || "Biology", 10), subject: subjects?.[0] || "Biology", mode: "practice" } })} style={{ padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Practice Weak Topics</button>}
           <button onClick={() => navigate("/dashboard")} style={{ padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}><ArrowLeft size={18} style={{ verticalAlign: "middle", marginRight: 8 }} /> Back to Dashboard</button>
-          <button onClick={handleShare} style={{ padding: 10, borderRadius: 10, background: "transparent", border: "none", color: "#888", fontSize: 13, cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}><Share2 size={14} /> Share Result</button>
+          <WhatsAppShareButton
+            result={{ percentageScore: percentage, correctAnswers: correctAnswers, totalQuestions: totalQuestions, timeSpentSeconds: timeSpentSeconds }}
+            type="mock"
+            style={{ width: "100%", justifyContent: "center" }}
+          />
         </div>
       </div>
     </div>

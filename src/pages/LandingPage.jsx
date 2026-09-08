@@ -214,6 +214,7 @@ export default function LandingPage() {
             <div style={{ width: 36, height: 36, borderRadius: 10, background: "var(--lp-gradient-1)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 18, color: "#fff" }}>E</div>
             <span style={{ fontSize: 20, fontWeight: 800, color: "var(--lp-text)" }}>
               ExamPadi <span style={{ color: "var(--lp-primary)" }}>AI</span>
+              <span className="jadai-brand-full" style={{ fontSize: 9, marginLeft: 8, letterSpacing: "0.08em", verticalAlign: "super" }}>by Jadai</span>
             </span>
           </Link>
 
@@ -697,16 +698,41 @@ export default function LandingPage() {
               </div>
             </div>
             <div>
-              <h4 style={{ fontSize: 13, fontWeight: 700, color: "#fff", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: "0.05em" }}>Exams</h4>
+              <h4 style={{ fontSize: 13, fontWeight: 700, color: "#fff", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: "0.05em" }}>Contact</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {["JAMB", "WAEC", "NABTEB", "POST-UTME"].map(item => (
-                  <span key={item} style={{ fontSize: 13 }}>{item}</span>
-                ))}
+                <a href="https://wa.me/2348127636057" target="_blank" rel="noopener noreferrer" style={{ color: "#94a3b8", textDecoration: "none", fontSize: 13, transition: "color 0.2s" }}
+                  onMouseOver={e => e.currentTarget.style.color = "#fff"}
+                  onMouseOut={e => e.currentTarget.style.color = "#94a3b8"}
+                >WhatsApp: +234 812 763 6057</a>
+                <a href="mailto:jadai7065@gmail.com" style={{ color: "#94a3b8", textDecoration: "none", fontSize: 13, transition: "color 0.2s" }}
+                  onMouseOver={e => e.currentTarget.style.color = "#fff"}
+                  onMouseOut={e => e.currentTarget.style.color = "#94a3b8"}
+                >jadai7065@gmail.com</a>
               </div>
             </div>
           </div>
           <div style={{ borderTop: "1px solid #1e293b", paddingTop: 20, textAlign: "center", fontSize: 12 }}>
+            <div style={{ marginBottom: 12 }}>
+              <span style={{
+                background: "linear-gradient(135deg, #6C3CE9, #D4A853)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                fontWeight: 800,
+                fontSize: 13,
+                letterSpacing: "0.02em",
+                animation: "jadaiPulse 3s ease-in-out infinite",
+              }}>
+                Developed by Jadai Studios
+              </span>
+            </div>
             &copy; {new Date().getFullYear()} ExamPadi AI. All rights reserved.
+            <style>{`
+              @keyframes jadaiPulse {
+                0%, 100% { opacity: 1; filter: brightness(1); }
+                50% { opacity: 0.85; filter: brightness(1.2); }
+              }
+            `}</style>
           </div>
         </div>
       </footer>

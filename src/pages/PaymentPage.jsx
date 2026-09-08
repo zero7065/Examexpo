@@ -21,11 +21,7 @@ const PaymentPage = () => {
     expiryDate.setHours(23, 59, 59, 999);
     expiryDate.setDate(expiryDate.getDate() + duration);
 
-    updateUser({
-      plan: planId.includes('pro') ? 'pro' : 'free',
-      planExpiry: expiryDate.toISOString()
-    });
-
+    // Write subscription to Firestore FIRST so useSubscription re-fetch sees it
     if (db && user) {
       try {
         await updateDoc(doc(db, "users", user.uid), {
@@ -42,6 +38,12 @@ const PaymentPage = () => {
         console.warn("Failed to write subscription to Firestore:", e);
       }
     }
+
+    // Then update AuthContext so the UI reflects Pro status
+    updateUser({
+      plan: planId.includes('pro') ? 'pro' : 'free',
+      planExpiry: expiryDate.toISOString()
+    });
   };
 
   const handlePayment = async (plan) => {
@@ -60,7 +62,7 @@ const PaymentPage = () => {
         try {
           await activatePro(plan.id, plan.duration, response.reference);
           logActivity({ action: "payment", userId: user.uid, email: user.email, details: { plan: plan.id, planName: plan.name, reference: response.reference } });
-          toast({ message: `Payment successful! You're now Pro 🎉`, type: "success" });
+          toast({ message: "Payment successful! You're now Pro", type: "success" });
           navigate("/payment/success");
         } catch (err) {
           toast({ message: 'Activation failed. Please contact support.', type: "error" });
@@ -88,7 +90,7 @@ const PaymentPage = () => {
           <span>Go Unlimited with ExamPadi Pro</span>
         </div>
         <h1 className="text-4xl md:text-6xl font-black text-text tracking-tight">Unlock Your Full Potential</h1>
-        <p className="text-text-muted text-xl max-w-2xl mx-auto font-medium">Don't let the 30-question daily limit hold you back. Join the 300+ score squad today.</p>
+        <p className="text-text-muted text-xl max-w-2xl mx-auto font-medium">Don't let the daily question limit hold you back. Join the 300+ score squad today.</p>
       </header>
 
       {/* Plans Grid */}
@@ -145,7 +147,7 @@ const PaymentPage = () => {
                   </>
                 )}
               </button>
-              {payError && <p className="text-danger text-[13px] text-center font-bold">⚠️ {payError}</p>}
+              {payError && <p className="text-danger text-[13px] text-center font-bold">{payError}</p>}
             </div>
           </div>
         ))}

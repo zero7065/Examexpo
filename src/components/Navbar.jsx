@@ -2,11 +2,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
-import { isAdmin } from "../lib/activityLog";
-
-function checkAdmin(user) {
-  try { return typeof isAdmin === 'function' && isAdmin(user); } catch { return false; }
-}
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -23,9 +18,9 @@ import {
   HelpCircle,
   Bot,
   MessageSquare,
-  Shield,
   Trophy,
-  Target
+  Target,
+  Users
 } from "lucide-react";
 
 const Navbar = () => {
@@ -44,10 +39,10 @@ const Navbar = () => {
     { name: "Notepad", path: "/notepad", icon: StickyNote, requiresPro: true },
     { name: "Leaderboard", path: "/leaderboard", icon: Trophy },
     { name: "Mastery", path: "/mastery", icon: Target },
+    { name: "Partners", path: "/study-partners", icon: Users, requiresPro: true },
     { name: "Help", path: "/help", icon: HelpCircle },
     { name: "Contact", path: "/contact", icon: MessageSquare },
     { name: "Profile", path: "/profile", icon: User },
-    ...(checkAdmin(user) ? [{ name: "Admin", path: "/admin", icon: Shield }] : []),
   ] : [];
 
   const isLanding = location.pathname === "/";
@@ -121,6 +116,13 @@ const Navbar = () => {
               <LogOut size={20} />
               <span>Sign Out</span>
             </button>
+
+            {/* Jadai Studios branding */}
+            <div className="text-center pt-2">
+              <span className="jadai-brand text-[10px] font-black tracking-wider opacity-60 hover:opacity-100 transition-opacity cursor-default">
+                Developed by Jadai Studios
+              </span>
+            </div>
           </div>
         )}
       </nav>

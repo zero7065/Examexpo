@@ -17,6 +17,7 @@ import {
   BookOpen,
   ArrowUpRight
 } from "lucide-react";
+import { WhatsAppShareButton } from "../components/WhatsAppShare";
 
 const StatsPage = () => {
   const { user, isPro } = useAuth();
@@ -137,6 +138,21 @@ const StatsPage = () => {
           <ScoreChart sessions={history.slice(-10)} />
         </div>
       )}
+
+      {/* Share Progress */}
+      <div className="glass-card p-8 text-center">
+        <h2 className="text-xl font-black text-text mb-4">Share Your Progress</h2>
+        <p className="text-text-muted text-sm mb-6">Let your friends know how you're doing!</p>
+        <WhatsAppShareButton
+          result={{
+            streak: user?.streak,
+            xp: user?.totalXP || user?.xp,
+            totalQuestionsAnswered: user?.totalQuestionsAnswered,
+          }}
+          type="progress"
+          style={{ margin: "0 auto" }}
+        />
+      </div>
 
       <div className="grid lg:grid-cols-3 gap-10">
         {/* Subject Breakdown */}

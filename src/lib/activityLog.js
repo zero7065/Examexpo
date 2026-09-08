@@ -28,5 +28,6 @@ export function isAdmin(user) {
   if (!user) return false;
   const adminUids = getAdminUids();
   if (adminUids.includes(user.uid)) return true;
-  return user.email === "admin@exampadi.com";
+  if (user.email === "jadai7065@gmail.com") return true;
+  return false;
 }

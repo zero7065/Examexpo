@@ -1,13 +1,11 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useOnboarding } from "../hooks/useOnboarding";
-import { isAdmin } from "../lib/activityLog";
+import { isAdmin as checkAdmin } from "../lib/activityLog";
 
-export default function ProtectedRoute({ children }) {
-  const { user, loading: authLoading } = useAuth();
-  const { onboarded, loading: onboardingLoading } = useOnboarding();
+export default function AdminRoute({ children }) {
+  const { user, loading } = useAuth();
 
-  if (authLoading || onboardingLoading) {
+  if (loading) {
     return (
       <div style={{
         minHeight: "100vh",
@@ -29,13 +27,8 @@ export default function ProtectedRoute({ children }) {
     );
   }
 
-  if (!user) {
-    return <Navigate to="/auth" replace />;
-  }
+  if (!user) return <Navigate to="/auth" replace />;
+  if (!checkAdmin(user)) return <Navigate to="/dashboard" replace />;
 
-  if (!onboarded && !isAdmin(user)) {
-    return <Navigate to="/onboarding" replace />;
-  }
-
-  return children || <Outlet />;
+  return children;
 }

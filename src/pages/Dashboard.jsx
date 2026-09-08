@@ -6,6 +6,7 @@ import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit } from "../lib/usageTracker";
 import { getQuestionsFromBank } from "../data/questionBank";
 import { useNotifications } from "../hooks/useNotifications";
+import { isAdmin } from "../lib/activityLog";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import ResumeBanner from "../components/ResumeBanner";
 import NotificationPrompt from "../components/NotificationPrompt";
@@ -29,6 +30,13 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [showProModal, setShowProModal] = useState(false);
   const [questionsLeft, setQuestionsLeft] = useState({ used: 0, limit: 15 });
+
+  // Auto-redirect admin to admin panel
+  useEffect(() => {
+    if (user && isAdmin(user)) {
+      navigate("/admin", { replace: true });
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     async function fetchProfile() {

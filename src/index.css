@@ -318,3 +318,31 @@ h6 {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 }
+
+/* ─── Jadai Studios Branding ─── */
+.jadai-brand {
+  background: linear-gradient(135deg, #6C3CE9 0%, #D4A853 50%, #6C3CE9 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: jadaiShimmer 4s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes jadaiShimmer {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+.jadai-brand-full {
+  background: linear-gradient(135deg, #6C3CE9 0%, #D4A853 50%, #6C3CE9 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: jadaiShimmer 4s ease-in-out infinite;
+  display: inline-block;
+  text-shadow: none;
+}

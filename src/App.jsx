@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { StudyProvider } from "./context/StudyContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import InstallPrompt from "./components/InstallPrompt";
@@ -43,6 +44,8 @@ const Settings = lazy(() => import("./pages/Settings"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const LeaderboardPage = lazy(() => import("./pages/LeaderboardPage"));
 const MasteryPage = lazy(() => import("./pages/MasteryPage"));
+const StudyPartnersPage = lazy(() => import("./pages/StudyPartnersPage"));
+const SharedTestPage = lazy(() => import("./pages/SharedTestPage"));
 
 function PageLoader() {
   return (
@@ -77,6 +80,8 @@ function AuthAwareRoutes() {
       "/cbt": "CBT Simulator — ExamPadi AI",
       "/stats": "Statistics — ExamPadi AI",
       "/profile": "Profile — ExamPadi AI",
+      "/study-partners": "Study Partners — ExamPadi AI",
+      "/shared-test": "Shared Test — ExamPadi AI",
     };
     document.title = titles[location.pathname] || "ExamPadi AI";
   }, [location.pathname, loading]);
@@ -117,11 +122,13 @@ function AuthAwareRoutes() {
           <Route path="/ai-tutor" element={<ProtectedRoute><AITutor /></ProtectedRoute>} />
           <Route path="/progress" element={<ProtectedRoute><Progress /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-          <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
+          <Route path="/admin" element={<AdminRoute><AdminPage /></AdminRoute>} />
           <Route path="/contact" element={<ProtectedRoute><ContactPage /></ProtectedRoute>} />
           <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
           <Route path="/leaderboard" element={<ProtectedRoute><LeaderboardPage /></ProtectedRoute>} />
           <Route path="/mastery" element={<ProtectedRoute><MasteryPage /></ProtectedRoute>} />
+          <Route path="/study-partners" element={<ProtectedRoute><StudyPartnersPage /></ProtectedRoute>} />
+          <Route path="/shared-test" element={<ProtectedRoute><SharedTestPage /></ProtectedRoute>} />
           <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
@@ -129,6 +136,22 @@ function AuthAwareRoutes() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         </Suspense>
+
+        {/* Floating Jadai Studios credit */}
+        {location.pathname !== "/" && location.pathname !== "/auth" && (
+          <div style={{
+            position: "fixed", bottom: 12, right: 16, zIndex: 40,
+            pointerEvents: "none",
+          }}>
+            <span className="jadai-brand" style={{
+              fontSize: 9, fontWeight: 800, letterSpacing: "0.12em",
+              textTransform: "uppercase", opacity: 0.4,
+              fontFamily: "'Inter', system-ui, sans-serif",
+            }}>
+              Jadai Studios
+            </span>
+          </div>
+        )}
       </main>
     </div>
   );

@@ -2,12 +2,15 @@ import { useState } from "react";
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { PLANS } from "../config/plans";
+import { loadPaystack } from "../paystack";
 import { useToast } from "../components/Toast";
+import { useAuth } from "../context/AuthContext";
 
 export function usePaystack() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { toast } = useToast();
+  const { updateUser } = useAuth();
 
   function calculateEndDate(plan) {
     const now = new Date();
@@ -21,30 +24,51 @@ export function usePaystack() {
 
   async function verifyPayment(reference, plan, userId) {
     const endDate = calculateEndDate(plan);
-    // Optimistically activate Pro. Cloud Function webhook verifies server-side
-    // and writes the verified payment record to `payments/{reference}`.
-    await updateDoc(doc(db, "users", userId), {
-      subscription: {
-        plan,
-        status: "active",
-        reference,
-        startDate: serverTimestamp(),
-        endDate,
-        autoRenew: true,
-      },
+
+    // Write subscription to Firestore FIRST so useSubscription re-fetch sees it
+    if (db && userId) {
+      try {
+        await updateDoc(doc(db, "users", userId), {
+          subscription: {
+            plan,
+            status: "active",
+            reference,
+            startDate: serverTimestamp(),
+            endDate,
+            autoRenew: true,
+          },
+        });
+      } catch (e) {
+        console.warn("Failed to write subscription to Firestore:", e);
+      }
+    }
+
+    // Then update AuthContext so isPro() and UI reflect Pro status
+    updateUser({
+      plan: plan.includes("pro") ? "pro" : "free",
+      planExpiry: endDate.toISOString(),
     });
+
     toast({ message: "Pro activated! Welcome to ExamPadi Pro", type: "success" });
   }
 
-  function initializePayment({ plan, userEmail, userId, userName }) {
+  async function initializePayment({ plan, userEmail, userId, userName }) {
     const paystackKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
     if (!paystackKey) {
       toast({ message: "Paystack public key is missing. Add VITE_PAYSTACK_PUBLIC_KEY to your .env file.", type: "error" });
       return;
     }
 
+    // Load Paystack script if not already loaded
+    try {
+      await loadPaystack();
+    } catch (err) {
+      toast({ message: err.message, type: "error" });
+      return;
+    }
+
     if (typeof window.PaystackPop === "undefined") {
-      toast({ message: "Payment system not loaded. Check your connection.", type: "error" });
+      toast({ message: "Payment system not loaded. Check your connection and try again.", type: "error" });
       return;
     }
 

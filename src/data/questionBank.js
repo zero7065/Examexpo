@@ -437,25 +437,25 @@ export const QUESTION_BANK = {
   // ============================================================
 
   "Use of English Language (2025)": [
-    { id: "eng_2025_001", subject: "Use of English Language", exam: "JAMB", year: 2025, topic: "Lexis", difficulty: "easy",
+    { id: "eng_2025_101", subject: "Use of English Language", exam: "JAMB", year: 2025, topic: "Lexis", difficulty: "easy",
       question: "The word 'ubiquitous' means:",
       options: { A: "Rare", B: "Present everywhere", C: "Invisible", D: "Ancient" },
       correctAnswer: "B", explanation: "Ubiquitous means existing or being everywhere at the same time." },
-    { id: "eng_2025_002", subject: "Use of English Language", exam: "JAMB", year: 2025, topic: "Grammar", difficulty: "medium",
+    { id: "eng_2025_102", subject: "Use of English Language", exam: "JAMB", year: 2025, topic: "Grammar", difficulty: "medium",
       question: "Choose the correct tense: 'By next month, I ___ here for two years.'",
       options: { A: "will have been working", B: "will work", C: "will be working", D: "have been working" },
       correctAnswer: "A", explanation: "Future perfect continuous - by a specific future time, completed action lasting a duration." },
   ],
 
   "Mathematics (2025)": [
-    { id: "mth_2025_001", subject: "Mathematics", exam: "JAMB", year: 2025, topic: "Algebra", difficulty: "medium",
+    { id: "mth_2025_101", subject: "Mathematics", exam: "JAMB", year: 2025, topic: "Algebra", difficulty: "medium",
       question: "Factorize: x┬▓ - 9y┬▓",
       options: { A: "(x-3y)(x-3y)", B: "(x+3y)(x-3y)", C: "(x-3y)(x+3y)", D: "(x-9y)(x+y)" },
       correctAnswer: "B", explanation: "Difference of squares: a┬▓-b┬▓ = (a+b)(a-b). So x┬▓-9y┬▓ = (x+3y)(x-3y)." },
-    { id: "mth_2025_002", subject: "Mathematics", exam: "JAMB", year: 2025, topic: "Probability", difficulty: "hard",
+    { id: "mth_2025_102", subject: "Mathematics", exam: "JAMB", year: 2025, topic: "Probability", difficulty: "hard",
       question: "Two dice are thrown. What is the probability of getting a sum of 10?",
       options: { A: "1/12", B: "1/9", C: "1/6", D: "1/4" },
-      correctAnswer: "A", explanation: "Total outcomes = 36. Favorable: (4,6),(5,5),(6,4),(5,5 doesn't exist twice). Actually (4,6),(5,5),(6,4) = 3 outcomes. 3/36 = 1/12." },
+      correctAnswer: "A", explanation: "Total outcomes = 36. Favorable: (4,6),(5,5),(6,4) = 3 outcomes. 3/36 = 1/12." },
   ],
 
   // ============================================================

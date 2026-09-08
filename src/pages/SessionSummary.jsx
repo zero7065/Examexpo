@@ -9,6 +9,7 @@ import { db } from "../firebase";
 import { updateStreak } from "../lib/userProfile";
 import { logActivity } from "../lib/activityLog";
 import { ArrowLeft, RotateCcw, Share2, Sparkles, CheckCircle2, XCircle } from "lucide-react";
+import { WhatsAppShareButton, WhatsAppHelpButton } from "../components/WhatsAppShare";
 
 export default function SessionSummary() {
   const { user } = useAuth();
@@ -202,9 +203,16 @@ export default function SessionSummary() {
           <button onClick={() => navigate("/dashboard")} style={{ padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>
             <ArrowLeft size={18} style={{ verticalAlign: "middle", marginRight: 8 }} /> Back to Dashboard
           </button>
-          <button onClick={handleShare} style={{ padding: 10, borderRadius: 10, background: "transparent", border: "none", color: "#888", fontSize: 13, cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
-            <Share2 size={14} /> Share Score
-          </button>
+          <WhatsAppShareButton
+            result={{ percentageScore: data?.score || 0, correctAnswers: data?.correct || 0, totalQuestions: data?.total || 0, timeSpentSeconds: data?.timeSeconds || 0 }}
+            type="result"
+            style={{ width: "100%", justifyContent: "center" }}
+          />
+          <WhatsAppHelpButton
+            subject={data?.subject || "my exams"}
+            score={data?.score || 0}
+            style={{ width: "100%", justifyContent: "center" }}
+          />
         </div>
       </div>
     </div>

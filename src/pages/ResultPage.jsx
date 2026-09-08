@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useToast } from "../components/Toast";
 import { Share2, Check } from "lucide-react";
+import { WhatsAppShareButton, WhatsAppHelpButton } from "../components/WhatsAppShare";
 
 function getResultTier(percentage) {
   if (percentage >= 80) return {
@@ -268,18 +269,18 @@ export default function ResultPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           {/* Share Card - Show for good scores */}
           {percentage >= 60 && (
-            <button 
-              onClick={handleShare}
-              style={{
-                padding: 16, borderRadius: 12, background: "linear-gradient(135deg, #FFB800, #FF8C00)", 
-                border: "none", color: "#000", fontWeight: 800, fontSize: 16, cursor: "pointer", 
-                fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: 8
-              }}
-            >
-              {copied ? <Check size={20} /> : <Share2 size={20} />}
-              {copied ? "Copied! Share Now 🎉" : "Share Your Score 🏆"}
-            </button>
+            <WhatsAppShareButton
+              result={{ percentageScore: percentage, correctAnswers: result.correctAnswers, totalQuestions: result.totalQuestions, timeSpentSeconds: result.timeSpentSeconds }}
+              type="result"
+              style={{ width: "100%", justifyContent: "center" }}
+            />
           )}
+
+          <WhatsAppHelpButton
+            subject={result.questionLog?.[0]?.topic || result.questionLog?.[0]?.subject || "my exams"}
+            score={percentage}
+            style={{ width: "100%", justifyContent: "center" }}
+          />
           
           <button onClick={() => navigate("/select")} style={{
             padding: 16, borderRadius: 12, background: "var(--primary)", border: "none",
