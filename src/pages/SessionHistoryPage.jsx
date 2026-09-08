@@ -32,9 +32,12 @@ export default function SessionHistoryPage() {
             const local = JSON.parse(savedSessions);
             const merged = [...firestoreSessions];
             local.forEach(ls => {
-              if (!merged.find(m => m.completedAt === ls.completedAt)) {
-                merged.push(ls);
-              }
+              const lsTime = typeof ls.completedAt === "string" ? ls.completedAt : "";
+              const exists = merged.some(m => {
+                const mTime = m.completedAt?.toDate?.() ? m.completedAt.toDate().toISOString() : (typeof m.completedAt === "string" ? m.completedAt : "");
+                return mTime === lsTime;
+              });
+              if (!exists) merged.push(ls);
             });
             setSessions(merged);
           } catch { setSessions(firestoreSessions); }

@@ -292,10 +292,10 @@ export default function PracticeSession() {
         <AlertCircle size={48} color="#FF4D6A" />
         <h2 style={{ color: "#fff", fontWeight: 700, fontSize: 22, margin: 0 }}>Daily Limit Reached</h2>
         <p style={{ color: "#888", fontSize: 14 }}>Upgrade to Pro for unlimited questions</p>
-        <button onClick={() => setShowProModal(true)} style={{ padding: "12px 28px", borderRadius: 10, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 15 }}>
+        <button onClick={() => { setShowProModal(true); setProReason("questions"); }} style={{ padding: "12px 28px", borderRadius: 10, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 15 }}>
           Upgrade Now
         </button>
-        <ProUpgradeModal open={showProModal} onClose={() => navigate("/dashboard")} reason="questions" />
+        <ProUpgradeModal open={showProModal} onClose={() => { setShowProModal(false); navigate("/dashboard"); }} reason="questions" dismissible />
       </div>
     );
   }

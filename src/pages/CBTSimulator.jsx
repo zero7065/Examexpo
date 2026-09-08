@@ -20,6 +20,7 @@ const CBTSimulator = () => {
   const [flagged, setFlagged] = useState(new Set());
   const [answers, setAnswers] = useState({});
   const [redirected, setRedirected] = useState(false);
+  const [startTime] = useState(Date.now());
 
   useEffect(() => {
     if (!sessionData?.questions?.length && !redirected) {
@@ -42,22 +43,25 @@ const CBTSimulator = () => {
   const currentQuestion = questions[currentIndex];
 
   const handleOptionSelect = (option) => {
-    const newAnswers = { ...answers, [currentIndex]: option };
+    const q = questions[currentIndex];
+    const newAnswers = { ...answers, [q.id]: option };
     setAnswers(newAnswers);
     toast({ message: `Answer marked for Q${currentIndex + 1}`, type: "info" });
   };
 
   const toggleFlag = () => {
+    const q = questions[currentIndex];
     const newFlagged = new Set(flagged);
-    if (newFlagged.has(currentIndex)) newFlagged.delete(currentIndex);
-    else newFlagged.add(currentIndex);
+    if (newFlagged.has(q.id)) newFlagged.delete(q.id);
+    else newFlagged.add(q.id);
     setFlagged(newFlagged);
   };
 
   const handleFinish = async () => {
     if (!window.confirm("Are you sure you want to submit your exam?")) return;
 
-    const correctAnswers = questions.filter((q, i) => answers[i] === q.correctAnswer).length;
+    const timeSpentSeconds = Math.floor((Date.now() - startTime) / 1000);
+    const correctAnswers = questions.filter((q) => answers[q.id] === q.correctAnswer).length;
 
     const result = {
       exam: sessionData.exam,
@@ -67,14 +71,14 @@ const CBTSimulator = () => {
       correctAnswers,
       score: (correctAnswers / questions.length) * 400,
       percentageScore: (correctAnswers / questions.length) * 100,
-      timeSpentSeconds: 120 * 60,
+      timeSpentSeconds,
       questions: questions,
-      questionLog: questions.map((q, i) => ({
+      questionLog: questions.map((q) => ({
         questionId: q.id,
         subject: q.subject,
-        userAnswer: answers[i],
+        userAnswer: answers[q.id],
         correctAnswer: q.correctAnswer,
-        isCorrect: answers[i] === q.correctAnswer,
+        isCorrect: answers[q.id] === q.correctAnswer,
         topic: q.topic
       }))
     };
@@ -166,19 +170,19 @@ const CBTSimulator = () => {
                   key={key}
                   onClick={() => handleOptionSelect(key)}
                   className={`flex items-center gap-8 p-8 rounded-2xl border-2 transition-all text-left relative overflow-hidden group ${
-                    answers[currentIndex] === key 
+                    answers[currentQuestion.id] === key 
                     ? 'border-primary bg-primary-dim shadow-xl shadow-primary/10' 
                     : 'border-border bg-bg-2 hover:border-text-muted'
                   }`}
                 >
                   <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-2xl transition-all ${
-                    answers[currentIndex] === key ? 'bg-primary text-black' : 'bg-bg-3 text-text-muted group-hover:bg-border'
+                    answers[currentQuestion.id] === key ? 'bg-primary text-black' : 'bg-bg-3 text-text-muted group-hover:bg-border'
                   }`}>
                     {key}
                   </div>
                   <div className="font-bold text-xl flex-1 text-text">{value}</div>
                   
-                  {answers[currentIndex] === key && (
+                  {answers[currentQuestion.id] === key && (
                     <div className="absolute right-0 top-0 h-full w-1.5 bg-primary"></div>
                   )}
                 </button>
@@ -195,7 +199,7 @@ const CBTSimulator = () => {
           </h3>
 
           <div className="grid grid-cols-5 gap-3">
-            {questions.map((_, i) => (
+            {questions.map((q, i) => (
               <button
                 key={i}
                 onClick={() => {
@@ -205,8 +209,8 @@ const CBTSimulator = () => {
                 className={`w-12 h-12 rounded-xl flex items-center justify-center font-black text-xs transition-all border-2 ${
                   currentIndex === i ? 'ring-4 ring-primary/20 scale-110' : ''
                 } ${
-                  flagged.has(i) ? 'bg-accent text-black border-accent' :
-                  answers[i] ? 'bg-primary text-black border-primary' : 'bg-bg-3 text-text-muted border-border hover:border-text-muted'
+                  flagged.has(q.id) ? 'bg-accent text-black border-accent' :
+                  answers[q.id] ? 'bg-primary text-black border-primary' : 'bg-bg-3 text-text-muted border-border hover:border-text-muted'
                 }`}
               >
                 {i + 1}
@@ -253,10 +257,10 @@ const CBTSimulator = () => {
       <div className="bg-bg-2 border-t border-border px-10 py-6 flex items-center justify-between shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
         <button 
           onClick={toggleFlag}
-          className={`flex items-center gap-3 font-black text-xs uppercase tracking-widest transition-all ${flagged.has(currentIndex) ? 'text-accent' : 'text-text-muted hover:text-text'}`}
+          className={`flex items-center gap-3 font-black text-xs uppercase tracking-widest transition-all ${flagged.has(currentQuestion.id) ? 'text-accent' : 'text-text-muted hover:text-text'}`}
         >
-          <Flag size={20} fill={flagged.has(currentIndex) ? 'currentColor' : 'none'} />
-          {flagged.has(currentIndex) ? 'Unflag Question' : 'Flag for Review'}
+          <Flag size={20} fill={flagged.has(currentQuestion.id) ? 'currentColor' : 'none'} />
+          {flagged.has(currentQuestion.id) ? 'Unflag Question' : 'Flag for Review'}
         </button>
 
         <div className="flex gap-4">

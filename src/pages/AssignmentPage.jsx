@@ -78,7 +78,7 @@ export default function AssignmentPage() {
       });
     }, 1000);
     return () => clearInterval(timerRef.current);
-  }, [step, timeRemaining > 0]);
+  }, [step]);
 
   const handleRequestAssignment = useCallback(() => {
     if (!user) return;
@@ -643,7 +643,7 @@ export default function AssignmentPage() {
                   }}
                 >
                   <Lightbulb size={14} style={{ marginRight: 6, verticalAlign: "middle" }} />
-                  Hint: Think about the underlying concept before choosing.
+                  Hint: {current.explanation ? current.explanation.substring(0, 80) + "..." : "Think about the underlying concept before choosing."}
                 </div>
               )}
 

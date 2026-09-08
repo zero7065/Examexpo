@@ -55,11 +55,17 @@ const SubjectSelector = () => {
     try {
       const subjectObjects = selectedSubjects.map(id => subjects.find(s => s.id === id));
       const questionCount = mode === "cbt" ? 40 : 20;
-      const questions = getQuestionsFromBank({
-        subject: subjectObjects[0].name,
-        exam: exam,
-        count: questionCount
+      const questionsPerSubject = Math.ceil(questionCount / subjectObjects.length);
+      const allQuestions = [];
+      subjectObjects.forEach(s => {
+        const qs = getQuestionsFromBank({
+          subject: s.name,
+          exam: exam,
+          count: questionsPerSubject
+        });
+        allQuestions.push(...qs);
       });
+      const questions = allQuestions.sort(() => Math.random() - 0.5).slice(0, questionCount);
 
       toast({ message: "Questions generated! Let's go 🔥", type: "success" });
       navigate(mode === "cbt" ? "/cbt" : "/practice", {
@@ -67,7 +73,7 @@ const SubjectSelector = () => {
           exam,
           mode,
           questions,
-          subject: subjectObjects[0].name,
+          subject: subjectObjects.map(s => s.name).join(", "),
           subjects: subjectObjects,
           startTime: Date.now(),
         }

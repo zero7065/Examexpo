@@ -68,11 +68,13 @@ export default function MockExam() {
   function beginExam() {
     if (selectedSubjects.length === 0) { toast({ message: "Select at least one subject", type: "warning" }); return; }
     const allQs = [];
+    const diffFilter = difficulty === "official" ? null : difficulty;
     selectedSubjects.forEach(s => {
       const qs = getRandomQuestions(s, config?.questionsPerSubject || 45);
       allQs.push(...qs);
     });
-    const shuffled = allQs.sort(() => Math.random() - 0.5);
+    const filtered = diffFilter ? allQs.filter(q => q.difficulty === diffFilter) : allQs;
+    const shuffled = (filtered.length > 0 ? filtered : allQs).sort(() => Math.random() - 0.5);
 
     setQuestions(shuffled);
     setTimeRemaining(duration);
@@ -80,12 +82,52 @@ export default function MockExam() {
     setStep("exam");
   }
 
-  // Timer
+  // Timer — refs avoid stale closure
+  const questionsRef = useRef(questions);
+  const answersRef = useRef(answers);
+  const flaggedRef = useRef(flagged);
+  const selectedSubjectsRef = useRef(selectedSubjects);
+  useEffect(() => { questionsRef.current = questions; }, [questions]);
+  useEffect(() => { answersRef.current = answers; }, [answers]);
+  useEffect(() => { flaggedRef.current = flagged; }, [flagged]);
+  useEffect(() => { selectedSubjectsRef.current = selectedSubjects; }, [selectedSubjects]);
+
+  function handleAutoSubmit() {
+    toast({ message: "Time's up! Submitting your exam...", type: "info" });
+    const qs = questionsRef.current;
+    const ans = answersRef.current;
+    const subs = selectedSubjectsRef.current;
+    if (!qs.length) return;
+    const correct = qs.filter(q => ans[q.id] === q.answer).length;
+    const wrong = qs.filter(q => ans[q.id] && ans[q.id] !== q.answer).length;
+    const skipped = qs.length - Object.keys(ans).length;
+    const pct = Math.round((correct / qs.length) * 100);
+    const jambScore = Math.round((correct / qs.length) * 400);
+    const xp = correct * 5 + (pct >= 80 ? 50 : pct >= 60 ? 25 : 0);
+    const weakTopics = qs.filter(q => ans[q.id] && ans[q.id] !== q.answer).map(q => q.topic);
+    const subjectBreakdown = {};
+    subs.forEach(s => {
+      const sq = qs.filter(q => q.subject === s);
+      const c = sq.filter(q => ans[q.id] === q.answer).length;
+      const w = sq.filter(q => ans[q.id] && ans[q.id] !== q.answer).length;
+      subjectBreakdown[s] = { correct: c, wrong: w, skipped: sq.length - c - w, score: sq.length > 0 ? Math.round((c / sq.length) * 100) : 0 };
+    });
+    navigate("/mock-summary", {
+      state: {
+        examType, subjects: subs, questions: qs, answers: ans,
+        overallScore: pct, jamb400Score: jambScore, correct, wrong, skipped,
+        totalQuestions: qs.length, timeUsed: duration,
+        xpEarned: xp, weakTopics: [...new Set(weakTopics)], subjectBreakdown,
+        flaggedIds: [...flaggedRef.current],
+      }
+    });
+  }
+
   useEffect(() => {
     if (!examStarted || examSubmitted) return;
     timerRef.current = setInterval(() => {
       setTimeRemaining(prev => {
-        if (prev <= 0) { clearInterval(timerRef.current); handleAutoSubmit(); return 0; }
+        if (prev <= 1) { clearInterval(timerRef.current); handleAutoSubmit(); return 0; }
         if (prev === 900 && !warningShown) {
           setWarningShown(true);
           toast({ message: "⏰ 15 minutes remaining! Review flagged questions.", type: "info" });
@@ -95,11 +137,6 @@ export default function MockExam() {
     }, 1000);
     return () => clearInterval(timerRef.current);
   }, [examStarted, examSubmitted]);
-
-  function handleAutoSubmit() {
-    toast({ message: "Time's up! Submitting your exam...", type: "info" });
-    setTimeout(() => submitExam(), 3000);
-  }
 
   function submitExam() {
     if (timerRef.current) clearInterval(timerRef.current);
