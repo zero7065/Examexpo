@@ -372,6 +372,42 @@ function getNested(obj, path) {
 
 // ─── Restore session on page load ───
 (function init() {
+  // Seed admin account if it doesn't exist
+  (function seedAdmin() {
+    const adminEmail = "jadai7065@gmail.com";
+    const adminPass = "Admin1234";
+    const users = getUsers();
+    const existing = Object.values(users).find(u => u.email === adminEmail);
+    if (!existing) {
+      const adminUid = "admin_jadai_" + Date.now().toString(36);
+      users[adminUid] = {
+        uid: adminUid,
+        email: adminEmail,
+        password: simpleHash(adminPass),
+        displayName: "Jadai Admin",
+        plan: null,
+        planExpiry: null,
+        role: "admin",
+        createdAt: Date.now(),
+      };
+      setUsers(users);
+      // Also create Firestore profile
+      setDocInColl("users", adminUid, {
+        email: adminEmail,
+        name: "Jadai Admin",
+        role: "admin",
+        exam: null,
+        subjects: [],
+        onboarded: true,
+        streak: 1,
+        lastActive: Date.now(),
+        xp: 0,
+        targetScore: 280,
+        createdAt: Date.now(),
+      });
+    }
+  })();
+
   const saved = getSession();
   if (saved && saved.uid) {
     const userData = getUser(saved.uid);
