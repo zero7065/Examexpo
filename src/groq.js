@@ -2,6 +2,15 @@
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
+function stripJsonFences(text) {
+  if (!text) return text;
+  let cleaned = text.trim();
+  if (cleaned.startsWith("```")) {
+    cleaned = cleaned.replace(/^```(?:json)?\s*\n?/i, "").replace(/\n?```\s*$/i, "");
+  }
+  return cleaned.trim();
+}
+
 async function callGroqInternal(systemPrompt, userPrompt, maxTokens = 300) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
   if (!key) {
@@ -26,7 +35,8 @@ async function callGroqInternal(systemPrompt, userPrompt, maxTokens = 300) {
   });
 
   if (!res.ok) {
-    const err = await res.json();
+    const err = await res.json().catch(() => ({}));
+    console.error("Groq API error:", res.status, err);
     throw new Error(err.error?.message || `Groq error: ${res.status}`);
   }
 
@@ -35,13 +45,11 @@ async function callGroqInternal(systemPrompt, userPrompt, maxTokens = 300) {
 }
 
 export async function callGroq(systemPrompt, userPrompt, maxTokens = 300) {
-  // Try API, fall back to local response
   try {
     return await callGroqInternal(systemPrompt, userPrompt, maxTokens);
   } catch (err) {
     console.warn("Groq API unavailable, using fallback:", err.message);
     
-    // Generate helpful fallback based on user prompt
     const lowerPrompt = userPrompt.toLowerCase();
     
     if (lowerPrompt.includes("photosynthesis")) {
@@ -66,7 +74,8 @@ export async function explainAnswer({ question, options, userAnswer, correctAnsw
 
   try {
     return await callGroq(system, user, 200);
-  } catch {
+  } catch (err) {
+    console.error("explainAnswer fallback:", err.message);
     return `The correct answer is ${correctAnswer}. Keep practicing similar questions to master this topic!`;
   }
 }
@@ -76,7 +85,8 @@ export async function getStudyTip(subject, weakTopics) {
   const user = `Student is weak in ${subject}. Topics: ${weakTopics.join(", ")}. Give 3 tips.`;
   try {
     return await callGroq(system, user, 150);
-  } catch {
+  } catch (err) {
+    console.error("getStudyTip fallback:", err.message);
     return `Focus on past questions for ${weakTopics[0]}. Practice consistently every day. Review your notes and join study groups.`;
   }
 }
@@ -86,18 +96,20 @@ export async function getDailyQuote() {
   const user = "Give one motivational quote.";
   try {
     return await callGroq(system, user, 50);
-  } catch {
+  } catch (err) {
+    console.error("getDailyQuote fallback:", err.message);
     return "Every question you practice today is a problem you won't face on exam day. Keep pushing!";
   }
 }
 
 export async function predictLikelyQuestions({ subject, exam, count = 6 }) {
-  const system = `You are a ${exam} expert. Predict likely topics for ${subject}.`;
-  const user = `Predict ${count} topics.`;
+  const system = `You are a ${exam} expert. Predict likely topics for ${subject}. Return ONLY valid JSON array, no markdown fences.`;
+  const user = `Predict ${count} topics. Return JSON array like: [{"topic":"...","likelihood":"...","reason":"...","sampleQuestion":"..."}]`;
   try {
     const res = await callGroq(system, user, 800);
-    return JSON.parse(res);
-  } catch {
+    return JSON.parse(stripJsonFences(res));
+  } catch (err) {
+    console.error("predictLikelyQuestions fallback:", err.message);
     return [
       { topic: "Core Fundamentals", likelihood: "very high", reason: "Always tested.", sampleQuestion: "What is the foundational principle?" }
     ];
@@ -108,11 +120,12 @@ export async function generateStudyPlan({ targetScore, examDate, currentLevel, w
   const daysUntilExam = Math.ceil((new Date(examDate) - new Date()) / (1000 * 60 * 60 * 24));
   
   try {
-    const system = "You are an exam consultant. Create a study plan as JSON.";
-    const user = `Create a ${Math.max(7, daysUntilExam)}-day plan for ${targetScore}. Weak: ${weakTopics.join(", ")}`;
+    const system = "You are an exam consultant. Create a study plan as JSON. Return ONLY valid JSON, no markdown fences.";
+    const user = `Create a ${Math.max(7, daysUntilExam)}-day plan for ${targetScore}. Weak: ${weakTopics.join(", ")}. Return JSON with totalDays and topics array.`;
     const res = await callGroq(system, user, 1500);
-    return JSON.parse(res);
-  } catch {
+    return JSON.parse(stripJsonFences(res));
+  } catch (err) {
+    console.error("generateStudyPlan fallback:", err.message);
     return {
       totalDays: Math.max(7, daysUntilExam),
       topics: [

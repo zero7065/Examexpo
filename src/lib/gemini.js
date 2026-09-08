@@ -42,7 +42,10 @@ function fallbackChat(messages, subject) {
 
 export async function explainQuestion({ question, options, correctAnswer, userAnswer, subject, topic }) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
-  if (!key) return fallbackExplanation({ question, correctAnswer, userAnswer, subject });
+  if (!key) {
+    console.error("VITE_GROQ_API_KEY is missing");
+    return fallbackExplanation({ question, correctAnswer, userAnswer, subject });
+  }
 
   const prompt = `You are ExamPadi AI, an expert Nigerian exam tutor specializing in JAMB and WAEC.
 
@@ -56,25 +59,22 @@ Topic: ${topic}
 
 Give a clear, friendly explanation in 3-4 sentences. Explain WHY ${correctAnswer} is correct, and briefly why the student's choice was wrong. Use simple language suitable for SS3 Nigerian students. End with a memory tip.`;
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 12000);
-
   try {
     const system = "You are ExamPadi AI, an expert Nigerian exam tutor. Never say you are built by Google or mention Gemini. You are ExamPadi AI powered by Groq.";
     const result = await callGroq(system, prompt, 300);
     return result;
   } catch (e) {
-    if (e?.name === "AbortError") return "AI took too long to respond. Please try again.";
     console.error("AI explanation error:", e);
     return fallbackExplanation({ question, correctAnswer, userAnswer, subject });
-  } finally {
-    clearTimeout(timeout);
   }
 }
 
 export async function chatWithTutor({ messages, subject, userProfile }) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
-  if (!key) return fallbackChat(messages, subject);
+  if (!key) {
+    console.error("VITE_GROQ_API_KEY is missing");
+    return fallbackChat(messages, subject);
+  }
 
   const systemPrompt = `You are ExamPadi AI Tutor — an expert, friendly Nigerian exam tutor specializing in JAMB, WAEC, and NABTEB.
 
@@ -100,16 +100,12 @@ Never say you are built by Google or mention Gemini. You are ExamPadi AI powered
     content: m.content,
   }));
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 12000);
-
   try {
-    const key2 = import.meta.env.VITE_GROQ_API_KEY;
     const res = await fetch(GROQ_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${key2}`,
+        "Authorization": `Bearer ${key}`,
       },
       body: JSON.stringify({
         model: "llama-3.1-8b-instant",
@@ -120,18 +116,18 @@ Never say you are built by Google or mention Gemini. You are ExamPadi AI powered
         max_tokens: 600,
         temperature: 0.8,
       }),
-      signal: controller.signal,
     });
 
-    if (!res.ok) return fallbackChat(messages, subject);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      console.error("Groq chat error:", res.status, err);
+      return fallbackChat(messages, subject);
+    }
 
     const data = await res.json();
     return data.choices[0]?.message?.content?.trim() || fallbackChat(messages, subject);
   } catch (e) {
-    if (e?.name === "AbortError") return "AI took too long. Please try again.";
     console.error("AI chat error:", e);
     return fallbackChat(messages, subject);
-  } finally {
-    clearTimeout(timeout);
   }
 }

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
 import { doc, updateDoc, addDoc, collection, increment, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
@@ -11,6 +12,7 @@ import { ChevronLeft, ChevronRight, Flag, Send, AlertCircle, Monitor, BookOpen }
 
 const CBTSimulator = () => {
   const { user } = useAuth();
+  const { isPro } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,7 +34,6 @@ const CBTSimulator = () => {
 
   if (!sessionData?.questions?.length) return null;
 
-  const isPro = user?.plan === "pro" && user?.planExpiry && new Date(user.planExpiry) > new Date();
   if (!isPro) return (
     <div className="min-h-screen bg-bg flex items-center justify-center p-6">
       <ProGate feature="Full CBT Simulation" />

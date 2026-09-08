@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useSubscription } from "../hooks/useSubscription";
 import { useTheme } from "../context/ThemeContext";
 import { 
   User, 
@@ -21,6 +22,7 @@ import {
 
 const ProfilePage = () => {
   const { user, logout } = useAuth();
+  const { isPro } = useSubscription();
   const { theme, toggle } = useTheme();
   const [isDeleting, setIsDeleting] = React.useState(false);
   const [deleteError, setDeleteError] = React.useState(null);
@@ -53,7 +55,7 @@ const ProfilePage = () => {
         {/* Profile Card */}
         <div className="lg:col-span-1 space-y-8">
           <div className="glass-card p-10 text-center space-y-6 relative overflow-hidden">
-            {user?.plan === 'pro' && (
+            {isPro && (
               <div className="absolute top-4 right-4 text-accent">
                 <Crown size={24} />
               </div>
@@ -69,9 +71,9 @@ const ProfilePage = () => {
             </div>
 
             <div className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest inline-block ${
-              user?.plan === 'pro' ? 'bg-accent/10 text-accent border border-accent/20' : 'bg-white/5 text-text-muted border border-border'
+              isPro ? 'bg-accent/10 text-accent border border-accent/20' : 'bg-white/5 text-text-muted border border-border'
             }`}>
-              {user?.plan === 'pro' ? 'Pro Member' : 'Free Member'}
+              {isPro ? 'Pro Member' : 'Free Member'}
             </div>
           </div>
 
@@ -115,14 +117,14 @@ const ProfilePage = () => {
             <div className="glass-card p-8 space-y-8">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                  <h4 className="text-2xl font-black mb-2">Current Plan: <span className={user?.plan === 'pro' ? 'text-accent' : 'text-text-muted'}>{user?.plan === 'pro' ? 'ExamPadi Pro' : 'Basic (Free)'}</span></h4>
+                  <h4 className="text-2xl font-black mb-2">Current Plan: <span className={isPro ? 'text-accent' : 'text-text-muted'}>{isPro ? 'ExamPadi Pro' : 'Basic (Free)'}</span></h4>
                   <p className="text-text-muted text-sm font-medium max-w-sm">
-                    {user?.plan === 'pro' 
+                    {isPro 
                       ? "Your premium features are active until 2025. You have unlimited daily questions."
                       : "You are currently on the free tier limited to 30 questions daily. Upgrade to remove limits."}
                   </p>
                 </div>
-                {user?.plan !== 'pro' && (
+                {!isPro && (
                   <Link to="/payment" className="btn-primary px-8 h-14 whitespace-nowrap shadow-xl shadow-primary/20">Upgrade Now</Link>
                 )}
               </div>
@@ -130,9 +132,9 @@ const ProfilePage = () => {
               <div className="h-px bg-border"></div>
 
               <div className="grid sm:grid-cols-2 gap-6">
-                <PlanBenefit icon={<Zap size={16} />} text="Unlimited Questions" active={user?.plan === 'pro'} />
-                <PlanBenefit icon={<Award size={16} />} text="CBT Sim Mode" active={user?.plan === 'pro'} />
-                <PlanBenefit icon={<User size={16} />} text="Weak Topic AI" active={user?.plan === 'pro'} />
+                <PlanBenefit icon={<Zap size={16} />} text="Unlimited Questions" active={isPro} />
+                <PlanBenefit icon={<Award size={16} />} text="CBT Sim Mode" active={isPro} />
+                <PlanBenefit icon={<User size={16} />} text="Weak Topic AI" active={isPro} />
                 <PlanBenefit icon={<Settings size={16} />} text="Custom Dashboard" active={true} />
               </div>
             </div>

@@ -1,13 +1,15 @@
 // src/pages/StudyPlanPage.jsx
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
 import { generateStudyPlan } from "../groq";
 import { BookOpen, Target, Calendar, Clock, CheckCircle, ArrowRight, Loader2, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const StudyPlanPage = () => {
-  const { user, isPro, updateUser } = useAuth();
+  const { user, updateUser } = useAuth();
+  const { isPro: proStatus } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -15,8 +17,6 @@ const StudyPlanPage = () => {
   const [targetScore, setTargetScore] = useState(300);
   const [examDate, setExamDate] = useState("");
   const [completedTopics, setCompletedTopics] = useState([]);
-
-  const proStatus = isPro();
 
   useEffect(() => {
     // Load any saved study plan

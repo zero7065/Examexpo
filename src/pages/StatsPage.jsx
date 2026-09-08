@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
 import { useStudy } from "../context/StudyContext";
 import { getStudyTip } from "../groq";
@@ -48,14 +49,13 @@ const LEVEL_NAMES = [
 ];
 
 const StatsPage = () => {
-  const { user, isPro } = useAuth();
+  const { user } = useAuth();
+  const { isPro: proStatus } = useSubscription();
   const { toast } = useToast();
   const { history } = useStudy();
   const navigate = useNavigate();
   const [loadingAdvice, setLoadingAdvice] = useState(false);
   const [advice, setAdvice] = useState([]);
-
-  const proStatus = isPro();
 
   const xpProfile = proStatus ? useMemo(() => getXpProfile(user?.uid || user?.id || "guest"), [user]) : null;
   const highscore = proStatus ? useMemo(() => getHighscore(user?.uid || user?.id || "guest"), [user]) : null;

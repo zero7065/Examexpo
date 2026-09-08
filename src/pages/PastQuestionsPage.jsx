@@ -6,7 +6,7 @@ import { useToast } from "../components/Toast";
 import { JAMB_SUBJECTS, WAEC_SUBJECTS } from "../data/subjects";
 import { Sparkles, BookOpen, History, ChevronRight, HelpCircle, Loader2 } from "lucide-react";
 import ProGate from "../components/ProGate";
-import { useAuth } from "../context/AuthContext";
+import { useSubscription } from "../hooks/useSubscription";
 
 const PAST_YEARS = [2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014];
 
@@ -20,9 +20,7 @@ export default function PastQuestionsPage() {
   const [loading, setLoading] = useState(false);
   const [predLoading, setPredLoading] = useState(false);
   const [revealed, setRevealed] = useState({});
-  const { isPro } = useAuth();
-
-  const proStatus = isPro();
+  const { isPro: proStatus } = useSubscription();
   
   if (!proStatus) return (
     <div className="max-w-4xl mx-auto p-6 md:p-10">

@@ -1,18 +1,18 @@
 // src/pages/NotepadPage.jsx
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
 import ProGate from "../components/ProGate";
 import { Save, Trash2, Clock } from "lucide-react";
 
 const NotepadPage = () => {
-  const { user, isPro } = useAuth();
+  const { user } = useAuth();
+  const { isPro: proStatus } = useSubscription();
   const { toast } = useToast();
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [editingId, setEditingId] = useState(null);
-
-  const proStatus = isPro();
 
     // Load notes from localStorage on mount
     useEffect(() => {

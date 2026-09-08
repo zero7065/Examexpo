@@ -1,6 +1,7 @@
 // src/components/Navbar.jsx
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useSubscription } from "../hooks/useSubscription";
 import { useTheme } from "../context/ThemeContext";
 import { 
   LayoutDashboard, 
@@ -25,11 +26,11 @@ import {
 } from "lucide-react";
 
 const Navbar = () => {
-  const { user, logout, isPro } = useAuth();
+  const { user, logout } = useAuth();
+  const { isPro: proStatus } = useSubscription();
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const proStatus = isPro();
 
   const navItems = user ? [
     { name: "Home", path: "/dashboard", icon: LayoutDashboard },
