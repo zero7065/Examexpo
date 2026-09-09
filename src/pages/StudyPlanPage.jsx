@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
-import { generateStudyPlan } from "../groq";
+import { generateStudyPlan } from "../lib/ai";
 import { collection, query, where, getDocs, doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { BookOpen, Target, Calendar, Clock, CheckCircle, ArrowRight, Loader2, Sparkles } from "lucide-react";

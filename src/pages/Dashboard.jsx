@@ -8,7 +8,7 @@ import { checkQuestionLimit } from "../lib/usageTracker";
 import { getQuestionsFromBank } from "../data/questionBank";
 import { useNotifications } from "../hooks/useNotifications";
 import { isAdmin } from "../lib/activityLog";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import ResumeBanner from "../components/ResumeBanner";
@@ -53,7 +53,7 @@ export default function Dashboard() {
           setQuestionsLeft(ql);
 
           const sessionsRef = collection(db, "sessions");
-          const q = query(sessionsRef, where("userId", "==", user.uid));
+          const q = query(sessionsRef, where("userId", "==", user.uid), limit(100));
           const snap = await getDocs(q);
           const stats = {};
           snap.docs.forEach(d => {

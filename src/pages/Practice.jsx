@@ -108,9 +108,6 @@ export default function Practice() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0a0a0f", padding: "24px", fontFamily: "'Inter', system-ui, sans-serif" }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-      `}</style>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         <h1 style={{ fontSize: 28, fontWeight: 800, color: "#fff", marginBottom: 8 }}>Practice Mode</h1>
         <p style={{ color: "#888", fontSize: 14, marginBottom: 32 }}>Select a subject and choose your study mode</p>

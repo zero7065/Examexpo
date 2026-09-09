@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit, trackQuestion, checkAILimit, trackAIMessage } from "../lib/usageTracker";
-import { explainQuestion } from "../lib/gemini";
+import { explainQuestion } from "../lib/ai";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import { Whiteboard } from "../components/Whiteboard";
 import { useHint } from "../hooks/useHints";
@@ -108,7 +108,10 @@ export default function PracticeSession() {
       mode,
       startTime: sessionData?.startTime || Date.now(),
     };
-    try { localStorage.setItem("exampadi_active_session", JSON.stringify(sessionState)); } catch {}
+    const timer = setTimeout(() => {
+      try { localStorage.setItem("exampadi_active_session", JSON.stringify(sessionState)); } catch {}
+    }, 500);
+    return () => clearTimeout(timer);
   }, [answers, currentIndex, questions, subject, mode, sessionComplete, sessionData]);
 
   useEffect(() => {

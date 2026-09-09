@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
@@ -177,13 +177,17 @@ export function AuthProvider({ children }) {
         <p style={{ color: "#888", fontFamily: "system-ui, sans-serif", fontSize: 15 }}>
           Loading ExamPadi...
         </p>
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }
 
+  const ctxValue = useMemo(() => ({
+    user, loading, login, signInWithGoogle, register, logout, resetPassword,
+    findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole,
+  }), [user, loading, profileVersion, isPro]);
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, signInWithGoogle, register, logout, resetPassword, findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole }}>
+    <AuthContext.Provider value={ctxValue}>
       {children}
     </AuthContext.Provider>
   );

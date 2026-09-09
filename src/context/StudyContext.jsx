@@ -1,5 +1,5 @@
 // src/context/StudyContext.jsx - Works without Firebase (uses localStorage)
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer, useEffect, useMemo } from "react";
 import { db } from "../firebaseConfig";
 import { doc, setDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { getQuestionsFromBank } from "../data/questionBank";
@@ -117,13 +117,16 @@ export const StudyProvider = ({ children }) => {
     }
   }, []);
 
-  // Save active session to localStorage on change
+  // Save active session to localStorage on change (debounced)
   useEffect(() => {
-    if (state.currentSession) {
-      localStorage.setItem("exampadi_active_session", JSON.stringify(state.currentSession));
-    } else {
-      localStorage.removeItem("exampadi_active_session");
-    }
+    const timer = setTimeout(() => {
+      if (state.currentSession) {
+        localStorage.setItem("exampadi_active_session", JSON.stringify(state.currentSession));
+      } else {
+        localStorage.removeItem("exampadi_active_session");
+      }
+    }, 500);
+    return () => clearTimeout(timer);
   }, [state.currentSession]);
 
   const startSession = async (sessionData) => {
@@ -223,16 +226,18 @@ export const StudyProvider = ({ children }) => {
     dispatch({ type: "END_SESSION", payload: sessionResult });
   };
 
+  const ctxValue = useMemo(() => ({
+    ...state,
+    startSession,
+    submitAnswer,
+    nextQuestion,
+    saveSessionToFirestore,
+    resumeSession,
+    clearActiveSession,
+  }), [state, startSession, submitAnswer, nextQuestion, saveSessionToFirestore, resumeSession, clearActiveSession]);
+
   return (
-    <StudyContext.Provider value={{
-      ...state,
-      startSession,
-      submitAnswer,
-      nextQuestion,
-      saveSessionToFirestore,
-      resumeSession,
-      clearActiveSession,
-    }}>
+    <StudyContext.Provider value={ctxValue}>
       {children}
     </StudyContext.Provider>
   );

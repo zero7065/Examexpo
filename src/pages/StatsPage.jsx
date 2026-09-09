@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
 import { useStudy } from "../context/StudyContext";
-import { getStudyTip } from "../groq";
+import { getStudyTip } from "../lib/ai";
 import { getUserProfile } from "../lib/userProfile";
 import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
 import { db } from "../firebaseConfig";

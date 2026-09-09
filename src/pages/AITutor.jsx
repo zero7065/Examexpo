@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
-import { chatWithTutor } from "../lib/gemini";
+import { chatWithTutor } from "../lib/ai";
 import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
 import { logActivity } from "../lib/activityLog";
 import ProUpgradeModal from "../components/ProUpgradeModal";
