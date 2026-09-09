@@ -155,6 +155,11 @@ export function AuthProvider({ children }) {
     return user?.role || "user";
   }
 
+  const ctxValue = useMemo(() => ({
+    user, loading, login, signInWithGoogle, register, logout, resetPassword,
+    findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole,
+  }), [user, loading, profileVersion]);
+
   if (loading) {
     return (
       <div style={{
@@ -180,11 +185,6 @@ export function AuthProvider({ children }) {
       </div>
     );
   }
-
-  const ctxValue = useMemo(() => ({
-    user, loading, login, signInWithGoogle, register, logout, resetPassword,
-    findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole,
-  }), [user, loading, profileVersion, isPro]);
 
   return (
     <AuthContext.Provider value={ctxValue}>
