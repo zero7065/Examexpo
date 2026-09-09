@@ -105,45 +105,40 @@ export async function seedAdminAccount() {
   if (_adminSeeded || !_auth || !_db) return;
   _adminSeeded = true;
 
+  let shouldSignOut = false;
+
   try {
-    const adminDocRef = doc(_db, "users", "admin-seed");
-    const existing = await getDoc(adminDocRef);
-
-    if (existing.exists() && existing.data()?.adminSeeded) {
-      return;
-    }
-
-    let adminUid = null;
-
     try {
       const cred = await createUserWithEmailAndPassword(_auth, ADMIN_EMAIL, ADMIN_PASSWORD);
-      adminUid = cred.user.uid;
-      await updateProfile(cred.user, { displayName: ADMIN_NAME });
+      shouldSignOut = true;
+      await updateProfile(cred.user, { displayName: ADMIN_NAME }).catch(() => {});
 
-      await setDoc(doc(_db, "users", adminUid), {
-        email: ADMIN_EMAIL,
-        name: ADMIN_NAME,
-        role: "admin",
-        exam: null,
-        subjects: [],
-        onboarded: true,
-        createdAt: serverTimestamp(),
-      }, { merge: true });
-
-      await setDoc(adminDocRef, { adminSeeded: true, adminUid, createdAt: serverTimestamp() }, { merge: true });
-
-      await signOut(_auth);
+      try {
+        await setDoc(doc(_db, "users", cred.user.uid), {
+          email: ADMIN_EMAIL,
+          name: ADMIN_NAME,
+          role: "admin",
+          exam: null,
+          subjects: [],
+          onboarded: true,
+          createdAt: serverTimestamp(),
+        }, { merge: true });
+      } catch (e) {
+        console.warn("Admin Firestore doc skipped:", e.code);
+      }
     } catch (e) {
       if (e.code === "auth/email-already-in-use") {
-        await setDoc(adminDocRef, { adminSeeded: true, createdAt: serverTimestamp() }, { merge: true });
-        return;
-      } else {
-        console.warn("Admin seed skipped:", e.message);
         return;
       }
+      console.warn("Admin seed skipped:", e.code);
+      return;
     }
   } catch (e) {
     console.warn("Admin seed failed:", e.message);
+  } finally {
+    if (shouldSignOut) {
+      await signOut(_auth).catch(() => {});
+    }
   }
 }
 

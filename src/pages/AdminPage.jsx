@@ -46,14 +46,14 @@ export default function AdminPage() {
   async function fetchData() {
     setLoading(true);
     try {
-      const [logSnap, userSnap, sesSnap, mockSnap] = await Promise.all([
+      const [logResult, userResult, sesResult, mockResult] = await Promise.allSettled([
         getDocs(query(collection(db, "activityLog"), orderBy("timestamp", "desc"), limit(200))),
         getDocs(query(collection(db, "users"), limit(200))),
         getDocs(query(collection(db, "sessions"), limit(200))),
         getDocs(query(collection(db, "mockExams"), limit(200))),
       ]);
-      const users = userSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-      const allLogs = logSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const users = userResult.status === "fulfilled" ? userResult.value.docs.map(d => ({ id: d.id, ...d.data() })) : [];
+      const allLogs = logResult.status === "fulfilled" ? logResult.value.docs.map(d => ({ id: d.id, ...d.data() })) : [];
 
       setLogs(allLogs);
       setPaymentLogs(allLogs.filter(l => l.action?.includes("payment")));
@@ -68,8 +68,8 @@ export default function AdminPage() {
 
       setStats({
         users: users.length,
-        sessions: sesSnap.size,
-        mockExams: mockSnap.size,
+        sessions: sesResult.status === "fulfilled" ? sesResult.value.size : 0,
+        mockExams: mockResult.status === "fulfilled" ? mockResult.value.size : 0,
         proUsers: users.filter(u => {
           const sub = u.subscription;
           if (sub?.status === "active" && sub.endDate) {
@@ -91,15 +91,15 @@ export default function AdminPage() {
   async function loadUserActivity(targetUser) {
     setSelectedUser(targetUser);
     try {
-      const [userLogSnap, sesSnap, mockSnap] = await Promise.all([
+      const [userLogResult, sesResult, mockResult] = await Promise.allSettled([
         getDocs(query(collection(db, "activityLog"), where("userId", "==", targetUser.id), orderBy("timestamp", "desc"), limit(50))),
         getDocs(query(collection(db, "sessions"), where("userId", "==", targetUser.id), limit(50))),
         getDocs(query(collection(db, "mockExams"), where("userId", "==", targetUser.id), limit(50))),
       ]);
 
-      const userLogs = userLogSnap.docs.map(d => ({ id: d.id, ...d.data() }));
-      const sessions = sesSnap.docs.map(d => ({ id: d.id, ...d.data(), type: "session" }));
-      const mocks = mockSnap.docs.map(d => ({ id: d.id, ...d.data(), type: "mock" }));
+      const userLogs = userLogResult.status === "fulfilled" ? userLogResult.value.docs.map(d => ({ id: d.id, ...d.data() })) : [];
+      const sessions = sesResult.status === "fulfilled" ? sesResult.value.docs.map(d => ({ id: d.id, ...d.data(), type: "session" })) : [];
+      const mocks = mockResult.status === "fulfilled" ? mockResult.value.docs.map(d => ({ id: d.id, ...d.data(), type: "mock" })) : [];
 
       setUserActivity([...userLogs, ...sessions, ...mocks].sort((a, b) => {
         const ta = a.timestamp?.toDate?.() || new Date(0);

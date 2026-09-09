@@ -2,78 +2,65 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Users — full access to own doc only
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email == "jadai7065@gmail.com";
+    }
+
     match /users/{userId} {
-      allow read, write: if request.auth.uid == userId;
+      allow read, write: if request.auth.uid == userId || isAdmin();
     }
 
-    // User subcollections (sessions, subjectStats, notes)
     match /users/{userId}/{document=**} {
-      allow read, write: if request.auth.uid == userId;
+      allow read, write: if request.auth.uid == userId || isAdmin();
     }
 
-    // Sessions — read/write own
     match /sessions/{sessionId} {
-      allow read: if request.auth.uid == resource.data.userId;
-      allow create: if request.auth.uid == request.resource.data.userId;
-      allow delete: if request.auth.uid == resource.data.userId;
-      allow update: if request.auth.uid == resource.data.userId;
+      allow read: if request.auth.uid == resource.data.userId || isAdmin();
+      allow create: if request.auth.uid == request.resource.data.userId || isAdmin();
+      allow delete: if request.auth.uid == resource.data.userId || isAdmin();
+      allow update: if request.auth.uid == resource.data.userId || isAdmin();
     }
 
-    // Mock exams — read/write own
     match /mockExams/{mockId} {
-      allow read: if request.auth.uid == resource.data.userId;
-      allow create: if request.auth.uid == request.resource.data.userId;
-      allow delete: if request.auth.uid == resource.data.userId;
-      allow update: if request.auth.uid == resource.data.userId;
+      allow read: if request.auth.uid == resource.data.userId || isAdmin();
+      allow create: if request.auth.uid == request.resource.data.userId || isAdmin();
+      allow delete: if request.auth.uid == resource.data.userId || isAdmin();
+      allow update: if request.auth.uid == resource.data.userId || isAdmin();
     }
 
-    // Notes — read/write own
     match /notes/{noteId} {
-      allow read: if request.auth.uid == resource.data.userId;
-      allow create: if request.auth.uid == request.resource.data.userId;
-      allow delete: if request.auth.uid == resource.data.userId;
-      allow update: if request.auth.uid == request.resource.data.userId;
+      allow read: if request.auth.uid == resource.data.userId || isAdmin();
+      allow create: if request.auth.uid == request.resource.data.userId || isAdmin();
+      allow delete: if request.auth.uid == resource.data.userId || isAdmin();
+      allow update: if request.auth.uid == request.resource.data.userId || isAdmin();
     }
 
-    // Feedback — anyone authenticated can create, read own
     match /feedback/{feedbackId} {
+      allow read: if request.auth.uid == resource.data.userId || isAdmin();
       allow create: if request.auth != null;
-      allow read: if request.auth.uid == resource.data.userId;
     }
 
-    // Study plans — read/write own
     match /studyPlans/{userId} {
-      allow read, write: if request.auth.uid == userId;
+      allow read, write: if request.auth.uid == userId || isAdmin();
     }
 
-    // Activity log — authenticated users can write, read own
     match /activityLog/{logId} {
+      allow read: if request.auth.uid == resource.data.userId || isAdmin();
       allow create: if request.auth != null;
-      allow read: if request.auth.uid == resource.data.userId;
     }
 
-    // Payments — owner read, admin write
     match /payments/{paymentId} {
-      allow read: if request.auth.uid == resource.data.userId;
+      allow read: if request.auth.uid == resource.data.userId || isAdmin();
       allow write: if request.auth != null;
     }
 
-    // Questions — anyone authenticated can read
     match /questions/{questionId} {
       allow read: if request.auth != null;
       allow write: if request.auth != null;
     }
 
-    // Stats — authenticated users can read/write
     match /stats/{statId} {
       allow read, write: if request.auth != null;
-    }
-
-    // Admin seed doc — anyone can read
-    match /admin-seed/{docId} {
-      allow read: if true;
-      allow write: if true;
     }
   }
 }

@@ -56,7 +56,7 @@ const StatsPage = () => {
   const navigate = useNavigate();
   const [loadingAdvice, setLoadingAdvice] = useState(false);
   const [advice, setAdvice] = useState([]);
-  const [firestoreStats, setFirestoreStats] = useState({ sessions: [], totalXp: 0, streak: 0 });
+  const [firestoreStats, setFirestoreStats] = useState({ sessions: [], mocks: [], totalXp: 0, streak: 0, totalQuestions: 0, totalCorrect: 0, totalSessions: 0 });
 
   useEffect(() => {
     if (!user) return;

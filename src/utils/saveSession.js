@@ -10,65 +10,82 @@ export async function saveSession({ uid, exam, mode, subjects, year, questions, 
   const score = Math.round((correct / total) * 100);
 
   // Save session document
-  await setDoc(doc(db, "users", uid, "sessions", sessionId), {
-    exam,
-    mode,
-    subjects,
-    year: year || null,
-    totalQuestions: total,
-    correctAnswers: correct,
-    wrongAnswers: total - correct,
-    percentageScore: score,
-    timeSpentSeconds,
-    completedAt: serverTimestamp(),
-    questionLog: answers.map(a => ({
-      questionId: a.id,
-      subject: a.subject,
-      topic: a.topic || null,
-      userAnswer: a.userAnswer,
-      correctAnswer: a.correctAnswer,
-      isCorrect: a.isCorrect,
-    })),
-  });
+  try {
+    await setDoc(doc(db, "users", uid, "sessions", sessionId), {
+      exam,
+      mode,
+      subjects,
+      year: year || null,
+      totalQuestions: total,
+      correctAnswers: correct,
+      wrongAnswers: total - correct,
+      percentageScore: score,
+      timeSpentSeconds,
+      completedAt: serverTimestamp(),
+      questionLog: answers.map(a => ({
+        questionId: a.id,
+        subject: a.subject,
+        topic: a.topic || null,
+        userAnswer: a.userAnswer,
+        correctAnswer: a.correctAnswer,
+        isCorrect: a.isCorrect,
+      })),
+    });
+  } catch (e) {
+    console.warn("Session save skipped:", e.code);
+  }
 
   // Update user aggregate stats
-  await updateDoc(doc(db, "users", uid), {
-    totalQuestionsAnswered: increment(total),
-    totalCorrect: increment(correct),
-    totalSessions: increment(1),
-    totalStudyTimeSeconds: increment(timeSpentSeconds),
-    lastActiveDate: new Date().toISOString().split("T")[0],
-  });
+  try {
+    await updateDoc(doc(db, "users", uid), {
+      totalQuestionsAnswered: increment(total),
+      totalCorrect: increment(correct),
+      totalSessions: increment(1),
+      totalStudyTimeSeconds: increment(timeSpentSeconds),
+      lastActiveDate: new Date().toISOString().split("T")[0],
+    });
+  } catch (e) {
+    console.warn("User stats update skipped:", e.code);
+  }
 
   // Update streak and capture new streak value
-  const newStreak = await updateStreak(uid);
+  let newStreak = 0;
+  try {
+    newStreak = await updateStreak(uid);
+  } catch (e) {
+    console.warn("Streak update skipped:", e.code);
+  }
 
   // Update per-subject stats
   for (const subject of subjects) {
-    const subjectAnswers = answers.filter(a => a.subject === subject);
-    const subjectCorrect = subjectAnswers.filter(a => a.isCorrect).length;
-    const subjectRef = doc(db, "users", uid, "subjectStats", subject.replace(/\s+/g, "_").toLowerCase());
-    const subjectSnap = await getDoc(subjectRef);
+    try {
+      const subjectAnswers = answers.filter(a => a.subject === subject);
+      const subjectCorrect = subjectAnswers.filter(a => a.isCorrect).length;
+      const subjectRef = doc(db, "users", uid, "subjectStats", subject.replace(/\s+/g, "_").toLowerCase());
+      const subjectSnap = await getDoc(subjectRef);
 
-    if (subjectSnap.exists()) {
-      const old = subjectSnap.data();
-      const newTotal = old.totalAttempted + subjectAnswers.length;
-      const newCorrect = old.totalCorrect + subjectCorrect;
-      await updateDoc(subjectRef, {
-        totalAttempted: newTotal,
-        totalCorrect: newCorrect,
-        accuracyPercent: Math.round((newCorrect / newTotal) * 100),
-        lastPracticed: serverTimestamp(),
-      });
-    } else {
-      await setDoc(subjectRef, {
-        subjectId: subject.replace(/\s+/g, "_").toLowerCase(),
-        subjectName: subject,
-        totalAttempted: subjectAnswers.length,
-        totalCorrect: subjectCorrect,
-        accuracyPercent: subjectAnswers.length > 0 ? Math.round((subjectCorrect / subjectAnswers.length) * 100) : 0,
-        lastPracticed: serverTimestamp(),
-      });
+      if (subjectSnap.exists()) {
+        const old = subjectSnap.data();
+        const newTotal = old.totalAttempted + subjectAnswers.length;
+        const newCorrect = old.totalCorrect + subjectCorrect;
+        await updateDoc(subjectRef, {
+          totalAttempted: newTotal,
+          totalCorrect: newCorrect,
+          accuracyPercent: Math.round((newCorrect / newTotal) * 100),
+          lastPracticed: serverTimestamp(),
+        });
+      } else {
+        await setDoc(subjectRef, {
+          subjectId: subject.replace(/\s+/g, "_").toLowerCase(),
+          subjectName: subject,
+          totalAttempted: subjectAnswers.length,
+          totalCorrect: subjectCorrect,
+          accuracyPercent: subjectAnswers.length > 0 ? Math.round((subjectCorrect / subjectAnswers.length) * 100) : 0,
+          lastPracticed: serverTimestamp(),
+        });
+      }
+    } catch (e) {
+      console.warn("Subject stats skipped:", e.code);
     }
   }
 
@@ -106,7 +123,7 @@ export async function saveSession({ uid, exam, mode, subjects, year, questions, 
 async function updateStreak(uid) {
   const ref = doc(db, "users", uid);
   const snap = await getDoc(ref);
-  const data = snap.data();
+  const data = snap.data() || {};
   const today = new Date().toISOString().split("T")[0];
   const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
 
@@ -122,7 +139,7 @@ async function updateStreak(uid) {
     streak: newStreak,
     longestStreak: longest,
     lastActiveDate: today,
-  });
+  }).catch(() => {});
 
   return newStreak;
 }
