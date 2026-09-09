@@ -48,9 +48,7 @@ const Navbar = () => {
     { name: "Profile", path: "/profile", icon: User },
   ] : [];
 
-  const isLanding = location.pathname === "/";
-
-  if (isLanding && !user) return null;
+  if (!user) return null;
 
   return (
     <>

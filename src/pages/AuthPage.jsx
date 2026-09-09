@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
+import { getUserProfile } from "../lib/userProfile";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function AuthPage() {
@@ -13,10 +14,22 @@ export default function AuthPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const didRedirect = useRef(false);
 
   useEffect(() => {
-    if (user) {
-      navigate("/dashboard", { replace: true });
+    if (user && !didRedirect.current) {
+      didRedirect.current = true;
+      getUserProfile(user.uid)
+        .then((profile) => {
+          if (profile?.onboarded) {
+            navigate("/dashboard", { replace: true });
+          } else {
+            navigate("/onboarding", { replace: true });
+          }
+        })
+        .catch(() => {
+          navigate("/onboarding", { replace: true });
+        });
     }
   }, [user, navigate]);
 

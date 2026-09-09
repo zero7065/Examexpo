@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#0a0a0f",
+        background: "var(--bg)",
       }}>
         <div style={{
           width: 40,
@@ -33,7 +33,11 @@ export default function ProtectedRoute({ children }) {
     return <Navigate to="/auth" replace />;
   }
 
-  if (!onboarded && !isAdmin(user)) {
+  if (isAdmin(user)) {
+    return children || <Outlet />;
+  }
+
+  if (onboarded === false) {
     return <Navigate to="/onboarding" replace />;
   }
 

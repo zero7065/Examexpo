@@ -4,16 +4,10 @@ import { db } from "../firebaseConfig";
 export async function createUserProfile(uid, data) {
   const userDoc = doc(db, "users", uid);
   await setDoc(userDoc, {
-    exam: data.exam || null,
-    subjects: data.subjects || [],
-    streak: 1,
-    lastActive: serverTimestamp(),
-    xp: 0,
-    targetScore: data.targetScore || 280,
-    createdAt: serverTimestamp(),
-    onboarded: true,
     ...data,
-  });
+    onboarded: true,
+    lastActive: serverTimestamp(),
+  }, { merge: true });
 }
 
 export async function getUserProfile(uid) {
