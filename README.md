@@ -1,20 +1,96 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ExamPadi AI
 
-# Run and deploy your app
+JAMB/WAEC/NECO/NABTEB exam prep app with AI-powered tutoring, Pro subscriptions, and adaptive practice.
 
-This contains everything you need to run your app locally.
+**Live:** https://exampadi.jadai.dev
 
-View your app in jadai Studio: https://ai.studio/apps/d8751b3e-f55a-4ee1-9e67-7be02fa92b4c
+## Features
 
-## Run Locally
+- **300+ past questions** across 13 subjects (10 years: JAMB/WAEC/NECO/NABTEB)
+- **Groq AI Tutor** — instant explanations for any question or topic
+- **CBT Simulator** — timed exam simulation with real scoring
+- **Mock Exams** — full-length practice tests
+- **Adaptive Practice** — picks questions based on your weak areas
+- **Pro Subscriptions** — Paystack integration (monthly & yearly plans)
+- **Admin Console** — user management, Pro assignment, question CRUD
+- **Leaderboard & Mastery** — real-time rankings and accuracy tracking
+- **Study Partners** — find and connect with other students
+- **Assignments** — create and complete practice assignments
+- **Whiteboard** — draw diagrams while studying
+- **WhatsApp Share** — share questions with friends
+- **XP & Streak System** — gamified learning
+- **Dark/Light Theme**
+- **Fully Responsive** — desktop sidebar + mobile bottom nav
 
-**Prerequisites:**  Node.js
+## Tech Stack
 
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 19, Vite 8, Tailwind CSS |
+| Auth & DB | Firebase SDK (v12) — Auth, Firestore |
+| AI | Groq API (LLaMA 3) |
+| Payments | Paystack |
+| Hosting | Vercel |
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Quick Start
+
+```bash
+npm install
+cp .env.example .env   # Fill in your keys
+npm run dev             # http://localhost:5173
+```
+
+## Environment Variables
+
+```bash
+# Firebase (Required)
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
+VITE_FIREBASE_MEASUREMENT_ID=
+
+# Groq AI (Required)
+VITE_GROQ_API_KEY=
+
+# Paystack (Required for Pro)
+VITE_PAYSTACK_PUBLIC_KEY=
+VITE_PAYSTACK_SECRET_KEY=
+
+# Admin (Optional — auto-seeds jadai7065@gmail.com)
+VITE_ADMIN_UIDS=
+```
+
+## Deploy to Vercel
+
+1. Push to GitHub
+2. Import repo at vercel.com/new
+3. Add all env vars in **Settings → Environment Variables**
+4. Deploy
+
+## Project Structure
+
+```
+src/
+  components/    Navbar, ProtectedRoute, AdminRoute, Whiteboard, WhatsAppShare, etc.
+  context/       AuthContext, ThemeContext, StudyContext
+  hooks/         useSubscription, useOnboarding, usePaystack, useNotifications
+  lib/           userProfile, usageTracker, activityLog, gemini (Groq)
+  pages/         Dashboard, AITutor, CBTSimulator, AdminPage, Leaderboard, etc.
+  data/          questionBank.js (300+ questions)
+  config/        plans.js (Free, Pro Monthly, Pro Yearly)
+```
+
+## Admin Access
+
+- Auto-seeded: `jadai7065@gmail.com` / `Admin1234`
+- Admin auto-redirects to `/admin` on login
+- Hidden from non-admin users (no nav link)
+
+## Contact
+
+- WhatsApp: +2348127636057
+- Email: jadai7065@gmail.com
+- Developed by Jadai Studios

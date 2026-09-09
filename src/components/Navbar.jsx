@@ -92,10 +92,6 @@ const Navbar = () => {
               </Link>
             );
           })}
-          
-          {!user && (
-            <Link to="/auth" className="btn-primary w-full mt-10">Sign In</Link>
-          )}
         </div>
 
         {user && (
