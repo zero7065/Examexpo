@@ -14,6 +14,7 @@ import {
   deleteUser,
   GoogleAuthProvider,
   setPersistence,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -91,6 +92,63 @@ export { _googleProvider as googleProvider };
 export async function signInWithGoogle() {
   if (!_auth) throw new Error("Firebase not configured");
   return signInWithPopup(_auth, _googleProvider);
+}
+
+// ─── Admin auto-seed ───
+const ADMIN_EMAIL = "jadai7065@gmail.com";
+const ADMIN_PASSWORD = "Admin1234";
+const ADMIN_NAME = "Admin";
+
+let _adminSeeded = false;
+
+export async function seedAdminAccount() {
+  if (_adminSeeded || !_auth || !_db) return;
+  _adminSeeded = true;
+
+  try {
+    const adminDocRef = doc(_db, "users", "admin-seed");
+    const existing = await getDoc(adminDocRef);
+
+    if (existing.exists() && existing.data()?.adminSeeded) {
+      return;
+    }
+
+    let adminUid = null;
+
+    try {
+      const cred = await createUserWithEmailAndPassword(_auth, ADMIN_EMAIL, ADMIN_PASSWORD);
+      adminUid = cred.user.uid;
+      await updateProfile(cred.user, { displayName: ADMIN_NAME });
+      await signOut(_auth);
+    } catch (e) {
+      if (e.code === "auth/email-already-in-use") {
+        const methods = await fetchSignInMethodsForEmail(_auth, ADMIN_EMAIL).catch(() => []);
+        if (methods.length > 0) {
+          await setDoc(adminDocRef, { adminSeeded: true, createdAt: serverTimestamp() }, { merge: true });
+          return;
+        }
+      } else {
+        console.warn("Admin seed skipped:", e.message);
+        return;
+      }
+    }
+
+    if (adminUid) {
+      await setDoc(doc(_db, "users", adminUid), {
+        email: ADMIN_EMAIL,
+        name: ADMIN_NAME,
+        role: "admin",
+        exam: null,
+        subjects: [],
+        onboarded: true,
+        createdAt: serverTimestamp(),
+      }, { merge: true });
+
+      await setDoc(adminDocRef, { adminSeeded: true, adminUid, createdAt: serverTimestamp() }, { merge: true });
+    }
+  } catch (e) {
+    console.warn("Admin seed failed:", e.message);
+  }
 }
 
 // ─── App metadata ───

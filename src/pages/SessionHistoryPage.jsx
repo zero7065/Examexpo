@@ -25,25 +25,7 @@ export default function SessionHistoryPage() {
         const snap = await getDocs(q);
         const firestoreSessions = [];
         snap.forEach(d => firestoreSessions.push({ id: d.id, ...d.data() }));
-
-        const savedSessions = localStorage.getItem(`ep-sessions-${user.uid}`);
-        if (savedSessions) {
-          try {
-            const local = JSON.parse(savedSessions);
-            const merged = [...firestoreSessions];
-            local.forEach(ls => {
-              const lsTime = typeof ls.completedAt === "string" ? ls.completedAt : "";
-              const exists = merged.some(m => {
-                const mTime = m.completedAt?.toDate?.() ? m.completedAt.toDate().toISOString() : (typeof m.completedAt === "string" ? m.completedAt : "");
-                return mTime === lsTime;
-              });
-              if (!exists) merged.push(ls);
-            });
-            setSessions(merged);
-          } catch { setSessions(firestoreSessions); }
-        } else {
-          setSessions(firestoreSessions);
-        }
+        setSessions(firestoreSessions);
       } catch { setSessions([]); }
       setLoading(false);
     }

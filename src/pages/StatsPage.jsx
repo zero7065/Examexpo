@@ -5,9 +5,9 @@ import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
 import { useStudy } from "../context/StudyContext";
 import { getStudyTip } from "../groq";
-import { getAdaptiveQuestions, getRecommendation } from "../lib/adaptiveEngine";
-import { getXpProfile, getHighscore, getDailyXp } from "../lib/xpSystem";
-import { getAssignmentHistory } from "../lib/assignmentSystem";
+import { getUserProfile } from "../lib/userProfile";
+import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import {
   BarChart3,
   TrendingUp,
@@ -56,15 +56,99 @@ const StatsPage = () => {
   const navigate = useNavigate();
   const [loadingAdvice, setLoadingAdvice] = useState(false);
   const [advice, setAdvice] = useState([]);
+  const [firestoreStats, setFirestoreStats] = useState({ sessions: [], totalXp: 0, streak: 0 });
 
-  const xpProfile = proStatus ? useMemo(() => getXpProfile(user?.uid || user?.id || "guest"), [user]) : null;
-  const highscore = proStatus ? useMemo(() => getHighscore(user?.uid || user?.id || "guest"), [user]) : null;
-  const dailyXp = proStatus ? useMemo(() => getDailyXp(user?.uid || user?.id || "guest"), [user]) : null;
-  const recommendation = proStatus ? useMemo(() => getRecommendation(user?.uid || user?.id || "guest"), [user]) : null;
-  const assignments = proStatus ? useMemo(() => getAssignmentHistory(user?.uid || user?.id || "guest"), [user]) : null;
+  useEffect(() => {
+    if (!user) return;
+    async function fetchStats() {
+      try {
+        const profile = await getUserProfile(user.uid);
+        const sessionsRef = collection(db, "sessions");
+        const q = query(sessionsRef, where("userId", "==", user.uid), orderBy("completedAt", "desc"), limit(50));
+        const snap = await getDocs(q);
+        const sessions = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+        const mockRef = collection(db, "mockExams");
+        const mq = query(mockRef, where("userId", "==", user.uid), orderBy("completedAt", "desc"), limit(20));
+        const mockSnap = await getDocs(mq);
+        const mocks = mockSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+        setFirestoreStats({
+          sessions,
+          mocks,
+          totalXp: profile?.xp || 0,
+          streak: profile?.streak || 0,
+          totalQuestions: profile?.totalQuestionsAnswered || 0,
+          totalCorrect: profile?.totalCorrect || 0,
+          totalSessions: profile?.totalSessions || 0,
+        });
+      } catch (e) {
+        console.error("Failed to load stats:", e);
+      }
+    }
+    fetchStats();
+  }, [user]);
+
+  const xpProfile = useMemo(() => {
+    const totalXp = firestoreStats.totalXp || 0;
+    let level = 1;
+    if (totalXp >= 1000) level = 5;
+    else if (totalXp >= 600) level = 4;
+    else if (totalXp >= 300) level = 3;
+    else if (totalXp >= 100) level = 2;
+    return { totalXp, level };
+  }, [firestoreStats.totalXp]);
+
+  const highscore = useMemo(() => {
+    const allScores = [...firestoreStats.sessions, ...firestoreStats.mocks]
+      .map(s => s.score || 0)
+      .filter(Boolean);
+    return allScores.length > 0 ? Math.max(...allScores) : 0;
+  }, [firestoreStats]);
+
+  const dailyXp = useMemo(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return firestoreStats.sessions
+      .filter(s => {
+        const d = s.completedAt?.toDate?.();
+        return d && d >= today;
+      })
+      .reduce((sum, s) => sum + (s.xpEarned || 0), 0);
+  }, [firestoreStats.sessions]);
+
+  const subjectDifficulties = useMemo(() => {
+    const stats = {};
+    firestoreStats.sessions.forEach(s => {
+      const subj = s.subject;
+      if (!subj) return;
+      if (!stats[subj]) stats[subj] = { correct: 0, total: 0 };
+      stats[subj].correct += s.correct || 0;
+      stats[subj].total += s.total || 0;
+    });
+    return Object.entries(stats).map(([subject, data]) => ({
+      subject,
+      correctRate: data.total > 0 ? data.correct / data.total : 0,
+      difficulty: data.total > 0 ? (data.correct / data.total >= 0.7 ? "hard" : data.correct / data.total >= 0.4 ? "medium" : "easy") : "easy",
+      totalAttempts: data.total,
+    }));
+  }, [firestoreStats.sessions]);
+
+  const overdueAssignments = useMemo(() => [], []);
+  const completedAssignments = useMemo(() => [], []);
+
+  const recommendation = useMemo(() => {
+    if (subjectDifficulties.length === 0) return null;
+    const weakest = [...subjectDifficulties].sort((a, b) => a.correctRate - b.correctRate)[0];
+    if (!weakest || weakest.correctRate >= 0.7) return null;
+    return {
+      subject: weakest.subject,
+      reason: `Your accuracy in ${weakest.subject} is ${Math.round(weakest.correctRate * 100)}%. Focus on improving this area.`,
+      difficulty: weakest.difficulty,
+    };
+  }, [subjectDifficulties]);
 
   const levelProgress = useMemo(() => {
-    if (!xpProfile) return 0;
     const thresholds = [
       { min: 0, max: 99 },
       { min: 100, max: 299 },
@@ -77,34 +161,6 @@ const StatsPage = () => {
     const progress = xpProfile.totalXp - t.min;
     return Math.min(100, Math.round((progress / range) * 100));
   }, [xpProfile]);
-
-  const subjectDifficulties = useMemo(() => {
-    if (!user?.uid) return [];
-    const uid = user.uid || user.id || "guest";
-    return SUBJECTS.map((subject) => {
-      const data = localStorage.getItem(`ep_adaptive_${uid}`);
-      let all = {};
-      try { all = data ? JSON.parse(data) : {}; } catch (e) { console.warn("Failed to parse adaptive data:", e); }
-      const perf = all[subject] || { difficulty: "easy", correctRate: 0, totalAttempts: 0 };
-      return { subject, ...perf };
-    });
-  }, [user]);
-
-  const overdueAssignments = useMemo(() => {
-    if (!assignments) return [];
-    return assignments.filter(
-      (a) =>
-        (a.status === "pending" || a.status === "active") &&
-        Date.now() > a.deadline
-    );
-  }, [assignments]);
-
-  const completedAssignments = useMemo(() => {
-    if (!assignments) return [];
-    return assignments.filter(
-      (a) => a.status === "passed" || a.status === "failed"
-    );
-  }, [assignments]);
 
   if (!proStatus) {
     return (

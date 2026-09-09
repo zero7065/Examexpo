@@ -4,6 +4,8 @@ import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
 import { generateStudyPlan } from "../groq";
+import { collection, query, where, getDocs, doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import { BookOpen, Target, Calendar, Clock, CheckCircle, ArrowRight, Loader2, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,15 +19,38 @@ const StudyPlanPage = () => {
   const [targetScore, setTargetScore] = useState(300);
   const [examDate, setExamDate] = useState("");
   const [completedTopics, setCompletedTopics] = useState([]);
+  const [weakTopics, setWeakTopics] = useState([]);
 
   useEffect(() => {
-    // Load any saved study plan
-    const savedPlan = localStorage.getItem(`ep-study-plan-${user?.email}`);
-    if (savedPlan) {
+    if (!user) return;
+    async function loadData() {
       try {
-        setStudyPlan(JSON.parse(savedPlan));
-      } catch (e) {}
+        const planDoc = await getDoc(doc(db, "studyPlans", user.uid));
+        if (planDoc.exists()) {
+          const data = planDoc.data();
+          setStudyPlan(data.plan);
+          setTargetScore(data.targetScore || 300);
+          setExamDate(data.examDate || "");
+        }
+
+        const sessionsRef = collection(db, "sessions");
+        const q = query(sessionsRef, where("userId", "==", user.uid));
+        const snap = await getDocs(q);
+        const topicErrors = {};
+        snap.docs.forEach(d => {
+          const weak = d.data().weakTopics || [];
+          weak.forEach(t => { topicErrors[t] = (topicErrors[t] || 0) + 1; });
+        });
+        const sorted = Object.entries(topicErrors)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5)
+          .map(([topic]) => topic);
+        setWeakTopics(sorted);
+      } catch (e) {
+        console.error("Failed to load study plan data:", e);
+      }
     }
+    loadData();
   }, [user]);
 
   const generatePlan = async () => {
@@ -36,18 +61,26 @@ const StudyPlanPage = () => {
     
     setLoading(true);
     try {
+      const topicsForPlan = weakTopics.length > 0 ? weakTopics : ["General Review", "Past Questions Practice", "Time Management"];
       const plan = await generateStudyPlan({
         targetScore,
         examDate,
         currentLevel: user?.totalSessions || 0,
-        weakTopics: ["Quadratic Equations", "Organic Chemistry", "Verbs"] // Would come from actual analysis
+        weakTopics: topicsForPlan,
       });
       
-      // Save plan
       setStudyPlan(plan);
-      localStorage.setItem(`ep-study-plan-${user?.email}`, JSON.stringify(plan));
       
-      // Also save exam date to user profile
+      if (user) {
+        await setDoc(doc(db, "studyPlans", user.uid), {
+          plan,
+          targetScore,
+          examDate,
+          weakTopics: topicsForPlan,
+          createdAt: serverTimestamp(),
+        }, { merge: true });
+      }
+      
       if (updateUser) {
         updateUser({ examDate });
       }

@@ -42,10 +42,11 @@ export function AuthProvider({ children }) {
     }
     try {
       await updateProfile(cred.user, { displayName: name });
+      const isAdminEmail = email === "jadai7065@gmail.com";
       await setDoc(doc(db, "users", cred.user.uid), {
         email,
         name,
-        role: "user",
+        role: isAdminEmail ? "admin" : "user",
         exam: null,
         subjects: [],
         onboarded: false,

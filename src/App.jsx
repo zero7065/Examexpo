@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import InstallPrompt from "./components/InstallPrompt";
 import { useAuth } from "./context/AuthContext";
+import { seedAdminAccount, isFirebaseConfigured } from "./firebaseConfig";
 
 // Critical path — direct imports
 import LandingPage from "./pages/LandingPage";
@@ -161,6 +162,12 @@ function AuthAwareRoutes() {
 }
 
 function App() {
+  useEffect(() => {
+    if (isFirebaseConfigured) {
+      seedAdminAccount();
+    }
+  }, []);
+
   return (
     <ThemeProvider>
       <StudyProvider>

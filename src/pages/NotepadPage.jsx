@@ -1,8 +1,9 @@
-// src/pages/NotepadPage.jsx
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
+import { collection, query, where, orderBy, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import ProGate from "../components/ProGate";
 import { Save, Trash2, Clock } from "lucide-react";
 
@@ -13,51 +14,69 @@ const NotepadPage = () => {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [editingId, setEditingId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    // Load notes from localStorage on mount
-    useEffect(() => {
-      if (!user) return;
-      const savedNotes = localStorage.getItem(`ep-notes-${user.uid}`);
-      if (savedNotes) {
-        try {
-          setNotes(JSON.parse(savedNotes));
-        } catch (e) {
-          console.error("Failed to load notes:", e);
-        }
+  useEffect(() => {
+    if (!user) { setLoading(false); return; }
+    async function fetchNotes() {
+      try {
+        const q = query(
+          collection(db, "notes"),
+          where("userId", "==", user.uid),
+          orderBy("createdAt", "desc")
+        );
+        const snap = await getDocs(q);
+        const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        setNotes(data);
+      } catch (e) {
+        console.error("Failed to load notes:", e);
+      } finally {
+        setLoading(false);
       }
-    }, [user]);
+    }
+    fetchNotes();
+  }, [user]);
 
-    // Save notes to localStorage whenever they change
-    useEffect(() => {
-      if (!user) return;
-      localStorage.setItem(`ep-notes-${user.uid}`, JSON.stringify(notes));
-    }, [notes, user]);
-
-  const handleAddNote = () => {
-    if (!newNote.trim()) return;
-    
-    const note = {
-      id: Date.now(),
-      content: newNote,
-      createdAt: new Date().toISOString(),
-    };
-    
-    setNotes([note, ...notes]);
-    setNewNote("");
-    toast({ message: "Note saved!", type: "success" });
+  const handleAddNote = async () => {
+    if (!newNote.trim() || !user) return;
+    try {
+      const docRef = await addDoc(collection(db, "notes"), {
+        userId: user.uid,
+        content: newNote,
+        createdAt: serverTimestamp(),
+      });
+      setNotes([{ id: docRef.id, userId: user.uid, content: newNote, createdAt: new Date() }, ...notes]);
+      setNewNote("");
+      toast({ message: "Note saved!", type: "success" });
+    } catch (e) {
+      toast({ message: "Failed to save note", type: "error" });
+    }
   };
 
-  const handleDeleteNote = (id) => {
-    setNotes(notes.filter(n => n.id !== id));
-    toast({ message: "Note deleted", type: "info" });
+  const handleDeleteNote = async (id) => {
+    try {
+      await deleteDoc(doc(db, "notes", id));
+      setNotes(notes.filter(n => n.id !== id));
+      toast({ message: "Note deleted", type: "info" });
+    } catch (e) {
+      toast({ message: "Failed to delete note", type: "error" });
+    }
   };
 
-  const handleUpdateNote = (id) => {
-    if (!newNote.trim()) return;
-    setNotes(notes.map(n => n.id === id ? { ...n, content: newNote, updatedAt: new Date().toISOString() } : n));
-    setNewNote("");
-    setEditingId(null);
-    toast({ message: "Note updated!", type: "success" });
+  const handleUpdateNote = async (id) => {
+    if (!newNote.trim() || !user) return;
+    try {
+      await updateDoc(doc(db, "notes", id), {
+        content: newNote,
+        updatedAt: serverTimestamp(),
+      });
+      setNotes(notes.map(n => n.id === id ? { ...n, content: newNote, updatedAt: new Date() } : n));
+      setNewNote("");
+      setEditingId(null);
+      toast({ message: "Note updated!", type: "success" });
+    } catch (e) {
+      toast({ message: "Failed to update note", type: "error" });
+    }
   };
 
   const startEdit = (note) => {
@@ -82,7 +101,6 @@ const NotepadPage = () => {
         </p>
       </header>
 
-      {/* Add Note Form */}
       <div className="glass-card p-6 space-y-4">
         <textarea
           value={newNote}
@@ -122,9 +140,10 @@ const NotepadPage = () => {
         </div>
       </div>
 
-      {/* Notes List */}
       <div className="space-y-4">
-        {notes.length === 0 ? (
+        {loading ? (
+          <div className="text-center py-12 text-text-muted">Loading notes...</div>
+        ) : notes.length === 0 ? (
           <div className="text-center py-12 text-text-muted">
             <p className="font-medium">No notes yet.</p>
             <p className="text-sm">Start writing to keep track of your study key points.</p>
@@ -137,7 +156,9 @@ const NotepadPage = () => {
                   <div className="flex items-center gap-2 text-text-muted text-xs mb-3">
                     <Clock size={14} />
                     <span>
-                      {new Date(note.createdAt).toLocaleDateString()} at {new Date(note.createdAt).toLocaleTimeString()}
+                      {note.createdAt?.toDate ? note.createdAt.toDate().toLocaleDateString() : new Date(note.createdAt).toLocaleDateString()}
+                      {" at "}
+                      {note.createdAt?.toDate ? note.createdAt.toDate().toLocaleTimeString() : new Date(note.createdAt).toLocaleTimeString()}
                     </span>
                     {note.updatedAt && (
                       <span className="text-primary">(edited)</span>

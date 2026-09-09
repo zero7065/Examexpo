@@ -8,6 +8,8 @@ import { checkQuestionLimit } from "../lib/usageTracker";
 import { getQuestionsFromBank } from "../data/questionBank";
 import { useNotifications } from "../hooks/useNotifications";
 import { isAdmin } from "../lib/activityLog";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import ResumeBanner from "../components/ResumeBanner";
 import NotificationPrompt from "../components/NotificationPrompt";
@@ -32,6 +34,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [showProModal, setShowProModal] = useState(false);
   const [questionsLeft, setQuestionsLeft] = useState({ used: 0, limit: 15 });
+  const [subjectStats, setSubjectStats] = useState({});
 
   // Auto-redirect admin to admin panel
   useEffect(() => {
@@ -48,6 +51,21 @@ export default function Dashboard() {
           setProfile(data);
           const ql = await checkQuestionLimit(user.uid);
           setQuestionsLeft(ql);
+
+          const sessionsRef = collection(db, "sessions");
+          const q = query(sessionsRef, where("userId", "==", user.uid));
+          const snap = await getDocs(q);
+          const stats = {};
+          snap.docs.forEach(d => {
+            const s = d.data();
+            const subj = s.subject;
+            if (subj) {
+              if (!stats[subj]) stats[subj] = { done: 0, correct: 0 };
+              stats[subj].done += s.total || 0;
+              stats[subj].correct += s.correct || 0;
+            }
+          });
+          setSubjectStats(stats);
         } catch (e) {
           console.error(e);
           toast({ message: "Failed to load profile data. Please refresh.", type: "error" });
@@ -193,10 +211,13 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div style={{ height: 6, background: "#1e1e2a", borderRadius: 3, marginBottom: 12, overflow: "hidden" }}>
-                  <div style={{ width: "0%", height: "100%", background: "#6C3CE9", borderRadius: 3 }} />
+                  <div style={{
+                    width: subjectStats[subj] ? `${Math.min(100, Math.round((subjectStats[subj].correct / Math.max(subjectStats[subj].done, 1)) * 100))}%` : "0%",
+                    height: "100%", background: "#6C3CE9", borderRadius: 3
+                  }} />
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 13, color: "#888" }}>
-                  <span>0 questions done</span>
+                  <span>{subjectStats[subj]?.done || 0} questions done</span>
                   <button style={{ background: "none", border: "none", color: "#6C3CE9", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
                     Start <ChevronRight size={14} />
                   </button>
