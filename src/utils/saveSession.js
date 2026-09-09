@@ -93,11 +93,11 @@ export async function saveSession({ uid, exam, mode, subjects, year, questions, 
   // Log public activity (non-blocking)
   const primarySubject = subjects[0] || exam;
   if (newStreak >= 3) {
-    await logActivity("streak", { days: newStreak });
+    logActivity({ action: "streak", userId: uid, details: { days: newStreak } });
   } else if (score >= 70) {
-    await logActivity("high_score", { score, subject: primarySubject });
+    logActivity({ action: "high_score", userId: uid, details: { score, subject: primarySubject } });
   } else {
-    await logActivity("session_complete", { score, subject: primarySubject });
+    logActivity({ action: "session_complete", userId: uid, details: { score, subject: primarySubject } });
   }
 
   return { sessionId, score, correct, total };

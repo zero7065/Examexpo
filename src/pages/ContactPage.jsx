@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import { Mail, MessageCircle, Send, CheckCircle } from "lucide-react";
 
 const ContactPage = () => {
@@ -10,25 +12,25 @@ const ContactPage = () => {
   const [form, setForm] = useState({ subject: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!form.subject || !form.message) {
       toast({ message: "Please fill all fields", type: "warning" });
       return;
     }
 
-    // Save to localStorage (simulate sending)
-    const feedback = {
-      ...form,
-      email: user?.email,
-      date: new Date().toISOString(),
-    };
-    let existing = [];
-    try { existing = JSON.parse(localStorage.getItem("ep-feedback") || "[]"); } catch (e) { console.warn("Failed to parse feedback data:", e); }
-    existing.push(feedback);
-    localStorage.setItem("ep-feedback", JSON.stringify(existing));
-
-    setSent(true);
-    toast({ message: "Message sent! We'll respond soon.", type: "success" });
+    try {
+      await addDoc(collection(db, "feedback"), {
+        userId: user?.uid || null,
+        email: user?.email || "anonymous",
+        subject: form.subject,
+        message: form.message,
+        createdAt: serverTimestamp(),
+      });
+      setSent(true);
+      toast({ message: "Message sent! We'll respond soon.", type: "success" });
+    } catch (e) {
+      toast({ message: "Failed to send message. Please try again.", type: "error" });
+    }
   };
 
   if (sent) {
