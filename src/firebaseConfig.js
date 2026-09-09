@@ -119,21 +119,7 @@ export async function seedAdminAccount() {
       const cred = await createUserWithEmailAndPassword(_auth, ADMIN_EMAIL, ADMIN_PASSWORD);
       adminUid = cred.user.uid;
       await updateProfile(cred.user, { displayName: ADMIN_NAME });
-      await signOut(_auth);
-    } catch (e) {
-      if (e.code === "auth/email-already-in-use") {
-        const methods = await fetchSignInMethodsForEmail(_auth, ADMIN_EMAIL).catch(() => []);
-        if (methods.length > 0) {
-          await setDoc(adminDocRef, { adminSeeded: true, createdAt: serverTimestamp() }, { merge: true });
-          return;
-        }
-      } else {
-        console.warn("Admin seed skipped:", e.message);
-        return;
-      }
-    }
 
-    if (adminUid) {
       await setDoc(doc(_db, "users", adminUid), {
         email: ADMIN_EMAIL,
         name: ADMIN_NAME,
@@ -145,6 +131,16 @@ export async function seedAdminAccount() {
       }, { merge: true });
 
       await setDoc(adminDocRef, { adminSeeded: true, adminUid, createdAt: serverTimestamp() }, { merge: true });
+
+      await signOut(_auth);
+    } catch (e) {
+      if (e.code === "auth/email-already-in-use") {
+        await setDoc(adminDocRef, { adminSeeded: true, createdAt: serverTimestamp() }, { merge: true });
+        return;
+      } else {
+        console.warn("Admin seed skipped:", e.message);
+        return;
+      }
     }
   } catch (e) {
     console.warn("Admin seed failed:", e.message);

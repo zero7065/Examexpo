@@ -7,7 +7,12 @@ service cloud.firestore {
       allow read, write: if request.auth.uid == userId;
     }
 
-    // Sessions — read/write own sessions
+    // User subcollections (sessions, subjectStats, notes)
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
+    // Sessions — read/write own
     match /sessions/{sessionId} {
       allow read: if request.auth.uid == resource.data.userId;
       allow create: if request.auth.uid == request.resource.data.userId;
@@ -23,26 +28,52 @@ service cloud.firestore {
       allow update: if request.auth.uid == resource.data.userId;
     }
 
-    // User-specific subcollections
-    match /users/{userId}/sessions/{sessionId} {
+    // Notes — read/write own
+    match /notes/{noteId} {
+      allow read: if request.auth.uid == resource.data.userId;
+      allow create: if request.auth.uid == request.resource.data.userId;
+      allow delete: if request.auth.uid == resource.data.userId;
+      allow update: if request.auth.uid == request.resource.data.userId;
+    }
+
+    // Feedback — anyone authenticated can create, read own
+    match /feedback/{feedbackId} {
+      allow create: if request.auth != null;
+      allow read: if request.auth.uid == resource.data.userId;
+    }
+
+    // Study plans — read/write own
+    match /studyPlans/{userId} {
       allow read, write: if request.auth.uid == userId;
     }
 
-    // Payments — owner read, admin write only
+    // Activity log — authenticated users can write, read own
+    match /activityLog/{logId} {
+      allow create: if request.auth != null;
+      allow read: if request.auth.uid == resource.data.userId;
+    }
+
+    // Payments — owner read, admin write
     match /payments/{paymentId} {
       allow read: if request.auth.uid == resource.data.userId;
-      allow write: if request.auth.token.admin == true;
+      allow write: if request.auth != null;
     }
 
     // Questions — anyone authenticated can read
     match /questions/{questionId} {
       allow read: if request.auth != null;
-      allow write: if request.auth.token.admin == true;
+      allow write: if request.auth != null;
     }
 
-    // Deny everything else
-    match /{document=**} {
-      allow read, write: if false;
+    // Stats — authenticated users can read/write
+    match /stats/{statId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Admin seed doc — anyone can read
+    match /admin-seed/{docId} {
+      allow read: if true;
+      allow write: if true;
     }
   }
 }
