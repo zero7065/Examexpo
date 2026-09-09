@@ -6,7 +6,7 @@ import { useToast } from "../components/Toast";
 import { useStudy } from "../context/StudyContext";
 import { getStudyTip } from "../lib/ai";
 import { getUserProfile } from "../lib/userProfile";
-import { collection, query, where, getDocs, orderBy, limit } from "firebase/firestore";
+import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import {
   BarChart3,
@@ -64,14 +64,16 @@ const StatsPage = () => {
       try {
         const profile = await getUserProfile(user.uid);
         const sessionsRef = collection(db, "sessions");
-        const q = query(sessionsRef, where("userId", "==", user.uid), orderBy("completedAt", "desc"), limit(50));
+        const q = query(sessionsRef, where("userId", "==", user.uid), limit(50));
         const snap = await getDocs(q);
-        const sessions = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        const sessions = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+          .sort((a, b) => (b.completedAt?.seconds || 0) - (a.completedAt?.seconds || 0));
 
         const mockRef = collection(db, "mockExams");
-        const mq = query(mockRef, where("userId", "==", user.uid), orderBy("completedAt", "desc"), limit(20));
+        const mq = query(mockRef, where("userId", "==", user.uid), limit(20));
         const mockSnap = await getDocs(mq);
-        const mocks = mockSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        const mocks = mockSnap.docs.map(d => ({ id: d.id, ...d.data() }))
+          .sort((a, b) => (b.completedAt?.seconds || 0) - (a.completedAt?.seconds || 0));
 
         setFirestoreStats({
           sessions,
