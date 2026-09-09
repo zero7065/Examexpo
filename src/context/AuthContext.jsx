@@ -18,6 +18,18 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [profileVersion, setProfileVersion] = useState(0);
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -166,8 +178,8 @@ export function AuthProvider({ children }) {
 
   const ctxValue = useMemo(() => ({
     user, loading, login, signInWithGoogle, register, logout, resetPassword,
-    findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole,
-  }), [user, loading, profileVersion]);
+    findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole, isOffline,
+  }), [user, loading, profileVersion, isOffline]);
 
   if (loading) {
     return (

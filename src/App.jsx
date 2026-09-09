@@ -58,7 +58,7 @@ function PageLoader() {
 }
 
 function AuthAwareRoutes() {
-  const { user, loading } = useAuth();
+  const { user, loading, isOffline } = useAuth();
   const location = useLocation();
 
   useEffect(() => {
@@ -90,6 +90,16 @@ function AuthAwareRoutes() {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-bg text-text selection:bg-primary/30">
+      {isOffline && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999,
+          background: "#FF6B35", color: "#fff", padding: "8px 16px",
+          textAlign: "center", fontSize: 13, fontWeight: 600,
+          fontFamily: "'Inter', system-ui, sans-serif",
+        }}>
+          You're offline — some features may not work. Data will sync when you reconnect.
+        </div>
+      )}
       <Navbar />
       <ScrollToTop />
       <main className={`flex-1 ${user ? "md:ml-64 pb-20 md:pb-0" : ""} animate-fade`}>
