@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { getUserProfile } from "../lib/userProfile";
 import { getRandomQuestions } from "../data/questions/index";
 import { ACHIEVEMENTS } from "../config/achievements";
-import { collection, query, where, orderBy, limit, getDocs, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { collection, query, where, limit, getDocs, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { ChevronRight, TrendingUp, Target, Zap, BookOpen, BarChart3, Flame, Trophy, Crown } from "lucide-react";
 
@@ -47,14 +47,16 @@ export default function Progress() {
         const p = await getUserProfile(user.uid);
         setProfile(p);
 
-        const sesQ = query(collection(db, "sessions"), where("userId", "==", user.uid), orderBy("completedAt", "desc"), limit(50));
+        const sesQ = query(collection(db, "sessions"), where("userId", "==", user.uid), limit(50));
         const sesSnap = await getDocs(sesQ);
         const ses = []; sesSnap.forEach(d => ses.push({ id: d.id, ...d.data() }));
+        ses.sort((a, b) => (b.completedAt?.seconds || 0) - (a.completedAt?.seconds || 0));
         setSessions(ses);
 
-        const mockQ = query(collection(db, "mockExams"), where("userId", "==", user.uid), orderBy("completedAt", "desc"), limit(20));
+        const mockQ = query(collection(db, "mockExams"), where("userId", "==", user.uid), limit(20));
         const mockSnap = await getDocs(mockQ);
         const mocks = []; mockSnap.forEach(d => mocks.push({ id: d.id, ...d.data() }));
+        mocks.sort((a, b) => (b.completedAt?.seconds || 0) - (a.completedAt?.seconds || 0));
         setMockExams(mocks);
 
         // Achievement check

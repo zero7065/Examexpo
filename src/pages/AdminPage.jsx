@@ -92,12 +92,12 @@ export default function AdminPage() {
     setSelectedUser(targetUser);
     try {
       const [userLogResult, sesResult, mockResult] = await Promise.allSettled([
-        getDocs(query(collection(db, "activityLog"), where("userId", "==", targetUser.id), orderBy("timestamp", "desc"), limit(50))),
+        getDocs(query(collection(db, "activityLog"), where("userId", "==", targetUser.id), limit(50))),
         getDocs(query(collection(db, "sessions"), where("userId", "==", targetUser.id), limit(50))),
         getDocs(query(collection(db, "mockExams"), where("userId", "==", targetUser.id), limit(50))),
       ]);
 
-      const userLogs = userLogResult.status === "fulfilled" ? userLogResult.value.docs.map(d => ({ id: d.id, ...d.data() })) : [];
+      const userLogs = userLogResult.status === "fulfilled" ? userLogResult.value.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0)) : [];
       const sessions = sesResult.status === "fulfilled" ? sesResult.value.docs.map(d => ({ id: d.id, ...d.data(), type: "session" })) : [];
       const mocks = mockResult.status === "fulfilled" ? mockResult.value.docs.map(d => ({ id: d.id, ...d.data(), type: "mock" })) : [];
 

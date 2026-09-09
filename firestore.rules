@@ -6,16 +6,21 @@ service cloud.firestore {
       return request.auth != null && request.auth.token.email == "jadai7065@gmail.com";
     }
 
+    // ─── USERS ───
     match /users/{userId} {
       allow read: if request.auth != null;
-      allow write: if request.auth.uid == userId || isAdmin();
+      allow create: if request.auth.uid == userId || isAdmin();
+      allow update: if request.auth.uid == userId || isAdmin();
+      allow delete: if isAdmin();
     }
 
+    // ─── USER SUBCOLLECTIONS (sessions, subjectStats) ───
     match /users/{userId}/{document=**} {
       allow read: if request.auth.uid == userId || isAdmin();
       allow write: if request.auth.uid == userId || isAdmin();
     }
 
+    // ─── SESSIONS (top-level) ───
     match /sessions/{sessionId} {
       allow read: if request.auth.uid == resource.data.userId || isAdmin();
       allow create: if request.auth.uid == request.resource.data.userId || isAdmin();
@@ -23,6 +28,7 @@ service cloud.firestore {
       allow update: if request.auth.uid == resource.data.userId || isAdmin();
     }
 
+    // ─── MOCK EXAMS ───
     match /mockExams/{mockId} {
       allow read: if request.auth.uid == resource.data.userId || isAdmin();
       allow create: if request.auth.uid == request.resource.data.userId || isAdmin();
@@ -30,39 +36,86 @@ service cloud.firestore {
       allow update: if request.auth.uid == resource.data.userId || isAdmin();
     }
 
+    // ─── NOTES ───
     match /notes/{noteId} {
       allow read: if request.auth.uid == resource.data.userId || isAdmin();
       allow create: if request.auth.uid == request.resource.data.userId || isAdmin();
       allow delete: if request.auth.uid == resource.data.userId || isAdmin();
-      allow update: if request.auth.uid == request.resource.data.userId || isAdmin();
+      allow update: if request.auth.uid == resource.data.userId || isAdmin();
     }
 
-    match /feedback/{feedbackId} {
-      allow read: if request.auth.uid == resource.data.userId || isAdmin();
-      allow create: if request.auth != null;
-    }
-
-    match /studyPlans/{userId} {
-      allow read, write: if request.auth.uid == userId || isAdmin();
-    }
-
+    // ─── ACTIVITY LOG ───
     match /activityLog/{logId} {
       allow read: if request.auth.uid == resource.data.userId || isAdmin();
       allow create: if request.auth != null;
+      allow delete: if isAdmin();
     }
 
-    match /payments/{paymentId} {
+    // ─── FEEDBACK ───
+    match /feedback/{feedbackId} {
       allow read: if request.auth.uid == resource.data.userId || isAdmin();
-      allow write: if request.auth != null;
+      allow create: if request.auth != null;
+      allow delete: if isAdmin();
     }
 
+    // ─── STUDY PLANS ───
+    match /studyPlans/{userId} {
+      allow read: if request.auth.uid == userId || isAdmin();
+      allow write: if request.auth.uid == userId || isAdmin();
+    }
+
+    // ─── QUESTIONS ───
     match /questions/{questionId} {
       allow read: if request.auth != null;
       allow write: if request.auth != null;
     }
 
+    // ─── STATS (global) ───
     match /stats/{statId} {
       allow read, write: if request.auth != null;
+    }
+
+    // ─── STUDY PAIRS ───
+    match /studyPairs/{pairId} {
+      allow read: if request.auth != null && (
+        request.auth.uid in resource.data.users ||
+        isAdmin()
+      );
+      allow create: if request.auth != null;
+      allow update: if request.auth != null && (
+        request.auth.uid in resource.data.users ||
+        isAdmin()
+      );
+      allow delete: if request.auth != null && (
+        request.auth.uid in resource.data.users ||
+        isAdmin()
+      );
+    }
+
+    // ─── INVITATIONS ───
+    match /invitations/{inviteId} {
+      allow read: if request.auth.uid == resource.data.fromUid ||
+                   request.auth.uid == resource.data.toUid ||
+                   isAdmin();
+      allow create: if request.auth.uid == request.resource.data.fromUid;
+      allow update: if request.auth.uid == resource.data.toUid || isAdmin();
+    }
+
+    // ─── SHARED TESTS ───
+    match /sharedTests/{testId} {
+      allow read: if request.auth.uid == resource.data.creatorUid ||
+                   request.auth.uid == resource.data.partnerUid ||
+                   isAdmin();
+      allow create: if request.auth.uid == request.resource.data.creatorUid;
+      allow update: if request.auth.uid == resource.data.creatorUid ||
+                     request.auth.uid == resource.data.partnerUid ||
+                     isAdmin();
+    }
+
+    // ─── USER SESSIONS (subcollection via questions.js) ───
+    match /userSessions/{userId}/{document=**} {
+      allow read: if request.auth.uid == userId || isAdmin();
+      allow write: if request.auth.uid == userId || isAdmin();
     }
   }
 }
