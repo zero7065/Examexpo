@@ -20,11 +20,20 @@ export function AuthProvider({ children }) {
   const [profileVersion, setProfileVersion] = useState(0);
 
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      clearTimeout(timeout);
       setUser(firebaseUser);
       setLoading(false);
+    }, () => {
+      clearTimeout(timeout);
+      setLoading(false);
     });
-    return unsubscribe;
+
+    return () => { clearTimeout(timeout); unsubscribe(); };
   }, []);
 
   async function register(email, password, name) {
