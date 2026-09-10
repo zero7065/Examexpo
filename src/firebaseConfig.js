@@ -34,6 +34,7 @@ import {
   increment,
   serverTimestamp,
   arrayUnion,
+  enableIndexedDbPersistence,
 } from "firebase/firestore";
 
 // ─── Firebase Config ───
@@ -62,6 +63,14 @@ if (isConfigured) {
     app = initializeApp(firebaseConfig);
     _auth = getAuth(app);
     _db = getFirestore(app);
+    // Enable offline persistence so Firestore works when network is flaky
+    enableIndexedDbPersistence(_db).catch((err) => {
+      if (err.code === "failed-precondition") {
+        console.warn("Firestore persistence: multiple tabs open, persistence only in first tab");
+      } else if (err.code === "unimplemented") {
+        console.warn("Firestore persistence: browser doesn't support IndexedDB");
+      }
+    });
   } catch (e) {
     console.error("Firebase init failed:", e);
   }
@@ -100,45 +109,35 @@ const ADMIN_PASSWORD = "Admin1234";
 const ADMIN_NAME = "Admin";
 
 let _adminSeeded = false;
+let _adminSeedAttempted = false;
 
 export async function seedAdminAccount() {
-  if (_adminSeeded || !_auth || !_db) return;
-  _adminSeeded = true;
-
-  let shouldSignOut = false;
+  if (_adminSeeded || _adminSeedAttempted || !_auth || !_db) return;
+  _adminSeedAttempted = true;
 
   try {
+    const cred = await createUserWithEmailAndPassword(_auth, ADMIN_EMAIL, ADMIN_PASSWORD);
     try {
-      const cred = await createUserWithEmailAndPassword(_auth, ADMIN_EMAIL, ADMIN_PASSWORD);
-      shouldSignOut = true;
       await updateProfile(cred.user, { displayName: ADMIN_NAME }).catch(() => {});
-
-      try {
-        await setDoc(doc(_db, "users", cred.user.uid), {
-          email: ADMIN_EMAIL,
-          name: ADMIN_NAME,
-          role: "admin",
-          exam: null,
-          subjects: [],
-          onboarded: true,
-          createdAt: serverTimestamp(),
-        }, { merge: true });
-      } catch (e) {
-        console.warn("Admin Firestore doc skipped:", e.code);
-      }
+      await setDoc(doc(_db, "users", cred.user.uid), {
+        email: ADMIN_EMAIL,
+        name: ADMIN_NAME,
+        role: "admin",
+        exam: null,
+        subjects: [],
+        onboarded: true,
+        createdAt: serverTimestamp(),
+      }, { merge: true }).catch(() => {});
     } catch (e) {
-      if (e.code === "auth/email-already-in-use") {
-        return;
-      }
-      console.warn("Admin seed skipped:", e.code);
-      return;
+      // Firestore write failed, but auth user exists — that's fine
     }
+    await signOut(_auth).catch(() => {});
+    _adminSeeded = true;
   } catch (e) {
-    console.warn("Admin seed failed:", e.message);
-  } finally {
-    if (shouldSignOut) {
-      await signOut(_auth).catch(() => {});
+    if (e.code === "auth/email-already-in-use") {
+      _adminSeeded = true;
     }
+    // Silently skip — network may be down, admin can still sign in manually
   }
 }
 

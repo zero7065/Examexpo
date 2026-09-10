@@ -32,20 +32,58 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+    let timeout;
+    let retryCount = 0;
+    let unsubscribe;
+    let cancelled = false;
+    const MAX_RETRIES = 3;
 
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      clearTimeout(timeout);
-      setUser(firebaseUser);
-      setLoading(false);
-    }, () => {
-      clearTimeout(timeout);
-      setLoading(false);
-    });
+    function startAuthListener() {
+      timeout = setTimeout(() => {
+        if (cancelled) return;
+        if (retryCount < MAX_RETRIES) {
+          retryCount++;
+          console.warn(`Auth state listener timed out, retry ${retryCount}/${MAX_RETRIES}`);
+          // Clean up previous listener before retrying
+          if (unsubscribe) unsubscribe();
+          startAuthListener();
+        } else {
+          console.warn("Auth state listener: max retries reached, proceeding offline");
+          setLoading(false);
+        }
+      }, 8000);
 
-    return () => { clearTimeout(timeout); unsubscribe(); };
+      unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+        clearTimeout(timeout);
+        if (cancelled) return;
+        setUser(firebaseUser);
+        setLoading(false);
+        retryCount = 0;
+      }, (error) => {
+        clearTimeout(timeout);
+        console.warn("Auth state error:", error?.code);
+        if (cancelled) return;
+        if (retryCount < MAX_RETRIES && error?.code === "auth/network-request-failed") {
+          retryCount++;
+          console.warn(`Retrying auth listener (${retryCount}/${MAX_RETRIES})...`);
+          setTimeout(() => {
+            if (!cancelled) {
+              if (unsubscribe) unsubscribe();
+              startAuthListener();
+            }
+          }, 2000 * retryCount);
+        } else {
+          setLoading(false);
+        }
+      });
+    }
+
+    startAuthListener();
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   async function register(email, password, name) {
@@ -53,13 +91,16 @@ export function AuthProvider({ children }) {
     try {
       cred = await createUserWithEmailAndPassword(auth, email, password);
     } catch (e) {
-      if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
+      if (e.code === 'auth/network-request-failed') {
+        await new Promise(r => setTimeout(r, 1500));
+        cred = await createUserWithEmailAndPassword(auth, email, password);
+      } else if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
         throw new Error("Firebase Email/Password auth is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Email/Password.");
-      }
-      if (e.code === 'auth/email-already-in-use') {
+      } else if (e.code === 'auth/email-already-in-use') {
+        throw e;
+      } else {
         throw e;
       }
-      throw e;
     }
     try {
       await updateProfile(cred.user, { displayName: name });
@@ -74,8 +115,12 @@ export function AuthProvider({ children }) {
         createdAt: serverTimestamp(),
       }, { merge: true });
     } catch (e) {
-      try { await deleteUser(cred.user); } catch (_) {}
-      throw new Error("Failed to create profile. Please try again.");
+      console.warn("Profile write failed (will retry on next load):", e.code);
+      // Don't delete user on network errors — profile will be created on next login
+      if (e.code !== "permission-denied" && e.code !== "unavailable") {
+        try { await deleteUser(cred.user); } catch (_) {}
+        throw new Error("Failed to create profile. Please try again.");
+      }
     }
     setUser({ ...cred.user, displayName: name });
     logActivity({ action: "register", userId: cred.user.uid, email, details: { name } });
@@ -86,10 +131,15 @@ export function AuthProvider({ children }) {
     try {
       cred = await signInWithEmailAndPassword(auth, email, password);
     } catch (e) {
-      if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
+      if (e.code === 'auth/network-request-failed') {
+        // Retry once after brief delay
+        await new Promise(r => setTimeout(r, 1500));
+        cred = await signInWithEmailAndPassword(auth, email, password);
+      } else if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
         throw new Error("Firebase Email/Password auth is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Email/Password.");
+      } else {
+        throw e;
       }
-      throw e;
     }
     logActivity({ action: "login", userId: cred.user.uid, email });
   }
