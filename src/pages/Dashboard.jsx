@@ -116,7 +116,7 @@ export default function Dashboard() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 32px" }}>
+      <div className="page-content" style={{ maxWidth: 1200, margin: "0 auto" }}>
         <ResumeBanner />
         <NotificationPrompt />
 
@@ -124,9 +124,9 @@ export default function Dashboard() {
         {!isPro && (
           <div style={{
             background: "linear-gradient(90deg, #1a0a3a, #0d1a3a)", borderRadius: 16,
-            padding: "16px 20px", marginBottom: 24, display: "flex", alignItems: "center",
+            padding: "14px 16px", marginBottom: 24, display: "flex", alignItems: "center",
             justifyContent: "space-between", border: "1px solid #2a1a4a", position: "relative",
-            overflow: "hidden",
+            overflow: "hidden", flexWrap: "wrap", gap: 12,
           }}>
             <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 3, background: "#D4A853" }} />
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -152,13 +152,13 @@ export default function Dashboard() {
         )}
 
         {/* Header */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
-          <div>
-            <h1 style={{ fontSize: 24, fontWeight: 700, color: "#fff", margin: 0 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
+          <div style={{ minWidth: 0 }}>
+            <h1 style={{ fontSize: "clamp(20px, 4vw, 24px)", fontWeight: 700, color: "#fff", margin: 0 }}>
               {getGreeting()}, {user?.displayName?.split(" ")[0] || "Student"} 👋
             </h1>
           </div>
-          <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
             <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
               <span>🔥</span> <span style={{ fontWeight: 600 }}>{streak} day streak</span>
             </div>
@@ -232,8 +232,8 @@ export default function Dashboard() {
           onClick={() => navigate("/practice-select")}
           style={{
             background: "linear-gradient(135deg, #1a0a3a 0%, #0d1a3a 100%)",
-            borderRadius: 16, padding: 24, marginBottom: 40, display: "flex", alignItems: "center", justifyContent: "space-between",
-            border: "1px solid #333", position: "relative", overflow: "hidden", cursor: "pointer"
+            borderRadius: 16, padding: "20px 16px", marginBottom: 40, display: "flex", alignItems: "center", justifyContent: "space-between",
+            border: "1px solid #333", position: "relative", overflow: "hidden", cursor: "pointer", flexWrap: "wrap", gap: 12
           }}>
           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 4, background: "#D4A853" }} />
           <div>
@@ -251,7 +251,7 @@ export default function Dashboard() {
         </div>
 
         {/* AI Tutor & Recent Activity */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
           <div
             onClick={() => navigate("/ai-tutor")}
             style={{ background: "#121218", border: "1px solid #6C3CE9", borderRadius: 16, padding: 24, cursor: "pointer" }}>

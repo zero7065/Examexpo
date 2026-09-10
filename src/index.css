@@ -180,6 +180,9 @@ h6 {
   .sidebar {
     display: none !important;
   }
+  .glass-card:hover {
+    transform: none;
+  }
 }
 @media (min-width: 769px) {
   body {

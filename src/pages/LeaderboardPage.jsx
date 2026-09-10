@@ -74,7 +74,7 @@ export default function LeaderboardPage() {
       </header>
 
       {top3.length >= 3 && (
-        <div className="grid grid-cols-3 gap-3 md:gap-4 items-end">
+        <div className="grid grid-cols-3 gap-2 md:gap-4 items-end">
           {[top3[1], top3[0], top3[2]].map((entry, i) => {
             const actualRank = i === 0 ? 2 : i === 1 ? 1 : 3;
             const pc = podiumColors[actualRank - 1];
@@ -87,11 +87,11 @@ export default function LeaderboardPage() {
                 style={{ animationDelay: `${actualRank * 0.15}s` }}
               >
                 <div className="text-center space-y-1">
-                  <div className={`w-14 h-14 mx-auto rounded-full bg-gradient-to-br ${pc.bg} flex items-center justify-center text-white font-bold text-lg shadow-lg ${pc.shadow}`}>
+                  <div className={`w-10 h-10 md:w-14 md:h-14 mx-auto rounded-full bg-gradient-to-br ${pc.bg} flex items-center justify-center text-white font-bold text-sm md:text-lg shadow-lg ${pc.shadow}`}>
                     {getInitials(entry.name)}
                   </div>
-                  <p className="font-bold text-sm text-text">{entry.name}</p>
-                  <p className="text-xs font-medium text-text-muted">{entry.xp.toLocaleString()} XP</p>
+                  <p className="font-bold text-xs md:text-sm text-text truncate max-w-[80px]">{entry.name}</p>
+                  <p className="text-[10px] md:text-xs font-medium text-text-muted">{entry.xp.toLocaleString()} XP</p>
                 </div>
                 <div className={`w-full rounded-t-2xl flex items-center justify-center ${podiumH}`}
                   style={{ background: actualRank === 1
@@ -110,14 +110,14 @@ export default function LeaderboardPage() {
 
       <div className="space-y-2 stagger-enter">
         {rest.map((entry) => (
-          <div key={entry.id} className={`glass-card p-4 flex items-center justify-between ${entry.id === user?.uid ? "ring-2 ring-primary" : ""}`}>
-            <div className="flex items-center gap-4">
-              <span className="w-8 text-center font-bold text-text-muted">#{entry.rank}</span>
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-emerald-600 text-white flex items-center justify-center text-sm font-bold shadow-sm">
+          <div key={entry.id} className={`glass-card p-3 md:p-4 flex items-center justify-between ${entry.id === user?.uid ? "ring-2 ring-primary" : ""}`}>
+            <div className="flex items-center gap-3 md:gap-4 min-w-0">
+              <span className="w-6 md:w-8 text-center font-bold text-text-muted text-xs md:text-sm">#{entry.rank}</span>
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary to-emerald-600 text-white flex items-center justify-center text-xs md:text-sm font-bold shadow-sm flex-shrink-0">
                 {getInitials(entry.name)}
               </div>
-              <div>
-                <p className="font-semibold text-text">{entry.name}{entry.id === user?.uid ? " (You)" : ""}</p>
+              <div className="min-w-0">
+                <p className="font-semibold text-text text-sm truncate">{entry.name}{entry.id === user?.uid ? " (You)" : ""}</p>
                 <div className="flex gap-1.5 mt-0.5 flex-wrap">
                   {(entry.subjects || []).slice(0, 3).map(s => (
                     <span key={s} className="text-xs px-2 py-0.5 rounded-md" style={{ background: "var(--bg-3)", color: "var(--text-muted)" }}>{s}</span>
@@ -125,7 +125,7 @@ export default function LeaderboardPage() {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
               <div className="flex items-center gap-1.5 text-sm" style={{ color: "var(--text-muted)" }}>
                 <Flame size={16} className="text-orange-400" />
                 <span className="font-medium" style={{ color: "var(--text)" }}>{entry.streak}</span>
@@ -145,10 +145,10 @@ export default function LeaderboardPage() {
       )}
 
       {user && userRank && (
-        <div className="glass-card p-4 flex items-center justify-between" style={{ background: "var(--primary-dim)", borderColor: "var(--primary)" }}>
+        <div className="glass-card p-3 md:p-4 flex items-center justify-between flex-wrap gap-3" style={{ background: "var(--primary-dim)", borderColor: "var(--primary)" }}>
           <div className="flex items-center gap-3">
             <TrendingUp size={20} style={{ color: "var(--primary)" }} />
-            <p className="text-sm font-medium" style={{ color: "var(--text)" }}>
+            <p className="text-xs md:text-sm font-medium" style={{ color: "var(--text)" }}>
               You're ranked <strong style={{ color: "var(--primary)" }}>#{userRank.rank}</strong>
               {userRank.rank > 3 && <span style={{ color: "var(--text-muted)" }}> — keep practicing to climb higher!</span>}
             </p>

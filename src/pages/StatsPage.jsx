@@ -279,7 +279,7 @@ const StatsPage = () => {
       )}
 
       {/* Top Overview Grid */}
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
         <StatsCard
           label="Overall Accuracy"
           value={user?.totalQuestionsAnswered > 0 ? Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 100) + "%" : "0%"}
@@ -312,7 +312,7 @@ const StatsPage = () => {
           </span>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6">
           <div className="space-y-2">
             <p className="text-xs font-black uppercase tracking-widest text-text-muted">Total XP</p>
             <p className="text-3xl font-black font-mono text-yellow-400">{xpProfile?.totalXp || 0}</p>
@@ -374,7 +374,7 @@ const StatsPage = () => {
         />
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
         {/* Subject Breakdown */}
         <div className="lg:col-span-2 space-y-8">
           <h2 className="text-2xl font-black text-text flex items-center gap-3">

@@ -140,10 +140,10 @@ export default function Progress() {
     return points.join(" ");
   }
 
-  if (loading) return <div style={{ minHeight: "100vh", background: "#0a0a0f", padding: "24px 32px" }}><SkeletonRow /></div>;
+  if (loading) return <div style={{ minHeight: "100vh", background: "#0a0a0f" }} className="page-content"><SkeletonRow /></div>;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", padding: "24px 32px" }}>
+    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }} className="page-content">
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
           <div>

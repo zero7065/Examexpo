@@ -105,6 +105,35 @@ export default function AuthPage() {
     }
   }
 
+  const [testResult, setTestResult] = useState(null);
+  const [testing, setTesting] = useState(false);
+
+  async function testConnection() {
+    setTesting(true);
+    setTestResult(null);
+    const results = [];
+    try {
+      const res = await fetch("https://identitytoolkit.googleapis.com/v1/projects?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", { signal: AbortSignal.timeout(5000) });
+      results.push(`Auth API: ${res.ok ? "OK" : "FAIL " + res.status}`);
+    } catch (e) {
+      results.push(`Auth API: BLOCKED (${e.name})`);
+    }
+    try {
+      const res = await fetch("https://firestore.googleapis.com/v1/projects/jamb-tutor/databases/(default)/documents/stats/global", { signal: AbortSignal.timeout(5000) });
+      results.push(`Firestore: ${res.ok ? "OK" : "FAIL " + res.status}`);
+    } catch (e) {
+      results.push(`Firestore: BLOCKED (${e.name})`);
+    }
+    try {
+      const res = await fetch("https://securetoken.googleapis.com/v1/token?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", { method: "POST", signal: AbortSignal.timeout(5000) });
+      results.push(`Token: ${res.status < 500 ? "Reachable" : "FAIL " + res.status}`);
+    } catch (e) {
+      results.push(`Token: BLOCKED (${e.name})`);
+    }
+    setTestResult(results.join(" | "));
+    setTesting(false);
+  }
+
   const inputStyle = (field) => ({
     width: "100%",
     padding: "14px 16px",
@@ -315,6 +344,29 @@ export default function AuthPage() {
             : <>Already have an account? <button onClick={() => setMode("signin")} style={{ background: "none", border: "none", color: "var(--primary)", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: 13 }}>Sign In</button></>
           }
         </p>
+
+        <div style={{ textAlign: "center", marginTop: 16, borderTop: "1px solid var(--border)", paddingTop: 16 }}>
+          <button
+            onClick={testConnection}
+            disabled={testing}
+            style={{
+              background: "none", border: "1px solid var(--border)", borderRadius: 8,
+              padding: "6px 14px", color: "var(--text-muted)", fontSize: 11, cursor: "pointer",
+              fontFamily: "inherit", opacity: testing ? 0.5 : 1,
+            }}
+          >
+            {testing ? "Testing..." : "Test Firebase Connection"}
+          </button>
+          {testResult && (
+            <p style={{
+              color: testResult.includes("BLOCKED") ? "var(--danger)" : "var(--success)",
+              fontSize: 11, marginTop: 8, fontFamily: "monospace", lineHeight: 1.6,
+              wordBreak: "break-word",
+            }}>
+              {testResult}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
