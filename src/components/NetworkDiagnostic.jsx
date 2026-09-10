@@ -1,37 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { clearOldServiceWorker } from "../lib/clearCache";
+import { deepDiagnostic } from "../lib/deepDiagnostic";
 
 export default function NetworkDiagnostic() {
   const [show, setShow] = useState(false);
-  const [results, setResults] = useState([]);
+  const [data, setData] = useState(null);
   const [testing, setTesting] = useState(false);
   const [cleared, setCleared] = useState(false);
+  const [logs, setLogs] = useState([]);
+
+  function addLog(msg) {
+    setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);
+  }
 
   async function runTests() {
     setTesting(true);
-    setResults([]);
-    const r = [];
+    setData(null);
+    setLogs([]);
+    addLog("Starting deep network diagnostic...");
 
-    const endpoints = [
-      ["Firebase Auth", "https://identitytoolkit.googleapis.com/v1/projects?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE"],
-      ["Firestore", "https://firestore.googleapis.com/v1/projects/jamb-tutor/databases/(default)/documents/stats/global"],
-      ["Firebase Token", "https://securetoken.googleapis.com/v1/token?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE"],
-      ["Google Fonts", "https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900"],
-    ];
+    const result = await deepDiagnostic();
+    setData(result);
 
-    for (const [name, url] of endpoints) {
-      try {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 8000);
-        const res = await fetch(url, { signal: controller.signal, method: name === "Firebase Token" ? "POST" : "GET" });
-        clearTimeout(timer);
-        r.push({ name, status: res.ok ? "OK" : `FAIL (${res.status})`, ok: res.ok });
-      } catch (e) {
-        r.push({ name, status: `BLOCKED (${e.name === "AbortError" ? "timeout" : e.name})`, ok: false });
-      }
+    const blocked = result.results.filter(r => !r.ok);
+    const ok = result.results.filter(r => r.ok);
+    addLog(`${ok.length}/${result.results.length} endpoints reachable`);
+    if (blocked.length > 0) {
+      addLog(`Blocked: ${blocked.map(r => r.name).join(", ")}`);
     }
-
-    setResults(r);
+    addLog(`Network: ${result.netInfo.onLine ? "Online" : "OFFLINE"} | Type: ${result.netInfo.effectiveType} | Speed: ${result.netInfo.downlink}Mbps | Latency: ${result.netInfo.rtt}ms`);
     setTesting(false);
   }
 
@@ -58,8 +55,6 @@ export default function NetworkDiagnostic() {
     );
   }
 
-  const allBlocked = results.length > 0 && results.every(r => !r.ok);
-
   return (
     <div
       style={{
@@ -71,51 +66,150 @@ export default function NetworkDiagnostic() {
     >
       <div style={{
         background: "var(--bg-2)", border: "1px solid var(--border)",
-        borderRadius: 16, padding: 28, maxWidth: 440, width: "100%",
+        borderRadius: 16, padding: 24, maxWidth: 500, width: "100%",
+        maxHeight: "90vh", overflow: "auto",
         boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
       }}>
-        <h2 style={{ color: "var(--text)", fontSize: 18, fontWeight: 800, margin: 0, marginBottom: 8 }}>
-          Network Diagnostic
+        <h2 style={{ color: "var(--text)", fontSize: 18, fontWeight: 800, margin: 0, marginBottom: 4 }}>
+          Deep Network Diagnostic
         </h2>
+        <p style={{ color: "var(--text-muted)", fontSize: 12, margin: "0 0 16px" }}>
+          Tests DNS, TLS, CORS, and all Firebase endpoints
+        </p>
 
-        {testing ? (
-          <p style={{ color: "var(--text-muted)", fontSize: 14 }}>Testing connections to Google/Firebase...</p>
-        ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
-            {results.map((r) => (
-              <div key={r.name} style={{
-                display: "flex", justifyContent: "space-between", alignItems: "center",
-                padding: "10px 14px", borderRadius: 8,
-                background: r.ok ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)",
-                border: `1px solid ${r.ok ? "rgba(34,197,94,0.3)" : "rgba(239,68,68,0.3)"}`,
-              }}>
-                <span style={{ color: "var(--text)", fontSize: 14, fontWeight: 600 }}>{r.name}</span>
-                <span style={{
-                  color: r.ok ? "#22c55e" : "#ef4444", fontSize: 12, fontFamily: "monospace", fontWeight: 700,
-                }}>
-                  {r.status}
-                </span>
-              </div>
-            ))}
+        {testing && (
+          <div style={{ padding: 16, textAlign: "center" }}>
+            <div style={{
+              width: 28, height: 28, borderRadius: "50%", border: "3px solid var(--border)",
+              borderTopColor: "var(--primary)", animation: "spin 0.8s linear infinite",
+              margin: "0 auto 12px",
+            }} />
+            <p style={{ color: "var(--text-muted)", fontSize: 13 }}>Testing all endpoints...</p>
           </div>
         )}
 
-        {allBlocked && !testing && (
-          <div style={{
-            padding: "14px 16px", borderRadius: 10, marginBottom: 16,
-            background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)",
-          }}>
-            <p style={{ color: "#ef4444", fontSize: 14, fontWeight: 700, margin: "0 0 8px" }}>
-              All Google/Firebase endpoints are blocked on your network
-            </p>
-            <p style={{ color: "var(--text-muted)", fontSize: 13, margin: 0, lineHeight: 1.6 }}>
-              Your ISP or network is blocking access to Google services. Try:<br/>
-              1. Switch to mobile data (MTN/Airtel/Glo)<br/>
-              2. Turn off VPN if active<br/>
-              3. Try a different WiFi network<br/>
-              4. Restart your router/modem
-            </p>
-          </div>
+        {data && (
+          <>
+            {/* Connection Info */}
+            <div style={{
+              padding: "10px 14px", borderRadius: 8, marginBottom: 12,
+              background: "var(--bg-3)", border: "1px solid var(--border)",
+              fontSize: 12, fontFamily: "monospace", color: "var(--text-muted)", lineHeight: 1.8,
+            }}>
+              <div>Online: <span style={{ color: data.netInfo.onLine ? "#22c55e" : "#ef4444", fontWeight: 700 }}>{data.netInfo.onLine ? "YES" : "NO"}</span></div>
+              <div>Connection: {data.netInfo.effectiveType} | {data.netInfo.downlink}Mbps | {data.netInfo.rtt}ms RTT</div>
+            </div>
+
+            {/* Endpoint Results */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 12 }}>
+              {data.results.map((r) => (
+                <div key={r.name} style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "8px 12px", borderRadius: 8,
+                  background: r.ok ? "rgba(34,197,94,0.08)" : "rgba(239,68,68,0.08)",
+                  border: `1px solid ${r.ok ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)"}`,
+                }}>
+                  <div>
+                    <span style={{ color: "var(--text)", fontSize: 13, fontWeight: 600 }}>{r.name}</span>
+                    {r.error && (
+                      <span style={{ color: "#ef4444", fontSize: 11, marginLeft: 8, fontFamily: "monospace" }}>
+                        {r.error}
+                      </span>
+                    )}
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "var(--text-muted)", fontSize: 11, fontFamily: "monospace" }}>
+                      {r.ms}ms
+                    </span>
+                    <span style={{
+                      color: r.ok ? "#22c55e" : "#ef4444", fontSize: 12, fontFamily: "monospace", fontWeight: 700,
+                    }}>
+                      {r.ok ? `${r.status} OK` : `FAIL`}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Logs */}
+            {logs.length > 0 && (
+              <div style={{
+                padding: "8px 12px", borderRadius: 8, marginBottom: 12,
+                background: "#0a0a0f", border: "1px solid var(--border)",
+                fontSize: 11, fontFamily: "monospace", color: "#888", lineHeight: 1.8,
+                maxHeight: 100, overflow: "auto",
+              }}>
+                {logs.map((l, i) => <div key={i}>{l}</div>)}
+              </div>
+            )}
+
+            {/* Diagnosis */}
+            {(() => {
+              const allBlocked = data.results.every(r => !r.ok);
+              const googleBlocked = data.results.filter(r => r.name.includes("Google") || r.name.includes("Auth")).every(r => !r.ok);
+              const firestoreBlocked = data.results.find(r => r.name.includes("Firestore")) && !data.results.find(r => r.name.includes("Firestore"))?.ok;
+              const fontsOk = data.results.find(r => r.name === "Google Fonts")?.ok;
+
+              if (allBlocked) {
+                return (
+                  <div style={{
+                    padding: "12px 14px", borderRadius: 10, marginBottom: 12,
+                    background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)",
+                  }}>
+                    <p style={{ color: "#ef4444", fontSize: 14, fontWeight: 700, margin: "0 0 6px" }}>
+                      ALL endpoints blocked — ISP-level Google blocking
+                    </p>
+                    <p style={{ color: "var(--text-muted)", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
+                      Your network is blocking ALL Google services. Switch to mobile data hotspot.
+                    </p>
+                  </div>
+                );
+              }
+              if (googleBlocked && fontsOk) {
+                return (
+                  <div style={{
+                    padding: "12px 14px", borderRadius: 10, marginBottom: 12,
+                    background: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.3)",
+                  }}>
+                    <p style={{ color: "#f59e0b", fontSize: 14, fontWeight: 700, margin: "0 0 6px" }}>
+                      Google accessible but Firebase Auth/Firestore blocked
+                    </p>
+                    <p style={{ color: "var(--text-muted)", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
+                      Your ISP may be specifically blocking Firebase endpoints. Try:<br/>
+                      1. Mobile data hotspot<br/>
+                      2. Different WiFi network<br/>
+                      3. Disable any VPN/proxy
+                    </p>
+                  </div>
+                );
+              }
+              if (firestoreBlocked) {
+                return (
+                  <div style={{
+                    padding: "12px 14px", borderRadius: 10, marginBottom: 12,
+                    background: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.3)",
+                  }}>
+                    <p style={{ color: "#f59e0b", fontSize: 14, fontWeight: 700, margin: "0 0 6px" }}>
+                      Firestore blocked — Auth may still work
+                    </p>
+                    <p style={{ color: "var(--text-muted)", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
+                      Firebase Auth might work but data won't save. Try mobile data.
+                    </p>
+                  </div>
+                );
+              }
+              return (
+                <div style={{
+                  padding: "12px 14px", borderRadius: 10, marginBottom: 12,
+                  background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)",
+                }}>
+                  <p style={{ color: "#22c55e", fontSize: 14, fontWeight: 700, margin: 0 }}>
+                    All critical endpoints reachable — network looks fine
+                  </p>
+                </div>
+              );
+            })()}
+          </>
         )}
 
         <div style={{ display: "flex", gap: 10 }}>
@@ -143,7 +237,7 @@ export default function NetworkDiagnostic() {
           </button>
         </div>
 
-        {!testing && results.length > 0 && (
+        {!testing && (
           <button
             onClick={runTests}
             style={{

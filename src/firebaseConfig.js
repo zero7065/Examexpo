@@ -34,7 +34,8 @@ import {
   increment,
   serverTimestamp,
   arrayUnion,
-  enableIndexedDbPersistence,
+  initializeFirestore,
+  persistentLocalCache,
 } from "firebase/firestore";
 
 // ─── Firebase Config ───
@@ -62,15 +63,13 @@ if (isConfigured) {
   try {
     app = initializeApp(firebaseConfig);
     _auth = getAuth(app);
-    _db = getFirestore(app);
-    // Enable offline persistence so Firestore works when network is flaky
-    enableIndexedDbPersistence(_db).catch((err) => {
-      if (err.code === "failed-precondition") {
-        console.warn("Firestore persistence: multiple tabs open, persistence only in first tab");
-      } else if (err.code === "unimplemented") {
-        console.warn("Firestore persistence: browser doesn't support IndexedDB");
-      }
-    });
+    // Use new cache API (replaces deprecated enableIndexedDbPersistence)
+    try {
+      _db = initializeFirestore(app, { localCache: persistentLocalCache() });
+    } catch (e) {
+      // Fallback if persistentLocalCache not supported
+      _db = getFirestore(app);
+    }
   } catch (e) {
     console.error("Firebase init failed:", e);
   }
