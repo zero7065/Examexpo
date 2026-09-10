@@ -30,19 +30,26 @@ export async function removePartner(userId, partnerUid) {
 }
 
 export async function getPartners(userId) {
-  const all = await getDocs(collection(db, "studyPairs"));
+  const q1 = query(collection(db, "studyPairs"), where("users", "array-contains", userId));
+  const snap = await getDocs(q1);
   const partners = [];
-  for (const snap of all.docs) {
-    const data = snap.data();
-    if (data.users.includes(userId) && data.status === "active") {
+  for (const pairDoc of snap.docs) {
+    const data = pairDoc.data();
+    if (data.status === "active") {
       const partnerUid = data.users.find((u) => u !== userId);
-      const userSnap = await getDoc(doc(db, "users", partnerUid));
-      if (userSnap.exists()) {
-        partners.push({
-          uid: partnerUid,
-          pairId: snap.id,
-          ...userSnap.data(),
-        });
+      if (partnerUid) {
+        try {
+          const userSnap = await getDoc(doc(db, "users", partnerUid));
+          if (userSnap.exists()) {
+            partners.push({
+              uid: partnerUid,
+              pairId: pairDoc.id,
+              ...userSnap.data(),
+            });
+          }
+        } catch (e) {
+          console.warn("Failed to fetch partner profile:", partnerUid, e);
+        }
       }
     }
   }

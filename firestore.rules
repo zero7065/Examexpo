@@ -77,10 +77,7 @@ service cloud.firestore {
 
     // ─── STUDY PAIRS ───
     match /studyPairs/{pairId} {
-      allow read: if request.auth != null && (
-        request.auth.uid in resource.data.users ||
-        isAdmin()
-      );
+      allow read: if request.auth != null;
       allow create: if request.auth != null;
       allow update: if request.auth != null && (
         request.auth.uid in resource.data.users ||
@@ -94,22 +91,16 @@ service cloud.firestore {
 
     // ─── INVITATIONS ───
     match /invitations/{inviteId} {
-      allow read: if request.auth.uid == resource.data.fromUid ||
-                   request.auth.uid == resource.data.toUid ||
-                   isAdmin();
+      allow read: if request.auth != null;
       allow create: if request.auth.uid == request.resource.data.fromUid;
-      allow update: if request.auth.uid == resource.data.toUid || isAdmin();
+      allow update: if request.auth != null;
     }
 
     // ─── SHARED TESTS ───
     match /sharedTests/{testId} {
-      allow read: if request.auth.uid == resource.data.creatorUid ||
-                   request.auth.uid == resource.data.partnerUid ||
-                   isAdmin();
+      allow read: if request.auth != null;
       allow create: if request.auth.uid == request.resource.data.creatorUid;
-      allow update: if request.auth.uid == resource.data.creatorUid ||
-                     request.auth.uid == resource.data.partnerUid ||
-                     isAdmin();
+      allow update: if request.auth != null;
     }
 
     // ─── USER SESSIONS (subcollection via questions.js) ───

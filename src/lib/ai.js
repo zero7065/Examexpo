@@ -1,7 +1,7 @@
 // src/lib/ai.js - Unified Groq AI client
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODELS = ["qwen/qwen3-32b", "llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
+const MODELS = ["qwen/qwen3-32b", "meta-llama/llama-4-scout-17b-16e-instruct", "llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
 
 function stripJsonFences(text) {
   if (!text) return text;

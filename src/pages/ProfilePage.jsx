@@ -68,6 +68,14 @@ const ProfilePage = () => {
             <div className="space-y-1">
               <h2 className="text-2xl font-black text-text">{user?.displayName || "Student"}</h2>
               <p className="text-text-muted text-sm font-medium">{user?.email}</p>
+              {user?.uid && (
+                <div className="mt-2 p-2 rounded-lg" style={{ background: "var(--bg-3)" }}>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-1">Your User ID (for Study Partners)</p>
+                  <p className="text-xs font-mono font-bold text-primary break-all cursor-pointer" title="Click to copy" onClick={() => { navigator.clipboard.writeText(user.uid).then(() => alert("User ID copied!")); }}>
+                    {user.uid}
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest inline-block ${

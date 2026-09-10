@@ -50,14 +50,19 @@ export default function StudyPartnersPage() {
   async function loadData() {
     setLoading(true);
     try {
-      const [p, t, lb] = await Promise.all([
+      const results = await Promise.allSettled([
         getPartners(user.uid),
         getPartnerTests(user.uid),
         getPartnerLeaderboard(user.uid),
       ]);
-      setPartners(p);
-      setTests(t);
-      setLeaderboard(lb);
+      setPartners(results[0].status === "fulfilled" ? results[0].value : []);
+      setTests(results[1].status === "fulfilled" ? results[1].value : []);
+      setLeaderboard(results[2].status === "fulfilled" ? results[2].value : []);
+
+      const failures = results.filter(r => r.status === "rejected");
+      if (failures.length > 0) {
+        console.warn("Some partner data failed to load:", failures.map(f => f.reason?.message));
+      }
     } catch (e) {
       console.error(e);
       toast({ message: "Failed to load study partners data.", type: "error" });
@@ -396,8 +401,14 @@ export default function StudyPartnersPage() {
             </div>
 
             <p style={{ color: "#888", fontSize: 13, marginBottom: 16 }}>
-              Enter your friend's User ID to add them. You can find your ID in Profile → Settings.
+              Enter your friend's User ID to add them. Share your ID with friends so they can add you.
             </p>
+
+            <div style={{ background: "rgba(108,60,233,0.1)", borderRadius: 10, padding: "10px 14px", marginBottom: 16, cursor: "pointer" }}
+              onClick={() => { navigator.clipboard.writeText(user.uid).then(() => toast({ message: "Your User ID copied!", type: "success" })); }}>
+              <div style={{ fontSize: 10, color: "#888", marginBottom: 2 }}>Your User ID (tap to copy):</div>
+              <div style={{ fontSize: 12, fontFamily: "monospace", color: "#6C3CE9", fontWeight: 700, wordBreak: "break-all" }}>{user.uid}</div>
+            </div>
 
             <AddPartnerForm onSubmit={handleAddPartner} />
           </div>
