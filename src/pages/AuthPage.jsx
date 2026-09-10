@@ -112,25 +112,27 @@ export default function AuthPage() {
     setTesting(true);
     setTestResult(null);
     const results = [];
-    try {
-      const res = await fetch("https://identitytoolkit.googleapis.com/v1/projects?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", { signal: AbortSignal.timeout(5000) });
-      results.push(`Auth API: ${res.ok ? "OK" : "FAIL " + res.status}`);
-    } catch (e) {
-      results.push(`Auth API: BLOCKED (${e.name})`);
+
+    const endpoints = [
+      ["Auth API", "https://identitytoolkit.googleapis.com/v1/projects?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", "GET"],
+      ["Firestore", "https://firestore.googleapis.com/v1/projects/jamb-tutor/databases/(default)/documents/stats/global", "GET"],
+      ["Token", "https://securetoken.googleapis.com/v1/token?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", "POST"],
+    ];
+
+    for (const [name, url, method] of endpoints) {
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 8000);
+        const res = await fetch(url, { method, signal: controller.signal });
+        clearTimeout(timer);
+        results.push(`${name}: ${res.ok ? "OK" : "FAIL " + res.status}`);
+      } catch (e) {
+        results.push(`${name}: BLOCKED`);
+      }
     }
-    try {
-      const res = await fetch("https://firestore.googleapis.com/v1/projects/jamb-tutor/databases/(default)/documents/stats/global", { signal: AbortSignal.timeout(5000) });
-      results.push(`Firestore: ${res.ok ? "OK" : "FAIL " + res.status}`);
-    } catch (e) {
-      results.push(`Firestore: BLOCKED (${e.name})`);
-    }
-    try {
-      const res = await fetch("https://securetoken.googleapis.com/v1/token?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", { method: "POST", signal: AbortSignal.timeout(5000) });
-      results.push(`Token: ${res.status < 500 ? "Reachable" : "FAIL " + res.status}`);
-    } catch (e) {
-      results.push(`Token: BLOCKED (${e.name})`);
-    }
-    setTestResult(results.join(" | "));
+
+    const allBlocked = results.every(r => r.includes("BLOCKED"));
+    setTestResult(results.join(" | ") + (allBlocked ? " — Your network is blocking Google. Try mobile data." : ""));
     setTesting(false);
   }
 

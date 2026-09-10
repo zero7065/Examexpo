@@ -92,8 +92,12 @@ export function AuthProvider({ children }) {
       cred = await createUserWithEmailAndPassword(auth, email, password);
     } catch (e) {
       if (e.code === 'auth/network-request-failed') {
-        await new Promise(r => setTimeout(r, 1500));
-        cred = await createUserWithEmailAndPassword(auth, email, password);
+        await new Promise(r => setTimeout(r, 2000));
+        try {
+          cred = await createUserWithEmailAndPassword(auth, email, password);
+        } catch (retryErr) {
+          throw new Error("Cannot reach Firebase — your network is blocking Google services. Try mobile data or a different WiFi. Use the Network Diagnostic button for details.");
+        }
       } else if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
         throw new Error("Firebase Email/Password auth is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Email/Password.");
       } else if (e.code === 'auth/email-already-in-use') {
@@ -133,8 +137,12 @@ export function AuthProvider({ children }) {
     } catch (e) {
       if (e.code === 'auth/network-request-failed') {
         // Retry once after brief delay
-        await new Promise(r => setTimeout(r, 1500));
-        cred = await signInWithEmailAndPassword(auth, email, password);
+        await new Promise(r => setTimeout(r, 2000));
+        try {
+          cred = await signInWithEmailAndPassword(auth, email, password);
+        } catch (retryErr) {
+          throw new Error("Cannot reach Firebase — your network is blocking Google services. Try mobile data or a different WiFi. Use the Network Diagnostic button for details.");
+        }
       } else if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
         throw new Error("Firebase Email/Password auth is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Email/Password.");
       } else {
@@ -154,6 +162,9 @@ export function AuthProvider({ children }) {
       }
       if (e.code === 'auth/configuration-not-found' || e.code === 'auth/operation-not-allowed') {
         throw new Error("Google sign-in is not enabled. Go to Firebase Console → Authentication → Sign-in method → enable Google.");
+      }
+      if (e.code === 'auth/network-request-failed' || e.message?.includes('network')) {
+        throw new Error("Cannot reach Firebase — your network is blocking Google services. Try mobile data or a different WiFi.");
       }
       throw e;
     }

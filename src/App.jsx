@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { StudyProvider } from "./context/StudyContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -9,6 +9,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import InstallPrompt from "./components/InstallPrompt";
 import { useAuth } from "./context/AuthContext";
 import { seedAdminAccount, isFirebaseConfigured } from "./firebaseConfig";
+import { clearOldServiceWorker } from "./lib/clearCache";
+import NetworkDiagnostic from "./components/NetworkDiagnostic";
 
 // Critical path — direct imports
 import LandingPage from "./pages/LandingPage";
@@ -93,17 +95,20 @@ function AuthAwareRoutes() {
       {isOffline && (
         <div style={{
           position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999,
-          background: "#FF6B35", color: "#fff", padding: "8px 16px",
+          background: "linear-gradient(135deg, #FF6B35, #e85d26)", color: "#fff", padding: "10px 16px",
           textAlign: "center", fontSize: 13, fontWeight: 600,
           fontFamily: "'Inter', system-ui, sans-serif",
+          display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
         }}>
-          You're offline — some features may not work. Data will sync when you reconnect.
+          <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: "#fff", animation: "pulse 1.5s infinite" }} />
+          You're offline — check your internet connection. Tap the Network Diagnostic button for help.
         </div>
       )}
       <Navbar />
       <ScrollToTop />
       <main className={`flex-1 ${user ? "md:ml-64 pb-20 md:pb-0" : ""} animate-fade`}>
         <InstallPrompt />
+        <NetworkDiagnostic />
         <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -172,6 +177,13 @@ function AuthAwareRoutes() {
 
 function App() {
   useEffect(() => {
+    // Force-clear old service workers on first load
+    clearOldServiceWorker().then(() => {
+      // Re-register the new clean SW after clearing old ones
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      }
+    });
     if (isFirebaseConfigured) {
       seedAdminAccount();
     }
