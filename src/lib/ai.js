@@ -1,7 +1,29 @@
 // src/lib/ai.js - Unified Groq AI client
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODELS = ["qwen/qwen3-32b", "meta-llama/llama-4-scout-17b-16e-instruct", "llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
+
+// Verified against GET /openai/v1/models for this API key (Oct 2026).
+// Old models (llama-3.x, qwen3-32b, llama-4-scout) no longer exist for this key.
+const MODELS = [
+  "qwen/qwen3.8-27b",
+  "openai/gpt-oss-120b",
+  "openai/gpt-oss-20b",
+  "allam-2-7b",
+];
+
+let _lastAIError = null;
+
+export function getLastAIError() {
+  return _lastAIError;
+}
+
+export function clearAIError() {
+  _lastAIError = null;
+}
+
+export function isAIConfigured() {
+  return Boolean(import.meta.env.VITE_GROQ_API_KEY);
+}
 
 function stripJsonFences(text) {
   if (!text) return text;
@@ -14,11 +36,16 @@ function stripJsonFences(text) {
 
 async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, temperature = 0.5) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
-  if (!key) throw new Error("Groq API key not configured.");
+  if (!key) {
+    _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
+    throw new Error("Groq API key not configured.");
+  }
 
   let lastError;
   for (const model of MODELS) {
     try {
+      // gpt-oss models are reasoning models — reasoning tokens count toward max_tokens
+      const tokens = model.startsWith("openai/gpt-oss") ? maxTokens + 2000 : maxTokens;
       const res = await fetch(GROQ_API_URL, {
         method: "POST",
         headers: {
@@ -31,35 +58,41 @@ async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, t
             { role: "system", content: systemPrompt },
             { role: "user", content: userPrompt },
           ],
-          max_tokens: maxTokens,
+          max_tokens: tokens,
           temperature,
         }),
       });
 
       if (res.ok) {
         const data = await res.json();
+        _lastAIError = null;
         return data.choices[0]?.message?.content?.trim() || "";
       }
 
       const err = await res.json().catch(() => ({}));
       const msg = err.error?.message || `Groq error: ${res.status}`;
-      console.warn(`Model ${model} failed: ${msg}`);
+      console.warn(`[AI] Model ${model} failed: ${msg}`);
       lastError = new Error(msg);
     } catch (e) {
-      console.warn(`Model ${model} network error:`, e.message);
+      console.warn(`[AI] Model ${model} network error:`, e.message);
       lastError = e;
     }
   }
+  _lastAIError = { message: lastError?.message || "All AI models failed", time: Date.now() };
   throw lastError || new Error("All AI models failed");
 }
 
 async function callGroqChatWithFallback(systemPrompt, messages, maxTokens = 600, temperature = 0.8) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
-  if (!key) throw new Error("Groq API key not configured.");
+  if (!key) {
+    _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
+    throw new Error("Groq API key not configured.");
+  }
 
   let lastError;
   for (const model of MODELS) {
     try {
+      const tokens = model.startsWith("openai/gpt-oss") ? maxTokens + 2000 : maxTokens;
       const res = await fetch(GROQ_API_URL, {
         method: "POST",
         headers: {
@@ -72,26 +105,33 @@ async function callGroqChatWithFallback(systemPrompt, messages, maxTokens = 600,
             { role: "system", content: systemPrompt },
             ...messages,
           ],
-          max_tokens: maxTokens,
+          max_tokens: tokens,
           temperature,
         }),
       });
 
       if (res.ok) {
         const data = await res.json();
+        _lastAIError = null;
         return data.choices[0]?.message?.content?.trim() || "";
       }
 
       const err = await res.json().catch(() => ({}));
       const msg = err.error?.message || `Groq error: ${res.status}`;
-      console.warn(`Model ${model} failed: ${msg}`);
+      console.warn(`[AI] Model ${model} failed: ${msg}`);
       lastError = new Error(msg);
     } catch (e) {
-      console.warn(`Model ${model} network error:`, e.message);
+      console.warn(`[AI] Model ${model} network error:`, e.message);
       lastError = e;
     }
   }
+  _lastAIError = { message: lastError?.message || "All AI models failed", time: Date.now() };
   throw lastError || new Error("All AI models failed");
+}
+
+// Generic single-prompt caller — used by question generators
+export async function askGroq(systemPrompt, userPrompt, opts = {}) {
+  return callGroqWithFallback(systemPrompt, userPrompt, opts.maxTokens ?? 300, opts.temperature ?? 0.5);
 }
 
 export async function explainAnswer({ question, options, userAnswer, correctAnswer, subject, exam }) {

@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
-import { chatWithTutor } from "../lib/ai";
+import { chatWithTutor, getLastAIError, isAIConfigured } from "../lib/ai";
 import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
 import { logActivity } from "../lib/activityLog";
 import ProUpgradeModal from "../components/ProUpgradeModal";
@@ -100,9 +100,18 @@ export default function AITutor() {
         userProfile: { name: user?.displayName || "Student", exam: profile?.exam || "JAMB", targetScore: profile?.targetScore || 300 },
       });
 
-      const aiMsg = { id: Date.now() + 1, role: "ai", content: response, timestamp: new Date().toISOString() };
+      const aiErr = getLastAIError();
+      const content = aiErr && Date.now() - aiErr.time < 15000
+        ? `⚠️ AI request failed: ${aiErr.message}`
+        : response;
+
+      const aiMsg = { id: Date.now() + 1, role: "ai", content, timestamp: new Date().toISOString() };
       setMessages(prev => [...prev, aiMsg]);
       setLoading(false);
+
+      if (aiErr && Date.now() - aiErr.time < 15000) {
+        toast({ message: `AI failed: ${aiErr.message}`, type: "error" });
+      }
 
       logActivity({ action: "ai_chat", userId: user?.uid, email: user?.email, details: { subject: activeSubject, questionLength: msg.trim().length } });
     } catch (e) {
@@ -134,6 +143,12 @@ export default function AITutor() {
           <Plus size={14} /> New Chat
         </button>
       </div>
+
+      {!isAIConfigured() && (
+        <div style={{ background: "rgba(239,68,68,0.12)", borderBottom: "1px solid rgba(239,68,68,0.35)", padding: "10px 20px", color: "#ef4444", fontSize: 13, fontWeight: 600, flexShrink: 0 }}>
+          AI key missing — add VITE_GROQ_API_KEY in your environment (Vercel dashboard or .env)
+        </div>
+      )}
 
       {/* Subject context pills */}
       <div style={{ display: "flex", gap: 6, padding: "8px 20px", background: "#0a0a0f", borderBottom: "1px solid #1e1e2a", overflowX: "auto", flexShrink: 0 }}>

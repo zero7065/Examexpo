@@ -1,6 +1,7 @@
 import { collection, getDocs, query, where, limit as firestoreLimit, doc, setDoc, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { getQuestionsFromBank } from "../data/questionBank";
+import { askGroq } from "./ai";
 
 export async function getQuestions(subject, topic, count = 10) {
   const results = [];
@@ -48,36 +49,18 @@ export async function saveSession(userId, sessionData) {
 }
 
 export async function generateQuestionsWithAI(subject, topic, count = 5) {
-  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-  if (!apiKey) return [];
-
   const prompt = `Generate ${count} Nigerian ${subject} exam questions${topic ? ` on topic: ${topic}` : ""}. 
 Return ONLY a valid JSON array. Each question object must have: 
 { "question": "string", "options": {"A":"...","B":"...","C":"...","D":"..."}, "correctAnswer": "A|B|C|D", "explanation": "string", "topic": "string", "difficulty": "easy|medium|hard" }
 Do NOT include any text outside the JSON array.`;
 
   try {
-    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "llama-3.1-8b-instant",
-        messages: [
-          { role: "system", content: "You are a Nigerian exam question generator. Return only valid JSON." },
-          { role: "user", content: prompt },
-        ],
-        max_tokens: 2000,
-        temperature: 0.7,
-      }),
-    });
+    const text = await askGroq(
+      "You are a Nigerian exam question generator. Return only valid JSON.",
+      prompt,
+      { maxTokens: 2000, temperature: 0.7 }
+    );
 
-    if (!res.ok) return [];
-
-    const data = await res.json();
-    const text = data.choices?.[0]?.message?.content || "";
     const jsonMatch = text.match(/\[[\s\S]*\]/);
     if (!jsonMatch) return [];
 
@@ -88,7 +71,8 @@ Do NOT include any text outside the JSON array.`;
       subject,
       exam: "JAMB",
     }));
-  } catch {
+  } catch (e) {
+    console.warn("[AI] generateQuestionsWithAI failed:", e.message);
     return [];
   }
 }
