@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
-import { generateStudyPlan } from "../lib/ai";
+import { generateStudyPlan, getAIErrorIfRecent } from "../lib/ai";
 import { collection, query, where, getDocs, doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { BookOpen, Target, Calendar, Clock, CheckCircle, ArrowRight, Loader2, Sparkles } from "lucide-react";
@@ -31,6 +31,7 @@ const StudyPlanPage = () => {
           setStudyPlan(data.plan);
           setTargetScore(data.targetScore || 300);
           setExamDate(data.examDate || "");
+          setCompletedTopics(data.completedTopics || []);
         }
 
         const sessionsRef = collection(db, "sessions");
@@ -68,7 +69,13 @@ const StudyPlanPage = () => {
         currentLevel: user?.totalSessions || 0,
         weakTopics: topicsForPlan,
       });
-      
+
+      const aiErr = getAIErrorIfRecent();
+      if (aiErr) {
+        toast({ message: `AI plan generation failed: ${aiErr.message}`, type: "error" });
+        return;
+      }
+
       setStudyPlan(plan);
       
       if (user) {
@@ -77,6 +84,7 @@ const StudyPlanPage = () => {
           targetScore,
           examDate,
           weakTopics: topicsForPlan,
+          completedTopics: [],
           createdAt: serverTimestamp(),
         }, { merge: true });
       }
@@ -94,8 +102,13 @@ const StudyPlanPage = () => {
 
   const markTopicComplete = (topic) => {
     if (!completedTopics.includes(topic)) {
-      setCompletedTopics([...completedTopics, topic]);
+      const next = [...completedTopics, topic];
+      setCompletedTopics(next);
       toast({ message: `Completed: ${topic}`, type: "success" });
+      // Persist completion so it survives refresh
+      if (user && db) {
+        setDoc(doc(db, "studyPlans", user.uid), { completedTopics: next }, { merge: true }).catch(() => {});
+      }
     }
   };
 

@@ -46,7 +46,8 @@ const Progress = lazy(() => import("./pages/Progress"));
 const Settings = lazy(() => import("./pages/Settings"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const LeaderboardPage = lazy(() => import("./pages/LeaderboardPage"));
-const MasteryPage = lazy(() => import("./pages/MasteryPage"));
+  const MasteryPage = lazy(() => import("./pages/MasteryPage"));
+  const FlashcardsPage = lazy(() => import("./pages/FlashcardsPage"));
 const StudyPartnersPage = lazy(() => import("./pages/StudyPartnersPage"));
 const SharedTestPage = lazy(() => import("./pages/SharedTestPage"));
 const AssignmentPage = lazy(() => import("./pages/AssignmentPage"));
@@ -144,6 +145,7 @@ function AuthAwareRoutes() {
           <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
           <Route path="/leaderboard" element={<ProtectedRoute><LeaderboardPage /></ProtectedRoute>} />
           <Route path="/mastery" element={<ProtectedRoute><MasteryPage /></ProtectedRoute>} />
+          <Route path="/flashcards" element={<ProtectedRoute><FlashcardsPage /></ProtectedRoute>} />
           <Route path="/study-partners" element={<ProtectedRoute><StudyPartnersPage /></ProtectedRoute>} />
           <Route path="/shared-test" element={<ProtectedRoute><SharedTestPage /></ProtectedRoute>} />
           <Route path="/assignment" element={<ProtectedRoute><AssignmentPage /></ProtectedRoute>} />

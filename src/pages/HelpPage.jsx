@@ -87,7 +87,11 @@ const HelpPage = () => {
             <ul className="space-y-3 text-text-muted">
               <li className="flex items-center gap-2">
                 <CheckCircle size={16} className="text-primary" />
-                30 questions daily
+                15 questions daily
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle size={16} className="text-primary" />
+                3 AI messages daily
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle size={16} className="text-primary" />

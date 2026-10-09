@@ -22,7 +22,8 @@ import {
   Trophy,
   Target,
   Users,
-  ClipboardList
+  ClipboardList,
+  Layers
 } from "lucide-react";
 
 const Navbar = () => {
@@ -41,6 +42,7 @@ const Navbar = () => {
     { name: "Notepad", path: "/notepad", icon: StickyNote, requiresPro: true },
     { name: "Leaderboard", path: "/leaderboard", icon: Trophy },
     { name: "Mastery", path: "/mastery", icon: Target },
+    { name: "Flashcards", path: "/flashcards", icon: Layers },
     { name: "Partners", path: "/study-partners", icon: Users, requiresPro: true },
     { name: "Assignment", path: "/assignment", icon: ClipboardList, requiresPro: true },
     { name: "Help", path: "/help", icon: HelpCircle },

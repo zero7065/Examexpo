@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useToast } from "../components/Toast";
 import { useStudy } from "../context/StudyContext";
-import { getStudyTip } from "../lib/ai";
+import { getStudyTip, getAIErrorIfRecent } from "../lib/ai";
 import { getUserProfile } from "../lib/userProfile";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "../firebaseConfig";
@@ -250,6 +250,11 @@ const StatsPage = () => {
         recommendation?.subject || "General",
         weakTopics.length > 0 ? weakTopics : ["Quadratic Equations", "Organic Chemistry", "Concord in English"]
       );
+      const aiErr = getAIErrorIfRecent();
+      if (aiErr) {
+        toast({ message: `AI advice failed: ${aiErr.message}`, type: "error" });
+        return;
+      }
       const formattedAdvice = typeof resp === "string" ? [{ topic: "Study Advice", tips: [resp] }] : resp;
       setAdvice(formattedAdvice);
       toast({ message: "AI Study Advice Generated! 🧠", type: "success" });

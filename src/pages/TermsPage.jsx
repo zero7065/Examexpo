@@ -42,7 +42,7 @@ export default function TermsPage() {
 
         <section>
           <h2 className="text-xl font-bold text-text mb-3">4. Free Plan Limits</h2>
-          <p>Free accounts are limited to 30 questions per day. This limit resets at midnight (WAT). Circumventing this limit by creating multiple accounts is a violation of these terms and may result in account suspension.</p>
+          <p>Free accounts are limited to 15 questions per day. This limit resets at midnight (WAT). Circumventing this limit by creating multiple accounts is a violation of these terms and may result in account suspension.</p>
         </section>
 
         <section>

@@ -1,7 +1,7 @@
 // src/pages/PastQuestionsPage.jsx
 import { useState } from "react";
 import { getQuestionsFromBank } from "../data/questionBank";
-import { predictLikelyQuestions } from "../lib/ai";
+import { predictLikelyQuestions, getAIErrorIfRecent } from "../lib/ai";
 import { useToast } from "../components/Toast";
 import { JAMB_SUBJECTS, WAEC_SUBJECTS } from "../data/subjects";
 import { Sparkles, BookOpen, History, ChevronRight, HelpCircle, Loader2 } from "lucide-react";
@@ -51,6 +51,11 @@ export default function PastQuestionsPage() {
     setPredictions([]);
     try {
       const preds = await predictLikelyQuestions({ subject, exam, count: 6 });
+      const aiErr = getAIErrorIfRecent();
+      if (aiErr) {
+        toast({ message: `Prediction failed: ${aiErr.message}`, type: "error" });
+        return;
+      }
       setPredictions(preds);
       toast({ message: "Exam predictions ready 🔮", type: "success" });
     } catch (err) {

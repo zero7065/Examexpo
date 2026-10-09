@@ -5,6 +5,7 @@ import { useToast } from "../components/Toast";
 import { getUserProfile } from "../lib/userProfile";
 import { getQuestionsFromBank } from "../data/questionBank";
 import { generateQuestionsWithAI } from "../lib/questions";
+import { getAIErrorIfRecent } from "../lib/ai";
 import { ChevronRight, Zap, BookOpen, Loader2, CheckCircle2, Clock } from "lucide-react";
 
 const SUBJECT_MAP = {
@@ -80,13 +81,22 @@ export default function Practice() {
       });
 
       if (questions.length === 0) {
-        questions = await generateQuestionsWithAI(subjectName, null, questionCount);
-      }
-
-      if (questions.length === 0) {
-        toast({ message: "No questions available for this subject yet", type: "error" });
-        setLoading(false);
-        return;
+        // Bank empty for this subject/exam — generate with AI (counts against free daily AI limit)
+        const { checkAILimit, trackAIMessage } = await import("../lib/usageTracker");
+        const limit = await checkAILimit(user?.uid);
+        if (!limit.allowed) {
+          toast({ message: `Daily AI limit reached (${limit.used}/${limit.limit}). Upgrade to Pro for unlimited AI questions.`, type: "warning" });
+          setLoading(false);
+          return;
+        }
+        if (user) trackAIMessage(user.uid);
+        questions = await generateQuestionsWithAI(subjectName, null, Math.min(questionCount, 10));
+        const aiErr = getAIErrorIfRecent();
+        if (questions.length === 0) {
+          toast({ message: aiErr ? `AI question generation failed: ${aiErr.message}` : "No questions available for this subject yet", type: "error" });
+          setLoading(false);
+          return;
+        }
       }
 
       toast({ message: `Starting ${mode} session 🔥`, type: "success" });

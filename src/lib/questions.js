@@ -58,7 +58,7 @@ Do NOT include any text outside the JSON array.`;
     const text = await askGroq(
       "You are a Nigerian exam question generator. Return only valid JSON.",
       prompt,
-      { maxTokens: 2000, temperature: 0.7 }
+      { maxTokens: 3000, temperature: 0.7 }
     );
 
     const jsonMatch = text.match(/\[[\s\S]*\]/);

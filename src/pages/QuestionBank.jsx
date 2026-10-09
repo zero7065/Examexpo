@@ -20,8 +20,8 @@ export default function QuestionBank() {
     topic: "",
     exam: "ALL",
     difficulty: "ALL",
-    yearFrom: "2018",
-    yearTo: "2023",
+    yearFrom: "2017",
+    yearTo: "2026",
   });
 
   useEffect(() => {

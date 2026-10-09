@@ -4,12 +4,13 @@ export const PLANS = {
     price: 0,
     limits: {
       questionsPerDay: 15,
-      aiTutorMessages: 0,
+      aiTutorMessages: 3,
       mockExams: 0,
       subjects: 2,
     },
     features: [
       "15 practice questions/day",
+      "3 AI tutor messages/day",
       "2 subjects only",
       "Basic progress tracking",
     ],

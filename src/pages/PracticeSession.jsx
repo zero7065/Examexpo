@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit, trackQuestion, checkAILimit, trackAIMessage } from "../lib/usageTracker";
-import { explainQuestion } from "../lib/ai";
+import { explainQuestion, getAIErrorIfRecent } from "../lib/ai";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import { Whiteboard } from "../components/Whiteboard";
 import { useHint } from "../hooks/useHints";
@@ -172,7 +172,13 @@ export default function PracticeSession() {
         topic: current.topic,
       });
 
-      setAiExplanations(prev => ({ ...prev, [current.id]: explanation }));
+      const aiErr = getAIErrorIfRecent();
+      if (aiErr) {
+        setAiExplanations(prev => ({ ...prev, [current.id]: `⚠️ AI unavailable: ${aiErr.message}` }));
+        toast({ message: `AI explanation failed: ${aiErr.message}`, type: "error" });
+      } else {
+        setAiExplanations(prev => ({ ...prev, [current.id]: explanation }));
+      }
       setLoadingAI(null);
     } catch (e) {
       console.error("AI explanation failed:", e);

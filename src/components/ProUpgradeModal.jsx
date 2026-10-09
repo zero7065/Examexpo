@@ -25,8 +25,8 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
 
   function getReasonPill() {
     switch (reason) {
-      case "questions": return { text: "⚡ Daily limit reached — 15/15 questions used", color: "#FF4D6A" };
-      case "ai": return { text: "🤖 AI Tutor is a Pro feature", color: "#6C3CE9" };
+      case "questions": return { text: `⚡ Daily limit reached — ${PLANS.free.limits.questionsPerDay}/${PLANS.free.limits.questionsPerDay} questions used`, color: "#FF4D6A" };
+      case "ai": return { text: `🤖 Daily AI limit reached (${PLANS.free.limits.aiTutorMessages}/${PLANS.free.limits.aiTutorMessages}) — Pro = unlimited`, color: "#6C3CE9" };
       case "mock": return { text: "📝 Mock exams require Pro", color: "#4D9EFF" };
       case "subjects": return { text: "📚 Unlock all subjects with Pro", color: "#FF9F43" };
       default: return null;

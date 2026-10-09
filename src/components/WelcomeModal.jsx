@@ -1,6 +1,7 @@
 // src/components/WelcomeModal.jsx - Fully offline
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import { PLANS } from "../config/plans";
 
 const SPEECHES = [
   "Every exam champion started exactly where you are right now — at zero. The questions you practice today are problems you won't face on exam day.",
@@ -66,8 +67,8 @@ export default function WelcomeModal() {
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 28 }}>
           {[
-            { icon: "📚", label: "30 free questions", sub: "every day" },
-            { icon: "🤖", label: "30 AI tutor Qs", sub: "every day" },
+            { icon: "📚", label: `${PLANS.free.limits.questionsPerDay} free questions`, sub: "every day" },
+            { icon: "🤖", label: `${PLANS.free.limits.aiTutorMessages} AI tutor messages`, sub: "every day" },
             { icon: "📊", label: "Progress tracking", sub: "from day one" },
           ].map((item, i) => (
             <div key={i} style={{

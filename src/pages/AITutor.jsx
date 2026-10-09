@@ -32,6 +32,7 @@ export default function AITutor() {
   const [activeSubject, setActiveSubject] = useState("General");
   const [conversationId, setConversationId] = useState(genId());
   const [showProModal, setShowProModal] = useState(false);
+  const [aiUsage, setAiUsage] = useState(null);
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -39,7 +40,10 @@ export default function AITutor() {
 
   useEffect(() => {
     if (user) getUserProfile(user.uid).then(setProfile).catch(() => {});
-  }, [user]);
+    if (user && !isPro) {
+      checkAILimit(user.uid).then(l => setAiUsage({ used: l.used, limit: l.limit })).catch(() => {});
+    }
+  }, [user, isPro]);
 
   const userSubjects = profile?.subjects || [];
 
@@ -80,9 +84,10 @@ export default function AITutor() {
     if (!msg.trim() || loading) return;
 
     try {
-      // Pro check
-      if (!isPro) {
-        const limit = await checkAILimit(user?.uid);
+      // Free-tier daily AI limit
+      if (!isPro && user) {
+        const limit = await checkAILimit(user.uid);
+        setAiUsage({ used: limit.used, limit: limit.limit });
         if (!limit.allowed) { setShowProModal(true); return; }
       }
 
@@ -91,7 +96,10 @@ export default function AITutor() {
       setInput("");
       setLoading(true);
 
-      if (user && !isPro) trackAIMessage(user.uid);
+      if (user && !isPro) {
+        trackAIMessage(user.uid);
+        setAiUsage(prev => prev ? { ...prev, used: prev.used + 1 } : prev);
+      }
 
       const allMsgs = [...messages, userMsg];
       const response = await chatWithTutor({
@@ -139,9 +147,21 @@ export default function AITutor() {
           <span style={{ fontWeight: 700, fontSize: 16 }}>AI Tutor</span>
           {isPro && <span style={{ fontSize: 10, fontWeight: 700, color: "#D4A853", background: "rgba(212,168,83,0.15)", padding: "2px 8px", borderRadius: 6 }}>PRO</span>}
         </div>
-        <button onClick={handleNewChat} style={{ padding: "8px 14px", borderRadius: 8, background: "#1a1a1f", border: "1px solid #333", color: "#888", cursor: "pointer", fontSize: 12, display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
-          <Plus size={14} /> New Chat
-        </button>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {!isPro && aiUsage && (
+            <span style={{ fontSize: 11, fontWeight: 700, color: aiUsage.used >= aiUsage.limit ? "#ef4444" : "#888", background: "#1a1a1f", border: "1px solid #333", padding: "4px 10px", borderRadius: 6 }}>
+              AI {aiUsage.used}/{aiUsage.limit} today
+            </span>
+          )}
+          {!isPro && (
+            <button onClick={() => setShowProModal(true)} style={{ padding: "6px 12px", borderRadius: 6, border: "none", background: "linear-gradient(135deg, #6C3CE9, #9B59B6)", color: "#fff", fontWeight: 700, fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>
+              Go Pro
+            </button>
+          )}
+          <button onClick={handleNewChat} style={{ padding: "8px 14px", borderRadius: 8, background: "#1a1a1f", border: "1px solid #333", color: "#888", cursor: "pointer", fontSize: 12, display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
+            <Plus size={14} /> New Chat
+          </button>
+        </div>
       </div>
 
       {!isAIConfigured() && (
@@ -159,31 +179,8 @@ export default function AITutor() {
         ))}
       </div>
 
-      {!isPro ? (
-        /* Pro gate — blurred preview */
-        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
-          <div style={{ filter: "blur(8px)", opacity: 0.3, padding: 20, maxWidth: 600, width: "100%" }}>
-            {[1, 2, 3].map(i => (
-              <div key={i} style={{ marginBottom: 16, display: "flex", justifyContent: i % 2 === 0 ? "flex-start" : "flex-end" }}>
-                <div style={{ maxWidth: "70%", padding: "12px 16px", borderRadius: i % 2 === 0 ? "18px 18px 18px 4px" : "18px 18px 4px 18px", background: i % 2 === 0 ? "#1a1a1f" : "#6C3CE9", border: i % 2 === 0 ? "1px solid #2a2a3a" : "none" }}>
-                  <div style={{ height: 12, width: 120, background: i % 2 === 0 ? "#2a2a3a" : "rgba(255,255,255,0.3)", borderRadius: 4, marginBottom: 6 }} />
-                  <div style={{ height: 12, width: 80, background: i % 2 === 0 ? "#2a2a3a" : "rgba(255,255,255,0.3)", borderRadius: 4 }} />
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ position: "absolute", textAlign: "center", maxWidth: 360 }}>
-            <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(108,60,233,0.15)", border: "1px solid rgba(108,60,233,0.3)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}><Sparkles size={28} color="#6C3CE9" /></div>
-            <h2 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 8px", color: "#fff" }}>AI Tutor is a Pro Feature</h2>
-            <p style={{ color: "#888", fontSize: 14, margin: "0 0 20px" }}>Get instant explanations, study guides, and exam tips from your personal AI tutor</p>
-            <button onClick={() => setShowProModal(true)} style={{ padding: "12px 28px", borderRadius: 10, border: "none", background: "linear-gradient(135deg, #6C3CE9, #9B59B6)", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "inherit" }}>
-              Unlock Pro →
-            </button>
-          </div>
-        </div>
-      ) : (
-        /* Chat area */
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
+      {/* Chat area — free users get PLANS.free.limits.aiTutorMessages per day */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: 0 }}>
           <div style={{ flex: 1, overflowY: "auto", padding: "20px" }}>
             {messages.length === 0 && !loading && (
               <div style={{ textAlign: "center", paddingTop: 60 }}>
@@ -236,7 +233,6 @@ export default function AITutor() {
             </div>
           </div>
         </div>
-      )}
 
       <ProUpgradeModal open={showProModal} onClose={() => setShowProModal(false)} reason="ai" dismissible />
 

@@ -17,6 +17,12 @@ export function getLastAIError() {
   return _lastAIError;
 }
 
+// Returns the last AI error only if it happened recently (i.e. during the current call)
+export function getAIErrorIfRecent(ms = 15000) {
+  if (_lastAIError && Date.now() - _lastAIError.time < ms) return _lastAIError;
+  return null;
+}
+
 export function clearAIError() {
   _lastAIError = null;
 }
@@ -226,6 +232,7 @@ export async function predictLikelyQuestions({ subject, exam, count = 6 }) {
     return JSON.parse(stripJsonFences(res));
   } catch (err) {
     console.warn("predictLikelyQuestions fallback:", err.message);
+    _lastAIError = { message: err.message, time: Date.now() };
     return [
       { topic: "Core Fundamentals", likelihood: "very high", reason: "Always tested.", sampleQuestion: "What is the foundational principle?" }
     ];
@@ -236,11 +243,15 @@ export async function generateStudyPlan({ targetScore, examDate, currentLevel, w
   const daysUntilExam = Math.ceil((new Date(examDate) - new Date()) / (1000 * 60 * 60 * 24));
   try {
     const system = "You are an exam consultant. Create a study plan as JSON. Return ONLY valid JSON, no markdown fences.";
-    const user = `Create a ${Math.max(7, daysUntilExam)}-day plan for ${targetScore}. Weak: ${weakTopics.join(", ")}. Return JSON with totalDays and topics array.`;
+    const user = `Create a ${Math.max(7, daysUntilExam)}-day study plan for a student targeting ${targetScore}/400. Weak topics: ${weakTopics.join(", ")}.
+Return JSON exactly in this shape:
+{"totalDays": <number>, "topics": [{"topic": "<name>", "description": "<1-2 sentence plan>", "duration": "<e.g. 2 hours>", "exercises": ["<actionable task>", "..."]}]}
+Include 5-8 topics ordered from foundations to final revision.`;
     const res = await callGroqWithFallback(system, user, 1500);
     return JSON.parse(stripJsonFences(res));
   } catch (err) {
     console.warn("generateStudyPlan fallback:", err.message);
+    _lastAIError = { message: err.message, time: Date.now() };
     return {
       totalDays: Math.max(7, daysUntilExam),
       topics: [
@@ -251,5 +262,26 @@ export async function generateStudyPlan({ targetScore, examDate, currentLevel, w
         { topic: "Final Review", description: "Review mistakes and summaries", duration: "2 hours", exercises: ["Review mistake log", "Read notes"] }
       ]
     };
+  }
+}
+
+export async function generateFlashcards({ subject, topic, count = 10, exam = "JAMB" }) {
+  try {
+    const system = "You are a Nigerian exam tutor creating revision flashcards. Return ONLY valid JSON, no markdown fences.";
+    const user = `Create ${count} exam-focused flashcards for ${exam} ${subject}${topic ? `, topic: ${topic}` : ""}.
+Return JSON exactly in this shape:
+{"cards": [{"front": "<question or term, max 20 words>", "back": "<concise answer or definition, max 40 words>", "tag": "<topic>"}]}
+Cover the highest-yield facts, formulas, definitions and distinctions. No fluff.`;
+    const res = await callGroqWithFallback(system, user, 2000, 0.6);
+    const parsed = JSON.parse(stripJsonFences(res));
+    const cards = Array.isArray(parsed) ? parsed : parsed.cards;
+    if (!Array.isArray(cards) || cards.length === 0) throw new Error("No flashcards returned");
+    return cards
+      .filter((c) => c && c.front && c.back)
+      .map((c, i) => ({ id: i + 1, front: String(c.front), back: String(c.back), tag: c.tag || topic || subject }));
+  } catch (err) {
+    console.warn("generateFlashcards fallback:", err.message);
+    _lastAIError = { message: err.message, time: Date.now() };
+    return [];
   }
 }

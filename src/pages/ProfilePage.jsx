@@ -129,7 +129,7 @@ const ProfilePage = () => {
                   <p className="text-text-muted text-sm font-medium max-w-sm">
                     {isPro 
                       ? "Your premium features are active until 2025. You have unlimited daily questions."
-                      : "You are currently on the free tier limited to 30 questions daily. Upgrade to remove limits."}
+                        : "You are currently on the free tier limited to 15 questions daily. Upgrade to remove limits."}
                   </p>
                 </div>
                 {!isPro && (

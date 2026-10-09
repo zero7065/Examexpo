@@ -1413,6 +1413,268 @@ export const QUESTION_BANK = {
       options: { A: "6:1 to 8:1", B: "15:1 to 20:1", C: "10:1 to 12:1", D: "20:1 to 25:1" },
       correctAnswer: "B", explanation: "Diesel engines have high compression ratios, typically 15:1 to 20:1 for efficiency." },
   ],
+
+  // ============================================================
+  // ADDITIONAL JAMB SUBJECTS
+  // ============================================================
+
+  "Geography": [
+    { id: "geo_2026_001", subject: "Geography", exam: "JAMB", year: 2026, topic: "Physical Geography", difficulty: "medium",
+      question: "The type of rainfall associated with the meeting of two air masses is called:",
+      options: { A: "Convectional", B: "Orographic", C: "Frontal (Relief)", D: "Convective" },
+      correctAnswer: "C", explanation: "Frontal rainfall occurs when warm and cold air masses meet along a front, forcing warm air to rise." },
+    { id: "geo_2026_002", subject: "Geography", exam: "JAMB", year: 2026, topic: "Map Reading", difficulty: "easy",
+      question: "On a map with a scale of 1:50,000, 4 cm represents a distance of:",
+      options: { A: "2 km", B: "5 km", C: "20 km", D: "0.5 km" },
+      correctAnswer: "A", explanation: "50,000 cm = 500 m... 4 × 50,000 = 200,000 cm = 2,000 m = 2 km." },
+    { id: "geo_2026_003", subject: "Geography", exam: "JAMB", year: 2026, topic: "Population", difficulty: "medium",
+      question: "The movement of people from rural to urban areas is known as:",
+      options: { A: "Emigration", B: "Urbanization", C: "Counter-urbanization", D: "Immigration" },
+      correctAnswer: "B", explanation: "Urbanization is the growth of towns and cities, driven by rural-to-urban migration." },
+    { id: "geo_2026_004", subject: "Geography", exam: "JAMB", year: 2026, topic: "Climate", difficulty: "hard",
+      question: "The Sahel region lies between which two zones?",
+      options: { A: "Desert and Mediterranean", B: "Sahara Desert and Sudan Savanna", C: "Forest and Savanna", D: "Tundra and Taiga" },
+      correctAnswer: "B", explanation: "The Sahel is a transitional belt between the Sahara Desert to the north and the Sudan Savanna to the south." },
+    { id: "geo_2026_005", subject: "Geography", exam: "JAMB", year: 2026, topic: "Economic Geography", difficulty: "medium",
+      question: "The most important cash crop of the Nigerian cocoa belt is:",
+      options: { A: "Rubber", B: "Cocoa", C: "Palm oil", D: "Kola nut" },
+      correctAnswer: "B", explanation: "Southwestern Nigeria is Nigeria's leading cocoa-producing region." },
+    { id: "geo_2025_001", subject: "Geography", exam: "JAMB", year: 2025, topic: "Drainage", difficulty: "medium",
+      question: "The river system that drains most of northern Nigeria is the:",
+      options: { A: "Niger system", B: "Chad system", C: "Cross River system", D: "Benue system" },
+      correctAnswer: "B", explanation: "Lake Chad and its tributaries (e.g. Yobe, Komadugu) drain much of the northeast." },
+    { id: "geo_2025_002", subject: "Geography", exam: "JAMB", year: 2025, topic: "Geomorphology", difficulty: "hard",
+      question: "A river's velocity is generally greatest at its:",
+      options: { A: "Source", B: "Middle course", C: "Mouth", D: "Old stage" },
+      correctAnswer: "C", explanation: "Velocity usually peaks near the mouth as gradient flattens but channel size and discharge are maximal." },
+    { id: "geo_2024_001", subject: "Geography", exam: "JAMB", year: 2024, topic: "Industry", difficulty: "easy",
+      question: "An industry located near its market to reduce transport of finished goods is:",
+      options: { A: "Raw-material oriented", B: "Market oriented", C: "Labour oriented", D: "Power oriented" },
+      correctAnswer: "B", explanation: "Market-oriented industries (e.g. bottling) site near consumers to cut distribution costs." },
+    { id: "geo_2024_002", subject: "Geography", exam: "JAMB", year: 2024, topic: "Map Reading", difficulty: "medium",
+      question: "Contours that are closely spaced on a map indicate:",
+      options: { A: "Flat land", B: "Steep slope", C: "A valley floor", D: "A plateau" },
+      correctAnswer: "B", explanation: "Close contour lines mean a rapid change in elevation — a steep slope." },
+    { id: "geo_2024_003", subject: "Geography", exam: "JAMB", year: 2024, topic: "Agriculture", difficulty: "medium",
+      question: "Which system of farming involves cultivating the same piece of land repeatedly without resting it?",
+      options: { A: "Bush fallowing", B: "Continuous cropping", C: "Mixed farming", D: "Plantation farming" },
+      correctAnswer: "B", explanation: "Continuous cropping uses land repeatedly without a fallow period, often depleting soil fertility." },
+  ],
+
+  "Agricultural Science": [
+    { id: "agric_2026_001", subject: "Agricultural Science", exam: "JAMB", year: 2026, topic: "Soil Science", difficulty: "easy",
+      question: "The soil fraction with the largest particle size is:",
+      options: { A: "Clay", B: "Silt", C: "Sand", D: "Loam" },
+      correctAnswer: "C", explanation: "Sand particles (0.05–2.0 mm) are the largest; clay particles are the smallest." },
+    { id: "agric_2026_002", subject: "Agricultural Science", exam: "JAMB", year: 2026, topic: "Crop Production", difficulty: "medium",
+      question: "The removal of the terminal bud of a plant to encourage branching is called:",
+      options: { A: "Grafting", B: "Pruning", C: "Weaning", D: "Pollination" },
+      correctAnswer: "B", explanation: "Pruning removes shoots/buds to promote bushier growth and higher yields." },
+    { id: "agric_2026_003", subject: "Agricultural Science", exam: "JAMB", year: 2026, topic: "Animal Husbandry", difficulty: "medium",
+      question: "A bull is a castrated male cattle; an intact male cattle is called a:",
+      options: { A: "Steer", B: "Bullock", C: "Ox", D: "Bull" },
+      correctAnswer: "D", explanation: "A bull is an uncastrated male; a steer is castrated; oxen are trained, often castrated, draft cattle." },
+    { id: "agric_2026_004", subject: "Agricultural Science", exam: "JAMB", year: 2026, topic: "Pasture", difficulty: "easy",
+      question: "The most common grass grown as pasture in the Nigerian Guinea Savanna is:",
+      options: { A: "Bermuda grass", B: "Guinea grass", C: "Star grass", D: "Napier grass" },
+      correctAnswer: "B", explanation: "Guinea grass (Megathyrsus maximus) is a productive pasture grass suited to the savanna." },
+    { id: "agric_2026_005", subject: "Agricultural Science", exam: "JAMB", year: 2026, topic: "Farm Tools", difficulty: "easy",
+      question: "Which farm tool is used for making holes in the soil for planting?",
+      options: { A: "Cutlass", B: "Hoe", C: "Digging stick / Planter", D: "Rake" },
+      correctAnswer: "C", explanation: "A planter or digging stick makes planting holes; cutlasses clear, hoes till, rakes gather." },
+    { id: "agric_2025_001", subject: "Agricultural Science", exam: "JAMB", year: 2025, topic: "Pests", difficulty: "medium",
+      question: "The pest that attacks stored grains by boring into them and reducing them to powder is:",
+      options: { A: "Grain borer (weevil)", B: "Bird", C: "Rodent", D: "Grasshopper" },
+      correctAnswer: "A", explanation: "Grain borers/weevils infest stored maize and cereals, leaving powder-like frass." },
+    { id: "agric_2025_002", subject: "Agricultural Science", exam: "JAMB", year: 2025, topic: "Agroforestry", difficulty: "medium",
+      question: "Growing trees alongside crops on the same piece of land is known as:",
+      options: { A: "Monoculture", B: "Agroforestry", C: "Hydroponics", D: "Horticulture" },
+      correctAnswer: "B", explanation: "Agroforestry combines trees with crops and/or livestock on the same land." },
+    { id: "agric_2024_001", subject: "Agricultural Science", exam: "JAMB", year: 2024, topic: "Photosynthesis", difficulty: "easy",
+      question: "The raw materials for photosynthesis are:",
+      options: { A: "Oxygen and glucose", B: "Carbon dioxide and water", C: "Chlorophyll and oxygen", D: "Nitrogen and water" },
+      correctAnswer: "B", explanation: "Plants use CO₂ and water, with light energy, to make glucose and release oxygen." },
+    { id: "agric_2024_002", subject: "Agricultural Science", exam: "JAMB", year: 2024, topic: "Fisheries", difficulty: "medium",
+      question: "The practice of breeding and rearing fish in confined water bodies is called:",
+      options: { A: "Pisciculture", B: "Apiculture", C: "Sericulture", D: "Olericulture" },
+      correctAnswer: "A", explanation: "Pisciculture = fish farming; apiculture = bees; sericulture = silkworms; olericulture = vegetables." },
+    { id: "agric_2024_003", subject: "Agricultural Science", exam: "JAMB", year: 2024, topic: "Soil Fertility", difficulty: "medium",
+      question: "Which of these is a major nutrient element required by plants?",
+      options: { A: "Carbon", B: "Nitrogen", C: "Hydrogen", D: "Sodium" },
+      correctAnswer: "B", explanation: "Nitrogen is a primary (macro) nutrient essential for leaf growth; C and H come from air/water." },
+  ],
+
+  "Literature-in-English": [
+    { id: "lit_2026_001", subject: "Literature-in-English", exam: "JAMB", year: 2026, topic: "Literary Devices", difficulty: "easy",
+      question: "A comparison using 'like' or 'as' is a:",
+      options: { A: "Metaphor", B: "Simile", C: "Personification", D: "Onomatopoeia" },
+      correctAnswer: "B", explanation: "A simile compares two things using 'like' or 'as' (e.g. brave as a lion)." },
+    { id: "lit_2026_002", subject: "Literature-in-English", exam: "JAMB", year: 2026, topic: "Poetry", difficulty: "medium",
+      question: "A poem of mourning, usually for someone who has died, is called an:",
+      options: { A: "Ode", B: "Elegy", C: "Sonnet", D: "Ballad" },
+      correctAnswer: "B", explanation: "An elegy is a poem of lament for the dead; an ode celebrates; a sonnet has 14 lines." },
+    { id: "lit_2026_003", subject: "Literature-in-English", exam: "JAMB", year: 2026, topic: "Drama", difficulty: "medium",
+      question: "The part of a play where the hero's fortunes decline is the:",
+      options: { A: "Exposition", B: "Climax", C: "Peripeteia / Falling action", D: "Dénouement" },
+      correctAnswer: "C", explanation: "Peripeteia is the reversal of fortune; the falling action leads toward resolution." },
+    { id: "lit_2026_004", subject: "Literature-in-English", exam: "JAMB", year: 2026, topic: "Prose", difficulty: "hard",
+      question: "In Chinua Achebe's 'Things Fall Apart', Okonkwo's tragic flaw is his:",
+      options: { A: "Generosity", B: "Fear of weakness and failure", C: "Love of peace", D: "Faith in the missionaries" },
+      correctAnswer: "B", explanation: "Okonkwo's obsessive fear of being seen as weak (like Unoka) drives his tragic decisions." },
+    { id: "lit_2026_005", subject: "Literature-in-English", exam: "JAMB", year: 2026, topic: "Literary Forms", difficulty: "easy",
+      question: "A short story with a moral lesson, often featuring animals, is a:",
+      options: { A: "Novel", B: "Fable", C: "Epic", D: "Satire" },
+      correctAnswer: "B", explanation: "Fables are short tales (often animal characters) that teach a moral." },
+    { id: "lit_2025_001", subject: "Literature-in-English", exam: "JAMB", year: 2025, topic: "Poetry", difficulty: "medium",
+      question: "A 14-line poem written in iambic pentameter is a:",
+      options: { A: "Haiku", B: "Sonnet", C: "Limerick", D: "Epic" },
+      correctAnswer: "B", explanation: "Sonnets have 14 lines (Shakespearean or Petrarchan) and are typically in iambic pentameter." },
+    { id: "lit_2025_002", subject: "Literature-in-English", exam: "JAMB", year: 2025, topic: "Drama", difficulty: "easy",
+      question: "A play intended to make the audience laugh is a:",
+      options: { A: "Tragedy", B: "Comedy", C: "Tragicomedy", D: "Melodrama" },
+      correctAnswer: "B", explanation: "Comedy has a humorous tone and usually ends happily." },
+    { id: "lit_2024_001", subject: "Literature-in-English", exam: "JAMB", year: 2024, topic: "Literary Devices", difficulty: "medium",
+      question: "'The classroom was a zoo' is an example of a:",
+      options: { A: "Simile", B: "Metaphor", C: "Hyperbole", D: "Irony" },
+      correctAnswer: "B", explanation: "It directly equates the classroom with a zoo without 'like' or 'as' — a metaphor." },
+    { id: "lit_2024_002", subject: "Literature-in-English", exam: "JAMB", year: 2024, topic: "Prose", difficulty: "medium",
+      question: "Narration written in the first person using 'I' is called:",
+      options: { A: "Omniscient narration", B: "First-person narration", C: "Third-person narration", D: "Objective narration" },
+      correctAnswer: "B", explanation: "First-person narration uses 'I/we' and gives limited, personal perspective." },
+    { id: "lit_2024_003", subject: "Literature-in-English", exam: "JAMB", year: 2024, topic: "Setting", difficulty: "easy",
+      question: "The time and place in which a story occurs is its:",
+      options: { A: "Theme", B: "Plot", C: "Setting", D: "Tone" },
+      correctAnswer: "C", explanation: "Setting is the time and location of the narrative." },
+  ],
+
+  "Commerce": [
+    { id: "com_2026_001", subject: "Commerce", exam: "JAMB", year: 2026, topic: "Trade", difficulty: "easy",
+      question: "Goods bought and sold without altering their form are called:",
+      options: { A: "Manufactured goods", B: "Intermediate goods", C: "Free goods", D: "Visible goods" },
+      correctAnswer: "D", explanation: "Visible/merchandise trade involves tangible goods traded without reprocessing." },
+    { id: "com_2026_002", subject: "Commerce", exam: "JAMB", year: 2026, topic: "Aids to Trade", difficulty: "easy",
+      question: "Which of these is NOT an aid to trade?",
+      options: { A: "Banking", B: "Insurance", C: "Advertising", D: "Manufacturing" },
+      correctAnswer: "D", explanation: "Manufacturing is production; banking, insurance, advertising and transport aid trade." },
+    { id: "com_2026_003", subject: "Commerce", exam: "JAMB", year: 2026, topic: "Business Units", difficulty: "medium",
+      question: "A business owned by one person who bears unlimited liability is a:",
+      options: { A: "Partnership", B: "Sole proprietorship", C: "Public company", D: "Cooperative" },
+      correctAnswer: "B", explanation: "Sole traders have unlimited personal liability for business debts." },
+    { id: "com_2026_004", subject: "Commerce", exam: "JAMB", year: 2026, topic: "Middlemen", difficulty: "medium",
+      question: "A merchant who buys goods in bulk and sells in smaller quantities to retailers is a:",
+      options: { A: "Agent", B: "Wholesaler", C: "Broker", D: "Manufacturer" },
+      correctAnswer: "B", explanation: "Wholesalers buy in bulk and break bulk for retailers; agents/brokers do not take title." },
+    { id: "com_2026_005", subject: "Commerce", exam: "JAMB", year: 2026, topic: "Documents", difficulty: "hard",
+      question: "A document title to goods that must be physically returned before the goods are released is a:",
+      options: { A: "Bill of lading (non-negotiable)", B: "Bill of lading (order)", C: "Invoice", D: "Insurance certificate" },
+      correctAnswer: "B", explanation: "An order bill of lading is a document of title; goods are released only against the original." },
+    { id: "com_2025_001", subject: "Commerce", exam: "JAMB", year: 2025, topic: "Money", difficulty: "easy",
+      question: "Which of the following is NOT a function of money?",
+      options: { A: "Medium of exchange", B: "Store of value", C: "Unit of account", D: "Generator of profits" },
+      correctAnswer: "D", explanation: "Money's functions are medium of exchange, store of value, unit of account and standard of deferred payment." },
+    { id: "com_2025_002", subject: "Commerce", exam: "JAMB", year: 2025, topic: "Production", difficulty: "medium",
+      question: "The four factors of production are land, labour, capital and:",
+      options: { A: "Machinery", B: "Entrepreneurship", C: "Money", D: "Technology" },
+      correctAnswer: "B", explanation: "Entrepreneurship organises the other three factors and bears risk." },
+    { id: "com_2024_001", subject: "Commerce", exam: "JAMB", year: 2024, topic: "Retailing", difficulty: "easy",
+      question: "A mobile shop that moves from place to place to sell goods is a:",
+      options: { A: "Department store", B: "Kiosk", C: "Hawker / Mobile vendor", D: "Supermarket" },
+      correctAnswer: "C", explanation: "Hawkers/mobile vendors carry or transport goods to customers in different locations." },
+    { id: "com_2024_002", subject: "Commerce", exam: "JAMB", year: 2024, topic: "Banking", difficulty: "medium",
+      question: "The Central Bank of Nigeria was established in:",
+      options: { A: "1958", B: "1960", C: "1954", D: "1963" },
+      correctAnswer: "A", explanation: "The CBN was established in 1958 and began operations in 1959." },
+    { id: "com_2024_003", subject: "Commerce", exam: "JAMB", year: 2024, topic: "Insurance", difficulty: "medium",
+      question: "In insurance, the principle requiring the insured to disclose all material facts is:",
+      options: { A: "Principle of indemnity", B: "Principle of utmost good faith (uberrimae fidei)", C: "Principle of subrogation", D: "Principle of contribution" },
+      correctAnswer: "B", explanation: "Utmost good faith requires full disclosure of all material facts when taking a policy." },
+  ],
+
+  "Christian Religious Knowledge": [
+    { id: "crs_2026_001", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2026, topic: "Old Testament", difficulty: "easy",
+      question: "Who led the Israelites across the River Jordan into the Promised Land?",
+      options: { A: "Moses", B: "Joshua", C: "Caleb", D: "Aaron" },
+      correctAnswer: "B", explanation: "Joshua succeeded Moses and led the crossing of the Jordan (Joshua 3)." },
+    { id: "crs_2026_002", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2026, topic: "New Testament", difficulty: "easy",
+      question: "Who baptized Jesus in River Jordan?",
+      options: { A: "Peter", B: "John the Baptist", C: "Andrew", D: "James" },
+      correctAnswer: "B", explanation: "John the Baptist baptized Jesus (Matthew 3:13–17)." },
+    { id: "crs_2026_003", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2026, topic: "Teachings of Jesus", difficulty: "medium",
+      question: "The parable of the Good Samaritan teaches about:",
+      options: { A: "Tithing", B: "Loving one's neighbour", C: "Prayer", D: "Fasting" },
+      correctAnswer: "B", explanation: "The Good Samaritan (Luke 10:25–37) illustrates loving and caring for anyone in need." },
+    { id: "crs_2026_004", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2026, topic: "Creation", difficulty: "medium",
+      question: "On which day did God create the sun, moon and stars?",
+      options: { A: "First day", B: "Second day", C: "Fourth day", D: "Sixth day" },
+      correctAnswer: "C", explanation: "Genesis 1:14–19 — lights in the firmament were made on the fourth day." },
+    { id: "crs_2026_005", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2026, topic: "Apostles", difficulty: "medium",
+      question: "Who wrote most of the Epistles in the New Testament?",
+      options: { A: "Peter", B: "Paul", C: "John", D: "Luke" },
+      correctAnswer: "B", explanation: "Paul authored 13 epistles, including Romans, Corinthians and Galatians." },
+    { id: "crs_2025_001", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2025, topic: "Worship", difficulty: "easy",
+      question: "The first of the Ten Commandments is about:",
+      options: { A: "Honouring parents", B: "Not stealing", C: "Having no other gods", D: "Keeping the Sabbath" },
+      correctAnswer: "C", explanation: "'You shall have no other gods before me' (Exodus 20:3)." },
+    { id: "crs_2025_002", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2025, topic: "Prophets", difficulty: "medium",
+      question: "Which prophet was taken up to heaven in a chariot of fire?",
+      options: { A: "Elijah", B: "Elisha", C: "Isaiah", D: "Jeremiah" },
+      correctAnswer: "A", explanation: "Elijah was taken up in a whirlwind/chariot of fire (2 Kings 2:11)." },
+    { id: "crs_2024_001", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2024, topic: "Suffering", difficulty: "hard",
+      question: "The book of Job deals mainly with the problem of:",
+      options: { A: "Exile", B: "Theodicy (why the righteous suffer)", C: "Idolatry", D: "Law and sacrifice" },
+      correctAnswer: "B", explanation: "Job explores why innocent people suffer — the problem of theodicy." },
+    { id: "crs_2024_002", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2024, topic: "New Testament", difficulty: "medium",
+      question: "Who betrayed Jesus for thirty pieces of silver?",
+      options: { A: "Judas Iscariot", B: "Peter", C: "Thomas", D: "John" },
+      correctAnswer: "A", explanation: "Judas Iscariot betrayed Jesus for thirty pieces of silver (Matthew 26:15)." },
+    { id: "crs_2024_003", subject: "Christian Religious Knowledge", exam: "JAMB", year: 2024, topic: "Miracles", difficulty: "medium",
+      question: "Who denied Jesus three times before the cock crowed?",
+      options: { A: "John", B: "Peter", C: "Philip", D: "Judas" },
+      correctAnswer: "B", explanation: "Peter denied knowing Jesus three times (Luke 22:54–62)." },
+  ],
+
+  "Further Mathematics": [
+    { id: "fm_2026_001", subject: "Further Mathematics", exam: "JAMB", year: 2026, topic: "Calculus", difficulty: "medium",
+      question: "Differentiate y = x³ with respect to x.",
+      options: { A: "x²", B: "3x²", C: "3x", D: "x⁴/4" },
+      correctAnswer: "B", explanation: "Using d/dx(xⁿ) = nxⁿ⁻¹: d/dx(x³) = 3x²." },
+    { id: "fm_2026_002", subject: "Further Mathematics", exam: "JAMB", year: 2026, topic: "Vectors", difficulty: "hard",
+      question: "If a = (2, 3) and b = (4, 1), find a · b (dot product).",
+      options: { A: "5", B: "11", C: "10", D: "7" },
+      correctAnswer: "B", explanation: "a · b = (2×4) + (3×1) = 8 + 3 = 11." },
+    { id: "fm_2026_003", subject: "Further Mathematics", exam: "JAMB", year: 2026, topic: "Mechanics", difficulty: "medium",
+      question: "A body of mass 5 kg has momentum 20 kg·m/s. Its velocity is:",
+      options: { A: "4 m/s", B: "100 m/s", C: "15 m/s", D: "0.25 m/s" },
+      correctAnswer: "A", explanation: "v = p/m = 20/5 = 4 m/s." },
+    { id: "fm_2026_004", subject: "Further Mathematics", exam: "JAMB", year: 2026, topic: "Probability", difficulty: "medium",
+      question: "Two fair dice are thrown. The probability that the sum is 7 is:",
+      options: { A: "1/6", B: "1/9", C: "1/12", D: "5/36" },
+      correctAnswer: "A", explanation: "Favourable outcomes: (1,6)(2,5)(3,4)(4,3)(5,2)(6,1) = 6/36 = 1/6." },
+    { id: "fm_2026_005", subject: "Further Mathematics", exam: "JAMB", year: 2026, topic: "Matrices", difficulty: "hard",
+      question: "The determinant of the matrix [[3, 2], [1, 4]] is:",
+      options: { A: "10", B: "14", C: "-10", D: "5" },
+      correctAnswer: "A", explanation: "det = (3×4) − (2×1) = 12 − 2 = 10." },
+    { id: "fm_2025_001", subject: "Further Mathematics", exam: "JAMB", year: 2025, topic: "Trigonometry", difficulty: "medium",
+      question: "If sin θ = 3/5 and θ is acute, cos θ equals:",
+      options: { A: "4/5", B: "5/3", C: "3/4", D: "1/5" },
+      correctAnswer: "A", explanation: "By Pythagoras, adjacent = √(5²−3²) = 4, so cos θ = 4/5." },
+    { id: "fm_2025_002", subject: "Further Mathematics", exam: "JAMB", year: 2025, topic: "Calculus", difficulty: "hard",
+      question: "Evaluate ∫₀¹ 2x dx.",
+      options: { A: "1", B: "2", C: "0", D: "1/2" },
+      correctAnswer: "A", explanation: "∫2x dx = x²; evaluated from 0 to 1 gives 1 − 0 = 1." },
+    { id: "fm_2024_001", subject: "Further Mathematics", exam: "JAMB", year: 2024, topic: "Statics", difficulty: "medium",
+      question: "The moment of a force about a point is measured in:",
+      options: { A: "Newtons", B: "Newton-metres", C: "Joules", D: "Watts" },
+      correctAnswer: "B", explanation: "Moment = force × perpendicular distance → N·m." },
+    { id: "fm_2024_002", subject: "Further Mathematics", exam: "JAMB", year: 2024, topic: "Series", difficulty: "medium",
+      question: "The 10th term of the arithmetic series 3, 7, 11, … is:",
+      options: { A: "39", B: "43", C: "40", D: "36" },
+      correctAnswer: "A", explanation: "aₙ = a + (n−1)d = 3 + 9×4 = 3 + 36 = 39." },
+    { id: "fm_2024_003", subject: "Further Mathematics", exam: "JAMB", year: 2024, topic: "Logarithms", difficulty: "easy",
+      question: "log₁₀ 1000 equals:",
+      options: { A: "2", B: "3", C: "10", D: "1" },
+      correctAnswer: "B", explanation: "10³ = 1000, so log₁₀ 1000 = 3." },
+  ],
 };
 
 // ============================================================
@@ -1441,26 +1703,34 @@ const SUBJECT_ALIASES = {
   english: "Use of English Language",
   "use of english": "Use of English Language",
   "use of english language": "Use of English Language",
+  "literature in english": "Literature-in-English",
+  literature: "Literature-in-English",
+  "christian religious studies": "Christian Religious Knowledge",
+  crs: "Christian Religious Knowledge",
+  agr: "Agricultural Science",
+  "agric science": "Agricultural Science",
+  "mathematics (core)": "Mathematics (WAEC)",
 };
 
 // ============================================================
 // QUERY FUNCTIONS
 // ============================================================
 
-export function getQuestionsFromBank({ subject, year, exam, count = 10, difficulty = null }) {
-  let pool = [];
-
+export function getQuestionsFromBank({ subject, year, exam, topic = null, count = 10, difficulty = null }) {
   // Normalize via aliases first
   const normalized = SUBJECT_ALIASES[subject?.toLowerCase()] || subject;
 
-  // Collect all questions matching the subject from QUESTION_BANK
+  // Collect all questions matching the subject from QUESTION_BANK.
+  // Prefer exact/prefixed key matches so "Mathematics" does not pull in "Further Mathematics".
+  let exactPool = [];
+  let fuzzyPool = [];
   for (const [key, value] of Object.entries(QUESTION_BANK)) {
-    if (key.toLowerCase() === normalized?.toLowerCase() ||
-        key.toLowerCase().includes(normalized?.toLowerCase()) ||
-        normalized?.toLowerCase().includes(key.toLowerCase())) {
-      pool = pool.concat(value);
-    }
+    const k = key.toLowerCase();
+    const n = (normalized || "").toLowerCase();
+    if (k === n || (n && k.startsWith(n + " ("))) exactPool = exactPool.concat(value);
+    else if (n && (k.includes(n) || n.includes(k))) fuzzyPool = fuzzyPool.concat(value);
   }
+  let pool = exactPool.length > 0 ? exactPool : fuzzyPool;
 
   // Filter by exam
   if (exam && pool.length > 0) {
@@ -1470,6 +1740,14 @@ export function getQuestionsFromBank({ subject, year, exam, count = 10, difficul
   // Filter by difficulty
   if (difficulty && pool.length > 0) {
     pool = pool.filter(q => q.difficulty === difficulty);
+  }
+
+  // Filter by topic — fall back to full pool if topic yields nothing
+  if (topic && pool.length > 0) {
+    const topicPool = pool.filter(q =>
+      (q.topic || "").toLowerCase().includes(topic.toLowerCase())
+    );
+    if (topicPool.length > 0) pool = topicPool;
   }
 
   // Filter by year - prioritize exact year, then any recent
