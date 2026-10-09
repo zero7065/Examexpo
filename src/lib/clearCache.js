@@ -1,22 +1,44 @@
-// Force-unregister old service workers and clear all caches
-// Call this once on app load to fix stale SW issues
-export async function clearOldServiceWorker() {
+// Version-gated service worker / cache cleanup.
+// Runs the aggressive wipe at most ONCE per SW_VERSION (not on every page load),
+// so the offline app shell survives across visits. Bump SW_VERSION when shipping
+// a build that must force clients off stale cached bundles.
+const SW_VERSION = "2026-10-08a";
+
+export function getSwVersion() {
+  return SW_VERSION;
+}
+
+// Aggressive wipe — only when forced or when the version changed.
+export async function clearOldServiceWorker({ force = false } = {}) {
   try {
+    let lastSeen = null;
+    try {
+      lastSeen = localStorage.getItem("exampadi_sw_version");
+    } catch (_) {}
+
+    if (!force && lastSeen === SW_VERSION) {
+      return false; // already cleaned for this build
+    }
+
     // Unregister ALL service workers
-    if ('serviceWorker' in navigator) {
+    if ("serviceWorker" in navigator) {
       const registrations = await navigator.serviceWorker.getRegistrations();
       for (const reg of registrations) {
-        await reg.unregister();
+        try { await reg.unregister(); } catch (_) {}
       }
     }
 
     // Clear all caches
-    if ('caches' in window) {
+    if ("caches" in window) {
       const cacheNames = await caches.keys();
       for (const name of cacheNames) {
-        await caches.delete(name);
+        try { await caches.delete(name); } catch (_) {}
       }
     }
+
+    try {
+      localStorage.setItem("exampadi_sw_version", SW_VERSION);
+    } catch (_) {}
 
     return true;
   } catch (e) {

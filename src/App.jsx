@@ -54,14 +54,14 @@ const AssignmentPage = lazy(() => import("./pages/AssignmentPage"));
 
 function PageLoader() {
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid #1e1e2a", borderTopColor: "#6C3CE9", animation: "spin 0.8s linear infinite" }} />
+    <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid var(--border)", borderTopColor: "var(--primary)", animation: "spin 0.8s linear infinite" }} />
     </div>
   );
 }
 
 function AuthAwareRoutes() {
-  const { user, loading, isOffline } = useAuth();
+  const { user, loading, isOffline, degraded } = useAuth();
   const location = useLocation();
 
   useEffect(() => {
@@ -87,6 +87,7 @@ function AuthAwareRoutes() {
       "/study-partners": "Study Partners — ExamPadi AI",
       "/shared-test": "Shared Test — ExamPadi AI",
       "/assignment": "Assignment — ExamPadi AI",
+      "/flashcards": "Flashcards — ExamPadi AI",
     };
     document.title = titles[location.pathname] || "ExamPadi AI";
   }, [location.pathname, loading]);
@@ -103,6 +104,18 @@ function AuthAwareRoutes() {
         }}>
           <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: "#fff", animation: "pulse 1.5s infinite" }} />
           You're offline — check your internet connection. Tap the Network Diagnostic button for help.
+        </div>
+      )}
+      {!isOffline && degraded && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999,
+          background: "linear-gradient(135deg, #b45309, #d97706)", color: "#fff", padding: "10px 16px",
+          textAlign: "center", fontSize: 13, fontWeight: 600,
+          fontFamily: "'Inter', system-ui, sans-serif",
+          display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+        }}>
+          <span style={{ display: "inline-block", width: 8, height: 8, borderRadius: "50%", background: "#fff", animation: "pulse 1.5s infinite" }} />
+          Degraded connection — your network is blocking some Google services. Data will sync when reachable. Switch to mobile data if sessions expire.
         </div>
       )}
       <Navbar />
@@ -179,9 +192,9 @@ function AuthAwareRoutes() {
 
 function App() {
   useEffect(() => {
-    // Force-clear old service workers on first load
+    // Version-gated cleanup: runs the aggressive wipe at most once per
+    // SW_VERSION, then registers the (self-contained) service worker.
     clearOldServiceWorker().then(() => {
-      // Re-register the new clean SW after clearing old ones
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       }

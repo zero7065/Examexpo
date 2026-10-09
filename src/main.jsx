@@ -19,12 +19,10 @@ setTimeout(() => initMonitoring(), 0);
 // Force isAdmin into bundle to prevent tree-shaking (used in Navbar + AdminPage)
 if (typeof isAdmin === 'function') isAdmin({ uid: 'retain' });
 
-// Unregister stale service workers to prevent "n is not a function" from cached old bundles
+// Register the service worker (offline shell). Cleanup of stale SWs/caches
+// runs at most once per SW_VERSION inside clearOldServiceWorker (App.jsx).
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(regs => {
-    regs.forEach(reg => reg.unregister());
-  });
-  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(

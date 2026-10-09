@@ -11,6 +11,8 @@ import {
 import { auth, db, signInWithGoogle as firebaseGoogleSignIn } from "../firebaseConfig";
 import { doc, setDoc, serverTimestamp, getDoc } from "firebase/firestore";
 import { logActivity } from "../lib/activityLog";
+import { onConnectionChange, startConnectionMonitor } from "../lib/connectionHealth";
+import { flushQueue } from "../lib/offlineQueue";
 
 const AuthContext = createContext();
 
@@ -19,6 +21,34 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [profileVersion, setProfileVersion] = useState(0);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [degraded, setDegraded] = useState(false);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+
+  // Partial-connectivity monitor (auth works, sync blocked)
+  useEffect(() => {
+    const offChange = onConnectionChange((next) => {
+      setDegraded(next);
+      // When hosts come back, flush queued writes and re-arm auth
+      if (!next) {
+        flushQueue().catch(() => {});
+      }
+    });
+    const stopMonitor = startConnectionMonitor();
+    return () => {
+      offChange();
+      stopMonitor();
+    };
+  }, []);
 
   useEffect(() => {
     const handleOnline = () => setIsOffline(false);
@@ -79,10 +109,23 @@ export function AuthProvider({ children }) {
     }
 
     startAuthListener();
+
+    // When connectivity returns, reset retries and re-subscribe the auth listener
+    // (Firebase may have dropped the stream mid-outage, and retryCount may be exhausted)
+    function handleReconnect() {
+      retryCount = 0;
+      if (unsubscribe) {
+        try { unsubscribe(); } catch (_) {}
+      }
+      startAuthListener();
+    }
+    window.addEventListener("online", handleReconnect);
+
     return () => {
       cancelled = true;
       clearTimeout(timeout);
       if (unsubscribe) unsubscribe();
+      window.removeEventListener("online", handleReconnect);
     };
   }, []);
 
@@ -240,7 +283,8 @@ export function AuthProvider({ children }) {
   const ctxValue = useMemo(() => ({
     user, loading, login, signInWithGoogle, register, logout, resetPassword,
     findUserByEmail, refreshProfile, updateUser, profileVersion, isPro, getUserRole, isOffline,
-  }), [user, loading, profileVersion, isOffline]);
+    degraded,
+  }), [user, loading, profileVersion, isOffline, degraded]);
 
   if (loading) {
     return (
@@ -249,19 +293,19 @@ export function AuthProvider({ children }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#0a0a0f",
+        background: "var(--bg)",
         flexDirection: "column",
         gap: 16,
       }}>
         <div style={{
           width: 36,
           height: 36,
-          border: "3px solid #333",
-          borderTopColor: "#6C3CE9",
+          border: "3px solid var(--border)",
+          borderTopColor: "var(--primary)",
           borderRadius: "50%",
           animation: "spin 0.8s linear infinite",
         }} />
-        <p style={{ color: "#888", fontFamily: "system-ui, sans-serif", fontSize: 15 }}>
+        <p style={{ color: "var(--text-muted)", fontFamily: "system-ui, sans-serif", fontSize: 15 }}>
           Loading ExamPadi...
         </p>
       </div>

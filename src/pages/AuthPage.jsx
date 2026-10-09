@@ -115,7 +115,7 @@ export default function AuthPage() {
 
     const endpoints = [
       ["Auth API", "https://identitytoolkit.googleapis.com/v1/projects?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", "GET"],
-      ["Firestore", "https://firestore.googleapis.com/v1/projects/jamb-tutor/databases/(default)/documents/stats/global", "GET"],
+      ["Firestore", "https://firestore.googleapis.com/v1/projects/jamb-tutor/databases/(default)/documents/stats/global?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", "GET"],
       ["Token", "https://securetoken.googleapis.com/v1/token?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", "POST"],
     ];
 
@@ -123,16 +123,19 @@ export default function AuthPage() {
       try {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), 8000);
-        const res = await fetch(url, { method, signal: controller.signal });
+        await fetch(url, { method, signal: controller.signal });
         clearTimeout(timer);
-        results.push(`${name}: ${res.ok ? "OK" : "FAIL " + res.status}`);
+        results.push(`${name}: OK`); // any HTTP response = host reachable
       } catch (e) {
         results.push(`${name}: BLOCKED`);
       }
     }
 
-    const allBlocked = results.every(r => r.includes("BLOCKED"));
-    setTestResult(results.join(" | ") + (allBlocked ? " — Your network is blocking Google. Try mobile data." : ""));
+    const blockedCount = results.filter(r => r.includes("BLOCKED")).length;
+    let suffix = "";
+    if (blockedCount === endpoints.length) suffix = " — Your network is blocking Google. Try mobile data.";
+    else if (blockedCount > 0) suffix = " — Partial blocking: sessions/data may not sync. Try mobile data.";
+    setTestResult(results.join(" | ") + suffix);
     setTesting(false);
   }
 

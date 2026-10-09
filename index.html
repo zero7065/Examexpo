@@ -52,6 +52,16 @@
   <link rel="dns-prefetch" href="https://api.groq.com" />
   <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
   <link rel="dns-prefetch" href="https://identitytoolkit.googleapis.com" />
+
+  <!-- Pre-paint theme (prevents light→dark flash) -->
+  <script>
+    try {
+      var t = localStorage.getItem("ep-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", t);
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute("content", t === "dark" ? "#0f0f12" : "#6C3CE9");
+    } catch (e) {}
+  </script>
 </head>
 <body>
   <div id="root"></div>

@@ -7,25 +7,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "var(--bg)",
-        "bg-2": "var(--bg-2)",
-        "bg-3": "var(--bg-3)",
-        subtle: "var(--subtle)",
-        border: "var(--border)",
-        text: "var(--text)",
-        "text-muted": "var(--text-muted)",
+        bg: "rgb(var(--bg-rgb) / <alpha-value>)",
+        "bg-2": "rgb(var(--bg-2-rgb) / <alpha-value>)",
+        "bg-3": "rgb(var(--bg-3-rgb) / <alpha-value>)",
+        subtle: "rgb(var(--subtle-rgb) / <alpha-value>)",
+        border: "rgb(var(--border-rgb) / <alpha-value>)",
+        text: "rgb(var(--text-rgb) / <alpha-value>)",
+        "text-muted": "rgb(var(--text-muted-rgb) / <alpha-value>)",
         primary: {
-          DEFAULT: "var(--primary)",
+          DEFAULT: "rgb(var(--primary-rgb) / <alpha-value>)",
           dim: "var(--primary-dim)",
         },
         accent: {
-          DEFAULT: "var(--accent)",
+          DEFAULT: "rgb(var(--accent-rgb) / <alpha-value>)",
           dim: "var(--accent-dim)",
         },
-        danger: "var(--danger)",
-        success: "var(--success)",
-        surface: "var(--bg)",
-        "surface-2": "var(--bg-2)",
+        danger: "rgb(var(--danger-rgb) / <alpha-value>)",
+        success: "rgb(var(--success-rgb) / <alpha-value>)",
+        surface: "rgb(var(--bg-rgb) / <alpha-value>)",
+        "surface-2": "rgb(var(--bg-2-rgb) / <alpha-value>)",
       },
       fontFamily: {
         sora: ["Sora", "sans-serif"],

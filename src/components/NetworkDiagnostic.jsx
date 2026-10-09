@@ -26,9 +26,10 @@ export default function NetworkDiagnostic() {
     const ok = result.results.filter(r => r.ok);
     addLog(`${ok.length}/${result.results.length} endpoints reachable`);
     if (blocked.length > 0) {
-      addLog(`Blocked: ${blocked.map(r => r.name).join(", ")}`);
+      addLog(`Blocked: ${blocked.map(r => `${r.name} (${r.error})`).join(", ")}`);
     }
     addLog(`Network: ${result.netInfo.onLine ? "Online" : "OFFLINE"} | Type: ${result.netInfo.effectiveType} | Speed: ${result.netInfo.downlink}Mbps | Latency: ${result.netInfo.rtt}ms`);
+    addLog(`Diagnosis: ${result.diagnosis.title}`);
     setTesting(false);
   }
 
@@ -124,7 +125,7 @@ export default function NetworkDiagnostic() {
                     <span style={{
                       color: r.ok ? "#22c55e" : "#ef4444", fontSize: 12, fontFamily: "monospace", fontWeight: 700,
                     }}>
-                      {r.ok ? `${r.status} OK` : `FAIL`}
+                      {r.ok ? (r.status ? `${r.status} OK` : "REACHABLE") : "BLOCKED"}
                     </span>
                   </div>
                 </div>
@@ -135,8 +136,8 @@ export default function NetworkDiagnostic() {
             {logs.length > 0 && (
               <div style={{
                 padding: "8px 12px", borderRadius: 8, marginBottom: 12,
-                background: "#0a0a0f", border: "1px solid var(--border)",
-                fontSize: 11, fontFamily: "monospace", color: "#888", lineHeight: 1.8,
+                background: "var(--bg-3)", border: "1px solid var(--border)",
+                fontSize: 11, fontFamily: "monospace", color: "var(--text-muted)", lineHeight: 1.8,
                 maxHeight: 100, overflow: "auto",
               }}>
                 {logs.map((l, i) => <div key={i}>{l}</div>)}
@@ -144,67 +145,23 @@ export default function NetworkDiagnostic() {
             )}
 
             {/* Diagnosis */}
-            {(() => {
-              const allBlocked = data.results.every(r => !r.ok);
-              const googleBlocked = data.results.filter(r => r.name.includes("Google") || r.name.includes("Auth")).every(r => !r.ok);
-              const firestoreBlocked = data.results.find(r => r.name.includes("Firestore")) && !data.results.find(r => r.name.includes("Firestore"))?.ok;
-              const fontsOk = data.results.find(r => r.name === "Google Fonts")?.ok;
-
-              if (allBlocked) {
-                return (
-                  <div style={{
-                    padding: "12px 14px", borderRadius: 10, marginBottom: 12,
-                    background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)",
-                  }}>
-                    <p style={{ color: "#ef4444", fontSize: 14, fontWeight: 700, margin: "0 0 6px" }}>
-                      ALL endpoints blocked — ISP-level Google blocking
-                    </p>
-                    <p style={{ color: "var(--text-muted)", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
-                      Your network is blocking ALL Google services. Switch to mobile data hotspot.
-                    </p>
-                  </div>
-                );
-              }
-              if (googleBlocked && fontsOk) {
-                return (
-                  <div style={{
-                    padding: "12px 14px", borderRadius: 10, marginBottom: 12,
-                    background: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.3)",
-                  }}>
-                    <p style={{ color: "#f59e0b", fontSize: 14, fontWeight: 700, margin: "0 0 6px" }}>
-                      Google accessible but Firebase Auth/Firestore blocked
-                    </p>
-                    <p style={{ color: "var(--text-muted)", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
-                      Your ISP may be specifically blocking Firebase endpoints. Try:<br/>
-                      1. Mobile data hotspot<br/>
-                      2. Different WiFi network<br/>
-                      3. Disable any VPN/proxy
-                    </p>
-                  </div>
-                );
-              }
-              if (firestoreBlocked) {
-                return (
-                  <div style={{
-                    padding: "12px 14px", borderRadius: 10, marginBottom: 12,
-                    background: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.3)",
-                  }}>
-                    <p style={{ color: "#f59e0b", fontSize: 14, fontWeight: 700, margin: "0 0 6px" }}>
-                      Firestore blocked — Auth may still work
-                    </p>
-                    <p style={{ color: "var(--text-muted)", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
-                      Firebase Auth might work but data won't save. Try mobile data.
-                    </p>
-                  </div>
-                );
-              }
+            {data.diagnosis && (() => {
+              const d = data.diagnosis;
+              const palette = d.level === "ok"
+                ? { bg: "rgba(34,197,94,0.1)", border: "rgba(34,197,94,0.3)", fg: "#22c55e" }
+                : d.level === "warn"
+                ? { bg: "rgba(251,191,36,0.1)", border: "rgba(251,191,36,0.3)", fg: "#f59e0b" }
+                : { bg: "rgba(239,68,68,0.1)", border: "rgba(239,68,68,0.3)", fg: "#ef4444" };
               return (
                 <div style={{
                   padding: "12px 14px", borderRadius: 10, marginBottom: 12,
-                  background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)",
+                  background: palette.bg, border: `1px solid ${palette.border}`,
                 }}>
-                  <p style={{ color: "#22c55e", fontSize: 14, fontWeight: 700, margin: 0 }}>
-                    All critical endpoints reachable — network looks fine
+                  <p style={{ color: palette.fg, fontSize: 14, fontWeight: 700, margin: "0 0 6px" }}>
+                    {d.title}
+                  </p>
+                  <p style={{ color: "var(--text-muted)", fontSize: 12, margin: 0, lineHeight: 1.6 }}>
+                    {d.advice}
                   </p>
                 </div>
               );

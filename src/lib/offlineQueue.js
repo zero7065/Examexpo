@@ -1,67 +1,117 @@
+// Offline/degraded write queue: when a Firestore write fails due to network,
+// queue it in localStorage and flush when reachable again.
 import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
-let pending = [];
+const LS_KEY = "exampadi_offline_queue";
+const MAX_OPS = 200;
 
-export function queueFirestoreWrite(path, data) {
-  if (navigator.onLine) {
-    try {
-      setDoc(doc(db, path), data);
-      return;
-    } catch (e) {
-      console.warn('Firestore write failed, queueing:', e);
-    }
+function load() {
+  try {
+    const saved = localStorage.getItem(LS_KEY);
+    const parsed = saved ? JSON.parse(saved) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_) {
+    return [];
   }
-  pending.push({ path, data, timestamp: Date.now() });
-  localStorage.setItem('exampadi_offline_queue', JSON.stringify(pending));
 }
 
-export function queueFirestoreAdd(collectionPath, data) {
-  if (navigator.onLine) {
-    try {
-      addDoc(collection(db, collectionPath), data);
-      return;
-    } catch (e) {
-      console.warn('Firestore add failed, queueing:', e);
-    }
-  }
-  pending.push({ collectionPath, data, timestamp: Date.now(), isAdd: true });
-  localStorage.setItem('exampadi_offline_queue', JSON.stringify(pending));
+function save(ops) {
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify(ops.slice(-MAX_OPS)));
+  } catch (_) {}
 }
 
-export function flushQueue() {
-  if (pending.length === 0) {
-    const saved = localStorage.getItem('exampadi_offline_queue');
-    if (saved) {
-      try { pending = JSON.parse(saved); } catch { pending = []; }
-    }
-  }
-  if (!navigator.onLine || pending.length === 0) return;
+let pending = load();
+let flushing = false;
+const listeners = new Set();
 
-  const failed = [];
+export function onQueueChange(fn) {
+  listeners.add(fn);
+  return () => listeners.delete(fn);
+}
 
-  pending.forEach(op => {
-    try {
-      if (op.isAdd) {
-        addDoc(collection(db, op.collectionPath), op.data);
-      } else {
-        setDoc(doc(db, op.path), op.data);
-      }
-    } catch {
-      failed.push(op);
-    }
+function emit() {
+  listeners.forEach((fn) => {
+    try { fn(pending.length); } catch (_) {}
   });
+}
 
-  pending = failed;
-  localStorage.setItem('exampadi_offline_queue', JSON.stringify(pending));
+function enqueue(op) {
+  pending = [...pending, { ...op, timestamp: Date.now() }].slice(-MAX_OPS);
+  save(pending);
+  emit();
+}
+
+// Fire-and-forget write: try now, queue on failure.
+export async function queueFirestoreWrite(path, data, { merge = true } = {}) {
+  const op = { kind: "set", path, data, merge };
+  try {
+    await setDoc(doc(db, path), data, { merge });
+    return { queued: false };
+  } catch (e) {
+    enqueue(op);
+    console.warn("Firestore write queued (offline/degraded):", path, e?.code || e?.message);
+    return { queued: true };
+  }
+}
+
+export async function queueFirestoreAdd(collectionPath, data) {
+  const op = { kind: "add", collectionPath, data };
+  try {
+    await addDoc(collection(db, collectionPath), data);
+    return { queued: false };
+  } catch (e) {
+    enqueue(op);
+    console.warn("Firestore add queued (offline/degraded):", collectionPath, e?.code || e?.message);
+    return { queued: true };
+  }
+}
+
+// Replay queued writes. Returns number successfully flushed.
+export async function flushQueue() {
+  if (flushing) return 0;
+  if (pending.length === 0) return 0;
+  if (typeof navigator !== "undefined" && !navigator.onLine) return 0;
+
+  flushing = true;
+  const failed = [];
+  let flushed = 0;
+
+  for (const op of pending) {
+    try {
+      if (op.kind === "add") {
+        await addDoc(collection(db, op.collectionPath), op.data);
+      } else {
+        await setDoc(doc(db, op.path), op.data, { merge: op.merge !== false });
+      }
+      flushed++;
+    } catch (e) {
+      failed.push(op);
+      // Stop on the first failure — network is likely still down.
+      const idx = pending.indexOf(op);
+      failed.push(...pending.slice(idx + 1));
+      break;
+    }
+  }
+
+  pending = failed.slice(-MAX_OPS);
+  save(pending);
+  flushing = false;
+  emit();
+  return flushed;
+}
+
+export function queuedWriteCount() {
+  return pending.length;
 }
 
 // Auto-flush when back online
-if (typeof window !== 'undefined') {
-  window.addEventListener('online', flushQueue);
-
-  const saved = localStorage.getItem('exampadi_offline_queue');
-  if (saved) {
-    try { pending = JSON.parse(saved); } catch { pending = []; }
-  }
+if (typeof window !== "undefined") {
+  window.addEventListener("online", () => {
+    flushQueue().catch(() => {});
+  });
+  window.addEventListener("focus", () => {
+    flushQueue().catch(() => {});
+  });
 }

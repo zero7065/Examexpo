@@ -98,7 +98,7 @@ export default function FlashcardsPage() {
           <select value={subject} onChange={e => setSubject(e.target.value)}
             className="px-4 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm" style={{ color: "var(--text)" }}>
             <option value="">Select subject…</option>
-            {subjects.map(s => <option key={s} value={s}>{s}</option>)}
+            {subjects.map(s => <option key={s.id} value={s.name}>{s.icon} {s.name}</option>)}
           </select>
           <input value={topic} onChange={e => setTopic(e.target.value)} placeholder="Topic (optional)"
             className="flex-1 min-w-[160px] px-4 py-2.5 rounded-xl bg-black/40 border border-white/10 text-sm" style={{ color: "var(--text)" }} />
