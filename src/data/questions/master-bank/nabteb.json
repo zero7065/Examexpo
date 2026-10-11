@@ -1,0 +1,77 @@
+[
+ {
+  "id": "nabteb-2026-ccp-001",
+  "subject": "Computer Craft Practice",
+  "topic": "Database",
+  "exam": [
+   "NABTEB"
+  ],
+  "year": 2026,
+  "difficulty": "medium",
+  "question": "Which SQL command is used to retrieve data?",
+  "options": {
+   "A": "INSERT",
+   "B": "UPDATE",
+   "C": "SELECT",
+   "D": "DELETE"
+  },
+  "correctAnswer": "C",
+  "explanation": "SELECT is used to query/retrieve data from a database.",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.582Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2026
+  ]
+ },
+ {
+  "id": "nabteb-2026-ccp-002",
+  "subject": "Computer Craft Practice",
+  "topic": "Programming",
+  "exam": [
+   "NABTEB"
+  ],
+  "year": 2026,
+  "difficulty": "hard",
+  "question": "What is the output of: print(type([]))?",
+  "options": {
+   "A": "<class 'list'>",
+   "B": "<class 'dict'>",
+   "C": "<class 'tuple'>",
+   "D": "<class 'set'>"
+  },
+  "correctAnswer": "A",
+  "explanation": "[] creates an empty list in Python, so type([]) returns <class 'list'>.",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.582Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2026
+  ]
+ },
+ {
+  "id": "nabteb-2026-amw-001",
+  "subject": "Auto Mechanics Work",
+  "topic": "Engine",
+  "exam": [
+   "NABTEB"
+  ],
+  "year": 2026,
+  "difficulty": "easy",
+  "question": "The compression ratio in diesel engines is typically:",
+  "options": {
+   "A": "6:1 to 8:1",
+   "B": "15:1 to 20:1",
+   "C": "10:1 to 12:1",
+   "D": "20:1 to 25:1"
+  },
+  "correctAnswer": "B",
+  "explanation": "Diesel engines have high compression ratios, typically 15:1 to 20:1 for efficiency.",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.582Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2026
+  ]
+ }
+]

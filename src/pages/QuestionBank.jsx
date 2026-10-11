@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getUserProfile } from "../lib/userProfile";
-import { getFilteredQuestions, getTopics, getAllSubjects, getTotalCount } from "../data/questions/index";
+import { getFilteredQuestions, getTopics, getAllSubjects, getTotalCount } from "../data/questions/compat";
+import RepetitionBadge from "../components/QuestionBank/RepetitionBadge";
 import { ChevronRight, ChevronLeft, Search, BookOpen } from "lucide-react";
 
 const DIFFICULTY_COLORS = { easy: "#4ADE80", medium: "#FF9F43", hard: "#FF4D6A" };
@@ -22,6 +23,7 @@ export default function QuestionBank() {
     difficulty: "ALL",
     yearFrom: "2017",
     yearTo: "2026",
+    highYieldOnly: false,
   });
 
   useEffect(() => {
@@ -84,6 +86,10 @@ export default function QuestionBank() {
           <input type="number" placeholder="From" value={filters.yearFrom} onChange={e => updateFilter("yearFrom", e.target.value)} style={{ width: 64, background: "#1a1a1f", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 10px", fontSize: 13, outline: "none", fontFamily: "inherit" }} />
           <input type="number" placeholder="To" value={filters.yearTo} onChange={e => updateFilter("yearTo", e.target.value)} style={{ width: 64, background: "#1a1a1f", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 10px", fontSize: 13, outline: "none", fontFamily: "inherit" }} />
 
+          <button onClick={() => updateFilter("highYieldOnly", !filters.highYieldOnly)} style={{ padding: "6px 14px", borderRadius: 20, border: filters.highYieldOnly ? "1px solid #f97316" : "1px solid #333", background: filters.highYieldOnly ? "rgba(249,115,22,0.15)" : "transparent", color: filters.highYieldOnly ? "#f97316" : "#888", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
+            🔥 High-yield only
+          </button>
+
           <button onClick={handleStartPractice} style={{ marginLeft: "auto", padding: "10px 20px", borderRadius: 10, border: "none", background: "#6C3CE9", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
             Practice {filtered.length > 20 ? "20" : filtered.length} Questions <ChevronRight size={16} />
           </button>
@@ -106,10 +112,11 @@ export default function QuestionBank() {
                     <div style={{ width: 10, height: 10, borderRadius: "50%", background: DIFFICULTY_COLORS[q.difficulty], marginTop: 6, flexShrink: 0 }} />
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ fontSize: 14, fontWeight: 600, color: "#fff", marginBottom: 6, lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: isExpanded ? "unset" : 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{q.question}</div>
-                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" }}>
                         <span style={{ padding: "2px 8px", borderRadius: 10, background: "rgba(108,60,233,0.15)", color: "#6C3CE9", fontSize: 11, fontWeight: 600 }}>{q.topic}</span>
                         <span style={{ padding: "2px 8px", borderRadius: 10, background: "rgba(255,255,255,0.05)", color: "#888", fontSize: 11, fontWeight: 500 }}>{q.year}</span>
                         {q.exam.map(e => <span key={e} style={{ padding: "2px 8px", borderRadius: 10, background: "rgba(0,229,160,0.1)", color: "#00E5A0", fontSize: 11, fontWeight: 600 }}>{e}</span>)}
+                        <RepetitionBadge question={q} />
                       </div>
                     </div>
                     <ChevronRight size={18} color="#888" style={{ flexShrink: 0, transform: isExpanded ? "rotate(90deg)" : "none", transition: "transform 0.2s" }} />

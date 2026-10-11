@@ -1,10 +1,12 @@
 // src/pages/PastQuestionsPage.jsx
 import { useState } from "react";
-import { getQuestionsFromBank } from "../data/questionBank";
-import { predictLikelyQuestions, getAIErrorIfRecent } from "../lib/ai";
+import { getQuestionsFromBank } from "../data/questions/compat";
+import { predictLikelyQuestions as predictLikelyAI, getAIErrorIfRecent } from "../lib/ai";
+import { likelyTopics } from "../lib/likelyQuestions";
+import RepetitionBadge from "../components/QuestionBank/RepetitionBadge";
 import { useToast } from "../components/Toast";
 import { JAMB_SUBJECTS, WAEC_SUBJECTS } from "../data/subjects";
-import { Sparkles, BookOpen, History, ChevronRight, HelpCircle, Loader2 } from "lucide-react";
+import { Sparkles, BookOpen, HelpCircle, Loader2 } from "lucide-react";
 import ProGate from "../components/ProGate";
 import { useSubscription } from "../hooks/useSubscription";
 
@@ -50,14 +52,35 @@ export default function PastQuestionsPage() {
     setPredLoading(true);
     setPredictions([]);
     try {
-      const preds = await predictLikelyQuestions({ subject, exam, count: 6 });
-      const aiErr = getAIErrorIfRecent();
-      if (aiErr) {
-        toast({ message: `Prediction failed: ${aiErr.message}`, type: "error" });
+      // Deterministic repetition engine first…
+      const dataDriven = likelyTopics({ subject, exam, count: 6 });
+      let combined = [...dataDriven];
+      // …AI fills the shortfall on thin topics (badged AI)
+      if (combined.length < 6) {
+        try {
+          const aiPreds = await predictLikelyAI({ subject, exam, count: 6 - combined.length });
+          const aiErr = getAIErrorIfRecent();
+          if (!aiErr && Array.isArray(aiPreds)) {
+            const seen = new Set(combined.map((p) => String(p.topic).toLowerCase()));
+            for (const p of aiPreds) {
+              if (p && p.topic && !seen.has(String(p.topic).toLowerCase())) {
+                combined.push({ ...p, _origin: "AI" });
+                seen.add(String(p.topic).toLowerCase());
+              }
+              if (combined.length >= 6) break;
+            }
+          }
+        } catch {
+          // AI fallback is best-effort; data results stand alone
+        }
+      }
+      if (combined.length === 0) {
+        toast({ message: "No prediction data for this subject yet", type: "warning" });
         return;
       }
-      setPredictions(preds);
-      toast({ message: "Exam predictions ready 🔮", type: "success" });
+      setPredictions(combined);
+      const dataCount = combined.filter((p) => p._origin !== "AI").length;
+      toast({ message: `Exam predictions ready 🔮 (${dataCount} data-backed)`, type: "success" });
     } catch (err) {
       toast({ message: err.message, type: "error" });
     } finally {
@@ -126,17 +149,20 @@ export default function PastQuestionsPage() {
         <div className="space-y-6">
           <h2 className="text-xl font-black text-accent flex items-center gap-2">
             <Sparkles size={24} />
-            AI Exam Predictions
+            Likely Questions
           </h2>
           <div className="grid md:grid-cols-2 gap-4">
             {predictions.map((p, i) => (
               <div key={i} className="glass-card p-6 border-accent/20">
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-4 gap-2">
                   <strong className="text-lg">{p.topic}</strong>
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest ${
-                    p.likelihood === "very high" ? 'bg-danger/10 text-danger' : 'bg-primary/10 text-primary'
-                  }`}>
-                    {p.likelihood}
+                  <span className="flex items-center gap-2">
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest ${
+                      p.likelihood === "very high" ? 'bg-danger/10 text-danger' : 'bg-primary/10 text-primary'
+                    }`}>
+                      {p.likelihood}
+                    </span>
+                    <RepetitionBadge question={p} showOrigin />
                   </span>
                 </div>
                 <p className="text-text-muted text-sm mb-4 leading-relaxed">{p.reason}</p>

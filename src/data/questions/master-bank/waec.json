@@ -1,0 +1,1502 @@
+[
+ {
+  "id": "waec-2026-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Comprehension",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2026,
+  "difficulty": "hard",
+  "question": "From the passage, the main challenge facing renewable energy adoption is:",
+  "options": {
+   "A": "High cost",
+   "B": "Lack of technology",
+   "C": "Government policy",
+   "D": "Public awareness"
+  },
+  "correctAnswer": "A",
+  "explanation": "The passage emphasizes high initial costs as the main barrier to renewable energy adoption.",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.581Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2026
+  ]
+ },
+ {
+  "id": "waec-2026-math-001",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2026,
+  "difficulty": "easy",
+  "question": "Solve: 2x + 5 = 15",
+  "options": {
+   "A": "x = 5",
+   "B": "x = 10",
+   "C": "x = 7.5",
+   "D": "x = 4"
+  },
+  "correctAnswer": "A",
+  "explanation": "2x = 15-5 = 10, so x = 10/2 = 5.",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.582Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2026
+  ]
+ },
+ {
+  "id": "waec-2022-biol-001",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "Which organelle is responsible for ATP production?",
+  "options": {
+   "A": "Nucleus",
+   "B": "Mitochondria",
+   "C": "Ribosome",
+   "D": "Golgi apparatus"
+  },
+  "correctAnswer": "B",
+  "explanation": "The mitochondria is the powerhouse of the cell, producing ATP through cellular respiration via the Krebs cycle and oxidative phosphorylation.",
+  "hint": "Think about energy currency in the cell",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.587Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2023-biol-001",
+  "subject": "Biology",
+  "topic": "Genetics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "In Mendelian genetics, if two heterozygous tall plants (Tt) are crossed, what is the probability of offspring being homozygous recessive?",
+  "options": {
+   "A": "1/4",
+   "B": "1/2",
+   "C": "3/4",
+   "D": "1"
+  },
+  "correctAnswer": "A",
+  "explanation": "Tt x Tt gives TT:Tt:tt in 1:2:1 ratio. Homozygous recessive (tt) probability = 1/4 or 25%.",
+  "hint": "Use a Punnett square",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.587Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2022-biol-002",
+  "subject": "Biology",
+  "topic": "Human Physiology",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "Which part of the nephron is responsible for water reabsorption under ADH influence?",
+  "options": {
+   "A": "Bowman's capsule",
+   "B": "Loop of Henle",
+   "C": "Collecting duct",
+   "D": "Proximal convoluted tubule"
+  },
+  "correctAnswer": "C",
+  "explanation": "The collecting duct is where ADH acts to increase water reabsorption, concentrating the urine and conserving body water.",
+  "hint": "ADH targets this final area",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.588Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "waec-2023-biol-002",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "hard",
+  "question": "Which process describes the movement of water molecules from a region of higher water potential to lower water potential through a semi-permeable membrane?",
+  "options": {
+   "A": "Diffusion",
+   "B": "Active transport",
+   "C": "Osmosis",
+   "D": "Facilitated diffusion"
+  },
+  "correctAnswer": "C",
+  "explanation": "Osmosis is the specific diffusion of water molecules across a semi-permeable membrane down the water potential gradient.",
+  "hint": "It involves water and a membrane",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.588Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-biol-001",
+  "subject": "Biology",
+  "topic": "Genetics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "A woman with blood group O marries a man with blood group AB. What blood groups are possible in their children?",
+  "options": {
+   "A": "A and B only",
+   "B": "A, B and O",
+   "C": "A, B, AB and O",
+   "D": "AB only"
+  },
+  "correctAnswer": "A",
+  "explanation": "Blood group O (OO) × AB (AB): children inherit either A (AO) or B (BO). AB and O are not possible.",
+  "hint": "Work with the alleles",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.589Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2020-biol-001",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "Which organelle contains digestive enzymes for breaking down cellular waste?",
+  "options": {
+   "A": "Ribosome",
+   "B": "Lysosome",
+   "C": "Smooth ER",
+   "D": "Nucleolus"
+  },
+  "correctAnswer": "B",
+  "explanation": "Lysosomes contain hydrolytic enzymes that break down waste materials, cellular debris, and pathogens through phagocytosis.",
+  "hint": "Think of it as the cell's recycling bin",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.589Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2022-biol-003",
+  "subject": "Biology",
+  "topic": "Human Physiology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "Which part of the brain controls balance and coordination?",
+  "options": {
+   "A": "Cerebrum",
+   "B": "Cerebellum",
+   "C": "Medulla oblongata",
+   "D": "Hypothalamus"
+  },
+  "correctAnswer": "B",
+  "explanation": "The cerebellum coordinates voluntary movements, balance, and fine motor control by integrating sensory information.",
+  "hint": "Think about standing on one leg",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.590Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-biol-002",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "hard",
+  "question": "During which phase of mitosis do chromosomes align at the equator?",
+  "options": {
+   "A": "Prophase",
+   "B": "Metaphase",
+   "C": "Anaphase",
+   "D": "Telophase"
+  },
+  "correctAnswer": "B",
+  "explanation": "During metaphase, spindle fibers align all chromosomes along the metaphase plate (equator) before separation.",
+  "hint": "M for 'middle' or 'meet at the middle'",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.591Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2020-biol-002",
+  "subject": "Biology",
+  "topic": "Genetics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "If a colour-blind man marries a woman who is a carrier, what is the chance their son will be colour-blind?",
+  "options": {
+   "A": "25%",
+   "B": "50%",
+   "C": "75%",
+   "D": "100%"
+  },
+  "correctAnswer": "B",
+  "explanation": "The man passes Y to sons (not X^c). The mother can pass X^c or X. Sons get Y from father, X from mother. If mother passes X^c, son is colour-blind. So 50% chance.",
+  "hint": "X-linked recessive means sons inherit from mother",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.591Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2022-chem-001",
+  "subject": "Chemistry",
+  "topic": "Atomic Structure",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "What is the maximum number of electrons that can occupy the third energy level?",
+  "options": {
+   "A": "8",
+   "B": "18",
+   "C": "32",
+   "D": "2"
+  },
+  "correctAnswer": "B",
+  "explanation": "The third energy level (n=3) has s, p, and d sublevels, holding 2 + 6 + 10 = 18 electrons maximum.",
+  "hint": "Formula: 2n²",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.591Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-chem-001",
+  "subject": "Chemistry",
+  "topic": "Chemical Bonding",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "Which type of bond involves the sharing of electrons between atoms?",
+  "options": {
+   "A": "Ionic",
+   "B": "Covalent",
+   "C": "Metallic",
+   "D": "Hydrogen"
+  },
+  "correctAnswer": "B",
+  "explanation": "Covalent bonds form when atoms share one or more pairs of electrons to achieve a stable electron configuration.",
+  "hint": "Sharing is caring",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.591Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2022-chem-002",
+  "subject": "Chemistry",
+  "topic": "Organic Chemistry",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "The general formula for alkanes is?",
+  "options": {
+   "A": "CₙH₂ₙ₊₂",
+   "B": "CₙH₂ₙ",
+   "C": "CₙH₂ₙ₋₂",
+   "D": "CₙH₂ₙ₊₁OH"
+  },
+  "correctAnswer": "A",
+  "explanation": "Alkanes are saturated hydrocarbons with single bonds only. Each carbon has 2 hydrogens plus 2 extra at ends: CₙH₂ₙ₊₂.",
+  "hint": "Saturated = maximum hydrogen",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.591Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-chem-002",
+  "subject": "Chemistry",
+  "topic": "Atomic Structure",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "Isotopes of the same element differ in their number of?",
+  "options": {
+   "A": "Protons",
+   "B": "Neutrons",
+   "C": "Electrons",
+   "D": "Protons and electrons"
+  },
+  "correctAnswer": "B",
+  "explanation": "Isotopes have the same number of protons (same element) but different numbers of neutrons, thus different mass numbers.",
+  "hint": "Same element, different mass",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.592Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2020-chem-001",
+  "subject": "Chemistry",
+  "topic": "Atomic Structure",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "The number of protons in an atom is called the?",
+  "options": {
+   "A": "Mass number",
+   "B": "Atomic number",
+   "C": "Avogadro's number",
+   "D": "Oxidation number"
+  },
+  "correctAnswer": "B",
+  "explanation": "The atomic number (Z) equals the number of protons in the nucleus and uniquely identifies each element.",
+  "hint": "It's the element's ID number",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.592Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-chem-003",
+  "subject": "Chemistry",
+  "topic": "Chemical Bonding",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "hard",
+  "question": "Which intermolecular force is strongest?",
+  "options": {
+   "A": "London dispersion",
+   "B": "Dipole-dipole",
+   "C": "Hydrogen bonding",
+   "D": "Ionic"
+  },
+  "correctAnswer": "C",
+  "explanation": "Hydrogen bonding is the strongest intermolecular force, occurring between H and highly electronegative atoms (N, O, F).",
+  "hint": "It involves H with N, O, or F",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.592Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2023-chem-001",
+  "subject": "Chemistry",
+  "topic": "Atomic Structure",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "What is the mass number of an atom with 12 protons and 12 neutrons?",
+  "options": {
+   "A": "12",
+   "B": "24",
+   "C": "36",
+   "D": "48"
+  },
+  "correctAnswer": "B",
+  "explanation": "Mass number = protons + neutrons = 12 + 12 = 24. This atom is a magnesium isotope.",
+  "hint": "Add protons and neutrons",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.592Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2022-phys-001",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "The SI unit of force is?",
+  "options": {
+   "A": "Joule",
+   "B": "Newton",
+   "C": "Pascal",
+   "D": "Watt"
+  },
+  "correctAnswer": "B",
+  "explanation": "The Newton (N) is the SI unit of force, defined as the force needed to accelerate 1 kg mass at 1 m/s².",
+  "hint": "Named after a scientist with an apple",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.592Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-phys-001",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "A car accelerates uniformly from rest to 20 m/s in 5 seconds. What is its acceleration?",
+  "options": {
+   "A": "4 m/s²",
+   "B": "5 m/s²",
+   "C": "10 m/s²",
+   "D": "20 m/s²"
+  },
+  "correctAnswer": "A",
+  "explanation": "a = (v - u)/t = (20 - 0)/5 = 4 m/s².",
+  "hint": "Change in velocity over time",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.593Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2022-phys-002",
+  "subject": "Physics",
+  "topic": "Light",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "What type of lens is used to correct short-sightedness?",
+  "options": {
+   "A": "Convex",
+   "B": "Concave",
+   "C": "Cylindrical",
+   "D": "Bifocal"
+  },
+  "correctAnswer": "B",
+  "explanation": "Concave (diverging) lenses correct short-sightedness (myopia) by diverging light rays before they enter the eye.",
+  "hint": "It's thinner at the centre",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.593Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2020-phys-001",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "What is the kinetic energy of a 2 kg object moving at 3 m/s?",
+  "options": {
+   "A": "6 J",
+   "B": "9 J",
+   "C": "18 J",
+   "D": "3 J"
+  },
+  "correctAnswer": "B",
+  "explanation": "KE = ½mv² = ½ × 2 × 3² = 1 × 9 = 9 J.",
+  "hint": "Half mass times velocity squared",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.593Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2023-phys-001",
+  "subject": "Physics",
+  "topic": "Waves",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "Which type of wave is sound?",
+  "options": {
+   "A": "Transverse",
+   "B": "Longitudinal",
+   "C": "Electromagnetic",
+   "D": "Surface"
+  },
+  "correctAnswer": "B",
+  "explanation": "Sound is a longitudinal wave where particles vibrate parallel to the direction of wave propagation, creating compressions and rarefactions.",
+  "hint": "Compression and rarefaction",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.593Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-phys-002",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "Newton's third law states that:",
+  "options": {
+   "A": "F = ma",
+   "B": "Every action has an equal opposite reaction",
+   "C": "Objects in motion stay in motion",
+   "D": "Energy is conserved"
+  },
+  "correctAnswer": "B",
+  "explanation": "Newton's Third Law: For every action force, there is an equal and opposite reaction force. Forces always come in pairs.",
+  "hint": "Action-reaction pairs",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.593Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-phys-003",
+  "subject": "Physics",
+  "topic": "Light",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "What colour is produced when red and green light mix?",
+  "options": {
+   "A": "Blue",
+   "B": "Yellow",
+   "C": "White",
+   "D": "Purple"
+  },
+  "correctAnswer": "B",
+  "explanation": "Red and green are additive primary colours that combine to form yellow. On a screen, red + green pixels appear yellow.",
+  "hint": "Think of traffic light colours",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.593Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2022-math-001",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "Solve for x: 2x + 5 = 15",
+  "options": {
+   "A": "5",
+   "B": "10",
+   "C": "7.5",
+   "D": "20"
+  },
+  "correctAnswer": "A",
+  "explanation": "2x + 5 = 15 => 2x = 10 => x = 5.",
+  "hint": "Isolate the variable",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.594Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2026
+  ]
+ },
+ {
+  "id": "waec-2021-math-001",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "Factorise x² - 5x + 6",
+  "options": {
+   "A": "(x-2)(x-3)",
+   "B": "(x+2)(x+3)",
+   "C": "(x-1)(x-6)",
+   "D": "(x+1)(x+6)"
+  },
+  "correctAnswer": "A",
+  "explanation": "x² - 5x + 6 = (x-2)(x-3) because -2 × -3 = 6 and -2 + -3 = -5.",
+  "hint": "Find factors of 6 that sum to -5",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.594Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2026
+  ]
+ },
+ {
+  "id": "waec-2022-math-002",
+  "subject": "Mathematics",
+  "topic": "Geometry",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "What is the area of a triangle with base 8 cm and height 6 cm?",
+  "options": {
+   "A": "48 cm²",
+   "B": "24 cm²",
+   "C": "14 cm²",
+   "D": "28 cm²"
+  },
+  "correctAnswer": "B",
+  "explanation": "Area = ½ × base × height = ½ × 8 × 6 = 24 cm².",
+  "hint": "Half base times height",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.594Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-math-002",
+  "subject": "Mathematics",
+  "topic": "Trigonometry",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "What is tan 45°?",
+  "options": {
+   "A": "0",
+   "B": "1",
+   "C": "√2",
+   "D": "½"
+  },
+  "correctAnswer": "B",
+  "explanation": "tan 45° = sin 45°/cos 45° = (√2/2)/(√2/2) = 1.",
+  "hint": "Sides of a right isosceles triangle",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.594Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2023-math-001",
+  "subject": "Mathematics",
+  "topic": "Geometry",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "hard",
+  "question": "The volume of a cylinder with radius 7 cm and height 10 cm is? (π = 22/7)",
+  "options": {
+   "A": "1540 cm³",
+   "B": "154 cm³",
+   "C": "220 cm³",
+   "D": "15400 cm³"
+  },
+  "correctAnswer": "A",
+  "explanation": "Volume = πr²h = 22/7 × 7² × 10 = 22/7 × 49 × 10 = 22 × 70 = 1540 cm³.",
+  "hint": "Area of circle × height",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.595Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-math-003",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "easy",
+  "question": "Simplify: (3x²)(2x³)",
+  "options": {
+   "A": "5x⁵",
+   "B": "6x⁵",
+   "C": "5x⁶",
+   "D": "6x⁶"
+  },
+  "correctAnswer": "B",
+  "explanation": "3 × 2 = 6 and x² × x³ = x^(2+3) = x⁵. So (3x²)(2x³) = 6x⁵.",
+  "hint": "Multiply coefficients, add exponents",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.595Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2026
+  ]
+ },
+ {
+  "id": "waec-2019-math-001",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "medium",
+  "question": "Solve the equation: 3x - 7 = 2x + 5",
+  "options": {
+   "A": "2",
+   "B": "7",
+   "C": "12",
+   "D": "5"
+  },
+  "correctAnswer": "C",
+  "explanation": "3x - 2x = 5 + 7 => x = 12.",
+  "hint": "Collect like terms",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.595Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2026
+  ]
+ },
+ {
+  "id": "waec-2021-math-004",
+  "subject": "Mathematics",
+  "topic": "Statistics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "What is the range of: 4, 8, 15, 16, 23, 42?",
+  "options": {
+   "A": "23",
+   "B": "38",
+   "C": "42",
+   "D": "46"
+  },
+  "correctAnswer": "B",
+  "explanation": "Range = highest - lowest = 42 - 4 = 38.",
+  "hint": "Max minus min",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.595Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2022-engl-001",
+  "subject": "English",
+  "topic": "Comprehension",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "Choose the word closest in meaning to 'benevolent'",
+  "options": {
+   "A": "Cruel",
+   "B": "Kind",
+   "C": "Strict",
+   "D": "Weak"
+  },
+  "correctAnswer": "B",
+  "explanation": "Benevolent means well-meaning, kindly, or generous. It derives from Latin 'bene' (well) and 'volent' (wishing).",
+  "hint": "A benevolent leader is good to their people",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.595Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-engl-001",
+  "subject": "English",
+  "topic": "Vocabulary",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "hard",
+  "question": "The word 'ephemeral' most nearly means:",
+  "options": {
+   "A": "Eternal",
+   "B": "Short-lived",
+   "C": "Hidden",
+   "D": "Beautiful"
+  },
+  "correctAnswer": "B",
+  "explanation": "Ephemeral means lasting for a very short time, from Greek 'ephemeros' (lasting only a day). Synonyms: fleeting, transient.",
+  "hint": "Think of a mayfly's lifespan",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.596Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2022-engl-002",
+  "subject": "English",
+  "topic": "Grammar",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "Choose the correct form: 'She ___ to school every day.'",
+  "options": {
+   "A": "go",
+   "B": "goes",
+   "C": "going",
+   "D": "gone"
+  },
+  "correctAnswer": "B",
+  "explanation": "In the simple present tense, third-person singular subjects take 'goes' as the verb form.",
+  "hint": "Third person singular",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.596Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-engl-002",
+  "subject": "English",
+  "topic": "Grammar",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "hard",
+  "question": "Identify the tense: 'By next year, she will have graduated.'",
+  "options": {
+   "A": "Future simple",
+   "B": "Future perfect",
+   "C": "Future continuous",
+   "D": "Present perfect"
+  },
+  "correctAnswer": "B",
+  "explanation": "Future perfect tense (will have + past participle) indicates an action completed before a specified future time.",
+  "hint": "Will have done",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.596Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-engl-003",
+  "subject": "English",
+  "topic": "Vocabulary",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "The word 'ubiquitous' means:",
+  "options": {
+   "A": "Rare",
+   "B": "Everywhere",
+   "C": "Unique",
+   "D": "Invisible"
+  },
+  "correctAnswer": "B",
+  "explanation": "Ubiquitous means present, appearing, or found everywhere. From Latin 'ubique' (everywhere).",
+  "hint": "Think of smartphones today",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.596Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2020-engl-001",
+  "subject": "English",
+  "topic": "Comprehension",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "easy",
+  "question": "A 'bibliophile' is a person who:",
+  "options": {
+   "A": "Writes books",
+   "B": "Loves books",
+   "C": "Sells books",
+   "D": "Destroys books"
+  },
+  "correctAnswer": "B",
+  "explanation": "A bibliophile is a person who collects or has a great love of books (Greek 'biblion' = book, 'philos' = loving).",
+  "hint": "Phile = love",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.597Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-engl-004",
+  "subject": "English",
+  "topic": "Comprehension",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "What does the idiom 'bite the bullet' mean?",
+  "options": {
+   "A": "Eat quickly",
+   "B": "Face a difficult situation",
+   "C": "Break something",
+   "D": "Make a decision"
+  },
+  "correctAnswer": "B",
+  "explanation": "To 'bite the bullet' means to endure a painful or unpleasant situation with courage and fortitude.",
+  "hint": "Surgery without anaesthetic",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.597Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2022-econ-001",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "The basic economic problem of scarcity arises because:",
+  "options": {
+   "A": "Resources are unlimited but wants are limited",
+   "B": "Resources are limited but wants are unlimited",
+   "C": "Both resources and wants are unlimited",
+   "D": "Neither resources nor wants are limited"
+  },
+  "correctAnswer": "B",
+  "explanation": "Scarcity exists because human wants are infinite but the resources to satisfy them are finite.",
+  "hint": "Limited resources, unlimited wants",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.597Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-econ-001",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "The law of demand states that as price increases:",
+  "options": {
+   "A": "Quantity demanded increases",
+   "B": "Quantity demanded decreases",
+   "C": "Supply increases",
+   "D": "Supply decreases"
+  },
+  "correctAnswer": "B",
+  "explanation": "The law of demand: there is an inverse relationship between price and quantity demanded, ceteris paribus.",
+  "hint": "Higher price, lower demand",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.598Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2023-econ-001",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "At equilibrium price:",
+  "options": {
+   "A": "Quantity demanded exceeds quantity supplied",
+   "B": "Quantity supplied equals quantity demanded",
+   "C": "Quantity supplied exceeds quantity demanded",
+   "D": "There is excess demand"
+  },
+  "correctAnswer": "B",
+  "explanation": "Market equilibrium occurs where quantity demanded equals quantity supplied, with no tendency for price to change.",
+  "hint": "Balanced market",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.598Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2020-econ-001",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "A market structure with many sellers selling identical products is called:",
+  "options": {
+   "A": "Monopoly",
+   "B": "Oligopoly",
+   "C": "Perfect competition",
+   "D": "Monopolistic competition"
+  },
+  "correctAnswer": "C",
+  "explanation": "Perfect competition has many buyers and sellers, homogeneous products, perfect information, and free entry/exit.",
+  "hint": "Many firms, same product",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.598Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2022-econ-002",
+  "subject": "Economics",
+  "topic": "Macroeconomics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "hard",
+  "question": "If the MPC is 0.8, what is the multiplier?",
+  "options": {
+   "A": "1.25",
+   "B": "5",
+   "C": "8",
+   "D": "2.5"
+  },
+  "correctAnswer": "B",
+  "explanation": "Multiplier = 1/(1-MPC) = 1/0.2 = 5. A change in spending will be multiplied 5 times.",
+  "hint": "One over one minus MPC",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.598Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "waec-2022-econ-003",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "Price elasticity of demand measures:",
+  "options": {
+   "A": "Responsiveness of supply to price changes",
+   "B": "Responsiveness of demand to price changes",
+   "C": "Change in income over time",
+   "D": "Market size"
+  },
+  "correctAnswer": "B",
+  "explanation": "Price elasticity of demand measures how much quantity demanded responds to a change in price.",
+  "hint": "How sensitive are buyers to price",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.598Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2023-econ-002",
+  "subject": "Economics",
+  "topic": "Microeconomics",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "hard",
+  "question": "What is the profit-maximizing rule for a firm?",
+  "options": {
+   "A": "MR = MC",
+   "B": "P = ATC",
+   "C": "TR = TC",
+   "D": "AR = AC"
+  },
+  "correctAnswer": "A",
+  "explanation": "Firms maximize profit by producing where marginal revenue equals marginal cost (MR = MC).",
+  "hint": "Additional revenue equals additional cost",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.598Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2022-gove-001",
+  "subject": "Government",
+  "topic": "Political Systems",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "The highest law of a country is called the:",
+  "options": {
+   "A": "Decree",
+   "B": "Constitution",
+   "C": "Bill",
+   "D": "Act"
+  },
+  "correctAnswer": "B",
+  "explanation": "A constitution is the supreme law of the land, establishing the framework for government and fundamental rights.",
+  "hint": "The supreme legal document",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.599Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-gove-001",
+  "subject": "Government",
+  "topic": "Constitution",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "The 1999 Nigerian Constitution provides for how many tiers of government?",
+  "options": {
+   "A": "2",
+   "B": "3",
+   "C": "4",
+   "D": "5"
+  },
+  "correctAnswer": "B",
+  "explanation": "Nigeria operates a three-tier federal system: Federal, State, and Local Governments.",
+  "hint": "Federal, State, Local",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.599Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2023-gove-001",
+  "subject": "Government",
+  "topic": "Constitution",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "Nigerian citizenship can be acquired through:",
+  "options": {
+   "A": "Only birth",
+   "B": "Birth, registration, naturalization",
+   "C": "Only marriage",
+   "D": "Only naturalization"
+  },
+  "correctAnswer": "B",
+  "explanation": "Nigerian citizenship is acquired by birth, registration (for those with Nigerian ancestry), or naturalization (for foreign residents).",
+  "hint": "Three ways to belong",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.599Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2022-gove-002",
+  "subject": "Government",
+  "topic": "Political Systems",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "hard",
+  "question": "The concept of separation of powers was popularized by:",
+  "options": {
+   "A": "John Locke",
+   "B": "Baron de Montesquieu",
+   "C": "Thomas Hobbes",
+   "D": "Jean-Jacques Rousseau"
+  },
+  "correctAnswer": "B",
+  "explanation": "Montesquieu's 'The Spirit of the Laws' (1748) articulated the separation of powers into executive, legislative, and judicial branches.",
+  "hint": "French philosopher",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.599Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-gove-002",
+  "subject": "Government",
+  "topic": "Political Systems",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "A political party is primarily formed to:",
+  "options": {
+   "A": "Make profits",
+   "B": "Win elections and govern",
+   "C": "Provide social services",
+   "D": "Educate citizens"
+  },
+  "correctAnswer": "B",
+  "explanation": "Political parties are organized groups that seek to win political power through elections and form government to implement their policies.",
+  "hint": "Seeking power through votes",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.600Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2021-gove-003",
+  "subject": "Government",
+  "topic": "Constitution",
+  "exam": [
+   "JAMB",
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "hard",
+  "question": "The process of removing a president from office is called:",
+  "options": {
+   "A": "Recall",
+   "B": "Impeachment",
+   "C": "Vote of no confidence",
+   "D": "Censure"
+  },
+  "correctAnswer": "B",
+  "explanation": "Impeachment is the constitutional process by which a legislature charges and removes a president or other high official for misconduct.",
+  "hint": "Official removal process",
+  "source": "past",
+  "createdAt": "2026-10-11T08:13:53.600Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2023
+  ]
+ }
+]

@@ -35,7 +35,7 @@ function loadDotEnv() {
       const k = t.slice(0, eq).trim();
       if (!(k in process.env)) process.env[k] = t.slice(eq + 1).trim().replace(/^["']|["']$/g, "");
     }
-  } catch (_) {}
+  } catch { /* .env optional — platform env may provide vars */ }
 }
 
 async function waitForServer(timeoutMs = 30000) {
@@ -44,7 +44,7 @@ async function waitForServer(timeoutMs = 30000) {
     try {
       const res = await fetch(BASE);
       if (res.ok) return;
-    } catch (_) {}
+    } catch { /* server not up yet — retry */ }
     await new Promise((r) => setTimeout(r, 500));
   }
   throw new Error("Preview server did not start in time");
@@ -71,7 +71,7 @@ async function main() {
     shell: true,
     stdio: "ignore",
   });
-  const kill = () => { try { server.kill(); } catch (_) {} };
+  const kill = () => { try { server.kill(); } catch { /* already dead */ } };
   process.on("exit", kill);
   process.on("SIGINT", () => { kill(); process.exit(1); });
 
