@@ -159,7 +159,7 @@ export default function SessionSummary() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", padding: "32px 24px" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)", padding: "32px 24px" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         
         {/* Score ring */}

@@ -187,7 +187,7 @@ export default function Settings() {
   async function handleLogout() { try { await logout(); navigate("/auth"); } catch (e) { console.error("Logout failed:", e); } }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }} className="page-content">
+    <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)" }} className="page-content">
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         <h1 style={{ fontSize: 28, fontWeight: 800, margin: "0 0 24px" }}>Settings</h1>
 

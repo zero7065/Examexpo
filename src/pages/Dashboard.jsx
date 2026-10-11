@@ -105,7 +105,7 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}>
+      <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-muted)" }}>
         Loading...
       </div>
     );
@@ -118,7 +118,7 @@ export default function Dashboard() {
   const xp = profile?.xp || 0;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)" }}>
       <div className="page-content" style={{ maxWidth: 1200, margin: "0 auto" }}>
         <ResumeBanner />
         <NotificationPrompt />

@@ -136,9 +136,9 @@ export default function AssignmentPage() {
       <div
         style={{
           minHeight: "100vh",
-          background: "#0a0a0f",
+          background: "var(--bg)",
           fontFamily: "'Inter', system-ui, sans-serif",
-          color: "#fff",
+          color: "var(--text)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -154,9 +154,9 @@ export default function AssignmentPage() {
       <div
         style={{
           minHeight: "100vh",
-          background: "#0a0a0f",
+          background: "var(--bg)",
           fontFamily: "'Inter', system-ui, sans-serif",
-          color: "#fff",
+          color: "var(--text)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -271,9 +271,9 @@ export default function AssignmentPage() {
       <div
         style={{
           minHeight: "100vh",
-          background: "#0a0a0f",
+          background: "var(--bg)",
           fontFamily: "'Inter', system-ui, sans-serif",
-          color: "#fff",
+          color: "var(--text)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -436,9 +436,9 @@ export default function AssignmentPage() {
       <div
         style={{
           minHeight: "100vh",
-          background: "#0a0a0f",
+          background: "var(--bg)",
           fontFamily: "'Inter', system-ui, sans-serif",
-          color: "#fff",
+          color: "var(--text)",
         }}
       >
         <style>{`

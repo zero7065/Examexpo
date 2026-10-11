@@ -113,9 +113,9 @@ export async function signInWithGoogle() {
   return signInWithPopup(_auth, _googleProvider);
 }
 
-// ─── Admin auto-seed ───
-const ADMIN_EMAIL = "jadai7065@gmail.com";
-const ADMIN_PASSWORD = "Admin1234";
+// ─── Admin auto-seed (credentials from env — never commit secrets) ───
+const ADMIN_EMAIL = import.meta.env.VITE_SEED_ADMIN_EMAIL || "";
+const ADMIN_PASSWORD = import.meta.env.VITE_SEED_ADMIN_PASSWORD || "";
 const ADMIN_NAME = "Admin";
 
 let _adminSeeded = false;
@@ -124,6 +124,12 @@ let _adminSeedAttempted = false;
 export async function seedAdminAccount() {
   if (_adminSeeded || _adminSeedAttempted || !_auth || !_db) return;
   _adminSeedAttempted = true;
+
+  if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+    // No seed credentials configured — admin signs in with an existing account.
+    // Set VITE_SEED_ADMIN_EMAIL / VITE_SEED_ADMIN_PASSWORD locally to auto-seed.
+    return;
+  }
 
   try {
     const cred = await createUserWithEmailAndPassword(_auth, ADMIN_EMAIL, ADMIN_PASSWORD);

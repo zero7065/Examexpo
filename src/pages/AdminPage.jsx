@@ -258,14 +258,14 @@ export default function AdminPage() {
     : usersList;
 
   if (loading) return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <div style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid #1e1e2a", borderTopColor: "#6C3CE9", animation: "spin 0.8s linear infinite" }} />
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", padding: 24, fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", padding: 24, fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)" }}>
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>

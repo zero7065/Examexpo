@@ -51,7 +51,7 @@ export default function QuestionBank() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)" }}>
       <div className="page-content" style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ marginBottom: 8 }}>
           <h1 style={{ fontSize: 28, fontWeight: 800, margin: 0 }}>Question Bank</h1>

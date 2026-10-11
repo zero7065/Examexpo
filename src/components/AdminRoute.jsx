@@ -12,7 +12,7 @@ export default function AdminRoute({ children }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#0a0a0f",
+        background: "var(--bg)",
       }}>
         <div style={{
           width: 40,

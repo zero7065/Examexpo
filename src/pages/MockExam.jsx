@@ -184,7 +184,7 @@ export default function MockExam() {
 
   if (step === "setup") {
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", padding: "32px 24px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)", padding: "32px 24px", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ maxWidth: 560, width: "100%", background: "#121218", border: "1px solid #1e1e2a", borderRadius: 24, padding: "32px 28px" }}>
           <h1 style={{ fontSize: 24, fontWeight: 800, margin: "0 0 4px", textAlign: "center" }}>Mock CBT Exam</h1>
           <p style={{ color: "#888", fontSize: 14, textAlign: "center", margin: "0 0 24px" }}>Simulate real exam conditions</p>
@@ -256,7 +256,7 @@ export default function MockExam() {
   const unanswered = questions.length - answeredCount;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)" }}>
       {/* Top bar */}
       <div style={{ position: "fixed", top: 0, left: 0, right: 0, background: "#0d0d12", borderBottom: "1px solid #1e1e2a", zIndex: 50 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 20px" }}>

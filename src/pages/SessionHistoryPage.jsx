@@ -52,7 +52,7 @@ export default function SessionHistoryPage() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Inter', system-ui, sans-serif" }}>
         <div style={{ color: "#6C3CE9", fontWeight: 700, fontSize: 20 }}>Loading your history...</div>
       </div>
     );
@@ -60,7 +60,7 @@ export default function SessionHistoryPage() {
 
   if (!sessions.length) {
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+      <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
         <div style={{ textAlign: "center", maxWidth: 500 }}>
           <div style={{ width: 80, height: 80, background: "rgba(255,255,255,0.05)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
             <History size={40} color="#888" />
@@ -76,7 +76,7 @@ export default function SessionHistoryPage() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }} className="page-content">
+    <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)" }} className="page-content">
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <h1 style={{ fontSize: "clamp(24px, 5vw, 32px)", fontWeight: 800, marginBottom: 8 }}>Your Study History</h1>
         <p style={{ color: "#888", fontWeight: 500, marginBottom: 40 }}>Review all your practice sessions, track your progress over time</p>

@@ -87,7 +87,7 @@ export default function MockSummary() {
   const avgSeconds = Math.round(timeUsed / totalQuestions);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", padding: "32px 24px" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)", padding: "32px 24px" }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         {/* Score ring */}
         <div style={{ textAlign: "center", marginBottom: 32 }}>

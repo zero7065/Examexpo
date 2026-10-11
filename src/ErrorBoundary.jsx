@@ -29,7 +29,7 @@ export default class ErrorBoundary extends Component {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0a0a0f",
+          background: "var(--bg)",
           fontFamily: "'Inter', system-ui, sans-serif",
           padding: 24,
         }}>
