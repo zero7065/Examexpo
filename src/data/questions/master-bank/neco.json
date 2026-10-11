@@ -21,7 +21,8 @@
   "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
-   2019
+   2019,
+   2024
   ]
  },
  {
@@ -96,7 +97,8 @@
   "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
-   2019
+   2019,
+   2025
   ]
  },
  {
@@ -146,7 +148,8 @@
   "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
-   2021
+   2021,
+   2025
   ]
  },
  {
@@ -171,6 +174,7 @@
   "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
+   2018,
    2019
   ]
  },
@@ -196,7 +200,8 @@
   "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
-   2020
+   2020,
+   2023
   ]
  },
  {
@@ -246,6 +251,7 @@
   "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
+   2018,
    2019
   ]
  },
@@ -271,7 +277,8 @@
   "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
-   2021
+   2021,
+   2022
   ]
  },
  {
@@ -296,7 +303,8 @@
   "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
-   2023
+   2023,
+   2024
   ]
  },
  {
@@ -319,9 +327,11 @@
   "explanation": "Beam/bathroom balances compare or sense mass.",
   "source": "seed",
   "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
-   2019
+   2018,
+   2019,
+   2022
   ]
  },
  {
@@ -344,9 +354,11 @@
   "explanation": "60 × 5 = 300 Wh (0.3 kWh); 300 Wh is the direct answer.",
   "source": "seed",
   "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
-   2020
+   2018,
+   2020,
+   2023
   ]
  },
  {
@@ -371,6 +383,7 @@
   "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
+   2019,
    2022
   ]
  },
@@ -496,6 +509,7 @@
   "createdAt": "2026-10-11T09:03:36.197Z",
   "highYield": false,
   "repeatedFrom": [
+   2020,
    2025
   ]
  },
@@ -597,6 +611,899 @@
   "highYield": false,
   "repeatedFrom": [
    2024
+  ]
+ },
+ {
+  "id": "neco-2018-phys-001",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2018,
+  "difficulty": "easy",
+  "question": "Which quantity is a scalar?",
+  "options": {
+   "A": "Velocity",
+   "B": "Acceleration",
+   "C": "Distance",
+   "D": "Force"
+  },
+  "correctAnswer": "C",
+  "explanation": "Distance has magnitude only; the rest have direction.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:06.775Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2019,
+   2022
+  ]
+ },
+ {
+  "id": "neco-2018-phys-002",
+  "subject": "Physics",
+  "topic": "Electricity",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2018,
+  "difficulty": "medium",
+  "question": "Three 2 Ω resistors in series give:",
+  "options": {
+   "A": "6 Ω",
+   "B": "2 Ω",
+   "C": "0.67 Ω",
+   "D": "1.5 Ω"
+  },
+  "correctAnswer": "A",
+  "explanation": "Series resistances add: 2 + 2 + 2 = 6 Ω.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.009Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2020,
+   2023
+  ]
+ },
+ {
+  "id": "neco-2019-phys-002",
+  "subject": "Physics",
+  "topic": "Waves",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "The number of vibrations per second is:",
+  "options": {
+   "A": "Amplitude",
+   "B": "Wavelength",
+   "C": "Frequency",
+   "D": "Period"
+  },
+  "correctAnswer": "C",
+  "explanation": "Frequency counts cycles per second (hertz).",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.010Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2022
+  ]
+ },
+ {
+  "id": "neco-2020-phys-002",
+  "subject": "Physics",
+  "topic": "Light",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "A concave mirror produces a real image when the object is:",
+  "options": {
+   "A": "At the focus",
+   "B": "Beyond the centre of curvature",
+   "C": "Touching the mirror",
+   "D": "Behind the mirror"
+  },
+  "correctAnswer": "B",
+  "explanation": "Objects beyond C form real, inverted, diminished images.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.010Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020,
+   2025
+  ]
+ },
+ {
+  "id": "neco-2021-phys-001",
+  "subject": "Physics",
+  "topic": "Heat",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2021,
+  "difficulty": "easy",
+  "question": "The clinical thermometer range is about:",
+  "options": {
+   "A": "0–100 °C",
+   "B": "35–43 °C",
+   "C": "-10–110 °C",
+   "D": "0–50 °C"
+  },
+  "correctAnswer": "B",
+  "explanation": "Clinical thermometers span body temperatures, ~35–43 °C.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.010Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "neco-2022-phys-002",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2022,
+  "difficulty": "hard",
+  "question": "A 2 kg mass falls 10 m (g = 10 m/s²). Its kinetic energy on landing is:",
+  "options": {
+   "A": "20 J",
+   "B": "100 J",
+   "C": "200 J",
+   "D": "400 J"
+  },
+  "correctAnswer": "C",
+  "explanation": "Loss in potential = mgh = 2×10×10 = 200 J → KE.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.010Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2019,
+   2022
+  ]
+ },
+ {
+  "id": "neco-2023-phys-001",
+  "subject": "Physics",
+  "topic": "Electricity",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "Power dissipated in a 4 Ω resistor carrying 3 A is:",
+  "options": {
+   "A": "12 W",
+   "B": "36 W",
+   "C": "7 W",
+   "D": "48 W"
+  },
+  "correctAnswer": "B",
+  "explanation": "P = I²R = 9 × 4 = 36 W.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.010Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2020,
+   2023
+  ]
+ },
+ {
+  "id": "neco-2024-phys-001",
+  "subject": "Physics",
+  "topic": "Pressure",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2024,
+  "difficulty": "easy",
+  "question": "Atmospheric pressure is measured with a:",
+  "options": {
+   "A": "Thermometer",
+   "B": "Barometer",
+   "C": "Ammeter",
+   "D": "Hydrometer"
+  },
+  "correctAnswer": "B",
+  "explanation": "Barometers measure air pressure.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.010Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "neco-2018-chem-001",
+  "subject": "Chemistry",
+  "topic": "Atomic Structure",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2018,
+  "difficulty": "easy",
+  "question": "The electronic configuration of oxygen (8) is:",
+  "options": {
+   "A": "2, 6",
+   "B": "2, 8",
+   "C": "2, 4, 2",
+   "D": "8"
+  },
+  "correctAnswer": "A",
+  "explanation": "8 electrons fill as 2 in K shell, 6 in L shell.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.010Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2018,
+   2019
+  ]
+ },
+ {
+  "id": "neco-2020-chem-001",
+  "subject": "Chemistry",
+  "topic": "Chemical Bonding",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "Diamond and graphite are ___ of carbon:",
+  "options": {
+   "A": "Isotopes",
+   "B": "Allotropes",
+   "C": "Isomers",
+   "D": "Polymers"
+  },
+  "correctAnswer": "B",
+  "explanation": "Different structural forms of one element are allotropes.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.010Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "neco-2022-chem-001",
+  "subject": "Chemistry",
+  "topic": "Acids and Bases",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "Which salt solution is acidic?",
+  "options": {
+   "A": "NaCl",
+   "B": "KNO₃",
+   "C": "NH₄Cl",
+   "D": "Na₂CO₃"
+  },
+  "correctAnswer": "C",
+  "explanation": "Ammonium chloride hydrolyses to give an acidic solution.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.018Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "neco-2024-chem-001",
+  "subject": "Chemistry",
+  "topic": "Organic Chemistry",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2024,
+  "difficulty": "easy",
+  "question": "The IUPAC name of CH₃COOH is:",
+  "options": {
+   "A": "Methanoic acid",
+   "B": "Ethanoic acid",
+   "C": "Methanol",
+   "D": "Ethanone"
+  },
+  "correctAnswer": "B",
+  "explanation": "Two-carbon carboxylic acid = ethanoic acid.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023,
+   2024
+  ]
+ },
+ {
+  "id": "neco-2025-chem-002",
+  "subject": "Chemistry",
+  "topic": "Electrolysis",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2025,
+  "difficulty": "hard",
+  "question": "During electrolysis of dilute H₂SO₄, the gas at the cathode is:",
+  "options": {
+   "A": "Oxygen",
+   "B": "Hydrogen",
+   "C": "Sulphur",
+   "D": "Steam"
+  },
+  "correctAnswer": "B",
+  "explanation": "H⁺ ions discharge at the cathode as hydrogen gas.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "neco-2018-biol-001",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2018,
+  "difficulty": "medium",
+  "question": "Mitosis produces daughter cells that are:",
+  "options": {
+   "A": "Genetically different",
+   "B": "Genetically identical",
+   "C": "Half in number",
+   "D": "Always gametes"
+  },
+  "correctAnswer": "B",
+  "explanation": "Mitosis copies chromosomes exactly for growth and repair.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2018,
+   2019
+  ]
+ },
+ {
+  "id": "neco-2021-biol-001",
+  "subject": "Biology",
+  "topic": "Genetics",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2021,
+  "difficulty": "hard",
+  "question": "A couple with genotypes AA × AS can have children who are:",
+  "options": {
+   "A": "SS only",
+   "B": "AA and AS only",
+   "C": "AS only",
+   "D": "AA, AS and SS"
+  },
+  "correctAnswer": "B",
+  "explanation": "One parent gives only A; children are AA (50%) or AS (50%).",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "neco-2023-biol-001",
+  "subject": "Biology",
+  "topic": "Ecology",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2023,
+  "difficulty": "easy",
+  "question": "The savanna is characterized by:",
+  "options": {
+   "A": "Dense evergreen forest",
+   "B": "Grasses with scattered trees",
+   "C": "Permanent snow",
+   "D": "No rainfall"
+  },
+  "correctAnswer": "B",
+  "explanation": "Tropical grassland with scattered trees defines savanna.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020,
+   2023
+  ]
+ },
+ {
+  "id": "neco-2025-biol-001",
+  "subject": "Biology",
+  "topic": "Transport System",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2025,
+  "difficulty": "medium",
+  "question": "Xylem tissue transports:",
+  "options": {
+   "A": "Food",
+   "B": "Water and minerals",
+   "C": "Hormones only",
+   "D": "Air"
+  },
+  "correctAnswer": "B",
+  "explanation": "Xylem vessels carry water and dissolved minerals upward.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "neco-2024-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Grammar",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2024,
+  "difficulty": "medium",
+  "question": "Choose the correct option: 'The news ___ good.'",
+  "options": {
+   "A": "are",
+   "B": "were",
+   "C": "is",
+   "D": "have been"
+  },
+  "correctAnswer": "C",
+  "explanation": "'News' is singular despite the -s ending.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2024
+  ]
+ },
+ {
+  "id": "neco-2025-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Oral English",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2025,
+  "difficulty": "easy",
+  "question": "The word 'chair' starts with which sound?",
+  "options": {
+   "A": "/ʃ/",
+   "B": "/tʃ/",
+   "C": "/k/",
+   "D": "/s/"
+  },
+  "correctAnswer": "B",
+  "explanation": "'Ch' in chair is pronounced /tʃ/.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "neco-2025-math-001",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2025,
+  "difficulty": "hard",
+  "question": "If y varies directly as x and y = 20 when x = 4, find y when x = 7",
+  "options": {
+   "A": "28",
+   "B": "35",
+   "C": "140",
+   "D": "11"
+  },
+  "correctAnswer": "B",
+  "explanation": "k = 20/4 = 5; y = 5×7 = 35.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2025
+  ]
+ },
+ {
+  "id": "neco-2025-math-002",
+  "subject": "Mathematics",
+  "topic": "Geometry",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2025,
+  "difficulty": "medium",
+  "question": "The perimeter of a square of side 9 cm is:",
+  "options": {
+   "A": "18 cm",
+   "B": "36 cm",
+   "C": "81 cm",
+   "D": "45 cm"
+  },
+  "correctAnswer": "B",
+  "explanation": "Perimeter = 4 × 9 = 36 cm.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2025
+  ]
+ },
+ {
+  "id": "neco-2021-gove-001",
+  "subject": "Government",
+  "topic": "Democracy",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "Periodic elections are essential in a democracy to ensure:",
+  "options": {
+   "A": "Life presidency",
+   "B": "Accountability and consent",
+   "C": "Military rule",
+   "D": "One-party dominance"
+  },
+  "correctAnswer": "B",
+  "explanation": "Regular polls let citizens renew or withdraw their mandate.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "neco-2023-gove-001",
+  "subject": "Government",
+  "topic": "Federalism",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2023,
+  "difficulty": "easy",
+  "question": "How many tiers of government does Nigeria have?",
+  "options": {
+   "A": "Two",
+   "B": "Three",
+   "C": "Four",
+   "D": "One"
+  },
+  "correctAnswer": "B",
+  "explanation": "Federal, state and local governments.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.019Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023
+  ]
+ },
+ {
+  "id": "neco-2024-econ-001",
+  "subject": "Economics",
+  "topic": "Demand and Supply",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2024,
+  "difficulty": "medium",
+  "question": "A rise in income (for a normal good) causes demand to:",
+  "options": {
+   "A": "Fall",
+   "B": "Shift right (increase)",
+   "C": "Stay fixed",
+   "D": "Become zero"
+  },
+  "correctAnswer": "B",
+  "explanation": "Higher income raises demand for normal goods at every price.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "neco-2025-econ-001",
+  "subject": "Economics",
+  "topic": "Population",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2025,
+  "difficulty": "easy",
+  "question": "A population pyramid with a wide base shows:",
+  "options": {
+   "A": "Ageing population",
+   "B": "High birth rate",
+   "C": "Zero growth",
+   "D": "High death rate only"
+  },
+  "correctAnswer": "B",
+  "explanation": "Many children at the base means high fertility.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "neco-2021-phys-002",
+  "subject": "Physics",
+  "topic": "Magnetism",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "The region around a magnet where force is felt is the:",
+  "options": {
+   "A": "Electric field",
+   "B": "Magnetic field",
+   "C": "Vacuum",
+   "D": "Circuit"
+  },
+  "correctAnswer": "B",
+  "explanation": "Magnetic influence occupies the magnetic field.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "neco-2020-chem-002",
+  "subject": "Chemistry",
+  "topic": "Salts",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2020,
+  "difficulty": "easy",
+  "question": "Common salt is chemically:",
+  "options": {
+   "A": "Sodium chloride",
+   "B": "Calcium carbonate",
+   "C": "Potassium nitrate",
+   "D": "Magnesium sulphate"
+  },
+  "correctAnswer": "A",
+  "explanation": "Table salt is NaCl.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "neco-2021-biol-002",
+  "subject": "Biology",
+  "topic": "Microorganisms",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "Pasteurization of milk mainly destroys:",
+  "options": {
+   "A": "Nutrients",
+   "B": "Harmful microbes",
+   "C": "Water",
+   "D": "Vitamins only"
+  },
+  "correctAnswer": "B",
+  "explanation": "Controlled heating kills pathogens while keeping milk nutritious.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "neco-2020-uoel-002",
+  "subject": "Use of English Language",
+  "topic": "Lexis and Structure",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2020,
+  "difficulty": "easy",
+  "question": "Choose the correctly spelt word:",
+  "options": {
+   "A": "Seperate",
+   "B": "Separate",
+   "C": "Seprate",
+   "D": "Seperete"
+  },
+  "correctAnswer": "B",
+  "explanation": "Separate: s-e-p-a-r-a-t-e ('par' in the middle).",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "neco-2022-math-001",
+  "subject": "Mathematics",
+  "topic": "Indices",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "Simplify: 7² ÷ 7",
+  "options": {
+   "A": "7",
+   "B": "49",
+   "C": "1",
+   "D": "14"
+  },
+  "correctAnswer": "A",
+  "explanation": "7²⁻¹ = 7¹ = 7.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "neco-2025-gove-001",
+  "subject": "Government",
+  "topic": "ECOWAS",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2025,
+  "difficulty": "medium",
+  "question": "Which country is NOT in ECOWAS?",
+  "options": {
+   "A": "Ghana",
+   "B": "Senegal",
+   "C": "Kenya",
+   "D": "Togo"
+  },
+  "correctAnswer": "C",
+  "explanation": "Kenya is in East Africa (EAC), not West Africa.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "neco-2023-econ-001",
+  "subject": "Economics",
+  "topic": "Scale of Preference",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2023,
+  "difficulty": "easy",
+  "question": "Wants are described as insatiable because:",
+  "options": {
+   "A": "They end at death only",
+   "B": "Human wants are unlimited",
+   "C": "Money is scarce",
+   "D": "Goods are free"
+  },
+  "correctAnswer": "B",
+  "explanation": "Human wants exceed available resources — the core economic problem.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023
+  ]
+ },
+ {
+  "id": "neco-2024-phys-002",
+  "subject": "Physics",
+  "topic": "Energy",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2024,
+  "difficulty": "easy",
+  "question": "Solar panels convert sunlight directly to:",
+  "options": {
+   "A": "Heat only",
+   "B": "Electricity",
+   "C": "Sound",
+   "D": "Wind"
+  },
+  "correctAnswer": "B",
+  "explanation": "Photovoltaic cells produce electric current from light.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "neco-2024-chem-002",
+  "subject": "Chemistry",
+  "topic": "Rates",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2024,
+  "difficulty": "medium",
+  "question": "A catalyst works by:",
+  "options": {
+   "A": "Raising activation energy",
+   "B": "Providing an easier reaction path",
+   "C": "Being used up",
+   "D": "Cooling reactants"
+  },
+  "correctAnswer": "B",
+  "explanation": "Catalysts lower activation energy without being consumed.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "neco-2022-biol-002",
+  "subject": "Biology",
+  "topic": "Coordination",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "The structural unit of the nervous system is the:",
+  "options": {
+   "A": "Nephron",
+   "B": "Neuron",
+   "C": "Alveolus",
+   "D": "Villus"
+  },
+  "correctAnswer": "B",
+  "explanation": "Neurons transmit nerve impulses.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:56:07.020Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
   ]
  }
 ]

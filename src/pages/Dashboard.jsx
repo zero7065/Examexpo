@@ -36,12 +36,8 @@ export default function Dashboard() {
   const [questionsLeft, setQuestionsLeft] = useState({ used: 0, limit: 15 });
   const [subjectStats, setSubjectStats] = useState({});
 
-  // Auto-redirect admin to admin panel
-  useEffect(() => {
-    if (user && isAdmin(user)) {
-      navigate("/admin", { replace: true });
-    }
-  }, [user, navigate]);
+  // NOTE: admins intentionally land here like everyone else.
+  // The admin console is reachable via the Admin nav item / /admin route.
 
   useEffect(() => {
     async function fetchProfile() {
@@ -161,10 +157,10 @@ export default function Dashboard() {
               {getGreeting()}, {user?.displayName?.split(" ")[0] || "Student"} 👋
             </h1>
           </div>
-          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
             <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
               <span>🔥</span> <span style={{ fontWeight: 600 }}>{streak} day streak</span>
-            </div>
+          </div>
+          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
             <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
               <Zap size={16} color="#D4A853" /> <span style={{ fontWeight: 600 }}>{xp} XP</span>
             </div>
@@ -181,6 +177,24 @@ export default function Dashboard() {
             )}
           </div>
         </div>
+
+        {/* Admin shortcut — visible only to admins, no forced redirect */}
+        {isAdmin(user) && (
+          <div
+            onClick={() => navigate("/admin")}
+            style={{
+              display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
+              background: "rgba(212,168,83,0.08)", border: "1px solid rgba(212,168,83,0.35)",
+              padding: "12px 18px", borderRadius: 14, marginBottom: 28,
+            }}
+          >
+            <span style={{ fontSize: 20 }}>👑</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: 700, color: "#D4A853", fontSize: 14 }}>Admin Console</div>
+              <div style={{ fontSize: 12, color: "#888" }}>Manage users, schools, content and compliance →</div>
+            </div>
+          </div>
+        )}
 
         {/* Subject Cards */}
         <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20 }}>Your Subjects</h2>

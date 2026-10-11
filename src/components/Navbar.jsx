@@ -33,13 +33,15 @@ import {
   LineChart,
   FileText,
   FlaskConical,
-  GraduationCap
+  GraduationCap,
+  ShieldCheck
 } from "lucide-react";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const { isPro: proStatus, profile } = useSubscription();
   const isTeacher = profile?.role === "teacher" || isAdmin(user);
+  const isAdminUser = isAdmin(user);
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,6 +60,7 @@ const Navbar = () => {
     { name: "History", path: "/history", icon: Clock },
     { name: "Leaderboard", path: "/leaderboard", icon: Trophy },
     ...(isTeacher ? [{ name: "Teacher", path: "/teacher", icon: GraduationCap }] : []),
+    ...(isAdminUser ? [{ name: "Admin", path: "/admin", icon: ShieldCheck }] : []),
     { name: "Notepad", path: "/notepad", icon: StickyNote, requiresPro: true },
     { name: "Partners", path: "/study-partners", icon: Users, requiresPro: true },
     { name: "Assignment", path: "/assignment", icon: ClipboardList, requiresPro: true },

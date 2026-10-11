@@ -50,10 +50,10 @@ export default function AdminPage() {
     setLoading(true);
     try {
       const [logResult, userResult, sesResult, mockResult] = await Promise.allSettled([
-        getDocs(query(collection(db, "activityLog"), orderBy("timestamp", "desc"), limit(200))),
+        getDocs(query(collection(db, "activityLog"), orderBy("timestamp", "desc"), limit(100))),
         getDocs(query(collection(db, "users"), limit(200))),
-        getDocs(query(collection(db, "sessions"), limit(200))),
-        getDocs(query(collection(db, "mockExams"), limit(200))),
+        getDocs(query(collection(db, "sessions"), limit(100))),
+        getDocs(query(collection(db, "mockExams"), limit(100))),
       ]);
       const users = userResult.status === "fulfilled" ? userResult.value.docs.map(d => ({ id: d.id, ...d.data() })) : [];
       const allLogs = logResult.status === "fulfilled" ? logResult.value.docs.map(d => ({ id: d.id, ...d.data() })) : [];
@@ -293,8 +293,8 @@ export default function AdminPage() {
             { label: "Total Users", value: stats.users, icon: Users, color: "#6C3CE9" },
             { label: "Pro Users", value: stats.proUsers, icon: Crown, color: "#D4A853" },
             { label: "Questions Answered", value: stats.totalQuestions.toLocaleString(), icon: BookOpen, color: "#4ADE80" },
-            { label: "Sessions", value: stats.sessions, icon: ClipboardList, color: "#FF9F43" },
-            { label: "Mock Exams", value: stats.mockExams, icon: Zap, color: "#FF4D6A" },
+            { label: "Sessions (recent 100)", value: stats.sessions, icon: ClipboardList, color: "#FF9F43" },
+            { label: "Mock Exams (recent 100)", value: stats.mockExams, icon: Zap, color: "#FF4D6A" },
             { label: "Total XP Earned", value: stats.totalXP.toLocaleString(), icon: Award, color: "#00BFFF" },
             { label: "Payments", value: stats.totalPayments, icon: CreditCard, color: "#D4A853" },
             { label: "Activity Events", value: logs.length, icon: Activity, color: "#888" },
