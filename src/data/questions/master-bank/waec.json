@@ -49,6 +49,7 @@
    2019,
    2021,
    2022,
+   2025,
    2026
   ]
  },
@@ -76,6 +77,7 @@
   "createdAt": "2026-10-11T08:13:53.587Z",
   "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -108,6 +110,7 @@
   "repeatedFrom": [
    2020,
    2021,
+   2022,
    2023
   ]
  },
@@ -161,6 +164,7 @@
   "createdAt": "2026-10-11T08:13:53.588Z",
   "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -193,6 +197,7 @@
   "repeatedFrom": [
    2020,
    2021,
+   2022,
    2023
   ]
  },
@@ -219,6 +224,7 @@
   "createdAt": "2026-10-11T08:13:53.589Z",
   "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -275,6 +281,7 @@
   "createdAt": "2026-10-11T08:13:53.591Z",
   "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -307,6 +314,7 @@
   "repeatedFrom": [
    2020,
    2021,
+   2022,
    2023
   ]
  },
@@ -334,6 +342,7 @@
   "createdAt": "2026-10-11T08:13:53.591Z",
   "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -390,7 +399,8 @@
   "createdAt": "2026-10-11T08:13:53.591Z",
   "highYield": false,
   "repeatedFrom": [
-   2022
+   2022,
+   2023
   ]
  },
  {
@@ -417,6 +427,7 @@
   "createdAt": "2026-10-11T08:13:53.592Z",
   "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -446,6 +457,7 @@
   "createdAt": "2026-10-11T08:13:53.592Z",
   "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -502,6 +514,7 @@
   "createdAt": "2026-10-11T08:13:53.592Z",
   "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -646,7 +659,8 @@
   "createdAt": "2026-10-11T08:13:53.593Z",
   "highYield": false,
   "repeatedFrom": [
-   2023
+   2023,
+   2024
   ]
  },
  {
@@ -732,6 +746,7 @@
    2019,
    2021,
    2022,
+   2025,
    2026
   ]
  },
@@ -762,6 +777,7 @@
    2019,
    2021,
    2022,
+   2025,
    2026
   ]
  },
@@ -788,6 +804,7 @@
   "createdAt": "2026-10-11T08:13:53.594Z",
   "highYield": false,
   "repeatedFrom": [
+   2020,
    2022,
    2023
   ]
@@ -816,7 +833,8 @@
   "createdAt": "2026-10-11T08:13:53.594Z",
   "highYield": false,
   "repeatedFrom": [
-   2021
+   2021,
+   2023
   ]
  },
  {
@@ -843,6 +861,7 @@
   "createdAt": "2026-10-11T08:13:53.595Z",
   "highYield": false,
   "repeatedFrom": [
+   2020,
    2022,
    2023
   ]
@@ -873,6 +892,7 @@
    2019,
    2021,
    2022,
+   2025,
    2026
   ]
  },
@@ -903,6 +923,7 @@
    2019,
    2021,
    2022,
+   2025,
    2026
   ]
  },
@@ -1497,6 +1518,534 @@
   "repeatedFrom": [
    2021,
    2023
+  ]
+ },
+ {
+  "id": "waec-2019-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Grammar",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "medium",
+  "question": "Choose the correct option: 'The teacher, along with the students, ___ arrived.'",
+  "options": {
+   "A": "have",
+   "B": "has",
+   "C": "are",
+   "D": "were"
+  },
+  "correctAnswer": "B",
+  "explanation": "Phrases like 'along with' don't change the singular subject 'teacher' → 'has'.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.618Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2020-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Synonyms",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "easy",
+  "question": "Which word is closest in meaning to 'rapid'?",
+  "options": {
+   "A": "Slow",
+   "B": "Swift",
+   "C": "Late",
+   "D": "Calm"
+  },
+  "correctAnswer": "B",
+  "explanation": "Rapid and swift both mean fast.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.618Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "waec-2021-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Antonyms",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "easy",
+  "question": "Opposite of 'generous':",
+  "options": {
+   "A": "Kind",
+   "B": "Stingy",
+   "C": "Rich",
+   "D": "Polite"
+  },
+  "correctAnswer": "B",
+  "explanation": "Stingy (unwilling to give) opposes generous.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.618Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2019-math-002",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "Solve: 5x = 45",
+  "options": {
+   "A": "5",
+   "B": "8",
+   "C": "9",
+   "D": "40"
+  },
+  "correctAnswer": "C",
+  "explanation": "x = 45/5 = 9.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.618Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2025,
+   2026
+  ]
+ },
+ {
+  "id": "waec-2020-math-001",
+  "subject": "Mathematics",
+  "topic": "Geometry",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "The angles of a triangle are in ratio 1:2:3. The largest angle is:",
+  "options": {
+   "A": "60°",
+   "B": "90°",
+   "C": "120°",
+   "D": "100°"
+  },
+  "correctAnswer": "B",
+  "explanation": "Total parts 6; largest = 3/6 × 180° = 90°.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.618Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-math-005",
+  "subject": "Mathematics",
+  "topic": "Statistics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "Find the mean of 10, 20, 30",
+  "options": {
+   "A": "15",
+   "B": "20",
+   "C": "30",
+   "D": "60"
+  },
+  "correctAnswer": "B",
+  "explanation": "(10+20+30)/3 = 60/3 = 20.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2019-biol-001",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "The site of photosynthesis is the:",
+  "options": {
+   "A": "Mitochondrion",
+   "B": "Chloroplast",
+   "C": "Nucleus",
+   "D": "Ribosome"
+  },
+  "correctAnswer": "B",
+  "explanation": "Chlorophyll in chloroplasts captures light energy.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2020-biol-003",
+  "subject": "Biology",
+  "topic": "Ecology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "Which organisms are primary consumers?",
+  "options": {
+   "A": "Grasses",
+   "B": "Grasshoppers",
+   "C": "Frogs",
+   "D": "Hawks"
+  },
+  "correctAnswer": "B",
+  "explanation": "Herbivores feeding directly on producers are primary consumers.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "waec-2019-chem-001",
+  "subject": "Chemistry",
+  "topic": "Atomic Structure",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "The lightest element is:",
+  "options": {
+   "A": "Helium",
+   "B": "Hydrogen",
+   "C": "Lithium",
+   "D": "Oxygen"
+  },
+  "correctAnswer": "B",
+  "explanation": "Hydrogen (atomic number 1) is the lightest element.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-chem-004",
+  "subject": "Chemistry",
+  "topic": "Acids and Bases",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "Which gas turns damp red litmus blue?",
+  "options": {
+   "A": "CO₂",
+   "B": "SO₂",
+   "C": "NH₃",
+   "D": "HCl"
+  },
+  "correctAnswer": "C",
+  "explanation": "Ammonia is alkaline and turns red litmus blue.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2020-phys-002",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "easy",
+  "question": "The SI unit of mass is the:",
+  "options": {
+   "A": "Gram",
+   "B": "Kilogram",
+   "C": "Tonne",
+   "D": "Pound"
+  },
+  "correctAnswer": "B",
+  "explanation": "The kilogram is the SI base unit of mass.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2022-phys-003",
+  "subject": "Physics",
+  "topic": "Electricity",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "A fuse protects circuits by:",
+  "options": {
+   "A": "Increasing current",
+   "B": "Melting to break excess current",
+   "C": "Storing charge",
+   "D": "Raising voltage"
+  },
+  "correctAnswer": "B",
+  "explanation": "The fuse wire melts when current exceeds its rating, opening the circuit.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "waec-2022-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Idioms",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "What does 'to burn the midnight oil' mean?",
+  "options": {
+   "A": "To waste fuel",
+   "B": "To study late into the night",
+   "C": "To cook dinner",
+   "D": "To light a lamp"
+  },
+  "correctAnswer": "B",
+  "explanation": "It means working or studying late at night.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "waec-2023-math-002",
+  "subject": "Mathematics",
+  "topic": "Trigonometry",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "If sin θ = 1/2 and θ is acute, θ equals:",
+  "options": {
+   "A": "30°",
+   "B": "45°",
+   "C": "60°",
+   "D": "90°"
+  },
+  "correctAnswer": "A",
+  "explanation": "sin 30° = 1/2.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2022-biol-004",
+  "subject": "Biology",
+  "topic": "Genetics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "The molecule that carries amino acids to ribosomes is:",
+  "options": {
+   "A": "mRNA",
+   "B": "tRNA",
+   "C": "rRNA",
+   "D": "DNA"
+  },
+  "correctAnswer": "B",
+  "explanation": "Transfer RNA delivers amino acids during translation.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2023-chem-002",
+  "subject": "Chemistry",
+  "topic": "Organic Chemistry",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "easy",
+  "question": "The test for hydrogen gas is that it:",
+  "options": {
+   "A": "Relights a glowing splint",
+   "B": "Burns with a pop sound",
+   "C": "Turns limewater milky",
+   "D": "Bleaches litmus"
+  },
+  "correctAnswer": "B",
+  "explanation": "Hydrogen burns with a characteristic squeaky pop.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2024-phys-001",
+  "subject": "Physics",
+  "topic": "Waves",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "easy",
+  "question": "Which colour of light has the longest wavelength?",
+  "options": {
+   "A": "Violet",
+   "B": "Green",
+   "C": "Yellow",
+   "D": "Red"
+  },
+  "correctAnswer": "D",
+  "explanation": "Red light (~700 nm) has the longest visible wavelength.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2024-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Grammar",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "hard",
+  "question": "Choose the correct option: 'Had I known, I ___ come earlier.'",
+  "options": {
+   "A": "will",
+   "B": "would have",
+   "C": "shall",
+   "D": "can"
+  },
+  "correctAnswer": "B",
+  "explanation": "Third conditional for past regret: 'would have' + past participle.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2025-math-001",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2025,
+  "difficulty": "medium",
+  "question": "Solve: x/3 + x/2 = 5",
+  "options": {
+   "A": "2",
+   "B": "5",
+   "C": "6",
+   "D": "30"
+  },
+  "correctAnswer": "C",
+  "explanation": "Multiply by 6: 2x + 3x = 30 → 5x = 30 → x = 6.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.619Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2025,
+   2026
+  ]
+ },
+ {
+  "id": "waec-2025-biol-001",
+  "subject": "Biology",
+  "topic": "Nutrition",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2025,
+  "difficulty": "easy",
+  "question": "Which nutrient builds body tissues?",
+  "options": {
+   "A": "Carbohydrate",
+   "B": "Protein",
+   "C": "Fat",
+   "D": "Vitamin"
+  },
+  "correctAnswer": "B",
+  "explanation": "Proteins supply amino acids for growth and repair.",
+  "source": "seed",
+  "createdAt": "2026-10-11T08:36:17.620Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
   ]
  }
 ]
