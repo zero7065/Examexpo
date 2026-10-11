@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useTheme } from "../context/ThemeContext";
 import AvatarDisplay from "./Avatar/AvatarDisplay";
+import { isAdmin } from "../lib/activityLog";
 import {
   LayoutDashboard,
   BookOpen,
@@ -31,12 +32,14 @@ import {
   Settings,
   LineChart,
   FileText,
-  FlaskConical
+  FlaskConical,
+  GraduationCap
 } from "lucide-react";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
-  const { isPro: proStatus } = useSubscription();
+  const { isPro: proStatus, profile } = useSubscription();
+  const isTeacher = profile?.role === "teacher" || isAdmin(user);
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,6 +57,7 @@ const Navbar = () => {
     { name: "Progress", path: "/progress", icon: LineChart },
     { name: "History", path: "/history", icon: Clock },
     { name: "Leaderboard", path: "/leaderboard", icon: Trophy },
+    ...(isTeacher ? [{ name: "Teacher", path: "/teacher", icon: GraduationCap }] : []),
     { name: "Notepad", path: "/notepad", icon: StickyNote, requiresPro: true },
     { name: "Partners", path: "/study-partners", icon: Users, requiresPro: true },
     { name: "Assignment", path: "/assignment", icon: ClipboardList, requiresPro: true },

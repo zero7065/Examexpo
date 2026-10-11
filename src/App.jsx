@@ -4,6 +4,7 @@ import { StudyProvider } from "./context/StudyContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
+import TeacherRoute from "./components/TeacherRoute";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import InstallPrompt from "./components/InstallPrompt";
@@ -52,6 +53,14 @@ const LeaderboardPage = lazy(() => import("./pages/LeaderboardPage"));
 const StudyPartnersPage = lazy(() => import("./pages/StudyPartnersPage"));
 const SharedTestPage = lazy(() => import("./pages/SharedTestPage"));
 const AssignmentPage = lazy(() => import("./pages/AssignmentPage"));
+const SchoolsLanding = lazy(() => import("./pages/schools/SchoolsLanding"));
+const SchoolSignup = lazy(() => import("./pages/schools/SchoolSignup"));
+const TeacherDashboard = lazy(() => import("./pages/schools/TeacherDashboard"));
+const ExamGenerator = lazy(() => import("./pages/schools/ExamGenerator"));
+const ClassroomMode = lazy(() => import("./pages/schools/ClassroomMode"));
+const ParentReports = lazy(() => import("./pages/schools/ParentReports"));
+const JoinClass = lazy(() => import("./pages/schools/JoinClass"));
+const DataExport = lazy(() => import("./pages/compliance/DataExport"));
 
 function PageLoader() {
   return (
@@ -91,6 +100,14 @@ function AuthAwareRoutes() {
       "/shared-test": "Shared Test — ExamPadi AI",
       "/assignment": "Assignment — ExamPadi AI",
       "/flashcards": "Flashcards — ExamPadi AI",
+      "/schools": "For Schools — ExamPadi AI",
+      "/schools/signup": "Register School — ExamPadi AI",
+      "/teacher": "Teacher Dashboard — ExamPadi AI",
+      "/teacher/exam-generator": "Exam Generator — ExamPadi AI",
+      "/teacher/classroom": "Classroom Mode — ExamPadi AI",
+      "/teacher/parent-reports": "Parent Reports — ExamPadi AI",
+      "/join": "Join Class — ExamPadi AI",
+      "/settings/data-export": "Export My Data — ExamPadi AI",
     };
     document.title = titles[location.pathname] || "ExamPadi AI";
   }, [location.pathname, loading]);
@@ -167,6 +184,21 @@ function AuthAwareRoutes() {
           <Route path="/assignment" element={<ProtectedRoute><AssignmentPage /></ProtectedRoute>} />
           <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+          <Route path="/settings/data-export" element={<ProtectedRoute><DataExport /></ProtectedRoute>} />
+
+          {/* Schools (public) */}
+          <Route path="/schools" element={<SchoolsLanding />} />
+          <Route path="/schools/signup" element={<SchoolSignup />} />
+
+          {/* Teacher (role-gated) */}
+          <Route path="/teacher" element={<TeacherRoute><TeacherDashboard /></TeacherRoute>} />
+          <Route path="/teacher/exam-generator" element={<TeacherRoute><ExamGenerator /></TeacherRoute>} />
+          <Route path="/teacher/classroom" element={<TeacherRoute><ClassroomMode /></TeacherRoute>} />
+          <Route path="/teacher/parent-reports" element={<TeacherRoute><ParentReports /></TeacherRoute>} />
+
+          {/* Class join */}
+          <Route path="/join" element={<ProtectedRoute><JoinClass /></ProtectedRoute>} />
+          <Route path="/join/:code" element={<ProtectedRoute><JoinClass /></ProtectedRoute>} />
 
           {/* 404 */}
           <Route path="*" element={<NotFoundPage />} />

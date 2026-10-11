@@ -6,6 +6,16 @@ service cloud.firestore {
       return request.auth != null && request.auth.token.email == "jadai7065@gmail.com";
     }
 
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isTeacherOfSchool(schoolId) {
+      return request.auth != null
+        && userDoc().role == "teacher"
+        && userDoc().schoolId == schoolId;
+    }
+
     // ─── USERS ───
     match /users/{userId} {
       allow read: if request.auth != null;
@@ -119,6 +129,63 @@ service cloud.firestore {
     match /siteContent/{docId} {
       allow read: if true;
       allow write: if isAdmin();
+    }
+
+    // ─── SCHOOLS ───
+    match /schools/{schoolId} {
+      // Public can file a request (create with status pending only);
+      // reads/writes restricted to members, teachers of the school, admin.
+      allow create: if request.auth != null
+        && request.resource.data.status == "pending";
+      allow read: if request.auth != null && (
+        isAdmin()
+        || resource.data.contactEmail == request.auth.token.email
+        || isTeacherOfSchool(schoolId)
+      );
+      allow update: if isAdmin();
+      // Generated exams archive
+      match /exams/{examId} {
+        allow read, write: if request.auth != null && (
+          isAdmin() || isTeacherOfSchool(schoolId)
+        );
+      }
+    }
+
+    // ─── CLASSES ───
+    match /classes/{classId} {
+      allow read: if request.auth != null && (
+        isAdmin()
+        || request.auth.uid in resource.data.students
+        || (resource.data.keys().hasAny(["createdBy"]) && resource.data.createdBy == request.auth.uid)
+      );
+      allow create: if request.auth != null;
+      allow update: if request.auth != null && (
+        isAdmin() || resource.data.createdBy == request.auth.uid
+      );
+    }
+
+    // ─── CLASS INVITES (code lookup by anyone signed in; join is open-code) ───
+    match /classInvites/{code} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+    }
+
+    // ─── TEACHER NOTES ───
+    match /teacherNotes/{noteId} {
+      allow read: if request.auth != null && (
+        isAdmin() || isTeacherOfSchool(resource.data.schoolId)
+      );
+      allow create, update: if request.auth != null && (
+        isAdmin() || isTeacherOfSchool(request.resource.data.schoolId)
+      );
+      allow delete: if isAdmin();
+    }
+
+    // ─── PILOT REQUESTS (public form → create only) ───
+    match /pilotRequests/{reqId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
     }
   }
 }

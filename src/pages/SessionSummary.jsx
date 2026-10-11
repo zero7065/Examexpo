@@ -54,6 +54,14 @@ export default function SessionSummary() {
     async function saveSession() {
       try {
         if (db) {
+          // Compact per-question log powers teacher heatmaps (capped, no full text)
+          const questionLog = Array.isArray(data.questions)
+            ? data.questions.slice(0, 60).map((q) => ({
+                t: q.topic || "General",
+                s: q.subject || data.subject || "General",
+                ok: data.answers?.[q.id] === q.answer,
+              }))
+            : [];
           await addDoc(collection(db, "sessions"), {
             userId: user.uid,
             subject: data.subject,
@@ -64,6 +72,7 @@ export default function SessionSummary() {
             timeSeconds: data.timeSeconds,
             xpEarned: data.xpEarned,
             weakTopics: data.weakTopics || [],
+            questionLog,
             completedAt: serverTimestamp(),
           });
 

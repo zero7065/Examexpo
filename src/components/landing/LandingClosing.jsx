@@ -105,6 +105,7 @@ const FOOT_COLS = [
     links: [
       { label: "Why Us", href: "#why-us" },
       { label: "About", href: "#about" },
+      { label: "For Schools", href: "/schools" },
       { label: "Pricing", href: "#pricing" },
       { label: "Help Center", href: "/help" },
     ],

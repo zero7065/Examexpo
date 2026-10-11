@@ -5,6 +5,7 @@ import { db } from "../firebaseConfig";
 import { useAuth } from "../context/AuthContext";
 import { isAdmin as _isAdmin, logActivity } from "../lib/activityLog";
 import AdminMedia from "../components/AdminMedia";
+import AdminCompliance from "../components/AdminCompliance";
 const isAdmin = typeof _isAdmin === 'function' ? _isAdmin : () => false;
 import { Shield, Users, Activity, BookOpen, Crown, ArrowLeft, RefreshCw, UserCheck, UserX, ChevronDown, Search, CrownIcon, Zap, CreditCard, ClipboardList, Award, Clock, FileText, CheckCircle, XCircle } from "lucide-react";
 
@@ -38,6 +39,7 @@ export default function AdminPage() {
   const [userActivity, setUserActivity] = useState([]);
   const [paymentLogs, setPaymentLogs] = useState([]);
   const [userStats, setUserStats] = useState(null);
+  const [roleEdit, setRoleEdit] = useState({ role: "", schoolId: "" });
 
   useEffect(() => {
     if (!user || !isAdmin(user)) { navigate("/dashboard"); return; }
@@ -91,6 +93,14 @@ export default function AdminPage() {
 
   async function loadUserActivity(targetUser) {
     setSelectedUser(targetUser);
+    setRoleEdit({ role: targetUser.role || "user", schoolId: targetUser.schoolId || "" });
+    // Compliance: every admin read of user data is logged with a reason
+    logActivity({
+      action: "admin_user_read",
+      userId: user?.uid,
+      email: user?.email,
+      details: { targetUserId: targetUser.id, targetUserEmail: targetUser.email, reason: "support drill-down" },
+    }).catch(() => {});
     try {
       const [userLogResult, sesResult, mockResult] = await Promise.allSettled([
         getDocs(query(collection(db, "activityLog"), where("userId", "==", targetUser.id), limit(50))),
@@ -309,6 +319,7 @@ export default function AdminPage() {
             { id: "users", label: `Users (${usersList.length})` },
             { id: "pro", label: `Pro Management (${stats.proUsers})` },
             { id: "media", label: "Landing Media" },
+            { id: "compliance", label: "Compliance" },
             { id: "userDetail", label: "User Details" },
           ].map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
@@ -615,8 +626,14 @@ export default function AdminPage() {
           <AdminMedia />
         )}
 
+        {/* Compliance Tab */}
+        {activeTab === "compliance" && (
+          <AdminCompliance adminUser={user} usersList={usersList} logs={logs} showToast={showToast} />
+        )}
+
         {/* User Detail Tab */}
-        {activeTab === "userDetail" && (          <div style={{ display: "grid", gap: 20 }}>
+        {activeTab === "userDetail" && (
+          <div style={{ display: "grid", gap: 20 }}>
             {!selectedUser ? (
               <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 40, textAlign: "center", color: "#666", fontSize: 14 }}>
                 Select a user from the Users tab to view their details.
@@ -646,6 +663,35 @@ export default function AdminPage() {
                       <Crown size={14} style={{ marginRight: 6 }} />
                       Grant Pro Access
                     </button>
+                  </div>
+
+                  {/* Role & school editor */}
+                  <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap", alignItems: "center" }}>
+                    <span style={{ fontSize: 12, color: "#888", fontWeight: 700 }}>ROLE:</span>
+                    <select value={roleEdit.role} onChange={(e) => setRoleEdit((r) => ({ ...r, role: e.target.value }))}
+                      style={{ background: "#0d0d12", border: "1px solid #333", borderRadius: 8, padding: "8px 12px", color: "#fff", fontSize: 13, outline: "none", fontFamily: "inherit" }}>
+                      <option value="user">Student (user)</option>
+                      <option value="teacher">Teacher</option>
+                    </select>
+                    <input value={roleEdit.schoolId} onChange={(e) => setRoleEdit((r) => ({ ...r, schoolId: e.target.value }))}
+                      placeholder="schoolId (for teachers)"
+                      style={{ background: "#0d0d12", border: "1px solid #333", borderRadius: 8, padding: "8px 12px", color: "#fff", fontSize: 13, outline: "none", fontFamily: "inherit", minWidth: 200 }} />
+                    <button onClick={async () => {
+                      try {
+                        await updateDoc(doc(db, "users", selectedUser.id), { role: roleEdit.role, schoolId: roleEdit.schoolId.trim() || null });
+                        setUsersList((list) => list.map((u) => u.id === selectedUser.id ? { ...u, role: roleEdit.role, schoolId: roleEdit.schoolId.trim() || null } : u));
+                        setSelectedUser((s) => ({ ...s, role: roleEdit.role, schoolId: roleEdit.schoolId.trim() || null }));
+                        logActivity({ action: "admin_role_change", userId: user?.uid, email: user?.email, details: { targetUserId: selectedUser.id, role: roleEdit.role, schoolId: roleEdit.schoolId.trim() || null, reason: "admin console" } }).catch(() => {});
+                        showToast(`Role set to ${roleEdit.role} ✓`, "success");
+                      } catch (e) {
+                        showToast(`Failed: ${e.message}`, "error");
+                      }
+                    }} style={{ padding: "8px 18px", borderRadius: 8, background: "#1a1a1f", border: "1px solid #6C3CE9", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>
+                      Save role
+                    </button>
+                    {selectedUser.role === "teacher" && (
+                      <span style={{ fontSize: 11, color: "#4ADE80", fontWeight: 700 }}>TEACHER{selectedUser.schoolId ? ` · ${selectedUser.schoolId.slice(0, 8)}…` : ""}</span>
+                    )}
                   </div>
 
                   {/* User Stats */}

@@ -1,4 +1,5 @@
 const { onRequest } = require("firebase-functions/v2/https");
+const { onSchedule } = require("firebase-functions/v2/scheduler");
 const { logger } = require("firebase-functions/v2");
 const admin = require("firebase-admin");
 const crypto = require("crypto");
@@ -101,5 +102,51 @@ exports.paystackWebhook = onRequest(
     } else {
       res.status(200).json({ status: "ignored" });
     }
+  }
+);
+
+// ─── Scheduled purge: hard-delete accounts past their 30-day grace period ───
+// Runs daily at 02:00 Africa/Lagos. Deletes users/{uid}, all per-user docs in
+// sessions/mockExams/notes/activityLog/feedback, aiMemory/{uid},
+// studyPlans/{uid}, and the avatar file.
+exports.purgeDeletedAccounts = onSchedule(
+  { schedule: "0 2 * * *", timeZone: "Africa/Lagos" },
+  async () => {
+    const cutoff = new Date().toISOString();
+    const usersSnap = await db.collection("users").get();
+    let purged = 0;
+
+    for (const userDoc of usersSnap.docs) {
+      const data = userDoc.data();
+      if (!data.deletedAt || !data.deletionScheduledAt) continue;
+      if (data.deletionScheduledAt > cutoff) continue;
+
+      const uid = userDoc.id;
+      try {
+        const batch = db.batch();
+        batch.delete(userDoc.ref);
+
+        for (const col of ["sessions", "mockExams", "notes", "activityLog", "feedback"]) {
+          const snap = await db.collection(col).where("userId", "==", uid).get();
+          snap.forEach((d) => batch.delete(d.ref));
+        }
+        batch.delete(db.doc(`aiMemory/${uid}`));
+        batch.delete(db.doc(`studyPlans/${uid}`));
+        await batch.commit();
+
+        try {
+          await admin.storage().bucket().file(`avatars/${uid}/profile.jpg`).delete();
+        } catch {
+          // file may not exist — not fatal
+        }
+
+        logger.info(`Purged deleted account ${uid}`);
+        purged++;
+      } catch (err) {
+        logger.error(`Purge failed for ${uid}`, err);
+      }
+    }
+
+    logger.info(`purgeDeletedAccounts complete: ${purged} account(s) purged`);
   }
 );
