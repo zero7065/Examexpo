@@ -135,6 +135,127 @@ async function callGroqChatWithFallback(systemPrompt, messages, maxTokens = 600,
   throw lastError || new Error("All AI models failed");
 }
 
+import { VISION_MODEL, downscaleDataUrl } from "./vision";
+import { topWeakTopics, recentSummaries } from "./aiMemory";
+
+// ─── Vision chat (image-capable). ONLY tries the multimodal model —
+// gpt-oss/allam are text-only and cannot accept image payloads.
+async function callGroqVisionChat(systemPrompt, textMessages, imageBase64, maxTokens = 800) {
+  const key = import.meta.env.VITE_GROQ_API_KEY;
+  if (!key) {
+    _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
+    throw new Error("Groq API key not configured.");
+  }
+  // Attach the image to the last user message (OpenAI content-array format)
+  const msgs = textMessages.map((m) => ({ role: m.role, content: m.content }));
+  for (let i = msgs.length - 1; i >= 0; i--) {
+    if (msgs[i].role === "user") {
+      msgs[i] = {
+        role: "user",
+        content: [
+          { type: "text", text: String(msgs[i].content || "") },
+          { type: "image_url", image_url: { url: imageBase64 } },
+        ],
+      };
+      break;
+    }
+  }
+  const body = {
+    model: VISION_MODEL,
+    messages: [{ role: "system", content: systemPrompt }, ...msgs],
+    max_tokens: maxTokens,
+    temperature: 0.6,
+  };
+  try {
+    const res = await fetch(GROQ_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+      body: JSON.stringify(body),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      _lastAIError = null;
+      return data.choices[0]?.message?.content?.trim() || "";
+    }
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error?.message || `Groq error: ${res.status}`);
+  } catch (e) {
+    _lastAIError = { message: e.message, time: Date.now() };
+    throw e;
+  }
+}
+
+// Vision entry point with one downscaled retry before surfacing the real error.
+export async function askGroqVision({ systemPrompt, messages, imageBase64, maxTokens = 800 }) {
+  try {
+    return await callGroqVisionChat(systemPrompt, messages, imageBase64, maxTokens);
+  } catch (firstErr) {
+    console.warn("[AI] Vision full-size failed, retrying downscaled:", firstErr.message);
+    try {
+      const smaller = await downscaleDataUrl(imageBase64, 512);
+      return await callGroqVisionChat(systemPrompt, messages, smaller, maxTokens);
+    } catch (e) {
+      console.warn("[AI] Vision downscaled retry failed:", e.message);
+      throw firstErr; // surface the original, more informative error
+    }
+  }
+}
+
+// ─── Memory-aware tutor system prompt ───
+const STYLE_INSTRUCTIONS = {
+  visual: "Prefer visual explanations: describe diagrams, layouts and what the student should picture or sketch.",
+  verbal: "Prefer clear verbal explanations: precise definitions and well-structured prose.",
+  example: "Lead with concrete worked examples before stating rules; every concept gets an example first.",
+  "step-by-step": "Break everything into small numbered steps; never skip intermediate reasoning.",
+};
+
+export function buildTutorSystemPrompt({ subject, userProfile, memory }) {
+  const weak = topWeakTopics(memory, 5);
+  const style = memory?.preferredStyle;
+  const sums = recentSummaries(memory, 3);
+
+  const lines = [
+    "You are ExamPadi AI Tutor — an expert, friendly Nigerian exam tutor specializing in JAMB, WAEC, NECO and NABTEB.",
+    "",
+    "Student profile:",
+    `- Name: ${userProfile?.name || "Student"}`,
+    `- Exam: ${userProfile?.exam || "JAMB"}`,
+    `- Target score: ${userProfile?.targetScore || "300"}`,
+    `- Current subject context: ${subject}`,
+    "",
+    "Your role:",
+    "- Explain concepts clearly using simple Nigerian student-friendly language",
+    "- Reference Nigerian curriculum (NERDC, WAEC syllabus)",
+    "- Give worked examples with step-by-step solutions",
+    "- Be encouraging but honest about weak areas",
+    "- Keep responses concise but complete — under 300 words unless solving a long problem",
+    "- Always relate answers back to what appears in JAMB/WAEC exams",
+    "- Explain WHY an answer is right, not just what it is",
+    '- End study-type answers with "What to revise next:" and one concrete topic',
+  ];
+
+  if (weak.length > 0) {
+    lines.push(
+      "",
+      "Known weak topics for this student (connect new explanations to these when relevant):",
+      ...weak.map((w) => `- ${w.subject}: ${w.topic} (${w.errorCount || 0} recent errors)`)
+    );
+  }
+  if (style && STYLE_INSTRUCTIONS[style]) {
+    lines.push("", `Preferred learning style (${style}): ${STYLE_INSTRUCTIONS[style]}`);
+  }
+  if (sums.length > 0) {
+    lines.push("", "Recent session notes:");
+    sums.forEach((s, i) => {
+      const bullets = Array.isArray(s.bullets) ? s.bullets.join("; ") : String(s.bullets || "");
+      lines.push(`- Session ${i + 1}: ${bullets}`);
+    });
+  }
+
+  lines.push("", "Never say you are built by Google or mention Gemini. You are ExamPadi AI powered by Groq.");
+  return lines.join("\n");
+}
+
 // Generic single-prompt caller — used by question generators
 export async function askGroq(systemPrompt, userPrompt, opts = {}) {
   return callGroqWithFallback(systemPrompt, userPrompt, opts.maxTokens ?? 300, opts.temperature ?? 0.5);
@@ -170,24 +291,8 @@ Give a clear, friendly explanation in 3-4 sentences. Explain WHY ${correctAnswer
   }
 }
 
-export async function chatWithTutor({ messages, subject, userProfile }) {
-  const systemPrompt = `You are ExamPadi AI Tutor — an expert, friendly Nigerian exam tutor specializing in JAMB, WAEC, and NABTEB.
-
-Student profile:
-- Name: ${userProfile?.name || "Student"}
-- Exam: ${userProfile?.exam || "JAMB"}
-- Target score: ${userProfile?.targetScore || "300"}
-- Current subject context: ${subject}
-
-Your role:
-- Explain concepts clearly using simple Nigerian student-friendly language
-- Reference Nigerian curriculum (NERDC, WAEC syllabus)
-- Give worked examples with step-by-step solutions
-- Be encouraging but honest about weak areas
-- Keep responses concise but complete — under 300 words unless solving a long problem
-- Always relate answers back to what appears in JAMB/WAEC exams
-
-Never say you are built by Google or mention Gemini. You are ExamPadi AI powered by Groq.`;
+export async function chatWithTutor({ messages, subject, userProfile, memory = null, imageBase64 = null }) {
+  const systemPrompt = buildTutorSystemPrompt({ subject, userProfile, memory });
 
   const chatMessages = messages.map(m => ({
     role: m.role === "ai" ? "assistant" : "user",
@@ -195,6 +300,10 @@ Never say you are built by Google or mention Gemini. You are ExamPadi AI powered
   }));
 
   try {
+    // Image present → vision path (multimodal model only, no text-model fallback)
+    if (imageBase64) {
+      return await askGroqVision({ systemPrompt, messages: chatMessages, imageBase64, maxTokens: 800 });
+    }
     return await callGroqChatWithFallback(systemPrompt, chatMessages, 600, 0.8);
   } catch (e) {
     console.warn("chatWithTutor fallback:", e.message);
@@ -265,8 +374,7 @@ Include 5-8 topics ordered from foundations to final revision.`;
   }
 }
 
-export async function generateFlashcards({ subject, topic, count = 10, exam = "JAMB" }) {
-  try {
+export async function generateFlashcards({ subject, topic, count = 10, exam = "JAMB" }) {  try {
     const system = "You are a Nigerian exam tutor creating revision flashcards. Return ONLY valid JSON, no markdown fences.";
     const user = `Create ${count} exam-focused flashcards for ${exam} ${subject}${topic ? `, topic: ${topic}` : ""}.
 Return JSON exactly in this shape:
@@ -284,4 +392,32 @@ Cover the highest-yield facts, formulas, definitions and distinctions. No fluff.
     _lastAIError = { message: err.message, time: Date.now() };
     return [];
   }
+}
+
+// ─── Session summarization ───
+// Pro: Groq produces 3 learning bullets + 1 weak topic (1 LLM call).
+// Free: instant offline heuristic from scores/weak topics (zero tokens).
+export async function summarizeSessionGroq({ subject, correct, total, weakTopics = [] }) {
+  const system = "You are a concise study coach. Return ONLY valid JSON, no markdown fences.";
+  const user = `A student just finished a ${subject} practice session: ${correct}/${total} correct. Weak topics: ${weakTopics.join(", ") || "none identified"}. Return JSON exactly: {"bullets": ["<bullet 1>", "<bullet 2>", "<bullet 3>"], "weakTopic": "<single weakest topic or null>"}. Each bullet max 15 words, actionable and encouraging.`;
+  const res = await callGroqWithFallback(system, user, 300, 0.5);
+  const parsed = JSON.parse(stripJsonFences(res));
+  if (!Array.isArray(parsed.bullets) || parsed.bullets.length === 0) throw new Error("Empty summary");
+  return {
+    at: Date.now(),
+    subject,
+    bullets: parsed.bullets.slice(0, 3).map(String),
+    weakTopic: parsed.weakTopic || null,
+  };
+}
+
+export function heuristicSummary({ subject, correct, total, weakTopics = [] }) {
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+  const weak = weakTopics[0];
+  const bullets = [
+    `Scored ${pct}% (${correct}/${total}) in ${subject} — ${pct >= 70 ? "strong session, keep the streak" : pct >= 50 ? "solid base, push weak spots" : "focus session needed on fundamentals"}.`,
+    weak ? `Priority revision: ${weak}.` : "No dominant weak topic — broaden coverage next.",
+    pct >= 70 ? "Next: timed mixed practice to build exam speed." : "Next: re-attempt missed questions with AI explanations.",
+  ];
+  return { at: Date.now(), subject, bullets, weakTopic: weak || null };
 }

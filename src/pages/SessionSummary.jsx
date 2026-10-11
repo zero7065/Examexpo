@@ -8,12 +8,16 @@ import { doc, updateDoc, addDoc, collection, increment, serverTimestamp } from "
 import { db } from "../firebaseConfig";
 import { updateStreak } from "../lib/userProfile";
 import { logActivity } from "../lib/activityLog";
+import { summarizeSessionGroq, heuristicSummary, getAIErrorIfRecent } from "../lib/ai";
+import { bufferSummary, flushMemory } from "../lib/aiMemory";
+import { useSubscription } from "../hooks/useSubscription";
 import { ArrowLeft, RotateCcw, Share2, Sparkles, CheckCircle2, XCircle } from "lucide-react";
 import { WhatsAppShareButton, WhatsAppHelpButton } from "../components/WhatsAppShare";
 
 export default function SessionSummary() {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { isPro } = useSubscription();
   const navigate = useNavigate();
   const location = useLocation();
   const data = location.state;
@@ -73,6 +77,37 @@ export default function SessionSummary() {
 
         await updateStreak(user.uid);
         setSaved(true);
+
+        // Session memory: Pro → Groq summary; free → instant heuristic.
+        // Buffered + flushed in one write; never blocks the summary screen.
+        (async () => {
+          try {
+            const input = {
+              subject: data.subject,
+              correct: data.correct,
+              total: data.total,
+              weakTopics: data.weakTopics || [],
+            };
+            let summary = null;
+            if (isPro) {
+              try {
+                summary = await summarizeSessionGroq(input);
+              } catch (e) {
+                const aiErr = getAIErrorIfRecent();
+                console.warn("Groq summary failed, using heuristic:", aiErr?.message || e.message);
+                summary = heuristicSummary(input);
+              }
+            } else {
+              summary = heuristicSummary(input);
+            }
+            if (summary) {
+              bufferSummary(user.uid, summary);
+              await flushMemory(user.uid);
+            }
+          } catch (e) {
+            console.warn("Session summary skipped:", e?.message);
+          }
+        })();
 
         logActivity({ action: "session_complete", userId: user.uid, email: user.email, details: { subject: data.subject, score: data.score, correct: data.correct, total: data.total, xp: data.xpEarned } });
 

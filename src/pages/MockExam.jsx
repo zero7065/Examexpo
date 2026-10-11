@@ -6,6 +6,7 @@ import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
 import { getRandomQuestions } from "../data/questions/index";
 import ProUpgradeModal from "../components/ProUpgradeModal";
+import { recordSession } from "../lib/aiMemory";
 import { Clock, Flag, ChevronLeft, ChevronRight, AlertTriangle } from "lucide-react";
 
 const EXAM_CONFIG = {
@@ -112,6 +113,7 @@ export default function MockExam() {
       const w = sq.filter(q => ans[q.id] && ans[q.id] !== q.answer).length;
       subjectBreakdown[s] = { correct: c, wrong: w, skipped: sq.length - c - w, score: sq.length > 0 ? Math.round((c / sq.length) * 100) : 0 };
     });
+    if (user) recordSession(user.uid, qs, ans, "answer").catch(() => {});
     navigate("/mock-summary", {
       state: {
         examType, subjects: subs, questions: qs, answers: ans,
@@ -159,6 +161,7 @@ export default function MockExam() {
       subjectBreakdown[s] = { correct: c, wrong: w, skipped: sq.length - c - w, score: Math.round((c / sq.length) * 100) };
     });
 
+    if (user) recordSession(user.uid, questions, answers, "answer").catch(() => {});
     navigate("/mock-summary", {
       state: {
         examType, subjects: selectedSubjects, questions, answers,

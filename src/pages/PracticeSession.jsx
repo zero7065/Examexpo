@@ -5,6 +5,7 @@ import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit, trackQuestion, checkAILimit, trackAIMessage } from "../lib/usageTracker";
 import { explainQuestion, getAIErrorIfRecent } from "../lib/ai";
+import { bufferInteraction, flushMemory } from "../lib/aiMemory";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import { Whiteboard } from "../components/Whiteboard";
 import { useHint } from "../hooks/useHints";
@@ -149,6 +150,15 @@ export default function PracticeSession() {
     if (user && !isPro) {
       trackQuestion(user.uid);
     }
+    // Buffer for AI memory (in-memory only — flushed once at session end)
+    if (user && current) {
+      bufferInteraction(user.uid, {
+        topic: current.topic,
+        subject: current.subject || subject,
+        correct: optionKey === current.answer,
+        questionText: current.question,
+      });
+    }
   }
 
   async function handleAskAI() {
@@ -243,6 +253,8 @@ export default function PracticeSession() {
 
     setSessionComplete(true);
     hintState.reset();
+    // Flush buffered AI-memory interactions (single Firestore write)
+    if (user) flushMemory(user.uid).catch(() => {});
     navigate("/session-summary", {
       state: {
         subject,

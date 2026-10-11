@@ -9,13 +9,63 @@ import { doc, updateDoc, collection, getDocs, writeBatch, query, where } from "f
 import { db } from "../firebaseConfig";
 import { updateProfile } from "firebase/auth";
 import ProUpgradeModal from "../components/ProUpgradeModal";
+import { getStudentMemory, recordStyle } from "../lib/aiMemory";
+import { LEARNING_STYLES } from "../components/Onboarding/LearningStyleMini";
 import { User, BookOpen, CreditCard, Bell, Sliders, AlertTriangle, LogOut, ChevronRight, Check, Pencil, Clock } from "lucide-react";
 
 const SUBJECT_OPTIONS = ["English", "Maths", "Physics", "Chemistry", "Biology", "Economics", "Government", "Literature", "CRS", "Geography", "Commerce", "Accounting", "Further Maths", "Agricultural Science", "Technical Drawing", "Business Management"];
 const EXAM_OPTIONS = ["JAMB", "WAEC", "NABTEB", "POST-UTME"];
 
-function Toggle({ value, onChange }) {
+function LearningStylePicker({ uid }) {
+  const { toast } = useToast();
+  const [style, setStyle] = useState(null);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (uid) getStudentMemory(uid).then((m) => setStyle(m.preferredStyle || null)).catch(() => {});
+  }, [uid]);
+
+  async function pick(id) {
+    setStyle(id);
+    if (!uid) return;
+    setSaving(true);
+    try {
+      await recordStyle(uid, id);
+      toast({ message: "AI tutor style updated", type: "success" });
+    } catch (_) {
+      toast({ message: "Saved locally — will sync when online", type: "info" });
+    } finally {
+      setSaving(false);
+    }
+  }
+
   return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+      {LEARNING_STYLES.map((s) => {
+        const sel = style === s.id;
+        return (
+          <button
+            key={s.id}
+            onClick={() => pick(s.id)}
+            disabled={saving}
+            title={s.desc}
+            style={{
+              padding: "8px 14px", borderRadius: 10, cursor: "pointer", fontFamily: "inherit",
+              border: sel ? "2px solid var(--primary)" : "1px solid var(--border)",
+              background: sel ? "var(--primary-dim)" : "var(--bg-3)",
+              color: sel ? "var(--text)" : "var(--text-muted)",
+              fontWeight: sel ? 700 : 500, fontSize: 13,
+            }}
+          >
+            {s.emoji} {s.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function Toggle({ value, onChange }) {  return (
     <button onClick={() => onChange(!value)} style={{
       width: 44, height: 24, borderRadius: 12, border: "none", cursor: "pointer", padding: 2,
       background: value ? "#6C3CE9" : "#333", transition: "background 0.2s", position: "relative",
@@ -147,6 +197,12 @@ export default function Settings() {
             })}
           </div>
           <p style={{ color: "#555", fontSize: 11, marginTop: 8 }}>Changes take effect on your next session</p>
+        </Section>
+
+        {/* AI Tutor */}
+        <Section title="AI Tutor">
+          <div style={{ fontSize: 13, color: "#888", marginBottom: 10 }}>How should the AI explain things to you?</div>
+          <LearningStylePicker uid={user?.uid} />
         </Section>
 
         {/* Subscription */}

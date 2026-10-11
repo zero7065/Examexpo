@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { createUserProfile, getUserProfile } from "../lib/userProfile";
+import { recordStyle } from "../lib/aiMemory";
 import { useToast } from "../components/Toast";
 import { logActivity } from "../lib/activityLog";
+import LearningStyleMini from "../components/Onboarding/LearningStyleMini";
 import { Check, ChevronRight, Target, GraduationCap, BookOpen, PenTool, ArrowRight } from "lucide-react";
 
 const EXAMS = [
@@ -39,6 +41,7 @@ export default function Onboarding() {
     targetScore: 280,
     targetGrade: "C",
   });
+  const [learningStyle, setLearningStyle] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -67,7 +70,7 @@ export default function Onboarding() {
     );
   }
 
-  const totalSteps = 4;
+  const totalSteps = 5;
   const subjects = formData.exam ? SUBJECTS[formData.exam] : [];
 
   function handleExamSelect(exam) {
@@ -111,6 +114,10 @@ export default function Onboarding() {
         targetScore: formData.exam === "jamb" ? formData.targetScore : null,
         targetGrade: formData.exam !== "jamb" ? formData.targetGrade : null,
       });
+      // Persist the learning-style answer (buffered; syncs when online)
+      if (learningStyle) {
+        recordStyle(user.uid, learningStyle).catch(() => {});
+      }
       logActivity({ action: "onboarding_complete", userId: user.uid, email: user.email, details: { exam: formData.exam, subjects: formData.subjects, targetScore: formData.targetScore } });
       toast({ message: "Profile created! Let's go 🚀", type: "success" });
       navigate("/dashboard");
@@ -427,8 +434,16 @@ export default function Onboarding() {
           </div>
         )}
 
-        {/* Step 4: Welcome */}
+        {/* Step 4: Learning style quiz */}
         {step === 4 && (
+          <LearningStyleMini
+            onDone={(style) => { setLearningStyle(style); setStep(5); }}
+            onSkip={() => setStep(5)}
+          />
+        )}
+
+        {/* Step 5: Welcome */}
+        {step === 5 && (
           <div style={{ animation: "fadeIn 0.4s ease", textAlign: "center" }}>
             <div style={{
               width: 100,
@@ -451,6 +466,12 @@ export default function Onboarding() {
             <p style={{ color: "var(--primary)", fontSize: 18, fontWeight: 600, marginBottom: 32 }}>
               Let's crush that {formData.exam === "jamb" ? `${formData.targetScore} score` : `${formData.targetGrade} grade`}!
             </p>
+            {learningStyle && (
+              <p style={{ color: "var(--text-muted)", fontSize: 13, marginBottom: 24 }}>
+                Your AI tutor will explain things {learningStyle === "visual" ? "with pictures & diagrams" : learningStyle === "verbal" ? "in clear words" : learningStyle === "example" ? "through worked examples" : "step by step"}.
+                You can change this anytime in Settings.
+              </p>
+            )}
             <button
               onClick={handleComplete}
               disabled={loading}

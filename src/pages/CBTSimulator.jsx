@@ -8,6 +8,7 @@ import { doc, updateDoc, addDoc, collection, increment, serverTimestamp } from "
 import { db } from "../firebaseConfig";
 import Timer from "../components/Timer";
 import ProGate from "../components/ProGate";
+import { recordSession } from "../lib/aiMemory";
 import { ChevronLeft, ChevronRight, Flag, Send, AlertCircle, Monitor, BookOpen } from "lucide-react";
 
 const CBTSimulator = () => {
@@ -100,6 +101,9 @@ const CBTSimulator = () => {
     } catch (e) {
       console.warn("Failed to save CBT session:", e);
     }
+
+    // Batch AI-memory update (single write, skipped silently offline)
+    if (user) recordSession(user.uid, questions, answers, "correctAnswer").catch(() => {});
 
     navigate("/result", { state: { result } });
   };

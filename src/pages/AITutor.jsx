@@ -5,15 +5,20 @@ import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
 import { chatWithTutor, getLastAIError, isAIConfigured } from "../lib/ai";
+import { getStudentMemory, topWeakTopics } from "../lib/aiMemory";
+import { preprocessImage } from "../lib/vision";
 import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
 import { logActivity } from "../lib/activityLog";
 import ProUpgradeModal from "../components/ProUpgradeModal";
-import { Send, Sparkles, Bot, Plus, ChevronRight } from "lucide-react";
+import MessageBubble from "../components/AITutor/MessageBubble";
+import TypingIndicator from "../components/AITutor/TypingIndicator";
+import ImageUpload from "../components/AITutor/ImageUpload";
+import { Send, Sparkles, Plus, ChevronRight, Brain } from "lucide-react";
 
 const QUICK_PROMPTS = [
-  "Explain Newton's Laws of Motion",
-  "What topics appear most in JAMB Biology?",
-  "Create a study plan for Physics",
+  "Explain photosynthesis like I'm 10",
+  "Solve this quadratic: x² - 5x + 6 = 0",
+  "What's likely to come in JAMB Physics?",
   "Summarize Organic Chemistry for WAEC",
 ];
 
@@ -33,6 +38,8 @@ export default function AITutor() {
   const [conversationId, setConversationId] = useState(genId());
   const [showProModal, setShowProModal] = useState(false);
   const [aiUsage, setAiUsage] = useState(null);
+  const [memory, setMemory] = useState(null);
+  const [pendingImage, setPendingImage] = useState(null);
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -40,10 +47,13 @@ export default function AITutor() {
 
   useEffect(() => {
     if (user) getUserProfile(user.uid).then(setProfile).catch(() => {});
+    if (user) getStudentMemory(user.uid).then(setMemory).catch(() => {});
     if (user && !isPro) {
       checkAILimit(user.uid).then(l => setAiUsage({ used: l.used, limit: l.limit })).catch(() => {});
     }
   }, [user, isPro]);
+
+  const weakCount = topWeakTopics(memory, 5).length;
 
   const userSubjects = profile?.subjects || [];
 
@@ -67,9 +77,18 @@ export default function AITutor() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Save to localStorage
+  // Save to localStorage (strip image payloads — too large for storage)
   useEffect(() => {
-    if (messages.length > 0) localStorage.setItem(`ep-chat-${conversationId}`, JSON.stringify(messages));
+    if (messages.length > 0) {
+      try {
+        const slim = messages.map((m) => {
+          const copy = { ...m };
+          delete copy.image; // data URLs are too large for localStorage
+          return copy;
+        });
+        localStorage.setItem(`ep-chat-${conversationId}`, JSON.stringify(slim));
+      } catch { /* storage full or unavailable — chat simply won't persist */ }
+    }
   }, [messages]);
 
   function handleNewChat() {
@@ -79,9 +98,20 @@ export default function AITutor() {
     localStorage.removeItem(`ep-chat-${conversationId}`);
   }
 
+  async function handleSelectImage(file) {
+    if (!file) return;
+    try {
+      const dataUrl = await preprocessImage(file);
+      setPendingImage(dataUrl);
+      if (!input.trim()) setInput("Solve this question for me.");
+    } catch (e) {
+      toast({ message: e.message || "Could not read image", type: "warning" });
+    }
+  }
+
   async function handleSend(text) {
     const msg = text || input;
-    if (!msg.trim() || loading) return;
+    if ((!msg.trim() && !pendingImage) || loading) return;
 
     try {
       // Free-tier daily AI limit
@@ -91,9 +121,12 @@ export default function AITutor() {
         if (!limit.allowed) { setShowProModal(true); return; }
       }
 
-      const userMsg = { id: Date.now(), role: "user", content: msg.trim(), timestamp: new Date().toISOString() };
+      const image = pendingImage;
+      const userMsg = { id: Date.now(), role: "user", content: (msg.trim() || "Solve this question for me."), timestamp: new Date().toISOString() };
+      if (image) userMsg.image = image;
       setMessages(prev => [...prev, userMsg]);
       setInput("");
+      setPendingImage(null);
       setLoading(true);
 
       if (user && !isPro) {
@@ -103,9 +136,11 @@ export default function AITutor() {
 
       const allMsgs = [...messages, userMsg];
       const response = await chatWithTutor({
-        messages: allMsgs,
+        messages: allMsgs.map((m) => ({ role: m.role, content: m.content })),
         subject: activeSubject,
         userProfile: { name: user?.displayName || "Student", exam: profile?.exam || "JAMB", targetScore: profile?.targetScore || 300 },
+        memory,
+        imageBase64: image,
       });
 
       const aiErr = getLastAIError();
@@ -121,7 +156,7 @@ export default function AITutor() {
         toast({ message: `AI failed: ${aiErr.message}`, type: "error" });
       }
 
-      logActivity({ action: "ai_chat", userId: user?.uid, email: user?.email, details: { subject: activeSubject, questionLength: msg.trim().length } });
+      logActivity({ action: "ai_chat", userId: user?.uid, email: user?.email, details: { subject: activeSubject, questionLength: userMsg.content.length, withImage: !!image } });
     } catch (e) {
       console.error("AI chat failed:", e);
       toast({ message: "Failed to get AI response. Please try again.", type: "error" });
@@ -139,17 +174,22 @@ export default function AITutor() {
   }, [input]);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff", display: "flex", flexDirection: "column" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)", display: "flex", flexDirection: "column" }}>
       {/* Top bar */}
-      <div style={{ background: "#0d0d12", borderBottom: "1px solid #1e1e2a", padding: "12px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
+      <div style={{ background: "var(--bg-2)", borderBottom: "1px solid var(--border)", padding: "12px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg, #6C3CE9, #D4A853)", display: "flex", alignItems: "center", justifyContent: "center" }}><Sparkles size={16} color="#fff" /></div>
           <span style={{ fontWeight: 700, fontSize: 16 }}>AI Tutor</span>
           {isPro && <span style={{ fontSize: 10, fontWeight: 700, color: "#D4A853", background: "rgba(212,168,83,0.15)", padding: "2px 8px", borderRadius: 6 }}>PRO</span>}
+          {weakCount > 0 && (
+            <span title={memory?.preferredStyle ? `Learning style: ${memory.preferredStyle}` : "I remember your weak topics"} style={{ fontSize: 11, fontWeight: 600, color: "var(--primary)", background: "var(--primary-dim)", border: "1px solid var(--border)", padding: "4px 10px", borderRadius: 20, display: "inline-flex", alignItems: "center", gap: 4 }}>
+              <Brain size={12} /> Remembering {weakCount} weak topic{weakCount === 1 ? "" : "s"}
+            </span>
+          )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           {!isPro && aiUsage && (
-            <span style={{ fontSize: 11, fontWeight: 700, color: aiUsage.used >= aiUsage.limit ? "#ef4444" : "#888", background: "#1a1a1f", border: "1px solid #333", padding: "4px 10px", borderRadius: 6 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: aiUsage.used >= aiUsage.limit ? "#ef4444" : "var(--text-muted)", background: "var(--bg-3)", border: "1px solid var(--border)", padding: "4px 10px", borderRadius: 6 }}>
               AI {aiUsage.used}/{aiUsage.limit} today
             </span>
           )}
@@ -158,7 +198,7 @@ export default function AITutor() {
               Go Pro
             </button>
           )}
-          <button onClick={handleNewChat} style={{ padding: "8px 14px", borderRadius: 8, background: "#1a1a1f", border: "1px solid #333", color: "#888", cursor: "pointer", fontSize: 12, display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
+          <button onClick={handleNewChat} style={{ padding: "8px 14px", borderRadius: 8, background: "var(--bg-3)", border: "1px solid var(--border)", color: "var(--text-muted)", cursor: "pointer", fontSize: 12, display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
             <Plus size={14} /> New Chat
           </button>
         </div>
@@ -171,9 +211,9 @@ export default function AITutor() {
       )}
 
       {/* Subject context pills */}
-      <div style={{ display: "flex", gap: 6, padding: "8px 20px", background: "#0a0a0f", borderBottom: "1px solid #1e1e2a", overflowX: "auto", flexShrink: 0 }}>
+      <div style={{ display: "flex", gap: 6, padding: "8px 20px", background: "var(--bg)", borderBottom: "1px solid var(--border)", overflowX: "auto", flexShrink: 0 }}>
         {["General", ...userSubjects].map(s => (
-          <button key={s} onClick={() => setActiveSubject(s)} style={{ padding: "6px 14px", borderRadius: 8, border: "none", background: activeSubject === s ? "#6C3CE9" : "#1a1a1f", color: activeSubject === s ? "#fff" : "#888", fontWeight: 600, fontSize: 12, cursor: "pointer", whiteSpace: "nowrap", fontFamily: "inherit" }}>
+          <button key={s} onClick={() => setActiveSubject(s)} style={{ padding: "6px 14px", borderRadius: 8, border: "none", background: activeSubject === s ? "#6C3CE9" : "var(--bg-3)", color: activeSubject === s ? "#fff" : "var(--text-muted)", fontWeight: 600, fontSize: 12, cursor: "pointer", whiteSpace: "nowrap", fontFamily: "inherit" }}>
             {s}
           </button>
         ))}
@@ -186,11 +226,11 @@ export default function AITutor() {
               <div style={{ textAlign: "center", paddingTop: 60 }}>
                 <div style={{ fontSize: 40, marginBottom: 16 }}>✨</div>
                 <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 8px" }}>Hi {user?.displayName?.split(" ")[0] || "Student"}! I'm your ExamPadi AI Tutor</h2>
-                <p style={{ color: "#888", fontSize: 14, margin: "0 0 24px", maxWidth: 400, margin: "0 auto 24px" }}>Ask me anything about your subjects. I can explain topics, solve questions, make study plans, and more.</p>
+                <p style={{ color: "var(--text-muted)", fontSize: 14, margin: "0 auto 24px", maxWidth: 400 }}>Ask me anything about your subjects — or snap a photo of a question with 📷. I can explain topics, solve questions, make study plans, and more.</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 400, margin: "0 auto" }}>
                   {QUICK_PROMPTS.map(p => (
-                    <button key={p} onClick={() => handleSend(p)} style={{ padding: "10px 16px", borderRadius: 10, background: "#1a1a1f", border: "1px solid #2a2a35", color: "#ccc", cursor: "pointer", fontSize: 13, textAlign: "left", display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: "inherit" }}>
-                      {p} <ChevronRight size={14} color="#666" />
+                    <button key={p} onClick={() => handleSend(p)} style={{ padding: "10px 16px", borderRadius: 10, background: "var(--bg-2)", border: "1px solid var(--border)", color: "var(--text-muted)", cursor: "pointer", fontSize: 13, textAlign: "left", display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: "inherit" }}>
+                      {p} <ChevronRight size={14} color="var(--text-muted)" />
                     </button>
                   ))}
                 </div>
@@ -198,50 +238,29 @@ export default function AITutor() {
             )}
 
             {messages.map(m => (
-              <div key={m.id} style={{ display: "flex", justifyContent: m.role === "user" ? "flex-end" : "flex-start", marginBottom: 16 }}>
-                {m.role === "ai" && (
-                  <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#6C3CE9", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, marginRight: 8, flexShrink: 0 }}>E</div>
-                )}
-                <div style={{ maxWidth: "70%", padding: "12px 16px", borderRadius: m.role === "user" ? "18px 18px 4px 18px" : "18px 18px 18px 4px", background: m.role === "user" ? "#6C3CE9" : "#1a1a1f", border: m.role === "user" ? "none" : "1px solid #2a2a3a" }}>
-                  <div style={{ fontSize: 14, color: "#fff", lineHeight: 1.6, whiteSpace: "pre-wrap" }}>{m.content}</div>
-                  <div style={{ fontSize: 10, color: m.role === "user" ? "rgba(255,255,255,0.5)" : "#555", marginTop: 4, textAlign: "right" }}>{new Date(m.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
-                </div>
-              </div>
+              <MessageBubble key={m.id} message={m} />
             ))}
 
-            {loading && (
-              <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: 16 }}>
-                <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#6C3CE9", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, marginRight: 8, flexShrink: 0 }}>E</div>
-                <div style={{ padding: "14px 20px", borderRadius: "18px 18px 18px 4px", background: "#1a1a1f", border: "1px solid #2a2a3a" }}>
-                  <div className="typing-dots" style={{ display: "flex", gap: 4 }}>
-                    <span /><span /><span />
-                  </div>
-                </div>
-              </div>
-            )}
+            {loading && <TypingIndicator />}
 
             <div ref={messagesEndRef} />
           </div>
 
           {/* Input */}
-          <div style={{ background: "#0d0d12", borderTop: "1px solid #1e1e2a", padding: 16, flexShrink: 0 }}>
-            <div style={{ position: "relative", maxWidth: 800, margin: "0 auto" }}>
-              <textarea ref={textareaRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={`Ask anything about ${activeSubject}...`} rows={1} style={{ width: "100%", padding: "12px 48px 12px 16px", borderRadius: 12, background: "#1a1a1f", border: "1px solid #333", color: "#fff", fontSize: 14, outline: "none", resize: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
-              <button onClick={() => handleSend()} disabled={!input.trim() || loading} style={{ position: "absolute", right: 6, bottom: 6, width: 36, height: 36, borderRadius: "50%", background: input.trim() && !loading ? "#6C3CE9" : "#333", border: "none", color: input.trim() && !loading ? "#fff" : "#666", cursor: input.trim() && !loading ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ background: "var(--bg-2)", borderTop: "1px solid var(--border)", padding: 16, flexShrink: 0 }}>
+            <div style={{ position: "relative", maxWidth: 800, margin: "0 auto", display: "flex", gap: 8, alignItems: "flex-end" }}>
+              <ImageUpload preview={pendingImage} onSelect={handleSelectImage} onClear={() => setPendingImage(null)} disabled={loading} />
+              <div style={{ position: "relative", flex: 1 }}>
+              <textarea ref={textareaRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={pendingImage ? "Describe what to solve…" : `Ask anything about ${activeSubject}…`} rows={1} style={{ width: "100%", padding: "12px 48px 12px 16px", borderRadius: 12, background: "var(--bg-3)", border: "1px solid var(--border)", color: "var(--text)", fontSize: 14, outline: "none", resize: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
+              <button onClick={() => handleSend()} disabled={(!input.trim() && !pendingImage) || loading} style={{ position: "absolute", right: 6, bottom: 6, width: 36, height: 36, borderRadius: "50%", background: (input.trim() || pendingImage) && !loading ? "#6C3CE9" : "#333", border: "none", color: (input.trim() || pendingImage) && !loading ? "#fff" : "#666", cursor: (input.trim() || pendingImage) && !loading ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Send size={16} />
               </button>
+              </div>
             </div>
           </div>
         </div>
 
       <ProUpgradeModal open={showProModal} onClose={() => setShowProModal(false)} reason="ai" dismissible />
-
-      <style>{`
-        .typing-dots span { width: 8px; height: 8px; background: #888; border-radius: 50%; animation: dotBounce 1.4s infinite ease-in-out both; }
-        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes dotBounce { 0%,80%,100% { transform: scale(0); } 40% { transform: scale(1); } }
-      `}</style>
     </div>
   );
 }
