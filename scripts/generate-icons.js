@@ -63,12 +63,11 @@ function paint(size) {
   const u = S / 512; // design units
   const px = new Uint8ClampedArray(S * S * 4);
 
-  const BG_TOP = [11, 11, 22];
-  const BG_MID = [20, 17, 39];
-  const BG_BOT = [10, 26, 34];
-  const PURPLE = [108, 60, 233];
-  const VIOLET = [155, 89, 182];
-  const TEAL = [0, 229, 160];
+  const BG_TOP = [7, 18, 12];
+  const BG_MID = [16, 36, 26];
+  const BG_BOT = [10, 22, 30];
+  const SAGE = [106, 154, 106];
+  const SAGE_HI = [143, 206, 143];
   const GOLD_HI = [255, 233, 168];
   const GOLD = [212, 168, 83];
 
@@ -83,12 +82,6 @@ function paint(size) {
     px[i + 1] = (g * sa + px[i + 1] * da * (1 - sa)) / out;
     px[i + 2] = (b * sa + px[i + 2] * da * (1 - sa)) / out;
     px[i + 3] = out * 255;
-  };
-
-  const rect = (x0, y0, x1, y1, c, a = 255) => {
-    for (let y = Math.max(0, Math.floor(y0)); y < Math.min(S, Math.ceil(y1)); y++)
-      for (let x = Math.max(0, Math.floor(x0)); x < Math.min(S, Math.ceil(x1)); x++)
-        set(x, y, c[0], c[1], c[2], a);
   };
 
   const rrect = (x0, y0, x1, y1, r, fill) => {
@@ -133,7 +126,7 @@ function paint(size) {
     let c = t < 0.55 ? mix(BG_TOP, BG_MID, t / 0.55) : mix(BG_MID, BG_BOT, (t - 0.55) / 0.45);
     const gd = Math.hypot(x - S * 0.5, y - S * 0.42) / (S * 0.55);
     const glow = Math.max(0, 1 - gd);
-    c = mix(c, PURPLE, glow * glow * 0.45);
+    c = mix(c, SAGE, glow * glow * 0.45);
     return [c[0], c[1], c[2], 255];
   });
 
@@ -152,8 +145,8 @@ function paint(size) {
     // curved top edge: dips at center
     const edge = 368 * u - Math.abs(x - S / 2) * 0.06;
     if (y < edge - 14 * u || y > 394 * u) return;
-    if (y < edge) set(x, y, 155, 89, 182, 220); // neon rim
-    else set(x, y, 30, 27, 51, 255); // slab
+    if (y < edge) set(x, y, 106, 154, 106, 220); // sage rim
+    else set(x, y, 18, 38, 26, 255); // slab
   };
   for (let y = Math.floor(340 * u); y < Math.ceil(400 * u); y++)
     for (let x = Math.floor(120 * u); x < Math.ceil(392 * u); x++) book(x, y);
@@ -186,14 +179,14 @@ function paint(size) {
         }
       }
   };
-  // spine (vertical gradient purple→violet)
-  bar(148 * u, 108 * u, 192 * u, 320 * u, PURPLE, VIOLET, true);
-  disc(170 * u, 108 * u, 22 * u, PURPLE);
-  disc(170 * u, 320 * u, 22 * u, VIOLET);
-  // bars
-  ebar(148 * u, 108 * u, 344 * u, 152 * u, PURPLE, TEAL);
+  // spine (vertical gradient sage)
+  bar(148 * u, 108 * u, 192 * u, 320 * u, SAGE, SAGE_HI, true);
+  disc(170 * u, 108 * u, 22 * u, SAGE);
+  disc(170 * u, 320 * u, 22 * u, SAGE_HI);
+  // bars: sage top, gold middle, sage bottom
+  ebar(148 * u, 108 * u, 344 * u, 152 * u, SAGE, SAGE_HI);
   ebar(148 * u, 204 * u, 380 * u, 248 * u, GOLD_HI, GOLD);
-  ebar(148 * u, 300 * u, 320 * u, 320 * u, PURPLE, VIOLET);
+  ebar(148 * u, 300 * u, 320 * u, 320 * u, SAGE, SAGE_HI);
   // scan sheen on middle bar
   for (let y = Math.floor(214 * u); y < Math.ceil(238 * u); y++)
     for (let x = Math.floor(160 * u); x < Math.ceil(368 * u); x++) {
@@ -203,10 +196,10 @@ function paint(size) {
 
   // 4) bot eye + ripples
   const ex = 392 * u, ey = 130 * u;
-  ring(ex, ey, 54 * u, 4 * u, TEAL, 140);
-  ring(ex, ey, 78 * u, 4 * u, TEAL, 70);
-  ring(ex, ey, 102 * u, 4 * u, TEAL, 32);
-  disc(ex, ey, 34 * u, [11, 11, 22]);
+  ring(ex, ey, 54 * u, 4 * u, SAGE_HI, 140);
+  ring(ex, ey, 78 * u, 4 * u, SAGE_HI, 70);
+  ring(ex, ey, 102 * u, 4 * u, SAGE_HI, 32);
+  disc(ex, ey, 34 * u, [7, 18, 12]);
   ring(ex, ey, 34 * u, 5 * u, GOLD, 255);
   disc(ex, ey, 12 * u, GOLD_HI);
 
@@ -215,12 +208,103 @@ function paint(size) {
 
 async function main() {
   fs.mkdirSync(OUT, { recursive: true });
-  for (const size of [192, 512]) {
+  for (const size of [180, 192, 512]) {
     const px = paint(size);
     const png = encodePNG(size, size, px);
-    const file = path.join(OUT, `icon-${size}.png`);
+    const name = size === 180 ? "apple-touch-icon.png" : `icon-${size}.png`;
+    const file = path.join(OUT, name);
     fs.writeFileSync(file, png);
-    console.log(`✓ icon-${size}.png (${(png.length / 1024).toFixed(1)} KB)`);
+    console.log(`✓ ${name} (${(png.length / 1024).toFixed(1)} KB)`);
+  }
+
+  // Maskable icon: solid backdrop, art at 72% centered (safe zone)
+  {
+    const S = 512;
+    const px = new Uint8ClampedArray(S * S * 4);
+    for (let i = 0; i < S * S; i++) {
+      px[i * 4] = 9; px[i * 4 + 1] = 20; px[i * 4 + 2] = 15; px[i * 4 + 3] = 255;
+    }
+    const art = paint(512);
+    const scale = 0.72;
+    const off = Math.floor(S * (1 - scale) / 2);
+    const dst = Math.floor(S * scale);
+    for (let y = 0; y < dst; y++) {
+      for (let x = 0; x < dst; x++) {
+        const sx = Math.min(511, Math.floor((x / dst) * 512));
+        const sy = Math.min(511, Math.floor((y / dst) * 512));
+        const s = (sy * 512 + sx) * 4;
+        const sa = art[s + 3] / 255;
+        // art is on transparent bg: blend only where opaque
+        if (sa <= 0) continue;
+        const d = ((y + off) * S + (x + off)) * 4;
+        px[d] = art[s]; px[d + 1] = art[s + 1]; px[d + 2] = art[s + 2]; px[d + 3] = 255;
+      }
+    }
+    const png = encodePNG(S, S, px);
+    fs.writeFileSync(path.join(OUT, "icon-maskable-512.png"), png);
+    console.log(`✓ icon-maskable-512.png (${(png.length / 1024).toFixed(1)} KB)`);
+  }
+
+  // Social share card 1200×630: seamless backdrop (same formula as art),
+  // art placed left, gold orbit accents right.
+  {
+    const W = 1200, H = 630;
+    const px = new Uint8ClampedArray(W * H * 4);
+    // art-local backdrop formula (matches paint() step 1)
+    const artBg = (lx, ly) => {
+      const t = ly / 512;
+      let c = t < 0.55
+        ? [7 + (16 - 7) * (t / 0.55), 18 + (36 - 18) * (t / 0.55), 12 + (26 - 12) * (t / 0.55)]
+        : [16 + (10 - 16) * ((t - 0.55) / 0.45), 36 + (22 - 36) * ((t - 0.55) / 0.45), 26 + (30 - 26) * ((t - 0.55) / 0.45)];
+      const gd = Math.hypot(lx - 256, ly - 215) / (512 * 0.55);
+      const glow = Math.max(0, 1 - gd);
+      const k = glow * glow * 0.45;
+      return [c[0] + (106 - c[0]) * k, c[1] + (154 - c[1]) * k, c[2] + (106 - c[2]) * k];
+    };
+    const art = paint(512);
+    const dst = 460;
+    const ox = 90, oy = Math.floor((H - dst) / 2);
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const i = (y * W + x) * 4;
+        const inArt = x >= ox && x < ox + dst && y >= oy && y < oy + dst;
+        if (inArt) {
+          const lx = Math.min(511, Math.floor(((x - ox) / dst) * 512));
+          const ly = Math.min(511, Math.floor(((y - oy) / dst) * 512));
+          const s = (ly * 512 + lx) * 4;
+          if (art[s + 3] > 0) {
+            px[i] = art[s]; px[i + 1] = art[s + 1]; px[i + 2] = art[s + 2]; px[i + 3] = 255;
+            continue;
+          }
+          const b = artBg(lx, ly);
+          px[i] = b[0]; px[i + 1] = b[1]; px[i + 2] = b[2]; px[i + 3] = 255;
+          continue;
+        }
+        const t = y / H;
+        px[i] = Math.round(7 + (10 - 7) * t);
+        px[i + 1] = Math.round(18 + (22 - 18) * t);
+        px[i + 2] = Math.round(12 + (30 - 12) * t);
+        px[i + 3] = 255;
+      }
+    }
+    // gold orbit arcs on the right
+    const cx = 950, cy = 315;
+    for (const [rr, a] of [[150, 160], [210, 90], [270, 45]]) {
+      for (let deg = 0; deg < 360; deg += 1) {
+        const rad = (deg * Math.PI) / 180;
+        const x = Math.round(cx + rr * Math.cos(rad));
+        const y = Math.round(cy + rr * Math.sin(rad));
+        if (x < 0 || y < 0 || x >= W || y >= H) continue;
+        const i = (y * W + x) * 4;
+        const sa = a / 255;
+        px[i] = Math.round(212 * sa + px[i] * (1 - sa));
+        px[i + 1] = Math.round(168 * sa + px[i + 1] * (1 - sa));
+        px[i + 2] = Math.round(83 * sa + px[i + 2] * (1 - sa));
+      }
+    }
+    const png = encodePNG(W, H, px);
+    fs.writeFileSync(path.join(OUT, "..", "og-image.png"), png);
+    console.log(`✓ og-image.png (${(png.length / 1024).toFixed(1)} KB)`);
   }
 }
 

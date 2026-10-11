@@ -8,18 +8,18 @@ export default function Logo({ size = 36, animate = true, radius = 10 }) {
       style={{
         width: size, height: size, borderRadius: radius, flexShrink: 0,
         display: "inline-flex", alignItems: "center", justifyContent: "center",
-        background: "linear-gradient(135deg, #0B0B16 0%, #141127 55%, #0A1A22 100%)",
-        border: "1px solid rgba(108,60,233,0.45)",
-        boxShadow: "0 0 18px rgba(108,60,233,0.35), inset 0 0 12px rgba(108,60,233,0.18)",
+        background: "linear-gradient(135deg, #07120C 0%, #10241A 55%, #0A141E 100%)",
+        border: "1px solid rgba(106,154,106,0.5)",
+        boxShadow: "0 0 18px rgba(106,154,106,0.35), inset 0 0 12px rgba(106,154,106,0.18)",
         position: "relative", overflow: "hidden",
       }}
     >
       <svg viewBox="0 0 512 512" width={size * 0.82} height={size * 0.82}>
         <defs>
           <linearGradient id="ep-logo-neon" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stopColor="#6C3CE9" />
-            <stop offset="0.55" stopColor="#9B59B6" />
-            <stop offset="1" stopColor="#00E5A0" />
+            <stop offset="0" stopColor="#4E7A4E" />
+            <stop offset="0.55" stopColor="#6A9A6A" />
+            <stop offset="1" stopColor="#8FCE8F" />
           </linearGradient>
           <linearGradient id="ep-logo-gold" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stopColor="#FFE9A8" />
@@ -28,10 +28,10 @@ export default function Logo({ size = 36, animate = true, radius = 10 }) {
         </defs>
 
         {/* E letterform */}
-        <rect x="118" y="118" width="44" height="212" rx="22" fill="#6C3CE9" />
+        <rect x="118" y="118" width="44" height="212" rx="22" fill="#4E7A4E" />
         <rect x="118" y="118" width="190" height="44" rx="22" fill="url(#ep-logo-neon)" />
         <rect className="ep-logo-scanbar" x="118" y="214" width="226" height="44" rx="22" fill="url(#ep-logo-gold)" />
-        <rect x="118" y="310" width="150" height="20" rx="10" fill="#9B59B6" />
+        <rect x="118" y="310" width="150" height="20" rx="10" fill="#6A9A6A" />
 
         {/* scan sheen sweeping the gold bar */}
         {animate && (
@@ -39,18 +39,18 @@ export default function Logo({ size = 36, animate = true, radius = 10 }) {
         )}
 
         {/* bot eye */}
-        <circle cx="398" cy="132" r="36" fill="#0B0B16" stroke="url(#ep-logo-gold)" strokeWidth="12" />
+        <circle cx="398" cy="132" r="36" fill="#07120C" stroke="url(#ep-logo-gold)" strokeWidth="12" />
         <circle className="ep-logo-eye" cx="398" cy="132" r="12" fill="url(#ep-logo-gold)" />
 
         {/* analyzing orbit */}
         {animate && (
           <circle className="ep-logo-orbit" cx="398" cy="132" r="58" fill="none"
-            stroke="#00E5A0" strokeWidth="7" strokeDasharray="40 26" strokeLinecap="round" opacity="0.8" />
+            stroke="#8FCE8F" strokeWidth="7" strokeDasharray="40 26" strokeLinecap="round" opacity="0.8" />
         )}
 
         {/* ripple rings */}
         {animate && (
-          <g fill="none" stroke="#00E5A0">
+          <g fill="none" stroke="#8FCE8F">
             <circle className="ep-logo-ripple r1" cx="398" cy="132" r="58" strokeWidth="7" />
             <circle className="ep-logo-ripple r2" cx="398" cy="132" r="58" strokeWidth="7" />
           </g>

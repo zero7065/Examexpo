@@ -35,7 +35,10 @@ import {
   FileText,
   FlaskConical,
   GraduationCap,
-  ShieldCheck
+  ShieldCheck,
+  Newspaper,
+  LibraryBig,
+  MonitorPlay
 } from "lucide-react";
 
 const Navbar = () => {
@@ -60,6 +63,9 @@ const Navbar = () => {
     { name: "Progress", path: "/progress", icon: LineChart },
     { name: "History", path: "/history", icon: Clock },
     { name: "Leaderboard", path: "/leaderboard", icon: Trophy },
+    { name: "Feed", path: "/feed", icon: Newspaper },
+    { name: "Reference", path: "/reference", icon: LibraryBig },
+    { name: "CBT Guide", path: "/guide/cbt", icon: MonitorPlay },
     ...(isTeacher ? [{ name: "Teacher", path: "/teacher", icon: GraduationCap }] : []),
     ...(isAdminUser ? [{ name: "Admin", path: "/admin", icon: ShieldCheck }] : []),
     { name: "Notepad", path: "/notepad", icon: StickyNote, requiresPro: true },

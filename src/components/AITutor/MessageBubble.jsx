@@ -6,13 +6,18 @@ import { Check, Copy } from "lucide-react";
 export default function MessageBubble({ message }) {
   const [copied, setCopied] = useState(false);
   const isUser = message.role === "user";
+  const imgs = Array.isArray(message.images)
+    ? message.images
+    : message.image
+      ? [message.image]
+      : [];
 
   async function copy() {
     try {
       await navigator.clipboard.writeText(message.content || "");
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch (_) {}
+    } catch { /* clipboard unavailable — ignore */ }
   }
 
   return (
@@ -27,12 +32,17 @@ export default function MessageBubble({ message }) {
         background: isUser ? "var(--primary)" : "var(--bg-2)",
         border: isUser ? "none" : "1px solid var(--border)",
       }}>
-        {message.image && (
-          <img
-            src={message.image}
-            alt="Uploaded question"
-            style={{ maxWidth: "100%", maxHeight: 180, borderRadius: 10, marginBottom: 8, display: "block" }}
-          />
+        {imgs.length > 0 && (
+          <div style={{ display: "flex", gap: 6, marginBottom: 8, flexWrap: "wrap" }}>
+            {imgs.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`Uploaded ${i + 1}`}
+                style={{ maxWidth: imgs.length > 1 ? "48%" : "100%", maxHeight: 180, borderRadius: 10, display: "block", objectFit: "cover" }}
+              />
+            ))}
+          </div>
         )}
         <div style={{ fontSize: 14, color: isUser ? "#fff" : "var(--text)", lineHeight: 1.6, whiteSpace: "pre-wrap" }}>
           {message.content}

@@ -140,13 +140,14 @@ import { topWeakTopics, recentSummaries } from "./aiMemory";
 
 // ─── Vision chat (image-capable). ONLY tries the multimodal model —
 // gpt-oss/allam are text-only and cannot accept image payloads.
-async function callGroqVisionChat(systemPrompt, textMessages, imageBase64, maxTokens = 800) {
+async function callGroqVisionChat(systemPrompt, textMessages, images, maxTokens = 1000) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
   if (!key) {
     _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
     throw new Error("Groq API key not configured.");
   }
-  // Attach the image to the last user message (OpenAI content-array format)
+  const imageList = (Array.isArray(images) ? images : images ? [images] : []).filter(Boolean).slice(0, 3);
+  // Attach image(s) to the last user message (OpenAI content-array format)
   const msgs = textMessages.map((m) => ({ role: m.role, content: m.content }));
   for (let i = msgs.length - 1; i >= 0; i--) {
     if (msgs[i].role === "user") {
@@ -154,7 +155,7 @@ async function callGroqVisionChat(systemPrompt, textMessages, imageBase64, maxTo
         role: "user",
         content: [
           { type: "text", text: String(msgs[i].content || "") },
-          { type: "image_url", image_url: { url: imageBase64 } },
+          ...imageList.map((url) => ({ type: "image_url", image_url: { url } })),
         ],
       };
       break;
@@ -186,19 +187,34 @@ async function callGroqVisionChat(systemPrompt, textMessages, imageBase64, maxTo
 }
 
 // Vision entry point with one downscaled retry before surfacing the real error.
-export async function askGroqVision({ systemPrompt, messages, imageBase64, maxTokens = 800 }) {
+// Accepts imageBase64 (string) or images (array, max 3) for multi-page docs.
+export async function askGroqVision({ systemPrompt, messages, imageBase64, images, maxTokens = 1000 }) {
+  const list = images || (imageBase64 ? [imageBase64] : []);
   try {
-    return await callGroqVisionChat(systemPrompt, messages, imageBase64, maxTokens);
+    return await callGroqVisionChat(systemPrompt, messages, list, maxTokens);
   } catch (firstErr) {
     console.warn("[AI] Vision full-size failed, retrying downscaled:", firstErr.message);
     try {
-      const smaller = await downscaleDataUrl(imageBase64, 512);
+      const smaller = await Promise.all(list.map((u) => downscaleDataUrl(u, 512)));
       return await callGroqVisionChat(systemPrompt, messages, smaller, maxTokens);
     } catch (e) {
       console.warn("[AI] Vision downscaled retry failed:", e.message);
       throw firstErr; // surface the original, more informative error
     }
   }
+}
+
+// Document analysis: OCR + key points + likely exam questions from up to 3 pages.
+export async function analyzeDocument({ images, subject = "General", instruction = "" }) {
+  const system = `You are ExamPadi AI, a Nigerian exam tutor. Analyze the attached document photo(s) — class notes, textbook pages, or past questions. Respond in 3 short sections: 1) "What this says" (2-3 sentence summary), 2) "Key points to memorize" (up to 5 bullets), 3) "Likely exam questions" (3 questions a JAMB/WAEC examiner could set from this, with one-line answers). Plain simple language. Never say you are built by Google.`;
+  const user = instruction.trim()
+    || `Analyze this ${subject} document for exam prep.`;
+  return askGroqVision({
+    systemPrompt: system,
+    messages: [{ role: "user", content: user }],
+    images,
+    maxTokens: 1200,
+  });
 }
 
 // ─── Memory-aware tutor system prompt ───
@@ -291,7 +307,7 @@ Give a clear, friendly explanation in 3-4 sentences. Explain WHY ${correctAnswer
   }
 }
 
-export async function chatWithTutor({ messages, subject, userProfile, memory = null, imageBase64 = null }) {
+export async function chatWithTutor({ messages, subject, userProfile, memory = null, imageBase64 = null, images = null }) {
   const systemPrompt = buildTutorSystemPrompt({ subject, userProfile, memory });
 
   const chatMessages = messages.map(m => ({
@@ -300,9 +316,10 @@ export async function chatWithTutor({ messages, subject, userProfile, memory = n
   }));
 
   try {
-    // Image present → vision path (multimodal model only, no text-model fallback)
-    if (imageBase64) {
-      return await askGroqVision({ systemPrompt, messages: chatMessages, imageBase64, maxTokens: 800 });
+    // Image(s) present → vision path (multimodal model only, no text-model fallback)
+    const imgList = images || (imageBase64 ? [imageBase64] : []);
+    if (imgList.length > 0) {
+      return await askGroqVision({ systemPrompt, messages: chatMessages, images: imgList, maxTokens: 1000 });
     }
     return await callGroqChatWithFallback(systemPrompt, chatMessages, 600, 0.8);
   } catch (e) {
@@ -437,7 +454,15 @@ export const GUIDE_ROUTES = [
   { path: "/mastery", label: "Mastery", keywords: ["mastery", "weak topic", "strong"] },
   { path: "/progress", label: "Progress", keywords: ["achievement", "badge", "level"] },
   { path: "/history", label: "History", keywords: ["history", "past session", "review", "mistake"] },
-  { path: "/leaderboard", label: "Leaderboard", keywords: ["leaderboard", "rank", "top", "compete", "xp", "point", "streak"] },
+  { path: "/leaderboard", label: "Leaderboard", keywords: ["leaderboard", "rank", "top",
+"compete", "xp", "point", "streak"] },
+  { path: "/feed", label: "Community Feed", keywords: ["feed", "community", "top students", "help board",
+"ask for help", "someone help", "public", "discuss with others"] },
+  { path: "/reference", label: "Reference Library", keywords: ["formula", "formulas", "reference",
+"periodic table", "constants", "grammar rules", "tenses", "cheat sheet", "tables"] },
+  { path: "/guide/cbt", label: "CBT Guide", keywords: ["cbt guide", "how to use computer", "computer exam",
+"operate computer", "mouse", "jamb cbt", "cbt training", "exam hall", "clueless", "never used computer"] },
+  { path: "/study-partners", label: "Friend Chat", keywords: ["chat", "message friend", "talk to partner", "discuss problem"] },
   { path: "/study-partners", label: "Study Partners", keywords: ["partner", "friend", "together", "share test", "invite"] },
   { path: "/assignment", label: "Assignments", keywords: ["assignment", "homework", "task"] },
   { path: "/notepad", label: "Notepad", keywords: ["note", "write", "formula"] },
@@ -464,7 +489,12 @@ export function matchGuideRoutes(text) {
 
 // AI-powered guide answer: organized steps referencing real app pages.
 export async function askGuide(issueText, userProfile) {
-  const system = `You are the ExamPadi AI Guide. A new student describes an issue or goal in plain words. Respond with a short, organized plan: 1-3 numbered steps, each naming the EXACT app page to open from this list: Dashboard, Practice, Mock Exam, AI Tutor, Study Plan, Flashcards, Question Bank, Past Questions, Stats, Mastery, Progress, History, Leaderboard, Study Partners, Assignments, Notepad, Settings, Profile, Go Pro, Help, Contact. Rules: max 120 words; plain simple language; if they need a human, point to Contact (WhatsApp). Never invent pages. Never say you are built by Google. You are ExamPadi AI powered by Groq.`;
+  const system = `You are the ExamPadi AI Guide. A new student describes an issue or goal in plain
+words. Respond with a short, organized plan: 1-3 numbered steps, each naming the EXACT app page to open from this
+list: Dashboard, Practice, Mock Exam, AI Tutor, Study Plan, Flashcards, Question Bank, Past Questions, Stats, Mastery,
+Progress, History, Leaderboard, Community Feed, Reference Library, CBT Guide, Friend Chat, Study Partners, Assignments, Notepad, Settings, Profile, Go Pro, Help, Contact. Rules:
+max 120 words; plain simple language; if they need a human, point to Contact (WhatsApp). Never invent pages. Never say
+you are built by Google. You are ExamPadi AI powered by Groq.`;
   const user = `Student says: "${issueText}". Student exam: ${userProfile?.exam || "JAMB"}. Give the organized steps.`;
   return callGroqWithFallback(system, user, 300, 0.5);
 }

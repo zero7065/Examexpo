@@ -2,33 +2,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, WifiOff, Gift } from "lucide-react";
 import LandingMedia from "./LandingMedia";
-
-function PhoneMockup() {
-  return (
-    <div className="lp-phone lp-animate-in lp-delay-3">
-      <div className="lp-phone-notch" />
-      <div style={{ background: "var(--landing-gradient)", borderRadius: 14, padding: 14, color: "#fff", marginBottom: 12 }}>
-        <div style={{ fontSize: 11, opacity: 0.8, fontWeight: 600 }}>PHYSICS · Q7/40</div>
-        <div style={{ fontSize: 13, fontWeight: 700, marginTop: 4, lineHeight: 1.5 }}>
-          A body of mass 5kg has momentum 20kg·m/s. Its velocity is…
-        </div>
-      </div>
-      {["2 m/s", "4 m/s ✓", "10 m/s", "100 m/s"].map((o, i) => (
-        <div key={o} style={{
-          borderRadius: 10, padding: 10, fontSize: 12, fontWeight: 600, marginBottom: 8,
-          background: i === 1 ? "rgb(var(--success-rgb) / 0.15)" : "var(--bg-2)",
-          border: i === 1 ? "1px solid var(--success)" : "1px solid var(--border)",
-          color: "var(--text)",
-        }}>{o}</div>
-      ))}
-      <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
-        <div style={{ flex: 1, height: 8, borderRadius: 4, background: "var(--primary)" }} />
-        <div style={{ flex: 3, height: 8, borderRadius: 4, background: "var(--border)" }} />
-      </div>
-      <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 10, textAlign: "center" }}>AI explanation available</div>
-    </div>
-  );
-}
+import DeviceShowcase from "./DeviceShowcase";
 
 const CHIPS = [
   { icon: CheckCircle2, label: "800+ exam questions" },
@@ -91,7 +65,7 @@ export default function LandingHero({ user }) {
             </div>
           </div>
           <div>
-            <LandingMedia slot="hero" alt="ExamPadi practice screen" mockup={<PhoneMockup />} />
+            <LandingMedia slot="hero" alt="ExamPadi practice screen" mockup={<DeviceShowcase />} />
           </div>
         </div>
       </div>

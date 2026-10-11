@@ -61,6 +61,11 @@ const ClassroomMode = lazy(() => import("./pages/schools/ClassroomMode"));
 const ParentReports = lazy(() => import("./pages/schools/ParentReports"));
 const JoinClass = lazy(() => import("./pages/schools/JoinClass"));
 const DataExport = lazy(() => import("./pages/compliance/DataExport"));
+const FriendChat = lazy(() => import("./pages/FriendChat"));
+const Feed = lazy(() => import("./pages/Feed"));
+const PublicProfile = lazy(() => import("./pages/PublicProfile"));
+const ReferencePage = lazy(() => import("./pages/ReferencePage"));
+const CBTGuidePage = lazy(() => import("./pages/CBTGuidePage"));
 
 function PageLoader() {
   return (
@@ -180,6 +185,11 @@ function AuthAwareRoutes() {
           <Route path="/mastery" element={<ProtectedRoute><MasteryPage /></ProtectedRoute>} />
           <Route path="/flashcards" element={<ProtectedRoute><FlashcardsPage /></ProtectedRoute>} />
           <Route path="/study-partners" element={<ProtectedRoute><StudyPartnersPage /></ProtectedRoute>} />
+          <Route path="/friends/chat/:pairId" element={<ProtectedRoute><FriendChat /></ProtectedRoute>} />
+          <Route path="/feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
+          <Route path="/u/:uid" element={<ProtectedRoute><PublicProfile /></ProtectedRoute>} />
+          <Route path="/reference" element={<ProtectedRoute><ReferencePage /></ProtectedRoute>} />
+          <Route path="/guide/cbt" element={<ProtectedRoute><CBTGuidePage /></ProtectedRoute>} />
           <Route path="/shared-test" element={<ProtectedRoute><SharedTestPage /></ProtectedRoute>} />
           <Route path="/assignment" element={<ProtectedRoute><AssignmentPage /></ProtectedRoute>} />
           <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />

@@ -11,7 +11,10 @@ import {
   Calendar,
   ChevronRight,
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  MonitorPlay,
+  LibraryBig,
+  Newspaper
 } from "lucide-react";
 
 const HelpPage = () => {
@@ -63,6 +66,27 @@ const HelpPage = () => {
       description: "Review all your past sessions, see which questions you got wrong, and learn from detailed explanations.",
       action: "View History",
       link: "/history"
+    },
+    {
+      icon: <MonitorPlay size={24} />,
+      title: "CBT Computer Guide",
+      description: "Never used a CBT computer? Picture-by-picture walkthrough plus a safe interactive demo. Free for everyone.",
+      action: "Learn CBT",
+      link: "/guide/cbt"
+    },
+    {
+      icon: <LibraryBig size={24} />,
+      title: "Reference Library",
+      description: "Formula sheets, constants, periodic table, grammar rules and key facts — searchable, works offline.",
+      action: "Open Library",
+      link: "/reference"
+    },
+    {
+      icon: <Newspaper size={24} />,
+      title: "Community Feed",
+      description: "See top students, ask the community when stuck, and help others — a public study hall.",
+      action: "Open Feed",
+      link: "/feed"
     }
   ];
 

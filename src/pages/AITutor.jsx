@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
-import { chatWithTutor, getLastAIError, isAIConfigured } from "../lib/ai";
+import { chatWithTutor, analyzeDocument, getLastAIError, isAIConfigured } from "../lib/ai";
 import { getStudentMemory, topWeakTopics } from "../lib/aiMemory";
 import { unlockAchievement } from "../lib/achievements";
 import { preprocessImage } from "../lib/vision";
@@ -15,7 +15,7 @@ import MessageBubble from "../components/AITutor/MessageBubble";
 import TypingIndicator from "../components/AITutor/TypingIndicator";
 import ImageUpload from "../components/AITutor/ImageUpload";
 import Logo from "../components/Logo";
-import { Send, Plus, ChevronRight, Brain } from "lucide-react";
+import { Send, Plus, ChevronRight, Brain, FileSearch } from "lucide-react";
 
 const QUICK_PROMPTS = [
   "Explain photosynthesis like I'm 10",
@@ -30,7 +30,6 @@ export default function AITutor() {
   const { user } = useAuth();
   const { toast } = useToast();
   const { isPro } = useSubscription();
-  const navigate = useNavigate();
   const location = useLocation();
   const [profile, setProfile] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -41,7 +40,8 @@ export default function AITutor() {
   const [showProModal, setShowProModal] = useState(false);
   const [aiUsage, setAiUsage] = useState(null);
   const [memory, setMemory] = useState(null);
-  const [pendingImage, setPendingImage] = useState(null);
+  const [pendingImages, setPendingImages] = useState([]);
+  const [analyzeMode, setAnalyzeMode] = useState(false);
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -86,6 +86,7 @@ export default function AITutor() {
         const slim = messages.map((m) => {
           const copy = { ...m };
           delete copy.image; // data URLs are too large for localStorage
+          delete copy.images;
           return copy;
         });
         localStorage.setItem(`ep-chat-${conversationId}`, JSON.stringify(slim));
@@ -102,10 +103,14 @@ export default function AITutor() {
 
   async function handleSelectImage(file) {
     if (!file) return;
+    if (pendingImages.length >= 3) {
+      toast({ message: "Maximum 3 photos — send these first, then add more", type: "info" });
+      return;
+    }
     try {
       const dataUrl = await preprocessImage(file);
-      setPendingImage(dataUrl);
-      if (!input.trim()) setInput("Solve this question for me.");
+      setPendingImages((prev) => [...prev, dataUrl].slice(0, 3));
+      if (!input.trim()) setInput(analyzeMode ? "Analyze this document for my exam." : "Solve this question for me.");
     } catch (e) {
       toast({ message: e.message || "Could not read image", type: "warning" });
     }
@@ -113,7 +118,8 @@ export default function AITutor() {
 
   async function handleSend(text) {
     const msg = text || input;
-    if ((!msg.trim() && !pendingImage) || loading) return;
+    const hasImages = pendingImages.length > 0;
+    if ((!msg.trim() && !hasImages) || loading) return;
 
     try {
       // Free-tier daily AI limit
@@ -123,12 +129,13 @@ export default function AITutor() {
         if (!limit.allowed) { setShowProModal(true); return; }
       }
 
-      const image = pendingImage;
-      const userMsg = { id: Date.now(), role: "user", content: (msg.trim() || "Solve this question for me."), timestamp: new Date().toISOString() };
-      if (image) userMsg.image = image;
+      const images = pendingImages;
+      const useAnalyze = analyzeMode && images.length > 0;
+      const userMsg = { id: Date.now(), role: "user", content: (msg.trim() || (useAnalyze ? "Analyze this document for my exam." : "Solve this question for me.")), timestamp: new Date().toISOString() };
+      if (images.length > 0) userMsg.images = images;
       setMessages(prev => [...prev, userMsg]);
       setInput("");
-      setPendingImage(null);
+      setPendingImages([]);
       setLoading(true);
 
       if (user && !isPro) {
@@ -137,13 +144,15 @@ export default function AITutor() {
       }
 
       const allMsgs = [...messages, userMsg];
-      const response = await chatWithTutor({
-        messages: allMsgs.map((m) => ({ role: m.role, content: m.content })),
-        subject: activeSubject,
-        userProfile: { name: user?.displayName || "Student", exam: profile?.exam || "JAMB", targetScore: profile?.targetScore || 300 },
-        memory,
-        imageBase64: image,
-      });
+      const response = useAnalyze
+        ? await analyzeDocument({ images, subject: activeSubject, instruction: userMsg.content })
+        : await chatWithTutor({
+            messages: allMsgs.map((m) => ({ role: m.role, content: m.content })),
+            subject: activeSubject,
+            userProfile: { name: user?.displayName || "Student", exam: profile?.exam || "JAMB", targetScore: profile?.targetScore || 300 },
+            memory,
+            images,
+          });
 
       const aiErr = getLastAIError();
       const content = aiErr && Date.now() - aiErr.time < 15000
@@ -164,7 +173,7 @@ export default function AITutor() {
         toast({ message: `AI failed: ${aiErr.message}`, type: "error" });
       }
 
-      logActivity({ action: "ai_chat", userId: user?.uid, email: user?.email, details: { subject: activeSubject, questionLength: userMsg.content.length, withImage: !!image } });
+      logActivity({ action: "ai_chat", userId: user?.uid, email: user?.email, details: { subject: activeSubject, questionLength: userMsg.content.length, withImages: images.length, analyzeMode: useAnalyze } });
     } catch (e) {
       console.error("AI chat failed:", e);
       toast({ message: "Failed to get AI response. Please try again.", type: "error" });
@@ -257,10 +266,28 @@ export default function AITutor() {
           {/* Input */}
           <div style={{ background: "var(--bg-2)", borderTop: "1px solid var(--border)", padding: 16, flexShrink: 0 }}>
             <div style={{ position: "relative", maxWidth: 800, margin: "0 auto", display: "flex", gap: 8, alignItems: "flex-end" }}>
-              <ImageUpload preview={pendingImage} onSelect={handleSelectImage} onClear={() => setPendingImage(null)} disabled={loading} />
+              <ImageUpload previews={pendingImages} onSelect={handleSelectImage} onClear={() => setPendingImages([])} onClearOne={(i) => setPendingImages((prev) => prev.filter((_, j) => j !== i))} disabled={loading} />
+              <button
+                onClick={() => {
+                  const next = !analyzeMode;
+                  setAnalyzeMode(next);
+                  if (next && !input.trim()) setInput("Analyze this document for my exam.");
+                  toast({ message: next ? "📄 Document analyze mode ON — attach up to 3 photos" : "Document analyze mode OFF", type: "info" });
+                }}
+                title="Toggle document analysis mode"
+                style={{
+                  width: 36, height: 36, borderRadius: "50%", flexShrink: 0,
+                  background: analyzeMode ? "var(--accent)" : "var(--bg-3)",
+                  border: "1px solid var(--border)",
+                  color: analyzeMode ? "#fff" : "var(--text-muted)",
+                  cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                }}
+              >
+                <FileSearch size={16} />
+              </button>
               <div style={{ position: "relative", flex: 1 }}>
-              <textarea ref={textareaRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={pendingImage ? "Describe what to solve…" : `Ask anything about ${activeSubject}…`} rows={1} style={{ width: "100%", padding: "12px 48px 12px 16px", borderRadius: 12, background: "var(--bg-3)", border: "1px solid var(--border)", color: "var(--text)", fontSize: 14, outline: "none", resize: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
-              <button onClick={() => handleSend()} disabled={(!input.trim() && !pendingImage) || loading} style={{ position: "absolute", right: 6, bottom: 6, width: 36, height: 36, borderRadius: "50%", background: (input.trim() || pendingImage) && !loading ? "#6C3CE9" : "#333", border: "none", color: (input.trim() || pendingImage) && !loading ? "#fff" : "#666", cursor: (input.trim() || pendingImage) && !loading ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <textarea ref={textareaRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={pendingImages.length > 0 ? (analyzeMode ? "What should I pull out of these pages?…" : "Describe what to solve…") : `Ask anything about ${activeSubject}…`} rows={1} style={{ width: "100%", padding: "12px 48px 12px 16px", borderRadius: 12, background: "var(--bg-3)", border: "1px solid var(--border)", color: "var(--text)", fontSize: 14, outline: "none", resize: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
+              <button onClick={() => handleSend()} disabled={(!input.trim() && pendingImages.length === 0) || loading} style={{ position: "absolute", right: 6, bottom: 6, width: 36, height: 36, borderRadius: "50%", background: (input.trim() || pendingImages.length > 0) && !loading ? "#6C3CE9" : "#333", border: "none", color: (input.trim() || pendingImages.length > 0) && !loading ? "#fff" : "#666", cursor: (input.trim() || pendingImages.length > 0) && !loading ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Send size={16} />
               </button>
               </div>

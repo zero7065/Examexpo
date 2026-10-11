@@ -220,6 +220,17 @@ export default function StudyPartnersPage() {
                       </div>
                     </div>
                     <button
+                      onClick={() => navigate(`/friends/chat/${p.pairId}`)}
+                      style={{
+                        padding: "8px 14px", borderRadius: 10,
+                        background: "rgb(var(--primary-rgb) / 0.15)", color: "var(--primary)",
+                        fontWeight: 600, fontSize: 12, border: "none", cursor: "pointer",
+                        display: "inline-flex", alignItems: "center", gap: 6,
+                      }}
+                    >
+                      <MessageCircle size={14} /> Chat
+                    </button>
+                    <button
                       onClick={() => { setSelectedPartner(p); setShowScheduleModal(true); }}
                       style={{
                         padding: "8px 14px", borderRadius: 10,

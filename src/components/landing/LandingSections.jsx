@@ -34,34 +34,50 @@ export function LandingWhyUs() {
   );
 }
 
+import StudentsIllustration from "./StudentsIllustration";
+
 export function LandingAbout() {
   return (
     <section id="about" className="lp-section" style={{ background: "var(--bg)" }}>
-      <div className="lp-container" style={{ maxWidth: 760, textAlign: "center" }}>
-        <h2 className="lp-h2">Built by Students of the <span className="lp-gradient-text">System</span></h2>
-        <p className="lp-sub" style={{ marginBottom: 20 }}>
-          ExamPadi was built by Jadai Studios to solve a simple problem: brilliant Nigerian students
-          fail exams they could pass — not for lack of effort, but for lack of the right practice tools.
-        </p>
-        <p className="lp-sub" style={{ marginBottom: 32 }}>
-          So we combined real past questions, an AI tutor that explains like a patient teacher,
-          and exam-day simulation — and made it work on the cheapest phones and the weakest networks.
-        </p>
-        <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-          <a
-            href="https://wa.me/2348127636057"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="lp-btn-primary"
-            style={{ padding: "12px 28px", fontSize: 15 }}
-          >
-            <MessageSquare size={17} /> Chat on WhatsApp
-          </a>
-          <a href="mailto:jadai7065@gmail.com" className="lp-btn-ghost" style={{ padding: "12px 28px", fontSize: 15 }}>
-            jadai7065@gmail.com
-          </a>
+      <div className="lp-container" style={{ maxWidth: 960 }}>
+        <div className="lp-about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "center" }}>
+          <div style={{ textAlign: "left" }}>
+            <h2 className="lp-h2">Built by Students of the <span className="lp-gradient-text">System</span></h2>
+            <p className="lp-sub" style={{ marginBottom: 20 }}>
+              ExamPadi was built by Jadai Studios to solve a simple problem: brilliant Nigerian students
+              fail exams they could pass — not for lack of effort, but for lack of the right practice tools.
+            </p>
+            <p className="lp-sub" style={{ marginBottom: 32 }}>
+              So we combined real past questions, an AI tutor that explains like a patient teacher,
+              and exam-day simulation — and made it work on the cheapest phones and the weakest networks.
+            </p>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <a
+                href="https://wa.me/2348127636057"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lp-btn-primary"
+                style={{ padding: "12px 28px", fontSize: 15 }}
+              >
+                <MessageSquare size={17} /> Chat on WhatsApp
+              </a>
+              <a href="mailto:jadai7065@gmail.com" className="lp-btn-ghost" style={{ padding: "12px 28px", fontSize: 15 }}>
+                jadai7065@gmail.com
+              </a>
+            </div>
+          </div>
+          <div className="lp-animate-in">
+            <StudentsIllustration />
+          </div>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 900px) {
+          .lp-about-grid { grid-template-columns: 1fr !important; }
+          .lp-about-grid > div:first-child { text-align: center; }
+          .lp-about-grid > div:first-child div:last-child { justify-content: center; }
+        }
+      `}</style>
     </section>
   );
 }

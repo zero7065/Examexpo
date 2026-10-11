@@ -131,6 +131,39 @@ export default function ProfilePage() {
               </div>
             )}
             <p className="text-text-muted text-sm">{user?.email}</p>
+            <button
+              onClick={async () => {
+                try {
+                  const next = !profile?.isPublic;
+                  await updateUserProfile(user.uid, { isPublic: next });
+                  setProfile((p) => ({ ...(p || {}), isPublic: next }));
+                  toast({ message: next ? "Public profile ON — you appear on the feed & leaderboard 🌍" : "Public profile OFF — only you (and partners) see details", type: "success" });
+                } catch {
+                  toast({ message: "Could not update — check connection", type: "error" });
+                }
+              }}
+              title="Show your profile, XP and badges on the community feed"
+              style={{
+                marginTop: 10, display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "8px 14px", borderRadius: 100, fontSize: 12, fontWeight: 700, cursor: "pointer",
+                background: profile?.isPublic ? "rgb(var(--primary-rgb) / 0.14)" : "var(--bg-3)",
+                color: profile?.isPublic ? "var(--primary)" : "var(--text-muted)",
+                border: profile?.isPublic ? "1px solid var(--primary)" : "1px solid var(--border)",
+                fontFamily: "inherit",
+              }}
+            >
+              <span style={{
+                width: 30, height: 17, borderRadius: 20, position: "relative",
+                background: profile?.isPublic ? "var(--primary)" : "var(--border)",
+                transition: "background 0.2s ease", flexShrink: 0,
+              }}>
+                <span style={{
+                  position: "absolute", top: 2, width: 13, height: 13, borderRadius: "50%",
+                  background: "#fff", left: profile?.isPublic ? 15 : 2, transition: "left 0.2s ease",
+                }} />
+              </span>
+              🌍 Public profile {profile?.isPublic ? "ON" : "OFF"}
+            </button>
             <div className="flex items-center gap-2 mt-3 justify-center sm:justify-start flex-wrap">
               <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest inline-flex items-center gap-1 ${isPro ? "bg-accent/10 text-accent border border-accent/20" : "bg-white/5 text-text-muted border border-border"}`}>
                 {isPro && <Crown size={11} />} {isPro ? "Pro Member" : "Free Member"}
