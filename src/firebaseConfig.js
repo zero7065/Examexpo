@@ -37,6 +37,7 @@ import {
   initializeFirestore,
   persistentLocalCache,
 } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // ─── Firebase Config ───
 const firebaseConfig = {
@@ -82,6 +83,16 @@ if (isConfigured) {
 // ─── Always export (even if null) ───
 export const auth = _auth;
 export const db = _db;
+
+// Firebase Storage (for admin-managed landing media). Lazily created so the
+// storage SDK is only loaded when actually used.
+let _storage = null;
+export function getAppStorage() {
+  if (_storage) return _storage;
+  if (!app) throw new Error("Firebase not configured");
+  _storage = getStorage(app);
+  return _storage;
+}
 
 // Re-export Firestore functions directly
 export { doc, collection, getDoc, getDocs, setDoc, updateDoc, addDoc, deleteDoc };

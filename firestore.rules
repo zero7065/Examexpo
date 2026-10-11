@@ -108,5 +108,17 @@ service cloud.firestore {
       allow read: if request.auth.uid == userId || isAdmin();
       allow write: if request.auth.uid == userId || isAdmin();
     }
+
+    // ─── AI MEMORY (per-user tutor memory) ───
+    match /aiMemory/{userId} {
+      allow read: if request.auth.uid == userId || isAdmin();
+      allow write: if request.auth.uid == userId || isAdmin();
+    }
+
+    // ─── SITE CONTENT (landing media, public read, admin write) ───
+    match /siteContent/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
   }
 }

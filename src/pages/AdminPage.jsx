@@ -4,6 +4,7 @@ import { collection, query, orderBy, limit, getDocs, doc, updateDoc, serverTimes
 import { db } from "../firebaseConfig";
 import { useAuth } from "../context/AuthContext";
 import { isAdmin as _isAdmin, logActivity } from "../lib/activityLog";
+import AdminMedia from "../components/AdminMedia";
 const isAdmin = typeof _isAdmin === 'function' ? _isAdmin : () => false;
 import { Shield, Users, Activity, BookOpen, Crown, ArrowLeft, RefreshCw, UserCheck, UserX, ChevronDown, Search, CrownIcon, Zap, CreditCard, ClipboardList, Award, Clock, FileText, CheckCircle, XCircle } from "lucide-react";
 
@@ -307,6 +308,7 @@ export default function AdminPage() {
             { id: "payments", label: `Payments (${paymentLogs.length})` },
             { id: "users", label: `Users (${usersList.length})` },
             { id: "pro", label: `Pro Management (${stats.proUsers})` },
+            { id: "media", label: "Landing Media" },
             { id: "userDetail", label: "User Details" },
           ].map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
@@ -608,9 +610,13 @@ export default function AdminPage() {
           </div>
         )}
 
+        {/* Landing Media Tab */}
+        {activeTab === "media" && (
+          <AdminMedia />
+        )}
+
         {/* User Detail Tab */}
-        {activeTab === "userDetail" && (
-          <div style={{ display: "grid", gap: 20 }}>
+        {activeTab === "userDetail" && (          <div style={{ display: "grid", gap: 20 }}>
             {!selectedUser ? (
               <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 40, textAlign: "center", color: "#666", fontSize: 14 }}>
                 Select a user from the Users tab to view their details.
