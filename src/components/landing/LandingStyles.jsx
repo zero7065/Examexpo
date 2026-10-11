@@ -103,6 +103,7 @@ export default function LandingStyles() {
         .lp-container { padding: 0 16px; }
         .lp-h2 { font-size: 28px; }
         .lp-nav-links { display: none !important; }
+        .lp-stats-grid { grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
       }
       @media (min-width: 769px) {
         .lp-hamburger { display: none !important; }

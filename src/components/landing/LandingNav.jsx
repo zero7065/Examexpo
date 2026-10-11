@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Menu, X } from "lucide-react";
 
-const LINKS = ["Features", "Why Us", "Pricing", "FAQ"];
+const LINKS = ["Features", "Why Us", "Mission", "Pricing", "FAQ"];
 
 function slug(s) {
   return s.toLowerCase().replace(/\s+/g, "-");

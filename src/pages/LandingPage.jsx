@@ -5,6 +5,7 @@ import LandingStyles from "../components/landing/LandingStyles";
 import LandingNav from "../components/landing/LandingNav";
 import LandingHero from "../components/landing/LandingHero";
 import LandingBento, { LandingStats } from "../components/landing/LandingBento";
+import LandingMission from "../components/landing/LandingMission";
 import {
   LandingWhyUs,
   LandingAbout,
@@ -39,6 +40,7 @@ export default function LandingPage() {
       </section>
 
       <LandingHow />
+      <LandingMission />
       <LandingWhyUs />
       <LandingAbout />
       <LandingTestimonials />

@@ -34,10 +34,10 @@ function CountUp({ end, suffix = "", duration = 2000 }) {
 }
 
 const STATS = [
-  { value: "50", suffix: "K+", label: "Active Students" },
-  { value: "15", suffix: "K+", label: "Practice Questions" },
-  { value: "95", suffix: "%", label: "Pass Rate" },
-  { value: "4.8", suffix: "★", label: "App Rating", decimals: true },
+  { value: "800", suffix: "+", label: "Practice Questions" },
+  { value: "16", suffix: "", label: "Subjects Covered" },
+  { value: "300", suffix: "+", label: "High-Yield Topics" },
+  { value: "4", suffix: "", label: "Exam Bodies" },
 ];
 
 function AnimatedStat({ value, suffix, decimals }) {
@@ -82,7 +82,7 @@ export function LandingStats() {
   return (
     <section style={{ padding: "40px 0", background: "var(--bg-2)", borderBottom: "1px solid var(--border)" }}>
       <div className="lp-container">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24, textAlign: "center" }}>
+        <div className="lp-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24, textAlign: "center" }}>
           {STATS.map((stat, i) => (
             <div key={stat.label} className={`lp-animate-in lp-delay-${i + 1}`}>
               <div style={{ fontSize: 32, fontWeight: 900, color: "var(--primary)", marginBottom: 4 }}>

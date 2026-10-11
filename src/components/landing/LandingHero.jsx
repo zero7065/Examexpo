@@ -31,7 +31,7 @@ function PhoneMockup() {
 }
 
 const CHIPS = [
-  { icon: CheckCircle2, label: "400+ exam questions" },
+  { icon: CheckCircle2, label: "800+ exam questions" },
   { icon: WifiOff, label: "Works offline" },
   { icon: Gift, label: "Free to start" },
 ];
@@ -65,7 +65,7 @@ export default function LandingHero({ user }) {
               <span style={{ background: "var(--landing-gradient)", color: "#fff", padding: "2px 10px", borderRadius: 100, fontSize: 11, fontWeight: 700 }}>NEW</span>
               AI-Powered Exam Prep for West African Students
             </div>
-            <h1 className="lp-animate-in lp-delay-1" style={{ fontSize: 52, fontWeight: 900, lineHeight: 1.1, margin: "0 0 20px", letterSpacing: "-0.03em" }}>
+            <h1 className="lp-animate-in lp-delay-1" style={{ fontSize: "clamp(2rem, 6vw, 3.25rem)", fontWeight: 900, lineHeight: 1.08, margin: "0 0 20px", letterSpacing: "-0.03em" }}>
               Ace Your Exams with <span className="lp-gradient-text">AI-Powered</span> Precision
             </h1>
             <p className="lp-animate-in lp-delay-2" style={{ fontSize: 18, lineHeight: 1.7, color: "var(--text-muted)", maxWidth: 520, margin: "0 0 36px" }}>

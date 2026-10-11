@@ -54,10 +54,10 @@ export function LandingCta({ user }) {
         <h2 className="lp-animate-in" style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-0.03em", margin: "0 0 16px" }}>
           Ready to Ace Your Exams?
         </h2>
-        <p className="lp-animate-in lp-delay-1" style={{ fontSize: 16, opacity: 0.85, maxWidth: 480, margin: "0 auto 32px", lineHeight: 1.7 }}>
-          Join thousands of students already preparing smarter with ExamPadi AI.
-          Start free, upgrade when you're ready.
-        </p>
+          <p className="lp-animate-in lp-delay-1" style={{ fontSize: 16, opacity: 0.85, maxWidth: 480, margin: "0 auto 32px", lineHeight: 1.7 }}>
+            Join thousands of students already preparing smarter with ExamPadi AI.
+            Start free, upgrade when you're ready.
+          </p>
         <div className="lp-animate-in lp-delay-2">
           <Link to={user ? "/dashboard" : "/auth"} style={{
             display: "inline-flex", alignItems: "center", gap: 8,

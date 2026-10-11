@@ -319,10 +319,10 @@ export default function PracticeSession() {
 
   if (limitBlocked) {
     return (
-      <div style={{ minHeight: "100vh", background: "#0a0a0f", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 24, fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 24, fontFamily: "'Inter', system-ui, sans-serif", padding: 24, textAlign: "center" }}>
         <AlertCircle size={48} color="#FF4D6A" />
-        <h2 style={{ color: "#fff", fontWeight: 700, fontSize: 22, margin: 0 }}>Daily Limit Reached</h2>
-        <p style={{ color: "#888", fontSize: 14 }}>Upgrade to Pro for unlimited questions</p>
+        <h2 style={{ color: "var(--text)", fontWeight: 700, fontSize: 22, margin: 0 }}>Daily Limit Reached</h2>
+        <p style={{ color: "var(--text-muted)", fontSize: 14 }}>Upgrade to Pro for unlimited questions</p>
         <button onClick={() => { setShowProModal(true); setProReason("questions"); }} style={{ padding: "12px 28px", borderRadius: 10, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 15 }}>
           Upgrade Now
         </button>
@@ -332,7 +332,7 @@ export default function PracticeSession() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0f", fontFamily: "'Inter', system-ui, sans-serif", color: "#fff" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)" }}>
       <div style={{ display: "flex", flexDirection: isDesktop ? "row" : "column", minHeight: "100vh" }}>
         
         {/* Left Panel */}
