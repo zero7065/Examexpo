@@ -196,6 +196,14 @@ h6 {
   padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
 }
 
+/* Reduce motion (Settings → Appearance) */
+html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after {
+  animation-duration: 0.001s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001s !important;
+  scroll-behavior: auto !important;
+}
+
 /* Mobile bottom nav safe area */
 @media (max-width: 768px) {
   body {

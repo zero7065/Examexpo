@@ -1,5 +1,6 @@
 // src/pages/HelpPage.jsx
 import { useNavigate } from "react-router-dom";
+import GuideAssistant from "../components/GuideAssistant";
 import { 
   BookOpen, 
   Target, 
@@ -73,6 +74,8 @@ const HelpPage = () => {
           Your complete guide to mastering JAMB and WAEC exams
         </p>
       </header>
+
+      <GuideAssistant />
 
       {/* Free vs Pro Comparison */}
       <div className="glass-card p-8">

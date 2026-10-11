@@ -12,5 +12,14 @@ service firebase.storage {
       allow delete: if request.auth != null
         && request.auth.token.email == "jadai7065@gmail.com";
     }
+    // Avatars — public read, owner-only write (2MB image cap).
+    match /avatars/{uid}/{file} {
+      allow read: if true;
+      allow write: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches("image/.*");
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
   }
 }

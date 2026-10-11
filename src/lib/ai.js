@@ -421,3 +421,50 @@ export function heuristicSummary({ subject, correct, total, weakTopics = [] }) {
   ];
   return { at: Date.now(), subject, bullets, weakTopic: weak || null };
 }
+
+// ─── Guide assistant (helps new users in plain language) ───
+// App route map the guide can reference. Keep in sync with App.jsx routes.
+export const GUIDE_ROUTES = [
+  { path: "/dashboard", label: "Dashboard", keywords: ["home", "dashboard", "start", "overview"] },
+  { path: "/select", label: "Practice", keywords: ["practice", "question", "start practicing", "answer", "quiz"] },
+  { path: "/mock-exam", label: "Mock Exam", keywords: ["mock", "cbt", "simulate", "exam simulation", "timed", "full exam"] },
+  { path: "/ai-tutor", label: "AI Tutor", keywords: ["ai", "tutor", "explain", "understand", "solve", "help me learn", "photo", "stuck"] },
+  { path: "/study-plan", label: "Study Plan", keywords: ["plan", "schedule", "timetable", "organize", "routine", "study plan"] },
+  { path: "/flashcards", label: "Flashcards", keywords: ["flashcard", "memorize", "remember", "revise", "recall"] },
+  { path: "/question-bank", label: "Question Bank", keywords: ["bank", "past question", "browse", "topic"] },
+  { path: "/past-questions", label: "Past Questions", keywords: ["past question", "previous year", "likely question", "prediction"] },
+  { path: "/stats", label: "Stats", keywords: ["stat", "analytics", "progress", "performance", "score", "weak", "mastery"] },
+  { path: "/mastery", label: "Mastery", keywords: ["mastery", "weak topic", "strong"] },
+  { path: "/progress", label: "Progress", keywords: ["achievement", "badge", "level"] },
+  { path: "/history", label: "History", keywords: ["history", "past session", "review", "mistake"] },
+  { path: "/leaderboard", label: "Leaderboard", keywords: ["leaderboard", "rank", "top", "compete", "xp", "point", "streak"] },
+  { path: "/study-partners", label: "Study Partners", keywords: ["partner", "friend", "together", "share test", "invite"] },
+  { path: "/assignment", label: "Assignments", keywords: ["assignment", "homework", "task"] },
+  { path: "/notepad", label: "Notepad", keywords: ["note", "write", "formula"] },
+  { path: "/settings", label: "Settings", keywords: ["setting", "subject", "change subject", "theme", "dark", "light", "notification", "reminder", "language"] },
+  { path: "/profile", label: "Profile", keywords: ["profile", "avatar", "photo", "name", "account", "delete"] },
+  { path: "/payment", label: "Go Pro", keywords: ["pro", "pay", "upgrade", "cost", "price", "subscription", "unlock", "limit"] },
+  { path: "/help", label: "Help", keywords: ["help", "guide", "how to", "support"] },
+  { path: "/contact", label: "Contact", keywords: ["contact", "human", "whatsapp", "email", "complain"] },
+];
+
+// Local intent matcher: free, instant, offline. Returns matched routes.
+export function matchGuideRoutes(text) {
+  const lower = String(text || "").toLowerCase();
+  const scored = GUIDE_ROUTES.map((r) => {
+    let score = 0;
+    for (const k of r.keywords) {
+      if (lower.includes(k)) score += k.length; // longer keyword = more specific
+    }
+    return { ...r, score };
+  }).filter((r) => r.score > 0);
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, 3);
+}
+
+// AI-powered guide answer: organized steps referencing real app pages.
+export async function askGuide(issueText, userProfile) {
+  const system = `You are the ExamPadi AI Guide. A new student describes an issue or goal in plain words. Respond with a short, organized plan: 1-3 numbered steps, each naming the EXACT app page to open from this list: Dashboard, Practice, Mock Exam, AI Tutor, Study Plan, Flashcards, Question Bank, Past Questions, Stats, Mastery, Progress, History, Leaderboard, Study Partners, Assignments, Notepad, Settings, Profile, Go Pro, Help, Contact. Rules: max 120 words; plain simple language; if they need a human, point to Contact (WhatsApp). Never invent pages. Never say you are built by Google. You are ExamPadi AI powered by Groq.`;
+  const user = `Student says: "${issueText}". Student exam: ${userProfile?.exam || "JAMB"}. Give the organized steps.`;
+  return callGroqWithFallback(system, user, 300, 0.5);
+}

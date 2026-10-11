@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useNotifications } from "../hooks/useNotifications";
@@ -11,6 +11,9 @@ import { updateProfile } from "firebase/auth";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import { getStudentMemory, recordStyle } from "../lib/aiMemory";
 import { LEARNING_STYLES } from "../components/Onboarding/LearningStyleMini";
+import { exportUserData, downloadJson, exportAllowedAt, markExported } from "../lib/compliance";
+import { useTheme } from "../context/ThemeContext";
+import pkg from "../../package.json";
 import { User, BookOpen, CreditCard, Bell, Sliders, AlertTriangle, LogOut, ChevronRight, Check, Pencil, Clock } from "lucide-react";
 
 const SUBJECT_OPTIONS = ["English", "Maths", "Physics", "Chemistry", "Biology", "Economics", "Government", "Literature", "CRS", "Geography", "Commerce", "Accounting", "Further Maths", "Agricultural Science", "Technical Drawing", "Business Management"];
@@ -91,7 +94,36 @@ export default function Settings() {
   const [showProModal, setShowProModal] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [resetInput, setResetInput] = useState("");
+  const [reduceMotion, setReduceMotion] = useState(() => {
+    try { return localStorage.getItem("ep-reduce-motion") === "1"; } catch { return false; }
+  });
+  const [exporting, setExporting] = useState(false);
   const debounceRef = useRef(null);
+  const { theme, toggle: toggleTheme } = useTheme();
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("reduce-motion", reduceMotion);
+    try { localStorage.setItem("ep-reduce-motion", reduceMotion ? "1" : "0"); } catch { /* persistence best-effort */ }
+  }, [reduceMotion]);
+
+  async function handleExportData() {
+    if (!user) return;
+    if (!exportAllowedAt(user.uid)) {
+      toast({ message: "Data export is limited to once every 24 hours", type: "warning" });
+      return;
+    }
+    setExporting(true);
+    try {
+      const data = await exportUserData(user.uid);
+      downloadJson(`exampadi-data-${user.uid.slice(0, 8)}.json`, data);
+      markExported(user.uid);
+      toast({ message: "Your data has been downloaded", type: "success" });
+    } catch (e) {
+      toast({ message: `Export failed: ${e.message}`, type: "error" });
+    } finally {
+      setExporting(false);
+    }
+  }
 
   useEffect(() => { document.title = "Settings — ExamPadi AI"; }, []);
 
@@ -184,6 +216,12 @@ export default function Settings() {
           </Row>
         </Section>
 
+        {/* Appearance */}
+        <Section title="Appearance">
+          <ToggleRow label={`Theme (currently ${theme})`} value={theme === "dark"} onChange={() => toggleTheme()} />
+          <ToggleRow label="Reduce motion" value={reduceMotion} onChange={setReduceMotion} />
+        </Section>
+
         {/* Subjects */}
         <Section title="Your Subjects">
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
@@ -203,6 +241,7 @@ export default function Settings() {
         <Section title="AI Tutor">
           <div style={{ fontSize: 13, color: "#888", marginBottom: 10 }}>How should the AI explain things to you?</div>
           <LearningStylePicker uid={user?.uid} />
+          <Row label="AI language" value="English" />
         </Section>
 
         {/* Subscription */}
@@ -274,6 +313,32 @@ export default function Settings() {
           </Row>
           <ToggleRow label="Show hints by default" value={preferences.showHints} onChange={v => handlePref("showHints", v)} />
           <ToggleRow label="Auto-advance after answer" value={preferences.autoAdvance} onChange={v => handlePref("autoAdvance", v)} />
+        </Section>
+
+        {/* Privacy */}
+        <Section title="Privacy">
+          <div style={{ fontSize: 13, color: "#888", marginBottom: 12 }}>
+            Download everything ExamPadi holds about you (profile, sessions, notes, AI memory). Limited to once every 24 hours.
+          </div>
+          <button
+            onClick={handleExportData}
+            disabled={exporting}
+            style={{ padding: "10px 20px", borderRadius: 10, background: "var(--bg-3)", border: "1px solid var(--border)", color: "var(--text)", fontWeight: 600, fontSize: 13, cursor: exporting ? "not-allowed" : "pointer", fontFamily: "inherit", opacity: exporting ? 0.6 : 1 }}
+          >
+            {exporting ? "Preparing download…" : "Download my data (JSON)"}
+          </button>
+        </Section>
+
+        {/* About */}
+        <Section title="About">
+          <Row label="Version" value={pkg.version || "1.0.0"} />
+          <Row label="Contact" value="jadai7065@gmail.com" />
+          <Row label="WhatsApp" value="+234 812 763 6057" />
+          <div style={{ display: "flex", gap: 16, marginTop: 12 }}>
+            <Link to="/terms" style={{ color: "var(--primary)", fontSize: 13, fontWeight: 600 }}>Terms</Link>
+            <Link to="/privacy" style={{ color: "var(--primary)", fontSize: 13, fontWeight: 600 }}>Privacy</Link>
+            <Link to="/help" style={{ color: "var(--primary)", fontSize: 13, fontWeight: 600 }}>Help</Link>
+          </div>
         </Section>
 
         {/* Danger zone */}

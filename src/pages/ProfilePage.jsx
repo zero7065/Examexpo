@@ -1,222 +1,296 @@
-// src/pages/ProfilePage.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+// src/pages/ProfilePage.jsx — header card, academics, stats, achievements, danger zone.
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
-import { useTheme } from "../context/ThemeContext";
-import { 
-  User, 
-  Mail, 
-  Crown, 
-  Settings, 
-  LogOut, 
-  Shield, 
-  Moon, 
-  Sun,
-  ChevronRight,
-  Zap,
-  Award,
-  AlertTriangle,
-  Trash2
+import { useToast } from "../components/Toast";
+import { getUserProfile, updateUserProfile } from "../lib/userProfile";
+import { softDeleteAccount } from "../lib/compliance";
+import { ACHIEVEMENTS } from "../config/achievements";
+import AvatarDisplay from "../components/Avatar/AvatarDisplay";
+import AvatarPicker from "../components/Avatar/AvatarPicker";
+import {
+  Crown, LogOut, AlertTriangle, Trash2, Pencil, X, Check,
+  Flame, Star, BookOpen, Target, GraduationCap, School,
 } from "lucide-react";
+import { updateProfile } from "firebase/auth";
 
-const ProfilePage = () => {
+export default function ProfilePage() {
   const { user, logout } = useAuth();
   const { isPro } = useSubscription();
-  const { theme, toggle } = useTheme();
-  const [isDeleting, setIsDeleting] = React.useState(false);
-  const [deleteError, setDeleteError] = React.useState(null);
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+  const [showPicker, setShowPicker] = useState(false);
+  const [editingName, setEditingName] = useState(false);
+  const [nameInput, setNameInput] = useState("");
+  const [editingSchool, setEditingSchool] = useState(false);
+  const [schoolInput, setSchoolInput] = useState("");
+  const [showDelete, setShowDelete] = useState(false);
+  const [deleteEmail, setDeleteEmail] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
-  const handleDeleteAccount = async () => {
-    if (!window.confirm("Are you sure you want to permanently delete your account? This action cannot be undone and all your study data will be lost.")) {
+  useEffect(() => {
+    if (user) {
+      getUserProfile(user.uid).then((p) => {
+        setProfile(p);
+        setNameInput(user.displayName || p?.name || "");
+        setSchoolInput(p?.school || "");
+      }).catch(() => {});
+    }
+  }, [user]);
+
+  const answered = profile?.totalQuestionsAnswered || 0;
+  const correct = profile?.totalCorrect || 0;
+  const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+  const unlocked = profile?.achievements || [];
+
+  async function saveName() {
+    const name = nameInput.trim();
+    if (!name || !user) { setEditingName(false); return; }
+    try {
+      await updateProfile(user, { displayName: name });
+      await updateUserProfile(user.uid, { name });
+      setProfile((p) => ({ ...(p || {}), name }));
+      toast({ message: "Display name updated", type: "success" });
+    } catch {
+      toast({ message: "Could not save name — check connection", type: "error" });
+    } finally {
+      setEditingName(false);
+    }
+  }
+
+  async function saveSchool() {
+    if (!user) { setEditingSchool(false); return; }
+    try {
+      await updateUserProfile(user.uid, { school: schoolInput.trim() });
+      setProfile((p) => ({ ...(p || {}), school: schoolInput.trim() }));
+      toast({ message: "School saved", type: "success" });
+    } catch {
+      toast({ message: "Could not save school", type: "error" });
+    } finally {
+      setEditingSchool(false);
+    }
+  }
+
+  async function confirmDelete() {
+    if (deleteEmail.trim().toLowerCase() !== (user?.email || "").toLowerCase()) {
+      toast({ message: "Email does not match", type: "warning" });
       return;
     }
-    setIsDeleting(true);
-    setDeleteError(null);
+    setDeleting(true);
     try {
-      if (user) {
-        await user.delete();
-      }
+      await softDeleteAccount(user.uid);
+      toast({ message: "Account scheduled for deletion. You've been signed out.", type: "info" });
       await logout();
-    } catch (err) {
-      setDeleteError("Delete failed. Contact support@exampadi.com.");
-      setIsDeleting(false);
+      navigate("/auth", { replace: true });
+    } catch (e) {
+      toast({ message: `Delete failed: ${e.message}`, type: "error" });
+      setDeleting(false);
     }
-  };
+  }
+
+  const stats = [
+    { icon: Star, label: "Total XP", value: (profile?.totalXP || 0).toLocaleString() },
+    { icon: Flame, label: "Streak", value: `${profile?.streak || profile?.currentStreak || 0} days` },
+    { icon: BookOpen, label: "Answered", value: answered.toLocaleString() },
+    { icon: Target, label: "Accuracy", value: `${accuracy}%` },
+  ];
 
   return (
-    <div className="max-w-4xl mx-auto p-6 md:p-10 space-y-12 animate-fade">
+    <div className="max-w-4xl mx-auto p-6 md:p-10 space-y-8 animate-fade">
       <header>
-        <h1 className="text-4xl font-black mb-2 text-text">Account Settings</h1>
-        <p className="text-text-muted font-medium">Manage your subscription, preferences, and security.</p>
+        <h1 className="text-3xl font-black text-text">Profile</h1>
+        <p className="text-text-muted font-medium">Make ExamPadi yours.</p>
       </header>
 
-      <div className="grid lg:grid-cols-3 gap-10">
-        {/* Profile Card */}
-        <div className="lg:col-span-1 space-y-8">
-          <div className="glass-card p-10 text-center space-y-6 relative overflow-hidden">
-            {isPro && (
-              <div className="absolute top-4 right-4 text-accent">
-                <Crown size={24} />
+      {/* Header card */}
+      <div className="glass-card p-8">
+        <div className="flex flex-col sm:flex-row items-center gap-6">
+          <button onClick={() => setShowPicker(true)} title="Change avatar" style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+            <AvatarDisplay user={user} profile={profile} size={96} radius={24} />
+          </button>
+          <div className="flex-1 text-center sm:text-left">
+            {editingName ? (
+              <div className="flex items-center gap-2 justify-center sm:justify-start">
+                <input
+                  autoFocus
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                  onBlur={saveName}
+                  onKeyDown={(e) => e.key === "Enter" && saveName()}
+                  className="input-field"
+                  style={{ maxWidth: 240, fontWeight: 700 }}
+                />
+                <button onClick={saveName} style={{ background: "none", border: "none", color: "var(--success)", cursor: "pointer" }}><Check size={18} /></button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 justify-center sm:justify-start">
+                <h2 className="text-2xl font-black text-text">{profile?.name || user?.displayName || "Student"}</h2>
+                <button onClick={() => setEditingName(true)} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer" }}><Pencil size={15} /></button>
               </div>
             )}
-            
-            <div className="w-24 h-24 bg-primary/20 rounded-3xl flex items-center justify-center mx-auto text-primary font-black text-4xl shadow-xl shadow-primary/10">
-              {user?.displayName?.charAt(0) || (user?.email?.charAt(0) || "").toUpperCase()}
-            </div>
-            
-            <div className="space-y-1">
-              <h2 className="text-2xl font-black text-text">{user?.displayName || "Student"}</h2>
-              <p className="text-text-muted text-sm font-medium">{user?.email}</p>
-              {user?.uid && (
-                <div className="mt-2 p-2 rounded-lg" style={{ background: "var(--bg-3)" }}>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-1">Your User ID (for Study Partners)</p>
-                  <p className="text-xs font-mono font-bold text-primary break-all cursor-pointer" title="Click to copy" onClick={() => { navigator.clipboard.writeText(user.uid).then(() => alert("User ID copied!")); }}>
-                    {user.uid}
-                  </p>
-                </div>
+            <p className="text-text-muted text-sm">{user?.email}</p>
+            <div className="flex items-center gap-2 mt-3 justify-center sm:justify-start flex-wrap">
+              <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest inline-flex items-center gap-1 ${isPro ? "bg-accent/10 text-accent border border-accent/20" : "bg-white/5 text-text-muted border border-border"}`}>
+                {isPro && <Crown size={11} />} {isPro ? "Pro Member" : "Free Member"}
+              </span>
+              {(profile?.exam || profile?.targetScore) && (
+                <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-primary/10 text-primary border border-primary/20">
+                  <GraduationCap size={11} style={{ display: "inline", verticalAlign: "-1px", marginRight: 4 }} />
+                  {profile?.exam || "JAMB"}{profile?.targetScore ? ` · ${profile.targetScore}` : ""}
+                </span>
               )}
             </div>
-
-            <div className={`px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest inline-block ${
-              isPro ? 'bg-accent/10 text-accent border border-accent/20' : 'bg-white/5 text-text-muted border border-border'
-            }`}>
-              {isPro ? 'Pro Member' : 'Free Member'}
-            </div>
           </div>
-
-          <div className="space-y-4">
-            <button 
-              onClick={toggle}
-              className="w-full flex items-center justify-between p-5 glass-card hover:border-primary/30 transition-all"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center text-text-muted">
-                  {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
-                </div>
-                <span className="font-bold">Appearance</span>
-              </div>
-              <span className="text-text-muted text-xs font-black uppercase tracking-widest">{theme} Mode</span>
-            </button>
-
-            <button 
-              onClick={logout}
-              className="w-full flex items-center justify-between p-5 glass-card border-danger/10 hover:border-danger/30 text-danger transition-all group"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-danger/10 rounded-xl flex items-center justify-center transition-colors">
-                  <LogOut size={20} />
-                </div>
-                <span className="font-bold">Sign Out</span>
-              </div>
-              <ChevronRight size={18} className="text-danger opacity-0 group-hover:opacity-100 transition-opacity" />
-            </button>
-          </div>
-        </div>
-
-        {/* Subscription & Detailed Settings */}
-        <div className="lg:col-span-2 space-y-8">
-          <section className="space-y-6">
-            <h3 className="text-xl font-black flex items-center gap-3">
-              <Shield size={20} className="text-primary" />
-              Subscription Status
-            </h3>
-            
-            <div className="glass-card p-8 space-y-8">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
-                  <h4 className="text-2xl font-black mb-2">Current Plan: <span className={isPro ? 'text-accent' : 'text-text-muted'}>{isPro ? 'ExamPadi Pro' : 'Basic (Free)'}</span></h4>
-                  <p className="text-text-muted text-sm font-medium max-w-sm">
-                    {isPro 
-                      ? "Your premium features are active until 2025. You have unlimited daily questions."
-                        : "You are currently on the free tier limited to 15 questions daily. Upgrade to remove limits."}
-                  </p>
-                </div>
-                {!isPro && (
-                  <Link to="/payment" className="btn-primary px-8 h-14 whitespace-nowrap shadow-xl shadow-primary/20">Upgrade Now</Link>
-                )}
-              </div>
-
-              <div className="h-px bg-border"></div>
-
-              <div className="grid sm:grid-cols-2 gap-6">
-                <PlanBenefit icon={<Zap size={16} />} text="Unlimited Questions" active={isPro} />
-                <PlanBenefit icon={<Award size={16} />} text="CBT Sim Mode" active={isPro} />
-                <PlanBenefit icon={<User size={16} />} text="Weak Topic AI" active={isPro} />
-                <PlanBenefit icon={<Settings size={16} />} text="Custom Dashboard" active={true} />
-              </div>
-            </div>
-          </section>
-
-          <section className="space-y-6">
-            <h3 className="text-xl font-black flex items-center gap-3">
-              <Settings size={20} className="text-primary" />
-              Preferences
-            </h3>
-            <div className="glass-card p-8 space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="font-bold">Email Notifications</div>
-                  <div className="text-xs text-text-muted font-medium">Weekly study reports & exam tips</div>
-                </div>
-                <div className="w-12 h-6 bg-primary/20 rounded-full relative cursor-pointer border border-primary/30">
-                  <div className="absolute right-1 top-1 w-4 h-4 bg-primary rounded-full"></div>
-                </div>
-              </div>
-              <div className="h-px bg-border"></div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="font-bold">Haptic Feedback</div>
-                  <div className="text-xs text-text-muted font-medium">Vibrate on mobile for correct answers</div>
-                </div>
-                <div className="w-12 h-6 bg-white/5 rounded-full relative cursor-pointer border border-border">
-                  <div className="absolute left-1 top-1 w-4 h-4 bg-slate-500 rounded-full"></div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="space-y-6 pt-6">
-            <h3 className="text-xl font-black flex items-center gap-3 text-danger">
-              <AlertTriangle size={20} className="text-danger" />
-              Danger Zone
-            </h3>
-            <div className="glass-card p-8 border-danger/20 space-y-6">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
-                  <div className="font-bold text-text">Delete Account</div>
-                  <div className="text-sm text-text-muted mt-1 max-w-sm">
-                    Permanently delete your account and all associated study data. This action cannot be undone.
-                  </div>
-                  {deleteError && (
-                    <div className="text-sm text-danger mt-2 font-medium bg-danger/10 p-2 rounded-lg inline-block">
-                      {deleteError}
-                    </div>
-                  )}
-                </div>
-                <button 
-                  onClick={handleDeleteAccount}
-                  disabled={isDeleting}
-                  className="px-6 py-3 bg-danger/10 text-danger hover:bg-danger/20 font-bold rounded-xl transition-colors whitespace-nowrap flex items-center justify-center gap-2"
-                >
-                  {isDeleting ? "Deleting..." : <><Trash2 size={18} /> Delete Account</>}
-                </button>
-              </div>
-            </div>
-          </section>
+          <Link to="/settings" className="btn-secondary px-5 py-2.5 text-sm">Settings</Link>
         </div>
       </div>
+
+      {/* Academics */}
+      <section className="glass-card p-6 space-y-4">
+        <h3 className="font-black text-lg text-text">Academics</h3>
+        <div className="flex flex-wrap gap-2">
+          {(profile?.subjects || []).length > 0 ? (
+            profile.subjects.map((s) => (
+              <span key={s} className="px-3 py-1.5 rounded-lg bg-primary/10 text-primary text-sm font-semibold border border-primary/20">{s}</span>
+            ))
+          ) : (
+            <span className="text-text-muted text-sm">No subjects yet.</span>
+          )}
+          <Link to="/settings" className="px-3 py-1.5 rounded-lg border border-dashed border-border text-text-muted text-sm font-semibold">+ Edit</Link>
+        </div>
+        <div>
+          {editingSchool ? (
+            <div className="flex items-center gap-2">
+              <input
+                autoFocus
+                value={schoolInput}
+                onChange={(e) => setSchoolInput(e.target.value)}
+                onBlur={saveSchool}
+                onKeyDown={(e) => e.key === "Enter" && saveSchool()}
+                placeholder="School name (optional)"
+                className="input-field"
+                style={{ maxWidth: 280 }}
+              />
+              <button onClick={saveSchool} style={{ background: "none", border: "none", color: "var(--success)", cursor: "pointer" }}><Check size={18} /></button>
+            </div>
+          ) : (
+            <button onClick={() => setEditingSchool(true)} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: 6, color: "var(--text-muted)", fontSize: 14, fontFamily: "inherit", padding: 0 }}>
+              <School size={15} /> {profile?.school || "Add your school (optional)"} <Pencil size={13} />
+            </button>
+          )}
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {stats.map((s) => (
+          <div key={s.label} className="glass-card p-5 text-center">
+            <s.icon size={20} className="mx-auto mb-2 text-primary" />
+            <div className="text-xl font-black text-text">{s.value}</div>
+            <div className="text-xs text-text-muted font-medium">{s.label}</div>
+          </div>
+        ))}
+      </section>
+
+      {/* Achievements */}
+      <section className="glass-card p-6">
+        <h3 className="font-black text-lg text-text mb-4">Achievements ({unlocked.length}/{ACHIEVEMENTS.length})</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+          {ACHIEVEMENTS.map((a) => {
+            const has = unlocked.includes(a.id);
+            return (
+              <div key={a.id} title={a.desc} className="rounded-xl border p-4 text-center transition-all"
+                style={{
+                  borderColor: has ? "var(--accent)" : "var(--border)",
+                  background: has ? "rgb(var(--accent-rgb) / 0.08)" : "transparent",
+                  opacity: has ? 1 : 0.45,
+                }}>
+                <div style={{ fontSize: 28 }}>{a.icon}</div>
+                <div className="text-xs font-bold text-text mt-2">{a.name}</div>
+                <div className="text-[11px] text-text-muted mt-1">{a.desc}</div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Danger zone */}
+      <section className="glass-card p-6 border-danger/20">
+        <h3 className="font-black text-lg text-danger mb-4 flex items-center gap-2"><AlertTriangle size={18} /> Danger Zone</h3>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button onClick={async () => { await logout(); navigate("/auth", { replace: true }); }}
+            className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-border text-text-muted font-bold hover:text-danger transition-colors">
+            <LogOut size={16} /> Sign Out
+          </button>
+          <button onClick={() => { setShowDelete(true); setDeleteEmail(""); }}
+            className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-danger/10 text-danger font-bold hover:bg-danger/20 transition-colors">
+            <Trash2 size={16} /> Delete Account
+          </button>
+        </div>
+      </section>
+
+      {/* Avatar picker modal */}
+      {showPicker && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 70, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}
+          onClick={(e) => { if (e.target === e.currentTarget) setShowPicker(false); }}>
+          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }} />
+          <div className="glass-card" style={{ position: "relative", width: "100%", maxWidth: 520, padding: 24, maxHeight: "90vh", overflowY: "auto" }}>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-black text-lg text-text">Choose avatar</h3>
+              <button onClick={() => setShowPicker(false)} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer" }}><X size={18} /></button>
+            </div>
+            <AvatarPicker
+              uid={user?.uid}
+              profile={profile}
+              onClose={() => setShowPicker(false)}
+              onSaved={() => {
+                if (user) getUserProfile(user.uid).then(setProfile).catch(() => {});
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Delete confirmation modal */}
+      {showDelete && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 70, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}
+          onClick={(e) => { if (e.target === e.currentTarget && !deleting) setShowDelete(false); }}>
+          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} />
+          <div className="glass-card" style={{ position: "relative", width: "100%", maxWidth: 440, padding: 24 }}>
+            <h3 className="font-black text-lg text-danger mb-2">Delete account?</h3>
+            <p className="text-sm text-text-muted mb-4" style={{ lineHeight: 1.6 }}>
+              Your profile will be anonymized now and all study data permanently removed within 30 days.
+              Type your email to confirm:
+            </p>
+            <input
+              value={deleteEmail}
+              onChange={(e) => setDeleteEmail(e.target.value)}
+              placeholder={user?.email || "email"}
+              className="input-field"
+              disabled={deleting}
+            />
+            <div className="flex gap-3 mt-4">
+              <button
+                onClick={confirmDelete}
+                disabled={deleting || deleteEmail.trim().toLowerCase() !== (user?.email || "").toLowerCase()}
+                className="flex-1 px-4 py-3 rounded-xl bg-danger text-white font-bold disabled:opacity-40"
+                style={{ border: "none", cursor: "pointer" }}
+              >
+                {deleting ? "Deleting…" : "Confirm delete"}
+              </button>
+              <button
+                onClick={() => !deleting && setShowDelete(false)}
+                className="px-4 py-3 rounded-xl border border-border text-text-muted font-bold"
+                style={{ background: "none", cursor: "pointer" }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
-
-const PlanBenefit = ({ icon, text, active }) => (
-  <div className={`flex items-center gap-3 ${active ? 'text-text' : 'text-text-muted opacity-40'}`}>
-    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${active ? 'bg-primary/10 text-primary' : 'bg-white/5'}`}>
-      {icon}
-    </div>
-    <span className="text-sm font-bold">{text}</span>
-  </div>
-);
-
-export default ProfilePage;
+}

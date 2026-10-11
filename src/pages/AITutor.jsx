@@ -6,6 +6,7 @@ import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
 import { chatWithTutor, getLastAIError, isAIConfigured } from "../lib/ai";
 import { getStudentMemory, topWeakTopics } from "../lib/aiMemory";
+import { unlockAchievement } from "../lib/achievements";
 import { preprocessImage } from "../lib/vision";
 import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
 import { logActivity } from "../lib/activityLog";
@@ -151,6 +152,12 @@ export default function AITutor() {
       const aiMsg = { id: Date.now() + 1, role: "ai", content, timestamp: new Date().toISOString() };
       setMessages(prev => [...prev, aiMsg]);
       setLoading(false);
+
+      if (!(aiErr && Date.now() - aiErr.time < 15000) && user) {
+        unlockAchievement(user.uid, "first_ai_chat").then((unlocked) => {
+          if (unlocked) toast({ message: "🏆 Achievement unlocked: Curious Mind!", type: "success" });
+        }).catch(() => {});
+      }
 
       if (aiErr && Date.now() - aiErr.time < 15000) {
         toast({ message: `AI failed: ${aiErr.message}`, type: "error" });

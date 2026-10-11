@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useAuth } from "../context/AuthContext";
+import AvatarDisplay from "../components/Avatar/AvatarDisplay";
 import { Trophy, Crown, Medal, Award, Flame, TrendingUp, Zap } from "lucide-react";
 
 const podiumColors = [
@@ -10,11 +11,6 @@ const podiumColors = [
   { bg: "from-slate-300 to-slate-500", shadow: "shadow-slate-400/20", icon: Medal },
   { bg: "from-orange-400 to-orange-600", shadow: "shadow-orange-500/20", icon: Award },
 ];
-
-function getInitials(name) {
-  if (!name) return "??";
-  return name.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2);
-}
 
 export default function LeaderboardPage() {
   const { user } = useAuth();
@@ -35,6 +31,8 @@ export default function LeaderboardPage() {
           xp: doc.data().xp || 0,
           streak: doc.data().streak || 0,
           subjects: doc.data().subjects || [],
+          photoURL: doc.data().photoURL || null,
+          avatarPreset: doc.data().avatarPreset || null,
         }));
         setLeaders(data);
 
@@ -87,8 +85,8 @@ export default function LeaderboardPage() {
                 style={{ animationDelay: `${actualRank * 0.15}s` }}
               >
                 <div className="text-center space-y-1">
-                  <div className={`w-10 h-10 md:w-14 md:h-14 mx-auto rounded-full bg-gradient-to-br ${pc.bg} flex items-center justify-center text-white font-bold text-sm md:text-lg shadow-lg ${pc.shadow}`}>
-                    {getInitials(entry.name)}
+                  <div className="mx-auto w-fit">
+                    <AvatarDisplay profile={entry} size={52} radius={26} />
                   </div>
                   <p className="font-bold text-xs md:text-sm text-text truncate max-w-[80px]">{entry.name}</p>
                   <p className="text-[10px] md:text-xs font-medium text-text-muted">{entry.xp.toLocaleString()} XP</p>
@@ -113,8 +111,8 @@ export default function LeaderboardPage() {
           <div key={entry.id} className={`glass-card p-3 md:p-4 flex items-center justify-between ${entry.id === user?.uid ? "ring-2 ring-primary" : ""}`}>
             <div className="flex items-center gap-3 md:gap-4 min-w-0">
               <span className="w-6 md:w-8 text-center font-bold text-text-muted text-xs md:text-sm">#{entry.rank}</span>
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary to-emerald-600 text-white flex items-center justify-center text-xs md:text-sm font-bold shadow-sm flex-shrink-0">
-                {getInitials(entry.name)}
+              <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0">
+                <AvatarDisplay profile={entry} size={40} radius={20} />
               </div>
               <div className="min-w-0">
                 <p className="font-semibold text-text text-sm truncate">{entry.name}{entry.id === user?.uid ? " (You)" : ""}</p>

@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useTheme } from "../context/ThemeContext";
+import AvatarDisplay from "./Avatar/AvatarDisplay";
 import {
   LayoutDashboard,
   BookOpen,
@@ -107,6 +108,9 @@ const Navbar = () => {
           >
             {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
           </button>
+          <Link to="/profile" title="Your profile" className="hover:opacity-80 transition-opacity">
+            <AvatarDisplay user={user} size={32} radius={10} />
+          </Link>
         </div>
 
         <div className="flex-1 min-h-0 space-y-2 overflow-y-auto pr-1 pb-4">

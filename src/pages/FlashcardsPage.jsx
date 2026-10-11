@@ -5,6 +5,7 @@ import { useToast } from "../components/Toast";
 import { generateFlashcards, getAIErrorIfRecent, isAIConfigured } from "../lib/ai";
 import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
 import { PLANS } from "../config/plans";
+import { unlockAchievement } from "../lib/achievements";
 import { JAMB_SUBJECTS, WAEC_SUBJECTS } from "../data/subjects";
 import { Layers, Sparkles, Loader2, ChevronLeft, ChevronRight, RotateCcw, Check, X } from "lucide-react";
 
@@ -51,6 +52,11 @@ export default function FlashcardsPage() {
       }
       setCards(result);
       toast({ message: `${result.length} flashcards ready! 🃏`, type: "success" });
+      if (user) {
+        unlockAchievement(user.uid, "first_flashcard").then((unlocked) => {
+          if (unlocked) toast({ message: "🏆 Achievement unlocked: Card Shark!", type: "success" });
+        }).catch(() => {});
+      }
     } catch (err) {
       toast({ message: err.message, type: "error" });
     } finally {
