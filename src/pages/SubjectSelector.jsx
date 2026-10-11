@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "../components/Toast";
 import { JAMB_SUBJECTS, WAEC_SUBJECTS } from "../data/subjects";
-import { getQuestionsFromBank, NABTEB_SUBJECTS } from "../data/questionBank";
+import { getQuestionsFromBank, NABTEB_SUBJECTS } from "../data/questions/compat";
 import { 
   Search, 
   ChevronRight, 

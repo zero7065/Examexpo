@@ -1,4 +1,4 @@
-import { getQuestionsFromBank } from "../data/questionBank";
+import { getQuestionsFromBank } from "../data/questions/compat";
 
 function getStorage(key) {
   try {

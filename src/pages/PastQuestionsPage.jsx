@@ -97,7 +97,7 @@ export default function PastQuestionsPage() {
       <header>
         <h1 className="text-4xl font-black mb-2 text-text">Past Questions</h1>
         <p className="text-text-muted font-medium">
-          10 years of JAMB & WAEC questions (2014–2024) + AI exam predictions
+          800+ JAMB, WAEC & NECO questions (2017–2026) + data-backed likely-question predictions
         </p>
       </header>
 
@@ -200,16 +200,19 @@ export default function PastQuestionsPage() {
          ) : (
            questions.map((q, i) => (
              <div key={q.id} className="glass-card p-8 animate-slide-up">
-               <div className="flex items-center justify-between mb-6">
-                 <span className="text-xs font-black uppercase tracking-widest text-text-muted">
-                   Question {i + 1} · {q.topic}
-                 </span>
-                 <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest ${
-                   q.difficulty === "hard" ? "bg-danger/10 text-danger" : q.difficulty === "medium" ? "bg-accent/10 text-accent" : "bg-primary/10 text-primary"
-                 }`}>
-                   {q.difficulty}
-                 </span>
-               </div>
+                <div className="flex items-center justify-between mb-6 gap-2">
+                  <span className="text-xs font-black uppercase tracking-widest text-text-muted">
+                    Question {i + 1} · {q.topic}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <RepetitionBadge question={q} />
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest ${
+                      q.difficulty === "hard" ? "bg-danger/10 text-danger" : q.difficulty === "medium" ? "bg-accent/10 text-accent" : "bg-primary/10 text-primary"
+                    }`}>
+                      {q.difficulty}
+                    </span>
+                  </span>
+                </div>
                
                <p className="text-lg font-bold leading-relaxed mb-8">{q.question}</p>
                

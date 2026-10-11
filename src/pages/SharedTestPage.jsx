@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
-import { getQuestionsFromBank } from "../data/questionBank";
+import { getQuestionsFromBank } from "../data/questions/compat";
 import { submitSharedTest, getSharedTest } from "../lib/studyPartners";
 import { Clock, CheckCircle, XCircle, Trophy, ArrowRight } from "lucide-react";
 

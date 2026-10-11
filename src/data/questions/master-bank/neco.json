@@ -1,1 +1,602 @@
-[]
+[
+ {
+  "id": "neco-2019-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Grammar",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "Choose the correct option: 'They ___ football yesterday.'",
+  "options": {
+   "A": "play",
+   "B": "played",
+   "C": "playing",
+   "D": "plays"
+  },
+  "correctAnswer": "B",
+  "explanation": "'Yesterday' signals past tense → 'played'.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019
+  ]
+ },
+ {
+  "id": "neco-2020-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Synonyms",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "Closest in meaning to 'verify':",
+  "options": {
+   "A": "Deny",
+   "B": "Confirm",
+   "C": "Forget",
+   "D": "Guess"
+  },
+  "correctAnswer": "B",
+  "explanation": "Verify means to confirm truth or accuracy.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "neco-2021-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Antonyms",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2021,
+  "difficulty": "easy",
+  "question": "Opposite of 'permit':",
+  "options": {
+   "A": "Allow",
+   "B": "Forbid",
+   "C": "Grant",
+   "D": "Approve"
+  },
+  "correctAnswer": "B",
+  "explanation": "Forbid is the direct opposite of permit.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "neco-2019-math-001",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "Solve: x + 9 = 20",
+  "options": {
+   "A": "9",
+   "B": "11",
+   "C": "29",
+   "D": "2"
+  },
+  "correctAnswer": "B",
+  "explanation": "x = 20 − 9 = 11.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019
+  ]
+ },
+ {
+  "id": "neco-2020-math-001",
+  "subject": "Mathematics",
+  "topic": "Fractions",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "Simplify: 5/8 − 1/4",
+  "options": {
+   "A": "4/4",
+   "B": "3/8",
+   "C": "1/2",
+   "D": "4/8"
+  },
+  "correctAnswer": "B",
+  "explanation": "5/8 − 2/8 = 3/8.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "neco-2021-math-001",
+  "subject": "Mathematics",
+  "topic": "Geometry",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2021,
+  "difficulty": "easy",
+  "question": "How many degrees in a full circle?",
+  "options": {
+   "A": "90°",
+   "B": "180°",
+   "C": "270°",
+   "D": "360°"
+  },
+  "correctAnswer": "D",
+  "explanation": "A complete rotation is 360°.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "neco-2019-biol-001",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "The jelly-like substance filling the cell is:",
+  "options": {
+   "A": "Cytoplasm",
+   "B": "Chlorophyll",
+   "C": "Plasma",
+   "D": "Sap"
+  },
+  "correctAnswer": "A",
+  "explanation": "Cytoplasm suspends organelles and hosts reactions.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019
+  ]
+ },
+ {
+  "id": "neco-2020-biol-001",
+  "subject": "Biology",
+  "topic": "Ecology",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "Carnivores feed on:",
+  "options": {
+   "A": "Plants",
+   "B": "Other animals",
+   "C": "Dead matter only",
+   "D": "Sunlight"
+  },
+  "correctAnswer": "B",
+  "explanation": "Carnivores obtain energy by eating other animals.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "neco-2022-biol-001",
+  "subject": "Biology",
+  "topic": "Nutrition",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "Goitre results from lack of:",
+  "options": {
+   "A": "Iron",
+   "B": "Iodine",
+   "C": "Calcium",
+   "D": "Zinc"
+  },
+  "correctAnswer": "B",
+  "explanation": "Iodine deficiency enlarges the thyroid gland.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "neco-2019-chem-001",
+  "subject": "Chemistry",
+  "topic": "Atomic Structure",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2019,
+  "difficulty": "medium",
+  "question": "Electrons occupy:",
+  "options": {
+   "A": "The nucleus",
+   "B": "Fixed shells around the nucleus",
+   "C": "Neutrons",
+   "D": "Protons"
+  },
+  "correctAnswer": "B",
+  "explanation": "Electrons orbit in shells (energy levels).",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019
+  ]
+ },
+ {
+  "id": "neco-2021-chem-001",
+  "subject": "Chemistry",
+  "topic": "Acids and Bases",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2021,
+  "difficulty": "easy",
+  "question": "Vinegar contains:",
+  "options": {
+   "A": "Citric acid",
+   "B": "Acetic acid",
+   "C": "Sulphuric acid",
+   "D": "Tartaric acid"
+  },
+  "correctAnswer": "B",
+  "explanation": "Vinegar is dilute acetic (ethanoic) acid.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "neco-2023-chem-001",
+  "subject": "Chemistry",
+  "topic": "Organic Chemistry",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "Alkenes decolourise bromine water because they are:",
+  "options": {
+   "A": "Saturated",
+   "B": "Unsaturated",
+   "C": "Acidic",
+   "D": "Ionic"
+  },
+  "correctAnswer": "B",
+  "explanation": "Double bonds add bromine across, removing its colour.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023
+  ]
+ },
+ {
+  "id": "neco-2019-phys-001",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "The instrument for measuring mass is the:",
+  "options": {
+   "A": "Ruler",
+   "B": "Balance",
+   "C": "Thermometer",
+   "D": "Stopwatch"
+  },
+  "correctAnswer": "B",
+  "explanation": "Beam/bathroom balances compare or sense mass.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019
+  ]
+ },
+ {
+  "id": "neco-2020-phys-001",
+  "subject": "Physics",
+  "topic": "Electricity",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "A 60 W bulb used 5 hours consumes:",
+  "options": {
+   "A": "300 Wh",
+   "B": "12 Wh",
+   "C": "65 Wh",
+   "D": "0.3 kWh only"
+  },
+  "correctAnswer": "A",
+  "explanation": "60 × 5 = 300 Wh (0.3 kWh); 300 Wh is the direct answer.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "neco-2022-phys-001",
+  "subject": "Physics",
+  "topic": "Waves",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "Sound travels fastest through:",
+  "options": {
+   "A": "Vacuum",
+   "B": "Air",
+   "C": "Water",
+   "D": "Steel"
+  },
+  "correctAnswer": "D",
+  "explanation": "Dense solids transmit vibrations fastest.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "neco-2023-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Idioms",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "What does 'to spill the beans' mean?",
+  "options": {
+   "A": "To cook badly",
+   "B": "To reveal a secret",
+   "C": "To waste food",
+   "D": "To farm beans"
+  },
+  "correctAnswer": "B",
+  "explanation": "It means disclosing secret information.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.197Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023
+  ]
+ },
+ {
+  "id": "neco-2024-math-001",
+  "subject": "Mathematics",
+  "topic": "Statistics",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2024,
+  "difficulty": "easy",
+  "question": "Find the mode of 1, 2, 2, 3, 4",
+  "options": {
+   "A": "1",
+   "B": "2",
+   "C": "3",
+   "D": "4"
+  },
+  "correctAnswer": "B",
+  "explanation": "2 occurs most frequently.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.197Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "neco-2024-biol-001",
+  "subject": "Biology",
+  "topic": "Reproduction",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2024,
+  "difficulty": "medium",
+  "question": "Insect-pollinated flowers are usually:",
+  "options": {
+   "A": "Small and scentless",
+   "B": "Bright, scented and nectar-rich",
+   "C": "Closed always",
+   "D": "Underground"
+  },
+  "correctAnswer": "B",
+  "explanation": "Showy, scented flowers attract insect pollinators.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.197Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "neco-2025-chem-001",
+  "subject": "Chemistry",
+  "topic": "Periodic Table",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2025,
+  "difficulty": "easy",
+  "question": "Group 1 elements are called:",
+  "options": {
+   "A": "Halogens",
+   "B": "Noble gases",
+   "C": "Alkali metals",
+   "D": "Transition metals"
+  },
+  "correctAnswer": "C",
+  "explanation": "Group 1 = alkali metals (Li, Na, K…).",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.197Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "neco-2025-phys-001",
+  "subject": "Physics",
+  "topic": "Light",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2025,
+  "difficulty": "medium",
+  "question": "A convex lens is thicker at the:",
+  "options": {
+   "A": "Edges",
+   "B": "Centre",
+   "C": "Top only",
+   "D": "Bottom only"
+  },
+  "correctAnswer": "B",
+  "explanation": "Convex lenses bulge at the middle to converge light.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.197Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "neco-2022-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Comprehension",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "A 'rhetorical question' is asked mainly to:",
+  "options": {
+   "A": "Get a direct answer",
+   "B": "Make a point without expecting reply",
+   "C": "Confuse readers",
+   "D": "End a story"
+  },
+  "correctAnswer": "B",
+  "explanation": "Rhetorical questions emphasize ideas, not elicit answers.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.197Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "neco-2023-math-001",
+  "subject": "Mathematics",
+  "topic": "Trigonometry",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "cos 0° equals:",
+  "options": {
+   "A": "0",
+   "B": "1",
+   "C": "1/2",
+   "D": "Undefined"
+  },
+  "correctAnswer": "B",
+  "explanation": "cos 0° = 1.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.197Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023
+  ]
+ },
+ {
+  "id": "neco-2022-econ-001",
+  "subject": "Economics",
+  "topic": "Money",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "Barter requires:",
+  "options": {
+   "A": "Double coincidence of wants",
+   "B": "Banks",
+   "C": "Coins",
+   "D": "Internet"
+  },
+  "correctAnswer": "A",
+  "explanation": "Both parties must want what the other offers.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.197Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "neco-2024-gove-001",
+  "subject": "Government",
+  "topic": "Arms of Government",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2024,
+  "difficulty": "easy",
+  "question": "The head of the executive at state level is the:",
+  "options": {
+   "A": "President",
+   "B": "Governor",
+   "C": "Speaker",
+   "D": "Chief Judge"
+  },
+  "correctAnswer": "B",
+  "explanation": "Governors head state executives in Nigeria.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.197Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ }
+]

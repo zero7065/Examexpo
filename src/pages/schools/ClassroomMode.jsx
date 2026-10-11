@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { getUserProfile } from "../../lib/userProfile";
-import { getQuestionsFromBank } from "../../data/questionBank";
+import { getQuestionsFromBank } from "../../data/questions/compat";
 import { JAMB_SUBJECTS } from "../../data/subjects";
 import { ArrowLeft, ArrowRight, Eye, EyeOff } from "lucide-react";
 

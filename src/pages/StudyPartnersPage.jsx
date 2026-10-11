@@ -9,7 +9,7 @@ import {
   createSharedTest, getPartnerTests, getPartnerLeaderboard,
 } from "../lib/studyPartners";
 import { shareOnWhatsApp } from "../components/WhatsAppShare";
-import { getQuestionsFromBank } from "../data/questionBank";
+import { getQuestionsFromBank } from "../data/questions/compat";
 import {
   Users, UserPlus, Trash2, Trophy, Clock, Target,
   Crown, Zap, MessageCircle, Play, X, ChevronDown,

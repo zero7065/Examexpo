@@ -14,14 +14,14 @@ import { seedAdminAccount, isFirebaseConfigured } from "./firebaseConfig";
 import { clearOldServiceWorker } from "./lib/clearCache";
 import NetworkDiagnostic from "./components/NetworkDiagnostic";
 
-// Critical path — direct imports
-import LandingPage from "./pages/LandingPage";
+// Critical path — direct imports (auth shell only; landing is lazy for a lean entry chunk)
 import AuthPage from "./pages/AuthPage";
 import Dashboard from "./pages/Dashboard";
 import Onboarding from "./pages/Onboarding";
 import NotFoundPage from "./pages/NotFoundPage";
 
 // Everything else lazy-loaded
+const LandingPage = lazy(() => import("./pages/LandingPage"));
 const SubjectSelector = lazy(() => import("./pages/SubjectSelector"));
 const Practice = lazy(() => import("./pages/Practice"));
 const CBTSimulator = lazy(() => import("./pages/CBTSimulator"));

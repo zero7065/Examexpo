@@ -2,7 +2,7 @@
 import { createContext, useContext, useReducer, useEffect, useMemo } from "react";
 import { db } from "../firebaseConfig";
 import { doc, setDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { getQuestionsFromBank } from "../data/questionBank";
+import { getQuestionsFromBank } from "../data/questions/compat";
 
 const StudyContext = createContext();
 export const useStudy = () => useContext(StudyContext);

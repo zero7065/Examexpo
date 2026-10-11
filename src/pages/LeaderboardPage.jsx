@@ -20,6 +20,22 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     async function fetchLeaders() {
+      // 5-minute cache: leaderboard is identical for everyone
+      try {
+        const raw = localStorage.getItem("ep_leaderboard_cache");
+        if (raw) {
+          const cached = JSON.parse(raw);
+          if (Date.now() - cached.at < 5 * 60 * 1000 && Array.isArray(cached.data)) {
+            setLeaders(cached.data);
+            if (user) {
+              const idx = cached.data.findIndex(d => d.id === user.uid);
+              setUserRank(idx >= 0 ? { rank: idx + 1, xp: cached.data[idx].xp } : { rank: cached.data.length + 1, xp: 0 });
+            }
+            setLoading(false);
+            return;
+          }
+        }
+      } catch { /* cache optional */ }
       try {
         const usersRef = collection(db, "users");
         const q = query(usersRef, orderBy("xp", "desc"), limit(50));
@@ -35,6 +51,9 @@ export default function LeaderboardPage() {
           avatarPreset: doc.data().avatarPreset || null,
         }));
         setLeaders(data);
+        try {
+          localStorage.setItem("ep_leaderboard_cache", JSON.stringify({ at: Date.now(), data }));
+        } catch { /* cache optional */ }
 
         if (user) {
           const idx = data.findIndex(d => d.id === user.uid);

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getUserProfile } from "../lib/userProfile";
-import { getRandomQuestions } from "../data/questions/index";
+import { getRandomQuestions } from "../data/questions/compat";
 import { ACHIEVEMENTS } from "../config/achievements";
 import { collection, query, where, limit, getDocs, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebaseConfig";

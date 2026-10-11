@@ -5,7 +5,7 @@ import { useToast } from "../components/Toast";
 import { getUserProfile } from "../lib/userProfile";
 import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit } from "../lib/usageTracker";
-import { getQuestionsFromBank } from "../data/questionBank";
+import { getQuestionsFromBank } from "../data/questions/compat";
 import { useNotifications } from "../hooks/useNotifications";
 import { isAdmin } from "../lib/activityLog";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
@@ -53,10 +53,13 @@ export default function Dashboard() {
           setQuestionsLeft(ql);
 
           const sessionsRef = collection(db, "sessions");
-          const q = query(sessionsRef, where("userId", "==", user.uid), limit(100));
+          const q = query(sessionsRef, where("userId", "==", user.uid), limit(50));
           const snap = await getDocs(q);
+          const docs = [...snap.docs].sort(
+            (a, b) => (b.data().completedAt?.seconds || 0) - (a.data().completedAt?.seconds || 0)
+          );
           const stats = {};
-          snap.docs.forEach(d => {
+          docs.forEach(d => {
             const s = d.data();
             const subj = s.subject;
             if (subj) {

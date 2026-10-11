@@ -1,6 +1,6 @@
 // src/lib/examGenerator.js — builds printable exam PDFs.
 // jsPDF is imported LAZILY by callers so ~350KB never lands in the main chunk.
-import { getQuestionsFromBank } from "../data/questionBank";
+import { getQuestionsFromBank } from "../data/questions/compat";
 
 export function pickExamQuestions({ subject, topics = [], count = 20, exam = "JAMB" }) {
   const pool = getQuestionsFromBank({ subject, exam, count: 200 });

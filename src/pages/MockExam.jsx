@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
-import { getRandomQuestions } from "../data/questions/index";
+import { getRandomQuestions } from "../data/questions/compat";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import { recordSession } from "../lib/aiMemory";
 import { Clock, Flag, ChevronLeft, ChevronRight, AlertTriangle } from "lucide-react";

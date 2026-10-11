@@ -1,4 +1,4 @@
-import { getQuestionsFromBank } from '../data/questionBank';
+import { getQuestionsFromBank } from '../data/questions/compat';
 
 const STORAGE_PREFIX = 'ep_adaptive_';
 const MAX_REPEAT = 5;

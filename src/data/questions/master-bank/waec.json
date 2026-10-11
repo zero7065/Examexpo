@@ -46,6 +46,7 @@
   "createdAt": "2026-10-11T08:13:53.582Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2021,
    2022,
@@ -77,6 +78,7 @@
   "createdAt": "2026-10-11T08:13:53.587Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -106,8 +108,9 @@
   "hint": "Use a Punnett square",
   "source": "past",
   "createdAt": "2026-10-11T08:13:53.587Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -164,6 +167,7 @@
   "createdAt": "2026-10-11T08:13:53.588Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -193,8 +197,9 @@
   "hint": "Work with the alleles",
   "source": "past",
   "createdAt": "2026-10-11T08:13:53.589Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -224,6 +229,7 @@
   "createdAt": "2026-10-11T08:13:53.589Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -281,6 +287,7 @@
   "createdAt": "2026-10-11T08:13:53.591Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -310,8 +317,9 @@
   "hint": "X-linked recessive means sons inherit from mother",
   "source": "past",
   "createdAt": "2026-10-11T08:13:53.591Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -342,6 +350,7 @@
   "createdAt": "2026-10-11T08:13:53.591Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -373,7 +382,9 @@
   "createdAt": "2026-10-11T08:13:53.591Z",
   "highYield": false,
   "repeatedFrom": [
-   2021
+   2018,
+   2021,
+   2024
   ]
  },
  {
@@ -397,8 +408,10 @@
   "hint": "Saturated = maximum hydrogen",
   "source": "past",
   "createdAt": "2026-10-11T08:13:53.591Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2020,
+   2021,
    2022,
    2023
   ]
@@ -427,6 +440,7 @@
   "createdAt": "2026-10-11T08:13:53.592Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -457,6 +471,7 @@
   "createdAt": "2026-10-11T08:13:53.592Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -488,7 +503,9 @@
   "createdAt": "2026-10-11T08:13:53.592Z",
   "highYield": false,
   "repeatedFrom": [
-   2021
+   2018,
+   2021,
+   2024
   ]
  },
  {
@@ -514,6 +531,7 @@
   "createdAt": "2026-10-11T08:13:53.592Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -545,9 +563,11 @@
   "createdAt": "2026-10-11T08:13:53.592Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2020,
    2021,
-   2022
+   2022,
+   2025
   ]
  },
  {
@@ -574,9 +594,11 @@
   "createdAt": "2026-10-11T08:13:53.593Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2020,
    2021,
-   2022
+   2022,
+   2025
   ]
  },
  {
@@ -600,10 +622,12 @@
   "hint": "It's thinner at the centre",
   "source": "past",
   "createdAt": "2026-10-11T08:13:53.593Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2019,
    2021,
-   2022
+   2022,
+   2024
   ]
  },
  {
@@ -630,9 +654,11 @@
   "createdAt": "2026-10-11T08:13:53.593Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2020,
    2021,
-   2022
+   2022,
+   2025
   ]
  },
  {
@@ -659,6 +685,7 @@
   "createdAt": "2026-10-11T08:13:53.593Z",
   "highYield": false,
   "repeatedFrom": [
+   2019,
    2023,
    2024
   ]
@@ -686,9 +713,11 @@
   "createdAt": "2026-10-11T08:13:53.593Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2020,
    2021,
-   2022
+   2022,
+   2025
   ]
  },
  {
@@ -713,10 +742,12 @@
   "hint": "Think of traffic light colours",
   "source": "past",
   "createdAt": "2026-10-11T08:13:53.593Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2019,
    2021,
-   2022
+   2022,
+   2024
   ]
  },
  {
@@ -743,6 +774,7 @@
   "createdAt": "2026-10-11T08:13:53.594Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2021,
    2022,
@@ -774,6 +806,7 @@
   "createdAt": "2026-10-11T08:13:53.594Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2021,
    2022,
@@ -804,6 +837,7 @@
   "createdAt": "2026-10-11T08:13:53.594Z",
   "highYield": false,
   "repeatedFrom": [
+   2018,
    2020,
    2022,
    2023
@@ -861,6 +895,7 @@
   "createdAt": "2026-10-11T08:13:53.595Z",
   "highYield": false,
   "repeatedFrom": [
+   2018,
    2020,
    2022,
    2023
@@ -889,6 +924,7 @@
   "createdAt": "2026-10-11T08:13:53.595Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2021,
    2022,
@@ -920,6 +956,7 @@
   "createdAt": "2026-10-11T08:13:53.595Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2021,
    2022,
@@ -951,7 +988,8 @@
   "createdAt": "2026-10-11T08:13:53.595Z",
   "highYield": false,
   "repeatedFrom": [
-   2021
+   2021,
+   2024
   ]
  },
  {
@@ -1540,8 +1578,9 @@
   "explanation": "Phrases like 'along with' don't change the singular subject 'teacher' → 'has'.",
   "source": "seed",
   "createdAt": "2026-10-11T08:36:17.618Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2024
   ]
@@ -1568,6 +1607,7 @@
   "createdAt": "2026-10-11T08:36:17.618Z",
   "highYield": false,
   "repeatedFrom": [
+   2018,
    2020
   ]
  },
@@ -1593,7 +1633,8 @@
   "createdAt": "2026-10-11T08:36:17.618Z",
   "highYield": false,
   "repeatedFrom": [
-   2021
+   2021,
+   2023
   ]
  },
  {
@@ -1618,6 +1659,7 @@
   "createdAt": "2026-10-11T08:36:17.618Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2021,
    2022,
@@ -1647,6 +1689,7 @@
   "createdAt": "2026-10-11T08:36:17.618Z",
   "highYield": false,
   "repeatedFrom": [
+   2018,
    2020,
    2022,
    2023
@@ -1674,7 +1717,8 @@
   "createdAt": "2026-10-11T08:36:17.619Z",
   "highYield": false,
   "repeatedFrom": [
-   2021
+   2021,
+   2024
   ]
  },
  {
@@ -1699,6 +1743,7 @@
   "createdAt": "2026-10-11T08:36:17.619Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -1728,7 +1773,9 @@
   "createdAt": "2026-10-11T08:36:17.619Z",
   "highYield": false,
   "repeatedFrom": [
-   2020
+   2020,
+   2021,
+   2024
   ]
  },
  {
@@ -1753,6 +1800,7 @@
   "createdAt": "2026-10-11T08:36:17.619Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2020,
    2021,
@@ -1782,7 +1830,9 @@
   "createdAt": "2026-10-11T08:36:17.619Z",
   "highYield": false,
   "repeatedFrom": [
-   2021
+   2019,
+   2021,
+   2025
   ]
  },
  {
@@ -1807,9 +1857,11 @@
   "createdAt": "2026-10-11T08:36:17.619Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2020,
    2021,
-   2022
+   2022,
+   2025
   ]
  },
  {
@@ -1834,6 +1886,7 @@
   "createdAt": "2026-10-11T08:36:17.619Z",
   "highYield": false,
   "repeatedFrom": [
+   2018,
    2022
   ]
  },
@@ -1908,8 +1961,9 @@
   "explanation": "Transfer RNA delivers amino acids during translation.",
   "source": "seed",
   "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2019,
    2020,
    2021,
    2022,
@@ -1936,8 +1990,10 @@
   "explanation": "Hydrogen burns with a characteristic squeaky pop.",
   "source": "seed",
   "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2020,
+   2021,
    2022,
    2023
   ]
@@ -1964,6 +2020,7 @@
   "createdAt": "2026-10-11T08:36:17.619Z",
   "highYield": false,
   "repeatedFrom": [
+   2019,
    2023,
    2024
   ]
@@ -1988,8 +2045,9 @@
   "explanation": "Third conditional for past regret: 'would have' + past participle.",
   "source": "seed",
   "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2024
   ]
@@ -2016,6 +2074,7 @@
   "createdAt": "2026-10-11T08:36:17.619Z",
   "highYield": true,
   "repeatedFrom": [
+   2018,
    2019,
    2021,
    2022,
@@ -2043,6 +2102,1287 @@
   "explanation": "Proteins supply amino acids for growth and repair.",
   "source": "seed",
   "createdAt": "2026-10-11T08:36:17.620Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023,
+   2025
+  ]
+ },
+ {
+  "id": "waec-2018-phys-001",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2018,
+  "difficulty": "easy",
+  "question": "Which of these is a vector quantity?",
+  "options": {
+   "A": "Speed",
+   "B": "Distance",
+   "C": "Velocity",
+   "D": "Time"
+  },
+  "correctAnswer": "C",
+  "explanation": "Velocity has magnitude and direction; the rest are scalars.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.551Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2020,
+   2021,
+   2022,
+   2025
+  ]
+ },
+ {
+  "id": "waec-2018-phys-002",
+  "subject": "Physics",
+  "topic": "Electricity",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2018,
+  "difficulty": "medium",
+  "question": "A wire of resistance 6 Ω is cut into two equal parts and joined in parallel. The new resistance is:",
+  "options": {
+   "A": "12 Ω",
+   "B": "6 Ω",
+   "C": "3 Ω",
+   "D": "1.5 Ω"
+  },
+  "correctAnswer": "D",
+  "explanation": "Each half is 3 Ω; parallel gives (3×3)/(3+3) = 1.5 Ω.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.554Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2018,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2019-phys-001",
+  "subject": "Physics",
+  "topic": "Waves",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "medium",
+  "question": "The phenomenon where sound is heard around a corner is:",
+  "options": {
+   "A": "Reflection",
+   "B": "Refraction",
+   "C": "Diffraction",
+   "D": "Polarization"
+  },
+  "correctAnswer": "C",
+  "explanation": "Diffraction bends waves around obstacles and through openings.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2023,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2019-phys-002",
+  "subject": "Physics",
+  "topic": "Light",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "The image formed by a plane mirror is:",
+  "options": {
+   "A": "Real and inverted",
+   "B": "Virtual and erect",
+   "C": "Real and diminished",
+   "D": "Virtual and inverted"
+  },
+  "correctAnswer": "B",
+  "explanation": "Plane mirrors form virtual, erect, same-size images.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2020-phys-003",
+  "subject": "Physics",
+  "topic": "Heat",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "Black surfaces are good absorbers of heat because they:",
+  "options": {
+   "A": "Reflect all radiation",
+   "B": "Absorb most radiation",
+   "C": "Conduct slowly",
+   "D": "Expand easily"
+  },
+  "correctAnswer": "B",
+  "explanation": "Dark matt surfaces absorb radiant heat best; shiny ones reflect it.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "waec-2021-phys-004",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "hard",
+  "question": "A body moves with uniform velocity when:",
+  "options": {
+   "A": "No force acts on it",
+   "B": "Resultant force is zero",
+   "C": "Mass is zero",
+   "D": "Friction is high"
+  },
+  "correctAnswer": "B",
+  "explanation": "Zero net force means zero acceleration — velocity stays uniform.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2020,
+   2021,
+   2022,
+   2025
+  ]
+ },
+ {
+  "id": "waec-2022-phys-004",
+  "subject": "Physics",
+  "topic": "Electricity",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "hard",
+  "question": "The cost of using a 2 kW heater for 3 hours at ₦50 per kWh is:",
+  "options": {
+   "A": "₦100",
+   "B": "₦150",
+   "C": "₦300",
+   "D": "₦600"
+  },
+  "correctAnswer": "C",
+  "explanation": "Energy = 2 × 3 = 6 kWh; cost = 6 × 50 = ₦300.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2018,
+   2022
+  ]
+ },
+ {
+  "id": "waec-2023-phys-002",
+  "subject": "Physics",
+  "topic": "Waves",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "easy",
+  "question": "The SI unit of frequency is the:",
+  "options": {
+   "A": "Metre",
+   "B": "Second",
+   "C": "Hertz",
+   "D": "Decibel"
+  },
+  "correctAnswer": "C",
+  "explanation": "Frequency (cycles per second) is measured in hertz.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2023,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2024-phys-002",
+  "subject": "Physics",
+  "topic": "Light",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "medium",
+  "question": "Total internal reflection occurs when light travels from:",
+  "options": {
+   "A": "Air to glass",
+   "B": "Glass to air beyond the critical angle",
+   "C": "Vacuum to air",
+   "D": "Water to ice"
+  },
+  "correctAnswer": "B",
+  "explanation": "Dense-to-rare medium beyond the critical angle traps all light inside.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2025-phys-001",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2025,
+  "difficulty": "medium",
+  "question": "A machine with velocity ratio 5 and efficiency 80% has mechanical advantage:",
+  "options": {
+   "A": "6.25",
+   "B": "4",
+   "C": "5",
+   "D": "0.8"
+  },
+  "correctAnswer": "B",
+  "explanation": "Efficiency = MA/VR → MA = 0.8 × 5 = 4.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2020,
+   2021,
+   2022,
+   2025
+  ]
+ },
+ {
+  "id": "waec-2018-chem-001",
+  "subject": "Chemistry",
+  "topic": "Atomic Structure",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2018,
+  "difficulty": "easy",
+  "question": "The particle with no charge in the nucleus is the:",
+  "options": {
+   "A": "Proton",
+   "B": "Electron",
+   "C": "Neutron",
+   "D": "Photon"
+  },
+  "correctAnswer": "C",
+  "explanation": "Neutrons are neutral; protons are positive, electrons negative.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2018-chem-002",
+  "subject": "Chemistry",
+  "topic": "Chemical Bonding",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2018,
+  "difficulty": "medium",
+  "question": "Which compound has both ionic and covalent bonds?",
+  "options": {
+   "A": "NaCl",
+   "B": "NaOH",
+   "C": "CH₄",
+   "D": "MgO"
+  },
+  "correctAnswer": "B",
+  "explanation": "NaOH has ionic Na⁺–OH⁻ bonding plus covalent O–H within hydroxide.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.555Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2018,
+   2021,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2019-chem-002",
+  "subject": "Chemistry",
+  "topic": "Acids and Bases",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "medium",
+  "question": "Methyl orange in an alkaline solution turns:",
+  "options": {
+   "A": "Red",
+   "B": "Yellow",
+   "C": "Colourless",
+   "D": "Blue"
+  },
+  "correctAnswer": "B",
+  "explanation": "Methyl orange is red in acid, yellow in alkali.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2025
+  ]
+ },
+ {
+  "id": "waec-2020-chem-002",
+  "subject": "Chemistry",
+  "topic": "Organic Chemistry",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "easy",
+  "question": "The functional group of esters is:",
+  "options": {
+   "A": "-OH",
+   "B": "-COO-",
+   "C": "-CHO",
+   "D": "-CO-"
+  },
+  "correctAnswer": "B",
+  "explanation": "Esters contain the -COO- (carboxylate) linkage.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-chem-005",
+  "subject": "Chemistry",
+  "topic": "Periodic Table",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "hard",
+  "question": "Atomic radius generally ___ across a period:",
+  "options": {
+   "A": "Increases",
+   "B": "Decreases",
+   "C": "Stays constant",
+   "D": "Doubles"
+  },
+  "correctAnswer": "B",
+  "explanation": "Rising nuclear charge pulls shells closer left to right.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2022-chem-003",
+  "subject": "Chemistry",
+  "topic": "Electrolysis",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "question": "During electrolysis of brine, chlorine is discharged at the:",
+  "options": {
+   "A": "Anode",
+   "B": "Cathode",
+   "C": "Salt bridge",
+   "D": "Battery"
+  },
+  "correctAnswer": "A",
+  "explanation": "Negative chloride ions migrate to the positive anode.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2022
+  ]
+ },
+ {
+  "id": "waec-2023-chem-003",
+  "subject": "Chemistry",
+  "topic": "Atomic Structure",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "An element X forms X²⁺. Its oxide formula is:",
+  "options": {
+   "A": "XO",
+   "B": "X₂O",
+   "C": "XO₂",
+   "D": "X₂O₃"
+  },
+  "correctAnswer": "A",
+  "explanation": "X²⁺ balances O²⁻ one-to-one as XO.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2024-chem-001",
+  "subject": "Chemistry",
+  "topic": "Chemical Bonding",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "easy",
+  "question": "A shared pair from one atom only is a ___ bond:",
+  "options": {
+   "A": "Ionic",
+   "B": "Covalent",
+   "C": "Dative",
+   "D": "Metallic"
+  },
+  "correctAnswer": "C",
+  "explanation": "Dative (coordinate) bonds donate both electrons from one atom.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2018,
+   2021,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2025-chem-001",
+  "subject": "Chemistry",
+  "topic": "Acids and Bases",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2025,
+  "difficulty": "hard",
+  "question": "25 cm³ of 0.1 M NaOH neutralizes 20 cm³ of HCl. The acid concentration is:",
+  "options": {
+   "A": "0.08 M",
+   "B": "0.125 M",
+   "C": "0.2 M",
+   "D": "0.5 M"
+  },
+  "correctAnswer": "B",
+  "explanation": "M₁V₁ = M₂V₂ → M = (0.1×25)/20 = 0.125 M.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2025
+  ]
+ },
+ {
+  "id": "waec-2021-chem-006",
+  "subject": "Chemistry",
+  "topic": "Organic Chemistry",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "Cracking of petroleum produces:",
+  "options": {
+   "A": "Only gases",
+   "B": "Shorter, more useful hydrocarbons",
+   "C": "Pure carbon",
+   "D": "Water"
+  },
+  "correctAnswer": "B",
+  "explanation": "Cracking splits long chains into petrol, diesel and gases.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2018-biol-001",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2018,
+  "difficulty": "medium",
+  "question": "The organelle that packages proteins is the:",
+  "options": {
+   "A": "Golgi body",
+   "B": "Ribosome",
+   "C": "Lysosome",
+   "D": "Vacuole"
+  },
+  "correctAnswer": "A",
+  "explanation": "The Golgi apparatus modifies, packages and ships proteins.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2019-biol-002",
+  "subject": "Biology",
+  "topic": "Genetics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "hard",
+  "question": "In humans, why are more boys than girls colour-blind? Because the gene is:",
+  "options": {
+   "A": "Dominant on Y",
+   "B": "Recessive X-linked",
+   "C": "On autosomes",
+   "D": "Always lethal"
+  },
+  "correctAnswer": "B",
+  "explanation": "Males need only one faulty X copy to show X-linked recessive traits.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2021-biol-003",
+  "subject": "Biology",
+  "topic": "Ecology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "easy",
+  "question": "A young forest replacing bare rock shows:",
+  "options": {
+   "A": "Primary succession",
+   "B": "Migration",
+   "C": "Hibernation",
+   "D": "Seed dispersal"
+  },
+  "correctAnswer": "A",
+  "explanation": "Colonization from lifeless ground is primary succession.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2023-biol-003",
+  "subject": "Biology",
+  "topic": "Nutrition",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "Bile is produced by the:",
+  "options": {
+   "A": "Stomach",
+   "B": "Liver",
+   "C": "Pancreas",
+   "D": "Gall bladder"
+  },
+  "correctAnswer": "B",
+  "explanation": "The liver secretes bile (stored in the gall bladder) to emulsify fats.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023,
+   2025
+  ]
+ },
+ {
+  "id": "waec-2024-biol-001",
+  "subject": "Biology",
+  "topic": "Transport System",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "hard",
+  "question": "The valve between the left atrium and ventricle is the:",
+  "options": {
+   "A": "Tricuspid",
+   "B": "Bicuspid (mitral)",
+   "C": "Pulmonary",
+   "D": "Aortic"
+  },
+  "correctAnswer": "B",
+  "explanation": "The bicuspid/mitral valve guards the left atrioventricular opening.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "waec-2025-biol-002",
+  "subject": "Biology",
+  "topic": "Reproduction",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2025,
+  "difficulty": "easy",
+  "question": "Pollination by wind is called:",
+  "options": {
+   "A": "Entomophily",
+   "B": "Anemophily",
+   "C": "Hydrophily",
+   "D": "Zoophily"
+  },
+  "correctAnswer": "B",
+  "explanation": "Anemophily = wind pollination (e.g., grasses, maize).",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "waec-2022-biol-005",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "easy",
+  "question": "Plant cells differ from animal cells by having:",
+  "options": {
+   "A": "Nucleus",
+   "B": "Cell wall and chloroplasts",
+   "C": "Mitochondria",
+   "D": "Ribosomes"
+  },
+  "correctAnswer": "B",
+  "explanation": "Walls and chloroplasts are plant-only structures.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2024-biol-002",
+  "subject": "Biology",
+  "topic": "Ecology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "medium",
+  "question": "Decomposers return nutrients by:",
+  "options": {
+   "A": "Photosynthesis",
+   "B": "Breaking down dead matter",
+   "C": "Hunting prey",
+   "D": "Fixing nitrogen only"
+  },
+  "correctAnswer": "B",
+  "explanation": "Fungi and bacteria recycle organic matter into soil nutrients.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020,
+   2021,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2020-chem-003",
+  "subject": "Chemistry",
+  "topic": "Stoichiometry",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "hard",
+  "question": "What mass of CO₂ forms from 12 g of carbon? (C=12, O=16)",
+  "options": {
+   "A": "22 g",
+   "B": "44 g",
+   "C": "12 g",
+   "D": "32 g"
+  },
+  "correctAnswer": "B",
+  "explanation": "12 g C = 1 mole → 1 mole CO₂ = 44 g.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "waec-2021-phys-005",
+  "subject": "Physics",
+  "topic": "Pressure",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2021,
+  "difficulty": "medium",
+  "question": "A force of 100 N on 0.5 m² gives pressure:",
+  "options": {
+   "A": "50 Pa",
+   "B": "200 Pa",
+   "C": "100 Pa",
+   "D": "500 Pa"
+  },
+  "correctAnswer": "B",
+  "explanation": "P = F/A = 100/0.5 = 200 Pa.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021
+  ]
+ },
+ {
+  "id": "waec-2023-biol-004",
+  "subject": "Biology",
+  "topic": "Coordination",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "Auxins in shoots cause bending:",
+  "options": {
+   "A": "Away from light",
+   "B": "Toward light",
+   "C": "Downward only",
+   "D": "Randomly"
+  },
+  "correctAnswer": "B",
+  "explanation": "Auxin accumulates on the shaded side, elongating it toward light.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023
+  ]
+ },
+ {
+  "id": "waec-2024-chem-002",
+  "subject": "Chemistry",
+  "topic": "Salts",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "easy",
+  "question": "Washing soda is:",
+  "options": {
+   "A": "NaCl",
+   "B": "Na₂CO₃·10H₂O",
+   "C": "CaO",
+   "D": "NaOH"
+  },
+  "correctAnswer": "B",
+  "explanation": "Washing soda is hydrated sodium carbonate.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "waec-2023-phys-003",
+  "subject": "Physics",
+  "topic": "Magnetism",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "easy",
+  "question": "Like magnetic poles:",
+  "options": {
+   "A": "Attract",
+   "B": "Repel",
+   "C": "Neutralize",
+   "D": "Disappear"
+  },
+  "correctAnswer": "B",
+  "explanation": "Like poles repel; unlike poles attract.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023
+  ]
+ },
+ {
+  "id": "waec-2020-biol-004",
+  "subject": "Biology",
+  "topic": "Microorganisms",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2020,
+  "difficulty": "medium",
+  "question": "Yeast is used in brewing because it:",
+  "options": {
+   "A": "Kills bacteria",
+   "B": "Ferments sugar to alcohol",
+   "C": "Adds colour",
+   "D": "Cools wort"
+  },
+  "correctAnswer": "B",
+  "explanation": "Yeast fermentation converts sugars to ethanol and CO₂.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2020
+  ]
+ },
+ {
+  "id": "waec-2025-chem-002",
+  "subject": "Chemistry",
+  "topic": "Rates",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2025,
+  "difficulty": "medium",
+  "question": "Powdered reactants react faster than lumps because of:",
+  "options": {
+   "A": "Greater surface area",
+   "B": "Higher temperature",
+   "C": "Catalysts",
+   "D": "Pressure"
+  },
+  "correctAnswer": "A",
+  "explanation": "More exposed surface means more frequent collisions.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "waec-2024-phys-003",
+  "subject": "Physics",
+  "topic": "Energy",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "medium",
+  "question": "A stretched catapult stores:",
+  "options": {
+   "A": "Kinetic energy",
+   "B": "Chemical energy",
+   "C": "Elastic potential energy",
+   "D": "Heat"
+  },
+  "correctAnswer": "C",
+  "explanation": "Deformed elastic materials hold elastic potential energy.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:35.556Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "waec-2018-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Grammar",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2018,
+  "difficulty": "easy",
+  "question": "Choose the correct option: 'She ___ to school every day.'",
+  "options": {
+   "A": "go",
+   "B": "goes",
+   "C": "going",
+   "D": "gone"
+  },
+  "correctAnswer": "B",
+  "explanation": "Third-person singular present tense takes 'goes'.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.188Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2019,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2018-uoel-002",
+  "subject": "Use of English Language",
+  "topic": "Synonyms",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2018,
+  "difficulty": "medium",
+  "question": "Closest in meaning to 'diligent':",
+  "options": {
+   "A": "Lazy",
+   "B": "Hardworking",
+   "C": "Rude",
+   "D": "Slow"
+  },
+  "correctAnswer": "B",
+  "explanation": "Diligent means showing steady hard work.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.194Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2018,
+   2020
+  ]
+ },
+ {
+  "id": "waec-2018-math-001",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2018,
+  "difficulty": "medium",
+  "question": "If 3x − 5 = 16, x equals:",
+  "options": {
+   "A": "3",
+   "B": "7",
+   "C": "11",
+   "D": "21"
+  },
+  "correctAnswer": "B",
+  "explanation": "3x = 21 → x = 7.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.194Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2019,
+   2021,
+   2022,
+   2025,
+   2026
+  ]
+ },
+ {
+  "id": "waec-2018-math-002",
+  "subject": "Mathematics",
+  "topic": "Geometry",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2018,
+  "difficulty": "easy",
+  "question": "A right angle measures:",
+  "options": {
+   "A": "45°",
+   "B": "90°",
+   "C": "180°",
+   "D": "360°"
+  },
+  "correctAnswer": "B",
+  "explanation": "A right angle is exactly 90°.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.194Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2018,
+   2020,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2019-econ-001",
+  "subject": "Economics",
+  "topic": "Demand and Supply",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "easy",
+  "question": "A demand schedule shows:",
+  "options": {
+   "A": "Prices over time",
+   "B": "Quantities demanded at various prices",
+   "C": "Government budgets",
+   "D": "Bank rates"
+  },
+  "correctAnswer": "B",
+  "explanation": "It tabulates price-quantity demanded pairs.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.194Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019
+  ]
+ },
+ {
+  "id": "waec-2019-gove-001",
+  "subject": "Government",
+  "topic": "Democracy",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2019,
+  "difficulty": "medium",
+  "question": "The principle of separation of powers was popularized by:",
+  "options": {
+   "A": "Karl Marx",
+   "B": "Montesquieu",
+   "C": "Plato",
+   "D": "Adam Smith"
+  },
+  "correctAnswer": "B",
+  "explanation": "Montesquieu's Spirit of the Laws argues for divided powers.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.195Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019
+  ]
+ },
+ {
+  "id": "waec-2023-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Antonyms",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "question": "Opposite of 'scarce':",
+  "options": {
+   "A": "Rare",
+   "B": "Abundant",
+   "C": "Costly",
+   "D": "Few"
+  },
+  "correctAnswer": "B",
+  "explanation": "Abundant means plentiful — the opposite of scarce.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.195Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2024-math-001",
+  "subject": "Mathematics",
+  "topic": "Statistics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "hard",
+  "question": "The median of 4, 4, 5, 7, 9, 10 is:",
+  "options": {
+   "A": "5",
+   "B": "6",
+   "C": "7",
+   "D": "4.5"
+  },
+  "correctAnswer": "B",
+  "explanation": "Even count: average of 3rd and 4th values = (5+7)/2 = 6.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.195Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2021,
+   2024
+  ]
+ },
+ {
+  "id": "waec-2024-econ-001",
+  "subject": "Economics",
+  "topic": "Inflation",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "medium",
+  "question": "Creeping inflation is roughly:",
+  "options": {
+   "A": "Above 50%",
+   "B": "Below 3% yearly",
+   "C": "Above 100%",
+   "D": "Zero"
+  },
+  "correctAnswer": "B",
+  "explanation": "Creeping (mild) inflation stays in low single digits.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.195Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "waec-2024-gove-001",
+  "subject": "Government",
+  "topic": "Federalism",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "easy",
+  "question": "Concurrent matters in Nigeria include:",
+  "options": {
+   "A": "Currency",
+   "B": "Education",
+   "C": "Defence",
+   "D": "Foreign affairs"
+  },
+  "correctAnswer": "B",
+  "explanation": "Education is shared between federal and state governments.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.195Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
+  ]
+ },
+ {
+  "id": "waec-2025-uoel-001",
+  "subject": "Use of English Language",
+  "topic": "Oral English",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2025,
+  "difficulty": "easy",
+  "question": "The /θ/ sound appears in:",
+  "options": {
+   "A": "This",
+   "B": "Think",
+   "C": "Though",
+   "D": "There"
+  },
+  "correctAnswer": "B",
+  "explanation": "'Think' uses voiceless /θ/; the rest use /ð/.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2025
+  ]
+ },
+ {
+  "id": "waec-2025-math-002",
+  "subject": "Mathematics",
+  "topic": "Indices",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2025,
+  "difficulty": "medium",
+  "question": "Simplify: 5⁰ + 5¹",
+  "options": {
+   "A": "1",
+   "B": "5",
+   "C": "6",
+   "D": "25"
+  },
+  "correctAnswer": "C",
+  "explanation": "1 + 5 = 6.",
+  "source": "seed",
+  "createdAt": "2026-10-11T09:03:36.196Z",
   "highYield": false,
   "repeatedFrom": [
    2025

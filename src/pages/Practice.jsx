@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { getUserProfile } from "../lib/userProfile";
-import { getQuestionsFromBank } from "../data/questionBank";
+import { getQuestionsFromBank } from "../data/questions/compat";
 import { generateQuestionsWithAI } from "../lib/questions";
 import { getAIErrorIfRecent } from "../lib/ai";
 import { ChevronRight, Zap, BookOpen, Loader2, CheckCircle2, Clock } from "lucide-react";
