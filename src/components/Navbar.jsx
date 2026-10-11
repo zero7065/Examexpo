@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useTheme } from "../context/ThemeContext";
 import AvatarDisplay from "./Avatar/AvatarDisplay";
+import Logo from "./Logo";
 import { isAdmin } from "../lib/activityLog";
 import {
   LayoutDashboard,
@@ -89,7 +90,7 @@ const Navbar = () => {
     return (
       <nav className="md:hidden fixed top-0 left-0 right-0 p-4 flex items-center justify-between z-50 bg-bg/80 backdrop-blur-md border-b border-border">
         <Link to="/" className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-black text-black">E</div>
+          <Logo size={32} radius={9} />
           <span className="font-black text-text">ExamPadi</span>
         </Link>
         <button onClick={toggle} aria-label="Toggle theme" className="p-2 text-text-muted hover:text-primary transition-colors">
@@ -105,7 +106,7 @@ const Navbar = () => {
       <nav className="hidden md:flex flex-col w-64 h-screen bg-bg-2 border-r border-border fixed left-0 top-0 p-6 z-50">
         <div className="flex items-center justify-between mb-6 px-2 shrink-0">
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-black text-black">E</div>
+            <Logo size={32} radius={9} />
             <h1 className="text-xl font-black tracking-tight text-text">ExamPadi <span className="text-primary">AI</span></h1>
           </Link>
           <button

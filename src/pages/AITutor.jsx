@@ -14,7 +14,8 @@ import ProUpgradeModal from "../components/ProUpgradeModal";
 import MessageBubble from "../components/AITutor/MessageBubble";
 import TypingIndicator from "../components/AITutor/TypingIndicator";
 import ImageUpload from "../components/AITutor/ImageUpload";
-import { Send, Sparkles, Plus, ChevronRight, Brain } from "lucide-react";
+import Logo from "../components/Logo";
+import { Send, Plus, ChevronRight, Brain } from "lucide-react";
 
 const QUICK_PROMPTS = [
   "Explain photosynthesis like I'm 10",
@@ -184,8 +185,8 @@ export default function AITutor() {
     <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)", display: "flex", flexDirection: "column" }}>
       {/* Top bar */}
       <div style={{ background: "var(--bg-2)", borderBottom: "1px solid var(--border)", padding: "12px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg, #6C3CE9, #D4A853)", display: "flex", alignItems: "center", justifyContent: "center" }}><Sparkles size={16} color="#fff" /></div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <Logo size={32} radius={9} />
           <span style={{ fontWeight: 700, fontSize: 16 }}>AI Tutor</span>
           {isPro && <span style={{ fontSize: 10, fontWeight: 700, color: "#D4A853", background: "rgba(212,168,83,0.15)", padding: "2px 8px", borderRadius: 6 }}>PRO</span>}
           {weakCount > 0 && (

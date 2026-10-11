@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { getUserProfile } from "../lib/userProfile";
+import Logo from "../components/Logo";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function AuthPage() {
@@ -173,13 +174,9 @@ export default function AuthPage() {
         boxShadow: "var(--card-shadow)",
       }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <div style={{
-            width: 56, height: 56, borderRadius: 16,
-            background: "var(--primary)", display: "inline-flex",
-            alignItems: "center", justifyContent: "center",
-            fontWeight: 900, fontSize: 28, color: "#fff",
-            marginBottom: 12
-          }}>E</div>
+          <div style={{ display: "inline-flex", marginBottom: 12 }}>
+            <Logo size={56} radius={16} />
+          </div>
           <h1 style={{ color: "var(--text)", fontSize: 24, fontWeight: 800, margin: 0 }}>
             ExamPadi AI
           </h1>

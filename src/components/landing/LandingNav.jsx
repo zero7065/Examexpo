@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Menu, X } from "lucide-react";
+import Logo from "../Logo";
 
 const LINKS = ["Features", "Why Us", "Mission", "Pricing", "FAQ"];
 
@@ -19,7 +20,7 @@ export default function LandingNav({ user }) {
     }}>
       <div className="lp-container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 72 }}>
         <Link to="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <div style={{ width: 36, height: 36, borderRadius: 10, background: "var(--landing-gradient)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 18, color: "#fff" }}>E</div>
+          <div style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center" }}><Logo size={36} radius={10} /></div>
           <span style={{ fontSize: 20, fontWeight: 800, color: "var(--text)" }}>
             ExamPadi <span style={{ color: "var(--primary)" }}>AI</span>
             <span className="jadai-brand-full" style={{ fontSize: 9, marginLeft: 8, letterSpacing: "0.08em", verticalAlign: "super" }}>by Jadai</span>
