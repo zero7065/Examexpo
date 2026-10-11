@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import InstallPrompt from "./components/InstallPrompt";
 import { useAuth } from "./context/AuthContext";
+import { useBackButton } from "./hooks/useBackButton";
 import { seedAdminAccount, isFirebaseConfigured } from "./firebaseConfig";
 import { clearOldServiceWorker } from "./lib/clearCache";
 import NetworkDiagnostic from "./components/NetworkDiagnostic";
@@ -62,6 +63,8 @@ function PageLoader() {
 
 function AuthAwareRoutes() {
   const { user, loading, isOffline, degraded } = useAuth();
+  // Android PWA double-tap-back-to-exit + sane in-app back navigation
+  useBackButton();
   const location = useLocation();
 
   useEffect(() => {

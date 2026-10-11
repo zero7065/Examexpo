@@ -213,7 +213,7 @@ const StatsPage = () => {
                 <TrendingUp size={14} className="text-green-400" /> Score Trends
               </div>
               <div className="flex items-center gap-2 text-text-muted">
-                <BarChart3 size={14} className="text-blue-400" /> Subject Mastery
+                <BarChart3 size={14} className="text-primary" /> Subject Mastery
               </div>
             </div>
             <button onClick={() => navigate("/payment")} className="btn-primary px-8">
@@ -301,7 +301,7 @@ const StatsPage = () => {
           label="Predicted JAMB Score"
           value={user?.totalQuestionsAnswered > 0 ? Math.min(400, Math.round((user?.totalCorrect / user?.totalQuestionsAnswered) * 400)) : "0"}
           description="Based on your current performance trends."
-          icon={<TrendingUp className="text-blue-400" size={24} />}
+          icon={<TrendingUp className="text-primary" size={24} />}
         />
       </div>
 

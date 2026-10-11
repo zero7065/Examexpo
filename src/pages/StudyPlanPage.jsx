@@ -132,7 +132,7 @@ const StudyPlanPage = () => {
               <div className="text-sm text-text-muted">Topics Covered</div>
             </div>
             <div className="p-6 bg-primary/10 rounded-2xl">
-              <div className="text-3xl font-black text-blue-500 mb-2">300+</div>
+              <div className="text-3xl font-black text-primary mb-2">300+</div>
               <div className="text-sm text-text-muted">Target Score</div>
             </div>
           </div>
@@ -230,7 +230,7 @@ const StudyPlanPage = () => {
             </div>
             <div className="flex items-center gap-6">
               <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center">
-                <BookOpen className="text-blue-500" size={32} />
+                <BookOpen className="text-primary" size={32} />
               </div>
               <div>
                 <div className="text-sm text-text-muted font-bold uppercase">Topics to Cover</div>
