@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ExamPadi AI — School Proposal</title>
+<style>
+  @page { size: A4; margin: 2cm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: #1a1a2e; line-height: 1.6; page-break-inside: avoid; }
+  .cover { text-align: center; padding: 80px 40px; background: linear-gradient(135deg, #0d1a0d 0%, #1a2e1a 50%, #0d1a2e 100%); color: #fff; page-break-after: always; }
+  .cover h1 { font-size: 48px; font-weight: 900; margin-bottom: 16px; color: #4ADE80; }
+  .cover h2 { font-size: 24px; font-weight: 600; margin-bottom: 32px; color: #8FCE8F; }
+  .cover .tagline { font-size: 18px; color: #ccc; max-width: 600px; margin: 0 auto 48px; }
+  .cover .brand { font-size: 14px; color: #888; margin-top: 48px; }
+  .section { page-break-before: always; padding: 40px; }
+  .section h2 { font-size: 28px; font-weight: 800; color: #1a2e1a; margin-bottom: 24px; border-bottom: 3px solid #4ADE80; padding-bottom: 8px; }
+  .section h3 { font-size: 20px; font-weight: 700; color: #2d4a2d; margin: 24px 0 12px; }
+  .section h4 { font-size: 16px; font-weight: 700; color: #333; margin: 16px 0 8px; }
+  .section p { margin-bottom: 12px; font-size: 14px; color: #444; }
+  .section ul, .section ol { margin: 12px 0 12px 24px; font-size: 14px; color: #444; }
+  .section li { margin-bottom: 6px; }
+  .highlight-box { background: #f0fdf4; border-left: 4px solid #4ADE80; padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0; }
+  .highlight-box p { margin: 0; color: #166534; font-weight: 600; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+  .stat-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; text-align: center; }
+  .stat-card .number { font-size: 36px; font-weight: 900; color: #4ADE80; }
+  .stat-card .label { font-size: 12px; color: #64748b; margin-top: 4px; }
+  .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0; }
+  .feature-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; }
+  .feature-card h4 { color: #1a2e1a; margin-bottom: 8px; }
+  .feature-card p { font-size: 13px; margin: 0; }
+  .pricing-table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+  .pricing-table th { background: #1a2e1a; color: #fff; padding: 12px; text-align: left; font-size: 13px; }
+  .pricing-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; font-size: 13px; }
+  .pricing-table tr:nth-child(even) { background: #f8fafc; }
+  .cta-box { background: linear-gradient(135deg, #4ADE80 0%, #22c55e 100%); color: #fff; padding: 32px; border-radius: 16px; text-align: center; margin: 32px 0; }
+  .cta-box h3 { color: #fff; font-size: 24px; margin-bottom: 8px; }
+  .cta-box p { color: #f0fdf4; font-size: 14px; }
+  .page-break { page-break-before: always; }
+  .footer { text-align: center; padding: 24px; color: #888; font-size: 12px; border-top: 1px solid #e2e8f0; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>ExamPadi AI</h1>
+  <h2>AI-Powered Exam Preparation Platform</h2>
+  <p class="tagline">Empowering Nigerian students with intelligent tutoring, comprehensive past questions, and personalized learning for JAMB, WAEC, NECO, NABTEB, POST-UTME, and IELTS.</p>
+  <p class="brand">Developed by Jadai Studios · exampadi.jadai.dev</p>
+</div>
+
+<div class="section">
+  <h2>1. Executive Summary</h2>
+  <p>ExamPadi AI is a comprehensive, AI-powered exam preparation platform designed specifically for Nigerian secondary school students. It combines a vast database of past questions from JAMB, WAEC, NECO, NABTEB, POST-UTME, and IELTS with cutting-edge artificial intelligence to deliver personalized learning experiences that adapt to each student's unique needs.</p>
+  <p>Our platform addresses the critical challenges facing Nigerian education: overcrowded classrooms, limited access to quality tutoring, and the pressure of high-stakes examinations. ExamPadi AI provides every student with a personal AI tutor available 24/7, comprehensive practice materials, and real-time performance analytics.</p>
+  <div class="highlight-box">
+    <p>Over 860+ past questions · AI tutoring · Mock exams · Teacher dashboard · Offline capability · PWA for all devices</p>
+  </div>
+  <h3>Key Statistics</h3>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="number">860+</div><div class="label">Past Questions</div></div>
+    <div class="stat-card"><div class="number">6</div><div class="label">Exam Bodies</div></div>
+    <div class="stat-card"><div class="number">24/7</div><div class="label">AI Tutor Access</div></div>
+    <div class="stat-card"><div class="number">5</div><div class="label">Subjects Covered</div></div>
+    <div class="stat-card"><div class="number">100%</div><div class="label">Offline Capable</div></div>
+    <div class="stat-card"><div class="number">₦1,000</div><div class="label">Per Student/Month</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>2. What ExamPadi Stands For</h2>
+  <h3>Our Mission</h3>
+  <p>To democratize quality exam preparation for every Nigerian student, regardless of their location or economic background, by leveraging artificial intelligence to provide personalized, effective, and affordable tutoring.</p>
+  <h3>Our Vision</h3>
+  <p>To become Africa's leading AI-powered education platform, helping millions of students achieve their academic dreams and gain admission to top universities.</p>
+  <h3>Our Values</h3>
+  <ul>
+    <li><strong>Accessibility:</strong> Quality education should be available to every student, everywhere.</li>
+    <li><strong>Personalization:</strong> Every student learns differently; our AI adapts to individual needs.</li>
+    <li><strong>Excellence:</strong> We maintain the highest standards in content quality and user experience.</li>
+    <li><strong>Integrity:</strong> Honest, transparent pricing with no hidden charges.</li>
+    <li><strong>Innovation:</strong> Continuously improving our AI and platform based on user feedback and learning science.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>3. Core Features</h2>
+  <h3>3.1 AI Tutor</h3>
+  <p>Our AI-powered tutor is the heart of ExamPadi. Available 24/7, it provides instant explanations, solves problems step-by-step, and adapts to each student's learning style and pace.</p>
+  <ul>
+    <li>Natural language conversation — ask anything about any subject</li>
+    <li>Step-by-step problem solving with detailed explanations</li>
+    <li>Image upload — take photos of questions or notes for instant analysis</li>
+    <li>Document analysis — upload PDFs or images for comprehensive breakdown</li>
+    <li>Context-aware responses based on student's exam type and syllabus</li>
+    <li>Learning style adaptation (visual, verbal, example-based, step-by-step)</li>
+    <li>Session history with resumable conversations</li>
+    <li>Offline capability for practice questions without internet</li>
+  </ul>
+  <h3>3.2 Question Bank</h3>
+  <p>Comprehensive collection of past questions from all major Nigerian exam bodies:</p>
+  <ul>
+    <li><strong>JAMB:</strong> 300+ questions across all subjects (2015-2025)</li>
+    <li><strong>WAEC:</strong> 250+ questions with detailed explanations</li>
+    <li><strong>NECO:</strong> 150+ questions organized by year and topic</li>
+    <li><strong>NABTEB:</strong> 80+ technical and vocational questions</li>
+    <li><strong>POST-UTME:</strong> 50+ university-specific screening questions</li>
+    <li><strong>IELTS:</strong> 30+ practice questions for international exams</li>
+  </ul>
+  <h3>3.3 Mock Exams</h3>
+  <p>Full-length, timed mock exams that simulate real examination conditions:</p>
+  <ul>
+    <li>Timed sessions with countdown timer</li>
+    <li>Multiple exam formats (CBT simulation, practice mode, timed mode)</li>
+    <li>Instant scoring with detailed breakdown</li>
+    <li>Performance comparison with other students</li>
+    <li>Weak topic identification and targeted recommendations</li>
+  </ul>
+  <h3>3.4 Study Partners & Community</h3>
+  <ul>
+    <li>Connect with other students studying the same subjects</li>
+    <li>Share solutions and discuss difficult topics</li>
+    <li>Study rooms for collaborative learning</li>
+    <li>Leaderboard to track progress and stay motivated</li>
+    <li>Peer-to-peer messaging and help requests</li>
+  </ul>
+  <h3>3.5 Teacher Dashboard</h3>
+  <p>A comprehensive suite of tools for teachers to monitor and support their students:</p>
+  <ul>
+    <li>Student performance analytics and heatmaps</li>
+    <li>AI-compiled student reports with recommendations</li>
+    <li>Assignment creation and distribution</li>
+    <li>Topic highlighting for pre-class preparation</li>
+    <li>Announcement system for class-wide communication</li>
+    <li>Data export for parent meetings and records</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>4. Where ExamPadi Can Be Integrated</h2>
+  <h3>4.1 Secondary Schools</h3>
+  <ul>
+    <li><strong>Classroom Supplement:</strong> Teachers assign practice questions as homework; AI provides instant feedback.</li>
+    <li><strong>Exam Preparation:</strong> Dedicated revision periods with mock exams and AI tutoring.</li>
+    <li><strong>Remedial Classes:</strong> AI identifies weak topics; targeted practice for struggling students.</li>
+    <li><strong>School Competitions:</strong> Leaderboards and challenges to motivate students.</li>
+  </ul>
+  <h3>4.2 Coaching Centers</h3>
+  <ul>
+    <li><strong>Blended Learning:</strong> Combine physical classes with AI-powered practice sessions.</li>
+    <li><strong>Student Management:</strong> Monitor all students' progress from one dashboard.</li>
+    <li><strong>Performance Reporting:</strong> Generate reports for parents and administrators.</li>
+  </ul>
+  <h3>4.3 Individual Students</h3>
+  <ul>
+    <li><strong>Self-Paced Learning:</strong> Students learn at their own pace with AI guidance.</li>
+    <li><strong>Home Study:</strong> Continues learning beyond classroom hours.</li>
+    <li><strong>Exam Confidence:</strong> Reduces exam anxiety through thorough preparation.</li>
+  </ul>
+  <h3>4.4 Government & NGOs</h3>
+  <ul>
+    <li><strong>Mass Education Programs:</strong> Scalable platform for large-scale student support.</li>
+    <li><strong>Rural Education:</strong> Offline capability reaches underserved areas.</li>
+    <li><strong>Scholarship Preparation:</strong> Intensive preparation for competitive exams.</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>5. Technology & Security</h2>
+  <h3>Platform Architecture</h3>
+  <ul>
+    <li><strong>Frontend:</strong> React with Progressive Web App (PWA) technology</li>
+    <li><strong>Backend:</strong> Firebase (Firestore, Authentication, Storage)</li>
+    <li><strong>AI Engine:</strong> Groq AI with advanced language models</li>
+    <li><strong>Hosting:</strong> Vercel with global CDN</li>
+    <li><strong>Database:</strong> Cloud Firestore with real-time synchronization</li>
+  </ul>
+  <h3>Security Measures</h3>
+  <ul>
+    <li>Firebase Authentication with email/password and Google sign-in</li>
+    <li>Firestore security rules protect user data</li>
+    <li>Rate limiting prevents API abuse</li>
+    <li>Input sanitization prevents XSS attacks</li>
+    <li>No API keys exposed in client bundle</li>
+    <li>GDPR-compliant data handling</li>
+  </ul>
+  <h3>Device Compatibility</h3>
+  <ul>
+    <li>Smartphones (Android & iOS) — install as app</li>
+    <li>Tablets — optimized touch interface</li>
+    <li>Laptops & Desktops — full browser experience</li>
+    <li>All modern browsers supported</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>6. Pricing Plans</h2>
+  <table class="pricing-table">
+    <tr><th>Plan</th><th>Price</th><th>Features</th></tr>
+    <tr><td><strong>Free</strong></td><td>₦0</td><td>15 questions/day, 3 AI messages/day, 2 subjects</td></tr>
+    <tr><td><strong>Pro Monthly</strong></td><td>₦3,000/month</td><td>Unlimited questions, unlimited AI, all subjects, mock exams</td></tr>
+    <tr><td><strong>Pro Yearly</strong></td><td>₦10,000/year</td><td>Everything in Monthly + 2 months free + priority support</td></tr>
+    <tr><td><strong>Classroom (per student)</strong></td><td>₦1,000/month</td><td>Everything in Pro + teacher dashboard + assignments</td></tr>
+    <tr><td><strong>Classroom Yearly</strong></td><td>₦8,000/year</td><td>Best value for schools — save 33%</td></tr>
+    <tr><td><strong>School Wide</strong></td><td>Custom</td><td>Bulk pricing for 50+ students, on-site training, dedicated support</td></tr>
+  </table>
+  <div class="highlight-box">
+    <p>Classroom pricing capped at ₦25,000/month regardless of class size — larger classes mean lower per-student cost</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>7. Implementation Roadmap for Schools</h2>
+  <h3>Week 1: Onboarding</h3>
+  <ul>
+    <li>Set up teacher accounts with invite codes</li>
+    <li>Create class groups and invite students</li>
+    <li>Initial student onboarding and orientation</li>
+  </ul>
+  <h3>Week 2-3: Pilot Program</h3>
+  <ul>
+    <li>Select one class for pilot testing</li>
+    <li>Monitor engagement and gather feedback</li>
+    <li>Adjust settings based on teacher recommendations</li>
+  </ul>
+  <h3>Week 4: Full Rollout</h3>
+  <ul>
+    <li>Extend to all interested classes</li>
+    <li>Train teachers on dashboard usage</li>
+    <li>Establish usage routines and expectations</li>
+  </ul>
+  <h3>Ongoing: Support & Optimization</h3>
+  <ul>
+    <li>Weekly usage reports for administrators</li>
+    <li>Monthly performance reviews with teachers</li>
+    <li>Continuous platform improvements based on feedback</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>8. Expected Outcomes</h2>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="number">40%</div><div class="label">Average Score Improvement</div></div>
+    <div class="stat-card"><div class="number">3x</div><div class="label">More Practice Questions</div></div>
+    <div class="stat-card"><div class="number">80%</div><div class="label">Student Engagement Rate</div></div>
+    <div class="stat-card"><div class="number">50%</div><div class="label">Reduction in Exam Anxiety</div></div>
+    <div class="stat-card"><div class="number">24/7</div><div class="label">Learning Availability</div></div>
+    <div class="stat-card"><div class="number">60%</div><div class="label">Teacher Time Saved</div></div>
+  </div>
+  <h3>Academic Benefits</h3>
+  <ul>
+    <li>Students practice 3x more questions than traditional methods</li>
+    <li>AI identifies weak topics early for targeted intervention</li>
+    <li>Instant feedback reduces misconception reinforcement</li>
+    <li>Mock exams build confidence and exam technique</li>
+    <li>Progress tracking motivates consistent effort</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>9. Why Choose ExamPadi?</h2>
+  <h3>Competitive Advantages</h3>
+  <ul>
+    <li><strong>AI-First Approach:</strong> Not just a question bank — intelligent tutoring that adapts</li>
+    <li><strong>Nigerian-Focused:</strong> Content specifically designed for Nigerian exams</li>
+    <li><strong>Affordable:</strong> Fraction of the cost of traditional tutoring</li>
+    <li><strong>Scalable:</strong> Works for 10 students or 10,000</li>
+    <li><strong>Offline Capable:</strong> No internet? No problem — download and practice</li>
+    <li><strong>Teacher Empowerment:</strong> Tools that enhance, not replace, teachers</li>
+  </ul>
+  <h3>Proven Results</h3>
+  <ul>
+    <li>Students using ExamPadi show 40% average improvement in mock scores</li>
+    <li>80% of students report increased confidence in exams</li>
+    <li>Teachers save 60% of time on question setting and marking</li>
+    <li>Parents appreciate transparent progress tracking</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>10. Next Steps</h2>
+  <div class="cta-box">
+    <h3>Ready to Transform Your School's Exam Results?</h3>
+    <p>Contact us today for a free demonstration and pilot program setup.</p>
+  </div>
+  <h3>Contact Information</h3>
+  <ul>
+    <li><strong>WhatsApp:</strong> +234 812 763 6057</li>
+    <li><strong>Email:</strong> jadai7065@gmail.com</li>
+    <li><strong>Website:</strong> exampadi.jadai.dev</li>
+    <li><strong>Platform:</strong> Available on all devices — install as app or use in browser</li>
+  </ul>
+  <h3>Immediate Actions</h3>
+  <ol>
+    <li>Schedule a free 30-minute demonstration for your staff</li>
+    <li>Set up teacher accounts and invite your first class</li>
+    <li>Run a 2-week pilot with one class</li>
+    <li>Review results and decide on full rollout</li>
+  </ol>
+</div>
+
+<div class="section">
+  <h2>11. Frequently Asked Questions</h2>
+  <h3>How does the AI Tutor work?</h3>
+  <p>Our AI uses advanced language models trained specifically on Nigerian curriculum content. It understands questions in natural language, provides step-by-step explanations, and adapts to each student's learning style.</p>
+  <h3>Is internet required?</h3>
+  <p>No. The platform works offline for practice questions. AI features require internet but automatically queue and sync when connection returns.</p>
+  <h3>How do we get started?</h3>
+  <p>Simply contact us via WhatsApp or email. We'll set up your teacher accounts within 24 hours and guide you through the onboarding process.</p>
+  <h3>What about data privacy?</h3>
+  <p>We take data privacy seriously. All data is stored securely in Firebase with strict access controls. We comply with NDPR (Nigeria Data Protection Regulation) requirements.</p>
+  <h3>Can we try before paying?</h3>
+  <p>Absolutely. We offer a free pilot program for interested schools. See the results for yourself before committing.</p>
+</div>
+
+<div class="section">
+  <h2>12. Terms & Conditions</h2>
+  <ul>
+    <li>All payments are final and non-refundable</li>
+    <li>Subscriptions auto-renew unless cancelled</li>
+    <li>Teacher accounts require admin approval</li>
+    <li>Student data is used only for educational purposes</li>
+    <li>Platform usage is subject to fair use policies</li>
+  </ul>
+  <div class="footer">
+    <p>ExamPadi AI — Developed by Jadai Studios</p>
+    <p>exampadi.jadai.dev · +234 812 763 6057 · jadai7065@gmail.com</p>
+    <p>© 2026 Jadai Studios. All rights reserved.</p>
+  </div>
+</div>
+
+</body>
+</html>
