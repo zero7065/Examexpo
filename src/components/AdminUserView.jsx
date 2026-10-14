@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Eye, Crown, Ban, RefreshCw, Loader2 } from "lucide-react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
-import { getUserProfile } from "../../lib/userProfile";
+import { db } from "../firebaseConfig";
+import { getUserProfile } from "../lib/userProfile";
 
 export default function AdminUserView({ userId, onClose }) {
   const [profile, setProfile] = useState(null);

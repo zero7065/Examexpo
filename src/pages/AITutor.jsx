@@ -4,8 +4,9 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
-import { chatWithTutor, analyzeDocument, getLastAIError, isAIConfigured } from "../lib/ai";
+import { chatWithTutor, analyzeDocument, getLastAIError, isAIConfigured, sanitizeAIResponse } from "../lib/ai";
 import { getStudentMemory, topWeakTopics } from "../lib/aiMemory";
+import { appendToAISession, getAISessions, createAISession, deleteAISession, getAISession } from "../lib/aiSessions";
 import { unlockAchievement } from "../lib/achievements";
 import { preprocessImage } from "../lib/vision";
 import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
@@ -46,6 +47,9 @@ export default function AITutor() {
   const [analyzeMode, setAnalyzeMode] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
   const [showImageGen, setShowImageGen] = useState(false);
+  const [sessions, setSessions] = useState([]);
+  const [showSessions, setShowSessions] = useState(false);
+  const [currentSessionId, setCurrentSessionId] = useState(null);
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -57,6 +61,7 @@ export default function AITutor() {
     if (user && !isPro) {
       checkAILimit(user.uid).then(l => setAiUsage({ used: l.used, limit: l.limit })).catch(() => {});
     }
+    if (user) getAISessions(user.uid).then(setSessions).catch(() => {});
   }, [user, isPro]);
 
   const weakCount = topWeakTopics(memory, 5).length;
@@ -89,12 +94,15 @@ export default function AITutor() {
       try {
         const slim = messages.map((m) => {
           const copy = { ...m };
-          delete copy.image; // data URLs are too large for localStorage
+          delete copy.image;
           delete copy.images;
           return copy;
         });
         localStorage.setItem(`ep-chat-${conversationId}`, JSON.stringify(slim));
-      } catch { /* storage full or unavailable — chat simply won't persist */ }
+      } catch { /* storage full */ }
+      if (currentSessionId) {
+        appendToAISession(currentSessionId, messages.map((m) => ({ role: m.role, content: m.content }))).catch(() => {});
+      }
     }
   }, [messages]);
 
@@ -102,7 +110,47 @@ export default function AITutor() {
     const id = genId();
     setConversationId(id);
     setMessages([]);
+    setCurrentSessionId(null);
     localStorage.removeItem(`ep-chat-${conversationId}`);
+  }
+
+  async function handleNewSession() {
+    if (!user) return;
+    try {
+      const id = await createAISession(user.uid, activeSubject);
+      setCurrentSessionId(id);
+      setConversationId(genId());
+      setMessages([]);
+      setShowSessions(false);
+      toast({ message: "New session started", type: "success" });
+    } catch (e) {
+      toast({ message: "Failed to create session", type: "error" });
+    }
+  }
+
+  async function handleResumeSession(session) {
+    try {
+      const full = await getAISession(session.id);
+      if (full?.messages) {
+        setMessages(full.messages.map((m, i) => ({ id: `s_${i}`, role: m.role, content: m.content })));
+        setCurrentSessionId(session.id);
+        setActiveSubject(session.subject || "General");
+        setShowSessions(false);
+      }
+    } catch (e) {
+      toast({ message: "Failed to load session", type: "error" });
+    }
+  }
+
+  async function handleDeleteSession(session) {
+    if (!window.confirm("Delete this session?")) return;
+    try {
+      await deleteAISession(session.id);
+      setSessions((prev) => prev.filter((s) => s.id !== session.id));
+      toast({ message: "Session deleted", type: "success" });
+    } catch (e) {
+      toast({ message: "Failed to delete", type: "error" });
+    }
   }
 
   async function handleSelectImage(file) {
@@ -222,8 +270,33 @@ export default function AITutor() {
           <button onClick={handleNewChat} style={{ padding: "8px 14px", borderRadius: 8, background: "var(--bg-3)", border: "1px solid var(--border)", color: "var(--text-muted)", cursor: "pointer", fontSize: 12, display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
             <Plus size={14} /> New Chat
           </button>
+          <button onClick={() => setShowSessions(!showSessions)} style={{ padding: "8px 14px", borderRadius: 8, background: showSessions ? "var(--primary)" : "var(--bg-3)", border: "1px solid var(--border)", color: showSessions ? "#fff" : "var(--text-muted)", cursor: "pointer", fontSize: 12, display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
+            History ({sessions.length})
+          </button>
         </div>
       </div>
+
+      {showSessions && (
+        <div style={{ position: "absolute", top: 60, left: 16, zIndex: 50, width: 280, maxHeight: 400, overflowY: "auto", background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 12, boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}>
+          <div style={{ padding: 12, borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontWeight: 700, fontSize: 13, color: "var(--text)" }}>Session History</span>
+            <button onClick={handleNewSession} style={{ background: "var(--primary)", border: "none", borderRadius: 6, padding: "4px 10px", color: "#fff", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>New</button>
+          </div>
+          {sessions.length === 0 ? (
+            <div style={{ padding: 16, color: "var(--text-muted)", fontSize: 12, textAlign: "center" }}>No past sessions</div>
+          ) : (
+            sessions.map((s) => (
+              <div key={s.id} style={{ padding: "10px 12px", borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 8 }}>
+                <button onClick={() => handleResumeSession(s)} style={{ flex: 1, background: "none", border: "none", color: "var(--text)", fontSize: 12, textAlign: "left", cursor: "pointer" }}>
+                  <div style={{ fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{s.title || s.subject}</div>
+                  <div style={{ color: "var(--text-muted)", fontSize: 10 }}>{s.subject} · {new Date(s.createdAt?.seconds * 1000 || Date.now()).toLocaleDateString()}</div>
+                </button>
+                <button onClick={() => handleDeleteSession(s)} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", padding: 4 }}>✕</button>
+              </div>
+            ))
+          )}
+        </div>
+      )}
 
       {!isAIConfigured() && (
         <div style={{ background: "rgba(239,68,68,0.12)", borderBottom: "1px solid rgba(239,68,68,0.35)", padding: "10px 20px", color: "#ef4444", fontSize: 13, fontWeight: 600, flexShrink: 0 }}>

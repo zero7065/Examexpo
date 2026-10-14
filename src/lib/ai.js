@@ -42,6 +42,24 @@ function stripJsonFences(text) {
   return cleaned.trim();
 }
 
+export function sanitizeAIResponse(text) {
+  if (!text) return text;
+  return text
+    .replace(/\*\*\*(.+?)\*\*\*/g, "$1")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/~~(.+?)~~/g, "$1")
+    .replace(/`{3}[\s\S]*?`{3}/g, (m) => m.replace(/`/g, ""))
+    .replace(/`(.+?)`/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/\[(.+?)\]\(.+?\)/g, "$1")
+    .replace(/^\s*[-*]\s+/gm, "• ")
+    .replace(/^\s*\d+\.\s+/gm, (m, offset, str) => {
+      const num = m.match(/\d+/)[0];
+      return `${num}. `;
+    });
+}
+
 async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, temperature = 0.5) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
   if (!key) {
@@ -252,6 +270,9 @@ export function buildTutorSystemPrompt({ subject, userProfile, memory }) {
     "- Be direct and precise: lead with the answer, then the shortest correct reasoning",
     "- Break details down stepwise: What → Why → How it appears in exams → What to revise next",
     '- End study-type answers with "What to revise next:" and one concrete topic',
+    "- Use emojis naturally (📚 ✅ 💡 🔥 🎯 📝) — be conversational like Claude or Grok",
+    "- NEVER use markdown ** for bold — write in plain conversational text instead",
+    "- Use bullet points and numbered lists with plain text, not markdown symbols",
   ];
 
   if (weak.length > 0) {

@@ -2,10 +2,12 @@
 // AI messages get copy-to-clipboard; user image messages show a thumbnail.
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
+import { sanitizeAIResponse } from "../../lib/ai";
 
 export default function MessageBubble({ message }) {
   const [copied, setCopied] = useState(false);
   const isUser = message.role === "user";
+  const content = isUser ? message.content : sanitizeAIResponse(message.content || "");
   const imgs = Array.isArray(message.images)
     ? message.images
     : message.image
