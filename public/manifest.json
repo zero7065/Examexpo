@@ -1,11 +1,11 @@
 {
-  "name": "ExamPadi AI — JAMB & WAEC Prep",
+  "name": "ExamPadi AI — JAMB, WAEC, NECO & NABTEB Prep",
   "short_name": "ExamPadi",
-  "description": "AI-powered exam preparation for JAMB, WAEC, and NABTEB",
+  "description": "AI-powered exam preparation for Nigerian students. Practice past questions, take mock exams, and get AI tutoring for JAMB, WAEC, NECO, NABTEB, POST-UTME, and IELTS.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#07120C",
-  "theme_color": "#6A9A6A",
+  "theme_color": "#4E7A4E",
   "orientation": "portrait",
   "scope": "/",
   "icons": [
@@ -15,24 +15,10 @@
     { "src": "/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
   ],
   "shortcuts": [
-    {
-      "name": "Practice",
-      "short_name": "Practice",
-      "url": "/select",
-      "description": "Start practicing past questions"
-    },
-    {
-      "name": "AI Tutor",
-      "short_name": "AI Tutor",
-      "url": "/ai-tutor",
-      "description": "Get AI-powered help"
-    },
-    {
-      "name": "Mock Exam",
-      "short_name": "Mock Exam",
-      "url": "/mock-exam",
-      "description": "Take a full mock exam"
-    }
+    { "name": "Practice", "short_name": "Practice", "url": "/select", "description": "Start practicing past questions" },
+    { "name": "AI Tutor", "short_name": "AI Tutor", "url": "/ai-tutor", "description": "Get AI-powered help" },
+    { "name": "Mock Exam", "short_name": "Mock Exam", "url": "/mock-exam", "description": "Take a full mock exam" },
+    { "name": "Study Room", "short_name": "Study Room", "url": "/room", "description": "Join a study room" }
   ],
   "categories": ["education"],
   "lang": "en-NG"
