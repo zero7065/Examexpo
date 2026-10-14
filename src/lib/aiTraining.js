@@ -16,8 +16,24 @@ export async function logTrainingEntry({ userId, userEmail, type, systemPrompt, 
       createdAt: new Date().toISOString(),
     });
   } catch (e) {
-    console.warn("[aiTraining] log failed:", e.message);
+    try {
+      const queue = JSON.parse(localStorage.getItem("aiTrainingQueue") || "[]");
+      queue.push({ userId, userEmail, type, systemPrompt, messages, metadata, createdAt: new Date().toISOString() });
+      localStorage.setItem("aiTrainingQueue", JSON.stringify(queue.slice(-200)));
+    } catch { /* storage full */ }
   }
+}
+
+export async function flushTrainingQueue() {
+  if (!db) return;
+  try {
+    const queue = JSON.parse(localStorage.getItem("aiTrainingQueue") || "[]");
+    if (queue.length === 0) return;
+    for (const entry of queue) {
+      await addDoc(collection(db, COLLECTION), entry);
+    }
+    localStorage.removeItem("aiTrainingQueue");
+  } catch { /* will retry later */ }
 }
 
 export async function getTrainingEntries({ userId, type, since, until, limitCount = 100 }) {

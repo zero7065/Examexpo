@@ -60,7 +60,6 @@ export async function checkConnectionHealth() {
 
   const checks = await Promise.all([
     probe(`https://securetoken.googleapis.com/v1/token?key=${FIREBASE_KEY}`, { method: "POST" }),
-    probe(`https://firestore.googleapis.com/v1/projects/${PROJECT}/databases/(default)/documents/stats/global?key=${FIREBASE_KEY}`),
   ]);
 
   const blocked = checks.filter((c) => !c).length;

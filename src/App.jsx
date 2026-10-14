@@ -16,6 +16,7 @@ import { useServiceWorkerUpdate } from "./hooks/useServiceWorkerUpdate";
 import OfflineIndicator from "./components/OfflineIndicator";
 import ContextualHelp from "./components/ContextualHelp";
 import NewUserChecklist from "./components/NewUserChecklist";
+import { flushTrainingQueue } from "./lib/aiTraining";
 
 import GuideFab from "./components/GuideFab";
 
@@ -267,6 +268,7 @@ function App() {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       }
     });
+    flushTrainingQueue().catch(() => {});
     if (isFirebaseConfigured) {
       seedAdminAccount();
     }
