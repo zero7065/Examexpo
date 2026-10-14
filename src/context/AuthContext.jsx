@@ -91,17 +91,22 @@ export function AuthProvider({ children }) {
         retryCount = 0;
       }, (error) => {
         clearTimeout(timeout);
-        console.warn("Auth state error:", error?.code);
         if (cancelled) return;
-        if (retryCount < MAX_RETRIES && error?.code === "auth/network-request-failed") {
+        const code = error?.code || "";
+        if (retryCount < MAX_RETRIES && (code === "auth/network-request-failed" || code === "auth/invalid-credential" || code === "auth/too-many-requests")) {
           retryCount++;
-          console.warn(`Retrying auth listener (${retryCount}/${MAX_RETRIES})...`);
+          console.warn(`Retrying auth listener (${retryCount}/${MAX_RETRIES})... code: ${code}`);
           setTimeout(() => {
             if (!cancelled) {
               if (unsubscribe) unsubscribe();
               startAuthListener();
             }
           }, 2000 * retryCount);
+        } else if (code === "auth/invalid-credential" || code === "auth/user-disabled") {
+          console.warn("Auth token invalid — signing out");
+          signOut(auth).catch(() => {});
+          setUser(null);
+          setLoading(false);
         } else {
           setLoading(false);
         }

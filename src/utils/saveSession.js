@@ -92,19 +92,15 @@ export async function saveSession({ uid, exam, mode, subjects, year, questions, 
   // Update global stats doc
   const statsRef = doc(db, "stats", "global");
   try {
-    await updateDoc(statsRef, {
+    await setDoc(statsRef, {
+      totalUsers: increment(1),
       totalQuestions: increment(total),
       questionsToday: increment(total),
       activePastHour: increment(1),
-    });
+      lastUpdated: serverTimestamp(),
+    }, { merge: true });
   } catch {
-    // Doc doesn't exist yet — create it
-    await setDoc(statsRef, {
-      totalUsers: 1,
-      totalQuestions: total,
-      questionsToday: total,
-      activePastHour: 1,
-    });
+    // Stats write blocked (rules not deployed yet or offline) — non-critical
   }
 
   // Log public activity (non-blocking)
