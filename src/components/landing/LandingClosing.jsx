@@ -7,7 +7,7 @@ const FAQS = [
   { q: "Is ExamPadi AI free?", a: "Yes! The free tier gives you 15 practice questions and 3 AI tutor messages every day, forever. Upgrade to Pro for unlimited access." },
   { q: "Which exams do you cover?", a: "JAMB (UTME), WAEC (SSCE & GCE), NECO and NABTEB, with questions from 2017 to 2026. Coverage is deepest for JAMB and grows every week." },
   { q: "How does the AI Tutor work?", a: "Ask any question in your subjects and get instant step-by-step explanations trained on the West African curriculum. You can even snap a photo of a question (Pro)." },
-  { q: "What do I get with Pro?", a: "Unlimited questions and AI chat, all subjects unlocked, full CBT mock exams, detailed analytics, offline mode and priority support — ₦3,000/month or ₦10,000/year." },
+  { q: "What do I get with Pro?", a: "Unlimited questions and AI chat, all subjects unlocked, full CBT mock exams, detailed analytics, offline mode and priority support — ₦3,000/month or ₦25,000/year." },
   { q: "Does it work offline or on a weak network?", a: "Yes. Questions, progress and the app shell keep working offline, and anything you do syncs automatically when you're back. If your network blocks Google services, the app tells you and keeps working from cache." },
   { q: "Which subjects are available?", a: "English, Mathematics, Physics, Chemistry, Biology, Economics, Government, Geography, Agricultural Science, Literature, Commerce, CRS, Further Mathematics — and more on the way." },
   { q: "Can schools use ExamPadi?", a: "Yes — contact us on WhatsApp for bulk Pro seats, teacher oversight and onboarding support for your school or tutorial centre." },

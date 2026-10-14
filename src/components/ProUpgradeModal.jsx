@@ -181,7 +181,7 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: 4 }}>
               {billing === "yearly" && (
                 <span style={{ fontSize: 16, color: "#FF6B6B", textDecoration: "line-through", fontWeight: 500 }}>
-                  ₦18,000
+                  ₦36,000
                 </span>
               )}
               <span style={{ fontSize: 48, fontWeight: 800, color: "#fff", letterSpacing: "-1px" }}>

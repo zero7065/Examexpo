@@ -195,7 +195,7 @@ const SubjectSelector = () => {
             
             <div className="space-y-4">
               <SummaryItem label="Exam" value={exam} color="text-primary" />
-              <SummaryItem label="Mode" value={mode === "cbt" ? "CBT Simulation" : "Focused Practice"} color="text-accent" />
+              <SummaryItem label="Mode" value={mode === "cbt" ? "Exam Mode" : "Focused Practice"} color="text-accent" />
               <SummaryItem label="Subjects" value={selectedSubjects.length} color="text-text" />
             </div>
 

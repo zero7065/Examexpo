@@ -279,8 +279,8 @@ const PaymentPage = () => {
           </label>
           <label className="text-sm font-bold text-text">Plan
             <select value={teamPlan} onChange={(e) => setTeamPlan(e.target.value)} className="input-field mt-2">
-              <option value="team_monthly">Team Monthly — {formatMoney(1000, currency)}/seat/mo</option>
-              <option value="team_yearly">Team Yearly — {formatMoney(8000, currency)}/seat/yr</option>
+              <option value="team_monthly">Team Monthly — {formatMoney(3000, currency)}/seat/mo</option>
+              <option value="team_yearly">Team Yearly — {formatMoney(25000, currency)} total</option>
             </select>
           </label>
         </div>

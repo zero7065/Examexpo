@@ -37,7 +37,7 @@ const CBTSimulator = () => {
 
   if (!isPro) return (
     <div className="min-h-screen bg-bg flex items-center justify-center p-6">
-      <ProGate feature="Full CBT Simulation" />
+      <ProGate feature="Full Exam Mode" />
     </div>
   );
 
@@ -116,7 +116,7 @@ const CBTSimulator = () => {
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center font-black text-black">E</div>
             <div>
-              <div className="text-[10px] font-black text-text-muted uppercase tracking-widest leading-none mb-1">CBT Simulation</div>
+              <div className="text-[10px] font-black text-text-muted uppercase tracking-widest leading-none mb-1">Exam Mode</div>
               <div className="text-sm font-black text-text">{sessionData.exam} 2025 UTME</div>
             </div>
           </div>
@@ -252,7 +252,7 @@ const CBTSimulator = () => {
               <AlertCircle size={14} /> Exam Mode
             </div>
             <p className="text-[10px] font-bold text-text-muted leading-relaxed italic">
-              AI Tutor is disabled during CBT Simulation. Your results will be analyzed after submission.
+              AI Tutor is disabled during Exam Mode. Your results will be analyzed after submission.
             </p>
           </div>
         </div>

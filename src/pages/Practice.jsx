@@ -129,7 +129,7 @@ export default function Practice() {
             {[
               { id: "practice", label: "Free Practice", icon: BookOpen, desc: "Untimed · Learn at your pace" },
               { id: "timed", label: "Timed Mode", icon: Clock, desc: "30 min countdown · Exam pressure" },
-              { id: "cbt", label: "CBT Mode", icon: Zap, desc: "40 questions · Full simulation" },
+              { id: "cbt", label: "Exam Mode", icon: Zap, desc: "40 questions · Full exam experience" },
             ].map((m) => {
               const Icon = m.icon;
               const isActive = mode === m.id;
@@ -193,7 +193,7 @@ export default function Practice() {
             </div>
             <div style={{ background: "#1a1a1f", borderRadius: 10, padding: 12 }}>
               <div style={{ fontSize: 11, color: "#888", marginBottom: 4 }}>Mode</div>
-              <div style={{ fontWeight: 600, color: "#fff" }}>{mode === "cbt" ? "CBT Simulation" : mode === "timed" ? "Timed" : "Free Practice"}</div>
+              <div style={{ fontWeight: 600, color: "#fff" }}>{mode === "cbt" ? "Exam Mode" : mode === "timed" ? "Timed" : "Free Practice"}</div>
             </div>
             <div style={{ background: "#1a1a1f", borderRadius: 10, padding: 12 }}>
               <div style={{ fontSize: 11, color: "#888", marginBottom: 4 }}>Questions</div>
