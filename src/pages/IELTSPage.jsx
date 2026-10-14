@@ -152,11 +152,34 @@ export default function IELTSPage() {
         </div>
       </section>
 
+      {/* How to Write & Perform */}
+      <section className="glass-card p-5">
+        <h2 className="font-black text-text mb-3">How to Write & Perform in IELTS</h2>
+        <div style={{ display: "grid", gap: 12 }}>
+          {[
+            { step: "1", title: "Before the test", desc: "Sleep well 2 nights before. Eat light. Arrive 30 min early. Bring ID. Do not cram new vocabulary on test day." },
+            { step: "2", title: "Listening strategy", desc: "Read all questions BEFORE the recording starts. Underline keywords. Write answers as you hear them — spelling counts." },
+            { step: "3", title: "Reading strategy", desc: "Skim each passage in 2 min first. Then read questions and scan for answers. Spend max 20 min per passage. TRUE/FALSE/NOT GIVEN: only what the text says." },
+            { step: "4", title: "Writing strategy", desc: "Task 1: 150+ words, describe trends, no opinion. Task 2: 250+ words, clear position, 4 paragraphs. Spend 20 min on Task 1, 40 min on Task 2." },
+            { step: "5", title: "Speaking strategy", desc: "Part 1: answer naturally. Part 2: use the full 2 minutes — structure with First… Then… Finally. Part 3: give extended answers with examples." },
+            { step: "6", title: "After the test", desc: "Results come in 13 days (paper) or 3-5 days (computer). Scores are valid for 2 years. Plan retakes early if needed." },
+          ].map((s) => (
+            <div key={s.step} style={{ display: "flex", gap: 12, padding: "10px 0", borderBottom: "1px solid var(--border)" }}>
+              <div style={{ width: 28, height: 28, borderRadius: "50%", background: "var(--primary)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0 }}>{s.step}</div>
+              <div>
+                <div style={{ fontWeight: 700, color: "var(--text)", fontSize: 14 }}>{s.title}</div>
+                <div style={{ color: "var(--text-muted)", fontSize: 13, lineHeight: 1.5 }}>{s.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="glass-card p-6 text-center" style={{ borderColor: "rgb(var(--primary-rgb) / 0.4)" }}>
         <h2 className="font-black text-text mb-2">Prepare inside ExamPadi</h2>
         <p className="text-sm text-text-muted mb-4" style={{ maxWidth: 520, margin: "0 auto 16px" }}>
-          Starter IELTS practice set, AI explanations for every answer, and a tutor that drills your weakest skill first — the exact strategy migration demands.
+          Full IELTS question bank, AI explanations for every answer, writing feedback, and a tutor that drills your weakest skill first.
         </p>
         <div className="flex gap-2 justify-center flex-wrap">
           <button onClick={startPractice} className="btn-primary" disabled={practicing}>

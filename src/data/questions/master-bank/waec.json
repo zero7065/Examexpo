@@ -1,3517 +1,4017 @@
 [
- {
-  "id": "waec-2026-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Comprehension",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2026,
-  "difficulty": "hard",
-  "question": "From the passage, the main challenge facing renewable energy adoption is:",
-  "options": {
-   "A": "High cost",
-   "B": "Lack of technology",
-   "C": "Government policy",
-   "D": "Public awareness"
-  },
-  "correctAnswer": "A",
-  "explanation": "The passage emphasizes high initial costs as the main barrier to renewable energy adoption.",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.581Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023,
-   2026
-  ]
- },
- {
-  "id": "waec-2026-math-001",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2026,
-  "difficulty": "easy",
-  "question": "Solve: 2x + 5 = 15",
-  "options": {
-   "A": "x = 5",
-   "B": "x = 10",
-   "C": "x = 7.5",
-   "D": "x = 4"
-  },
-  "correctAnswer": "A",
-  "explanation": "2x = 15-5 = 10, so x = 10/2 = 5.",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.582Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2021,
-   2022,
-   2025,
-   2026
-  ]
- },
- {
-  "id": "waec-2022-biol-001",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "Which organelle is responsible for ATP production?",
-  "options": {
-   "A": "Nucleus",
-   "B": "Mitochondria",
-   "C": "Ribosome",
-   "D": "Golgi apparatus"
-  },
-  "correctAnswer": "B",
-  "explanation": "The mitochondria is the powerhouse of the cell, producing ATP through cellular respiration via the Krebs cycle and oxidative phosphorylation.",
-  "hint": "Think about energy currency in the cell",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.587Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2023-biol-001",
-  "subject": "Biology",
-  "topic": "Genetics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "In Mendelian genetics, if two heterozygous tall plants (Tt) are crossed, what is the probability of offspring being homozygous recessive?",
-  "options": {
-   "A": "1/4",
-   "B": "1/2",
-   "C": "3/4",
-   "D": "1"
-  },
-  "correctAnswer": "A",
-  "explanation": "Tt x Tt gives TT:Tt:tt in 1:2:1 ratio. Homozygous recessive (tt) probability = 1/4 or 25%.",
-  "hint": "Use a Punnett square",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.587Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2022-biol-002",
-  "subject": "Biology",
-  "topic": "Human Physiology",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "Which part of the nephron is responsible for water reabsorption under ADH influence?",
-  "options": {
-   "A": "Bowman's capsule",
-   "B": "Loop of Henle",
-   "C": "Collecting duct",
-   "D": "Proximal convoluted tubule"
-  },
-  "correctAnswer": "C",
-  "explanation": "The collecting duct is where ADH acts to increase water reabsorption, concentrating the urine and conserving body water.",
-  "hint": "ADH targets this final area",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.588Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "waec-2023-biol-002",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "hard",
-  "question": "Which process describes the movement of water molecules from a region of higher water potential to lower water potential through a semi-permeable membrane?",
-  "options": {
-   "A": "Diffusion",
-   "B": "Active transport",
-   "C": "Osmosis",
-   "D": "Facilitated diffusion"
-  },
-  "correctAnswer": "C",
-  "explanation": "Osmosis is the specific diffusion of water molecules across a semi-permeable membrane down the water potential gradient.",
-  "hint": "It involves water and a membrane",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.588Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-biol-001",
-  "subject": "Biology",
-  "topic": "Genetics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "A woman with blood group O marries a man with blood group AB. What blood groups are possible in their children?",
-  "options": {
-   "A": "A and B only",
-   "B": "A, B and O",
-   "C": "A, B, AB and O",
-   "D": "AB only"
-  },
-  "correctAnswer": "A",
-  "explanation": "Blood group O (OO) × AB (AB): children inherit either A (AO) or B (BO). AB and O are not possible.",
-  "hint": "Work with the alleles",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.589Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2020-biol-001",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "Which organelle contains digestive enzymes for breaking down cellular waste?",
-  "options": {
-   "A": "Ribosome",
-   "B": "Lysosome",
-   "C": "Smooth ER",
-   "D": "Nucleolus"
-  },
-  "correctAnswer": "B",
-  "explanation": "Lysosomes contain hydrolytic enzymes that break down waste materials, cellular debris, and pathogens through phagocytosis.",
-  "hint": "Think of it as the cell's recycling bin",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.589Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2022-biol-003",
-  "subject": "Biology",
-  "topic": "Human Physiology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "Which part of the brain controls balance and coordination?",
-  "options": {
-   "A": "Cerebrum",
-   "B": "Cerebellum",
-   "C": "Medulla oblongata",
-   "D": "Hypothalamus"
-  },
-  "correctAnswer": "B",
-  "explanation": "The cerebellum coordinates voluntary movements, balance, and fine motor control by integrating sensory information.",
-  "hint": "Think about standing on one leg",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.590Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "waec-2021-biol-002",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "hard",
-  "question": "During which phase of mitosis do chromosomes align at the equator?",
-  "options": {
-   "A": "Prophase",
-   "B": "Metaphase",
-   "C": "Anaphase",
-   "D": "Telophase"
-  },
-  "correctAnswer": "B",
-  "explanation": "During metaphase, spindle fibers align all chromosomes along the metaphase plate (equator) before separation.",
-  "hint": "M for 'middle' or 'meet at the middle'",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.591Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2020-biol-002",
-  "subject": "Biology",
-  "topic": "Genetics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "If a colour-blind man marries a woman who is a carrier, what is the chance their son will be colour-blind?",
-  "options": {
-   "A": "25%",
-   "B": "50%",
-   "C": "75%",
-   "D": "100%"
-  },
-  "correctAnswer": "B",
-  "explanation": "The man passes Y to sons (not X^c). The mother can pass X^c or X. Sons get Y from father, X from mother. If mother passes X^c, son is colour-blind. So 50% chance.",
-  "hint": "X-linked recessive means sons inherit from mother",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.591Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2022-chem-001",
-  "subject": "Chemistry",
-  "topic": "Atomic Structure",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "What is the maximum number of electrons that can occupy the third energy level?",
-  "options": {
-   "A": "8",
-   "B": "18",
-   "C": "32",
-   "D": "2"
-  },
-  "correctAnswer": "B",
-  "explanation": "The third energy level (n=3) has s, p, and d sublevels, holding 2 + 6 + 10 = 18 electrons maximum.",
-  "hint": "Formula: 2n²",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.591Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-chem-001",
-  "subject": "Chemistry",
-  "topic": "Chemical Bonding",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "Which type of bond involves the sharing of electrons between atoms?",
-  "options": {
-   "A": "Ionic",
-   "B": "Covalent",
-   "C": "Metallic",
-   "D": "Hydrogen"
-  },
-  "correctAnswer": "B",
-  "explanation": "Covalent bonds form when atoms share one or more pairs of electrons to achieve a stable electron configuration.",
-  "hint": "Sharing is caring",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.591Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2022-chem-002",
-  "subject": "Chemistry",
-  "topic": "Organic Chemistry",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "The general formula for alkanes is?",
-  "options": {
-   "A": "CₙH₂ₙ₊₂",
-   "B": "CₙH₂ₙ",
-   "C": "CₙH₂ₙ₋₂",
-   "D": "CₙH₂ₙ₊₁OH"
-  },
-  "correctAnswer": "A",
-  "explanation": "Alkanes are saturated hydrocarbons with single bonds only. Each carbon has 2 hydrogens plus 2 extra at ends: CₙH₂ₙ₊₂.",
-  "hint": "Saturated = maximum hydrogen",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.591Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-chem-002",
-  "subject": "Chemistry",
-  "topic": "Atomic Structure",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "Isotopes of the same element differ in their number of?",
-  "options": {
-   "A": "Protons",
-   "B": "Neutrons",
-   "C": "Electrons",
-   "D": "Protons and electrons"
-  },
-  "correctAnswer": "B",
-  "explanation": "Isotopes have the same number of protons (same element) but different numbers of neutrons, thus different mass numbers.",
-  "hint": "Same element, different mass",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.592Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2020-chem-001",
-  "subject": "Chemistry",
-  "topic": "Atomic Structure",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "The number of protons in an atom is called the?",
-  "options": {
-   "A": "Mass number",
-   "B": "Atomic number",
-   "C": "Avogadro's number",
-   "D": "Oxidation number"
-  },
-  "correctAnswer": "B",
-  "explanation": "The atomic number (Z) equals the number of protons in the nucleus and uniquely identifies each element.",
-  "hint": "It's the element's ID number",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.592Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-chem-003",
-  "subject": "Chemistry",
-  "topic": "Chemical Bonding",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "hard",
-  "question": "Which intermolecular force is strongest?",
-  "options": {
-   "A": "London dispersion",
-   "B": "Dipole-dipole",
-   "C": "Hydrogen bonding",
-   "D": "Ionic"
-  },
-  "correctAnswer": "C",
-  "explanation": "Hydrogen bonding is the strongest intermolecular force, occurring between H and highly electronegative atoms (N, O, F).",
-  "hint": "It involves H with N, O, or F",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.592Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2023-chem-001",
-  "subject": "Chemistry",
-  "topic": "Atomic Structure",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "What is the mass number of an atom with 12 protons and 12 neutrons?",
-  "options": {
-   "A": "12",
-   "B": "24",
-   "C": "36",
-   "D": "48"
-  },
-  "correctAnswer": "B",
-  "explanation": "Mass number = protons + neutrons = 12 + 12 = 24. This atom is a magnesium isotope.",
-  "hint": "Add protons and neutrons",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.592Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2022-phys-001",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "The SI unit of force is?",
-  "options": {
-   "A": "Joule",
-   "B": "Newton",
-   "C": "Pascal",
-   "D": "Watt"
-  },
-  "correctAnswer": "B",
-  "explanation": "The Newton (N) is the SI unit of force, defined as the force needed to accelerate 1 kg mass at 1 m/s².",
-  "hint": "Named after a scientist with an apple",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.592Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2021,
-   2022,
-   2024,
-   2025
-  ]
- },
- {
-  "id": "waec-2021-phys-001",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "A car accelerates uniformly from rest to 20 m/s in 5 seconds. What is its acceleration?",
-  "options": {
-   "A": "4 m/s²",
-   "B": "5 m/s²",
-   "C": "10 m/s²",
-   "D": "20 m/s²"
-  },
-  "correctAnswer": "A",
-  "explanation": "a = (v - u)/t = (20 - 0)/5 = 4 m/s².",
-  "hint": "Change in velocity over time",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.593Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2021,
-   2022,
-   2024,
-   2025
-  ]
- },
- {
-  "id": "waec-2022-phys-002",
-  "subject": "Physics",
-  "topic": "Light",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "What type of lens is used to correct short-sightedness?",
-  "options": {
-   "A": "Convex",
-   "B": "Concave",
-   "C": "Cylindrical",
-   "D": "Bifocal"
-  },
-  "correctAnswer": "B",
-  "explanation": "Concave (diverging) lenses correct short-sightedness (myopia) by diverging light rays before they enter the eye.",
-  "hint": "It's thinner at the centre",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.593Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2021,
-   2022,
-   2024
-  ]
- },
- {
-  "id": "waec-2020-phys-001",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "What is the kinetic energy of a 2 kg object moving at 3 m/s?",
-  "options": {
-   "A": "6 J",
-   "B": "9 J",
-   "C": "18 J",
-   "D": "3 J"
-  },
-  "correctAnswer": "B",
-  "explanation": "KE = ½mv² = ½ × 2 × 3² = 1 × 9 = 9 J.",
-  "hint": "Half mass times velocity squared",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.593Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2021,
-   2022,
-   2024,
-   2025
-  ]
- },
- {
-  "id": "waec-2023-phys-001",
-  "subject": "Physics",
-  "topic": "Waves",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "Which type of wave is sound?",
-  "options": {
-   "A": "Transverse",
-   "B": "Longitudinal",
-   "C": "Electromagnetic",
-   "D": "Surface"
-  },
-  "correctAnswer": "B",
-  "explanation": "Sound is a longitudinal wave where particles vibrate parallel to the direction of wave propagation, creating compressions and rarefactions.",
-  "hint": "Compression and rarefaction",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.593Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2023,
-   2024
-  ]
- },
- {
-  "id": "waec-2021-phys-002",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "Newton's third law states that:",
-  "options": {
-   "A": "F = ma",
-   "B": "Every action has an equal opposite reaction",
-   "C": "Objects in motion stay in motion",
-   "D": "Energy is conserved"
-  },
-  "correctAnswer": "B",
-  "explanation": "Newton's Third Law: For every action force, there is an equal and opposite reaction force. Forces always come in pairs.",
-  "hint": "Action-reaction pairs",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.593Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2021,
-   2022,
-   2024,
-   2025
-  ]
- },
- {
-  "id": "waec-2021-phys-003",
-  "subject": "Physics",
-  "topic": "Light",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "What colour is produced when red and green light mix?",
-  "options": {
-   "A": "Blue",
-   "B": "Yellow",
-   "C": "White",
-   "D": "Purple"
-  },
-  "correctAnswer": "B",
-  "explanation": "Red and green are additive primary colours that combine to form yellow. On a screen, red + green pixels appear yellow.",
-  "hint": "Think of traffic light colours",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.593Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2021,
-   2022,
-   2024
-  ]
- },
- {
-  "id": "waec-2022-math-001",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "Solve for x: 2x + 5 = 15",
-  "options": {
-   "A": "5",
-   "B": "10",
-   "C": "7.5",
-   "D": "20"
-  },
-  "correctAnswer": "A",
-  "explanation": "2x + 5 = 15 => 2x = 10 => x = 5.",
-  "hint": "Isolate the variable",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.594Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2021,
-   2022,
-   2025,
-   2026
-  ]
- },
- {
-  "id": "waec-2021-math-001",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "Factorise x² - 5x + 6",
-  "options": {
-   "A": "(x-2)(x-3)",
-   "B": "(x+2)(x+3)",
-   "C": "(x-1)(x-6)",
-   "D": "(x+1)(x+6)"
-  },
-  "correctAnswer": "A",
-  "explanation": "x² - 5x + 6 = (x-2)(x-3) because -2 × -3 = 6 and -2 + -3 = -5.",
-  "hint": "Find factors of 6 that sum to -5",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.594Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2021,
-   2022,
-   2025,
-   2026
-  ]
- },
- {
-  "id": "waec-2022-math-002",
-  "subject": "Mathematics",
-  "topic": "Geometry",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "What is the area of a triangle with base 8 cm and height 6 cm?",
-  "options": {
-   "A": "48 cm²",
-   "B": "24 cm²",
-   "C": "14 cm²",
-   "D": "28 cm²"
-  },
-  "correctAnswer": "B",
-  "explanation": "Area = ½ × base × height = ½ × 8 × 6 = 24 cm².",
-  "hint": "Half base times height",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.594Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-math-002",
-  "subject": "Mathematics",
-  "topic": "Trigonometry",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "What is tan 45°?",
-  "options": {
-   "A": "0",
-   "B": "1",
-   "C": "√2",
-   "D": "½"
-  },
-  "correctAnswer": "B",
-  "explanation": "tan 45° = sin 45°/cos 45° = (√2/2)/(√2/2) = 1.",
-  "hint": "Sides of a right isosceles triangle",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.594Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2023
-  ]
- },
- {
-  "id": "waec-2023-math-001",
-  "subject": "Mathematics",
-  "topic": "Geometry",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "hard",
-  "question": "The volume of a cylinder with radius 7 cm and height 10 cm is? (π = 22/7)",
-  "options": {
-   "A": "1540 cm³",
-   "B": "154 cm³",
-   "C": "220 cm³",
-   "D": "15400 cm³"
-  },
-  "correctAnswer": "A",
-  "explanation": "Volume = πr²h = 22/7 × 7² × 10 = 22/7 × 49 × 10 = 22 × 70 = 1540 cm³.",
-  "hint": "Area of circle × height",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.595Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-math-003",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "easy",
-  "question": "Simplify: (3x²)(2x³)",
-  "options": {
-   "A": "5x⁵",
-   "B": "6x⁵",
-   "C": "5x⁶",
-   "D": "6x⁶"
-  },
-  "correctAnswer": "B",
-  "explanation": "3 × 2 = 6 and x² × x³ = x^(2+3) = x⁵. So (3x²)(2x³) = 6x⁵.",
-  "hint": "Multiply coefficients, add exponents",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.595Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2021,
-   2022,
-   2025,
-   2026
-  ]
- },
- {
-  "id": "waec-2019-math-001",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "medium",
-  "question": "Solve the equation: 3x - 7 = 2x + 5",
-  "options": {
-   "A": "2",
-   "B": "7",
-   "C": "12",
-   "D": "5"
-  },
-  "correctAnswer": "C",
-  "explanation": "3x - 2x = 5 + 7 => x = 12.",
-  "hint": "Collect like terms",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.595Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2021,
-   2022,
-   2025,
-   2026
-  ]
- },
- {
-  "id": "waec-2021-math-004",
-  "subject": "Mathematics",
-  "topic": "Statistics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "What is the range of: 4, 8, 15, 16, 23, 42?",
-  "options": {
-   "A": "23",
-   "B": "38",
-   "C": "42",
-   "D": "46"
-  },
-  "correctAnswer": "B",
-  "explanation": "Range = highest - lowest = 42 - 4 = 38.",
-  "hint": "Max minus min",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.595Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2022-engl-001",
-  "subject": "English",
-  "topic": "Comprehension",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "Choose the word closest in meaning to 'benevolent'",
-  "options": {
-   "A": "Cruel",
-   "B": "Kind",
-   "C": "Strict",
-   "D": "Weak"
-  },
-  "correctAnswer": "B",
-  "explanation": "Benevolent means well-meaning, kindly, or generous. It derives from Latin 'bene' (well) and 'volent' (wishing).",
-  "hint": "A benevolent leader is good to their people",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.595Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022
-  ]
- },
- {
-  "id": "waec-2021-engl-001",
-  "subject": "English",
-  "topic": "Vocabulary",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "hard",
-  "question": "The word 'ephemeral' most nearly means:",
-  "options": {
-   "A": "Eternal",
-   "B": "Short-lived",
-   "C": "Hidden",
-   "D": "Beautiful"
-  },
-  "correctAnswer": "B",
-  "explanation": "Ephemeral means lasting for a very short time, from Greek 'ephemeros' (lasting only a day). Synonyms: fleeting, transient.",
-  "hint": "Think of a mayfly's lifespan",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.596Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "waec-2022-engl-002",
-  "subject": "English",
-  "topic": "Grammar",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "Choose the correct form: 'She ___ to school every day.'",
-  "options": {
-   "A": "go",
-   "B": "goes",
-   "C": "going",
-   "D": "gone"
-  },
-  "correctAnswer": "B",
-  "explanation": "In the simple present tense, third-person singular subjects take 'goes' as the verb form.",
-  "hint": "Third person singular",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.596Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2022
-  ]
- },
- {
-  "id": "waec-2021-engl-002",
-  "subject": "English",
-  "topic": "Grammar",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "hard",
-  "question": "Identify the tense: 'By next year, she will have graduated.'",
-  "options": {
-   "A": "Future simple",
-   "B": "Future perfect",
-   "C": "Future continuous",
-   "D": "Present perfect"
-  },
-  "correctAnswer": "B",
-  "explanation": "Future perfect tense (will have + past participle) indicates an action completed before a specified future time.",
-  "hint": "Will have done",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.596Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2022
-  ]
- },
- {
-  "id": "waec-2021-engl-003",
-  "subject": "English",
-  "topic": "Vocabulary",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "The word 'ubiquitous' means:",
-  "options": {
-   "A": "Rare",
-   "B": "Everywhere",
-   "C": "Unique",
-   "D": "Invisible"
-  },
-  "correctAnswer": "B",
-  "explanation": "Ubiquitous means present, appearing, or found everywhere. From Latin 'ubique' (everywhere).",
-  "hint": "Think of smartphones today",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.596Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "waec-2020-engl-001",
-  "subject": "English",
-  "topic": "Comprehension",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "easy",
-  "question": "A 'bibliophile' is a person who:",
-  "options": {
-   "A": "Writes books",
-   "B": "Loves books",
-   "C": "Sells books",
-   "D": "Destroys books"
-  },
-  "correctAnswer": "B",
-  "explanation": "A bibliophile is a person who collects or has a great love of books (Greek 'biblion' = book, 'philos' = loving).",
-  "hint": "Phile = love",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.597Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022
-  ]
- },
- {
-  "id": "waec-2021-engl-004",
-  "subject": "English",
-  "topic": "Comprehension",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "What does the idiom 'bite the bullet' mean?",
-  "options": {
-   "A": "Eat quickly",
-   "B": "Face a difficult situation",
-   "C": "Break something",
-   "D": "Make a decision"
-  },
-  "correctAnswer": "B",
-  "explanation": "To 'bite the bullet' means to endure a painful or unpleasant situation with courage and fortitude.",
-  "hint": "Surgery without anaesthetic",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.597Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022
-  ]
- },
- {
-  "id": "waec-2022-econ-001",
-  "subject": "Economics",
-  "topic": "Microeconomics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "The basic economic problem of scarcity arises because:",
-  "options": {
-   "A": "Resources are unlimited but wants are limited",
-   "B": "Resources are limited but wants are unlimited",
-   "C": "Both resources and wants are unlimited",
-   "D": "Neither resources nor wants are limited"
-  },
-  "correctAnswer": "B",
-  "explanation": "Scarcity exists because human wants are infinite but the resources to satisfy them are finite.",
-  "hint": "Limited resources, unlimited wants",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.597Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-econ-001",
-  "subject": "Economics",
-  "topic": "Microeconomics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "The law of demand states that as price increases:",
-  "options": {
-   "A": "Quantity demanded increases",
-   "B": "Quantity demanded decreases",
-   "C": "Supply increases",
-   "D": "Supply decreases"
-  },
-  "correctAnswer": "B",
-  "explanation": "The law of demand: there is an inverse relationship between price and quantity demanded, ceteris paribus.",
-  "hint": "Higher price, lower demand",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.598Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2023-econ-001",
-  "subject": "Economics",
-  "topic": "Microeconomics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "At equilibrium price:",
-  "options": {
-   "A": "Quantity demanded exceeds quantity supplied",
-   "B": "Quantity supplied equals quantity demanded",
-   "C": "Quantity supplied exceeds quantity demanded",
-   "D": "There is excess demand"
-  },
-  "correctAnswer": "B",
-  "explanation": "Market equilibrium occurs where quantity demanded equals quantity supplied, with no tendency for price to change.",
-  "hint": "Balanced market",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.598Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2020-econ-001",
-  "subject": "Economics",
-  "topic": "Microeconomics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "A market structure with many sellers selling identical products is called:",
-  "options": {
-   "A": "Monopoly",
-   "B": "Oligopoly",
-   "C": "Perfect competition",
-   "D": "Monopolistic competition"
-  },
-  "correctAnswer": "C",
-  "explanation": "Perfect competition has many buyers and sellers, homogeneous products, perfect information, and free entry/exit.",
-  "hint": "Many firms, same product",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.598Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2022-econ-002",
-  "subject": "Economics",
-  "topic": "Macroeconomics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "hard",
-  "question": "If the MPC is 0.8, what is the multiplier?",
-  "options": {
-   "A": "1.25",
-   "B": "5",
-   "C": "8",
-   "D": "2.5"
-  },
-  "correctAnswer": "B",
-  "explanation": "Multiplier = 1/(1-MPC) = 1/0.2 = 5. A change in spending will be multiplied 5 times.",
-  "hint": "One over one minus MPC",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.598Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "waec-2022-econ-003",
-  "subject": "Economics",
-  "topic": "Microeconomics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "Price elasticity of demand measures:",
-  "options": {
-   "A": "Responsiveness of supply to price changes",
-   "B": "Responsiveness of demand to price changes",
-   "C": "Change in income over time",
-   "D": "Market size"
-  },
-  "correctAnswer": "B",
-  "explanation": "Price elasticity of demand measures how much quantity demanded responds to a change in price.",
-  "hint": "How sensitive are buyers to price",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.598Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2023-econ-002",
-  "subject": "Economics",
-  "topic": "Microeconomics",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "hard",
-  "question": "What is the profit-maximizing rule for a firm?",
-  "options": {
-   "A": "MR = MC",
-   "B": "P = ATC",
-   "C": "TR = TC",
-   "D": "AR = AC"
-  },
-  "correctAnswer": "A",
-  "explanation": "Firms maximize profit by producing where marginal revenue equals marginal cost (MR = MC).",
-  "hint": "Additional revenue equals additional cost",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.598Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2022-gove-001",
-  "subject": "Government",
-  "topic": "Political Systems",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "The highest law of a country is called the:",
-  "options": {
-   "A": "Decree",
-   "B": "Constitution",
-   "C": "Bill",
-   "D": "Act"
-  },
-  "correctAnswer": "B",
-  "explanation": "A constitution is the supreme law of the land, establishing the framework for government and fundamental rights.",
-  "hint": "The supreme legal document",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.599Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2022
-  ]
- },
- {
-  "id": "waec-2021-gove-001",
-  "subject": "Government",
-  "topic": "Constitution",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "The 1999 Nigerian Constitution provides for how many tiers of government?",
-  "options": {
-   "A": "2",
-   "B": "3",
-   "C": "4",
-   "D": "5"
-  },
-  "correctAnswer": "B",
-  "explanation": "Nigeria operates a three-tier federal system: Federal, State, and Local Governments.",
-  "hint": "Federal, State, Local",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.599Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2023
-  ]
- },
- {
-  "id": "waec-2023-gove-001",
-  "subject": "Government",
-  "topic": "Constitution",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "Nigerian citizenship can be acquired through:",
-  "options": {
-   "A": "Only birth",
-   "B": "Birth, registration, naturalization",
-   "C": "Only marriage",
-   "D": "Only naturalization"
-  },
-  "correctAnswer": "B",
-  "explanation": "Nigerian citizenship is acquired by birth, registration (for those with Nigerian ancestry), or naturalization (for foreign residents).",
-  "hint": "Three ways to belong",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.599Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2023
-  ]
- },
- {
-  "id": "waec-2022-gove-002",
-  "subject": "Government",
-  "topic": "Political Systems",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "hard",
-  "question": "The concept of separation of powers was popularized by:",
-  "options": {
-   "A": "John Locke",
-   "B": "Baron de Montesquieu",
-   "C": "Thomas Hobbes",
-   "D": "Jean-Jacques Rousseau"
-  },
-  "correctAnswer": "B",
-  "explanation": "Montesquieu's 'The Spirit of the Laws' (1748) articulated the separation of powers into executive, legislative, and judicial branches.",
-  "hint": "French philosopher",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.599Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2022
-  ]
- },
- {
-  "id": "waec-2021-gove-002",
-  "subject": "Government",
-  "topic": "Political Systems",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "A political party is primarily formed to:",
-  "options": {
-   "A": "Make profits",
-   "B": "Win elections and govern",
-   "C": "Provide social services",
-   "D": "Educate citizens"
-  },
-  "correctAnswer": "B",
-  "explanation": "Political parties are organized groups that seek to win political power through elections and form government to implement their policies.",
-  "hint": "Seeking power through votes",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.600Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2022
-  ]
- },
- {
-  "id": "waec-2021-gove-003",
-  "subject": "Government",
-  "topic": "Constitution",
-  "exam": [
-   "JAMB",
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "hard",
-  "question": "The process of removing a president from office is called:",
-  "options": {
-   "A": "Recall",
-   "B": "Impeachment",
-   "C": "Vote of no confidence",
-   "D": "Censure"
-  },
-  "correctAnswer": "B",
-  "explanation": "Impeachment is the constitutional process by which a legislature charges and removes a president or other high official for misconduct.",
-  "hint": "Official removal process",
-  "source": "past",
-  "createdAt": "2026-10-11T08:13:53.600Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2023
-  ]
- },
- {
-  "id": "waec-2019-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Grammar",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "medium",
-  "question": "Choose the correct option: 'The teacher, along with the students, ___ arrived.'",
-  "options": {
-   "A": "have",
-   "B": "has",
-   "C": "are",
-   "D": "were"
-  },
-  "correctAnswer": "B",
-  "explanation": "Phrases like 'along with' don't change the singular subject 'teacher' → 'has'.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.618Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2024
-  ]
- },
- {
-  "id": "waec-2020-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Synonyms",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "easy",
-  "question": "Which word is closest in meaning to 'rapid'?",
-  "options": {
-   "A": "Slow",
-   "B": "Swift",
-   "C": "Late",
-   "D": "Calm"
-  },
-  "correctAnswer": "B",
-  "explanation": "Rapid and swift both mean fast.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.618Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2020
-  ]
- },
- {
-  "id": "waec-2021-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Antonyms",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "easy",
-  "question": "Opposite of 'generous':",
-  "options": {
-   "A": "Kind",
-   "B": "Stingy",
-   "C": "Rich",
-   "D": "Polite"
-  },
-  "correctAnswer": "B",
-  "explanation": "Stingy (unwilling to give) opposes generous.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.618Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2023
-  ]
- },
- {
-  "id": "waec-2019-math-002",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "Solve: 5x = 45",
-  "options": {
-   "A": "5",
-   "B": "8",
-   "C": "9",
-   "D": "40"
-  },
-  "correctAnswer": "C",
-  "explanation": "x = 45/5 = 9.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.618Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2021,
-   2022,
-   2025,
-   2026
-  ]
- },
- {
-  "id": "waec-2020-math-001",
-  "subject": "Mathematics",
-  "topic": "Geometry",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "The angles of a triangle are in ratio 1:2:3. The largest angle is:",
-  "options": {
-   "A": "60°",
-   "B": "90°",
-   "C": "120°",
-   "D": "100°"
-  },
-  "correctAnswer": "B",
-  "explanation": "Total parts 6; largest = 3/6 × 180° = 90°.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.618Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-math-005",
-  "subject": "Mathematics",
-  "topic": "Statistics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "Find the mean of 10, 20, 30",
-  "options": {
-   "A": "15",
-   "B": "20",
-   "C": "30",
-   "D": "60"
-  },
-  "correctAnswer": "B",
-  "explanation": "(10+20+30)/3 = 60/3 = 20.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2019-biol-001",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "The site of photosynthesis is the:",
-  "options": {
-   "A": "Mitochondrion",
-   "B": "Chloroplast",
-   "C": "Nucleus",
-   "D": "Ribosome"
-  },
-  "correctAnswer": "B",
-  "explanation": "Chlorophyll in chloroplasts captures light energy.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2020-biol-003",
-  "subject": "Biology",
-  "topic": "Ecology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "Which organisms are primary consumers?",
-  "options": {
-   "A": "Grasses",
-   "B": "Grasshoppers",
-   "C": "Frogs",
-   "D": "Hawks"
-  },
-  "correctAnswer": "B",
-  "explanation": "Herbivores feeding directly on producers are primary consumers.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2019-chem-001",
-  "subject": "Chemistry",
-  "topic": "Atomic Structure",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "The lightest element is:",
-  "options": {
-   "A": "Helium",
-   "B": "Hydrogen",
-   "C": "Lithium",
-   "D": "Oxygen"
-  },
-  "correctAnswer": "B",
-  "explanation": "Hydrogen (atomic number 1) is the lightest element.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-chem-004",
-  "subject": "Chemistry",
-  "topic": "Acids and Bases",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "Which gas turns damp red litmus blue?",
-  "options": {
-   "A": "CO₂",
-   "B": "SO₂",
-   "C": "NH₃",
-   "D": "HCl"
-  },
-  "correctAnswer": "C",
-  "explanation": "Ammonia is alkaline and turns red litmus blue.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2021,
-   2022,
-   2025
-  ]
- },
- {
-  "id": "waec-2020-phys-002",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "easy",
-  "question": "The SI unit of mass is the:",
-  "options": {
-   "A": "Gram",
-   "B": "Kilogram",
-   "C": "Tonne",
-   "D": "Pound"
-  },
-  "correctAnswer": "B",
-  "explanation": "The kilogram is the SI base unit of mass.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2021,
-   2022,
-   2024,
-   2025
-  ]
- },
- {
-  "id": "waec-2022-phys-003",
-  "subject": "Physics",
-  "topic": "Electricity",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "A fuse protects circuits by:",
-  "options": {
-   "A": "Increasing current",
-   "B": "Melting to break excess current",
-   "C": "Storing charge",
-   "D": "Raising voltage"
-  },
-  "correctAnswer": "B",
-  "explanation": "The fuse wire melts when current exceeds its rating, opening the circuit.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2022
-  ]
- },
- {
-  "id": "waec-2022-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Idioms",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "What does 'to burn the midnight oil' mean?",
-  "options": {
-   "A": "To waste fuel",
-   "B": "To study late into the night",
-   "C": "To cook dinner",
-   "D": "To light a lamp"
-  },
-  "correctAnswer": "B",
-  "explanation": "It means working or studying late at night.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "waec-2023-math-002",
-  "subject": "Mathematics",
-  "topic": "Trigonometry",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "If sin θ = 1/2 and θ is acute, θ equals:",
-  "options": {
-   "A": "30°",
-   "B": "45°",
-   "C": "60°",
-   "D": "90°"
-  },
-  "correctAnswer": "A",
-  "explanation": "sin 30° = 1/2.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2023
-  ]
- },
- {
-  "id": "waec-2022-biol-004",
-  "subject": "Biology",
-  "topic": "Genetics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "The molecule that carries amino acids to ribosomes is:",
-  "options": {
-   "A": "mRNA",
-   "B": "tRNA",
-   "C": "rRNA",
-   "D": "DNA"
-  },
-  "correctAnswer": "B",
-  "explanation": "Transfer RNA delivers amino acids during translation.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2023-chem-002",
-  "subject": "Chemistry",
-  "topic": "Organic Chemistry",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "easy",
-  "question": "The test for hydrogen gas is that it:",
-  "options": {
-   "A": "Relights a glowing splint",
-   "B": "Burns with a pop sound",
-   "C": "Turns limewater milky",
-   "D": "Bleaches litmus"
-  },
-  "correctAnswer": "B",
-  "explanation": "Hydrogen burns with a characteristic squeaky pop.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2024-phys-001",
-  "subject": "Physics",
-  "topic": "Waves",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "Which colour of light has the longest wavelength?",
-  "options": {
-   "A": "Violet",
-   "B": "Green",
-   "C": "Yellow",
-   "D": "Red"
-  },
-  "correctAnswer": "D",
-  "explanation": "Red light (~700 nm) has the longest visible wavelength.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2023,
-   2024
-  ]
- },
- {
-  "id": "waec-2024-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Grammar",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "hard",
-  "question": "Choose the correct option: 'Had I known, I ___ come earlier.'",
-  "options": {
-   "A": "will",
-   "B": "would have",
-   "C": "shall",
-   "D": "can"
-  },
-  "correctAnswer": "B",
-  "explanation": "Third conditional for past regret: 'would have' + past participle.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2024
-  ]
- },
- {
-  "id": "waec-2025-math-001",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "Solve: x/3 + x/2 = 5",
-  "options": {
-   "A": "2",
-   "B": "5",
-   "C": "6",
-   "D": "30"
-  },
-  "correctAnswer": "C",
-  "explanation": "Multiply by 6: 2x + 3x = 30 → 5x = 30 → x = 6.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.619Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2021,
-   2022,
-   2025,
-   2026
-  ]
- },
- {
-  "id": "waec-2025-biol-001",
-  "subject": "Biology",
-  "topic": "Nutrition",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2025,
-  "difficulty": "easy",
-  "question": "Which nutrient builds body tissues?",
-  "options": {
-   "A": "Carbohydrate",
-   "B": "Protein",
-   "C": "Fat",
-   "D": "Vitamin"
-  },
-  "correctAnswer": "B",
-  "explanation": "Proteins supply amino acids for growth and repair.",
-  "source": "seed",
-  "createdAt": "2026-10-11T08:36:17.620Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023,
-   2025
-  ]
- },
- {
-  "id": "waec-2018-phys-001",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2018,
-  "difficulty": "easy",
-  "question": "Which of these is a vector quantity?",
-  "options": {
-   "A": "Speed",
-   "B": "Distance",
-   "C": "Velocity",
-   "D": "Time"
-  },
-  "correctAnswer": "C",
-  "explanation": "Velocity has magnitude and direction; the rest are scalars.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.551Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2021,
-   2022,
-   2024,
-   2025
-  ]
- },
- {
-  "id": "waec-2018-phys-002",
-  "subject": "Physics",
-  "topic": "Electricity",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2018,
-  "difficulty": "medium",
-  "question": "A wire of resistance 6 Ω is cut into two equal parts and joined in parallel. The new resistance is:",
-  "options": {
-   "A": "12 Ω",
-   "B": "6 Ω",
-   "C": "3 Ω",
-   "D": "1.5 Ω"
-  },
-  "correctAnswer": "D",
-  "explanation": "Each half is 3 Ω; parallel gives (3×3)/(3+3) = 1.5 Ω.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.554Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2022
-  ]
- },
- {
-  "id": "waec-2019-phys-001",
-  "subject": "Physics",
-  "topic": "Waves",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "medium",
-  "question": "The phenomenon where sound is heard around a corner is:",
-  "options": {
-   "A": "Reflection",
-   "B": "Refraction",
-   "C": "Diffraction",
-   "D": "Polarization"
-  },
-  "correctAnswer": "C",
-  "explanation": "Diffraction bends waves around obstacles and through openings.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2023,
-   2024
-  ]
- },
- {
-  "id": "waec-2019-phys-002",
-  "subject": "Physics",
-  "topic": "Light",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "The image formed by a plane mirror is:",
-  "options": {
-   "A": "Real and inverted",
-   "B": "Virtual and erect",
-   "C": "Real and diminished",
-   "D": "Virtual and inverted"
-  },
-  "correctAnswer": "B",
-  "explanation": "Plane mirrors form virtual, erect, same-size images.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2021,
-   2022,
-   2024
-  ]
- },
- {
-  "id": "waec-2020-phys-003",
-  "subject": "Physics",
-  "topic": "Heat",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "Black surfaces are good absorbers of heat because they:",
-  "options": {
-   "A": "Reflect all radiation",
-   "B": "Absorb most radiation",
-   "C": "Conduct slowly",
-   "D": "Expand easily"
-  },
-  "correctAnswer": "B",
-  "explanation": "Dark matt surfaces absorb radiant heat best; shiny ones reflect it.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020
-  ]
- },
- {
-  "id": "waec-2021-phys-004",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "hard",
-  "question": "A body moves with uniform velocity when:",
-  "options": {
-   "A": "No force acts on it",
-   "B": "Resultant force is zero",
-   "C": "Mass is zero",
-   "D": "Friction is high"
-  },
-  "correctAnswer": "B",
-  "explanation": "Zero net force means zero acceleration — velocity stays uniform.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2021,
-   2022,
-   2024,
-   2025
-  ]
- },
- {
-  "id": "waec-2022-phys-004",
-  "subject": "Physics",
-  "topic": "Electricity",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "hard",
-  "question": "The cost of using a 2 kW heater for 3 hours at ₦50 per kWh is:",
-  "options": {
-   "A": "₦100",
-   "B": "₦150",
-   "C": "₦300",
-   "D": "₦600"
-  },
-  "correctAnswer": "C",
-  "explanation": "Energy = 2 × 3 = 6 kWh; cost = 6 × 50 = ₦300.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2022
-  ]
- },
- {
-  "id": "waec-2023-phys-002",
-  "subject": "Physics",
-  "topic": "Waves",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "easy",
-  "question": "The SI unit of frequency is the:",
-  "options": {
-   "A": "Metre",
-   "B": "Second",
-   "C": "Hertz",
-   "D": "Decibel"
-  },
-  "correctAnswer": "C",
-  "explanation": "Frequency (cycles per second) is measured in hertz.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2023,
-   2024
-  ]
- },
- {
-  "id": "waec-2024-phys-002",
-  "subject": "Physics",
-  "topic": "Light",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "Total internal reflection occurs when light travels from:",
-  "options": {
-   "A": "Air to glass",
-   "B": "Glass to air beyond the critical angle",
-   "C": "Vacuum to air",
-   "D": "Water to ice"
-  },
-  "correctAnswer": "B",
-  "explanation": "Dense-to-rare medium beyond the critical angle traps all light inside.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2021,
-   2022,
-   2024
-  ]
- },
- {
-  "id": "waec-2025-phys-001",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "A machine with velocity ratio 5 and efficiency 80% has mechanical advantage:",
-  "options": {
-   "A": "6.25",
-   "B": "4",
-   "C": "5",
-   "D": "0.8"
-  },
-  "correctAnswer": "B",
-  "explanation": "Efficiency = MA/VR → MA = 0.8 × 5 = 4.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2021,
-   2022,
-   2024,
-   2025
-  ]
- },
- {
-  "id": "waec-2018-chem-001",
-  "subject": "Chemistry",
-  "topic": "Atomic Structure",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2018,
-  "difficulty": "easy",
-  "question": "The particle with no charge in the nucleus is the:",
-  "options": {
-   "A": "Proton",
-   "B": "Electron",
-   "C": "Neutron",
-   "D": "Photon"
-  },
-  "correctAnswer": "C",
-  "explanation": "Neutrons are neutral; protons are positive, electrons negative.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2018-chem-002",
-  "subject": "Chemistry",
-  "topic": "Chemical Bonding",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2018,
-  "difficulty": "medium",
-  "question": "Which compound has both ionic and covalent bonds?",
-  "options": {
-   "A": "NaCl",
-   "B": "NaOH",
-   "C": "CH₄",
-   "D": "MgO"
-  },
-  "correctAnswer": "B",
-  "explanation": "NaOH has ionic Na⁺–OH⁻ bonding plus covalent O–H within hydroxide.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.555Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2019-chem-002",
-  "subject": "Chemistry",
-  "topic": "Acids and Bases",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "medium",
-  "question": "Methyl orange in an alkaline solution turns:",
-  "options": {
-   "A": "Red",
-   "B": "Yellow",
-   "C": "Colourless",
-   "D": "Blue"
-  },
-  "correctAnswer": "B",
-  "explanation": "Methyl orange is red in acid, yellow in alkali.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2021,
-   2022,
-   2025
-  ]
- },
- {
-  "id": "waec-2020-chem-002",
-  "subject": "Chemistry",
-  "topic": "Organic Chemistry",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "easy",
-  "question": "The functional group of esters is:",
-  "options": {
-   "A": "-OH",
-   "B": "-COO-",
-   "C": "-CHO",
-   "D": "-CO-"
-  },
-  "correctAnswer": "B",
-  "explanation": "Esters contain the -COO- (carboxylate) linkage.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-chem-005",
-  "subject": "Chemistry",
-  "topic": "Periodic Table",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "hard",
-  "question": "Atomic radius generally ___ across a period:",
-  "options": {
-   "A": "Increases",
-   "B": "Decreases",
-   "C": "Stays constant",
-   "D": "Doubles"
-  },
-  "correctAnswer": "B",
-  "explanation": "Rising nuclear charge pulls shells closer left to right.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "waec-2022-chem-003",
-  "subject": "Chemistry",
-  "topic": "Electrolysis",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "During electrolysis of brine, chlorine is discharged at the:",
-  "options": {
-   "A": "Anode",
-   "B": "Cathode",
-   "C": "Salt bridge",
-   "D": "Battery"
-  },
-  "correctAnswer": "A",
-  "explanation": "Negative chloride ions migrate to the positive anode.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "waec-2023-chem-003",
-  "subject": "Chemistry",
-  "topic": "Atomic Structure",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "An element X forms X²⁺. Its oxide formula is:",
-  "options": {
-   "A": "XO",
-   "B": "X₂O",
-   "C": "XO₂",
-   "D": "X₂O₃"
-  },
-  "correctAnswer": "A",
-  "explanation": "X²⁺ balances O²⁻ one-to-one as XO.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2024-chem-001",
-  "subject": "Chemistry",
-  "topic": "Chemical Bonding",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "A shared pair from one atom only is a ___ bond:",
-  "options": {
-   "A": "Ionic",
-   "B": "Covalent",
-   "C": "Dative",
-   "D": "Metallic"
-  },
-  "correctAnswer": "C",
-  "explanation": "Dative (coordinate) bonds donate both electrons from one atom.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2025-chem-001",
-  "subject": "Chemistry",
-  "topic": "Acids and Bases",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2025,
-  "difficulty": "hard",
-  "question": "25 cm³ of 0.1 M NaOH neutralizes 20 cm³ of HCl. The acid concentration is:",
-  "options": {
-   "A": "0.08 M",
-   "B": "0.125 M",
-   "C": "0.2 M",
-   "D": "0.5 M"
-  },
-  "correctAnswer": "B",
-  "explanation": "M₁V₁ = M₂V₂ → M = (0.1×25)/20 = 0.125 M.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2021,
-   2022,
-   2025
-  ]
- },
- {
-  "id": "waec-2021-chem-006",
-  "subject": "Chemistry",
-  "topic": "Organic Chemistry",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "Cracking of petroleum produces:",
-  "options": {
-   "A": "Only gases",
-   "B": "Shorter, more useful hydrocarbons",
-   "C": "Pure carbon",
-   "D": "Water"
-  },
-  "correctAnswer": "B",
-  "explanation": "Cracking splits long chains into petrol, diesel and gases.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2018-biol-001",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2018,
-  "difficulty": "medium",
-  "question": "The organelle that packages proteins is the:",
-  "options": {
-   "A": "Golgi body",
-   "B": "Ribosome",
-   "C": "Lysosome",
-   "D": "Vacuole"
-  },
-  "correctAnswer": "A",
-  "explanation": "The Golgi apparatus modifies, packages and ships proteins.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2019-biol-002",
-  "subject": "Biology",
-  "topic": "Genetics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "hard",
-  "question": "In humans, why are more boys than girls colour-blind? Because the gene is:",
-  "options": {
-   "A": "Dominant on Y",
-   "B": "Recessive X-linked",
-   "C": "On autosomes",
-   "D": "Always lethal"
-  },
-  "correctAnswer": "B",
-  "explanation": "Males need only one faulty X copy to show X-linked recessive traits.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2021-biol-003",
-  "subject": "Biology",
-  "topic": "Ecology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "easy",
-  "question": "A young forest replacing bare rock shows:",
-  "options": {
-   "A": "Primary succession",
-   "B": "Migration",
-   "C": "Hibernation",
-   "D": "Seed dispersal"
-  },
-  "correctAnswer": "A",
-  "explanation": "Colonization from lifeless ground is primary succession.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2023-biol-003",
-  "subject": "Biology",
-  "topic": "Nutrition",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "Bile is produced by the:",
-  "options": {
-   "A": "Stomach",
-   "B": "Liver",
-   "C": "Pancreas",
-   "D": "Gall bladder"
-  },
-  "correctAnswer": "B",
-  "explanation": "The liver secretes bile (stored in the gall bladder) to emulsify fats.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023,
-   2025
-  ]
- },
- {
-  "id": "waec-2024-biol-001",
-  "subject": "Biology",
-  "topic": "Transport System",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "hard",
-  "question": "The valve between the left atrium and ventricle is the:",
-  "options": {
-   "A": "Tricuspid",
-   "B": "Bicuspid (mitral)",
-   "C": "Pulmonary",
-   "D": "Aortic"
-  },
-  "correctAnswer": "B",
-  "explanation": "The bicuspid/mitral valve guards the left atrioventricular opening.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "waec-2025-biol-002",
-  "subject": "Biology",
-  "topic": "Reproduction",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2025,
-  "difficulty": "easy",
-  "question": "Pollination by wind is called:",
-  "options": {
-   "A": "Entomophily",
-   "B": "Anemophily",
-   "C": "Hydrophily",
-   "D": "Zoophily"
-  },
-  "correctAnswer": "B",
-  "explanation": "Anemophily = wind pollination (e.g., grasses, maize).",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "waec-2022-biol-005",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "Plant cells differ from animal cells by having:",
-  "options": {
-   "A": "Nucleus",
-   "B": "Cell wall and chloroplasts",
-   "C": "Mitochondria",
-   "D": "Ribosomes"
-  },
-  "correctAnswer": "B",
-  "explanation": "Walls and chloroplasts are plant-only structures.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2024-biol-002",
-  "subject": "Biology",
-  "topic": "Ecology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "Decomposers return nutrients by:",
-  "options": {
-   "A": "Photosynthesis",
-   "B": "Breaking down dead matter",
-   "C": "Hunting prey",
-   "D": "Fixing nitrogen only"
-  },
-  "correctAnswer": "B",
-  "explanation": "Fungi and bacteria recycle organic matter into soil nutrients.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020,
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2020-chem-003",
-  "subject": "Chemistry",
-  "topic": "Stoichiometry",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "hard",
-  "question": "What mass of CO₂ forms from 12 g of carbon? (C=12, O=16)",
-  "options": {
-   "A": "22 g",
-   "B": "44 g",
-   "C": "12 g",
-   "D": "32 g"
-  },
-  "correctAnswer": "B",
-  "explanation": "12 g C = 1 mole → 1 mole CO₂ = 44 g.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020
-  ]
- },
- {
-  "id": "waec-2021-phys-005",
-  "subject": "Physics",
-  "topic": "Pressure",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "A force of 100 N on 0.5 m² gives pressure:",
-  "options": {
-   "A": "50 Pa",
-   "B": "200 Pa",
-   "C": "100 Pa",
-   "D": "500 Pa"
-  },
-  "correctAnswer": "B",
-  "explanation": "P = F/A = 100/0.5 = 200 Pa.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "waec-2023-biol-004",
-  "subject": "Biology",
-  "topic": "Coordination",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "Auxins in shoots cause bending:",
-  "options": {
-   "A": "Away from light",
-   "B": "Toward light",
-   "C": "Downward only",
-   "D": "Randomly"
-  },
-  "correctAnswer": "B",
-  "explanation": "Auxin accumulates on the shaded side, elongating it toward light.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023
-  ]
- },
- {
-  "id": "waec-2024-chem-002",
-  "subject": "Chemistry",
-  "topic": "Salts",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "Washing soda is:",
-  "options": {
-   "A": "NaCl",
-   "B": "Na₂CO₃·10H₂O",
-   "C": "CaO",
-   "D": "NaOH"
-  },
-  "correctAnswer": "B",
-  "explanation": "Washing soda is hydrated sodium carbonate.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "waec-2023-phys-003",
-  "subject": "Physics",
-  "topic": "Magnetism",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "easy",
-  "question": "Like magnetic poles:",
-  "options": {
-   "A": "Attract",
-   "B": "Repel",
-   "C": "Neutralize",
-   "D": "Disappear"
-  },
-  "correctAnswer": "B",
-  "explanation": "Like poles repel; unlike poles attract.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023
-  ]
- },
- {
-  "id": "waec-2020-biol-004",
-  "subject": "Biology",
-  "topic": "Microorganisms",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "Yeast is used in brewing because it:",
-  "options": {
-   "A": "Kills bacteria",
-   "B": "Ferments sugar to alcohol",
-   "C": "Adds colour",
-   "D": "Cools wort"
-  },
-  "correctAnswer": "B",
-  "explanation": "Yeast fermentation converts sugars to ethanol and CO₂.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020
-  ]
- },
- {
-  "id": "waec-2025-chem-002",
-  "subject": "Chemistry",
-  "topic": "Rates",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "Powdered reactants react faster than lumps because of:",
-  "options": {
-   "A": "Greater surface area",
-   "B": "Higher temperature",
-   "C": "Catalysts",
-   "D": "Pressure"
-  },
-  "correctAnswer": "A",
-  "explanation": "More exposed surface means more frequent collisions.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "waec-2024-phys-003",
-  "subject": "Physics",
-  "topic": "Energy",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "A stretched catapult stores:",
-  "options": {
-   "A": "Kinetic energy",
-   "B": "Chemical energy",
-   "C": "Elastic potential energy",
-   "D": "Heat"
-  },
-  "correctAnswer": "C",
-  "explanation": "Deformed elastic materials hold elastic potential energy.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:35.556Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "waec-2018-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Grammar",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2018,
-  "difficulty": "easy",
-  "question": "Choose the correct option: 'She ___ to school every day.'",
-  "options": {
-   "A": "go",
-   "B": "goes",
-   "C": "going",
-   "D": "gone"
-  },
-  "correctAnswer": "B",
-  "explanation": "Third-person singular present tense takes 'goes'.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.188Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2024
-  ]
- },
- {
-  "id": "waec-2018-uoel-002",
-  "subject": "Use of English Language",
-  "topic": "Synonyms",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2018,
-  "difficulty": "medium",
-  "question": "Closest in meaning to 'diligent':",
-  "options": {
-   "A": "Lazy",
-   "B": "Hardworking",
-   "C": "Rude",
-   "D": "Slow"
-  },
-  "correctAnswer": "B",
-  "explanation": "Diligent means showing steady hard work.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.194Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2020
-  ]
- },
- {
-  "id": "waec-2018-math-001",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2018,
-  "difficulty": "medium",
-  "question": "If 3x − 5 = 16, x equals:",
-  "options": {
-   "A": "3",
-   "B": "7",
-   "C": "11",
-   "D": "21"
-  },
-  "correctAnswer": "B",
-  "explanation": "3x = 21 → x = 7.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.194Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2021,
-   2022,
-   2025,
-   2026
-  ]
- },
- {
-  "id": "waec-2018-math-002",
-  "subject": "Mathematics",
-  "topic": "Geometry",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2018,
-  "difficulty": "easy",
-  "question": "A right angle measures:",
-  "options": {
-   "A": "45°",
-   "B": "90°",
-   "C": "180°",
-   "D": "360°"
-  },
-  "correctAnswer": "B",
-  "explanation": "A right angle is exactly 90°.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.194Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2019-econ-001",
-  "subject": "Economics",
-  "topic": "Demand and Supply",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "A demand schedule shows:",
-  "options": {
-   "A": "Prices over time",
-   "B": "Quantities demanded at various prices",
-   "C": "Government budgets",
-   "D": "Bank rates"
-  },
-  "correctAnswer": "B",
-  "explanation": "It tabulates price-quantity demanded pairs.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.194Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019
-  ]
- },
- {
-  "id": "waec-2019-gove-001",
-  "subject": "Government",
-  "topic": "Democracy",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2019,
-  "difficulty": "medium",
-  "question": "The principle of separation of powers was popularized by:",
-  "options": {
-   "A": "Karl Marx",
-   "B": "Montesquieu",
-   "C": "Plato",
-   "D": "Adam Smith"
-  },
-  "correctAnswer": "B",
-  "explanation": "Montesquieu's Spirit of the Laws argues for divided powers.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.195Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019
-  ]
- },
- {
-  "id": "waec-2023-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Antonyms",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "Opposite of 'scarce':",
-  "options": {
-   "A": "Rare",
-   "B": "Abundant",
-   "C": "Costly",
-   "D": "Few"
-  },
-  "correctAnswer": "B",
-  "explanation": "Abundant means plentiful — the opposite of scarce.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.195Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2023
-  ]
- },
- {
-  "id": "waec-2024-math-001",
-  "subject": "Mathematics",
-  "topic": "Statistics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "hard",
-  "question": "The median of 4, 4, 5, 7, 9, 10 is:",
-  "options": {
-   "A": "5",
-   "B": "6",
-   "C": "7",
-   "D": "4.5"
-  },
-  "correctAnswer": "B",
-  "explanation": "Even count: average of 3rd and 4th values = (5+7)/2 = 6.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.195Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2024
-  ]
- },
- {
-  "id": "waec-2024-econ-001",
-  "subject": "Economics",
-  "topic": "Inflation",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "Creeping inflation is roughly:",
-  "options": {
-   "A": "Above 50%",
-   "B": "Below 3% yearly",
-   "C": "Above 100%",
-   "D": "Zero"
-  },
-  "correctAnswer": "B",
-  "explanation": "Creeping (mild) inflation stays in low single digits.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.195Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "waec-2024-gove-001",
-  "subject": "Government",
-  "topic": "Federalism",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "Concurrent matters in Nigeria include:",
-  "options": {
-   "A": "Currency",
-   "B": "Education",
-   "C": "Defence",
-   "D": "Foreign affairs"
-  },
-  "correctAnswer": "B",
-  "explanation": "Education is shared between federal and state governments.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.195Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "waec-2025-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Oral English",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2025,
-  "difficulty": "easy",
-  "question": "The /θ/ sound appears in:",
-  "options": {
-   "A": "This",
-   "B": "Think",
-   "C": "Though",
-   "D": "There"
-  },
-  "correctAnswer": "B",
-  "explanation": "'Think' uses voiceless /θ/; the rest use /ð/.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "waec-2025-math-002",
-  "subject": "Mathematics",
-  "topic": "Indices",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "Simplify: 5⁰ + 5¹",
-  "options": {
-   "A": "1",
-   "B": "5",
-   "C": "6",
-   "D": "25"
-  },
-  "correctAnswer": "C",
-  "explanation": "1 + 5 = 6.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "waec-2023-biol-005",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "kind": "theory",
-  "question": "Describe the structure of the mammalian skin and explain how it regulates body temperature.",
-  "modelAnswer": "The skin has the epidermis (protection), dermis with sweat glands, hair follicles and blood vessels, plus fat beneath. In heat: sweat evaporates to cool the body and vessels dilate (flushing). In cold: no sweat, vessels constrict, hairs stand (goose pimples) trapping warm air.",
-  "explanation": "Focus on structure → function links for each layer.",
-  "source": "seed",
-  "createdAt": "2026-10-14T00:48:34.964Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2020,
-   2021,
-   2022,
-   2023
-  ]
- },
- {
-  "id": "waec-2022-chem-004",
-  "subject": "Chemistry",
-  "topic": "Acids and Bases",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "kind": "theory",
-  "question": "Describe how you would prepare a pure dry sample of zinc sulphate crystals starting from zinc oxide.",
-  "modelAnswer": "Add excess zinc oxide to warm dilute sulphuric acid and stir. Filter off unreacted oxide. Heat the filtrate to saturation, cool to crystallize, filter, wash with distilled water and dry between filter papers. Reaction: ZnO + H2SO4 → ZnSO4 + H2O.",
-  "explanation": "Standard soluble-salt preparation: excess base + acid, filter, crystallize.",
-  "source": "seed",
-  "createdAt": "2026-10-14T00:48:34.968Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2021,
-   2022,
-   2025
-  ]
- },
- {
-  "id": "waec-2024-phys-004",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "hard",
-  "kind": "theory",
-  "question": "State Newton's laws of motion and give one everyday example of each.",
-  "modelAnswer": "1st (inertia): objects keep their state unless forced — passengers lurch forward when a bus brakes. 2nd: F = ma — harder to push a loaded truck. 3rd: action–reaction — a rocket pushes gas down, gas pushes rocket up.",
-  "explanation": "Name each law, state it, and attach a concrete example.",
-  "source": "seed",
-  "createdAt": "2026-10-14T00:48:34.968Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2021,
-   2022,
-   2024,
-   2025
-  ]
- },
- {
-  "id": "waec-2023-uoel-002",
-  "subject": "Use of English Language",
-  "topic": "Comprehension",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "kind": "theory",
-  "question": "Write a short paragraph on 'The value of hard work', using at least one idiom and one simile.",
-  "modelAnswer": "Model: 'Hard work never goes to waste. Like a farmer who tills patiently before the rains, the diligent student sows effort daily and reaps success in due season — truly,success loves preparation.' Contains simile (like a farmer…), idiom-adjacent phrasing, unity of theme.",
-  "explanation": "Examiners reward clear theme, one idiom, one simile, correct tenses.",
-  "source": "seed",
-  "createdAt": "2026-10-14T00:48:34.968Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023,
-   2026
-  ]
- },
- {
-  "id": "waec-2024-lite-001",
-  "subject": "Literature-in-English",
-  "topic": "Prose",
-  "exam": [
-   "WAEC"
-  ],
-  "year": 2024,
-  "difficulty": "hard",
-  "kind": "theory",
-  "question": "Discuss Okonkwo's fear of weakness as the engine of tragedy in Things Fall Apart.",
-  "modelAnswer": "Okonkwo's dread of resembling Unoka drives every excess: beating Ojiugo during peace week, killing Ikemefuna to seem manly, and suicide — the ultimate abomination. Achebe makes a virtue (industry) curdle into a flaw, so the hero falls by his own logic.",
-  "explanation": "Thesis + three textual moments + closing insight on tragic structure.",
-  "source": "seed",
-  "createdAt": "2026-10-14T00:48:34.968Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- }
+  {
+    "id": "waec-2026-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Comprehension",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "From the passage, the main challenge facing renewable energy adoption is:",
+    "options": {
+      "A": "High cost",
+      "B": "Lack of technology",
+      "C": "Government policy",
+      "D": "Public awareness"
+    },
+    "correctAnswer": "A",
+    "explanation": "The passage emphasizes high initial costs as the main barrier to renewable energy adoption.",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.581Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2026-math-001",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Solve: 2x + 5 = 15",
+    "options": {
+      "A": "x = 5",
+      "B": "x = 10",
+      "C": "x = 7.5",
+      "D": "x = 4"
+    },
+    "correctAnswer": "A",
+    "explanation": "2x = 15-5 = 10, so x = 10/2 = 5.",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.582Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2021,
+      2022,
+      2025,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2022-biol-001",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "Which organelle is responsible for ATP production?",
+    "options": {
+      "A": "Nucleus",
+      "B": "Mitochondria",
+      "C": "Ribosome",
+      "D": "Golgi apparatus"
+    },
+    "correctAnswer": "B",
+    "explanation": "The mitochondria is the powerhouse of the cell, producing ATP through cellular respiration via the Krebs cycle and oxidative phosphorylation.",
+    "hint": "Think about energy currency in the cell",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.587Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2023-biol-001",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "In Mendelian genetics, if two heterozygous tall plants (Tt) are crossed, what is the probability of offspring being homozygous recessive?",
+    "options": {
+      "A": "1/4",
+      "B": "1/2",
+      "C": "3/4",
+      "D": "1"
+    },
+    "correctAnswer": "A",
+    "explanation": "Tt x Tt gives TT:Tt:tt in 1:2:1 ratio. Homozygous recessive (tt) probability = 1/4 or 25%.",
+    "hint": "Use a Punnett square",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.587Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2022-biol-002",
+    "subject": "Biology",
+    "topic": "Human Physiology",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "Which part of the nephron is responsible for water reabsorption under ADH influence?",
+    "options": {
+      "A": "Bowman's capsule",
+      "B": "Loop of Henle",
+      "C": "Collecting duct",
+      "D": "Proximal convoluted tubule"
+    },
+    "correctAnswer": "C",
+    "explanation": "The collecting duct is where ADH acts to increase water reabsorption, concentrating the urine and conserving body water.",
+    "hint": "ADH targets this final area",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.588Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
+  },
+  {
+    "id": "waec-2023-biol-002",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "hard",
+    "question": "Which process describes the movement of water molecules from a region of higher water potential to lower water potential through a semi-permeable membrane?",
+    "options": {
+      "A": "Diffusion",
+      "B": "Active transport",
+      "C": "Osmosis",
+      "D": "Facilitated diffusion"
+    },
+    "correctAnswer": "C",
+    "explanation": "Osmosis is the specific diffusion of water molecules across a semi-permeable membrane down the water potential gradient.",
+    "hint": "It involves water and a membrane",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.588Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-biol-001",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "A woman with blood group O marries a man with blood group AB. What blood groups are possible in their children?",
+    "options": {
+      "A": "A and B only",
+      "B": "A, B and O",
+      "C": "A, B, AB and O",
+      "D": "AB only"
+    },
+    "correctAnswer": "A",
+    "explanation": "Blood group O (OO) × AB (AB): children inherit either A (AO) or B (BO). AB and O are not possible.",
+    "hint": "Work with the alleles",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.589Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2020-biol-001",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "Which organelle contains digestive enzymes for breaking down cellular waste?",
+    "options": {
+      "A": "Ribosome",
+      "B": "Lysosome",
+      "C": "Smooth ER",
+      "D": "Nucleolus"
+    },
+    "correctAnswer": "B",
+    "explanation": "Lysosomes contain hydrolytic enzymes that break down waste materials, cellular debris, and pathogens through phagocytosis.",
+    "hint": "Think of it as the cell's recycling bin",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.589Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2022-biol-003",
+    "subject": "Biology",
+    "topic": "Human Physiology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "Which part of the brain controls balance and coordination?",
+    "options": {
+      "A": "Cerebrum",
+      "B": "Cerebellum",
+      "C": "Medulla oblongata",
+      "D": "Hypothalamus"
+    },
+    "correctAnswer": "B",
+    "explanation": "The cerebellum coordinates voluntary movements, balance, and fine motor control by integrating sensory information.",
+    "hint": "Think about standing on one leg",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.590Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
+  },
+  {
+    "id": "waec-2021-biol-002",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "hard",
+    "question": "During which phase of mitosis do chromosomes align at the equator?",
+    "options": {
+      "A": "Prophase",
+      "B": "Metaphase",
+      "C": "Anaphase",
+      "D": "Telophase"
+    },
+    "correctAnswer": "B",
+    "explanation": "During metaphase, spindle fibers align all chromosomes along the metaphase plate (equator) before separation.",
+    "hint": "M for 'middle' or 'meet at the middle'",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.591Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2020-biol-002",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "If a colour-blind man marries a woman who is a carrier, what is the chance their son will be colour-blind?",
+    "options": {
+      "A": "25%",
+      "B": "50%",
+      "C": "75%",
+      "D": "100%"
+    },
+    "correctAnswer": "B",
+    "explanation": "The man passes Y to sons (not X^c). The mother can pass X^c or X. Sons get Y from father, X from mother. If mother passes X^c, son is colour-blind. So 50% chance.",
+    "hint": "X-linked recessive means sons inherit from mother",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.591Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2022-chem-001",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "What is the maximum number of electrons that can occupy the third energy level?",
+    "options": {
+      "A": "8",
+      "B": "18",
+      "C": "32",
+      "D": "2"
+    },
+    "correctAnswer": "B",
+    "explanation": "The third energy level (n=3) has s, p, and d sublevels, holding 2 + 6 + 10 = 18 electrons maximum.",
+    "hint": "Formula: 2n²",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.591Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-chem-001",
+    "subject": "Chemistry",
+    "topic": "Chemical Bonding",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "Which type of bond involves the sharing of electrons between atoms?",
+    "options": {
+      "A": "Ionic",
+      "B": "Covalent",
+      "C": "Metallic",
+      "D": "Hydrogen"
+    },
+    "correctAnswer": "B",
+    "explanation": "Covalent bonds form when atoms share one or more pairs of electrons to achieve a stable electron configuration.",
+    "hint": "Sharing is caring",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.591Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2022-chem-002",
+    "subject": "Chemistry",
+    "topic": "Organic Chemistry",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "The general formula for alkanes is?",
+    "options": {
+      "A": "CₙH₂ₙ₊₂",
+      "B": "CₙH₂ₙ",
+      "C": "CₙH₂ₙ₋₂",
+      "D": "CₙH₂ₙ₊₁OH"
+    },
+    "correctAnswer": "A",
+    "explanation": "Alkanes are saturated hydrocarbons with single bonds only. Each carbon has 2 hydrogens plus 2 extra at ends: CₙH₂ₙ₊₂.",
+    "hint": "Saturated = maximum hydrogen",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.591Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-chem-002",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "Isotopes of the same element differ in their number of?",
+    "options": {
+      "A": "Protons",
+      "B": "Neutrons",
+      "C": "Electrons",
+      "D": "Protons and electrons"
+    },
+    "correctAnswer": "B",
+    "explanation": "Isotopes have the same number of protons (same element) but different numbers of neutrons, thus different mass numbers.",
+    "hint": "Same element, different mass",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.592Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2020-chem-001",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "The number of protons in an atom is called the?",
+    "options": {
+      "A": "Mass number",
+      "B": "Atomic number",
+      "C": "Avogadro's number",
+      "D": "Oxidation number"
+    },
+    "correctAnswer": "B",
+    "explanation": "The atomic number (Z) equals the number of protons in the nucleus and uniquely identifies each element.",
+    "hint": "It's the element's ID number",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.592Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-chem-003",
+    "subject": "Chemistry",
+    "topic": "Chemical Bonding",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "hard",
+    "question": "Which intermolecular force is strongest?",
+    "options": {
+      "A": "London dispersion",
+      "B": "Dipole-dipole",
+      "C": "Hydrogen bonding",
+      "D": "Ionic"
+    },
+    "correctAnswer": "C",
+    "explanation": "Hydrogen bonding is the strongest intermolecular force, occurring between H and highly electronegative atoms (N, O, F).",
+    "hint": "It involves H with N, O, or F",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.592Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2023-chem-001",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "What is the mass number of an atom with 12 protons and 12 neutrons?",
+    "options": {
+      "A": "12",
+      "B": "24",
+      "C": "36",
+      "D": "48"
+    },
+    "correctAnswer": "B",
+    "explanation": "Mass number = protons + neutrons = 12 + 12 = 24. This atom is a magnesium isotope.",
+    "hint": "Add protons and neutrons",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.592Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2022-phys-001",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "The SI unit of force is?",
+    "options": {
+      "A": "Joule",
+      "B": "Newton",
+      "C": "Pascal",
+      "D": "Watt"
+    },
+    "correctAnswer": "B",
+    "explanation": "The Newton (N) is the SI unit of force, defined as the force needed to accelerate 1 kg mass at 1 m/s².",
+    "hint": "Named after a scientist with an apple",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.592Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2021-phys-001",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "A car accelerates uniformly from rest to 20 m/s in 5 seconds. What is its acceleration?",
+    "options": {
+      "A": "4 m/s²",
+      "B": "5 m/s²",
+      "C": "10 m/s²",
+      "D": "20 m/s²"
+    },
+    "correctAnswer": "A",
+    "explanation": "a = (v - u)/t = (20 - 0)/5 = 4 m/s².",
+    "hint": "Change in velocity over time",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.593Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2022-phys-002",
+    "subject": "Physics",
+    "topic": "Light",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "What type of lens is used to correct short-sightedness?",
+    "options": {
+      "A": "Convex",
+      "B": "Concave",
+      "C": "Cylindrical",
+      "D": "Bifocal"
+    },
+    "correctAnswer": "B",
+    "explanation": "Concave (diverging) lenses correct short-sightedness (myopia) by diverging light rays before they enter the eye.",
+    "hint": "It's thinner at the centre",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.593Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2021,
+      2022,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2020-phys-001",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "What is the kinetic energy of a 2 kg object moving at 3 m/s?",
+    "options": {
+      "A": "6 J",
+      "B": "9 J",
+      "C": "18 J",
+      "D": "3 J"
+    },
+    "correctAnswer": "B",
+    "explanation": "KE = ½mv² = ½ × 2 × 3² = 1 × 9 = 9 J.",
+    "hint": "Half mass times velocity squared",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.593Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2023-phys-001",
+    "subject": "Physics",
+    "topic": "Waves",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Which type of wave is sound?",
+    "options": {
+      "A": "Transverse",
+      "B": "Longitudinal",
+      "C": "Electromagnetic",
+      "D": "Surface"
+    },
+    "correctAnswer": "B",
+    "explanation": "Sound is a longitudinal wave where particles vibrate parallel to the direction of wave propagation, creating compressions and rarefactions.",
+    "hint": "Compression and rarefaction",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.593Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2023,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2021-phys-002",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "Newton's third law states that:",
+    "options": {
+      "A": "F = ma",
+      "B": "Every action has an equal opposite reaction",
+      "C": "Objects in motion stay in motion",
+      "D": "Energy is conserved"
+    },
+    "correctAnswer": "B",
+    "explanation": "Newton's Third Law: For every action force, there is an equal and opposite reaction force. Forces always come in pairs.",
+    "hint": "Action-reaction pairs",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.593Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2021-phys-003",
+    "subject": "Physics",
+    "topic": "Light",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "What colour is produced when red and green light mix?",
+    "options": {
+      "A": "Blue",
+      "B": "Yellow",
+      "C": "White",
+      "D": "Purple"
+    },
+    "correctAnswer": "B",
+    "explanation": "Red and green are additive primary colours that combine to form yellow. On a screen, red + green pixels appear yellow.",
+    "hint": "Think of traffic light colours",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.593Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2021,
+      2022,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2022-math-001",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "Solve for x: 2x + 5 = 15",
+    "options": {
+      "A": "5",
+      "B": "10",
+      "C": "7.5",
+      "D": "20"
+    },
+    "correctAnswer": "A",
+    "explanation": "2x + 5 = 15 => 2x = 10 => x = 5.",
+    "hint": "Isolate the variable",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.594Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2021,
+      2022,
+      2025,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2021-math-001",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "Factorise x² - 5x + 6",
+    "options": {
+      "A": "(x-2)(x-3)",
+      "B": "(x+2)(x+3)",
+      "C": "(x-1)(x-6)",
+      "D": "(x+1)(x+6)"
+    },
+    "correctAnswer": "A",
+    "explanation": "x² - 5x + 6 = (x-2)(x-3) because -2 × -3 = 6 and -2 + -3 = -5.",
+    "hint": "Find factors of 6 that sum to -5",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.594Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2021,
+      2022,
+      2025,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2022-math-002",
+    "subject": "Mathematics",
+    "topic": "Geometry",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "What is the area of a triangle with base 8 cm and height 6 cm?",
+    "options": {
+      "A": "48 cm²",
+      "B": "24 cm²",
+      "C": "14 cm²",
+      "D": "28 cm²"
+    },
+    "correctAnswer": "B",
+    "explanation": "Area = ½ × base × height = ½ × 8 × 6 = 24 cm².",
+    "hint": "Half base times height",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.594Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-math-002",
+    "subject": "Mathematics",
+    "topic": "Trigonometry",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "What is tan 45°?",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "√2",
+      "D": "½"
+    },
+    "correctAnswer": "B",
+    "explanation": "tan 45° = sin 45°/cos 45° = (√2/2)/(√2/2) = 1.",
+    "hint": "Sides of a right isosceles triangle",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.594Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2023-math-001",
+    "subject": "Mathematics",
+    "topic": "Geometry",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "hard",
+    "question": "The volume of a cylinder with radius 7 cm and height 10 cm is? (π = 22/7)",
+    "options": {
+      "A": "1540 cm³",
+      "B": "154 cm³",
+      "C": "220 cm³",
+      "D": "15400 cm³"
+    },
+    "correctAnswer": "A",
+    "explanation": "Volume = πr²h = 22/7 × 7² × 10 = 22/7 × 49 × 10 = 22 × 70 = 1540 cm³.",
+    "hint": "Area of circle × height",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.595Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-math-003",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "easy",
+    "question": "Simplify: (3x²)(2x³)",
+    "options": {
+      "A": "5x⁵",
+      "B": "6x⁵",
+      "C": "5x⁶",
+      "D": "6x⁶"
+    },
+    "correctAnswer": "B",
+    "explanation": "3 × 2 = 6 and x² × x³ = x^(2+3) = x⁵. So (3x²)(2x³) = 6x⁵.",
+    "hint": "Multiply coefficients, add exponents",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.595Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2021,
+      2022,
+      2025,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2019-math-001",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "medium",
+    "question": "Solve the equation: 3x - 7 = 2x + 5",
+    "options": {
+      "A": "2",
+      "B": "7",
+      "C": "12",
+      "D": "5"
+    },
+    "correctAnswer": "C",
+    "explanation": "3x - 2x = 5 + 7 => x = 12.",
+    "hint": "Collect like terms",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.595Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2021,
+      2022,
+      2025,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2021-math-004",
+    "subject": "Mathematics",
+    "topic": "Statistics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "What is the range of: 4, 8, 15, 16, 23, 42?",
+    "options": {
+      "A": "23",
+      "B": "38",
+      "C": "42",
+      "D": "46"
+    },
+    "correctAnswer": "B",
+    "explanation": "Range = highest - lowest = 42 - 4 = 38.",
+    "hint": "Max minus min",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.595Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2022-engl-001",
+    "subject": "English",
+    "topic": "Comprehension",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "Choose the word closest in meaning to 'benevolent'",
+    "options": {
+      "A": "Cruel",
+      "B": "Kind",
+      "C": "Strict",
+      "D": "Weak"
+    },
+    "correctAnswer": "B",
+    "explanation": "Benevolent means well-meaning, kindly, or generous. It derives from Latin 'bene' (well) and 'volent' (wishing).",
+    "hint": "A benevolent leader is good to their people",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.595Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2021-engl-001",
+    "subject": "English",
+    "topic": "Vocabulary",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "hard",
+    "question": "The word 'ephemeral' most nearly means:",
+    "options": {
+      "A": "Eternal",
+      "B": "Short-lived",
+      "C": "Hidden",
+      "D": "Beautiful"
+    },
+    "correctAnswer": "B",
+    "explanation": "Ephemeral means lasting for a very short time, from Greek 'ephemeros' (lasting only a day). Synonyms: fleeting, transient.",
+    "hint": "Think of a mayfly's lifespan",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.596Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
+  },
+  {
+    "id": "waec-2022-engl-002",
+    "subject": "English",
+    "topic": "Grammar",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "Choose the correct form: 'She ___ to school every day.'",
+    "options": {
+      "A": "go",
+      "B": "goes",
+      "C": "going",
+      "D": "gone"
+    },
+    "correctAnswer": "B",
+    "explanation": "In the simple present tense, third-person singular subjects take 'goes' as the verb form.",
+    "hint": "Third person singular",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.596Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2021-engl-002",
+    "subject": "English",
+    "topic": "Grammar",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "hard",
+    "question": "Identify the tense: 'By next year, she will have graduated.'",
+    "options": {
+      "A": "Future simple",
+      "B": "Future perfect",
+      "C": "Future continuous",
+      "D": "Present perfect"
+    },
+    "correctAnswer": "B",
+    "explanation": "Future perfect tense (will have + past participle) indicates an action completed before a specified future time.",
+    "hint": "Will have done",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.596Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2021-engl-003",
+    "subject": "English",
+    "topic": "Vocabulary",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "The word 'ubiquitous' means:",
+    "options": {
+      "A": "Rare",
+      "B": "Everywhere",
+      "C": "Unique",
+      "D": "Invisible"
+    },
+    "correctAnswer": "B",
+    "explanation": "Ubiquitous means present, appearing, or found everywhere. From Latin 'ubique' (everywhere).",
+    "hint": "Think of smartphones today",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.596Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
+  },
+  {
+    "id": "waec-2020-engl-001",
+    "subject": "English",
+    "topic": "Comprehension",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "easy",
+    "question": "A 'bibliophile' is a person who:",
+    "options": {
+      "A": "Writes books",
+      "B": "Loves books",
+      "C": "Sells books",
+      "D": "Destroys books"
+    },
+    "correctAnswer": "B",
+    "explanation": "A bibliophile is a person who collects or has a great love of books (Greek 'biblion' = book, 'philos' = loving).",
+    "hint": "Phile = love",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.597Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2021-engl-004",
+    "subject": "English",
+    "topic": "Comprehension",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "What does the idiom 'bite the bullet' mean?",
+    "options": {
+      "A": "Eat quickly",
+      "B": "Face a difficult situation",
+      "C": "Break something",
+      "D": "Make a decision"
+    },
+    "correctAnswer": "B",
+    "explanation": "To 'bite the bullet' means to endure a painful or unpleasant situation with courage and fortitude.",
+    "hint": "Surgery without anaesthetic",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.597Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2022-econ-001",
+    "subject": "Economics",
+    "topic": "Microeconomics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "The basic economic problem of scarcity arises because:",
+    "options": {
+      "A": "Resources are unlimited but wants are limited",
+      "B": "Resources are limited but wants are unlimited",
+      "C": "Both resources and wants are unlimited",
+      "D": "Neither resources nor wants are limited"
+    },
+    "correctAnswer": "B",
+    "explanation": "Scarcity exists because human wants are infinite but the resources to satisfy them are finite.",
+    "hint": "Limited resources, unlimited wants",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.597Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-econ-001",
+    "subject": "Economics",
+    "topic": "Microeconomics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "The law of demand states that as price increases:",
+    "options": {
+      "A": "Quantity demanded increases",
+      "B": "Quantity demanded decreases",
+      "C": "Supply increases",
+      "D": "Supply decreases"
+    },
+    "correctAnswer": "B",
+    "explanation": "The law of demand: there is an inverse relationship between price and quantity demanded, ceteris paribus.",
+    "hint": "Higher price, lower demand",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.598Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2023-econ-001",
+    "subject": "Economics",
+    "topic": "Microeconomics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "At equilibrium price:",
+    "options": {
+      "A": "Quantity demanded exceeds quantity supplied",
+      "B": "Quantity supplied equals quantity demanded",
+      "C": "Quantity supplied exceeds quantity demanded",
+      "D": "There is excess demand"
+    },
+    "correctAnswer": "B",
+    "explanation": "Market equilibrium occurs where quantity demanded equals quantity supplied, with no tendency for price to change.",
+    "hint": "Balanced market",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.598Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2020-econ-001",
+    "subject": "Economics",
+    "topic": "Microeconomics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "A market structure with many sellers selling identical products is called:",
+    "options": {
+      "A": "Monopoly",
+      "B": "Oligopoly",
+      "C": "Perfect competition",
+      "D": "Monopolistic competition"
+    },
+    "correctAnswer": "C",
+    "explanation": "Perfect competition has many buyers and sellers, homogeneous products, perfect information, and free entry/exit.",
+    "hint": "Many firms, same product",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.598Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2022-econ-002",
+    "subject": "Economics",
+    "topic": "Macroeconomics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "hard",
+    "question": "If the MPC is 0.8, what is the multiplier?",
+    "options": {
+      "A": "1.25",
+      "B": "5",
+      "C": "8",
+      "D": "2.5"
+    },
+    "correctAnswer": "B",
+    "explanation": "Multiplier = 1/(1-MPC) = 1/0.2 = 5. A change in spending will be multiplied 5 times.",
+    "hint": "One over one minus MPC",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.598Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
+  },
+  {
+    "id": "waec-2022-econ-003",
+    "subject": "Economics",
+    "topic": "Microeconomics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "Price elasticity of demand measures:",
+    "options": {
+      "A": "Responsiveness of supply to price changes",
+      "B": "Responsiveness of demand to price changes",
+      "C": "Change in income over time",
+      "D": "Market size"
+    },
+    "correctAnswer": "B",
+    "explanation": "Price elasticity of demand measures how much quantity demanded responds to a change in price.",
+    "hint": "How sensitive are buyers to price",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.598Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2023-econ-002",
+    "subject": "Economics",
+    "topic": "Microeconomics",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "hard",
+    "question": "What is the profit-maximizing rule for a firm?",
+    "options": {
+      "A": "MR = MC",
+      "B": "P = ATC",
+      "C": "TR = TC",
+      "D": "AR = AC"
+    },
+    "correctAnswer": "A",
+    "explanation": "Firms maximize profit by producing where marginal revenue equals marginal cost (MR = MC).",
+    "hint": "Additional revenue equals additional cost",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.598Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2022-gove-001",
+    "subject": "Government",
+    "topic": "Political Systems",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "The highest law of a country is called the:",
+    "options": {
+      "A": "Decree",
+      "B": "Constitution",
+      "C": "Bill",
+      "D": "Act"
+    },
+    "correctAnswer": "B",
+    "explanation": "A constitution is the supreme law of the land, establishing the framework for government and fundamental rights.",
+    "hint": "The supreme legal document",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.599Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2021-gove-001",
+    "subject": "Government",
+    "topic": "Constitution",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "The 1999 Nigerian Constitution provides for how many tiers of government?",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5"
+    },
+    "correctAnswer": "B",
+    "explanation": "Nigeria operates a three-tier federal system: Federal, State, and Local Governments.",
+    "hint": "Federal, State, Local",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.599Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2023-gove-001",
+    "subject": "Government",
+    "topic": "Constitution",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Nigerian citizenship can be acquired through:",
+    "options": {
+      "A": "Only birth",
+      "B": "Birth, registration, naturalization",
+      "C": "Only marriage",
+      "D": "Only naturalization"
+    },
+    "correctAnswer": "B",
+    "explanation": "Nigerian citizenship is acquired by birth, registration (for those with Nigerian ancestry), or naturalization (for foreign residents).",
+    "hint": "Three ways to belong",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.599Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2022-gove-002",
+    "subject": "Government",
+    "topic": "Political Systems",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "hard",
+    "question": "The concept of separation of powers was popularized by:",
+    "options": {
+      "A": "John Locke",
+      "B": "Baron de Montesquieu",
+      "C": "Thomas Hobbes",
+      "D": "Jean-Jacques Rousseau"
+    },
+    "correctAnswer": "B",
+    "explanation": "Montesquieu's 'The Spirit of the Laws' (1748) articulated the separation of powers into executive, legislative, and judicial branches.",
+    "hint": "French philosopher",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.599Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2021-gove-002",
+    "subject": "Government",
+    "topic": "Political Systems",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "A political party is primarily formed to:",
+    "options": {
+      "A": "Make profits",
+      "B": "Win elections and govern",
+      "C": "Provide social services",
+      "D": "Educate citizens"
+    },
+    "correctAnswer": "B",
+    "explanation": "Political parties are organized groups that seek to win political power through elections and form government to implement their policies.",
+    "hint": "Seeking power through votes",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.600Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2021-gove-003",
+    "subject": "Government",
+    "topic": "Constitution",
+    "exam": [
+      "JAMB",
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "hard",
+    "question": "The process of removing a president from office is called:",
+    "options": {
+      "A": "Recall",
+      "B": "Impeachment",
+      "C": "Vote of no confidence",
+      "D": "Censure"
+    },
+    "correctAnswer": "B",
+    "explanation": "Impeachment is the constitutional process by which a legislature charges and removes a president or other high official for misconduct.",
+    "hint": "Official removal process",
+    "source": "past",
+    "createdAt": "2026-10-11T08:13:53.600Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2019-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Grammar",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "medium",
+    "question": "Choose the correct option: 'The teacher, along with the students, ___ arrived.'",
+    "options": {
+      "A": "have",
+      "B": "has",
+      "C": "are",
+      "D": "were"
+    },
+    "correctAnswer": "B",
+    "explanation": "Phrases like 'along with' don't change the singular subject 'teacher' → 'has'.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.618Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2020-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Synonyms",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "easy",
+    "question": "Which word is closest in meaning to 'rapid'?",
+    "options": {
+      "A": "Slow",
+      "B": "Swift",
+      "C": "Late",
+      "D": "Calm"
+    },
+    "correctAnswer": "B",
+    "explanation": "Rapid and swift both mean fast.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.618Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2020
+    ]
+  },
+  {
+    "id": "waec-2021-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Antonyms",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "easy",
+    "question": "Opposite of 'generous':",
+    "options": {
+      "A": "Kind",
+      "B": "Stingy",
+      "C": "Rich",
+      "D": "Polite"
+    },
+    "correctAnswer": "B",
+    "explanation": "Stingy (unwilling to give) opposes generous.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.618Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2019-math-002",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "Solve: 5x = 45",
+    "options": {
+      "A": "5",
+      "B": "8",
+      "C": "9",
+      "D": "40"
+    },
+    "correctAnswer": "C",
+    "explanation": "x = 45/5 = 9.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.618Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2021,
+      2022,
+      2025,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2020-math-001",
+    "subject": "Mathematics",
+    "topic": "Geometry",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "The angles of a triangle are in ratio 1:2:3. The largest angle is:",
+    "options": {
+      "A": "60°",
+      "B": "90°",
+      "C": "120°",
+      "D": "100°"
+    },
+    "correctAnswer": "B",
+    "explanation": "Total parts 6; largest = 3/6 × 180° = 90°.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.618Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-math-005",
+    "subject": "Mathematics",
+    "topic": "Statistics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "Find the mean of 10, 20, 30",
+    "options": {
+      "A": "15",
+      "B": "20",
+      "C": "30",
+      "D": "60"
+    },
+    "correctAnswer": "B",
+    "explanation": "(10+20+30)/3 = 60/3 = 20.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2019-biol-001",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "The site of photosynthesis is the:",
+    "options": {
+      "A": "Mitochondrion",
+      "B": "Chloroplast",
+      "C": "Nucleus",
+      "D": "Ribosome"
+    },
+    "correctAnswer": "B",
+    "explanation": "Chlorophyll in chloroplasts captures light energy.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2020-biol-003",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "Which organisms are primary consumers?",
+    "options": {
+      "A": "Grasses",
+      "B": "Grasshoppers",
+      "C": "Frogs",
+      "D": "Hawks"
+    },
+    "correctAnswer": "B",
+    "explanation": "Herbivores feeding directly on producers are primary consumers.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2019-chem-001",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "The lightest element is:",
+    "options": {
+      "A": "Helium",
+      "B": "Hydrogen",
+      "C": "Lithium",
+      "D": "Oxygen"
+    },
+    "correctAnswer": "B",
+    "explanation": "Hydrogen (atomic number 1) is the lightest element.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-chem-004",
+    "subject": "Chemistry",
+    "topic": "Acids and Bases",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "Which gas turns damp red litmus blue?",
+    "options": {
+      "A": "CO₂",
+      "B": "SO₂",
+      "C": "NH₃",
+      "D": "HCl"
+    },
+    "correctAnswer": "C",
+    "explanation": "Ammonia is alkaline and turns red litmus blue.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2021,
+      2022,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2020-phys-002",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "easy",
+    "question": "The SI unit of mass is the:",
+    "options": {
+      "A": "Gram",
+      "B": "Kilogram",
+      "C": "Tonne",
+      "D": "Pound"
+    },
+    "correctAnswer": "B",
+    "explanation": "The kilogram is the SI base unit of mass.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2022-phys-003",
+    "subject": "Physics",
+    "topic": "Electricity",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "A fuse protects circuits by:",
+    "options": {
+      "A": "Increasing current",
+      "B": "Melting to break excess current",
+      "C": "Storing charge",
+      "D": "Raising voltage"
+    },
+    "correctAnswer": "B",
+    "explanation": "The fuse wire melts when current exceeds its rating, opening the circuit.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2022-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Idioms",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "What does 'to burn the midnight oil' mean?",
+    "options": {
+      "A": "To waste fuel",
+      "B": "To study late into the night",
+      "C": "To cook dinner",
+      "D": "To light a lamp"
+    },
+    "correctAnswer": "B",
+    "explanation": "It means working or studying late at night.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
+  },
+  {
+    "id": "waec-2023-math-002",
+    "subject": "Mathematics",
+    "topic": "Trigonometry",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "If sin θ = 1/2 and θ is acute, θ equals:",
+    "options": {
+      "A": "30°",
+      "B": "45°",
+      "C": "60°",
+      "D": "90°"
+    },
+    "correctAnswer": "A",
+    "explanation": "sin 30° = 1/2.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2022-biol-004",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "The molecule that carries amino acids to ribosomes is:",
+    "options": {
+      "A": "mRNA",
+      "B": "tRNA",
+      "C": "rRNA",
+      "D": "DNA"
+    },
+    "correctAnswer": "B",
+    "explanation": "Transfer RNA delivers amino acids during translation.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2023-chem-002",
+    "subject": "Chemistry",
+    "topic": "Organic Chemistry",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "The test for hydrogen gas is that it:",
+    "options": {
+      "A": "Relights a glowing splint",
+      "B": "Burns with a pop sound",
+      "C": "Turns limewater milky",
+      "D": "Bleaches litmus"
+    },
+    "correctAnswer": "B",
+    "explanation": "Hydrogen burns with a characteristic squeaky pop.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2024-phys-001",
+    "subject": "Physics",
+    "topic": "Waves",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Which colour of light has the longest wavelength?",
+    "options": {
+      "A": "Violet",
+      "B": "Green",
+      "C": "Yellow",
+      "D": "Red"
+    },
+    "correctAnswer": "D",
+    "explanation": "Red light (~700 nm) has the longest visible wavelength.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2023,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Grammar",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Choose the correct option: 'Had I known, I ___ come earlier.'",
+    "options": {
+      "A": "will",
+      "B": "would have",
+      "C": "shall",
+      "D": "can"
+    },
+    "correctAnswer": "B",
+    "explanation": "Third conditional for past regret: 'would have' + past participle.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2025-math-001",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Solve: x/3 + x/2 = 5",
+    "options": {
+      "A": "2",
+      "B": "5",
+      "C": "6",
+      "D": "30"
+    },
+    "correctAnswer": "C",
+    "explanation": "Multiply by 6: 2x + 3x = 30 → 5x = 30 → x = 6.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.619Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2021,
+      2022,
+      2025,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2025-biol-001",
+    "subject": "Biology",
+    "topic": "Nutrition",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "Which nutrient builds body tissues?",
+    "options": {
+      "A": "Carbohydrate",
+      "B": "Protein",
+      "C": "Fat",
+      "D": "Vitamin"
+    },
+    "correctAnswer": "B",
+    "explanation": "Proteins supply amino acids for growth and repair.",
+    "source": "seed",
+    "createdAt": "2026-10-11T08:36:17.620Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2018-phys-001",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2018,
+    "difficulty": "easy",
+    "question": "Which of these is a vector quantity?",
+    "options": {
+      "A": "Speed",
+      "B": "Distance",
+      "C": "Velocity",
+      "D": "Time"
+    },
+    "correctAnswer": "C",
+    "explanation": "Velocity has magnitude and direction; the rest are scalars.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.551Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2018-phys-002",
+    "subject": "Physics",
+    "topic": "Electricity",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2018,
+    "difficulty": "medium",
+    "question": "A wire of resistance 6 Ω is cut into two equal parts and joined in parallel. The new resistance is:",
+    "options": {
+      "A": "12 Ω",
+      "B": "6 Ω",
+      "C": "3 Ω",
+      "D": "1.5 Ω"
+    },
+    "correctAnswer": "D",
+    "explanation": "Each half is 3 Ω; parallel gives (3×3)/(3+3) = 1.5 Ω.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.554Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2019-phys-001",
+    "subject": "Physics",
+    "topic": "Waves",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "medium",
+    "question": "The phenomenon where sound is heard around a corner is:",
+    "options": {
+      "A": "Reflection",
+      "B": "Refraction",
+      "C": "Diffraction",
+      "D": "Polarization"
+    },
+    "correctAnswer": "C",
+    "explanation": "Diffraction bends waves around obstacles and through openings.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2023,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2019-phys-002",
+    "subject": "Physics",
+    "topic": "Light",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "The image formed by a plane mirror is:",
+    "options": {
+      "A": "Real and inverted",
+      "B": "Virtual and erect",
+      "C": "Real and diminished",
+      "D": "Virtual and inverted"
+    },
+    "correctAnswer": "B",
+    "explanation": "Plane mirrors form virtual, erect, same-size images.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2021,
+      2022,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2020-phys-003",
+    "subject": "Physics",
+    "topic": "Heat",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "Black surfaces are good absorbers of heat because they:",
+    "options": {
+      "A": "Reflect all radiation",
+      "B": "Absorb most radiation",
+      "C": "Conduct slowly",
+      "D": "Expand easily"
+    },
+    "correctAnswer": "B",
+    "explanation": "Dark matt surfaces absorb radiant heat best; shiny ones reflect it.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020
+    ]
+  },
+  {
+    "id": "waec-2021-phys-004",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "hard",
+    "question": "A body moves with uniform velocity when:",
+    "options": {
+      "A": "No force acts on it",
+      "B": "Resultant force is zero",
+      "C": "Mass is zero",
+      "D": "Friction is high"
+    },
+    "correctAnswer": "B",
+    "explanation": "Zero net force means zero acceleration — velocity stays uniform.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2022-phys-004",
+    "subject": "Physics",
+    "topic": "Electricity",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "hard",
+    "question": "The cost of using a 2 kW heater for 3 hours at ₦50 per kWh is:",
+    "options": {
+      "A": "₦100",
+      "B": "₦150",
+      "C": "₦300",
+      "D": "₦600"
+    },
+    "correctAnswer": "C",
+    "explanation": "Energy = 2 × 3 = 6 kWh; cost = 6 × 50 = ₦300.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2022
+    ]
+  },
+  {
+    "id": "waec-2023-phys-002",
+    "subject": "Physics",
+    "topic": "Waves",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "The SI unit of frequency is the:",
+    "options": {
+      "A": "Metre",
+      "B": "Second",
+      "C": "Hertz",
+      "D": "Decibel"
+    },
+    "correctAnswer": "C",
+    "explanation": "Frequency (cycles per second) is measured in hertz.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2023,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-phys-002",
+    "subject": "Physics",
+    "topic": "Light",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Total internal reflection occurs when light travels from:",
+    "options": {
+      "A": "Air to glass",
+      "B": "Glass to air beyond the critical angle",
+      "C": "Vacuum to air",
+      "D": "Water to ice"
+    },
+    "correctAnswer": "B",
+    "explanation": "Dense-to-rare medium beyond the critical angle traps all light inside.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2021,
+      2022,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2025-phys-001",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "A machine with velocity ratio 5 and efficiency 80% has mechanical advantage:",
+    "options": {
+      "A": "6.25",
+      "B": "4",
+      "C": "5",
+      "D": "0.8"
+    },
+    "correctAnswer": "B",
+    "explanation": "Efficiency = MA/VR → MA = 0.8 × 5 = 4.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2018-chem-001",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2018,
+    "difficulty": "easy",
+    "question": "The particle with no charge in the nucleus is the:",
+    "options": {
+      "A": "Proton",
+      "B": "Electron",
+      "C": "Neutron",
+      "D": "Photon"
+    },
+    "correctAnswer": "C",
+    "explanation": "Neutrons are neutral; protons are positive, electrons negative.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2018-chem-002",
+    "subject": "Chemistry",
+    "topic": "Chemical Bonding",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2018,
+    "difficulty": "medium",
+    "question": "Which compound has both ionic and covalent bonds?",
+    "options": {
+      "A": "NaCl",
+      "B": "NaOH",
+      "C": "CH₄",
+      "D": "MgO"
+    },
+    "correctAnswer": "B",
+    "explanation": "NaOH has ionic Na⁺–OH⁻ bonding plus covalent O–H within hydroxide.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.555Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2019-chem-002",
+    "subject": "Chemistry",
+    "topic": "Acids and Bases",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "medium",
+    "question": "Methyl orange in an alkaline solution turns:",
+    "options": {
+      "A": "Red",
+      "B": "Yellow",
+      "C": "Colourless",
+      "D": "Blue"
+    },
+    "correctAnswer": "B",
+    "explanation": "Methyl orange is red in acid, yellow in alkali.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2021,
+      2022,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2020-chem-002",
+    "subject": "Chemistry",
+    "topic": "Organic Chemistry",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "easy",
+    "question": "The functional group of esters is:",
+    "options": {
+      "A": "-OH",
+      "B": "-COO-",
+      "C": "-CHO",
+      "D": "-CO-"
+    },
+    "correctAnswer": "B",
+    "explanation": "Esters contain the -COO- (carboxylate) linkage.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-chem-005",
+    "subject": "Chemistry",
+    "topic": "Periodic Table",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "hard",
+    "question": "Atomic radius generally ___ across a period:",
+    "options": {
+      "A": "Increases",
+      "B": "Decreases",
+      "C": "Stays constant",
+      "D": "Doubles"
+    },
+    "correctAnswer": "B",
+    "explanation": "Rising nuclear charge pulls shells closer left to right.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
+  },
+  {
+    "id": "waec-2022-chem-003",
+    "subject": "Chemistry",
+    "topic": "Electrolysis",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "During electrolysis of brine, chlorine is discharged at the:",
+    "options": {
+      "A": "Anode",
+      "B": "Cathode",
+      "C": "Salt bridge",
+      "D": "Battery"
+    },
+    "correctAnswer": "A",
+    "explanation": "Negative chloride ions migrate to the positive anode.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
+  },
+  {
+    "id": "waec-2023-chem-003",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "An element X forms X²⁺. Its oxide formula is:",
+    "options": {
+      "A": "XO",
+      "B": "X₂O",
+      "C": "XO₂",
+      "D": "X₂O₃"
+    },
+    "correctAnswer": "A",
+    "explanation": "X²⁺ balances O²⁻ one-to-one as XO.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2024-chem-001",
+    "subject": "Chemistry",
+    "topic": "Chemical Bonding",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "A shared pair from one atom only is a ___ bond:",
+    "options": {
+      "A": "Ionic",
+      "B": "Covalent",
+      "C": "Dative",
+      "D": "Metallic"
+    },
+    "correctAnswer": "C",
+    "explanation": "Dative (coordinate) bonds donate both electrons from one atom.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2025-chem-001",
+    "subject": "Chemistry",
+    "topic": "Acids and Bases",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "25 cm³ of 0.1 M NaOH neutralizes 20 cm³ of HCl. The acid concentration is:",
+    "options": {
+      "A": "0.08 M",
+      "B": "0.125 M",
+      "C": "0.2 M",
+      "D": "0.5 M"
+    },
+    "correctAnswer": "B",
+    "explanation": "M₁V₁ = M₂V₂ → M = (0.1×25)/20 = 0.125 M.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2021,
+      2022,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2021-chem-006",
+    "subject": "Chemistry",
+    "topic": "Organic Chemistry",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "Cracking of petroleum produces:",
+    "options": {
+      "A": "Only gases",
+      "B": "Shorter, more useful hydrocarbons",
+      "C": "Pure carbon",
+      "D": "Water"
+    },
+    "correctAnswer": "B",
+    "explanation": "Cracking splits long chains into petrol, diesel and gases.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2018-biol-001",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2018,
+    "difficulty": "medium",
+    "question": "The organelle that packages proteins is the:",
+    "options": {
+      "A": "Golgi body",
+      "B": "Ribosome",
+      "C": "Lysosome",
+      "D": "Vacuole"
+    },
+    "correctAnswer": "A",
+    "explanation": "The Golgi apparatus modifies, packages and ships proteins.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2019-biol-002",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "hard",
+    "question": "In humans, why are more boys than girls colour-blind? Because the gene is:",
+    "options": {
+      "A": "Dominant on Y",
+      "B": "Recessive X-linked",
+      "C": "On autosomes",
+      "D": "Always lethal"
+    },
+    "correctAnswer": "B",
+    "explanation": "Males need only one faulty X copy to show X-linked recessive traits.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2021-biol-003",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "easy",
+    "question": "A young forest replacing bare rock shows:",
+    "options": {
+      "A": "Primary succession",
+      "B": "Migration",
+      "C": "Hibernation",
+      "D": "Seed dispersal"
+    },
+    "correctAnswer": "A",
+    "explanation": "Colonization from lifeless ground is primary succession.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2023-biol-003",
+    "subject": "Biology",
+    "topic": "Nutrition",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Bile is produced by the:",
+    "options": {
+      "A": "Stomach",
+      "B": "Liver",
+      "C": "Pancreas",
+      "D": "Gall bladder"
+    },
+    "correctAnswer": "B",
+    "explanation": "The liver secretes bile (stored in the gall bladder) to emulsify fats.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2024-biol-001",
+    "subject": "Biology",
+    "topic": "Transport System",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "The valve between the left atrium and ventricle is the:",
+    "options": {
+      "A": "Tricuspid",
+      "B": "Bicuspid (mitral)",
+      "C": "Pulmonary",
+      "D": "Aortic"
+    },
+    "correctAnswer": "B",
+    "explanation": "The bicuspid/mitral valve guards the left atrioventricular opening.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2025-biol-002",
+    "subject": "Biology",
+    "topic": "Reproduction",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "Pollination by wind is called:",
+    "options": {
+      "A": "Entomophily",
+      "B": "Anemophily",
+      "C": "Hydrophily",
+      "D": "Zoophily"
+    },
+    "correctAnswer": "B",
+    "explanation": "Anemophily = wind pollination (e.g., grasses, maize).",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "waec-2022-biol-005",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "Plant cells differ from animal cells by having:",
+    "options": {
+      "A": "Nucleus",
+      "B": "Cell wall and chloroplasts",
+      "C": "Mitochondria",
+      "D": "Ribosomes"
+    },
+    "correctAnswer": "B",
+    "explanation": "Walls and chloroplasts are plant-only structures.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2024-biol-002",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Decomposers return nutrients by:",
+    "options": {
+      "A": "Photosynthesis",
+      "B": "Breaking down dead matter",
+      "C": "Hunting prey",
+      "D": "Fixing nitrogen only"
+    },
+    "correctAnswer": "B",
+    "explanation": "Fungi and bacteria recycle organic matter into soil nutrients.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020,
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2020-chem-003",
+    "subject": "Chemistry",
+    "topic": "Stoichiometry",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "hard",
+    "question": "What mass of CO₂ forms from 12 g of carbon? (C=12, O=16)",
+    "options": {
+      "A": "22 g",
+      "B": "44 g",
+      "C": "12 g",
+      "D": "32 g"
+    },
+    "correctAnswer": "B",
+    "explanation": "12 g C = 1 mole → 1 mole CO₂ = 44 g.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020
+    ]
+  },
+  {
+    "id": "waec-2021-phys-005",
+    "subject": "Physics",
+    "topic": "Pressure",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "A force of 100 N on 0.5 m² gives pressure:",
+    "options": {
+      "A": "50 Pa",
+      "B": "200 Pa",
+      "C": "100 Pa",
+      "D": "500 Pa"
+    },
+    "correctAnswer": "B",
+    "explanation": "P = F/A = 100/0.5 = 200 Pa.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
+  },
+  {
+    "id": "waec-2023-biol-004",
+    "subject": "Biology",
+    "topic": "Coordination",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Auxins in shoots cause bending:",
+    "options": {
+      "A": "Away from light",
+      "B": "Toward light",
+      "C": "Downward only",
+      "D": "Randomly"
+    },
+    "correctAnswer": "B",
+    "explanation": "Auxin accumulates on the shaded side, elongating it toward light.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "waec-2024-chem-002",
+    "subject": "Chemistry",
+    "topic": "Salts",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Washing soda is:",
+    "options": {
+      "A": "NaCl",
+      "B": "Na₂CO₃·10H₂O",
+      "C": "CaO",
+      "D": "NaOH"
+    },
+    "correctAnswer": "B",
+    "explanation": "Washing soda is hydrated sodium carbonate.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2023-phys-003",
+    "subject": "Physics",
+    "topic": "Magnetism",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Like magnetic poles:",
+    "options": {
+      "A": "Attract",
+      "B": "Repel",
+      "C": "Neutralize",
+      "D": "Disappear"
+    },
+    "correctAnswer": "B",
+    "explanation": "Like poles repel; unlike poles attract.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "waec-2020-biol-004",
+    "subject": "Biology",
+    "topic": "Microorganisms",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "Yeast is used in brewing because it:",
+    "options": {
+      "A": "Kills bacteria",
+      "B": "Ferments sugar to alcohol",
+      "C": "Adds colour",
+      "D": "Cools wort"
+    },
+    "correctAnswer": "B",
+    "explanation": "Yeast fermentation converts sugars to ethanol and CO₂.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020
+    ]
+  },
+  {
+    "id": "waec-2025-chem-002",
+    "subject": "Chemistry",
+    "topic": "Rates",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Powdered reactants react faster than lumps because of:",
+    "options": {
+      "A": "Greater surface area",
+      "B": "Higher temperature",
+      "C": "Catalysts",
+      "D": "Pressure"
+    },
+    "correctAnswer": "A",
+    "explanation": "More exposed surface means more frequent collisions.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "waec-2024-phys-003",
+    "subject": "Physics",
+    "topic": "Energy",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "A stretched catapult stores:",
+    "options": {
+      "A": "Kinetic energy",
+      "B": "Chemical energy",
+      "C": "Elastic potential energy",
+      "D": "Heat"
+    },
+    "correctAnswer": "C",
+    "explanation": "Deformed elastic materials hold elastic potential energy.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:35.556Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2018-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Grammar",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2018,
+    "difficulty": "easy",
+    "question": "Choose the correct option: 'She ___ to school every day.'",
+    "options": {
+      "A": "go",
+      "B": "goes",
+      "C": "going",
+      "D": "gone"
+    },
+    "correctAnswer": "B",
+    "explanation": "Third-person singular present tense takes 'goes'.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.188Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2018-uoel-002",
+    "subject": "Use of English Language",
+    "topic": "Synonyms",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2018,
+    "difficulty": "medium",
+    "question": "Closest in meaning to 'diligent':",
+    "options": {
+      "A": "Lazy",
+      "B": "Hardworking",
+      "C": "Rude",
+      "D": "Slow"
+    },
+    "correctAnswer": "B",
+    "explanation": "Diligent means showing steady hard work.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.194Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2020
+    ]
+  },
+  {
+    "id": "waec-2018-math-001",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2018,
+    "difficulty": "medium",
+    "question": "If 3x − 5 = 16, x equals:",
+    "options": {
+      "A": "3",
+      "B": "7",
+      "C": "11",
+      "D": "21"
+    },
+    "correctAnswer": "B",
+    "explanation": "3x = 21 → x = 7.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.194Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2021,
+      2022,
+      2025,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2018-math-002",
+    "subject": "Mathematics",
+    "topic": "Geometry",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2018,
+    "difficulty": "easy",
+    "question": "A right angle measures:",
+    "options": {
+      "A": "45°",
+      "B": "90°",
+      "C": "180°",
+      "D": "360°"
+    },
+    "correctAnswer": "B",
+    "explanation": "A right angle is exactly 90°.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.194Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2019-econ-001",
+    "subject": "Economics",
+    "topic": "Demand and Supply",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "A demand schedule shows:",
+    "options": {
+      "A": "Prices over time",
+      "B": "Quantities demanded at various prices",
+      "C": "Government budgets",
+      "D": "Bank rates"
+    },
+    "correctAnswer": "B",
+    "explanation": "It tabulates price-quantity demanded pairs.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.194Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019
+    ]
+  },
+  {
+    "id": "waec-2019-gove-001",
+    "subject": "Government",
+    "topic": "Democracy",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2019,
+    "difficulty": "medium",
+    "question": "The principle of separation of powers was popularized by:",
+    "options": {
+      "A": "Karl Marx",
+      "B": "Montesquieu",
+      "C": "Plato",
+      "D": "Adam Smith"
+    },
+    "correctAnswer": "B",
+    "explanation": "Montesquieu's Spirit of the Laws argues for divided powers.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.195Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019
+    ]
+  },
+  {
+    "id": "waec-2023-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Antonyms",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Opposite of 'scarce':",
+    "options": {
+      "A": "Rare",
+      "B": "Abundant",
+      "C": "Costly",
+      "D": "Few"
+    },
+    "correctAnswer": "B",
+    "explanation": "Abundant means plentiful — the opposite of scarce.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.195Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2024-math-001",
+    "subject": "Mathematics",
+    "topic": "Statistics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "The median of 4, 4, 5, 7, 9, 10 is:",
+    "options": {
+      "A": "5",
+      "B": "6",
+      "C": "7",
+      "D": "4.5"
+    },
+    "correctAnswer": "B",
+    "explanation": "Even count: average of 3rd and 4th values = (5+7)/2 = 6.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.195Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-econ-001",
+    "subject": "Economics",
+    "topic": "Inflation",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Creeping inflation is roughly:",
+    "options": {
+      "A": "Above 50%",
+      "B": "Below 3% yearly",
+      "C": "Above 100%",
+      "D": "Zero"
+    },
+    "correctAnswer": "B",
+    "explanation": "Creeping (mild) inflation stays in low single digits.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.195Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-gove-001",
+    "subject": "Government",
+    "topic": "Federalism",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Concurrent matters in Nigeria include:",
+    "options": {
+      "A": "Currency",
+      "B": "Education",
+      "C": "Defence",
+      "D": "Foreign affairs"
+    },
+    "correctAnswer": "B",
+    "explanation": "Education is shared between federal and state governments.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.195Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2025-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Oral English",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "The /θ/ sound appears in:",
+    "options": {
+      "A": "This",
+      "B": "Think",
+      "C": "Though",
+      "D": "There"
+    },
+    "correctAnswer": "B",
+    "explanation": "'Think' uses voiceless /θ/; the rest use /ð/.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "waec-2025-math-002",
+    "subject": "Mathematics",
+    "topic": "Indices",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Simplify: 5⁰ + 5¹",
+    "options": {
+      "A": "1",
+      "B": "5",
+      "C": "6",
+      "D": "25"
+    },
+    "correctAnswer": "C",
+    "explanation": "1 + 5 = 6.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "waec-2023-biol-005",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "kind": "theory",
+    "question": "Describe the structure of the mammalian skin and explain how it regulates body temperature.",
+    "modelAnswer": "The skin has the epidermis (protection), dermis with sweat glands, hair follicles and blood vessels, plus fat beneath. In heat: sweat evaporates to cool the body and vessels dilate (flushing). In cold: no sweat, vessels constrict, hairs stand (goose pimples) trapping warm air.",
+    "explanation": "Focus on structure → function links for each layer.",
+    "source": "seed",
+    "createdAt": "2026-10-14T00:48:34.964Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ]
+  },
+  {
+    "id": "waec-2022-chem-004",
+    "subject": "Chemistry",
+    "topic": "Acids and Bases",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "kind": "theory",
+    "question": "Describe how you would prepare a pure dry sample of zinc sulphate crystals starting from zinc oxide.",
+    "modelAnswer": "Add excess zinc oxide to warm dilute sulphuric acid and stir. Filter off unreacted oxide. Heat the filtrate to saturation, cool to crystallize, filter, wash with distilled water and dry between filter papers. Reaction: ZnO + H2SO4 → ZnSO4 + H2O.",
+    "explanation": "Standard soluble-salt preparation: excess base + acid, filter, crystallize.",
+    "source": "seed",
+    "createdAt": "2026-10-14T00:48:34.968Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2021,
+      2022,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2024-phys-004",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "kind": "theory",
+    "question": "State Newton's laws of motion and give one everyday example of each.",
+    "modelAnswer": "1st (inertia): objects keep their state unless forced — passengers lurch forward when a bus brakes. 2nd: F = ma — harder to push a loaded truck. 3rd: action–reaction — a rocket pushes gas down, gas pushes rocket up.",
+    "explanation": "Name each law, state it, and attach a concrete example.",
+    "source": "seed",
+    "createdAt": "2026-10-14T00:48:34.968Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2021,
+      2022,
+      2024,
+      2025
+    ]
+  },
+  {
+    "id": "waec-2023-uoel-002",
+    "subject": "Use of English Language",
+    "topic": "Comprehension",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "kind": "theory",
+    "question": "Write a short paragraph on 'The value of hard work', using at least one idiom and one simile.",
+    "modelAnswer": "Model: 'Hard work never goes to waste. Like a farmer who tills patiently before the rains, the diligent student sows effort daily and reaps success in due season — truly,success loves preparation.' Contains simile (like a farmer…), idiom-adjacent phrasing, unity of theme.",
+    "explanation": "Examiners reward clear theme, one idiom, one simile, correct tenses.",
+    "source": "seed",
+    "createdAt": "2026-10-14T00:48:34.968Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023,
+      2026
+    ]
+  },
+  {
+    "id": "waec-2024-lite-001",
+    "subject": "Literature-in-English",
+    "topic": "Prose",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "kind": "theory",
+    "question": "Discuss Okonkwo's fear of weakness as the engine of tragedy in Things Fall Apart.",
+    "modelAnswer": "Okonkwo's dread of resembling Unoka drives every excess: beating Ojiugo during peace week, killing Ikemefuna to seem manly, and suicide — the ultimate abomination. Achebe makes a virtue (industry) curdle into a flaw, so the hero falls by his own logic.",
+    "explanation": "Thesis + three textual moments + closing insight on tragic structure.",
+    "source": "seed",
+    "createdAt": "2026-10-14T00:48:34.968Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-mathematics-011",
+    "subject": "Mathematics",
+    "topic": "If y = 3x + 2, what is y when ",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "If y = 3x + 2, what is y when x = 4?",
+    "options": {
+      "A": "10",
+      "B": "12",
+      "C": "14",
+      "D": "16"
+    },
+    "correctAnswer": "C",
+    "explanation": "y = 3(4) + 2 = 12 + 2 = 14.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-mathematics-012",
+    "subject": "Mathematics",
+    "topic": "The sum of angles in a triangl",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "The sum of angles in a triangle is:",
+    "options": {
+      "A": "90°",
+      "B": "180°",
+      "C": "270°",
+      "D": "360°"
+    },
+    "correctAnswer": "D",
+    "explanation": "The three interior angles of any triangle always sum to 180°.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-biology-013",
+    "subject": "Biology",
+    "topic": "Which blood group is the unive",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Which blood group is the universal donor?",
+    "options": {
+      "A": "A",
+      "B": "O",
+      "C": "AB",
+      "D": "B"
+    },
+    "correctAnswer": "B",
+    "explanation": "Group O negative is the universal donor because it has no A or B antigens.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-chemistry-014",
+    "subject": "Chemistry",
+    "topic": "What type of reaction is: 2H₂ ",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "What type of reaction is: 2H₂ + O₂ → 2H₂O?",
+    "options": {
+      "A": "Combination",
+      "B": "Decomposition",
+      "C": "Displacement",
+      "D": "Neutralization"
+    },
+    "correctAnswer": "A",
+    "explanation": "Two elements combine to form one compound — this is a combination (synthesis) reaction.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-physics-015",
+    "subject": "Physics",
+    "topic": "Ohm law states that V equals:",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Ohm law states that V equals:",
+    "options": {
+      "A": "I/R",
+      "B": "IR",
+      "C": "I²R",
+      "D": "R/I"
+    },
+    "correctAnswer": "B",
+    "explanation": "V = IR (Voltage = Current x Resistance). This is the fundamental relationship in electric circuits.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-economics-016",
+    "subject": "Economics",
+    "topic": "Inflation is best defined as:",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Inflation is best defined as:",
+    "options": {
+      "A": "Fall in prices",
+      "B": "Rise in unemployment",
+      "C": "Persistent rise in general price level",
+      "D": "Fall in GDP"
+    },
+    "correctAnswer": "C",
+    "explanation": "Inflation is a persistent increase in the general price level of goods and services over time.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-government-017",
+    "subject": "Government",
+    "topic": "The main organs of government ",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The main organs of government are:",
+    "options": {
+      "A": "Executive only",
+      "B": "Legislature only",
+      "C": "Judiciary only",
+      "D": "Executive, Legislature and Judiciary"
+    },
+    "correctAnswer": "D",
+    "explanation": "The three arms of government are the Executive (implements laws), Legislature (makes laws) and Judiciary (interprets laws).",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-english-018",
+    "subject": "English",
+    "topic": "A word that means the opposite",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "A word that means the opposite of another is called:",
+    "options": {
+      "A": "Antonym",
+      "B": "Synonym",
+      "C": "Acronym",
+      "D": "Homonym"
+    },
+    "correctAnswer": "A",
+    "explanation": "An antonym is a word opposite in meaning (e.g., hot/cold). A synonym is a word similar in meaning.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-physics-019",
+    "subject": "Physics",
+    "topic": "The unit of electrical resista",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "The unit of electrical resistance is:",
+    "options": {
+      "A": "Volt",
+      "B": "Ohm",
+      "C": "Ampere",
+      "D": "Joule"
+    },
+    "correctAnswer": "B",
+    "explanation": "Resistance is measured in Ohms (Ω). Volts measure potential difference, Amperes measure current.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-chemistry-020",
+    "subject": "Chemistry",
+    "topic": "Which of these is an alkali?",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Which of these is an alkali?",
+    "options": {
+      "A": "HCl",
+      "B": "H₂SO₄",
+      "C": "CO₂",
+      "D": "NaOH"
+    },
+    "correctAnswer": "D",
+    "explanation": "NaOH (sodium hydroxide) is a base/alkali. HCl and H₂SO₄ are acids. CO₂ is an oxide.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-mathematics-021",
+    "subject": "Mathematics",
+    "topic": "If y = 3x + 2, what is y when ",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "If y = 3x + 2, what is y when x = 4?",
+    "options": {
+      "A": "10",
+      "B": "12",
+      "C": "14",
+      "D": "16"
+    },
+    "correctAnswer": "C",
+    "explanation": "y = 3(4) + 2 = 12 + 2 = 14.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-mathematics-022",
+    "subject": "Mathematics",
+    "topic": "The sum of angles in a triangl",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "The sum of angles in a triangle is:",
+    "options": {
+      "A": "90°",
+      "B": "180°",
+      "C": "270°",
+      "D": "360°"
+    },
+    "correctAnswer": "D",
+    "explanation": "The three interior angles of any triangle always sum to 180°.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-biology-023",
+    "subject": "Biology",
+    "topic": "Which blood group is the unive",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Which blood group is the universal donor?",
+    "options": {
+      "A": "A",
+      "B": "O",
+      "C": "AB",
+      "D": "B"
+    },
+    "correctAnswer": "B",
+    "explanation": "Group O negative is the universal donor because it has no A or B antigens.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-chemistry-024",
+    "subject": "Chemistry",
+    "topic": "What type of reaction is: 2H₂ ",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "What type of reaction is: 2H₂ + O₂ → 2H₂O?",
+    "options": {
+      "A": "Combination",
+      "B": "Decomposition",
+      "C": "Displacement",
+      "D": "Neutralization"
+    },
+    "correctAnswer": "A",
+    "explanation": "Two elements combine to form one compound — this is a combination (synthesis) reaction.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-physics-025",
+    "subject": "Physics",
+    "topic": "Ohm law states that V equals:",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Ohm law states that V equals:",
+    "options": {
+      "A": "I/R",
+      "B": "IR",
+      "C": "I²R",
+      "D": "R/I"
+    },
+    "correctAnswer": "B",
+    "explanation": "V = IR (Voltage = Current x Resistance). This is the fundamental relationship in electric circuits.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-economics-026",
+    "subject": "Economics",
+    "topic": "Inflation is best defined as:",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Inflation is best defined as:",
+    "options": {
+      "A": "Fall in prices",
+      "B": "Rise in unemployment",
+      "C": "Persistent rise in general price level",
+      "D": "Fall in GDP"
+    },
+    "correctAnswer": "C",
+    "explanation": "Inflation is a persistent increase in the general price level of goods and services over time.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-government-027",
+    "subject": "Government",
+    "topic": "The main organs of government ",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The main organs of government are:",
+    "options": {
+      "A": "Executive only",
+      "B": "Legislature only",
+      "C": "Judiciary only",
+      "D": "Executive, Legislature and Judiciary"
+    },
+    "correctAnswer": "D",
+    "explanation": "The three arms of government are the Executive (implements laws), Legislature (makes laws) and Judiciary (interprets laws).",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-english-028",
+    "subject": "English",
+    "topic": "A word that means the opposite",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "A word that means the opposite of another is called:",
+    "options": {
+      "A": "Antonym",
+      "B": "Synonym",
+      "C": "Acronym",
+      "D": "Homonym"
+    },
+    "correctAnswer": "A",
+    "explanation": "An antonym is a word opposite in meaning (e.g., hot/cold). A synonym is a word similar in meaning.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-physics-029",
+    "subject": "Physics",
+    "topic": "The unit of electrical resista",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "The unit of electrical resistance is:",
+    "options": {
+      "A": "Volt",
+      "B": "Ohm",
+      "C": "Ampere",
+      "D": "Joule"
+    },
+    "correctAnswer": "B",
+    "explanation": "Resistance is measured in Ohms (Ω). Volts measure potential difference, Amperes measure current.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "waec-2024-chemistry-030",
+    "subject": "Chemistry",
+    "topic": "Which of these is an alkali?",
+    "exam": [
+      "WAEC"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Which of these is an alkali?",
+    "options": {
+      "A": "HCl",
+      "B": "H₂SO₄",
+      "C": "CO₂",
+      "D": "NaOH"
+    },
+    "correctAnswer": "D",
+    "explanation": "NaOH (sodium hydroxide) is a base/alkali. HCl and H₂SO₄ are acids. CO₂ is an oxide.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.782Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  }
 ]

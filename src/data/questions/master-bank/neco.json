@@ -1,1533 +1,2433 @@
 [
- {
-  "id": "neco-2019-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Grammar",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "Choose the correct option: 'They ___ football yesterday.'",
-  "options": {
-   "A": "play",
-   "B": "played",
-   "C": "playing",
-   "D": "plays"
+  {
+    "id": "neco-2019-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Grammar",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "Choose the correct option: 'They ___ football yesterday.'",
+    "options": {
+      "A": "play",
+      "B": "played",
+      "C": "playing",
+      "D": "plays"
+    },
+    "correctAnswer": "B",
+    "explanation": "'Yesterday' signals past tense → 'played'.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "'Yesterday' signals past tense → 'played'.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2024
-  ]
- },
- {
-  "id": "neco-2020-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Synonyms",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "Closest in meaning to 'verify':",
-  "options": {
-   "A": "Deny",
-   "B": "Confirm",
-   "C": "Forget",
-   "D": "Guess"
+  {
+    "id": "neco-2020-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Synonyms",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "Closest in meaning to 'verify':",
+    "options": {
+      "A": "Deny",
+      "B": "Confirm",
+      "C": "Forget",
+      "D": "Guess"
+    },
+    "correctAnswer": "B",
+    "explanation": "Verify means to confirm truth or accuracy.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Verify means to confirm truth or accuracy.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020
-  ]
- },
- {
-  "id": "neco-2021-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Antonyms",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2021,
-  "difficulty": "easy",
-  "question": "Opposite of 'permit':",
-  "options": {
-   "A": "Allow",
-   "B": "Forbid",
-   "C": "Grant",
-   "D": "Approve"
+  {
+    "id": "neco-2021-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Antonyms",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2021,
+    "difficulty": "easy",
+    "question": "Opposite of 'permit':",
+    "options": {
+      "A": "Allow",
+      "B": "Forbid",
+      "C": "Grant",
+      "D": "Approve"
+    },
+    "correctAnswer": "B",
+    "explanation": "Forbid is the direct opposite of permit.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Forbid is the direct opposite of permit.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "neco-2019-math-001",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "Solve: x + 9 = 20",
-  "options": {
-   "A": "9",
-   "B": "11",
-   "C": "29",
-   "D": "2"
+  {
+    "id": "neco-2019-math-001",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "Solve: x + 9 = 20",
+    "options": {
+      "A": "9",
+      "B": "11",
+      "C": "29",
+      "D": "2"
+    },
+    "correctAnswer": "B",
+    "explanation": "x = 20 − 9 = 11.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2023,
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "x = 20 − 9 = 11.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2023,
-   2025
-  ]
- },
- {
-  "id": "neco-2020-math-001",
-  "subject": "Mathematics",
-  "topic": "Fractions",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "Simplify: 5/8 − 1/4",
-  "options": {
-   "A": "4/4",
-   "B": "3/8",
-   "C": "1/2",
-   "D": "4/8"
+  {
+    "id": "neco-2020-math-001",
+    "subject": "Mathematics",
+    "topic": "Fractions",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "Simplify: 5/8 − 1/4",
+    "options": {
+      "A": "4/4",
+      "B": "3/8",
+      "C": "1/2",
+      "D": "4/8"
+    },
+    "correctAnswer": "B",
+    "explanation": "5/8 − 2/8 = 3/8.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "5/8 − 2/8 = 3/8.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020
-  ]
- },
- {
-  "id": "neco-2021-math-001",
-  "subject": "Mathematics",
-  "topic": "Geometry",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2021,
-  "difficulty": "easy",
-  "question": "How many degrees in a full circle?",
-  "options": {
-   "A": "90°",
-   "B": "180°",
-   "C": "270°",
-   "D": "360°"
+  {
+    "id": "neco-2021-math-001",
+    "subject": "Mathematics",
+    "topic": "Geometry",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2021,
+    "difficulty": "easy",
+    "question": "How many degrees in a full circle?",
+    "options": {
+      "A": "90°",
+      "B": "180°",
+      "C": "270°",
+      "D": "360°"
+    },
+    "correctAnswer": "D",
+    "explanation": "A complete rotation is 360°.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2025
+    ]
   },
-  "correctAnswer": "D",
-  "explanation": "A complete rotation is 360°.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2025
-  ]
- },
- {
-  "id": "neco-2019-biol-001",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "The jelly-like substance filling the cell is:",
-  "options": {
-   "A": "Cytoplasm",
-   "B": "Chlorophyll",
-   "C": "Plasma",
-   "D": "Sap"
+  {
+    "id": "neco-2019-biol-001",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "The jelly-like substance filling the cell is:",
+    "options": {
+      "A": "Cytoplasm",
+      "B": "Chlorophyll",
+      "C": "Plasma",
+      "D": "Sap"
+    },
+    "correctAnswer": "A",
+    "explanation": "Cytoplasm suspends organelles and hosts reactions.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2019
+    ]
   },
-  "correctAnswer": "A",
-  "explanation": "Cytoplasm suspends organelles and hosts reactions.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2019
-  ]
- },
- {
-  "id": "neco-2020-biol-001",
-  "subject": "Biology",
-  "topic": "Ecology",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "Carnivores feed on:",
-  "options": {
-   "A": "Plants",
-   "B": "Other animals",
-   "C": "Dead matter only",
-   "D": "Sunlight"
+  {
+    "id": "neco-2020-biol-001",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "Carnivores feed on:",
+    "options": {
+      "A": "Plants",
+      "B": "Other animals",
+      "C": "Dead matter only",
+      "D": "Sunlight"
+    },
+    "correctAnswer": "B",
+    "explanation": "Carnivores obtain energy by eating other animals.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020,
+      2023
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Carnivores obtain energy by eating other animals.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020,
-   2023
-  ]
- },
- {
-  "id": "neco-2022-biol-001",
-  "subject": "Biology",
-  "topic": "Nutrition",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "Goitre results from lack of:",
-  "options": {
-   "A": "Iron",
-   "B": "Iodine",
-   "C": "Calcium",
-   "D": "Zinc"
+  {
+    "id": "neco-2022-biol-001",
+    "subject": "Biology",
+    "topic": "Nutrition",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "Goitre results from lack of:",
+    "options": {
+      "A": "Iron",
+      "B": "Iodine",
+      "C": "Calcium",
+      "D": "Zinc"
+    },
+    "correctAnswer": "B",
+    "explanation": "Iodine deficiency enlarges the thyroid gland.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Iodine deficiency enlarges the thyroid gland.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "neco-2019-chem-001",
-  "subject": "Chemistry",
-  "topic": "Atomic Structure",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2019,
-  "difficulty": "medium",
-  "question": "Electrons occupy:",
-  "options": {
-   "A": "The nucleus",
-   "B": "Fixed shells around the nucleus",
-   "C": "Neutrons",
-   "D": "Protons"
+  {
+    "id": "neco-2019-chem-001",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2019,
+    "difficulty": "medium",
+    "question": "Electrons occupy:",
+    "options": {
+      "A": "The nucleus",
+      "B": "Fixed shells around the nucleus",
+      "C": "Neutrons",
+      "D": "Protons"
+    },
+    "correctAnswer": "B",
+    "explanation": "Electrons orbit in shells (energy levels).",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2019
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Electrons orbit in shells (energy levels).",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2019
-  ]
- },
- {
-  "id": "neco-2021-chem-001",
-  "subject": "Chemistry",
-  "topic": "Acids and Bases",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2021,
-  "difficulty": "easy",
-  "question": "Vinegar contains:",
-  "options": {
-   "A": "Citric acid",
-   "B": "Acetic acid",
-   "C": "Sulphuric acid",
-   "D": "Tartaric acid"
+  {
+    "id": "neco-2021-chem-001",
+    "subject": "Chemistry",
+    "topic": "Acids and Bases",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2021,
+    "difficulty": "easy",
+    "question": "Vinegar contains:",
+    "options": {
+      "A": "Citric acid",
+      "B": "Acetic acid",
+      "C": "Sulphuric acid",
+      "D": "Tartaric acid"
+    },
+    "correctAnswer": "B",
+    "explanation": "Vinegar is dilute acetic (ethanoic) acid.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2022
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Vinegar is dilute acetic (ethanoic) acid.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2022
-  ]
- },
- {
-  "id": "neco-2023-chem-001",
-  "subject": "Chemistry",
-  "topic": "Organic Chemistry",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "Alkenes decolourise bromine water because they are:",
-  "options": {
-   "A": "Saturated",
-   "B": "Unsaturated",
-   "C": "Acidic",
-   "D": "Ionic"
+  {
+    "id": "neco-2023-chem-001",
+    "subject": "Chemistry",
+    "topic": "Organic Chemistry",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Alkenes decolourise bromine water because they are:",
+    "options": {
+      "A": "Saturated",
+      "B": "Unsaturated",
+      "C": "Acidic",
+      "D": "Ionic"
+    },
+    "correctAnswer": "B",
+    "explanation": "Double bonds add bromine across, removing its colour.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023,
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Double bonds add bromine across, removing its colour.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023,
-   2024
-  ]
- },
- {
-  "id": "neco-2019-phys-001",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "The instrument for measuring mass is the:",
-  "options": {
-   "A": "Ruler",
-   "B": "Balance",
-   "C": "Thermometer",
-   "D": "Stopwatch"
+  {
+    "id": "neco-2019-phys-001",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "The instrument for measuring mass is the:",
+    "options": {
+      "A": "Ruler",
+      "B": "Balance",
+      "C": "Thermometer",
+      "D": "Stopwatch"
+    },
+    "correctAnswer": "B",
+    "explanation": "Beam/bathroom balances compare or sense mass.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2022
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Beam/bathroom balances compare or sense mass.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2022
-  ]
- },
- {
-  "id": "neco-2020-phys-001",
-  "subject": "Physics",
-  "topic": "Electricity",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "A 60 W bulb used 5 hours consumes:",
-  "options": {
-   "A": "300 Wh",
-   "B": "12 Wh",
-   "C": "65 Wh",
-   "D": "0.3 kWh only"
+  {
+    "id": "neco-2020-phys-001",
+    "subject": "Physics",
+    "topic": "Electricity",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "A 60 W bulb used 5 hours consumes:",
+    "options": {
+      "A": "300 Wh",
+      "B": "12 Wh",
+      "C": "65 Wh",
+      "D": "0.3 kWh only"
+    },
+    "correctAnswer": "A",
+    "explanation": "60 × 5 = 300 Wh (0.3 kWh); 300 Wh is the direct answer.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2023
+    ]
   },
-  "correctAnswer": "A",
-  "explanation": "60 × 5 = 300 Wh (0.3 kWh); 300 Wh is the direct answer.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2023
-  ]
- },
- {
-  "id": "neco-2022-phys-001",
-  "subject": "Physics",
-  "topic": "Waves",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "Sound travels fastest through:",
-  "options": {
-   "A": "Vacuum",
-   "B": "Air",
-   "C": "Water",
-   "D": "Steel"
+  {
+    "id": "neco-2022-phys-001",
+    "subject": "Physics",
+    "topic": "Waves",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "Sound travels fastest through:",
+    "options": {
+      "A": "Vacuum",
+      "B": "Air",
+      "C": "Water",
+      "D": "Steel"
+    },
+    "correctAnswer": "D",
+    "explanation": "Dense solids transmit vibrations fastest.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.196Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2022
+    ]
   },
-  "correctAnswer": "D",
-  "explanation": "Dense solids transmit vibrations fastest.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2022
-  ]
- },
- {
-  "id": "neco-2023-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Idioms",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "What does 'to spill the beans' mean?",
-  "options": {
-   "A": "To cook badly",
-   "B": "To reveal a secret",
-   "C": "To waste food",
-   "D": "To farm beans"
+  {
+    "id": "neco-2023-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Idioms",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "What does 'to spill the beans' mean?",
+    "options": {
+      "A": "To cook badly",
+      "B": "To reveal a secret",
+      "C": "To waste food",
+      "D": "To farm beans"
+    },
+    "correctAnswer": "B",
+    "explanation": "It means disclosing secret information.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.197Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "It means disclosing secret information.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.197Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023
-  ]
- },
- {
-  "id": "neco-2024-math-001",
-  "subject": "Mathematics",
-  "topic": "Statistics",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "Find the mode of 1, 2, 2, 3, 4",
-  "options": {
-   "A": "1",
-   "B": "2",
-   "C": "3",
-   "D": "4"
+  {
+    "id": "neco-2024-math-001",
+    "subject": "Mathematics",
+    "topic": "Statistics",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Find the mode of 1, 2, 2, 3, 4",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "correctAnswer": "B",
+    "explanation": "2 occurs most frequently.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.197Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "2 occurs most frequently.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.197Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "neco-2024-biol-001",
-  "subject": "Biology",
-  "topic": "Reproduction",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "Insect-pollinated flowers are usually:",
-  "options": {
-   "A": "Small and scentless",
-   "B": "Bright, scented and nectar-rich",
-   "C": "Closed always",
-   "D": "Underground"
+  {
+    "id": "neco-2024-biol-001",
+    "subject": "Biology",
+    "topic": "Reproduction",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Insect-pollinated flowers are usually:",
+    "options": {
+      "A": "Small and scentless",
+      "B": "Bright, scented and nectar-rich",
+      "C": "Closed always",
+      "D": "Underground"
+    },
+    "correctAnswer": "B",
+    "explanation": "Showy, scented flowers attract insect pollinators.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.197Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Showy, scented flowers attract insect pollinators.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.197Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "neco-2025-chem-001",
-  "subject": "Chemistry",
-  "topic": "Periodic Table",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2025,
-  "difficulty": "easy",
-  "question": "Group 1 elements are called:",
-  "options": {
-   "A": "Halogens",
-   "B": "Noble gases",
-   "C": "Alkali metals",
-   "D": "Transition metals"
+  {
+    "id": "neco-2025-chem-001",
+    "subject": "Chemistry",
+    "topic": "Periodic Table",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "Group 1 elements are called:",
+    "options": {
+      "A": "Halogens",
+      "B": "Noble gases",
+      "C": "Alkali metals",
+      "D": "Transition metals"
+    },
+    "correctAnswer": "C",
+    "explanation": "Group 1 = alkali metals (Li, Na, K…).",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.197Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "C",
-  "explanation": "Group 1 = alkali metals (Li, Na, K…).",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.197Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "neco-2025-phys-001",
-  "subject": "Physics",
-  "topic": "Light",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "A convex lens is thicker at the:",
-  "options": {
-   "A": "Edges",
-   "B": "Centre",
-   "C": "Top only",
-   "D": "Bottom only"
+  {
+    "id": "neco-2025-phys-001",
+    "subject": "Physics",
+    "topic": "Light",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "A convex lens is thicker at the:",
+    "options": {
+      "A": "Edges",
+      "B": "Centre",
+      "C": "Top only",
+      "D": "Bottom only"
+    },
+    "correctAnswer": "B",
+    "explanation": "Convex lenses bulge at the middle to converge light.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.197Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020,
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Convex lenses bulge at the middle to converge light.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.197Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020,
-   2025
-  ]
- },
- {
-  "id": "neco-2022-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Comprehension",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "A 'rhetorical question' is asked mainly to:",
-  "options": {
-   "A": "Get a direct answer",
-   "B": "Make a point without expecting reply",
-   "C": "Confuse readers",
-   "D": "End a story"
+  {
+    "id": "neco-2022-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Comprehension",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "A 'rhetorical question' is asked mainly to:",
+    "options": {
+      "A": "Get a direct answer",
+      "B": "Make a point without expecting reply",
+      "C": "Confuse readers",
+      "D": "End a story"
+    },
+    "correctAnswer": "B",
+    "explanation": "Rhetorical questions emphasize ideas, not elicit answers.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.197Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Rhetorical questions emphasize ideas, not elicit answers.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.197Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "neco-2023-math-001",
-  "subject": "Mathematics",
-  "topic": "Trigonometry",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "cos 0° equals:",
-  "options": {
-   "A": "0",
-   "B": "1",
-   "C": "1/2",
-   "D": "Undefined"
+  {
+    "id": "neco-2023-math-001",
+    "subject": "Mathematics",
+    "topic": "Trigonometry",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "cos 0° equals:",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "1/2",
+      "D": "Undefined"
+    },
+    "correctAnswer": "B",
+    "explanation": "cos 0° = 1.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.197Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "cos 0° = 1.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.197Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023
-  ]
- },
- {
-  "id": "neco-2022-econ-001",
-  "subject": "Economics",
-  "topic": "Money",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "Barter requires:",
-  "options": {
-   "A": "Double coincidence of wants",
-   "B": "Banks",
-   "C": "Coins",
-   "D": "Internet"
+  {
+    "id": "neco-2022-econ-001",
+    "subject": "Economics",
+    "topic": "Money",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "Barter requires:",
+    "options": {
+      "A": "Double coincidence of wants",
+      "B": "Banks",
+      "C": "Coins",
+      "D": "Internet"
+    },
+    "correctAnswer": "A",
+    "explanation": "Both parties must want what the other offers.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.197Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
   },
-  "correctAnswer": "A",
-  "explanation": "Both parties must want what the other offers.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.197Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "neco-2024-gove-001",
-  "subject": "Government",
-  "topic": "Arms of Government",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "The head of the executive at state level is the:",
-  "options": {
-   "A": "President",
-   "B": "Governor",
-   "C": "Speaker",
-   "D": "Chief Judge"
+  {
+    "id": "neco-2024-gove-001",
+    "subject": "Government",
+    "topic": "Arms of Government",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The head of the executive at state level is the:",
+    "options": {
+      "A": "President",
+      "B": "Governor",
+      "C": "Speaker",
+      "D": "Chief Judge"
+    },
+    "correctAnswer": "B",
+    "explanation": "Governors head state executives in Nigeria.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:03:36.197Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Governors head state executives in Nigeria.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:03:36.197Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "neco-2018-phys-001",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2018,
-  "difficulty": "easy",
-  "question": "Which quantity is a scalar?",
-  "options": {
-   "A": "Velocity",
-   "B": "Acceleration",
-   "C": "Distance",
-   "D": "Force"
+  {
+    "id": "neco-2018-phys-001",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2018,
+    "difficulty": "easy",
+    "question": "Which quantity is a scalar?",
+    "options": {
+      "A": "Velocity",
+      "B": "Acceleration",
+      "C": "Distance",
+      "D": "Force"
+    },
+    "correctAnswer": "C",
+    "explanation": "Distance has magnitude only; the rest have direction.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:06.775Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2022
+    ]
   },
-  "correctAnswer": "C",
-  "explanation": "Distance has magnitude only; the rest have direction.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:06.775Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2022
-  ]
- },
- {
-  "id": "neco-2018-phys-002",
-  "subject": "Physics",
-  "topic": "Electricity",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2018,
-  "difficulty": "medium",
-  "question": "Three 2 Ω resistors in series give:",
-  "options": {
-   "A": "6 Ω",
-   "B": "2 Ω",
-   "C": "0.67 Ω",
-   "D": "1.5 Ω"
+  {
+    "id": "neco-2018-phys-002",
+    "subject": "Physics",
+    "topic": "Electricity",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2018,
+    "difficulty": "medium",
+    "question": "Three 2 Ω resistors in series give:",
+    "options": {
+      "A": "6 Ω",
+      "B": "2 Ω",
+      "C": "0.67 Ω",
+      "D": "1.5 Ω"
+    },
+    "correctAnswer": "A",
+    "explanation": "Series resistances add: 2 + 2 + 2 = 6 Ω.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.009Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2023
+    ]
   },
-  "correctAnswer": "A",
-  "explanation": "Series resistances add: 2 + 2 + 2 = 6 Ω.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.009Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2023
-  ]
- },
- {
-  "id": "neco-2019-phys-002",
-  "subject": "Physics",
-  "topic": "Waves",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2019,
-  "difficulty": "easy",
-  "question": "The number of vibrations per second is:",
-  "options": {
-   "A": "Amplitude",
-   "B": "Wavelength",
-   "C": "Frequency",
-   "D": "Period"
+  {
+    "id": "neco-2019-phys-002",
+    "subject": "Physics",
+    "topic": "Waves",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2019,
+    "difficulty": "easy",
+    "question": "The number of vibrations per second is:",
+    "options": {
+      "A": "Amplitude",
+      "B": "Wavelength",
+      "C": "Frequency",
+      "D": "Period"
+    },
+    "correctAnswer": "C",
+    "explanation": "Frequency counts cycles per second (hertz).",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.010Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2022
+    ]
   },
-  "correctAnswer": "C",
-  "explanation": "Frequency counts cycles per second (hertz).",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.010Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2022
-  ]
- },
- {
-  "id": "neco-2020-phys-002",
-  "subject": "Physics",
-  "topic": "Light",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "A concave mirror produces a real image when the object is:",
-  "options": {
-   "A": "At the focus",
-   "B": "Beyond the centre of curvature",
-   "C": "Touching the mirror",
-   "D": "Behind the mirror"
+  {
+    "id": "neco-2020-phys-002",
+    "subject": "Physics",
+    "topic": "Light",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "A concave mirror produces a real image when the object is:",
+    "options": {
+      "A": "At the focus",
+      "B": "Beyond the centre of curvature",
+      "C": "Touching the mirror",
+      "D": "Behind the mirror"
+    },
+    "correctAnswer": "B",
+    "explanation": "Objects beyond C form real, inverted, diminished images.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.010Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020,
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Objects beyond C form real, inverted, diminished images.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.010Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020,
-   2025
-  ]
- },
- {
-  "id": "neco-2021-phys-001",
-  "subject": "Physics",
-  "topic": "Heat",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2021,
-  "difficulty": "easy",
-  "question": "The clinical thermometer range is about:",
-  "options": {
-   "A": "0–100 °C",
-   "B": "35–43 °C",
-   "C": "-10–110 °C",
-   "D": "0–50 °C"
+  {
+    "id": "neco-2021-phys-001",
+    "subject": "Physics",
+    "topic": "Heat",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2021,
+    "difficulty": "easy",
+    "question": "The clinical thermometer range is about:",
+    "options": {
+      "A": "0–100 °C",
+      "B": "35–43 °C",
+      "C": "-10–110 °C",
+      "D": "0–50 °C"
+    },
+    "correctAnswer": "B",
+    "explanation": "Clinical thermometers span body temperatures, ~35–43 °C.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.010Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Clinical thermometers span body temperatures, ~35–43 °C.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.010Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "neco-2022-phys-002",
-  "subject": "Physics",
-  "topic": "Mechanics",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2022,
-  "difficulty": "hard",
-  "question": "A 2 kg mass falls 10 m (g = 10 m/s²). Its kinetic energy on landing is:",
-  "options": {
-   "A": "20 J",
-   "B": "100 J",
-   "C": "200 J",
-   "D": "400 J"
+  {
+    "id": "neco-2022-phys-002",
+    "subject": "Physics",
+    "topic": "Mechanics",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2022,
+    "difficulty": "hard",
+    "question": "A 2 kg mass falls 10 m (g = 10 m/s²). Its kinetic energy on landing is:",
+    "options": {
+      "A": "20 J",
+      "B": "100 J",
+      "C": "200 J",
+      "D": "400 J"
+    },
+    "correctAnswer": "C",
+    "explanation": "Loss in potential = mgh = 2×10×10 = 200 J → KE.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.010Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2019,
+      2022
+    ]
   },
-  "correctAnswer": "C",
-  "explanation": "Loss in potential = mgh = 2×10×10 = 200 J → KE.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.010Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2019,
-   2022
-  ]
- },
- {
-  "id": "neco-2023-phys-001",
-  "subject": "Physics",
-  "topic": "Electricity",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "question": "Power dissipated in a 4 Ω resistor carrying 3 A is:",
-  "options": {
-   "A": "12 W",
-   "B": "36 W",
-   "C": "7 W",
-   "D": "48 W"
+  {
+    "id": "neco-2023-phys-001",
+    "subject": "Physics",
+    "topic": "Electricity",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Power dissipated in a 4 Ω resistor carrying 3 A is:",
+    "options": {
+      "A": "12 W",
+      "B": "36 W",
+      "C": "7 W",
+      "D": "48 W"
+    },
+    "correctAnswer": "B",
+    "explanation": "P = I²R = 9 × 4 = 36 W.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.010Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2018,
+      2020,
+      2023
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "P = I²R = 9 × 4 = 36 W.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.010Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2018,
-   2020,
-   2023
-  ]
- },
- {
-  "id": "neco-2024-phys-001",
-  "subject": "Physics",
-  "topic": "Pressure",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "Atmospheric pressure is measured with a:",
-  "options": {
-   "A": "Thermometer",
-   "B": "Barometer",
-   "C": "Ammeter",
-   "D": "Hydrometer"
+  {
+    "id": "neco-2024-phys-001",
+    "subject": "Physics",
+    "topic": "Pressure",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Atmospheric pressure is measured with a:",
+    "options": {
+      "A": "Thermometer",
+      "B": "Barometer",
+      "C": "Ammeter",
+      "D": "Hydrometer"
+    },
+    "correctAnswer": "B",
+    "explanation": "Barometers measure air pressure.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.010Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Barometers measure air pressure.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.010Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "neco-2018-chem-001",
-  "subject": "Chemistry",
-  "topic": "Atomic Structure",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2018,
-  "difficulty": "easy",
-  "question": "The electronic configuration of oxygen (8) is:",
-  "options": {
-   "A": "2, 6",
-   "B": "2, 8",
-   "C": "2, 4, 2",
-   "D": "8"
+  {
+    "id": "neco-2018-chem-001",
+    "subject": "Chemistry",
+    "topic": "Atomic Structure",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2018,
+    "difficulty": "easy",
+    "question": "The electronic configuration of oxygen (8) is:",
+    "options": {
+      "A": "2, 6",
+      "B": "2, 8",
+      "C": "2, 4, 2",
+      "D": "8"
+    },
+    "correctAnswer": "A",
+    "explanation": "8 electrons fill as 2 in K shell, 6 in L shell.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.010Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2019
+    ]
   },
-  "correctAnswer": "A",
-  "explanation": "8 electrons fill as 2 in K shell, 6 in L shell.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.010Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2019
-  ]
- },
- {
-  "id": "neco-2020-chem-001",
-  "subject": "Chemistry",
-  "topic": "Chemical Bonding",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2020,
-  "difficulty": "medium",
-  "question": "Diamond and graphite are ___ of carbon:",
-  "options": {
-   "A": "Isotopes",
-   "B": "Allotropes",
-   "C": "Isomers",
-   "D": "Polymers"
+  {
+    "id": "neco-2020-chem-001",
+    "subject": "Chemistry",
+    "topic": "Chemical Bonding",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2020,
+    "difficulty": "medium",
+    "question": "Diamond and graphite are ___ of carbon:",
+    "options": {
+      "A": "Isotopes",
+      "B": "Allotropes",
+      "C": "Isomers",
+      "D": "Polymers"
+    },
+    "correctAnswer": "B",
+    "explanation": "Different structural forms of one element are allotropes.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.010Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Different structural forms of one element are allotropes.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.010Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020
-  ]
- },
- {
-  "id": "neco-2022-chem-001",
-  "subject": "Chemistry",
-  "topic": "Acids and Bases",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2022,
-  "difficulty": "medium",
-  "question": "Which salt solution is acidic?",
-  "options": {
-   "A": "NaCl",
-   "B": "KNO₃",
-   "C": "NH₄Cl",
-   "D": "Na₂CO₃"
+  {
+    "id": "neco-2022-chem-001",
+    "subject": "Chemistry",
+    "topic": "Acids and Bases",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2022,
+    "difficulty": "medium",
+    "question": "Which salt solution is acidic?",
+    "options": {
+      "A": "NaCl",
+      "B": "KNO₃",
+      "C": "NH₄Cl",
+      "D": "Na₂CO₃"
+    },
+    "correctAnswer": "C",
+    "explanation": "Ammonium chloride hydrolyses to give an acidic solution.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.018Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2022
+    ]
   },
-  "correctAnswer": "C",
-  "explanation": "Ammonium chloride hydrolyses to give an acidic solution.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.018Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2022
-  ]
- },
- {
-  "id": "neco-2024-chem-001",
-  "subject": "Chemistry",
-  "topic": "Organic Chemistry",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "The IUPAC name of CH₃COOH is:",
-  "options": {
-   "A": "Methanoic acid",
-   "B": "Ethanoic acid",
-   "C": "Methanol",
-   "D": "Ethanone"
+  {
+    "id": "neco-2024-chem-001",
+    "subject": "Chemistry",
+    "topic": "Organic Chemistry",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The IUPAC name of CH₃COOH is:",
+    "options": {
+      "A": "Methanoic acid",
+      "B": "Ethanoic acid",
+      "C": "Methanol",
+      "D": "Ethanone"
+    },
+    "correctAnswer": "B",
+    "explanation": "Two-carbon carboxylic acid = ethanoic acid.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023,
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Two-carbon carboxylic acid = ethanoic acid.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023,
-   2024
-  ]
- },
- {
-  "id": "neco-2025-chem-002",
-  "subject": "Chemistry",
-  "topic": "Electrolysis",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2025,
-  "difficulty": "hard",
-  "question": "During electrolysis of dilute H₂SO₄, the gas at the cathode is:",
-  "options": {
-   "A": "Oxygen",
-   "B": "Hydrogen",
-   "C": "Sulphur",
-   "D": "Steam"
+  {
+    "id": "neco-2025-chem-002",
+    "subject": "Chemistry",
+    "topic": "Electrolysis",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "During electrolysis of dilute H₂SO₄, the gas at the cathode is:",
+    "options": {
+      "A": "Oxygen",
+      "B": "Hydrogen",
+      "C": "Sulphur",
+      "D": "Steam"
+    },
+    "correctAnswer": "B",
+    "explanation": "H⁺ ions discharge at the cathode as hydrogen gas.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "H⁺ ions discharge at the cathode as hydrogen gas.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "neco-2018-biol-001",
-  "subject": "Biology",
-  "topic": "Cell Biology",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2018,
-  "difficulty": "medium",
-  "question": "Mitosis produces daughter cells that are:",
-  "options": {
-   "A": "Genetically different",
-   "B": "Genetically identical",
-   "C": "Half in number",
-   "D": "Always gametes"
+  {
+    "id": "neco-2018-biol-001",
+    "subject": "Biology",
+    "topic": "Cell Biology",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2018,
+    "difficulty": "medium",
+    "question": "Mitosis produces daughter cells that are:",
+    "options": {
+      "A": "Genetically different",
+      "B": "Genetically identical",
+      "C": "Half in number",
+      "D": "Always gametes"
+    },
+    "correctAnswer": "B",
+    "explanation": "Mitosis copies chromosomes exactly for growth and repair.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2018,
+      2019
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Mitosis copies chromosomes exactly for growth and repair.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2018,
-   2019
-  ]
- },
- {
-  "id": "neco-2021-biol-001",
-  "subject": "Biology",
-  "topic": "Genetics",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2021,
-  "difficulty": "hard",
-  "question": "A couple with genotypes AA × AS can have children who are:",
-  "options": {
-   "A": "SS only",
-   "B": "AA and AS only",
-   "C": "AS only",
-   "D": "AA, AS and SS"
+  {
+    "id": "neco-2021-biol-001",
+    "subject": "Biology",
+    "topic": "Genetics",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2021,
+    "difficulty": "hard",
+    "question": "A couple with genotypes AA × AS can have children who are:",
+    "options": {
+      "A": "SS only",
+      "B": "AA and AS only",
+      "C": "AS only",
+      "D": "AA, AS and SS"
+    },
+    "correctAnswer": "B",
+    "explanation": "One parent gives only A; children are AA (50%) or AS (50%).",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "One parent gives only A; children are AA (50%) or AS (50%).",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "neco-2023-biol-001",
-  "subject": "Biology",
-  "topic": "Ecology",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2023,
-  "difficulty": "easy",
-  "question": "The savanna is characterized by:",
-  "options": {
-   "A": "Dense evergreen forest",
-   "B": "Grasses with scattered trees",
-   "C": "Permanent snow",
-   "D": "No rainfall"
+  {
+    "id": "neco-2023-biol-001",
+    "subject": "Biology",
+    "topic": "Ecology",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "The savanna is characterized by:",
+    "options": {
+      "A": "Dense evergreen forest",
+      "B": "Grasses with scattered trees",
+      "C": "Permanent snow",
+      "D": "No rainfall"
+    },
+    "correctAnswer": "B",
+    "explanation": "Tropical grassland with scattered trees defines savanna.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020,
+      2023
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Tropical grassland with scattered trees defines savanna.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020,
-   2023
-  ]
- },
- {
-  "id": "neco-2025-biol-001",
-  "subject": "Biology",
-  "topic": "Transport System",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "Xylem tissue transports:",
-  "options": {
-   "A": "Food",
-   "B": "Water and minerals",
-   "C": "Hormones only",
-   "D": "Air"
+  {
+    "id": "neco-2025-biol-001",
+    "subject": "Biology",
+    "topic": "Transport System",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Xylem tissue transports:",
+    "options": {
+      "A": "Food",
+      "B": "Water and minerals",
+      "C": "Hormones only",
+      "D": "Air"
+    },
+    "correctAnswer": "B",
+    "explanation": "Xylem vessels carry water and dissolved minerals upward.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Xylem vessels carry water and dissolved minerals upward.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "neco-2024-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Grammar",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "Choose the correct option: 'The news ___ good.'",
-  "options": {
-   "A": "are",
-   "B": "were",
-   "C": "is",
-   "D": "have been"
+  {
+    "id": "neco-2024-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Grammar",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Choose the correct option: 'The news ___ good.'",
+    "options": {
+      "A": "are",
+      "B": "were",
+      "C": "is",
+      "D": "have been"
+    },
+    "correctAnswer": "C",
+    "explanation": "'News' is singular despite the -s ending.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2019,
+      2024
+    ]
   },
-  "correctAnswer": "C",
-  "explanation": "'News' is singular despite the -s ending.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2019,
-   2024
-  ]
- },
- {
-  "id": "neco-2025-uoel-001",
-  "subject": "Use of English Language",
-  "topic": "Oral English",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2025,
-  "difficulty": "easy",
-  "question": "The word 'chair' starts with which sound?",
-  "options": {
-   "A": "/ʃ/",
-   "B": "/tʃ/",
-   "C": "/k/",
-   "D": "/s/"
+  {
+    "id": "neco-2025-uoel-001",
+    "subject": "Use of English Language",
+    "topic": "Oral English",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "The word 'chair' starts with which sound?",
+    "options": {
+      "A": "/ʃ/",
+      "B": "/tʃ/",
+      "C": "/k/",
+      "D": "/s/"
+    },
+    "correctAnswer": "B",
+    "explanation": "'Ch' in chair is pronounced /tʃ/.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "'Ch' in chair is pronounced /tʃ/.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "neco-2025-math-001",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2025,
-  "difficulty": "hard",
-  "question": "If y varies directly as x and y = 20 when x = 4, find y when x = 7",
-  "options": {
-   "A": "28",
-   "B": "35",
-   "C": "140",
-   "D": "11"
+  {
+    "id": "neco-2025-math-001",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "If y varies directly as x and y = 20 when x = 4, find y when x = 7",
+    "options": {
+      "A": "28",
+      "B": "35",
+      "C": "140",
+      "D": "11"
+    },
+    "correctAnswer": "B",
+    "explanation": "k = 20/4 = 5; y = 5×7 = 35.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2023,
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "k = 20/4 = 5; y = 5×7 = 35.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2023,
-   2025
-  ]
- },
- {
-  "id": "neco-2025-math-002",
-  "subject": "Mathematics",
-  "topic": "Geometry",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "The perimeter of a square of side 9 cm is:",
-  "options": {
-   "A": "18 cm",
-   "B": "36 cm",
-   "C": "81 cm",
-   "D": "45 cm"
+  {
+    "id": "neco-2025-math-002",
+    "subject": "Mathematics",
+    "topic": "Geometry",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "The perimeter of a square of side 9 cm is:",
+    "options": {
+      "A": "18 cm",
+      "B": "36 cm",
+      "C": "81 cm",
+      "D": "45 cm"
+    },
+    "correctAnswer": "B",
+    "explanation": "Perimeter = 4 × 9 = 36 cm.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021,
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Perimeter = 4 × 9 = 36 cm.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021,
-   2025
-  ]
- },
- {
-  "id": "neco-2021-gove-001",
-  "subject": "Government",
-  "topic": "Democracy",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "Periodic elections are essential in a democracy to ensure:",
-  "options": {
-   "A": "Life presidency",
-   "B": "Accountability and consent",
-   "C": "Military rule",
-   "D": "One-party dominance"
+  {
+    "id": "neco-2021-gove-001",
+    "subject": "Government",
+    "topic": "Democracy",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "Periodic elections are essential in a democracy to ensure:",
+    "options": {
+      "A": "Life presidency",
+      "B": "Accountability and consent",
+      "C": "Military rule",
+      "D": "One-party dominance"
+    },
+    "correctAnswer": "B",
+    "explanation": "Regular polls let citizens renew or withdraw their mandate.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Regular polls let citizens renew or withdraw their mandate.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "neco-2023-gove-001",
-  "subject": "Government",
-  "topic": "Federalism",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2023,
-  "difficulty": "easy",
-  "question": "How many tiers of government does Nigeria have?",
-  "options": {
-   "A": "Two",
-   "B": "Three",
-   "C": "Four",
-   "D": "One"
+  {
+    "id": "neco-2023-gove-001",
+    "subject": "Government",
+    "topic": "Federalism",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "How many tiers of government does Nigeria have?",
+    "options": {
+      "A": "Two",
+      "B": "Three",
+      "C": "Four",
+      "D": "One"
+    },
+    "correctAnswer": "B",
+    "explanation": "Federal, state and local governments.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.019Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Federal, state and local governments.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023
-  ]
- },
- {
-  "id": "neco-2024-econ-001",
-  "subject": "Economics",
-  "topic": "Demand and Supply",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "A rise in income (for a normal good) causes demand to:",
-  "options": {
-   "A": "Fall",
-   "B": "Shift right (increase)",
-   "C": "Stay fixed",
-   "D": "Become zero"
+  {
+    "id": "neco-2024-econ-001",
+    "subject": "Economics",
+    "topic": "Demand and Supply",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "A rise in income (for a normal good) causes demand to:",
+    "options": {
+      "A": "Fall",
+      "B": "Shift right (increase)",
+      "C": "Stay fixed",
+      "D": "Become zero"
+    },
+    "correctAnswer": "B",
+    "explanation": "Higher income raises demand for normal goods at every price.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Higher income raises demand for normal goods at every price.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "neco-2025-econ-001",
-  "subject": "Economics",
-  "topic": "Population",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2025,
-  "difficulty": "easy",
-  "question": "A population pyramid with a wide base shows:",
-  "options": {
-   "A": "Ageing population",
-   "B": "High birth rate",
-   "C": "Zero growth",
-   "D": "High death rate only"
+  {
+    "id": "neco-2025-econ-001",
+    "subject": "Economics",
+    "topic": "Population",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "A population pyramid with a wide base shows:",
+    "options": {
+      "A": "Ageing population",
+      "B": "High birth rate",
+      "C": "Zero growth",
+      "D": "High death rate only"
+    },
+    "correctAnswer": "B",
+    "explanation": "Many children at the base means high fertility.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Many children at the base means high fertility.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "neco-2021-phys-002",
-  "subject": "Physics",
-  "topic": "Magnetism",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "The region around a magnet where force is felt is the:",
-  "options": {
-   "A": "Electric field",
-   "B": "Magnetic field",
-   "C": "Vacuum",
-   "D": "Circuit"
+  {
+    "id": "neco-2021-phys-002",
+    "subject": "Physics",
+    "topic": "Magnetism",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "The region around a magnet where force is felt is the:",
+    "options": {
+      "A": "Electric field",
+      "B": "Magnetic field",
+      "C": "Vacuum",
+      "D": "Circuit"
+    },
+    "correctAnswer": "B",
+    "explanation": "Magnetic influence occupies the magnetic field.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Magnetic influence occupies the magnetic field.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "neco-2020-chem-002",
-  "subject": "Chemistry",
-  "topic": "Salts",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2020,
-  "difficulty": "easy",
-  "question": "Common salt is chemically:",
-  "options": {
-   "A": "Sodium chloride",
-   "B": "Calcium carbonate",
-   "C": "Potassium nitrate",
-   "D": "Magnesium sulphate"
+  {
+    "id": "neco-2020-chem-002",
+    "subject": "Chemistry",
+    "topic": "Salts",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2020,
+    "difficulty": "easy",
+    "question": "Common salt is chemically:",
+    "options": {
+      "A": "Sodium chloride",
+      "B": "Calcium carbonate",
+      "C": "Potassium nitrate",
+      "D": "Magnesium sulphate"
+    },
+    "correctAnswer": "A",
+    "explanation": "Table salt is NaCl.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020
+    ]
   },
-  "correctAnswer": "A",
-  "explanation": "Table salt is NaCl.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020
-  ]
- },
- {
-  "id": "neco-2021-biol-002",
-  "subject": "Biology",
-  "topic": "Microorganisms",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2021,
-  "difficulty": "medium",
-  "question": "Pasteurization of milk mainly destroys:",
-  "options": {
-   "A": "Nutrients",
-   "B": "Harmful microbes",
-   "C": "Water",
-   "D": "Vitamins only"
+  {
+    "id": "neco-2021-biol-002",
+    "subject": "Biology",
+    "topic": "Microorganisms",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2021,
+    "difficulty": "medium",
+    "question": "Pasteurization of milk mainly destroys:",
+    "options": {
+      "A": "Nutrients",
+      "B": "Harmful microbes",
+      "C": "Water",
+      "D": "Vitamins only"
+    },
+    "correctAnswer": "B",
+    "explanation": "Controlled heating kills pathogens while keeping milk nutritious.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2021
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Controlled heating kills pathogens while keeping milk nutritious.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2021
-  ]
- },
- {
-  "id": "neco-2020-uoel-002",
-  "subject": "Use of English Language",
-  "topic": "Lexis and Structure",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2020,
-  "difficulty": "easy",
-  "question": "Choose the correctly spelt word:",
-  "options": {
-   "A": "Seperate",
-   "B": "Separate",
-   "C": "Seprate",
-   "D": "Seperete"
+  {
+    "id": "neco-2020-uoel-002",
+    "subject": "Use of English Language",
+    "topic": "Lexis and Structure",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2020,
+    "difficulty": "easy",
+    "question": "Choose the correctly spelt word:",
+    "options": {
+      "A": "Seperate",
+      "B": "Separate",
+      "C": "Seprate",
+      "D": "Seperete"
+    },
+    "correctAnswer": "B",
+    "explanation": "Separate: s-e-p-a-r-a-t-e ('par' in the middle).",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2020
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Separate: s-e-p-a-r-a-t-e ('par' in the middle).",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2020
-  ]
- },
- {
-  "id": "neco-2022-math-001",
-  "subject": "Mathematics",
-  "topic": "Indices",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "Simplify: 7² ÷ 7",
-  "options": {
-   "A": "7",
-   "B": "49",
-   "C": "1",
-   "D": "14"
+  {
+    "id": "neco-2022-math-001",
+    "subject": "Mathematics",
+    "topic": "Indices",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "Simplify: 7² ÷ 7",
+    "options": {
+      "A": "7",
+      "B": "49",
+      "C": "1",
+      "D": "14"
+    },
+    "correctAnswer": "A",
+    "explanation": "7²⁻¹ = 7¹ = 7.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
   },
-  "correctAnswer": "A",
-  "explanation": "7²⁻¹ = 7¹ = 7.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "neco-2025-gove-001",
-  "subject": "Government",
-  "topic": "ECOWAS",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "Which country is NOT in ECOWAS?",
-  "options": {
-   "A": "Ghana",
-   "B": "Senegal",
-   "C": "Kenya",
-   "D": "Togo"
+  {
+    "id": "neco-2025-gove-001",
+    "subject": "Government",
+    "topic": "ECOWAS",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Which country is NOT in ECOWAS?",
+    "options": {
+      "A": "Ghana",
+      "B": "Senegal",
+      "C": "Kenya",
+      "D": "Togo"
+    },
+    "correctAnswer": "C",
+    "explanation": "Kenya is in East Africa (EAC), not West Africa.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "C",
-  "explanation": "Kenya is in East Africa (EAC), not West Africa.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "neco-2023-econ-001",
-  "subject": "Economics",
-  "topic": "Scale of Preference",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2023,
-  "difficulty": "easy",
-  "question": "Wants are described as insatiable because:",
-  "options": {
-   "A": "They end at death only",
-   "B": "Human wants are unlimited",
-   "C": "Money is scarce",
-   "D": "Goods are free"
+  {
+    "id": "neco-2023-econ-001",
+    "subject": "Economics",
+    "topic": "Scale of Preference",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Wants are described as insatiable because:",
+    "options": {
+      "A": "They end at death only",
+      "B": "Human wants are unlimited",
+      "C": "Money is scarce",
+      "D": "Goods are free"
+    },
+    "correctAnswer": "B",
+    "explanation": "Human wants exceed available resources — the core economic problem.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Human wants exceed available resources — the core economic problem.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2023
-  ]
- },
- {
-  "id": "neco-2024-phys-002",
-  "subject": "Physics",
-  "topic": "Energy",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "Solar panels convert sunlight directly to:",
-  "options": {
-   "A": "Heat only",
-   "B": "Electricity",
-   "C": "Sound",
-   "D": "Wind"
+  {
+    "id": "neco-2024-phys-002",
+    "subject": "Physics",
+    "topic": "Energy",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Solar panels convert sunlight directly to:",
+    "options": {
+      "A": "Heat only",
+      "B": "Electricity",
+      "C": "Sound",
+      "D": "Wind"
+    },
+    "correctAnswer": "B",
+    "explanation": "Photovoltaic cells produce electric current from light.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Photovoltaic cells produce electric current from light.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "neco-2024-chem-002",
-  "subject": "Chemistry",
-  "topic": "Rates",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "A catalyst works by:",
-  "options": {
-   "A": "Raising activation energy",
-   "B": "Providing an easier reaction path",
-   "C": "Being used up",
-   "D": "Cooling reactants"
+  {
+    "id": "neco-2024-chem-002",
+    "subject": "Chemistry",
+    "topic": "Rates",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "A catalyst works by:",
+    "options": {
+      "A": "Raising activation energy",
+      "B": "Providing an easier reaction path",
+      "C": "Being used up",
+      "D": "Cooling reactants"
+    },
+    "correctAnswer": "B",
+    "explanation": "Catalysts lower activation energy without being consumed.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Catalysts lower activation energy without being consumed.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "neco-2022-biol-002",
-  "subject": "Biology",
-  "topic": "Coordination",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2022,
-  "difficulty": "easy",
-  "question": "The structural unit of the nervous system is the:",
-  "options": {
-   "A": "Nephron",
-   "B": "Neuron",
-   "C": "Alveolus",
-   "D": "Villus"
+  {
+    "id": "neco-2022-biol-002",
+    "subject": "Biology",
+    "topic": "Coordination",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2022,
+    "difficulty": "easy",
+    "question": "The structural unit of the nervous system is the:",
+    "options": {
+      "A": "Nephron",
+      "B": "Neuron",
+      "C": "Alveolus",
+      "D": "Villus"
+    },
+    "correctAnswer": "B",
+    "explanation": "Neurons transmit nerve impulses.",
+    "source": "seed",
+    "createdAt": "2026-10-11T09:56:07.020Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2022
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Neurons transmit nerve impulses.",
-  "source": "seed",
-  "createdAt": "2026-10-11T09:56:07.020Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2022
-  ]
- },
- {
-  "id": "neco-2023-math-002",
-  "subject": "Mathematics",
-  "topic": "Algebra",
-  "exam": [
-   "NECO"
-  ],
-  "year": 2023,
-  "difficulty": "medium",
-  "kind": "theory",
-  "question": "Solve the equation 2x² − 7x + 3 = 0 by factorization, showing all steps.",
-  "modelAnswer": "Split middle term: 2x² − 6x − x + 3 = 0 → 2x(x − 3) − 1(x − 3) = 0 → (2x − 1)(x − 3) = 0. So x = 1/2 or x = 3.",
-  "explanation": "Show splitting, grouping, and both roots.",
-  "source": "seed",
-  "createdAt": "2026-10-14T00:48:34.968Z",
-  "highYield": true,
-  "repeatedFrom": [
-   2019,
-   2023,
-   2025
-  ]
- }
+  {
+    "id": "neco-2023-math-002",
+    "subject": "Mathematics",
+    "topic": "Algebra",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2023,
+    "difficulty": "medium",
+    "kind": "theory",
+    "question": "Solve the equation 2x² − 7x + 3 = 0 by factorization, showing all steps.",
+    "modelAnswer": "Split middle term: 2x² − 6x − x + 3 = 0 → 2x(x − 3) − 1(x − 3) = 0 → (2x − 1)(x − 3) = 0. So x = 1/2 or x = 3.",
+    "explanation": "Show splitting, grouping, and both roots.",
+    "source": "seed",
+    "createdAt": "2026-10-14T00:48:34.968Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2019,
+      2023,
+      2025
+    ]
+  },
+  {
+    "id": "neco-2024-mathematics-011",
+    "subject": "Mathematics",
+    "topic": "Solve for x: 2x + 5 = 17",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Solve for x: 2x + 5 = 17",
+    "options": {
+      "A": "x=4",
+      "B": "x=6",
+      "C": "x=7",
+      "D": "x=8"
+    },
+    "correctAnswer": "B",
+    "explanation": "Subtract 5 from both sides: 2x=12. Divide by 2: x=6.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.763Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-mathematics-012",
+    "subject": "Mathematics",
+    "topic": "What is the value of 3² + 4²?",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "What is the value of 3² + 4²?",
+    "options": {
+      "A": "25",
+      "B": "7",
+      "C": "25",
+      "D": "49"
+    },
+    "correctAnswer": "C",
+    "explanation": "3²=9, 4²=16. 9+16=25.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.780Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-mathematics-013",
+    "subject": "Mathematics",
+    "topic": "Simplify: 3/4 + 1/2",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Simplify: 3/4 + 1/2",
+    "options": {
+      "A": "4/6",
+      "B": "1/2",
+      "C": "5/4",
+      "D": "5/4"
+    },
+    "correctAnswer": "D",
+    "explanation": "1/2 = 2/4. 3/4 + 2/4 = 5/4.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.780Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-biology-014",
+    "subject": "Biology",
+    "topic": "Which organelle is responsible",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Which organelle is responsible for energy production in cells?",
+    "options": {
+      "A": "Nucleus",
+      "B": "Mitochondria",
+      "C": "Ribosome",
+      "D": "Golgi body"
+    },
+    "correctAnswer": "B",
+    "explanation": "Mitochondria produce ATP through cellular respiration.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.780Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-biology-015",
+    "subject": "Biology",
+    "topic": "Photosynthesis occurs in which",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Photosynthesis occurs in which part of the cell?",
+    "options": {
+      "A": "Nucleus",
+      "B": "Mitochondria",
+      "C": "Chloroplast",
+      "D": "Cytoplasm"
+    },
+    "correctAnswer": "C",
+    "explanation": "Chloroplasts contain chlorophyll which captures light energy for photosynthesis.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.780Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-chemistry-016",
+    "subject": "Chemistry",
+    "topic": "What is the chemical symbol fo",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "What is the chemical symbol for Sodium?",
+    "options": {
+      "A": "Na",
+      "B": "So",
+      "C": "Sd",
+      "D": "Nm"
+    },
+    "correctAnswer": "A",
+    "explanation": "Na comes from the Latin name Natrium.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.780Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-chemistry-017",
+    "subject": "Chemistry",
+    "topic": "The pH of a neutral solution i",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The pH of a neutral solution is:",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "7",
+      "D": "14"
+    },
+    "correctAnswer": "C",
+    "explanation": "pH 7 is neutral. Below 7 is acidic, above 7 is alkaline.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.780Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-physics-018",
+    "subject": "Physics",
+    "topic": "The SI unit of force is:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "The SI unit of force is:",
+    "options": {
+      "A": "Joule",
+      "B": "Newton",
+      "C": "Watt",
+      "D": "Pascal"
+    },
+    "correctAnswer": "B",
+    "explanation": "Force is measured in Newtons (N), named after Isaac Newton.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.780Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-physics-019",
+    "subject": "Physics",
+    "topic": "Speed is defined as:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Speed is defined as:",
+    "options": {
+      "A": "Distance x Time",
+      "B": "Mass x Acceleration",
+      "C": "Force x Distance",
+      "D": "Distance / Time"
+    },
+    "correctAnswer": "D",
+    "explanation": "Speed = Distance ÷ Time. The SI unit is m/s.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.780Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-economics-020",
+    "subject": "Economics",
+    "topic": "The law of demand states that:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The law of demand states that:",
+    "options": {
+      "A": "As price falls, quantity demanded rises",
+      "B": "As price rises, quantity demanded rises",
+      "C": "Price and demand are unrelated",
+      "D": "Demand always equals supply"
+    },
+    "correctAnswer": "A",
+    "explanation": "There is an inverse relationship between price and quantity demanded, ceteris paribus.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-government-021",
+    "subject": "Government",
+    "topic": "The Nigerian constitution was ",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "The Nigerian constitution was first promulgated in:",
+    "options": {
+      "A": "1960",
+      "B": "1963",
+      "C": "1979",
+      "D": "1999"
+    },
+    "correctAnswer": "C",
+    "explanation": "The 1979 constitution introduced the presidential system in Nigeria.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-english-022",
+    "subject": "English",
+    "topic": "Choose the correct spelling:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Choose the correct spelling:",
+    "options": {
+      "A": "Occurence",
+      "B": "Occurrence",
+      "C": "Occurrance",
+      "D": "Ocurrence"
+    },
+    "correctAnswer": "B",
+    "explanation": "Occurrence has double c and double r. It is one of the most commonly misspelled English words.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-mathematics-021",
+    "subject": "Mathematics",
+    "topic": "Solve for x: 2x + 5 = 17",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Solve for x: 2x + 5 = 17",
+    "options": {
+      "A": "x=4",
+      "B": "x=6",
+      "C": "x=7",
+      "D": "x=8"
+    },
+    "correctAnswer": "B",
+    "explanation": "Subtract 5 from both sides: 2x=12. Divide by 2: x=6.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-mathematics-022",
+    "subject": "Mathematics",
+    "topic": "What is the value of 3² + 4²?",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "What is the value of 3² + 4²?",
+    "options": {
+      "A": "25",
+      "B": "7",
+      "C": "25",
+      "D": "49"
+    },
+    "correctAnswer": "C",
+    "explanation": "3²=9, 4²=16. 9+16=25.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-mathematics-023",
+    "subject": "Mathematics",
+    "topic": "Simplify: 3/4 + 1/2",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Simplify: 3/4 + 1/2",
+    "options": {
+      "A": "4/6",
+      "B": "1/2",
+      "C": "5/4",
+      "D": "5/4"
+    },
+    "correctAnswer": "D",
+    "explanation": "1/2 = 2/4. 3/4 + 2/4 = 5/4.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-biology-024",
+    "subject": "Biology",
+    "topic": "Which organelle is responsible",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Which organelle is responsible for energy production in cells?",
+    "options": {
+      "A": "Nucleus",
+      "B": "Mitochondria",
+      "C": "Ribosome",
+      "D": "Golgi body"
+    },
+    "correctAnswer": "B",
+    "explanation": "Mitochondria produce ATP through cellular respiration.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-biology-025",
+    "subject": "Biology",
+    "topic": "Photosynthesis occurs in which",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Photosynthesis occurs in which part of the cell?",
+    "options": {
+      "A": "Nucleus",
+      "B": "Mitochondria",
+      "C": "Chloroplast",
+      "D": "Cytoplasm"
+    },
+    "correctAnswer": "C",
+    "explanation": "Chloroplasts contain chlorophyll which captures light energy for photosynthesis.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-chemistry-026",
+    "subject": "Chemistry",
+    "topic": "What is the chemical symbol fo",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "What is the chemical symbol for Sodium?",
+    "options": {
+      "A": "Na",
+      "B": "So",
+      "C": "Sd",
+      "D": "Nm"
+    },
+    "correctAnswer": "A",
+    "explanation": "Na comes from the Latin name Natrium.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-chemistry-027",
+    "subject": "Chemistry",
+    "topic": "The pH of a neutral solution i",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The pH of a neutral solution is:",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "7",
+      "D": "14"
+    },
+    "correctAnswer": "C",
+    "explanation": "pH 7 is neutral. Below 7 is acidic, above 7 is alkaline.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-physics-028",
+    "subject": "Physics",
+    "topic": "The SI unit of force is:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "The SI unit of force is:",
+    "options": {
+      "A": "Joule",
+      "B": "Newton",
+      "C": "Watt",
+      "D": "Pascal"
+    },
+    "correctAnswer": "B",
+    "explanation": "Force is measured in Newtons (N), named after Isaac Newton.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-physics-029",
+    "subject": "Physics",
+    "topic": "Speed is defined as:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Speed is defined as:",
+    "options": {
+      "A": "Distance x Time",
+      "B": "Mass x Acceleration",
+      "C": "Force x Distance",
+      "D": "Distance / Time"
+    },
+    "correctAnswer": "D",
+    "explanation": "Speed = Distance ÷ Time. The SI unit is m/s.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-economics-030",
+    "subject": "Economics",
+    "topic": "The law of demand states that:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The law of demand states that:",
+    "options": {
+      "A": "As price falls, quantity demanded rises",
+      "B": "As price rises, quantity demanded rises",
+      "C": "Price and demand are unrelated",
+      "D": "Demand always equals supply"
+    },
+    "correctAnswer": "A",
+    "explanation": "There is an inverse relationship between price and quantity demanded, ceteris paribus.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-government-031",
+    "subject": "Government",
+    "topic": "The Nigerian constitution was ",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "The Nigerian constitution was first promulgated in:",
+    "options": {
+      "A": "1960",
+      "B": "1963",
+      "C": "1979",
+      "D": "1999"
+    },
+    "correctAnswer": "C",
+    "explanation": "The 1979 constitution introduced the presidential system in Nigeria.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-english-032",
+    "subject": "English",
+    "topic": "Choose the correct spelling:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Choose the correct spelling:",
+    "options": {
+      "A": "Occurence",
+      "B": "Occurrence",
+      "C": "Occurrance",
+      "D": "Ocurrence"
+    },
+    "correctAnswer": "B",
+    "explanation": "Occurrence has double c and double r. It is one of the most commonly misspelled English words.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-mathematics-031",
+    "subject": "Mathematics",
+    "topic": "Solve for x: 2x + 5 = 17",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Solve for x: 2x + 5 = 17",
+    "options": {
+      "A": "x=4",
+      "B": "x=6",
+      "C": "x=7",
+      "D": "x=8"
+    },
+    "correctAnswer": "B",
+    "explanation": "Subtract 5 from both sides: 2x=12. Divide by 2: x=6.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-mathematics-032",
+    "subject": "Mathematics",
+    "topic": "What is the value of 3² + 4²?",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "What is the value of 3² + 4²?",
+    "options": {
+      "A": "25",
+      "B": "7",
+      "C": "25",
+      "D": "49"
+    },
+    "correctAnswer": "C",
+    "explanation": "3²=9, 4²=16. 9+16=25.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-mathematics-033",
+    "subject": "Mathematics",
+    "topic": "Simplify: 3/4 + 1/2",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Simplify: 3/4 + 1/2",
+    "options": {
+      "A": "4/6",
+      "B": "1/2",
+      "C": "5/4",
+      "D": "5/4"
+    },
+    "correctAnswer": "D",
+    "explanation": "1/2 = 2/4. 3/4 + 2/4 = 5/4.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-biology-034",
+    "subject": "Biology",
+    "topic": "Which organelle is responsible",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Which organelle is responsible for energy production in cells?",
+    "options": {
+      "A": "Nucleus",
+      "B": "Mitochondria",
+      "C": "Ribosome",
+      "D": "Golgi body"
+    },
+    "correctAnswer": "B",
+    "explanation": "Mitochondria produce ATP through cellular respiration.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-biology-035",
+    "subject": "Biology",
+    "topic": "Photosynthesis occurs in which",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Photosynthesis occurs in which part of the cell?",
+    "options": {
+      "A": "Nucleus",
+      "B": "Mitochondria",
+      "C": "Chloroplast",
+      "D": "Cytoplasm"
+    },
+    "correctAnswer": "C",
+    "explanation": "Chloroplasts contain chlorophyll which captures light energy for photosynthesis.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-chemistry-036",
+    "subject": "Chemistry",
+    "topic": "What is the chemical symbol fo",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "What is the chemical symbol for Sodium?",
+    "options": {
+      "A": "Na",
+      "B": "So",
+      "C": "Sd",
+      "D": "Nm"
+    },
+    "correctAnswer": "A",
+    "explanation": "Na comes from the Latin name Natrium.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-chemistry-037",
+    "subject": "Chemistry",
+    "topic": "The pH of a neutral solution i",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The pH of a neutral solution is:",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "7",
+      "D": "14"
+    },
+    "correctAnswer": "C",
+    "explanation": "pH 7 is neutral. Below 7 is acidic, above 7 is alkaline.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-physics-038",
+    "subject": "Physics",
+    "topic": "The SI unit of force is:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "The SI unit of force is:",
+    "options": {
+      "A": "Joule",
+      "B": "Newton",
+      "C": "Watt",
+      "D": "Pascal"
+    },
+    "correctAnswer": "B",
+    "explanation": "Force is measured in Newtons (N), named after Isaac Newton.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-physics-039",
+    "subject": "Physics",
+    "topic": "Speed is defined as:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Speed is defined as:",
+    "options": {
+      "A": "Distance x Time",
+      "B": "Mass x Acceleration",
+      "C": "Force x Distance",
+      "D": "Distance / Time"
+    },
+    "correctAnswer": "D",
+    "explanation": "Speed = Distance ÷ Time. The SI unit is m/s.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-economics-040",
+    "subject": "Economics",
+    "topic": "The law of demand states that:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The law of demand states that:",
+    "options": {
+      "A": "As price falls, quantity demanded rises",
+      "B": "As price rises, quantity demanded rises",
+      "C": "Price and demand are unrelated",
+      "D": "Demand always equals supply"
+    },
+    "correctAnswer": "A",
+    "explanation": "There is an inverse relationship between price and quantity demanded, ceteris paribus.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-government-041",
+    "subject": "Government",
+    "topic": "The Nigerian constitution was ",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "The Nigerian constitution was first promulgated in:",
+    "options": {
+      "A": "1960",
+      "B": "1963",
+      "C": "1979",
+      "D": "1999"
+    },
+    "correctAnswer": "C",
+    "explanation": "The 1979 constitution introduced the presidential system in Nigeria.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "neco-2024-english-042",
+    "subject": "English",
+    "topic": "Choose the correct spelling:",
+    "exam": [
+      "NECO"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Choose the correct spelling:",
+    "options": {
+      "A": "Occurence",
+      "B": "Occurrence",
+      "C": "Occurrance",
+      "D": "Ocurrence"
+    },
+    "correctAnswer": "B",
+    "explanation": "Occurrence has double c and double r. It is one of the most commonly misspelled English words.",
+    "source": "seed",
+    "createdAt": "2026-10-14T23:24:02.781Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  }
 ]

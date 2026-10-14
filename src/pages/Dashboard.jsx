@@ -20,8 +20,9 @@ import NotificationPanel from "../components/NotificationPanel";
 import OnboardingTour from "../components/OnboardingTour";
 import { tourSeen } from "../lib/tour";
 import SurveyPrompt from "../components/SurveyPrompt";
+import { listUpdates } from "../lib/community";
 import {
-  Target, Calendar, CheckCircle, Zap, Send, ChevronRight, Crown
+  Target, Calendar, CheckCircle, Zap, Send, ChevronRight, Crown, Bell, Megaphone
 } from "lucide-react";
 
 const SUBJECT_ICONS = {
@@ -44,7 +45,12 @@ export default function Dashboard() {
   const [subjectStats, setSubjectStats] = useState({});
   const [insights, setInsights] = useState([]);
   const [showTour, setShowTour] = useState(() => !tourSeen());
+  const [updates, setUpdates] = useState([]);
   const healthTip = dailyHealthTip(new Date().toISOString().split("T")[0]);
+
+  useEffect(() => {
+    listUpdates(5).then(setUpdates).catch(() => {});
+  }, []);
 
   // NOTE: admins intentionally land here like everyone else.
   // The admin console is reachable via the Admin nav item / /admin route.
@@ -136,6 +142,21 @@ export default function Dashboard() {
       <div className="page-content" style={{ maxWidth: 1200, margin: "0 auto" }}>
         <ResumeBanner />
         <NotificationPrompt />
+
+        {updates.length > 0 && (
+          <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 12, padding: "12px 16px", marginBottom: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
+              <Megaphone size={14} color="var(--primary)" />
+              <span style={{ fontSize: 12, fontWeight: 700, color: "var(--text)", textTransform: "uppercase", letterSpacing: 1 }}>Latest Updates</span>
+            </div>
+            {updates.slice(0, 3).map((u) => (
+              <div key={u.id} style={{ padding: "6px 0", borderBottom: "1px solid var(--border)" }}>
+                <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text)" }}>{u.title}</div>
+                <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{u.body?.slice(0, 100)}…</div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Pro Banner (free users only) */}
         {!isPro && (

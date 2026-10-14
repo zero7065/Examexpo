@@ -16,7 +16,7 @@ export const PLANS = {
     ],
     locked: [
       "AI Tutor (unlimited chat)",
-      "Full Mock CBT Exams",
+      "Full Mock Exams",
       "All subjects unlocked",
       "Detailed analytics",
       "Offline mode",
@@ -33,7 +33,7 @@ export const PLANS = {
       "Unlimited practice questions",
       "All subjects unlocked",
       "AI Tutor — unlimited chat",
-      "Full Mock CBT Exams",
+      "Full Mock Exams",
       "Detailed performance analytics",
       "Offline mode",
       "Priority support",
@@ -52,6 +52,23 @@ export const PLANS = {
       "2 months free",
       "Early access to new features",
       "Exclusive leaderboard badge",
+    ]
+  },
+  ielts: {
+    name: "IELTS Preparation",
+    price: 80000,
+    currency: "NGN",
+    paystackPlan: "ielts_yearly",
+    interval: "yearly",
+    badge: "IELTS — Study Abroad Ready",
+    features: [
+      "Everything in Pro Yearly",
+      "Full IELTS question bank (132+ questions)",
+      "IELTS band score calculator",
+      "Writing task feedback (AI)",
+      "Speaking practice prompts",
+      "Visa requirement guide",
+      "Priority IELTS support",
     ]
   }
 };
