@@ -7,6 +7,7 @@ import { getUserProfile } from "../lib/userProfile";
 import { chatWithTutor, analyzeDocument, getLastAIError, isAIConfigured, sanitizeAIResponse } from "../lib/ai";
 import { getStudentMemory, topWeakTopics } from "../lib/aiMemory";
 import { appendToAISession, getAISessions, createAISession, deleteAISession, getAISession } from "../lib/aiSessions";
+import { useFeatureOnlineGuard } from "../hooks/useOnlineStatus";
 import { unlockAchievement } from "../lib/achievements";
 import { preprocessImage } from "../lib/vision";
 import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
@@ -50,6 +51,7 @@ export default function AITutor() {
   const [sessions, setSessions] = useState([]);
   const [showSessions, setShowSessions] = useState(false);
   const [currentSessionId, setCurrentSessionId] = useState(null);
+  const { blocked, requireOnline, dismiss } = useFeatureOnlineGuard();
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -172,6 +174,7 @@ export default function AITutor() {
     const msg = text || input;
     const hasImages = pendingImages.length > 0;
     if ((!msg.trim() && !hasImages) || loading) return;
+    if (!requireOnline("AI Tutor")) return;
 
     try {
       // Free-tier daily AI limit
@@ -414,6 +417,18 @@ export default function AITutor() {
       )}
 
       {showImageGen && <ImageGenerator onClose={() => setShowImageGen(false)} />}
+
+      {blocked && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
+          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.7)" }} onClick={dismiss} />
+          <div className="glass-card" style={{ position: "relative", padding: 32, textAlign: "center", maxWidth: 400 }}>
+            <div style={{ fontSize: 48, marginBottom: 12 }}>⚠️</div>
+            <h3 style={{ color: "var(--text)", fontSize: 18, fontWeight: 800, marginBottom: 8 }}>You need to be online</h3>
+            <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 20 }}>{blocked} requires an internet connection. Please check your network and try again.</p>
+            <button onClick={dismiss} className="btn-primary" style={{ padding: "10px 24px" }}>OK</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

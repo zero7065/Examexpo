@@ -13,6 +13,7 @@ import { useBackButton } from "./hooks/useBackButton";
 import { seedAdminAccount, isFirebaseConfigured } from "./firebaseConfig";
 import { clearOldServiceWorker } from "./lib/clearCache";
 import { useServiceWorkerUpdate } from "./hooks/useServiceWorkerUpdate";
+import OfflineIndicator from "./components/OfflineIndicator";
 
 import GuideFab from "./components/GuideFab";
 
@@ -154,6 +155,7 @@ function AuthAwareRoutes() {
       <GuideFab />
       <main className={`flex-1 ${user ? "md:ml-64 pb-20 md:pb-0" : ""} animate-fade`}>
         <InstallPrompt />
+        <OfflineIndicator />
         {updateAvailable && (
           <div style={{ position: "fixed", bottom: 16, left: "50%", transform: "translateX(-50%)", zIndex: 200, background: "#1a1a2e", border: "1px solid #6C3CE9", borderRadius: 12, padding: "12px 20px", display: "flex", alignItems: "center", gap: 12, boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}>
             <span style={{ color: "#fff", fontSize: 14, fontWeight: 600 }}>New version available</span>
