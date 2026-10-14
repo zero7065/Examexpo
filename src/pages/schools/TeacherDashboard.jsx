@@ -13,8 +13,11 @@ import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import AvatarDisplay from "../../components/Avatar/AvatarDisplay";
 import {
-  Users, Plus, FileText, MonitorPlay, ClipboardList, X, Send, Trophy,
+  Users, Plus, FileText, MonitorPlay, ClipboardList, X, Send, Trophy, Sparkles, Megaphone, BookOpenCheck,
 } from "lucide-react";
+import { createAssignment, createAnnouncement, listAssignmentsForTeacher, listAnnouncementsForSchool } from "../../lib/teacherContent";
+import { askGroq } from "../../lib/ai";
+import TeacherTools from "../../components/TeacherTools";
 
 function cellColor(acc) {
   if (acc === null) return "var(--bg-3)";
@@ -350,6 +353,10 @@ export default function TeacherDashboard() {
             </button>
           </div>
         </div>
+      )}
+
+      {schoolId && roster.length > 0 && (
+        <TeacherTools schoolId={schoolId} roster={roster} classId={classId} />
       )}
     </div>
   );

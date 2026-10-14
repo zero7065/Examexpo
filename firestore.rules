@@ -339,5 +339,11 @@ service cloud.firestore {
       allow create: if request.auth != null;
       allow read, update, delete: if isAdmin();
     }
+
+    // ─── TEACHER INVITES (admin only) ───
+    match /teacherInvites/{inviteId} {
+      allow read, update, delete: if isAdmin();
+      allow create: if request.auth != null;
+    }
   }
 }

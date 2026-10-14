@@ -58,6 +58,7 @@ const AssignmentPage = lazy(() => import("./pages/AssignmentPage"));
 const SchoolsLanding = lazy(() => import("./pages/schools/SchoolsLanding"));
 const SchoolSignup = lazy(() => import("./pages/schools/SchoolSignup"));
 const TeacherDashboard = lazy(() => import("./pages/schools/TeacherDashboard"));
+const TeacherRegister = lazy(() => import("./pages/TeacherRegister"));
 const ExamGenerator = lazy(() => import("./pages/schools/ExamGenerator"));
 const ClassroomMode = lazy(() => import("./pages/schools/ClassroomMode"));
 const ParentReports = lazy(() => import("./pages/schools/ParentReports"));
@@ -214,9 +215,10 @@ function AuthAwareRoutes() {
           {/* Schools (public) */}
           <Route path="/schools" element={<SchoolsLanding />} />
           <Route path="/schools/signup" element={<SchoolSignup />} />
+          <Route path="/teacher/register" element={<ProtectedRoute><TeacherRegister /></ProtectedRoute>} />
 
           {/* Teacher (role-gated) */}
-          <Route path="/teacher" element={<TeacherRoute><TeacherDashboard /></TeacherRoute>} />
+          <Route path="/teacher" element={<TeacherRoute />} />
           <Route path="/teacher/exam-generator" element={<TeacherRoute><ExamGenerator /></TeacherRoute>} />
           <Route path="/teacher/classroom" element={<TeacherRoute><ClassroomMode /></TeacherRoute>} />
           <Route path="/teacher/parent-reports" element={<TeacherRoute><ParentReports /></TeacherRoute>} />
@@ -228,7 +230,7 @@ function AuthAwareRoutes() {
           {/* 404 */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        </Suspense>
+      </Suspense>
 
         {/* Floating Jadai Studios credit */}
         {location.pathname !== "/" && location.pathname !== "/auth" && (

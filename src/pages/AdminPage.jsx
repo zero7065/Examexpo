@@ -12,6 +12,7 @@ const isAdmin = typeof _isAdmin === 'function' ? _isAdmin : () => false;
 import { Shield, Users, Activity, BookOpen, Crown, ArrowLeft, RefreshCw, UserCheck, UserX, ChevronDown, Search, CrownIcon, Zap, CreditCard, ClipboardList, Award, Clock, FileText, CheckCircle, XCircle, Wifi } from "lucide-react";
 import NetworkDiagnostic from "../components/NetworkDiagnostic";
 import AdminTrainingData from "../components/AdminTrainingData";
+import AdminTeachers from "../components/AdminTeachers";
 
 const FULL_PRO_FEATURES = {
   notepad: true,
@@ -327,6 +328,7 @@ export default function AdminPage() {
             { id: "content", label: "Updates & Feedback" },
             { id: "compliance", label: "Compliance" },
             { id: "training", label: "AI Training Data" },
+            { id: "teachers", label: "Teacher Invites" },
             { id: "userDetail", label: "User Details" },
           ].map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
@@ -637,6 +639,11 @@ export default function AdminPage() {
         {/* Training Data Tab */}
         {activeTab === "training" && (
           <AdminTrainingData />
+        )}
+
+        {/* Teacher Invites Tab */}
+        {activeTab === "teachers" && (
+          <AdminTeachers />
         )}
 
         {/* Landing Media Tab */}
