@@ -8,6 +8,7 @@ import { chatWithTutor, analyzeDocument, getLastAIError, isAIConfigured, sanitiz
 import { getStudentMemory, topWeakTopics } from "../lib/aiMemory";
 import { appendToAISession, getAISessions, createAISession, deleteAISession, getAISession } from "../lib/aiSessions";
 import { useFeatureOnlineGuard } from "../hooks/useOnlineStatus";
+import { checkRateLimit } from "../lib/rateLimiter";
 import { unlockAchievement } from "../lib/achievements";
 import { preprocessImage } from "../lib/vision";
 import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
@@ -175,6 +176,11 @@ export default function AITutor() {
     const hasImages = pendingImages.length > 0;
     if ((!msg.trim() && !hasImages) || loading) return;
     if (!requireOnline("AI Tutor")) return;
+    const rate = checkRateLimit(user?.uid || "anon", isPro ? 60 : 10);
+    if (!rate.allowed) {
+      toast({ message: `Rate limit exceeded. Try again in ${rate.retryAfter}s.`, type: "warning" });
+      return;
+    }
 
     try {
       // Free-tier daily AI limit
