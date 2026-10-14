@@ -246,6 +246,18 @@ export function AuthProvider({ children }) {
     setUser(null);
   }
 
+  useEffect(() => {
+    const onErr = (e) => {
+      const msg = String(e?.message || e?.reason || "");
+      if (msg.includes("token") || msg.includes("credential") || msg.includes("auth")) {
+        signOut(auth).catch(() => {});
+        setUser(null);
+      }
+    };
+    window.addEventListener("unhandledrejection", onErr);
+    return () => window.removeEventListener("unhandledrejection", onErr);
+  }, []);
+
   async function resetPassword(email) {
     try {
       await sendPasswordResetEmail(auth, email);
