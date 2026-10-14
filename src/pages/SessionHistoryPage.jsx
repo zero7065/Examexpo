@@ -3,14 +3,17 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { collection, query, where, limit, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import { History, ChevronRight, Calendar, Clock, Target, BookOpen } from "lucide-react";
+import { History, ChevronRight, Calendar, Clock, Target, BookOpen, MessageSquare, TrendingUp } from "lucide-react";
+import { getAISessions } from "../lib/aiSessions";
 
 export default function SessionHistoryPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [sessions, setSessions] = useState([]);
+  const [aiSessions, setAiSessions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedSession, setSelectedSession] = useState(null);
+  const [view, setView] = useState("sessions");
 
   useEffect(() => {
     async function fetchSessions() {
@@ -26,6 +29,7 @@ export default function SessionHistoryPage() {
         snap.forEach(d => firestoreSessions.push({ id: d.id, ...d.data() }));
         firestoreSessions.sort((a, b) => (b.completedAt?.seconds || 0) - (a.completedAt?.seconds || 0));
         setSessions(firestoreSessions);
+        getAISessions(user.uid).then(setAiSessions).catch(() => {});
       } catch { setSessions([]); }
       setLoading(false);
     }
@@ -81,6 +85,22 @@ export default function SessionHistoryPage() {
         <h1 style={{ fontSize: "clamp(24px, 5vw, 32px)", fontWeight: 800, marginBottom: 8 }}>Your Study History</h1>
         <p style={{ color: "#888", fontWeight: 500, marginBottom: 40 }}>Review all your practice sessions, track your progress over time</p>
 
+        <div style={{ display: "flex", gap: 8, marginBottom: 24 }}>
+          {[
+            { id: "sessions", label: "Practice Sessions", icon: BookOpen },
+            { id: "ai", label: "AI Conversations", icon: MessageSquare },
+            { id: "timeline", label: "Timeline", icon: TrendingUp },
+          ].map((v) => {
+            const Icon = v.icon;
+            return (
+              <button key={v.id} onClick={() => setView(v.id)} style={{ padding: "8px 16px", borderRadius: 8, border: "none", cursor: "pointer", background: view === v.id ? "#6C3CE9" : "#1e1e2a", color: view === v.id ? "#fff" : "#888", fontWeight: 600, fontSize: 13, display: "flex", alignItems: "center", gap: 6 }}>
+                <Icon size={14} /> {v.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {view === "sessions" && (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24, alignItems: "start" }}>
           {/* Sessions List */}
           <div>
@@ -170,6 +190,78 @@ export default function SessionHistoryPage() {
             )}
           </div>
         </div>
+        )}
+
+        {view === "ai" && (
+          <div>
+            <h2 style={{ fontSize: 20, fontWeight: 700, display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+              <MessageSquare size={24} color="#6C3CE9" />
+              AI Conversations ({aiSessions.length})
+            </h2>
+            {aiSessions.length === 0 ? (
+              <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 32, textAlign: "center" }}>
+                <MessageSquare size={40} color="#888" style={{ opacity: 0.5, marginBottom: 16 }} />
+                <p style={{ color: "#888", fontSize: 14 }}>No AI conversations yet. Start chatting with the AI Tutor to build your history.</p>
+                <button onClick={() => navigate("/ai-tutor")} style={{ marginTop: 16, padding: "12px 24px", borderRadius: 10, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 14, fontFamily: "inherit" }}>
+                  Open AI Tutor
+                </button>
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                {aiSessions.map((s) => (
+                  <div key={s.id} onClick={() => navigate("/ai-tutor", { state: { resumeSessionId: s.id } })}
+                    style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 16, cursor: "pointer", transition: "border 0.2s" }}
+                    onMouseEnter={(e) => e.currentTarget.style.border = "1px solid #6C3CE9"}
+                    onMouseLeave={(e) => e.currentTarget.style.border = "1px solid #1e1e2a"}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <div>
+                        <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 4 }}>{s.title || s.subject || "AI Chat"}</div>
+                        <div style={{ fontSize: 12, color: "#888" }}>{s.messages?.length || 0} messages · {s.subject}</div>
+                      </div>
+                      <div style={{ fontSize: 12, color: "#888" }}>{s.createdAt?.seconds ? new Date(s.createdAt.seconds * 1000).toLocaleDateString() : ""}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {view === "timeline" && (
+          <div>
+            <h2 style={{ fontSize: 20, fontWeight: 700, display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+              <TrendingUp size={24} color="#6C3CE9" />
+              Learning Timeline
+            </h2>
+            {sessions.length === 0 ? (
+              <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 32, textAlign: "center" }}>
+                <p style={{ color: "#888", fontSize: 14 }}>Complete practice sessions to see your learning timeline.</p>
+              </div>
+            ) : (
+              <div style={{ position: "relative", paddingLeft: 24 }}>
+                <div style={{ position: "absolute", left: 8, top: 0, bottom: 0, width: 2, background: "#333" }} />
+                {sessions.slice(0, 20).map((s, i) => {
+                  const date = s.completedAt?.toDate?.() || (s.createdAt?.seconds ? new Date(s.createdAt.seconds * 1000) : new Date());
+                  const score = Math.round(s.percentageScore || s.score || 0);
+                  return (
+                    <div key={i} style={{ position: "relative", marginBottom: 16, paddingLeft: 24 }}>
+                      <div style={{ position: "absolute", left: -20, top: 4, width: 12, height: 12, borderRadius: "50%", background: score >= 80 ? "#4ADE80" : score >= 60 ? "#6C3CE9" : score >= 50 ? "#D4A853" : "#FF4D6A" }} />
+                      <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 12, padding: 12 }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                          <div>
+                            <div style={{ fontSize: 13, fontWeight: 600, color: "#fff" }}>{s.exam || "Practice"} · {s.mode || "practice"}</div>
+                            <div style={{ fontSize: 11, color: "#888" }}>{date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</div>
+                          </div>
+                          <div style={{ fontSize: 18, fontWeight: 800, color: getScoreColor(score) }}>{score}%</div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
