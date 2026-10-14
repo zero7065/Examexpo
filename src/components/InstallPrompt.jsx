@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function InstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [show, setShow] = useState(false);
+  const [showIOS, setShowIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
@@ -31,7 +32,10 @@ export default function InstallPrompt() {
   }, []);
 
   async function handleInstall() {
-    if (!deferredPrompt) return;
+    if (!deferredPrompt) {
+      setShowIOS(true);
+      return;
+    }
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
     if (outcome === "accepted") {

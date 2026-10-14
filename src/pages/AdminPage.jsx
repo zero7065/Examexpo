@@ -15,6 +15,7 @@ import AdminTrainingData from "../components/AdminTrainingData";
 import AdminTeachers from "../components/AdminTeachers";
 import AdminDevSettings from "../components/AdminDevSettings";
 import AdminUserView from "../components/AdminUserView";
+import AdminAnalytics from "../components/AdminAnalytics";
 
 const FULL_PRO_FEATURES = {
   notepad: true,
@@ -333,6 +334,7 @@ export default function AdminPage() {
             { id: "training", label: "AI Training Data" },
             { id: "teachers", label: "Teacher Invites" },
             { id: "dev", label: "Developer" },
+            { id: "analytics", label: "Analytics" },
             { id: "userDetail", label: "User Details" },
           ].map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
@@ -653,6 +655,11 @@ export default function AdminPage() {
         {/* Developer Tab */}
         {activeTab === "dev" && (
           <AdminDevSettings />
+        )}
+
+        {/* Analytics Tab */}
+        {activeTab === "analytics" && (
+          <AdminAnalytics />
         )}
 
         {/* Landing Media Tab */}
