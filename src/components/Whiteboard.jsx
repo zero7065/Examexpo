@@ -9,7 +9,9 @@ import {
   X,
   Minimize2,
   Maximize2,
+  Sparkles,
 } from "lucide-react";
+import WhiteboardAI from "./WhiteboardAI";
 
 const COLORS = ["#000000", "#E53E3E", "#3182CE", "#38A169"];
 const COLOR_NAMES = ["Black", "Red", "Blue", "Green"];
@@ -17,6 +19,8 @@ const PEN_SIZES = { thin: 2, medium: 4, thick: 8 };
 
 const useWhiteboard = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showAI, setShowAI] = useState(false);
+  const [aiImage, setAiImage] = useState(null);
   const canvasRef = useRef(null);
 
   const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
@@ -26,6 +30,12 @@ const useWhiteboard = () => {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }, []);
+
+  const exportCanvas = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return null;
+    return canvas.toDataURL("image/png");
   }, []);
 
   const [calcDisplay, setCalcDisplay] = useState({
@@ -463,6 +473,19 @@ const Whiteboard = () => {
                 >
                   <Trash2 size={12} />
                 </button>
+                <button
+                  style={{ ...s.toolBtn(false), marginLeft: 4, color: "#6C3CE9" }}
+                  onClick={() => {
+                    const img = exportCanvas();
+                    if (img) {
+                      setAiImage(img);
+                      setShowAI(true);
+                    }
+                  }}
+                  title="AI Analysis"
+                >
+                  <Sparkles size={12} />
+                </button>
               </div>
 
               <div style={s.canvasWrap}>
@@ -497,6 +520,10 @@ const Whiteboard = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {showAI && aiImage && (
+        <WhiteboardAI imageBase64={aiImage} onClose={() => { setShowAI(false); setAiImage(null); }} />
       )}
     </>
   );
