@@ -9,10 +9,12 @@ import AdminCompliance from "../components/AdminCompliance";
 import AdminTeams from "../components/AdminTeams";
 import AdminContent from "../components/AdminContent";
 const isAdmin = typeof _isAdmin === 'function' ? _isAdmin : () => false;
-import { Shield, Users, Activity, BookOpen, Crown, ArrowLeft, RefreshCw, UserCheck, UserX, ChevronDown, Search, CrownIcon, Zap, CreditCard, ClipboardList, Award, Clock, FileText, CheckCircle, XCircle, Wifi } from "lucide-react";
+import { Shield, Users, Activity, BookOpen, Crown, ArrowLeft, RefreshCw, UserCheck, UserX, ChevronDown, Search, CrownIcon, Zap, CreditCard, ClipboardList, Award, Clock, FileText, CheckCircle, XCircle, Wifi, Eye } from "lucide-react";
 import NetworkDiagnostic from "../components/NetworkDiagnostic";
 import AdminTrainingData from "../components/AdminTrainingData";
 import AdminTeachers from "../components/AdminTeachers";
+import AdminDevSettings from "../components/AdminDevSettings";
+import AdminUserView from "../components/AdminUserView";
 
 const FULL_PRO_FEATURES = {
   notepad: true,
@@ -41,6 +43,7 @@ export default function AdminPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [toast, setToast] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [viewingAs, setViewingAs] = useState(null);
   const [userActivity, setUserActivity] = useState([]);
   const [paymentLogs, setPaymentLogs] = useState([]);
   const [userStats, setUserStats] = useState(null);
@@ -329,6 +332,7 @@ export default function AdminPage() {
             { id: "compliance", label: "Compliance" },
             { id: "training", label: "AI Training Data" },
             { id: "teachers", label: "Teacher Invites" },
+            { id: "dev", label: "Developer" },
             { id: "userDetail", label: "User Details" },
           ].map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
@@ -646,6 +650,11 @@ export default function AdminPage() {
           <AdminTeachers />
         )}
 
+        {/* Developer Tab */}
+        {activeTab === "dev" && (
+          <AdminDevSettings />
+        )}
+
         {/* Landing Media Tab */}
         {activeTab === "media" && (
           <AdminMedia />
@@ -697,6 +706,13 @@ export default function AdminPage() {
                     }}>
                       <Crown size={14} style={{ marginRight: 6 }} />
                       Grant Pro Access
+                    </button>
+                    <button onClick={() => setViewingAs(selectedUser)} style={{
+                      padding: "10px 20px", borderRadius: 10, border: "1px solid #333",
+                      background: "#1e1e2a", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
+                    }}>
+                      <Eye size={14} style={{ marginRight: 6 }} />
+                      View as User
                     </button>
                   </div>
 
@@ -944,6 +960,10 @@ export default function AdminPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {viewingAs && (
+        <AdminUserView userId={viewingAs.id} onClose={() => setViewingAs(null)} />
       )}
 
       {/* Toast */}
