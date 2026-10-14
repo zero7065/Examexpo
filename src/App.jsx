@@ -86,7 +86,7 @@ function PageLoader() {
 
 function AuthAwareRoutes() {
   const { user, loading, isOffline, degraded } = useAuth();
-  // Android PWA double-tap-back-to-exit + sane in-app back navigation
+  const { updateAvailable, applyUpdate } = useServiceWorkerUpdate();
   useBackButton();
   const location = useLocation();
 
@@ -259,8 +259,6 @@ function AuthAwareRoutes() {
 }
 
 function App() {
-  const { updateAvailable, applyUpdate } = useServiceWorkerUpdate();
-
   useEffect(() => {
     // Version-gated cleanup: runs the aggressive wipe at most once per
     // SW_VERSION, then registers the (self-contained) service worker.

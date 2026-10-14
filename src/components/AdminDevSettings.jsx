@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Settings, Key, Shield, AlertTriangle, Save, Loader2 } from "lucide-react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
+import { db } from "../firebaseConfig";
 
 const SETTINGS_DOC = "siteContent/devSettings";
 

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Sparkles, Megaphone, BookOpenCheck, Loader2, Send } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
-import { useToast } from "../../components/Toast";
-import { createAssignment, createAnnouncement, listAssignmentsForTeacher, listAnnouncementsForSchool } from "../../lib/teacherContent";
-import { askGroq } from "../../lib/ai";
+import { useAuth } from "../context/AuthContext";
+import { useToast } from "../components/Toast";
+import { createAssignment, createAnnouncement, listAssignmentsForTeacher, listAnnouncementsForSchool } from "../lib/teacherContent";
+import { askGroq } from "../lib/ai";
 
 export default function TeacherTools({ schoolId, roster, classId }) {
   const { user } = useAuth();

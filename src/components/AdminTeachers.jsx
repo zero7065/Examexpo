@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { GraduationCap, Plus, Copy, Trash2, Loader2 } from "lucide-react";
-import { createTeacherInvite, listTeacherInvites, revokeTeacherInvite } from "../../lib/teacherInvites";
+import { createTeacherInvite, listTeacherInvites, revokeTeacherInvite } from "../lib/teacherInvites";
 
 export default function AdminTeachers() {
   const [invites, setInvites] = useState([]);

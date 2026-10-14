@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Download, Loader2, Database } from "lucide-react";
-import { getTrainingEntries, formatTrainingEntryForFinetuning } from "../../lib/aiTraining";
+import { getTrainingEntries, formatTrainingEntryForFinetuning } from "../lib/aiTraining";
 
 export default function AdminTrainingData() {
   const [loading, setLoading] = useState(false);

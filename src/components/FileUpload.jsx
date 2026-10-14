@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Upload, FileText, Video, X, Loader2, CheckCircle, Image as ImageIcon } from "lucide-react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebaseConfig";
+import { getAppStorage } from "../firebaseConfig";
 
 const MAX_SIZE = 50 * 1024 * 1024;
 const ALLOWED_TYPES = {
@@ -45,7 +45,9 @@ export default function FileUpload({ onUploadComplete, onUploadError }) {
   }
 
   async function handleUpload() {
-    if (!file || !storage) return;
+    if (!file) return;
+    const storage = getAppStorage();
+    if (!storage) { onUploadError?.("Storage not available"); return; }
     setUploading(true);
     setProgress(0);
     try {
