@@ -15,7 +15,9 @@ import MessageBubble from "../components/AITutor/MessageBubble";
 import TypingIndicator from "../components/AITutor/TypingIndicator";
 import ImageUpload from "../components/AITutor/ImageUpload";
 import Logo from "../components/Logo";
-import { Send, Plus, ChevronRight, Brain, FileSearch } from "lucide-react";
+import { Send, Plus, ChevronRight, Brain, FileSearch, Upload, Image as ImageIcon } from "lucide-react";
+import FileUpload from "../components/FileUpload";
+import ImageGenerator from "../components/ImageGenerator";
 
 const QUICK_PROMPTS = [
   "Explain photosynthesis like I'm 10",
@@ -42,6 +44,8 @@ export default function AITutor() {
   const [memory, setMemory] = useState(null);
   const [pendingImages, setPendingImages] = useState([]);
   const [analyzeMode, setAnalyzeMode] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
+  const [showImageGen, setShowImageGen] = useState(false);
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -285,6 +289,32 @@ export default function AITutor() {
               >
                 <FileSearch size={16} />
               </button>
+              <button
+                onClick={() => setShowUpload(true)}
+                title="Upload document or video"
+                style={{
+                  width: 36, height: 36, borderRadius: "50%", flexShrink: 0,
+                  background: "var(--bg-3)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-muted)",
+                  cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                }}
+              >
+                <Upload size={16} />
+              </button>
+              <button
+                onClick={() => setShowImageGen(true)}
+                title="Generate educational image"
+                style={{
+                  width: 36, height: 36, borderRadius: "50%", flexShrink: 0,
+                  background: "var(--bg-3)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-muted)",
+                  cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                }}
+              >
+                <ImageIcon size={16} />
+              </button>
               <div style={{ position: "relative", flex: 1 }}>
               <textarea ref={textareaRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={pendingImages.length > 0 ? (analyzeMode ? "What should I pull out of these pages?…" : "Describe what to solve…") : `Ask anything about ${activeSubject}…`} rows={1} style={{ width: "100%", padding: "12px 48px 12px 16px", borderRadius: 12, background: "var(--bg-3)", border: "1px solid var(--border)", color: "var(--text)", fontSize: 14, outline: "none", resize: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
               <button onClick={() => handleSend()} disabled={(!input.trim() && pendingImages.length === 0) || loading} style={{ position: "absolute", right: 6, bottom: 6, width: 36, height: 36, borderRadius: "50%", background: (input.trim() || pendingImages.length > 0) && !loading ? "#6C3CE9" : "#333", border: "none", color: (input.trim() || pendingImages.length > 0) && !loading ? "#fff" : "#666", cursor: (input.trim() || pendingImages.length > 0) && !loading ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -296,6 +326,21 @@ export default function AITutor() {
         </div>
 
       <ProUpgradeModal open={showProModal} onClose={() => setShowProModal(false)} reason="ai" dismissible />
+
+      {showUpload && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
+          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)" }} onClick={() => setShowUpload(false)} />
+          <div className="glass-card" style={{ position: "relative", width: "100%", maxWidth: 480, padding: 24 }}>
+            <h3 style={{ color: "var(--text)", fontSize: 18, fontWeight: 800, margin: "0 0 16px" }}>Upload Document or Video</h3>
+            <FileUpload
+              onUploadComplete={(file) => { setShowUpload(false); toast({ message: `Uploaded: ${file.name}`, type: "success" }); }}
+              onUploadError={(msg) => toast({ message: msg, type: "error" })}
+            />
+          </div>
+        </div>
+      )}
+
+      {showImageGen && <ImageGenerator onClose={() => setShowImageGen(false)} />}
     </div>
   );
 }
