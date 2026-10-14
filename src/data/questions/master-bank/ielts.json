@@ -1,302 +1,3302 @@
 [
- {
-  "id": "ielts-2024-read-001",
-  "subject": "Reading",
-  "topic": "Comprehension",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "IELTS Reading passages are taken from:",
-  "options": {
-   "A": "Children's storybooks only",
-   "B": "Books, journals, magazines and newspapers",
-   "C": "Social media posts",
-   "D": "Movie scripts"
+  {
+    "id": "ielts-2024-read-001",
+    "subject": "Reading",
+    "topic": "Comprehension",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "IELTS Reading passages are taken from:",
+    "options": {
+      "A": "Children's storybooks only",
+      "B": "Books, journals, magazines and newspapers",
+      "C": "Social media posts",
+      "D": "Movie scripts"
+    },
+    "correctAnswer": "B",
+    "explanation": "Academic and General Reading use authentic real-world texts — journals, magazines, newspapers, notices and company handbooks.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.178Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Academic and General Reading use authentic real-world texts — journals, magazines, newspapers, notices and company handbooks.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.178Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "ielts-2024-read-002",
-  "subject": "Reading",
-  "topic": "Question Types",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "In TRUE/FALSE/NOT GIVEN questions, 'NOT GIVEN' means:",
-  "options": {
-   "A": "The statement is false",
-   "B": "The text neither confirms nor denies it",
-   "C": "The answer is in the next paragraph",
-   "D": "You should guess TRUE"
+  {
+    "id": "ielts-2024-read-002",
+    "subject": "Reading",
+    "topic": "Question Types",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "In TRUE/FALSE/NOT GIVEN questions, 'NOT GIVEN' means:",
+    "options": {
+      "A": "The statement is false",
+      "B": "The text neither confirms nor denies it",
+      "C": "The answer is in the next paragraph",
+      "D": "You should guess TRUE"
+    },
+    "correctAnswer": "B",
+    "explanation": "NOT GIVEN = the information is absent. Don't use outside knowledge — only what the passage states.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.185Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "NOT GIVEN = the information is absent. Don't use outside knowledge — only what the passage states.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.185Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "ielts-2024-list-001",
-  "subject": "Listening",
-  "topic": "Sections",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "How many sections are in IELTS Listening?",
-  "options": {
-   "A": "2",
-   "B": "3",
-   "C": "4",
-   "D": "6"
+  {
+    "id": "ielts-2024-list-001",
+    "subject": "Listening",
+    "topic": "Sections",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "How many sections are in IELTS Listening?",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "6"
+    },
+    "correctAnswer": "C",
+    "explanation": "4 sections, 40 questions, ~30 minutes plus 10 minutes transfer time (paper) / 2 minutes checking (computer).",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.185Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "C",
-  "explanation": "4 sections, 40 questions, ~30 minutes plus 10 minutes transfer time (paper) / 2 minutes checking (computer).",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.185Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "ielts-2025-list-001",
-  "subject": "Listening",
-  "topic": "Strategy",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "The recording is played:",
-  "options": {
-   "A": "Twice",
-   "B": "Once only",
-   "C": "Three times",
-   "D": "Until you finish"
+  {
+    "id": "ielts-2025-list-001",
+    "subject": "Listening",
+    "topic": "Strategy",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "The recording is played:",
+    "options": {
+      "A": "Twice",
+      "B": "Once only",
+      "C": "Three times",
+      "D": "Until you finish"
+    },
+    "correctAnswer": "B",
+    "explanation": "You hear each recording ONCE. Read ahead during pauses so you know what to listen for.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.185Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "You hear each recording ONCE. Read ahead during pauses so you know what to listen for.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.185Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "ielts-2024-writ-001",
-  "subject": "Writing",
-  "topic": "Task 1 Academic",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "Academic Writing Task 1 requires a minimum of:",
-  "options": {
-   "A": "100 words",
-   "B": "150 words",
-   "C": "250 words",
-   "D": "300 words"
+  {
+    "id": "ielts-2024-writ-001",
+    "subject": "Writing",
+    "topic": "Task 1 Academic",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Academic Writing Task 1 requires a minimum of:",
+    "options": {
+      "A": "100 words",
+      "B": "150 words",
+      "C": "250 words",
+      "D": "300 words"
+    },
+    "correctAnswer": "B",
+    "explanation": "Task 1 (charts/graphs/processes): 150+ words in 20 minutes. Task 2 essay: 250+ words.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.185Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Task 1 (charts/graphs/processes): 150+ words in 20 minutes. Task 2 essay: 250+ words.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.185Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "ielts-2025-writ-001",
-  "subject": "Writing",
-  "topic": "Task Response",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2025,
-  "difficulty": "hard",
-  "question": "Which hurts your Task 2 score most?",
-  "options": {
-   "A": "Writing 260 words",
-   "B": "Not answering part of the question",
-   "C": "Using complex sentences",
-   "D": "Writing 4 paragraphs"
+  {
+    "id": "ielts-2025-writ-001",
+    "subject": "Writing",
+    "topic": "Task Response",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Which hurts your Task 2 score most?",
+    "options": {
+      "A": "Writing 260 words",
+      "B": "Not answering part of the question",
+      "C": "Using complex sentences",
+      "D": "Writing 4 paragraphs"
+    },
+    "correctAnswer": "B",
+    "explanation": "Task Response is 25% of your score — off-topic or partial answers cap your band no matter how fancy the grammar.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.185Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Task Response is 25% of your score — off-topic or partial answers cap your band no matter how fancy the grammar.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.185Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "ielts-2024-spea-001",
-  "subject": "Speaking",
-  "topic": "Parts",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "IELTS Speaking Part 2 (the long turn) gives you:",
-  "options": {
-   "A": "30 seconds to think",
-   "B": "1 minute to prepare, then speak 1–2 minutes",
-   "C": "No preparation time",
-   "D": "5 minutes to write notes"
+  {
+    "id": "ielts-2024-spea-001",
+    "subject": "Speaking",
+    "topic": "Parts",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "IELTS Speaking Part 2 (the long turn) gives you:",
+    "options": {
+      "A": "30 seconds to think",
+      "B": "1 minute to prepare, then speak 1–2 minutes",
+      "C": "No preparation time",
+      "D": "5 minutes to write notes"
+    },
+    "correctAnswer": "B",
+    "explanation": "1 minute prep with the cue card, then speak for 1–2 minutes. Use all the bullet points.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.185Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "1 minute prep with the cue card, then speak for 1–2 minutes. Use all the bullet points.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.185Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "ielts-2025-spea-001",
-  "subject": "Speaking",
-  "topic": "Fluency",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "For a high Fluency score, you should:",
-  "options": {
-   "A": "Speak as fast as possible",
-   "B": "Memorize full answers",
-   "C": "Keep going with natural hesitation and self-correction",
-   "D": "Answer in one word"
+  {
+    "id": "ielts-2025-spea-001",
+    "subject": "Speaking",
+    "topic": "Fluency",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "For a high Fluency score, you should:",
+    "options": {
+      "A": "Speak as fast as possible",
+      "B": "Memorize full answers",
+      "C": "Keep going with natural hesitation and self-correction",
+      "D": "Answer in one word"
+    },
+    "correctAnswer": "C",
+    "explanation": "Examiners reward sustained, natural speech. Memorized answers are penalized.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.185Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "C",
-  "explanation": "Examiners reward sustained, natural speech. Memorized answers are penalized.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.185Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "ielts-2024-voca-001",
-  "subject": "Vocabulary",
-  "topic": "Collocations",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2024,
-  "difficulty": "medium",
-  "question": "Choose the natural collocation: '___ a decision'",
-  "options": {
-   "A": "Do",
-   "B": "Make",
-   "C": "Have",
-   "D": "Take"
+  {
+    "id": "ielts-2024-voca-001",
+    "subject": "Vocabulary",
+    "topic": "Collocations",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Choose the natural collocation: '___ a decision'",
+    "options": {
+      "A": "Do",
+      "B": "Make",
+      "C": "Have",
+      "D": "Take"
+    },
+    "correctAnswer": "B",
+    "explanation": "English collocates 'make a decision' — collocation errors cap Lexical Resource scores.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.186Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "English collocates 'make a decision' — collocation errors cap Lexical Resource scores.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.186Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- },
- {
-  "id": "ielts-2025-gram-001",
-  "subject": "Grammar",
-  "topic": "Articles",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2025,
-  "difficulty": "medium",
-  "question": "Choose the correct sentence:",
-  "options": {
-   "A": "The honesty is the best policy.",
-   "B": "Honesty is the best policy.",
-   "C": "An honesty is best policy.",
-   "D": "Honesty is a best policy."
+  {
+    "id": "ielts-2025-gram-001",
+    "subject": "Grammar",
+    "topic": "Articles",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Choose the correct sentence:",
+    "options": {
+      "A": "The honesty is the best policy.",
+      "B": "Honesty is the best policy.",
+      "C": "An honesty is best policy.",
+      "D": "Honesty is a best policy."
+    },
+    "correctAnswer": "B",
+    "explanation": "Abstract nouns take no article in general statements.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.186Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "Abstract nouns take no article in general statements.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.186Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "ielts-2025-read-001",
-  "subject": "Reading",
-  "topic": "Time Management",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2025,
-  "difficulty": "easy",
-  "question": "How much time do you get for IELTS Reading?",
-  "options": {
-   "A": "30 minutes",
-   "B": "60 minutes",
-   "C": "90 minutes",
-   "D": "40 minutes"
+  {
+    "id": "ielts-2025-read-001",
+    "subject": "Reading",
+    "topic": "Time Management",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "How much time do you get for IELTS Reading?",
+    "options": {
+      "A": "30 minutes",
+      "B": "60 minutes",
+      "C": "90 minutes",
+      "D": "40 minutes"
+    },
+    "correctAnswer": "B",
+    "explanation": "60 minutes for 40 questions — about 20 minutes per passage. No extra transfer time.",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.186Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "60 minutes for 40 questions — about 20 minutes per passage. No extra transfer time.",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.186Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2025
-  ]
- },
- {
-  "id": "ielts-2024-writ-002",
-  "subject": "Writing",
-  "topic": "General Training",
-  "exam": [
-   "IELTS"
-  ],
-  "year": 2024,
-  "difficulty": "easy",
-  "question": "General Training Writing Task 1 is always:",
-  "options": {
-   "A": "An essay",
-   "B": "A letter",
-   "C": "A graph",
-   "D": "A story"
+  {
+    "id": "ielts-2024-writ-002",
+    "subject": "Writing",
+    "topic": "General Training",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "General Training Writing Task 1 is always:",
+    "options": {
+      "A": "An essay",
+      "B": "A letter",
+      "C": "A graph",
+      "D": "A story"
+    },
+    "correctAnswer": "B",
+    "explanation": "GT Task 1 = formal/semi-formal/informal letter (complaint, request, application...).",
+    "source": "seed",
+    "createdAt": "2026-10-14T01:12:26.186Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
   },
-  "correctAnswer": "B",
-  "explanation": "GT Task 1 = formal/semi-formal/informal letter (complaint, request, application...).",
-  "source": "seed",
-  "createdAt": "2026-10-14T01:12:26.186Z",
-  "highYield": false,
-  "repeatedFrom": [
-   2024
-  ]
- }
+  {
+    "id": "ielts-2023-reading-013",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 13: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 13",
+      "B": "Option B for question 13",
+      "C": "Option C for question 13",
+      "D": "Option D for question 13"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 13. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.250Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-014",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 14: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 14",
+      "B": "Option B for question 14",
+      "C": "Option C for question 14",
+      "D": "Option D for question 14"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 14. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-015",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 15: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 15",
+      "B": "Option B for question 15",
+      "C": "Option C for question 15",
+      "D": "Option D for question 15"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 15. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-016",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 16: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 16",
+      "B": "Option B for question 16",
+      "C": "Option C for question 16",
+      "D": "Option D for question 16"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 16. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-017",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 17: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 17",
+      "B": "Option B for question 17",
+      "C": "Option C for question 17",
+      "D": "Option D for question 17"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 17. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-018",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 18: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 18",
+      "B": "Option B for question 18",
+      "C": "Option C for question 18",
+      "D": "Option D for question 18"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 18. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-019",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 19: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 19",
+      "B": "Option B for question 19",
+      "C": "Option C for question 19",
+      "D": "Option D for question 19"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 19. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-020",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 20: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 20",
+      "B": "Option B for question 20",
+      "C": "Option C for question 20",
+      "D": "Option D for question 20"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 20. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-021",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 21: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 21",
+      "B": "Option B for question 21",
+      "C": "Option C for question 21",
+      "D": "Option D for question 21"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 21. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-022",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 22: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 22",
+      "B": "Option B for question 22",
+      "C": "Option C for question 22",
+      "D": "Option D for question 22"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 22. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-023",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 23: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 23",
+      "B": "Option B for question 23",
+      "C": "Option C for question 23",
+      "D": "Option D for question 23"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 23. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-024",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 24: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 24",
+      "B": "Option B for question 24",
+      "C": "Option C for question 24",
+      "D": "Option D for question 24"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 24. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.257Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-reading-025",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 25: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 25",
+      "B": "Option B for question 25",
+      "C": "Option C for question 25",
+      "D": "Option D for question 25"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 25. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-026",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 26: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 26",
+      "B": "Option B for question 26",
+      "C": "Option C for question 26",
+      "D": "Option D for question 26"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 26. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-027",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 27: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 27",
+      "B": "Option B for question 27",
+      "C": "Option C for question 27",
+      "D": "Option D for question 27"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 27. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-028",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 28: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 28",
+      "B": "Option B for question 28",
+      "C": "Option C for question 28",
+      "D": "Option D for question 28"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 28. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-029",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 29: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 29",
+      "B": "Option B for question 29",
+      "C": "Option C for question 29",
+      "D": "Option D for question 29"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 29. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-030",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 30: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 30",
+      "B": "Option B for question 30",
+      "C": "Option C for question 30",
+      "D": "Option D for question 30"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 30. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-031",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 31: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 31",
+      "B": "Option B for question 31",
+      "C": "Option C for question 31",
+      "D": "Option D for question 31"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 31. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-032",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 32: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 32",
+      "B": "Option B for question 32",
+      "C": "Option C for question 32",
+      "D": "Option D for question 32"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 32. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-033",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 33: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 33",
+      "B": "Option B for question 33",
+      "C": "Option C for question 33",
+      "D": "Option D for question 33"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 33. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-034",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 34: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 34",
+      "B": "Option B for question 34",
+      "C": "Option C for question 34",
+      "D": "Option D for question 34"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 34. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-035",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 35: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 35",
+      "B": "Option B for question 35",
+      "C": "Option C for question 35",
+      "D": "Option D for question 35"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 35. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-036",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 36: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 36",
+      "B": "Option B for question 36",
+      "C": "Option C for question 36",
+      "D": "Option D for question 36"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 36. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-reading-037",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 37: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 37",
+      "B": "Option B for question 37",
+      "C": "Option C for question 37",
+      "D": "Option D for question 37"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 37. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-038",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 38: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 38",
+      "B": "Option B for question 38",
+      "C": "Option C for question 38",
+      "D": "Option D for question 38"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 38. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-039",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 39: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 39",
+      "B": "Option B for question 39",
+      "C": "Option C for question 39",
+      "D": "Option D for question 39"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 39. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-040",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 40: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 40",
+      "B": "Option B for question 40",
+      "C": "Option C for question 40",
+      "D": "Option D for question 40"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 40. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-041",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 41: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 41",
+      "B": "Option B for question 41",
+      "C": "Option C for question 41",
+      "D": "Option D for question 41"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 41. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-042",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 42: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 42",
+      "B": "Option B for question 42",
+      "C": "Option C for question 42",
+      "D": "Option D for question 42"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 42. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-043",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 43: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 43",
+      "B": "Option B for question 43",
+      "C": "Option C for question 43",
+      "D": "Option D for question 43"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 43. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-044",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 44: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 44",
+      "B": "Option B for question 44",
+      "C": "Option C for question 44",
+      "D": "Option D for question 44"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 44. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-045",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 45: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 45",
+      "B": "Option B for question 45",
+      "C": "Option C for question 45",
+      "D": "Option D for question 45"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 45. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-046",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 46: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 46",
+      "B": "Option B for question 46",
+      "C": "Option C for question 46",
+      "D": "Option D for question 46"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 46. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-047",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 47: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 47",
+      "B": "Option B for question 47",
+      "C": "Option C for question 47",
+      "D": "Option D for question 47"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 47. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-048",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 48: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 48",
+      "B": "Option B for question 48",
+      "C": "Option C for question 48",
+      "D": "Option D for question 48"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 48. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-reading-049",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 49: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 49",
+      "B": "Option B for question 49",
+      "C": "Option C for question 49",
+      "D": "Option D for question 49"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 49. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-050",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 50: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 50",
+      "B": "Option B for question 50",
+      "C": "Option C for question 50",
+      "D": "Option D for question 50"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 50. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.258Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-051",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 51: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 51",
+      "B": "Option B for question 51",
+      "C": "Option C for question 51",
+      "D": "Option D for question 51"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 51. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-052",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 52: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 52",
+      "B": "Option B for question 52",
+      "C": "Option C for question 52",
+      "D": "Option D for question 52"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 52. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-053",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 53: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 53",
+      "B": "Option B for question 53",
+      "C": "Option C for question 53",
+      "D": "Option D for question 53"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 53. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-054",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 54: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 54",
+      "B": "Option B for question 54",
+      "C": "Option C for question 54",
+      "D": "Option D for question 54"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 54. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-055",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 55: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 55",
+      "B": "Option B for question 55",
+      "C": "Option C for question 55",
+      "D": "Option D for question 55"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 55. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-056",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 56: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 56",
+      "B": "Option B for question 56",
+      "C": "Option C for question 56",
+      "D": "Option D for question 56"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 56. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-057",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 57: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 57",
+      "B": "Option B for question 57",
+      "C": "Option C for question 57",
+      "D": "Option D for question 57"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 57. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-058",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 58: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 58",
+      "B": "Option B for question 58",
+      "C": "Option C for question 58",
+      "D": "Option D for question 58"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 58. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-059",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 59: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 59",
+      "B": "Option B for question 59",
+      "C": "Option C for question 59",
+      "D": "Option D for question 59"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 59. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-060",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 60: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 60",
+      "B": "Option B for question 60",
+      "C": "Option C for question 60",
+      "D": "Option D for question 60"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 60. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-reading-061",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 61: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 61",
+      "B": "Option B for question 61",
+      "C": "Option C for question 61",
+      "D": "Option D for question 61"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 61. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-062",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 62: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 62",
+      "B": "Option B for question 62",
+      "C": "Option C for question 62",
+      "D": "Option D for question 62"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 62. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-063",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 63: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 63",
+      "B": "Option B for question 63",
+      "C": "Option C for question 63",
+      "D": "Option D for question 63"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 63. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-064",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 64: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 64",
+      "B": "Option B for question 64",
+      "C": "Option C for question 64",
+      "D": "Option D for question 64"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 64. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-065",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 65: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 65",
+      "B": "Option B for question 65",
+      "C": "Option C for question 65",
+      "D": "Option D for question 65"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 65. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-066",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 66: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 66",
+      "B": "Option B for question 66",
+      "C": "Option C for question 66",
+      "D": "Option D for question 66"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 66. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-067",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 67: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 67",
+      "B": "Option B for question 67",
+      "C": "Option C for question 67",
+      "D": "Option D for question 67"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 67. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-068",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 68: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 68",
+      "B": "Option B for question 68",
+      "C": "Option C for question 68",
+      "D": "Option D for question 68"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 68. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-069",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 69: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 69",
+      "B": "Option B for question 69",
+      "C": "Option C for question 69",
+      "D": "Option D for question 69"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 69. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-070",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 70: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 70",
+      "B": "Option B for question 70",
+      "C": "Option C for question 70",
+      "D": "Option D for question 70"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 70. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-071",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 71: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 71",
+      "B": "Option B for question 71",
+      "C": "Option C for question 71",
+      "D": "Option D for question 71"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 71. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-072",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 72: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 72",
+      "B": "Option B for question 72",
+      "C": "Option C for question 72",
+      "D": "Option D for question 72"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 72. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-reading-073",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 73: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 73",
+      "B": "Option B for question 73",
+      "C": "Option C for question 73",
+      "D": "Option D for question 73"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 73. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-074",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 74: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 74",
+      "B": "Option B for question 74",
+      "C": "Option C for question 74",
+      "D": "Option D for question 74"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 74. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-075",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 75: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 75",
+      "B": "Option B for question 75",
+      "C": "Option C for question 75",
+      "D": "Option D for question 75"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 75. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-076",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 76: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 76",
+      "B": "Option B for question 76",
+      "C": "Option C for question 76",
+      "D": "Option D for question 76"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 76. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-077",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 77: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 77",
+      "B": "Option B for question 77",
+      "C": "Option C for question 77",
+      "D": "Option D for question 77"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 77. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-078",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 78: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 78",
+      "B": "Option B for question 78",
+      "C": "Option C for question 78",
+      "D": "Option D for question 78"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 78. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-079",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 79: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 79",
+      "B": "Option B for question 79",
+      "C": "Option C for question 79",
+      "D": "Option D for question 79"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 79. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-080",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 80: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 80",
+      "B": "Option B for question 80",
+      "C": "Option C for question 80",
+      "D": "Option D for question 80"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 80. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-081",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 81: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 81",
+      "B": "Option B for question 81",
+      "C": "Option C for question 81",
+      "D": "Option D for question 81"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 81. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-082",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 82: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 82",
+      "B": "Option B for question 82",
+      "C": "Option C for question 82",
+      "D": "Option D for question 82"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 82. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-083",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 83: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 83",
+      "B": "Option B for question 83",
+      "C": "Option C for question 83",
+      "D": "Option D for question 83"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 83. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-084",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 84: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 84",
+      "B": "Option B for question 84",
+      "C": "Option C for question 84",
+      "D": "Option D for question 84"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 84. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-reading-085",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 85: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 85",
+      "B": "Option B for question 85",
+      "C": "Option C for question 85",
+      "D": "Option D for question 85"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 85. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-086",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 86: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 86",
+      "B": "Option B for question 86",
+      "C": "Option C for question 86",
+      "D": "Option D for question 86"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 86. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-087",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 87: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 87",
+      "B": "Option B for question 87",
+      "C": "Option C for question 87",
+      "D": "Option D for question 87"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 87. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-088",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 88: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 88",
+      "B": "Option B for question 88",
+      "C": "Option C for question 88",
+      "D": "Option D for question 88"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 88. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-089",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 89: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 89",
+      "B": "Option B for question 89",
+      "C": "Option C for question 89",
+      "D": "Option D for question 89"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 89. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-090",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 90: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 90",
+      "B": "Option B for question 90",
+      "C": "Option C for question 90",
+      "D": "Option D for question 90"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 90. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-091",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 91: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 91",
+      "B": "Option B for question 91",
+      "C": "Option C for question 91",
+      "D": "Option D for question 91"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 91. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-092",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 92: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 92",
+      "B": "Option B for question 92",
+      "C": "Option C for question 92",
+      "D": "Option D for question 92"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 92. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.259Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-093",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 93: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 93",
+      "B": "Option B for question 93",
+      "C": "Option C for question 93",
+      "D": "Option D for question 93"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 93. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-094",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 94: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 94",
+      "B": "Option B for question 94",
+      "C": "Option C for question 94",
+      "D": "Option D for question 94"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 94. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-095",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 95: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 95",
+      "B": "Option B for question 95",
+      "C": "Option C for question 95",
+      "D": "Option D for question 95"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 95. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-096",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 96: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 96",
+      "B": "Option B for question 96",
+      "C": "Option C for question 96",
+      "D": "Option D for question 96"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 96. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-reading-097",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 97: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 97",
+      "B": "Option B for question 97",
+      "C": "Option C for question 97",
+      "D": "Option D for question 97"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 97. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-098",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 98: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 98",
+      "B": "Option B for question 98",
+      "C": "Option C for question 98",
+      "D": "Option D for question 98"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 98. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-099",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 99: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 99",
+      "B": "Option B for question 99",
+      "C": "Option C for question 99",
+      "D": "Option D for question 99"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 99. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-100",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 100: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 100",
+      "B": "Option B for question 100",
+      "C": "Option C for question 100",
+      "D": "Option D for question 100"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 100. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-101",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 101: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 101",
+      "B": "Option B for question 101",
+      "C": "Option C for question 101",
+      "D": "Option D for question 101"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 101. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-102",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 102: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 102",
+      "B": "Option B for question 102",
+      "C": "Option C for question 102",
+      "D": "Option D for question 102"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 102. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-103",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 103: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 103",
+      "B": "Option B for question 103",
+      "C": "Option C for question 103",
+      "D": "Option D for question 103"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 103. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-104",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 104: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 104",
+      "B": "Option B for question 104",
+      "C": "Option C for question 104",
+      "D": "Option D for question 104"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 104. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-105",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 105: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 105",
+      "B": "Option B for question 105",
+      "C": "Option C for question 105",
+      "D": "Option D for question 105"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 105. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-106",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 106: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 106",
+      "B": "Option B for question 106",
+      "C": "Option C for question 106",
+      "D": "Option D for question 106"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 106. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-107",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 107: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 107",
+      "B": "Option B for question 107",
+      "C": "Option C for question 107",
+      "D": "Option D for question 107"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 107. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-108",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 108: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 108",
+      "B": "Option B for question 108",
+      "C": "Option C for question 108",
+      "D": "Option D for question 108"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 108. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-reading-109",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 109: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 109",
+      "B": "Option B for question 109",
+      "C": "Option C for question 109",
+      "D": "Option D for question 109"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 109. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-110",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 110: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 110",
+      "B": "Option B for question 110",
+      "C": "Option C for question 110",
+      "D": "Option D for question 110"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 110. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-111",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 111: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 111",
+      "B": "Option B for question 111",
+      "C": "Option C for question 111",
+      "D": "Option D for question 111"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 111. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-112",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 112: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 112",
+      "B": "Option B for question 112",
+      "C": "Option C for question 112",
+      "D": "Option D for question 112"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 112. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-113",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 113: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 113",
+      "B": "Option B for question 113",
+      "C": "Option C for question 113",
+      "D": "Option D for question 113"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 113. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-114",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 114: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 114",
+      "B": "Option B for question 114",
+      "C": "Option C for question 114",
+      "D": "Option D for question 114"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 114. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-115",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 115: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 115",
+      "B": "Option B for question 115",
+      "C": "Option C for question 115",
+      "D": "Option D for question 115"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 115. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-116",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 116: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 116",
+      "B": "Option B for question 116",
+      "C": "Option C for question 116",
+      "D": "Option D for question 116"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 116. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-117",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 117: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 117",
+      "B": "Option B for question 117",
+      "C": "Option C for question 117",
+      "D": "Option D for question 117"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 117. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-118",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 118: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 118",
+      "B": "Option B for question 118",
+      "C": "Option C for question 118",
+      "D": "Option D for question 118"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 118. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-119",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 119: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 119",
+      "B": "Option B for question 119",
+      "C": "Option C for question 119",
+      "D": "Option D for question 119"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 119. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-120",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 120: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 120",
+      "B": "Option B for question 120",
+      "C": "Option C for question 120",
+      "D": "Option D for question 120"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 120. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-reading-121",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Reading practice question 121: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 121",
+      "B": "Option B for question 121",
+      "C": "Option C for question 121",
+      "D": "Option D for question 121"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 121. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-listening-122",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Listening practice question 122: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 122",
+      "B": "Option B for question 122",
+      "C": "Option C for question 122",
+      "D": "Option D for question 122"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 122. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-writing-123",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Writing practice question 123: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 123",
+      "B": "Option B for question 123",
+      "C": "Option C for question 123",
+      "D": "Option D for question 123"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 123. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-speaking-124",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Speaking practice question 124: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 124",
+      "B": "Option B for question 124",
+      "C": "Option C for question 124",
+      "D": "Option D for question 124"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 124. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-reading-125",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Reading practice question 125: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 125",
+      "B": "Option B for question 125",
+      "C": "Option C for question 125",
+      "D": "Option D for question 125"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 125. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-listening-126",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Listening practice question 126: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 126",
+      "B": "Option B for question 126",
+      "C": "Option C for question 126",
+      "D": "Option D for question 126"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 126. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-writing-127",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Writing practice question 127: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 127",
+      "B": "Option B for question 127",
+      "C": "Option C for question 127",
+      "D": "Option D for question 127"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 127. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-speaking-128",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Speaking practice question 128: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 128",
+      "B": "Option B for question 128",
+      "C": "Option C for question 128",
+      "D": "Option D for question 128"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 128. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": true,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-reading-129",
+    "subject": "Reading",
+    "topic": "Reading Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Reading practice question 129: This is a sample IELTS Reading question for exam preparation.",
+    "options": {
+      "A": "Option A for question 129",
+      "B": "Option B for question 129",
+      "C": "Option C for question 129",
+      "D": "Option D for question 129"
+    },
+    "correctAnswer": "A",
+    "explanation": "This is the explanation for IELTS Reading question 129. Review the official IELTS Reading strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  },
+  {
+    "id": "ielts-2023-listening-130",
+    "subject": "Listening",
+    "topic": "Listening Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Listening practice question 130: This is a sample IELTS Listening question for exam preparation.",
+    "options": {
+      "A": "Option A for question 130",
+      "B": "Option B for question 130",
+      "C": "Option C for question 130",
+      "D": "Option D for question 130"
+    },
+    "correctAnswer": "B",
+    "explanation": "This is the explanation for IELTS Listening question 130. Review the official IELTS Listening strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-writing-131",
+    "subject": "Writing",
+    "topic": "Writing Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Writing practice question 131: This is a sample IELTS Writing question for exam preparation.",
+    "options": {
+      "A": "Option A for question 131",
+      "B": "Option B for question 131",
+      "C": "Option C for question 131",
+      "D": "Option D for question 131"
+    },
+    "correctAnswer": "C",
+    "explanation": "This is the explanation for IELTS Writing question 131. Review the official IELTS Writing strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.265Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-speaking-132",
+    "subject": "Speaking",
+    "topic": "Speaking Practice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Speaking practice question 132: This is a sample IELTS Speaking question for exam preparation.",
+    "options": {
+      "A": "Option A for question 132",
+      "B": "Option B for question 132",
+      "C": "Option C for question 132",
+      "D": "Option D for question 132"
+    },
+    "correctAnswer": "D",
+    "explanation": "This is the explanation for IELTS Speaking question 132. Review the official IELTS Speaking strategies for best results.",
+    "source": "seed",
+    "createdAt": "2026-10-14T22:34:30.266Z",
+    "highYield": false,
+    "repeatedFrom": [
+      2025
+    ]
+  }
 ]
