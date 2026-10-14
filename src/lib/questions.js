@@ -65,12 +65,17 @@ Do NOT include any text outside the JSON array.`;
     if (!jsonMatch) return [];
 
     const parsed = JSON.parse(jsonMatch[0]);
-    return parsed.map((q, i) => ({
-      ...q,
-      id: `ai_${Date.now()}_${i}`,
-      subject,
-      exam: "JAMB",
-    }));
+    return parsed.map((q, i) => {
+      const answer = q.answer || q.correctAnswer;
+      return {
+        ...q,
+        answer,
+        correctAnswer: answer,
+        id: `ai_${Date.now()}_${i}`,
+        subject,
+        exam: "JAMB",
+      };
+    });
   } catch (e) {
     console.warn("[AI] generateQuestionsWithAI failed:", e.message);
     return [];

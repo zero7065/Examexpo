@@ -32,7 +32,7 @@ const SUBJECT_ICONS = {
 };
 
 export default function Dashboard() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
@@ -108,16 +108,6 @@ export default function Dashboard() {
     if (hour < 12) return "Good morning";
     if (hour < 18) return "Good afternoon";
     return "Good evening";
-  }
-
-  async function handleLogout() {
-    try {
-      await logout();
-      navigate("/auth");
-    } catch (e) {
-      console.error("Logout failed:", e);
-      toast({ message: "Failed to sign out. Please try again.", type: "error" });
-    }
   }
 
   function getScoreColor(score) {

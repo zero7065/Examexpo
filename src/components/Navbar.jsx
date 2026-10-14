@@ -12,7 +12,7 @@ import {
   BookOpen,
   BarChart3,
   User,
-  LogOut,
+
   Crown,
   History,
   Moon,
@@ -204,14 +204,6 @@ const Navbar = () => {
             </Link>
           )}
 
-          <button
-            onClick={async () => { await logout(); navigate("/auth"); }}
-            className="flex items-center gap-3 px-4 py-3 w-full text-text-muted hover:text-danger transition-colors font-bold"
-          >
-            <LogOut size={20} />
-            <span>Sign Out</span>
-          </button>
-
           <div className="text-center pt-2">
             <span className="jadai-brand text-[10px] font-black tracking-wider opacity-60 hover:opacity-100 transition-opacity cursor-default">
               Developed by Jadai Studios
@@ -310,12 +302,6 @@ const Navbar = () => {
                 <Crown size={18} /> Go Pro
               </Link>
             )}
-            <button
-              onClick={async () => { setMoreOpen(false); await logout(); navigate("/auth"); }}
-              className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-text-muted hover:text-danger font-bold bg-subtle transition-colors"
-            >
-              <LogOut size={18} /> Sign Out
-            </button>
           </div>
         </div>
       )}

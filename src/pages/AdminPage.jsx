@@ -9,7 +9,8 @@ import AdminCompliance from "../components/AdminCompliance";
 import AdminTeams from "../components/AdminTeams";
 import AdminContent from "../components/AdminContent";
 const isAdmin = typeof _isAdmin === 'function' ? _isAdmin : () => false;
-import { Shield, Users, Activity, BookOpen, Crown, ArrowLeft, RefreshCw, UserCheck, UserX, ChevronDown, Search, CrownIcon, Zap, CreditCard, ClipboardList, Award, Clock, FileText, CheckCircle, XCircle } from "lucide-react";
+import { Shield, Users, Activity, BookOpen, Crown, ArrowLeft, RefreshCw, UserCheck, UserX, ChevronDown, Search, CrownIcon, Zap, CreditCard, ClipboardList, Award, Clock, FileText, CheckCircle, XCircle, Wifi } from "lucide-react";
+import NetworkDiagnostic from "../components/NetworkDiagnostic";
 
 const FULL_PRO_FEATURES = {
   notepad: true,
@@ -354,6 +355,12 @@ export default function AdminPage() {
             />
           </div>
         )}
+
+        {/* Network Diagnostic */}
+        <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 20, marginBottom: 20 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>Network Diagnostics</div>
+          <NetworkDiagnostic />
+        </div>
 
         {/* Activity Log Tab */}
         {activeTab === "overview" && (

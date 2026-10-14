@@ -15,7 +15,8 @@ import { exportUserData, downloadJson, exportAllowedAt, markExported } from "../
 import { ALL_EXAMS } from "../lib/exams";
 import { useTheme } from "../context/ThemeContext";
 import pkg from "../../package.json";
-import { User, BookOpen, CreditCard, Bell, Sliders, AlertTriangle, LogOut, ChevronRight, Check, Pencil, Clock } from "lucide-react";
+import { User, BookOpen, CreditCard, Bell, Sliders, AlertTriangle, ChevronRight, Check, Pencil, Clock, Activity } from "lucide-react";
+import NetworkDiagnostic from "../components/NetworkDiagnostic";
 
 const SUBJECT_OPTIONS = ["English", "Maths", "Physics", "Chemistry", "Biology", "Economics", "Government", "Literature", "CRS", "Geography", "Commerce", "Accounting", "Further Maths", "Agricultural Science", "Technical Drawing", "Business Management"];
 const EXAM_OPTIONS = ["JAMB", "WAEC", "NABTEB", "POST-UTME"];
@@ -80,7 +81,7 @@ function Toggle({ value, onChange }) {  return (
 }
 
 export default function Settings() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { isPro, daysLeft, loading: subLoading } = useSubscription();
   const { permission: notifPermission, requestPermission, scheduleReminder } = useNotifications();
   const navigate = useNavigate();
@@ -204,7 +205,7 @@ export default function Settings() {
     } catch (e) { console.warn("Reset error:", e); }
   }
 
-  async function handleLogout() { try { await logout(); navigate("/auth"); } catch (e) { console.error("Logout failed:", e); } }
+
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)" }} className="page-content">
@@ -398,10 +399,10 @@ export default function Settings() {
           </div>
         </Section>
 
-        {/* Sign out */}
-        <button onClick={handleLogout} style={{ width: "100%", padding: "14px", borderRadius: 12, background: "#1a1a1f", border: "1px solid #333", color: "#FF4D6A", fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 24 }}>
-          <LogOut size={18} /> Sign Out
-        </button>
+        {/* Network diagnostic */}
+        <Section title="Network Diagnostics" icon={Sliders}>
+          <NetworkDiagnostic />
+        </Section>
       </div>
 
       {/* Exam modal */}
