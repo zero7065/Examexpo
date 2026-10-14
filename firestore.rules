@@ -333,5 +333,11 @@ service cloud.firestore {
       allow create: if true;
       allow read, update, delete: if isAdmin();
     }
+
+    // ─── AI TRAINING DATA (user write, admin read) ───
+    match /aiTrainingData/{entryId} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if isAdmin();
+    }
   }
 }

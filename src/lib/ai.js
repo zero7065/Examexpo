@@ -1,5 +1,7 @@
 // src/lib/ai.js - Unified Groq AI client
 
+import { logTrainingEntry } from "./aiTraining";
+
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 // Verified against GET /openai/v1/models for this API key (Oct 2026).
@@ -276,14 +278,27 @@ export function buildTutorSystemPrompt({ subject, userProfile, memory }) {
 
 // Generic single-prompt caller — used by question generators
 export async function askGroq(systemPrompt, userPrompt, opts = {}) {
-  return callGroqWithFallback(systemPrompt, userPrompt, opts.maxTokens ?? 300, opts.temperature ?? 0.5);
+  const result = await callGroqWithFallback(systemPrompt, userPrompt, opts.maxTokens ?? 300, opts.temperature ?? 0.5);
+  const { user } = await import("../context/AuthContext").catch(() => ({}));
+  logTrainingEntry({
+    userId: user?.uid || "anonymous",
+    userEmail: user?.email || "",
+    type: "askGroq",
+    systemPrompt,
+    messages: [{ role: "user", content: userPrompt }, { role: "assistant", content: result }],
+    metadata: { maxTokens: opts.maxTokens, temperature: opts.temperature },
+  }).catch(() => {});
+  return result;
 }
 
 export async function explainAnswer({ question, options, userAnswer, correctAnswer, subject, exam }) {
   const system = `You are a friendly Nigerian exam tutor for ${exam || "JAMB"}. Never say you are built by Google or mention Gemini. You are ExamPadi AI powered by Groq.`;
   const user = `Question: ${question}\nOptions: A) ${options.A} B) ${options.B} C) ${options.C} D) ${options.D}\nStudent answered: ${userAnswer}\nCorrect answer: ${correctAnswer}\nSubject: ${subject}\nExplain why ${correctAnswer} is correct in 3-4 sentences. End with a memory tip.`;
   try {
-    return await callGroqWithFallback(system, user, 300);
+    const result = await callGroqWithFallback(system, user, 300);
+    const { user: u } = await import("../context/AuthContext").catch(() => ({}));
+    logTrainingEntry({ userId: u?.uid || "anonymous", userEmail: u?.email || "", type: "explainAnswer", systemPrompt: system, messages: [{ role: "user", content: user }, { role: "assistant", content: result }], metadata: { subject, exam } }).catch(() => {});
+    return result;
   } catch (err) {
     console.warn("explainAnswer fallback:", err.message);
     return `The correct answer is ${correctAnswer}. In ${subject}, this concept is fundamental. Review your textbook and practice similar past questions to master this topic. Keep studying!`;
@@ -302,7 +317,10 @@ Topic: ${topic}
 
 Give a clear, friendly explanation in 3-4 sentences. Explain WHY ${correctAnswer} is correct, and briefly why the student's choice was wrong. Use simple language suitable for SS3 Nigerian students. End with a memory tip.`;
   try {
-    return await callGroqWithFallback(system, prompt, 300);
+    const result = await callGroqWithFallback(system, prompt, 300);
+    const { user } = await import("../context/AuthContext").catch(() => ({}));
+    logTrainingEntry({ userId: user?.uid || "anonymous", userEmail: user?.email || "", type: "explainQuestion", systemPrompt: system, messages: [{ role: "user", content: prompt }, { role: "assistant", content: result }], metadata: { subject, topic } }).catch(() => {});
+    return result;
   } catch (e) {
     console.warn("explainQuestion fallback:", e.message);
     return `The correct answer is ${correctAnswer}. In ${subject}, this concept is fundamental. Review your textbook and practice similar past questions to master this topic. Keep studying!`;
@@ -332,9 +350,15 @@ export async function chatWithTutor({ messages, subject, userProfile, memory = n
     // Image(s) present → vision path (multimodal model only, no text-model fallback)
     const imgList = images || (imageBase64 ? [imageBase64] : []);
     if (imgList.length > 0) {
-      return await askGroqVision({ systemPrompt, messages: chatMessages, images: imgList, maxTokens: 1000 });
+      const result = await askGroqVision({ systemPrompt, messages: chatMessages, images: imgList, maxTokens: 1000 });
+      const { user } = await import("../context/AuthContext").catch(() => ({}));
+      logTrainingEntry({ userId: user?.uid || "anonymous", userEmail: user?.email || "", type: "chatWithTutor", systemPrompt, messages: [...chatMessages, { role: "assistant", content: result }], metadata: { subject, messageCount: messages.length } }).catch(() => {});
+      return result;
     }
-    return await callGroqChatWithFallback(systemPrompt, chatMessages, 600, 0.8);
+    const result = await callGroqChatWithFallback(systemPrompt, chatMessages, 600, 0.8);
+    const { user } = await import("../context/AuthContext").catch(() => ({}));
+    logTrainingEntry({ userId: user?.uid || "anonymous", userEmail: user?.email || "", type: "chatWithTutor", systemPrompt, messages: [...chatMessages, { role: "assistant", content: result }], metadata: { subject, messageCount: messages.length } }).catch(() => {});
+    return result;
   } catch (e) {
     console.warn("chatWithTutor fallback:", e.message);
     return `I'm ExamPadi AI Tutor. I can help with ${subject} questions. Please try asking again — I'm having temporary connectivity issues. In the meantime, review your notes and past questions on this topic.`;
@@ -378,7 +402,7 @@ export async function predictLikelyQuestions({ subject, exam, count = 6 }) {
   }
 }
 
-export async function generateStudyPlan({ targetScore, examDate, currentLevel, weakTopics }) {
+export async function generateStudyPlan({ targetScore, examDate, currentLevel: _currentLevel, weakTopics }) {
   const daysUntilExam = Math.ceil((new Date(examDate) - new Date()) / (1000 * 60 * 60 * 24));
   try {
     const system = "You are an exam consultant. Create a study plan as JSON. Return ONLY valid JSON, no markdown fences.";
