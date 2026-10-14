@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { markTourSeen } from "../lib/tour";
-import { Zap, Bot, Users, Trophy, X, ArrowRight, ArrowLeft } from "lucide-react";
+import { Zap, Bot, Users, Trophy, X, ArrowRight, ArrowLeft, BookOpen, Layers, Settings, PenTool } from "lucide-react";
 
 const STEPS = [
   {
@@ -25,6 +25,26 @@ const STEPS = [
     icon: Trophy, title: "4 · Chase the board",
     body: "Streaks, XP and the leaderboard turn consistency into a game. Turn on your public profile to appear on the feed.",
     to: "/leaderboard", cta: "See leaderboard",
+  },
+  {
+    icon: BookOpen, title: "5 · Mock Exams & Exam Mode",
+    body: "Take full-length timed mock exams that simulate real exam conditions. Get instant scores and detailed breakdowns.",
+    to: "/mock-exam", cta: "Try a mock exam",
+  },
+  {
+    icon: Layers, title: "6 · Flashcards & Study Plans",
+    body: "Review key concepts with AI-generated flashcards. Follow personalized study plans that adapt to your weak topics.",
+    to: "/flashcards", cta: "Browse flashcards",
+  },
+  {
+    icon: Settings, title: "7 · Settings & Preferences",
+    body: "Customize your experience: toggle exams, set learning style, manage notifications, and control your privacy.",
+    to: "/settings", cta: "Open settings",
+  },
+  {
+    icon: PenTool, title: "8 · Whiteboard & AI Analysis",
+    body: "Draw on the whiteboard to work through problems. Let AI analyze your rough work and show you exactly where you went wrong.",
+    to: "/practice", cta: "Try the whiteboard",
   },
 ];
 
