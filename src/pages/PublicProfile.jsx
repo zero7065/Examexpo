@@ -7,9 +7,10 @@ import { addPartner } from "../lib/studyPartners";
 import { useToast } from "../components/Toast";
 import AvatarDisplay from "../components/Avatar/AvatarDisplay";
 import { isAdmin } from "../lib/activityLog";
-import { ArrowLeft, UserPlus, MessageCircle, Lock, Flame, Star, Trophy } from "lucide-react";
+import { ArrowLeft, UserPlus, MessageCircle, Lock, Flame, Star, Trophy, Share2 } from "lucide-react";
 import { ACHIEVEMENTS } from "../config/achievements";
 import { getActiveBadge } from "../lib/achievements";
+import { shareToWhatsApp, copyShareLink } from "../lib/share";
 
 export default function PublicProfile() {
   const { uid } = useParams();
@@ -130,6 +131,13 @@ export default function PublicProfile() {
           <p className="text-sm text-text-muted flex-1">Add {profile.name || "them"} as a partner to discuss problems and share solutions 1:1.</p>
         </div>
       )}
+
+      <div className="glass-card p-5 flex items-center gap-3">
+        <Share2 size={18} className="text-primary shrink-0" />
+        <p className="text-sm text-text-muted flex-1">Share this profile</p>
+        <button onClick={() => { copyShareLink(`/u/${uid}`); toast({ message: "Link copied!", type: "success" }); }} className="btn-secondary px-3 py-2 text-xs">Copy Link</button>
+        <button onClick={() => shareToWhatsApp(`Check out ${profile.name || "this student"} on ExamPadi!`, `${window.location.origin}/u/${uid}`)} className="btn-secondary px-3 py-2 text-xs">WhatsApp</button>
+      </div>
     </div>
   );
 }
