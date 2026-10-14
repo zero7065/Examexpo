@@ -18094,7 +18094,8 @@
   "repeatedFrom": [
    2018,
    2020,
-   2022
+   2022,
+   2025
   ]
  },
  {
@@ -18200,7 +18201,8 @@
   "repeatedFrom": [
    2018,
    2020,
-   2022
+   2022,
+   2025
   ]
  },
  {
@@ -18306,7 +18308,8 @@
   "repeatedFrom": [
    2018,
    2020,
-   2022
+   2022,
+   2025
   ]
  },
  {
@@ -19299,6 +19302,53 @@
   "repeatedFrom": [
    2021,
    2026
+  ]
+ },
+ {
+  "id": "jamb-2024-econ-013",
+  "subject": "Economics",
+  "topic": "Demand and Supply",
+  "exam": [
+   "JAMB"
+  ],
+  "year": 2024,
+  "difficulty": "medium",
+  "kind": "theory",
+  "question": "Explain any four factors that cause a shift in the demand curve.",
+  "modelAnswer": "1) Income rise shifts demand right for normal goods. 2) Cheaper substitutes shift it left. 3) Favourable taste/fashion shifts right. 4) Larger population shifts right. (Also: expectations, complementary prices.) Each changes demand at every price — hence a shift, not a movement.",
+  "explanation": "Four distinct factors + shift-vs-movement distinction earns full marks.",
+  "source": "seed",
+  "createdAt": "2026-10-14T00:48:34.968Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2022,
+   2024,
+   2025,
+   2026
+  ]
+ },
+ {
+  "id": "jamb-2025-gove-014",
+  "subject": "Government",
+  "topic": "Democracy",
+  "exam": [
+   "JAMB"
+  ],
+  "year": 2025,
+  "difficulty": "medium",
+  "kind": "theory",
+  "question": "Outline four features of a democratic government.",
+  "modelAnswer": "1) Periodic free and fair elections. 2) Majority rule with minority rights. 3) Rule of law and independent judiciary. 4) Freedom of speech, press and association. (Also: universal suffrage, separation of powers.)",
+  "explanation": "List + one-line expansion per feature.",
+  "source": "seed",
+  "createdAt": "2026-10-14T00:48:34.968Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2018,
+   2020,
+   2022,
+   2025
   ]
  }
 ]

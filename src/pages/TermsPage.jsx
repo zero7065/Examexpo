@@ -27,8 +27,9 @@ const SECTIONS = [
   {
     h: "5. Payments & Subscriptions (Paystack)",
     list: [
-      "Pro plans are billed in advance via Paystack in Nigerian Naira (₦).",
-      "Refunds: full refund within 7 days of first purchase if you contact us; no refunds after 7 days except as required by Nigerian consumer protection law.",
+      "Pro plans are billed in advance via Paystack in Nigerian Naira (₦). All charges land directly in our Paystack account.",
+      "No refunds: all payments are final. If anything goes wrong with your payment or activation, contact the team (WhatsApp +234 812 763 6057 or jadai7065@gmail.com) and we will resolve it — including manual activation.",
+      "Team purchases: one payment covers all seats in the team. Seats are non-transferable once redeemed, unless the team owner contacts us.",
       "Plans expire at term end — we do not auto-renew unless you start a new payment.",
       "School invoices are payable per term by bank transfer or Paystack; receipts provided for audits.",
     ],

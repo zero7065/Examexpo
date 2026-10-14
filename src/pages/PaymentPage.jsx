@@ -5,10 +5,11 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import { openPaystack } from "../paystack";
-import { PLANS as CONFIG_PLANS } from "../config/plans";
-import { Check, Crown, Zap, ShieldCheck, Sparkles, ChevronRight, Loader2, Award } from "lucide-react";
+import { usePaystack } from "../hooks/usePaystack";
+import { PLANS as CONFIG_PLANS, CURRENCIES, formatMoney, teamPrice } from "../config/plans";
+import { Check, Crown, Zap, ShieldCheck, Sparkles, ChevronRight, Loader2, Award, Users, Ticket } from "lucide-react";
 import { logActivity } from "../lib/activityLog";
+import { createTeamDraft, activateTeam, joinTeamByCode } from "../lib/teams";
 
 const PaymentPage = () => {
   const { user, updateUser } = useAuth();
@@ -16,6 +17,18 @@ const PaymentPage = () => {
   const navigate = useNavigate();
   const [payLoading, setPayLoading] = useState(false);
   const [payError, setPayError] = useState(null);
+  // Teams state
+  const [teamPlan, setTeamPlan] = useState("team_monthly");
+  const [teamSeats, setTeamSeats] = useState(5);
+  const [teamName, setTeamName] = useState("");
+  const [teamPaying, setTeamPaying] = useState(false);
+  const [teamCode, setTeamCode] = useState("");
+  const [redeemCode, setRedeemCode] = useState("");
+  const [redeeming, setRedeeming] = useState(false);
+  const [customAmount, setCustomAmount] = useState("");
+  const [customPaying, setCustomPaying] = useState(false);
+  const [currency, setCurrency] = useState("NGN");
+  const { initializePayment } = usePaystack();
 
   const activatePro = async (planId, duration, reference) => {
     const expiryDate = new Date();
@@ -58,53 +71,128 @@ const PaymentPage = () => {
       return;
     }
 
-    const paystackKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-    if (!paystackKey) {
-      toast({ message: "Paystack key missing. Add VITE_PAYSTACK_PUBLIC_KEY to .env.", type: "error" });
-      return;
-    }
-
     setPayLoading(true);
     setPayError(null);
-
-    const reference = `EP-${user.uid}-${Date.now()}`;
-    const amount = planConfig.price * 100;
-
     try {
-      await openPaystack({
-        key: paystackKey,
-        email: user.email,
-        amount: amount,
-        ref: reference,
-        currency: "NGN",
-        metadata: { userId: user.uid, plan: planKey, userName: user.displayName || "Student" },
-        onSuccess: async function(response) {
-          try {
-            const duration = planKey === "pro_yearly" ? 365 : 30;
-            await activatePro(planKey, duration, response.reference);
-            logActivity({ action: "payment_success", userId: user.uid, email: user.email, details: { plan: planKey, reference: response.reference, amount: planConfig.price } });
-            toast({ message: "Payment successful! You're now Pro", type: "success" });
-            navigate("/payment/success");
-          } catch (err) {
-            toast({ message: "Activation failed. Contact support.", type: "error" });
-          } finally {
-            setPayLoading(false);
-          }
-        },
-        onClose: function() {
-          setPayLoading(false);
+      const paidRef = await initializePayment({
+        plan: planKey,
+        userEmail: user.email,
+        userId: user.uid,
+        userName: user.displayName || "Student",
+        currency,
+        onPaid: async (response) => {
+          const duration = planKey === "pro_yearly" ? 365 : 30;
+          await activatePro(planKey, duration, response.reference);
+          logActivity({ action: "payment_success", userId: user.uid, email: user.email, details: { plan: planKey, reference: response.reference, amount: planConfig.price, currency } });
+          toast({ message: "Payment successful! You're now Pro", type: "success" });
+          navigate("/payment/success");
         },
       });
+      if (!paidRef) {
+        // closed before completion — nothing charged
+      }
     } catch (err) {
-      setPayLoading(false);
       const msg = err.message || "Payment failed. Try again.";
       if (msg !== "Payment cancelled") {
         setPayError(msg);
-        toast({ message: msg, type: "error" });
         logActivity({ action: "payment_failed", userId: user.uid, email: user.email, details: { plan: planKey, error: msg } });
       }
+    } finally {
+      setPayLoading(false);
     }
   };
+
+  async function handleTeamPay() {
+    if (!user) return navigate("/auth");
+    const seats = Math.min(100, Math.max(1, Math.floor(Number(teamSeats) || 1)));
+    const total = teamPrice(teamPlan, seats);
+    setTeamPaying(true);
+    try {
+      const { teamId, code } = await createTeamDraft({
+        name: teamName.trim() || `${user.displayName || "Student"}'s Team`,
+        plan: teamPlan,
+        seats,
+        payerUid: user.uid,
+        payerEmail: user.email,
+      });
+      const paidRef = await initializePayment({
+        plan: teamPlan,
+        userEmail: user.email,
+        userId: user.uid,
+        userName: user.displayName || "Student",
+        customAmount: total,
+        currency,
+        extraMetadata: { teamId, teamPurchase: true, seats },
+        onPaid: async (response) => {
+          await activateTeam({
+            teamId,
+            payerUid: user.uid,
+            payerEmail: user.email,
+            reference: response.reference,
+            amountNaira: total,
+          });
+          setTeamCode(code);
+          toast({ message: `Team activated! Share code ${code} with your group.`, type: "success" });
+          logActivity({ action: "payment_success", userId: user.uid, email: user.email, details: { plan: teamPlan, teamId, seats, reference: response.reference, amount: total } });
+          navigate("/team/" + teamId);
+        },
+      });
+      if (!paidRef) {
+        // Payment window closed before completion — draft stays pending.
+      }
+    } catch (err) {
+      toast({ message: err.message || "Team purchase failed.", type: "error" });
+    } finally {
+      setTeamPaying(false);
+    }
+  }
+
+  async function handleRedeem() {
+    if (!user) return navigate("/auth");
+    if (!redeemCode.trim()) {
+      toast({ message: "Enter your team code.", type: "error" });
+      return;
+    }
+    setRedeeming(true);
+    try {
+      const res = await joinTeamByCode(redeemCode, user.uid);
+      toast({ message: `Welcome to ${res.teamName}! Pro active until ${new Date(res.expiry).toLocaleDateString()}.`, type: "success" });
+      navigate("/team/" + res.teamId);
+    } catch (err) {
+      toast({ message: err.message || "Could not join team.", type: "error" });
+    } finally {
+      setRedeeming(false);
+    }
+  }
+
+  async function handleCustomPay() {
+    if (!user) return navigate("/auth");
+    const cur = CURRENCIES[currency] || CURRENCIES.NGN;
+    const entered = Number(customAmount) || 0;
+    if (entered < cur.minCustom) {
+      toast({ message: `Minimum is ${cur.symbol}${cur.minCustom.toLocaleString()} (one month of Pro).`, type: "error" });
+      return;
+    }
+    // Convert to NGN for activation thresholds; Paystack charges the entered currency.
+    const amountNGN = Math.ceil(entered / cur.rate);
+    setCustomPaying(true);
+    try {
+      const paidRef = await initializePayment({
+        plan: "pro_monthly",
+        userEmail: user.email,
+        userId: user.uid,
+        userName: user.displayName || "Student",
+        customAmount: amountNGN,
+        currency,
+        extraMetadata: { customPayment: true, enteredAmount: entered },
+      });
+      if (paidRef) navigate("/payment/success");
+    } catch (err) {
+      toast({ message: err.message || "Payment failed.", type: "error" });
+    } finally {
+      setCustomPaying(false);
+    }
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-6 md:p-10 space-y-16 animate-fade">
@@ -115,6 +203,14 @@ const PaymentPage = () => {
         </div>
         <h1 className="text-4xl md:text-6xl font-black text-text tracking-tight">Unlock Your Full Potential</h1>
         <p className="text-text-muted text-xl max-w-2xl mx-auto font-medium">Don't let the daily question limit hold you back. Join the 300+ score squad today.</p>
+        <div className="flex items-center justify-center gap-2 mt-2">
+          <span className="text-sm text-text-muted font-semibold">Pay in:</span>
+          <select value={currency} onChange={(e) => setCurrency(e.target.value)} className="input-field" style={{ maxWidth: 200 }}>
+            {Object.entries(CURRENCIES).map(([code, c]) => (
+              <option key={code} value={code}>{c.symbol} {code} — {c.label}</option>
+            ))}
+          </select>
+        </div>
       </header>
 
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -136,7 +232,7 @@ const PaymentPage = () => {
             <div className="mb-8">
               <h3 className="text-2xl font-black mb-2 text-text">{plan.name}</h3>
               <div className="flex items-baseline gap-1">
-                <span className="text-5xl font-black font-mono tracking-tighter">₦{plan.price.toLocaleString()}</span>
+                <span className="text-5xl font-black font-mono tracking-tighter">{formatMoney(plan.price, currency)}</span>
                 <span className="text-text-muted font-bold text-sm">/ {plan.interval === "yearly" ? "yr" : "mo"}</span>
               </div>
               {plan.key === "pro_yearly" && (
@@ -161,7 +257,7 @@ const PaymentPage = () => {
                   plan.badge ? "bg-primary text-black shadow-primary/20 hover:scale-105" : "bg-bg-3 text-text border border-border hover:bg-border"
                 }`}
               >
-                {payLoading ? <Loader2 className="animate-spin" size={24} /> : <>Pay ₦{plan.price.toLocaleString()}<ChevronRight size={20} /></>}
+                {payLoading ? <Loader2 className="animate-spin" size={24} /> : <>Pay {formatMoney(plan.price, currency)}<ChevronRight size={20} /></>}
               </button>
               {payError && <p className="text-danger text-[13px] text-center font-bold">{payError}</p>}
             </div>
@@ -169,12 +265,81 @@ const PaymentPage = () => {
         ))}
       </div>
 
+      {/* ── Teams: one person pays for the whole group ── */}
+      <div className="glass-card p-8 md:p-10 max-w-4xl mx-auto">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary"><Users size={22} /></div>
+          <h2 className="text-2xl font-black text-text">Pay for Your Team</h2>
+        </div>
+        <p className="text-text-muted mb-6">One payment covers everyone — classmates, tutorial group, family. Classroom ceiling: never more than ₦25,000. Each member redeems your team code and gets Pro until your plan expires. You occupy the first seat.</p>
+
+        <div className="grid md:grid-cols-2 gap-4 mb-4">
+          <label className="text-sm font-bold text-text">Team name
+            <input value={teamName} onChange={(e) => setTeamName(e.target.value)} placeholder="e.g. SS3 Physics Squad" className="input-field mt-2" />
+          </label>
+          <label className="text-sm font-bold text-text">Plan
+            <select value={teamPlan} onChange={(e) => setTeamPlan(e.target.value)} className="input-field mt-2">
+              <option value="team_monthly">Team Monthly — {formatMoney(1000, currency)}/seat/mo</option>
+              <option value="team_yearly">Team Yearly — {formatMoney(8000, currency)}/seat/yr</option>
+            </select>
+          </label>
+        </div>
+
+        <label className="text-sm font-bold text-text">Seats (2–100)
+          <div className="flex items-center gap-4 mt-2">
+            <button onClick={() => setTeamSeats(s => Math.max(2, (Number(s) || 2) - 1))} className="btn-secondary px-5 h-12 text-xl font-black">−</button>
+            <span className="text-3xl font-black font-mono text-text w-20 text-center">{teamSeats}</span>
+            <button onClick={() => setTeamSeats(s => Math.min(100, (Number(s) || 2) + 1))} className="btn-secondary px-5 h-12 text-xl font-black">+</button>
+            <span className="text-text-muted text-sm ml-auto">Total: <strong className="text-text text-xl font-mono">{formatMoney(teamPrice(teamPlan, teamSeats), currency)}</strong></span>
+          </div>
+        </label>
+
+        <button onClick={handleTeamPay} disabled={teamPaying} className="btn-primary w-full h-14 text-lg mt-6 disabled:opacity-60">
+          {teamPaying ? <Loader2 className="animate-spin" size={22} /> : <>Pay {formatMoney(teamPrice(teamPlan, teamSeats), currency)} for {teamSeats} seats <ChevronRight size={20} /></>}
+        </button>
+        {teamCode && (
+          <div className="mt-4 p-4 rounded-2xl bg-primary/10 border border-primary/30 text-center">
+            <div className="text-xs font-black uppercase tracking-widest text-text-muted mb-1">Share this code with your team</div>
+            <div className="text-3xl font-black font-mono tracking-widest text-primary">{teamCode}</div>
+          </div>
+        )}
+
+        {/* Redeem */}
+        <div className="mt-8 pt-6 border-t border-border">
+          <div className="flex items-center gap-2 mb-2">
+            <Ticket size={18} className="text-accent" />
+            <h3 className="font-black text-text">Have a team code?</h3>
+          </div>
+          <div className="flex gap-2">
+            <input value={redeemCode} onChange={(e) => setRedeemCode(e.target.value.toUpperCase())} placeholder="TEAM-XXXXXX" className="input-field font-mono tracking-widest" />
+            <button onClick={handleRedeem} disabled={redeeming} className="btn-secondary px-6 whitespace-nowrap disabled:opacity-60">
+              {redeeming ? <Loader2 className="animate-spin" size={18} /> : "Join team"}
+            </button>
+          </div>
+        </div>
+
+        {/* Custom amount */}
+        <div className="mt-6 pt-6 border-t border-border">
+          <h3 className="font-black text-text mb-1">Pay a custom amount</h3>
+          <p className="text-text-muted text-sm mb-3">Any amount from {formatMoney(CONFIG_PLANS.pro_monthly.price, currency)} upward goes straight to our Paystack and activates Pro Monthly on your account.</p>
+          <div className="flex gap-2">
+            <input type="number" min={CURRENCIES[currency].minCustom} value={customAmount} onChange={(e) => setCustomAmount(e.target.value)} placeholder={`e.g. ${CURRENCIES[currency].minCustom * 2}`} className="input-field font-mono" />
+            <button onClick={handleCustomPay} disabled={customPaying} className="btn-secondary px-6 whitespace-nowrap disabled:opacity-60">
+              {customPaying ? <Loader2 className="animate-spin" size={18} /> : <>Pay custom</>}
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 border-t border-border">
         <TrustItem icon={<ShieldCheck size={24} />} title="Secure Checkout" label="Paystack Encrypted" />
         <TrustItem icon={<Zap size={24} />} title="Instant Access" label="Automated Activation" />
         <TrustItem icon={<Sparkles size={24} />} title="Premium Support" label="Priority AI Analysis" />
         <TrustItem icon={<Award size={24} />} title="Score Guarantee" label="Proven Study Method" />
       </div>
+
+      <p className="text-center text-text-muted text-sm max-w-2xl mx-auto">
+        All payments go securely to our Paystack account. <strong className="text-text">No refunds</strong> — if anything goes wrong with payment or activation, contact the team on WhatsApp <strong className="text-text">+234 812 763 6057</strong> and we'll resolve it.
+      </p>
     </div>
   );
 };

@@ -12,6 +12,7 @@ import ProUpgradeModal from "../components/ProUpgradeModal";
 import { getStudentMemory, recordStyle } from "../lib/aiMemory";
 import { LEARNING_STYLES } from "../components/Onboarding/LearningStyleMini";
 import { exportUserData, downloadJson, exportAllowedAt, markExported } from "../lib/compliance";
+import { ALL_EXAMS } from "../lib/exams";
 import { useTheme } from "../context/ThemeContext";
 import pkg from "../../package.json";
 import { User, BookOpen, CreditCard, Bell, Sliders, AlertTriangle, LogOut, ChevronRight, Check, Pencil, Clock } from "lucide-react";
@@ -89,6 +90,7 @@ export default function Settings() {
   const [nameInput, setNameInput] = useState("");
   const [targetInput, setTargetInput] = useState("");
   const [selectedSubjects, setSelectedSubjects] = useState([]);
+  const [enabledExams, setEnabledExams] = useState([...ALL_EXAMS]);
   const [preferences, setPreferences] = useState({ sessionLength: 10, questionOrder: "random", showHints: false, autoAdvance: false, dailyReminder: true, streakAlerts: true, newQuestions: true });
   const [showExamModal, setShowExamModal] = useState(false);
   const [showProModal, setShowProModal] = useState(false);
@@ -131,6 +133,9 @@ export default function Settings() {
     if (user) getUserProfile(user.uid).then(p => {
       setProfile(p);
       setSelectedSubjects(p?.subjects || []);
+      if (Array.isArray(p?.examsEnabled) && p.examsEnabled.length > 0) {
+        setEnabledExams(ALL_EXAMS.filter((e) => p.examsEnabled.includes(e)));
+      }
       setNameInput(user.displayName || "");
       setTargetInput(String(p?.targetScore || 280));
       if (p?.preferences) setPreferences(p.preferences);
@@ -160,6 +165,21 @@ export default function Settings() {
     setSelectedSubjects(next);
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => updateFirestore({ subjects: next }), 1000);
+  }
+
+  function handleExamToggle(ex) {
+    setEnabledExams((prev) => {
+      const next = prev.includes(ex)
+        ? (prev.length <= 1 ? prev : prev.filter((e) => e !== ex))
+        : [...prev, ex];
+      if (next.length === prev.length && prev.includes(ex)) {
+        toast({ message: "Keep at least one exam on.", type: "info" });
+        return prev;
+      }
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => updateFirestore({ examsEnabled: next }), 800);
+      return next;
+    });
   }
 
   function handlePref(key, val) {
@@ -235,6 +255,20 @@ export default function Settings() {
             })}
           </div>
           <p style={{ color: "#555", fontSize: 11, marginTop: 8 }}>Changes take effect on your next session</p>
+        </Section>
+
+        <Section title="My Exams">
+          <div style={{ fontSize: 13, color: "#888", marginBottom: 10 }}>Switch off exams you don't write — they disappear from every picker across the app.</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+            {ALL_EXAMS.map((ex) => {
+              const on = enabledExams.includes(ex);
+              return (
+                <button key={ex} onClick={() => handleExamToggle(ex)} style={{ padding: "6px 14px", borderRadius: 8, border: on ? "2px solid #6C3CE9" : "1px solid #333", background: on ? "rgba(108,60,233,0.2)" : "#1a1a1f", color: on ? "#fff" : "#888", fontWeight: on ? 600 : 400, fontSize: 12, cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}>
+                  {on && <Check size={12} />} {ex}
+                </button>
+              );
+            })}
+          </div>
         </Section>
 
         {/* AI Tutor */}

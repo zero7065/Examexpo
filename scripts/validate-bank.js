@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BANK_DIR = path.resolve(__dirname, "..", "src", "data", "questions", "master-bank");
 
-const EXAMS = new Set(["JAMB", "WAEC", "NECO", "NABTEB", "POST-UTME"]);
+const EXAMS = new Set(["JAMB", "WAEC", "NECO", "NABTEB", "POST-UTME", "IELTS"]);
 const DIFFS = new Set(["easy", "medium", "hard"]);
 
 async function main() {
@@ -48,11 +48,17 @@ async function main() {
       if (!Number.isInteger(q.year) || q.year < 1990 || q.year > 2030) errors.push(`${where}: bad year ${q.year}`);
       if (!DIFFS.has(q.difficulty)) errors.push(`${where}: bad difficulty ${q.difficulty}`);
       if (!q.question || !String(q.question).trim()) errors.push(`${where}: empty question`);
-      const opts = q.options || {};
-      ["A", "B", "C", "D"].forEach((k) => {
-        if (!opts[k] || !String(opts[k]).trim()) errors.push(`${where}: empty option ${k}`);
-      });
-      if (!["A", "B", "C", "D"].includes(q.correctAnswer)) errors.push(`${where}: bad correctAnswer ${q.correctAnswer}`);
+      const kind = q.kind || "objective";
+      if (!["objective", "theory"].includes(kind)) errors.push(`${where}: bad kind ${q.kind}`);
+      if (kind === "theory") {
+        if (!q.modelAnswer || !String(q.modelAnswer).trim()) errors.push(`${where}: theory needs modelAnswer`);
+      } else {
+        const opts = q.options || {};
+        ["A", "B", "C", "D"].forEach((k) => {
+          if (!opts[k] || !String(opts[k]).trim()) errors.push(`${where}: empty option ${k}`);
+        });
+        if (!["A", "B", "C", "D"].includes(q.correctAnswer)) errors.push(`${where}: bad correctAnswer ${q.correctAnswer}`);
+      }
       if (!q.explanation || !String(q.explanation).trim()) errors.push(`${where}: empty explanation`);
       if (q.repeatedFrom !== undefined && !Array.isArray(q.repeatedFrom)) errors.push(`${where}: repeatedFrom must be an array`);
     });

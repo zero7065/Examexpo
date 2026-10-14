@@ -157,6 +157,18 @@ export default function StudyPartnersPage() {
           {/* Action Buttons */}
           <div style={{ display: "flex", gap: 12, marginBottom: 24, flexWrap: "wrap" }}>
             <button
+              onClick={() => navigate("/room")}
+              style={{
+                flex: 1, minWidth: 140, padding: "14px 16px", borderRadius: 14,
+                background: "linear-gradient(135deg, #00E5A0, #6C3CE9)",
+                color: "#fff", fontWeight: 700, fontSize: 14,
+                border: "none", cursor: "pointer", display: "flex",
+                alignItems: "center", justifyContent: "center", gap: 8,
+              }}
+            >
+              <Play size={18} /> Study Room
+            </button>
+            <button
               onClick={() => setShowAddModal(true)}
               style={{
                 flex: 1, minWidth: 140, padding: "14px 16px", borderRadius: 14,

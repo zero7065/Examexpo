@@ -12,7 +12,7 @@ import { createHash } from "node:crypto";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const BANK_DIR = path.join(ROOT, "src", "data", "questions", "master-bank");
-const FILE_FOR = { JAMB: "jamb.json", WAEC: "waec.json", NECO: "neco.json", NABTEB: "nabteb.json", "POST-UTME": "postutme.json" };
+const FILE_FOR = { JAMB: "jamb.json", WAEC: "waec.json", NECO: "neco.json", NABTEB: "nabteb.json", "POST-UTME": "postutme.json", IELTS: "ielts.json" };
 
 function normText(s) {
   return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim().replace(/\s+/g, " ");
@@ -64,10 +64,13 @@ async function main() {
     const where = `batch[${i}]`;
     const exam = String(s.exam || "JAMB").toUpperCase();
     if (!FILE_FOR[exam]) { errors.push(`${where}: bad exam ${s.exam}`); return; }
-    const okOptions = ["A", "B", "C", "D"].every((k) => String(s.options?.[k] || "").trim());
+    const kind = s.kind === "theory" ? "theory" : "objective";
+    const okOptions = kind === "theory" || ["A", "B", "C", "D"].every((k) => String(s.options?.[k] || "").trim());
+    const okAnswer = kind === "theory" || ["A", "B", "C", "D"].includes(String(s.correctAnswer || "").toUpperCase());
     const ok = String(s.question || "").trim() && String(s.explanation || "").trim()
-      && String(s.subject || "").trim() && ["A", "B", "C", "D"].includes(String(s.correctAnswer || "").toUpperCase())
-      && okOptions && Number(s.year) > 0;
+      && String(s.subject || "").trim() && okAnswer
+      && okOptions && Number(s.year) > 0
+      && (kind === "objective" || String(s.modelAnswer || "").trim());
     if (!ok) { errors.push(`${where}: invalid entry (fields/answer/options/year)`); return; }
     const h = `${exam}:${hashText(s.question)}`;
     if (seen.has(h)) { skipped++; return; }
@@ -82,9 +85,14 @@ async function main() {
       exam: [exam],
       year: Number(s.year),
       difficulty: ["easy", "medium", "hard"].includes(s.difficulty) ? s.difficulty : "medium",
+      ...(kind === "theory" ? { kind: "theory" } : {}),
       question: String(s.question),
-      options: { A: String(s.options.A), B: String(s.options.B), C: String(s.options.C), D: String(s.options.D) },
-      correctAnswer: String(s.correctAnswer).toUpperCase(),
+      ...(kind === "theory"
+        ? { modelAnswer: String(s.modelAnswer) }
+        : {
+            options: { A: String(s.options.A), B: String(s.options.B), C: String(s.options.C), D: String(s.options.D) },
+            correctAnswer: String(s.correctAnswer).toUpperCase(),
+          }),
       explanation: String(s.explanation),
       ...(s.hint ? { hint: String(s.hint) } : {}),
       source: "seed",

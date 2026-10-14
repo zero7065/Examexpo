@@ -9,6 +9,19 @@ const PROJECT = import.meta.env?.VITE_FIREBASE_PROJECT_ID || "jamb-tutor";
 let _degraded = false;
 const listeners = new Set();
 
+// Sync anything saved locally while offline (sessions, queued writes).
+// Dynamic imports avoid hard deps and keep this module side-effect free.
+async function flushPendingData() {
+  try {
+    const { flushLocalSessions } = await import("./questions");
+    await flushLocalSessions().catch(() => {});
+  } catch {}
+  try {
+    const { flushQueue } = await import("./offlineQueue");
+    await flushQueue().catch(() => {});
+  } catch {}
+}
+
 export function isDegraded() {
   return _degraded;
 }
@@ -69,7 +82,7 @@ export function startConnectionMonitor({ intervalMs = 60000 } = {}) {
     }
   }
 
-  const onOnline = () => { emit(false); run(); };
+  const onOnline = () => { emit(false); run(); flushPendingData(); };
   const onOffline = () => emit(true);
   const onFocus = () => run();
 
@@ -78,6 +91,7 @@ export function startConnectionMonitor({ intervalMs = 60000 } = {}) {
   window.addEventListener("focus", onFocus);
 
   run();
+  flushPendingData();
   const timer = setInterval(run, intervalMs);
 
   return () => {

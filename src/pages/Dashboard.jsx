@@ -6,6 +6,9 @@ import { getUserProfile } from "../lib/userProfile";
 import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit } from "../lib/usageTracker";
 import { getQuestionsFromBank } from "../data/questions/compat";
+import { getStudentMemory } from "../lib/aiMemory";
+import { analyzeLearning } from "../lib/learningLoop";
+import { dailyHealthTip } from "../data/wellness";
 import { useNotifications } from "../hooks/useNotifications";
 import { isAdmin } from "../lib/activityLog";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
@@ -13,6 +16,10 @@ import { db } from "../firebaseConfig";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import ResumeBanner from "../components/ResumeBanner";
 import NotificationPrompt from "../components/NotificationPrompt";
+import NotificationPanel from "../components/NotificationPanel";
+import OnboardingTour from "../components/OnboardingTour";
+import { tourSeen } from "../lib/tour";
+import SurveyPrompt from "../components/SurveyPrompt";
 import {
   Target, Calendar, CheckCircle, Zap, Send, ChevronRight, Crown
 } from "lucide-react";
@@ -35,6 +42,9 @@ export default function Dashboard() {
   const [showProModal, setShowProModal] = useState(false);
   const [questionsLeft, setQuestionsLeft] = useState({ used: 0, limit: 15 });
   const [subjectStats, setSubjectStats] = useState({});
+  const [insights, setInsights] = useState([]);
+  const [showTour, setShowTour] = useState(() => !tourSeen());
+  const healthTip = dailyHealthTip(new Date().toISOString().split("T")[0]);
 
   // NOTE: admins intentionally land here like everyone else.
   // The admin console is reachable via the Admin nav item / /admin route.
@@ -65,6 +75,24 @@ export default function Dashboard() {
             }
           });
           setSubjectStats(stats);
+          // AI learning loop: spot failure patterns + prescribe countermeasures
+          try {
+            const mem = await getStudentMemory(user.uid).catch(() => null);
+            const sessionData = docs.map((d) => ({ ...d.data(), id: d.id }));
+            let seen = {};
+            try { seen = JSON.parse(localStorage.getItem(`rx-seen-${user.uid}`) || "{}"); } catch {}
+            const found = analyzeLearning({ sessions: sessionData, memory: mem, seenCounts: seen });
+            setInsights(found.slice(0, 2));
+            // record views so countermeasures escalate while a problem persists
+            const next = { ...seen };
+            found.forEach(({ pattern }) => {
+              const k = `${pattern.subject}::${pattern.topic}::${pattern.kind}`;
+              next[k] = (next[k] || 0) + 1;
+            });
+            try { localStorage.setItem(`rx-seen-${user.uid}`, JSON.stringify(next)); } catch {}
+          } catch (e) {
+            console.warn("Learning loop failed:", e?.message);
+          }
         } catch (e) {
           console.error(e);
           toast({ message: "Failed to load profile data. Please refresh.", type: "error" });
@@ -161,6 +189,7 @@ export default function Dashboard() {
               <span>🔥</span> <span style={{ fontWeight: 600 }}>{streak} day streak</span>
           </div>
           <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <NotificationPanel />
             <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
               <Zap size={16} color="#D4A853" /> <span style={{ fontWeight: 600 }}>{xp} XP</span>
             </div>
@@ -192,6 +221,48 @@ export default function Dashboard() {
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 700, color: "#D4A853", fontSize: 14 }}>Admin Console</div>
               <div style={{ fontSize: 12, color: "#888" }}>Manage users, schools, content and compliance →</div>
+            </div>
+          </div>
+        )}
+
+        {/* AI Coach: pattern detection + countermeasures */}
+        {insights.length > 0 && (
+          <div style={{ marginBottom: 28, display: "grid", gap: 12 }}>
+            {insights.map(({ pattern, rx }, i) => (
+              <div key={i} style={{
+                display: "flex", gap: 12, alignItems: "flex-start",
+                background: pattern.severity === "high" ? "rgba(255,77,106,0.07)" : "rgba(212,168,83,0.07)",
+                border: pattern.severity === "high" ? "1px solid rgba(255,77,106,0.3)" : "1px solid rgba(212,168,83,0.3)",
+                padding: "14px 16px", borderRadius: 14, flexWrap: "wrap",
+              }}>
+                <span style={{ fontSize: 22 }}>🤖</span>
+                <div style={{ flex: 1, minWidth: 200 }}>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>{rx.title}</div>
+                  <div style={{ fontSize: 13, color: "#aaa", marginTop: 2, lineHeight: 1.5 }}>{rx.body}</div>
+                </div>
+                <button onClick={() => navigate(rx.action.to)} style={{
+                  background: "var(--primary)", color: "#fff", border: "none",
+                  padding: "10px 18px", borderRadius: 10, fontWeight: 700, fontSize: 13,
+                  cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap",
+                }}>
+                  {rx.action.label}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Health tip of the day */}
+        {healthTip && (
+          <div style={{
+            display: "flex", gap: 12, alignItems: "center",
+            background: "rgba(0,229,160,0.06)", border: "1px solid rgba(0,229,160,0.25)",
+            padding: "12px 16px", borderRadius: 14, marginBottom: 28,
+          }}>
+            <span style={{ fontSize: 24 }}>{healthTip.icon}</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 13 }}>Study healthy: {healthTip.title}</div>
+              <div style={{ fontSize: 12, color: "#aaa", marginTop: 2 }}>{healthTip.body}</div>
             </div>
           </div>
         )}
@@ -294,6 +365,10 @@ export default function Dashboard() {
 
       {/* Pro Upgrade Modal */}
       <ProUpgradeModal open={showProModal} onClose={() => setShowProModal(false)} dismissible />
+
+      {/* First-run tour + 1-week survey */}
+      {showTour && <OnboardingTour onClose={() => setShowTour(false)} />}
+      <SurveyPrompt createdAt={user?.metadata?.creationTime} />
 
     </div>
   );

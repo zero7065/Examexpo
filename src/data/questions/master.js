@@ -10,16 +10,9 @@ import waec from "./master-bank/waec.json";
 import neco from "./master-bank/neco.json";
 import nabteb from "./master-bank/nabteb.json";
 import postutme from "./master-bank/postutme.json";
+import ielts from "./master-bank/ielts.json";
 
-const BANKS = { JAMB: jamb, WAEC: waec, NECO: neco, NABTEB: nabteb, "POST-UTME": postutme };
-
-const EXAM_FILES = {
-  JAMB: "jamb.json",
-  WAEC: "waec.json",
-  NECO: "neco.json",
-  NABTEB: "nabteb.json",
-  "POST-UTME": "postutme.json",
-};
+const BANKS = { JAMB: jamb, WAEC: waec, NECO: neco, NABTEB: nabteb, "POST-UTME": postutme, IELTS: ielts };
 
 function normExam(exam) {
   const e = String(exam || "JAMB").toUpperCase();
@@ -39,11 +32,19 @@ export function getAllBankQuestions() {
 
 // Async loader for NEW code paths. Today resolves immediately (static
 // imports); becomes a dynamic import() per exam file once banks grow.
+const LAZY_LOADERS = {
+  JAMB: () => import("./master-bank/jamb.json"),
+  WAEC: () => import("./master-bank/waec.json"),
+  NECO: () => import("./master-bank/neco.json"),
+  NABTEB: () => import("./master-bank/nabteb.json"),
+  "POST-UTME": () => import("./master-bank/postutme.json"),
+  IELTS: () => import("./master-bank/ielts.json"),
+};
+
 export async function loadBank(exam = "JAMB") {
   const key = normExam(exam);
   if (BANKS[key]) return BANKS[key];
-  // Future lazy path (kept for the 2,000+ question cutover):
-  const mod = await import(`./master-bank/${EXAM_FILES[key]}`);
+  const mod = await LAZY_LOADERS[key]();
   return mod.default || [];
 }
 

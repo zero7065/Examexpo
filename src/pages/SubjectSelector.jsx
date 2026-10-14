@@ -1,7 +1,10 @@
 // src/pages/SubjectSelector.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "../components/Toast";
+import { useAuth } from "../context/AuthContext";
+import { getUserProfile } from "../lib/userProfile";
+import { getEnabledExams } from "../lib/exams";
 import { JAMB_SUBJECTS, WAEC_SUBJECTS } from "../data/subjects";
 import { getQuestionsFromBank, NABTEB_SUBJECTS } from "../data/questions/compat";
 import { 
@@ -25,9 +28,22 @@ const SubjectSelector = () => {
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [enabledExams, setEnabledExams] = useState(["JAMB", "WAEC", "NABTEB"]);
 
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user) return;
+    getUserProfile(user.uid).then((p) => {
+      const list = getEnabledExams(p).filter((e) => ["JAMB", "WAEC", "NABTEB"].includes(e));
+      if (list.length > 0) {
+        setEnabledExams(list);
+        setExam((prev) => (list.includes(prev) ? prev : list[0]));
+      }
+    }).catch(() => {});
+  }, [user]);
 
   const subjects = exam === "JAMB" ? JAMB_SUBJECTS : exam === "WAEC" ? WAEC_SUBJECTS : NABTEB_SUBJECTS;
   const filteredSubjects = subjects.filter(s => 
@@ -99,7 +115,7 @@ const SubjectSelector = () => {
             <div className="space-y-4">
               <label className="text-[10px] font-black uppercase tracking-widest text-text-muted">Exam Board</label>
               <div className="flex bg-bg-3 p-1.5 rounded-2xl border border-border">
-                {["JAMB", "WAEC", "NABTEB"].map(e => (
+                {enabledExams.map(e => (
                   <button 
                     key={e} 
                     onClick={() => { setExam(e); setSelectedSubjects([]); }}

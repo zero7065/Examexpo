@@ -95,9 +95,10 @@
   "explanation": "x = 20 − 9 = 11.",
   "source": "seed",
   "createdAt": "2026-10-11T09:03:36.196Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
    2019,
+   2023,
    2025
   ]
  },
@@ -1124,9 +1125,10 @@
   "explanation": "k = 20/4 = 5; y = 5×7 = 35.",
   "source": "seed",
   "createdAt": "2026-10-11T09:56:07.019Z",
-  "highYield": false,
+  "highYield": true,
   "repeatedFrom": [
    2019,
+   2023,
    2025
   ]
  },
@@ -1504,6 +1506,28 @@
   "highYield": false,
   "repeatedFrom": [
    2022
+  ]
+ },
+ {
+  "id": "neco-2023-math-002",
+  "subject": "Mathematics",
+  "topic": "Algebra",
+  "exam": [
+   "NECO"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "kind": "theory",
+  "question": "Solve the equation 2x² − 7x + 3 = 0 by factorization, showing all steps.",
+  "modelAnswer": "Split middle term: 2x² − 6x − x + 3 = 0 → 2x(x − 3) − 1(x − 3) = 0 → (2x − 1)(x − 3) = 0. So x = 1/2 or x = 3.",
+  "explanation": "Show splitting, grouping, and both roots.",
+  "source": "seed",
+  "createdAt": "2026-10-14T00:48:34.968Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2019,
+   2023,
+   2025
   ]
  }
 ]

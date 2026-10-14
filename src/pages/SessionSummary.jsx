@@ -13,6 +13,8 @@ import { bufferSummary, flushMemory } from "../lib/aiMemory";
 import { useSubscription } from "../hooks/useSubscription";
 import { ArrowLeft, RotateCcw, Share2, Sparkles, CheckCircle2, XCircle } from "lucide-react";
 import { WhatsAppShareButton, WhatsAppHelpButton } from "../components/WhatsAppShare";
+import ReviewPrompt from "../components/ReviewPrompt";
+import { shouldAskReview } from "../lib/community";
 
 export default function SessionSummary() {
   const { user } = useAuth();
@@ -25,6 +27,7 @@ export default function SessionSummary() {
   const [expandedReview, setExpandedReview] = useState(null);
   const animRef = useRef(null);
   const [saved, setSaved] = useState(false);
+  const [reviewKey, setReviewKey] = useState(null);
   const { sendNotification } = useNotifications();
 
   useEffect(() => {
@@ -86,6 +89,7 @@ export default function SessionSummary() {
 
         await updateStreak(user.uid);
         setSaved(true);
+        setReviewKey(`session-${Date.now()}`);
 
         // Session memory: Pro → Groq summary; free → instant heuristic.
         // Buffered + flushed in one write; never blocks the summary screen.
@@ -259,6 +263,9 @@ export default function SessionSummary() {
           />
         </div>
       </div>
+      {saved && reviewKey && shouldAskReview(reviewKey) && (
+        <ReviewPrompt sessionId={reviewKey} context={`${data?.subject || "Practice"} · ${data?.score || 0}%`} />
+      )}
     </div>
   );
 }

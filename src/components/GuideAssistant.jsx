@@ -17,10 +17,11 @@ const QUICK_TASKS = [
   { label: "Ask the AI Tutor", to: "/ai-tutor" },
   { label: "Make a study plan", to: "/study-plan" },
   { label: "See my weak topics", to: "/mastery" },
+  { label: "Pay for a team", to: "/payment" },
   { label: "Upgrade to Pro", to: "/payment" },
 ];
 
-export default function GuideAssistant() {
+export default function GuideAssistant({ compact = false, onNavigate }) {
   const { user } = useAuth();
   const { toast } = useToast();
   const { isPro } = useSubscription();
@@ -80,8 +81,12 @@ export default function GuideAssistant() {
     }
   }
 
+  function go() {
+    if (onNavigate) onNavigate();
+  }
+
   return (
-    <div className="glass-card p-6 md:p-8" style={{ borderColor: "rgb(var(--primary-rgb) / 0.35)" }}>
+    <div className={compact ? "" : "glass-card p-6 md:p-8"} style={compact ? {} : { borderColor: "rgb(var(--primary-rgb) / 0.35)" }}>
       <div className="flex items-center gap-3 mb-2">
         <div className="w-11 h-11 rounded-2xl flex items-center justify-center text-white shrink-0" style={{ background: "var(--landing-gradient)" }}>
           <Compass size={22} />
@@ -113,7 +118,7 @@ export default function GuideAssistant() {
 
       <div className="flex flex-wrap gap-2 mt-4">
         {QUICK_TASKS.map((t) => (
-          <Link key={t.label} to={t.to} className="text-xs font-semibold px-3 py-2 rounded-full border border-border text-text-muted hover:text-primary hover:border-primary/50 transition-colors">
+          <Link key={t.label} to={t.to} onClick={go} className="text-xs font-semibold px-3 py-2 rounded-full border border-border text-text-muted hover:text-primary hover:border-primary/50 transition-colors">
             {t.label}
           </Link>
         ))}
@@ -123,7 +128,7 @@ export default function GuideAssistant() {
         <div className="mt-5 space-y-2 animate-fade">
           <div className="text-sm font-bold text-text">Here's where to go, in order:</div>
           {matched.map((r, i) => (
-            <Link key={r.path} to={r.path} className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-primary/50 transition-colors group">
+            <Link key={r.path} to={r.path} onClick={go} className="flex items-center gap-3 p-3 rounded-xl border border-border hover:border-primary/50 transition-colors group">
               <span className="w-7 h-7 rounded-full bg-primary text-white text-xs font-black flex items-center justify-center shrink-0">{i + 1}</span>
               <span className="font-bold text-text text-sm flex-1">{r.label}</span>
               <ArrowRight size={15} className="text-text-muted group-hover:text-primary transition-colors" />
@@ -134,7 +139,7 @@ export default function GuideAssistant() {
 
       {matched && matched.length === 0 && !aiAnswer && (
         <div className="mt-5 text-sm text-text-muted">
-          I couldn't match that to a page. Try different words — or tap <strong>Ask AI</strong> for a custom plan, or <Link to="/contact" className="text-primary font-semibold">talk to a human</Link>.
+          I couldn't match that to a page. Try different words — or tap <strong>Ask AI</strong> for a custom plan, or <Link to="/contact" onClick={go} className="text-primary font-semibold">talk to a human</Link>.
         </div>
       )}
 

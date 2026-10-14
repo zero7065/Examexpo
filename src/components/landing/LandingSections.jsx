@@ -1,6 +1,8 @@
 // Why Us, About, How-it-works, Testimonials sections.
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, Users, BookOpen, Zap, MessageSquare } from "lucide-react";
+import { listApprovedReviews } from "../../lib/community";
 
 const WHY_US = [
   { emoji: "🎯", title: "Built for Nigerian Exams", body: "Not generic edtech. Every question, explanation and plan targets JAMB, WAEC, NECO & NABTEB syllabi." },
@@ -125,10 +127,16 @@ const TESTIMONIALS = [
 ];
 
 function initials(name) {
-  return name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+  return String(name || "?").split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
 }
 
 export function LandingTestimonials() {
+  const [live, setLive] = useState([]);
+  useEffect(() => {
+    listApprovedReviews(6).then(setLive).catch(() => {});
+  }, []);
+  // Real approved reviews first, curated fallback fills the row
+  const shown = [...live.map((r) => ({ name: r.name, text: r.text, exam: r.context || "Verified student", rating: r.rating || 5 })), ...TESTIMONIALS].slice(0, 3);
   return (
     <section className="lp-section" style={{ background: "var(--bg)" }}>
       <div className="lp-container">
@@ -136,8 +144,8 @@ export function LandingTestimonials() {
           <h2 className="lp-h2">Loved by <span className="lp-gradient-text">Students</span></h2>
           <p className="lp-sub">Hear from students who aced their exams with ExamPadi AI.</p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="lp-test-grid">
-          {TESTIMONIALS.map((t, i) => (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="lp-test-grid">
+            {shown.map((t, i) => (
             <div key={t.name} className={`lp-bento-card lp-animate-in lp-delay-${i + 1}`}>
               <div style={{ display: "flex", gap: 2, marginBottom: 4 }}>
                 {Array.from({ length: 5 }, (_, s) => (

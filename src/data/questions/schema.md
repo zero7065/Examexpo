@@ -46,6 +46,7 @@ so migration loses nothing.
 | `highYield` | no | Set by `analyze-repetition.js` (default false) |
 | `repeatedFrom` | no | Sorted unique years, set by `analyze-repetition.js` |
 | `source` | no | `past` (real paper) or `seed` (curated) |
+| `kind` | no | `objective` (default) or `theory`. Theory questions carry `modelAnswer` instead of options/correctAnswer |
 | `createdAt` | no | ISO timestamp of ingestion |
 
 ## Files

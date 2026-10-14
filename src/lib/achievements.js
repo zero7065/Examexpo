@@ -2,6 +2,23 @@
 import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
+// Active-member badge: streak fire or recent activity dot.
+// Returns { label, color } or null.
+export function getActiveBadge(profile) {
+  if (!profile) return null;
+  const streak = profile.streak || profile.currentStreak || 0;
+  if (streak >= 7) return { label: "🔥 Active", color: "#FF9F43" };
+  const last = profile.lastActive?.toDate
+    ? profile.lastActive.toDate().getTime()
+    : profile.lastActive
+      ? new Date(profile.lastActive).getTime()
+      : 0;
+  if (last && Date.now() - last < 48 * 60 * 60 * 1000) {
+    return { label: "🟢 Active", color: "#00E5A0" };
+  }
+  return null;
+}
+
 // Unlocks `id` for uid if not already unlocked. Returns true when newly unlocked.
 export async function unlockAchievement(uid, id) {
   if (!uid || !db) return false;

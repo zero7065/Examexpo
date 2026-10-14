@@ -6,6 +6,8 @@ import { useAuth } from "../context/AuthContext";
 import { isAdmin as _isAdmin, logActivity } from "../lib/activityLog";
 import AdminMedia from "../components/AdminMedia";
 import AdminCompliance from "../components/AdminCompliance";
+import AdminTeams from "../components/AdminTeams";
+import AdminContent from "../components/AdminContent";
 const isAdmin = typeof _isAdmin === 'function' ? _isAdmin : () => false;
 import { Shield, Users, Activity, BookOpen, Crown, ArrowLeft, RefreshCw, UserCheck, UserX, ChevronDown, Search, CrownIcon, Zap, CreditCard, ClipboardList, Award, Clock, FileText, CheckCircle, XCircle } from "lucide-react";
 
@@ -319,6 +321,8 @@ export default function AdminPage() {
             { id: "users", label: `Users (${usersList.length})` },
             { id: "pro", label: `Pro Management (${stats.proUsers})` },
             { id: "media", label: "Landing Media" },
+            { id: "teams", label: "Teams" },
+            { id: "content", label: "Updates & Feedback" },
             { id: "compliance", label: "Compliance" },
             { id: "userDetail", label: "User Details" },
           ].map(tab => (
@@ -624,6 +628,16 @@ export default function AdminPage() {
         {/* Landing Media Tab */}
         {activeTab === "media" && (
           <AdminMedia />
+        )}
+
+        {/* Teams Tab */}
+        {activeTab === "teams" && (
+          <AdminTeams />
+        )}
+
+        {/* Content Tab */}
+        {activeTab === "content" && (
+          <AdminContent />
         )}
 
         {/* Compliance Tab */}

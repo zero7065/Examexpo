@@ -86,7 +86,46 @@ function calculateXP(session) {
 function saveSessionLocal(userId, sessionData) {
   const key = `exampadi_sessions_${userId}`;
   const existing = JSON.parse(localStorage.getItem(key) || "[]");
-  existing.push({ ...sessionData, completedAt: new Date().toISOString() });
+  existing.push({ ...sessionData, completedAt: new Date().toISOString(), _unsynced: true });
   localStorage.setItem(key, JSON.stringify(existing));
   return `local_${Date.now()}`;
+}
+
+// Push locally-saved (unsynced) sessions to Firestore when back online.
+// Called on app start + reconnect. Never throws.
+export async function flushLocalSessions() {
+  if (!db) return 0;
+  let flushed = 0;
+  try {
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith("exampadi_sessions_")) keys.push(k);
+    }
+    for (const key of keys) {
+      const userId = key.replace("exampadi_sessions_", "");
+      let list = [];
+      try { list = JSON.parse(localStorage.getItem(key) || "[]"); } catch { continue; }
+      const pending = list.filter((s) => s && s._unsynced);
+      if (pending.length === 0) continue;
+      const remaining = [];
+      for (const s of pending) {
+        try {
+          const { _unsynced, ...payload } = s;
+          await addDoc(collection(db, "userSessions", userId, "sessions"), {
+            ...payload,
+            completedAt: serverTimestamp(),
+          });
+          flushed++;
+        } catch {
+          remaining.push(s);
+        }
+      }
+      const synced = list.filter((s) => !s._unsynced);
+      localStorage.setItem(key, JSON.stringify([...synced, ...remaining]));
+    }
+  } catch (e) {
+    console.warn("flushLocalSessions failed:", e?.message);
+  }
+  return flushed;
 }

@@ -23,6 +23,7 @@ import {
   HelpCircle,
   Bot,
   MessageSquare,
+  MessagesSquare,
   Trophy,
   Target,
   Users,
@@ -51,33 +52,63 @@ const Navbar = () => {
   const location = useLocation();
   const [moreOpen, setMoreOpen] = useState(false);
 
-  const navItems = user ? [
-    { name: "Home", path: "/dashboard", icon: LayoutDashboard },
-    { name: "Practice", path: "/select", icon: Zap },
-    { name: "AI Tutor", path: "/ai-tutor", icon: Bot },
-    { name: "Question Bank", path: "/question-bank", icon: BookOpen },
-    { name: "Flashcards", path: "/flashcards", icon: Layers },
-    { name: "Study Plan", path: "/study-plan", icon: FileText },
-    { name: "Mastery", path: "/mastery", icon: Target },
-    { name: "Stats", path: "/stats", icon: BarChart3 },
-    { name: "Progress", path: "/progress", icon: LineChart },
-    { name: "History", path: "/history", icon: Clock },
-    { name: "Leaderboard", path: "/leaderboard", icon: Trophy },
-    { name: "Feed", path: "/feed", icon: Newspaper },
-    { name: "Reference", path: "/reference", icon: LibraryBig },
-    { name: "CBT Guide", path: "/guide/cbt", icon: MonitorPlay },
-    ...(isTeacher ? [{ name: "Teacher", path: "/teacher", icon: GraduationCap }] : []),
-    ...(isAdminUser ? [{ name: "Admin", path: "/admin", icon: ShieldCheck }] : []),
-    { name: "Notepad", path: "/notepad", icon: StickyNote, requiresPro: true },
-    { name: "Partners", path: "/study-partners", icon: Users, requiresPro: true },
-    { name: "Assignment", path: "/assignment", icon: ClipboardList, requiresPro: true },
-    { name: "Mock Exam", path: "/mock-exam", icon: FlaskConical, requiresPro: true },
-    { name: "Past Questions", path: "/past-questions", icon: History, requiresPro: true },
-    { name: "Help", path: "/help", icon: HelpCircle },
-    { name: "Contact", path: "/contact", icon: MessageSquare },
-    { name: "Profile", path: "/profile", icon: User },
-    { name: "Settings", path: "/settings", icon: Settings },
+  // Organized navigation: grouped sections so students AND teachers
+  // find things fast. Flat navItems derived below for active-state logic.
+  const navSections = user ? [
+    {
+      title: "Learn",
+      items: [
+        { name: "Home", path: "/dashboard", icon: LayoutDashboard },
+        { name: "Practice", path: "/select", icon: Zap },
+        { name: "Question Bank", path: "/question-bank", icon: BookOpen },
+        { name: "Flashcards", path: "/flashcards", icon: Layers },
+        { name: "Study Plan", path: "/study-plan", icon: FileText },
+        { name: "CBT Guide", path: "/guide/cbt", icon: MonitorPlay },
+        { name: "Reference", path: "/reference", icon: LibraryBig },
+      ],
+    },
+    {
+      title: "AI & Insights",
+      items: [
+        { name: "AI Tutor", path: "/ai-tutor", icon: Bot },
+        { name: "Mastery", path: "/mastery", icon: Target },
+        { name: "Stats", path: "/stats", icon: BarChart3 },
+        { name: "Progress", path: "/progress", icon: LineChart },
+        { name: "History", path: "/history", icon: Clock },
+      ],
+    },
+    {
+      title: "Community",
+      items: [
+        { name: "Leaderboard", path: "/leaderboard", icon: Trophy },
+        { name: "Feed", path: "/feed", icon: Newspaper },
+        { name: "Study Room", path: "/room", icon: MessagesSquare },
+        { name: "Partners", path: "/study-partners", icon: Users, requiresPro: true },
+        ...(isTeacher ? [{ name: "Teacher", path: "/teacher", icon: GraduationCap }] : []),
+        ...(isAdminUser ? [{ name: "Admin", path: "/admin", icon: ShieldCheck }] : []),
+      ],
+    },
+    {
+      title: "Pro Tools",
+      items: [
+        { name: "Notepad", path: "/notepad", icon: StickyNote, requiresPro: true },
+        { name: "Assignment", path: "/assignment", icon: ClipboardList, requiresPro: true },
+        { name: "Mock Exam", path: "/mock-exam", icon: FlaskConical, requiresPro: true },
+        { name: "Past Questions", path: "/past-questions", icon: History, requiresPro: true },
+      ],
+    },
+    {
+      title: "Account",
+      items: [
+        { name: "Help", path: "/help", icon: HelpCircle },
+        { name: "Contact", path: "/contact", icon: MessageSquare },
+        { name: "Profile", path: "/profile", icon: User },
+        { name: "Settings", path: "/settings", icon: Settings },
+      ],
+    },
   ] : [];
+
+  const navItems = navSections.flatMap((s) => s.items);
 
   const mobilePrimary = user ? [
     { name: "Home", path: "/dashboard", icon: LayoutDashboard },
@@ -127,30 +158,39 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="flex-1 min-h-0 space-y-2 overflow-y-auto pr-1 pb-4">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = location.pathname === item.path;
-            const isLocked = item.requiresPro && !proStatus;
+        <div className="flex-1 min-h-0 space-y-4 overflow-y-auto pr-1 pb-4">
+          {navSections.map((section) => (
+            <div key={section.title}>
+              <div className="px-4 mb-1 text-[10px] font-black uppercase tracking-widest text-text-muted/70">
+                {section.title}
+              </div>
+              <div className="space-y-2">
+                {section.items.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = location.pathname === item.path;
+                  const isLocked = item.requiresPro && !proStatus;
 
-            return (
-              <Link
-                key={item.path}
-                to={isLocked ? "/payment" : item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-bold ${
-                  isActive
-                  ? "bg-primary text-black shadow-lg shadow-primary/20"
-                  : isLocked
-                  ? "text-text-muted/50 cursor-not-allowed"
-                  : "text-text-muted hover:bg-subtle hover:text-text"
-                }`}
-              >
-                <Icon size={20} className={isLocked ? "opacity-50" : ""} />
-                <span className={isLocked ? "opacity-50" : ""}>{item.name}</span>
-                {isLocked && <span className="ml-auto text-xs">🔒</span>}
-              </Link>
-            );
-          })}
+                  return (
+                    <Link
+                      key={item.path}
+                      to={isLocked ? "/payment" : item.path}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-bold ${
+                        isActive
+                        ? "bg-primary text-black shadow-lg shadow-primary/20"
+                        : isLocked
+                        ? "text-text-muted/50 cursor-not-allowed"
+                        : "text-text-muted hover:bg-subtle hover:text-text"
+                      }`}
+                    >
+                      <Icon size={20} className={isLocked ? "opacity-50" : ""} />
+                      <span className={isLocked ? "opacity-50" : ""}>{item.name}</span>
+                      {isLocked && <span className="ml-auto text-xs">🔒</span>}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="mt-auto pt-4 border-t border-border space-y-4 shrink-0">

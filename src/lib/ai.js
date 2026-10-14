@@ -247,6 +247,8 @@ export function buildTutorSystemPrompt({ subject, userProfile, memory }) {
     "- Keep responses concise but complete — under 300 words unless solving a long problem",
     "- Always relate answers back to what appears in JAMB/WAEC exams",
     "- Explain WHY an answer is right, not just what it is",
+    "- Be direct and precise: lead with the answer, then the shortest correct reasoning",
+    "- Break details down stepwise: What → Why → How it appears in exams → What to revise next",
     '- End study-type answers with "What to revise next:" and one concrete topic',
   ];
 
@@ -308,7 +310,18 @@ Give a clear, friendly explanation in 3-4 sentences. Explain WHY ${correctAnswer
 }
 
 export async function chatWithTutor({ messages, subject, userProfile, memory = null, imageBase64 = null, images = null }) {
-  const systemPrompt = buildTutorSystemPrompt({ subject, userProfile, memory });
+  let systemPrompt = buildTutorSystemPrompt({ subject, userProfile, memory });
+
+  // RAG: ground the answer in real bank questions matching the latest message
+  try {
+    const lastUser = [...messages].reverse().find((m) => m.role !== "ai" && String(m.content || "").trim());
+    if (lastUser && !images && !imageBase64) {
+      const { ragContextFor } = await import("./rag");
+      systemPrompt += ragContextFor(lastUser.content, { subject });
+    }
+  } catch {
+    // RAG is best-effort — never break the chat
+  }
 
   const chatMessages = messages.map(m => ({
     role: m.role === "ai" ? "assistant" : "user",
@@ -460,9 +473,12 @@ export const GUIDE_ROUTES = [
 "ask for help", "someone help", "public", "discuss with others"] },
   { path: "/reference", label: "Reference Library", keywords: ["formula", "formulas", "reference",
 "periodic table", "constants", "grammar rules", "tenses", "cheat sheet", "tables"] },
+  { path: "/ielts", label: "IELTS Japa Pathway", keywords: ["ielts", "japa", "study abroad", "migrate",
+"migration", "visa", "canada", "uk", "australia", "band", "english test", "travel"] },
   { path: "/guide/cbt", label: "CBT Guide", keywords: ["cbt guide", "how to use computer", "computer exam",
 "operate computer", "mouse", "jamb cbt", "cbt training", "exam hall", "clueless", "never used computer"] },
   { path: "/study-partners", label: "Friend Chat", keywords: ["chat", "message friend", "talk to partner", "discuss problem"] },
+  { path: "/room", label: "Study Room", keywords: ["study room", "room code", "live room", "group practice", "classroom live", "study together live", "share room"] },
   { path: "/study-partners", label: "Study Partners", keywords: ["partner", "friend", "together", "share test", "invite"] },
   { path: "/assignment", label: "Assignments", keywords: ["assignment", "homework", "task"] },
   { path: "/notepad", label: "Notepad", keywords: ["note", "write", "formula"] },
@@ -492,7 +508,7 @@ export async function askGuide(issueText, userProfile) {
   const system = `You are the ExamPadi AI Guide. A new student describes an issue or goal in plain
 words. Respond with a short, organized plan: 1-3 numbered steps, each naming the EXACT app page to open from this
 list: Dashboard, Practice, Mock Exam, AI Tutor, Study Plan, Flashcards, Question Bank, Past Questions, Stats, Mastery,
-Progress, History, Leaderboard, Community Feed, Reference Library, CBT Guide, Friend Chat, Study Partners, Assignments, Notepad, Settings, Profile, Go Pro, Help, Contact. Rules:
+Progress, History, Leaderboard, Community Feed, Reference Library, IELTS Japa Pathway, CBT Guide, Friend Chat, Study Room, Study Partners, Assignments, Notepad, Settings, Profile, Go Pro, Help, Contact. Rules:
 max 120 words; plain simple language; if they need a human, point to Contact (WhatsApp). Never invent pages. Never say
 you are built by Google. You are ExamPadi AI powered by Groq.`;
   const user = `Student says: "${issueText}". Student exam: ${userProfile?.exam || "JAMB"}. Give the organized steps.`;

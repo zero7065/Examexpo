@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import { PLANS } from "../config/plans";
+import { PLANS, convertFromNGN } from "../config/plans";
 import { openPaystack } from "../paystack";
 import { useToast } from "../components/Toast";
 import { useAuth } from "../context/AuthContext";
@@ -51,36 +51,50 @@ export function usePaystack() {
     toast({ message: "Pro activated! Welcome to ExamPadi Pro", type: "success" });
   }
 
-  async function initializePayment({ plan, userEmail, userId, userName }) {
+  async function initializePayment({ plan, userEmail, userId, userName, customAmount, extraMetadata, onPaid, currency = "NGN" }) {
     const paystackKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
     if (!paystackKey) {
       toast({ message: "Paystack key missing. Add VITE_PAYSTACK_PUBLIC_KEY to .env.", type: "error" });
-      return;
+      return null;
     }
 
     const planData = PLANS[plan];
-    if (!planData || planData.price <= 0) {
+    if (!planData && !customAmount) {
       toast({ message: "Invalid plan selected.", type: "error" });
-      return;
+      return null;
+    }
+
+    // Custom amounts must meet or beat the plan price — everything lands in Paystack.
+    const amountNaira = customAmount && customAmount > 0 ? customAmount : planData.price;
+    if (planData && amountNaira < planData.price) {
+      toast({ message: `Minimum for this plan is ₦${planData.price.toLocaleString()}.`, type: "error" });
+      return null;
     }
 
     setLoading(true);
     setError(null);
 
     const reference = `EP-${userId}-${Date.now()}`;
-    const amount = planData.price * 100;
+    // Amounts are computed in NGN, then converted — any country can pay.
+    const amountMinor = Math.round(convertFromNGN(amountNaira, currency) * 100);
 
     try {
+      let paidRef = null;
       await openPaystack({
         key: paystackKey,
         email: userEmail,
-        amount: amount,
+        amount: amountMinor,
         ref: reference,
-        currency: "NGN",
-        metadata: { userId, plan, userName },
+        currency,
+        metadata: { userId, plan, userName, amountNaira, currency, ...(extraMetadata || {}) },
         onSuccess: async function(response) {
+          paidRef = response.reference;
           try {
-            await verifyPayment(response.reference, plan, userId);
+            if (onPaid) {
+              await onPaid(response);
+            } else {
+              await verifyPayment(response.reference, plan, userId);
+            }
           } catch (e) {
             console.error("Verify error:", e);
             toast({ message: "Payment received but activation failed. Contact support.", type: "error" });
@@ -92,12 +106,15 @@ export function usePaystack() {
           setLoading(false);
         },
       });
+      return paidRef;
     } catch (err) {
       setLoading(false);
       const msg = err.message || "Payment failed. Try again.";
       if (msg !== "Payment cancelled") {
+        setError(msg);
         toast({ message: msg, type: "error" });
       }
+      return null;
     }
   }
 

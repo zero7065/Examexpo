@@ -9,6 +9,8 @@ import { updateStreak } from "../lib/userProfile";
 import { logActivity } from "../lib/activityLog";
 import { ArrowLeft, RotateCcw, Share2, ChevronDown, ChevronUp, Target, Zap, Clock, CheckCircle2, XCircle } from "lucide-react";
 import { WhatsAppShareButton } from "../components/WhatsAppShare";
+import ReviewPrompt from "../components/ReviewPrompt";
+import { shouldAskReview } from "../lib/community";
 
 const SCORE_COLORS = { low: "#FF4D6A", mid: "#FF9F43", good: "#00E5A0", elite: "#D4A853" };
 
@@ -41,6 +43,7 @@ export default function MockSummary() {
   const [displayXP, setDisplayXP] = useState(0);
   const [reviewMode, setReviewMode] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [reviewKey, setReviewKey] = useState(null);
 
   useEffect(() => {
     if (!data) { navigate("/dashboard", { replace: true }); return; }
@@ -61,6 +64,7 @@ export default function MockSummary() {
         logActivity({ action: "mock_exam_complete", userId: user.uid, email: user.email, details: { examType: data.examType, overallScore: data.overallScore, jamb400Score: data.jamb400Score, correct: data.correct, total: data.totalQuestions } });
         await updateStreak(user.uid);
         setSaved(true);
+        setReviewKey(`mock-${Date.now()}`);
       } catch (e) { console.warn("Save mock error:", e); }
     }
     save();
@@ -203,6 +207,9 @@ export default function MockSummary() {
           />
         </div>
       </div>
+      {saved && reviewKey && shouldAskReview(reviewKey) && (
+        <ReviewPrompt sessionId={reviewKey} context={`${examType || "Mock"} · ${overallScore || 0}%`} />
+      )}
     </div>
   );
 }

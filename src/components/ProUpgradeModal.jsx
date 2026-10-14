@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { usePaystack } from "../hooks/usePaystack";
 import { PLANS } from "../config/plans";
 import { X, Check, Crown, ChevronRight, Loader2, Zap, ShieldCheck, ArrowLeft } from "lucide-react";
 
 export default function ProUpgradeModal({ open, onClose, reason, dismissible }) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [billing, setBilling] = useState("yearly");
-  const { initializePayment, loading } = usePaystack();
+  const { initializePayment, loading, error: payError } = usePaystack();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
 
   useEffect(() => {
@@ -36,7 +38,11 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
   const reasonPill = getReasonPill();
 
   async function handleUpgrade() {
-    if (!user) return;
+    if (!user) {
+      onClose && onClose();
+      navigate("/auth");
+      return;
+    }
     await initializePayment({
       plan,
       userEmail: user.email,
@@ -44,6 +50,10 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
       userName: user.displayName || "Student",
     });
   }
+
+  const monthlyEquiv = billing === "yearly"
+    ? `₦${Math.round(PLANS.pro_yearly.price / 12).toLocaleString()}/month`
+    : null;
 
   return (
     <div style={{
@@ -179,7 +189,7 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
               </span>
             </div>
             <div style={{ color: "#666", fontSize: 14, marginTop: 4 }}>
-              {billing === "yearly" ? "/year · that's just ₦1,000/month" : "/month"}
+              {billing === "yearly" ? `/year · that's just ${monthlyEquiv}` : "/month"}
             </div>
           </div>
 
@@ -258,6 +268,11 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
               </div>
             ))}
           </div>
+          {payError && (
+            <p style={{ color: "#FF6B6B", fontSize: 13, textAlign: "center", margin: "0 0 12px", fontWeight: 600 }}>
+              {payError}
+            </p>
+          )}
 
           {/* Dismiss */}
           <div style={{ textAlign: "center" }}>

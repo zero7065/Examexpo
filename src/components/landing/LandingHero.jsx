@@ -43,9 +43,18 @@ export default function LandingHero({ user }) {
               Ace Your Exams with <span className="lp-gradient-text">AI-Powered</span> Precision
             </h1>
             <p className="lp-animate-in lp-delay-2" style={{ fontSize: 18, lineHeight: 1.7, color: "var(--text-muted)", maxWidth: 520, margin: "0 0 36px" }}>
-              Practice real JAMB, WAEC &amp; NABTEB past questions, get AI-driven explanations,
+              10 years of JAMB, WAEC, NECO &amp; NABTEB questions — strategically analyzed for
+              the most repeated topics, objectives and theory. Practice, get AI-driven explanations,
               simulate CBT exams, and track your progress — all in one platform.
             </p>
+            <div style={{ margin: "-20px 0 28px" }}>
+              <Link to="/ielts" style={{ fontSize: 13, fontWeight: 700, color: "var(--primary)" }}>
+                ✈️ Going abroad? See the IELTS japa pathway →
+              </Link>
+            </div>
+            <div style={{ fontSize: 13, color: "var(--text-muted)", margin: "-8px 0 28px" }}>
+              🌱 In SS1–SS3? Starting early is how geniuses are bred — <Link to="/auth" style={{ fontWeight: 700, color: "var(--primary)" }}>begin now, free</Link>.
+            </div>
             <div className="lp-animate-in lp-delay-3" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
               <Link to={user ? "/dashboard" : "/auth"} className="lp-btn-primary">
                 {user ? "Go to Dashboard" : "Start Free"} <ArrowRight size={18} />

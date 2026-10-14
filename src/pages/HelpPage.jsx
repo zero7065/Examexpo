@@ -1,6 +1,9 @@
 // src/pages/HelpPage.jsx
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import GuideAssistant from "../components/GuideAssistant";
+import OnboardingTour from "../components/OnboardingTour";
+import { Sparkles } from "lucide-react";
 import { 
   BookOpen, 
   Target, 
@@ -19,6 +22,7 @@ import {
 
 const HelpPage = () => {
   const navigate = useNavigate();
+  const [showTour, setShowTour] = useState(false);
 
   const features = [
     {
@@ -97,7 +101,12 @@ const HelpPage = () => {
         <p className="text-text-muted text-lg max-w-2xl mx-auto">
           Your complete guide to mastering JAMB and WAEC exams
         </p>
+        <button onClick={() => setShowTour(true)} className="btn-secondary mt-4 px-6">
+          <Sparkles size={16} /> Replay the guided tour
+        </button>
       </header>
+
+      {showTour && <OnboardingTour onClose={() => setShowTour(false)} />}
 
       <GuideAssistant />
 

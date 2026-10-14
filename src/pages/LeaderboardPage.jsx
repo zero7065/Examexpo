@@ -4,6 +4,7 @@ import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useAuth } from "../context/AuthContext";
 import AvatarDisplay from "../components/Avatar/AvatarDisplay";
+import { getActiveBadge } from "../lib/achievements";
 import { Trophy, Crown, Medal, Award, Flame, TrendingUp, Zap } from "lucide-react";
 
 const podiumColors = [
@@ -45,7 +46,8 @@ export default function LeaderboardPage() {
           id: doc.id,
           name: doc.data().name || "Student",
           xp: doc.data().xp || 0,
-          streak: doc.data().streak || 0,
+          streak: doc.data().streak || doc.data().currentStreak || 0,
+          lastActive: doc.data().lastActive || null,
           subjects: doc.data().subjects || [],
           photoURL: doc.data().photoURL || null,
           avatarPreset: doc.data().avatarPreset || null,
@@ -134,7 +136,10 @@ export default function LeaderboardPage() {
                 <AvatarDisplay profile={entry} size={40} radius={20} />
               </div>
               <div className="min-w-0">
-                <p className="font-semibold text-text text-sm truncate">{entry.name}{entry.id === user?.uid ? " (You)" : ""}</p>
+                <p className="font-semibold text-text text-sm truncate">
+                  {entry.name}{entry.id === user?.uid ? " (You)" : ""}
+                  {(() => { const b = getActiveBadge(entry); return b ? <span style={{ fontSize: 11, fontWeight: 800, color: b.color, marginLeft: 6 }}>{b.label}</span> : null; })()}
+                </p>
                 <div className="flex gap-1.5 mt-0.5 flex-wrap">
                   {(entry.subjects || []).slice(0, 3).map(s => (
                     <span key={s} className="text-xs px-2 py-0.5 rounded-md" style={{ background: "var(--bg-3)", color: "var(--text-muted)" }}>{s}</span>

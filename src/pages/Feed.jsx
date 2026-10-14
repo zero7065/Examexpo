@@ -7,8 +7,12 @@ import {
   postHelpRequest, subscribeHelpRequests, replyToRequest,
   subscribeReplies, resolveRequest, getTopStudents,
 } from "../lib/discussions";
+import {
+  listApprovedReviews, toggleReviewLike, submitReview,
+} from "../lib/community";
 import AvatarDisplay from "../components/Avatar/AvatarDisplay";
-import { Trophy, MessageCircle, CheckCircle2, Send, ChevronDown, Sparkles } from "lucide-react";
+import { getActiveBadge } from "../lib/achievements";
+import { Trophy, MessageCircle, CheckCircle2, Send, ChevronDown, Sparkles, Star, ThumbsUp, PenLine } from "lucide-react";
 import { JAMB_SUBJECTS } from "../data/subjects";
 
 function ReplyThread({ request, user, userName }) {
@@ -99,15 +103,60 @@ export default function Feed() {
   const [topic, setTopic] = useState("");
   const [text, setText] = useState("");
   const [posting, setPosting] = useState(false);
+  const [reviews, setReviews] = useState([]);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewText, setReviewText] = useState("");
+  const [sendingReview, setSendingReview] = useState(false);
 
   useEffect(() => {
     getTopStudents(10).then(setTop).catch(() => {});
     const unsub = subscribeHelpRequests(setRequests, 30);
+    listApprovedReviews(12).then(setReviews).catch(() => {});
     return () => unsub && unsub();
   }, []);
 
-  async function post() {
-    if (posting) return;
+  async function sendReview() {
+    if (sendingReview) return;
+    setSendingReview(true);
+    try {
+      await submitReview({
+        uid: user.uid,
+        name: user.displayName || "Student",
+        rating: reviewRating,
+        text: reviewText.trim(),
+        context: "feed",
+      });
+      setReviewText("");
+      setShowReviewForm(false);
+      toast({ message: "Review sent for AI check — it goes live once approved ⭐", type: "success" });
+    } catch (e) {
+      toast({ message: e.message || "Could not submit", type: "error" });
+    } finally {
+      setSendingReview(false);
+    }
+  }
+
+  async function likeReview(id) {
+    try {
+      const liked = await toggleReviewLike(id, user.uid);
+      setReviews((prev) =>
+        prev.map((r) =>
+          r.id === id
+            ? {
+                ...r,
+                likes: liked ? [...(r.likes || []), user.uid] : (r.likes || []).filter((x) => x !== user.uid),
+                likeCount: Math.max(0, (r.likeCount || 0) + (liked ? 1 : -1)),
+              }
+            : r
+        )
+      );
+    } catch {
+      toast({ message: "Could not like right now", type: "error" });
+    }
+  }
+
+  async function post() {    if (posting) return;
     setPosting(true);
     try {
       await postHelpRequest({
@@ -144,7 +193,10 @@ export default function Feed() {
                 <span style={{ fontWeight: 900, color: "var(--text-muted)", width: 26 }}>#{i + 1}</span>
                 <AvatarDisplay profile={s} user={{ displayName: s.name, photoURL: s.photoURL }} size={40} radius={20} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontWeight: 700, fontSize: 14, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{s.name || "Student"}</div>
+                  <div style={{ fontWeight: 700, fontSize: 14, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {s.name || "Student"}
+                    {(() => { const b = getActiveBadge(s); return b ? <span style={{ fontSize: 11, fontWeight: 800, color: b.color, marginLeft: 6 }}>{b.label}</span> : null; })()}
+                  </div>
                   <div style={{ fontSize: 12, color: "var(--text-muted)" }}>⚡ {(s.xp || 0).toLocaleString()} XP</div>
                 </div>
                 <Link to={`/u/${s.uid}`} className="btn-secondary" style={{ padding: "8px 14px", fontSize: 12 }}>View</Link>
@@ -169,6 +221,67 @@ export default function Feed() {
         <button onClick={post} disabled={posting} className="btn-primary disabled:opacity-60">
           {posting ? "Posting…" : "Post help request"}
         </button>
+      </section>
+
+      {/* Student reviews */}
+      <section>
+        <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <h2 className="font-black text-text flex items-center gap-2"><Star size={18} className="text-accent" /> Student reviews</h2>
+          <button onClick={() => setShowReviewForm((s) => !s)} className="btn-secondary px-4 text-sm">
+            <PenLine size={14} /> Write a review
+          </button>
+        </div>
+        {showReviewForm && (
+          <div className="glass-card p-4 mb-3 space-y-3">
+            <div className="flex gap-1 justify-center">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <button key={n} onClick={() => setReviewRating(n)} style={{ background: "none", border: "none", cursor: "pointer", padding: 2 }}>
+                  <Star size={26} fill={n <= reviewRating ? "var(--accent)" : "none"} color={n <= reviewRating ? "var(--accent)" : "var(--border)"} />
+                </button>
+              ))}
+            </div>
+            <textarea value={reviewText} onChange={(e) => setReviewText(e.target.value)} rows={3} maxLength={500}
+              placeholder="What do you think of ExamPadi? (shows with your name after AI check)" className="input-field" style={{ resize: "vertical" }} />
+            <button onClick={sendReview} disabled={sendingReview} className="btn-primary w-full disabled:opacity-60">
+              {sendingReview ? "Sending…" : "Submit review"}
+            </button>
+          </div>
+        )}
+        {reviews.length === 0 ? (
+          <p className="text-sm text-text-muted">No reviews yet — yours could be the first! 👆</p>
+        ) : (
+          <div className="grid-auto">
+            {reviews.map((r) => {
+              const liked = (r.likes || []).includes(user?.uid);
+              return (
+                <div key={r.id} className="glass-card p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <AvatarDisplay profile={{ name: r.name }} size={32} radius={16} />
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-text text-sm truncate">{r.name}</div>
+                      <div className="flex gap-0.5">
+                        {[1, 2, 3, 4, 5].map((n) => (
+                          <Star key={n} size={11} fill={n <= (r.rating || 5) ? "var(--accent)" : "none"} color={n <= (r.rating || 5) ? "var(--accent)" : "var(--border)"} />
+                        ))}
+                      </div>
+                    </div>
+                    <button onClick={() => likeReview(r.id)} title={liked ? "Unlike" : "Like this review"}
+                      style={{
+                        display: "inline-flex", alignItems: "center", gap: 4, cursor: "pointer",
+                        background: liked ? "rgb(var(--primary-rgb) / 0.14)" : "var(--bg-3)",
+                        color: liked ? "var(--primary)" : "var(--text-muted)",
+                        border: liked ? "1px solid var(--primary)" : "1px solid var(--border)",
+                        borderRadius: 20, padding: "6px 12px", fontSize: 12, fontWeight: 700, fontFamily: "inherit",
+                      }}>
+                      <ThumbsUp size={13} /> {r.likeCount || 0}
+                    </button>
+                  </div>
+                  <p className="text-sm text-text" style={{ lineHeight: 1.6 }}>{r.text}</p>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </section>
 
       {/* Help board */}

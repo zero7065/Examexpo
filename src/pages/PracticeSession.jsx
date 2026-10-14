@@ -6,6 +6,7 @@ import { useSubscription } from "../hooks/useSubscription";
 import { checkQuestionLimit, trackQuestion, checkAILimit, trackAIMessage } from "../lib/usageTracker";
 import { explainQuestion, getAIErrorIfRecent } from "../lib/ai";
 import { bufferInteraction, flushMemory } from "../lib/aiMemory";
+import { motivatorFor } from "../data/wellness";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import { Whiteboard } from "../components/Whiteboard";
 import { useHint } from "../hooks/useHints";
@@ -144,7 +145,18 @@ export default function PracticeSession() {
 
   function handleSelect(optionKey) {
     if (revealed[current?.id] || sessionComplete) return;
-    setAnswers(prev => ({ ...prev, [current.id]: optionKey }));
+    if (current?.kind === "theory") return; // theory uses its own writer UI
+    setAnswers(prev => {
+      const next = { ...prev, [current.id]: optionKey };
+      // Mid-activity motivation: every 5th answered question
+      const answered = Object.keys(next).length;
+      if (answered > 0 && answered % 5 === 0 && answered < questions.length) {
+        setTimeout(() => {
+          toast({ message: motivatorFor(Date.now(), answered), type: "info" });
+        }, 600);
+      }
+      return next;
+    });
     setRevealed(prev => ({ ...prev, [current.id]: true }));
 
     if (user && !isPro) {
@@ -211,6 +223,10 @@ export default function PracticeSession() {
 
   function handleUseHint() {
     if (!current || revealed[current.id]) return;
+    if (current.kind === "theory") {
+      toast({ message: "No hints on theory — compare with the model answer", type: "info" });
+      return;
+    }
     if (!hintState.canUse) {
       toast({ message: "No hints remaining this session", type: "warning" });
       return;
@@ -241,13 +257,16 @@ export default function PracticeSession() {
   function finishSession() {
     if (timerRef.current) clearInterval(timerRef.current);
 
-    const correct = questions.filter(q => answers[q.id] === q.answer).length;
-    const wrong = questions.filter(q => answers[q.id] && answers[q.id] !== q.answer).length;
-    const unanswered = questions.length - Object.keys(answers).length;
-    const pct = Math.round((correct / questions.length) * 100);
-    const xp = correct * 5 + Object.keys(answers).length * 2 + (pct >= 80 ? 10 : 0);
+    // Theory questions are self-reviewed, never scored
+    const scored = questions.filter(q => q.kind !== "theory");
+    const theoryReviewed = questions.filter(q => q.kind === "theory" && answers[q.id]).length;
+    const correct = scored.filter(q => answers[q.id] === q.answer).length;
+    const wrong = scored.filter(q => answers[q.id] && answers[q.id] !== q.answer).length;
+    const unanswered = scored.length - Object.keys(answers).filter(id => scored.some(q => q.id === id)).length;
+    const pct = scored.length > 0 ? Math.round((correct / scored.length) * 100) : 100;
+    const xp = correct * 5 + Object.keys(answers).length * 2 + theoryReviewed * 2 + (pct >= 80 ? 10 : 0);
 
-    const weakTopics = questions
+    const weakTopics = scored
       .filter(q => answers[q.id] && answers[q.id] !== q.answer)
       .map(q => q.topic);
 
@@ -374,6 +393,33 @@ export default function PracticeSession() {
               {/* Question text */}
               <h2 style={{ fontSize: 18, fontWeight: 700, lineHeight: 1.6, marginBottom: 24, margin: "0 0 24px", color: "#fff" }}>{current.question}</h2>
 
+              {current.kind === "theory" ? (
+                <div style={{ marginBottom: 24 }}>
+                  <div style={{ fontSize: 11, fontWeight: 800, color: "#D4A853", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>
+                    📝 Theory — write your answer, then compare
+                  </div>
+                  <textarea
+                    value={typeof answers[current.id] === "string" && answers[current.id] !== "REVIEWED" ? answers[current.id] : ""}
+                    onChange={(e) => setAnswers(prev => ({ ...prev, [current.id]: e.target.value.slice(0, 2000) }))}
+                    disabled={!!revealed[current.id]}
+                    rows={5}
+                    placeholder="Write your answer here…"
+                    style={{ width: "100%", padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontSize: 14, outline: "none", resize: "vertical", fontFamily: "inherit", boxSizing: "border-box" }}
+                  />
+                  {!revealed[current.id] ? (
+                    <button onClick={() => { setAnswers(prev => ({ ...prev, [current.id]: prev[current.id] || "REVIEWED" })); setRevealed(prev => ({ ...prev, [current.id]: true })); }}
+                      style={{ marginTop: 12, padding: "10px 20px", borderRadius: 10, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>
+                      Show model answer
+                    </button>
+                  ) : (
+                    <div style={{ marginTop: 12, padding: 14, borderRadius: 10, background: "rgba(212,168,83,0.08)", borderLeft: "3px solid #D4A853" }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: "#D4A853", marginBottom: 6 }}>MODEL ANSWER — compare honestly</div>
+                      <p style={{ fontSize: 13, color: "#ccc", lineHeight: 1.7, margin: 0, whiteSpace: "pre-wrap" }}>{current.modelAnswer || current.explanation}</p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+              <>
               {/* Options */}
               <div style={{ display: "grid", gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr", gap: 10, marginBottom: 24 }}>
                 {Object.entries(current.options).map(([key, val]) => (
@@ -385,6 +431,8 @@ export default function PracticeSession() {
                   </button>
                 ))}
               </div>
+              </>
+              )}
 
               {/* After reveal */}
               {revealed[current.id] && (

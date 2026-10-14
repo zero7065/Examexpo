@@ -13,6 +13,7 @@ import { useBackButton } from "./hooks/useBackButton";
 import { seedAdminAccount, isFirebaseConfigured } from "./firebaseConfig";
 import { clearOldServiceWorker } from "./lib/clearCache";
 import NetworkDiagnostic from "./components/NetworkDiagnostic";
+import GuideFab from "./components/GuideFab";
 
 // Critical path — direct imports (auth shell only; landing is lazy for a lean entry chunk)
 import AuthPage from "./pages/AuthPage";
@@ -62,10 +63,13 @@ const ParentReports = lazy(() => import("./pages/schools/ParentReports"));
 const JoinClass = lazy(() => import("./pages/schools/JoinClass"));
 const DataExport = lazy(() => import("./pages/compliance/DataExport"));
 const FriendChat = lazy(() => import("./pages/FriendChat"));
+const TeamPage = lazy(() => import("./pages/TeamPage"));
+const StudyRoom = lazy(() => import("./pages/StudyRoom"));
 const Feed = lazy(() => import("./pages/Feed"));
 const PublicProfile = lazy(() => import("./pages/PublicProfile"));
 const ReferencePage = lazy(() => import("./pages/ReferencePage"));
 const CBTGuidePage = lazy(() => import("./pages/CBTGuidePage"));
+const IELTSPage = lazy(() => import("./pages/IELTSPage"));
 
 function PageLoader() {
   return (
@@ -145,6 +149,7 @@ function AuthAwareRoutes() {
       )}
       <Navbar />
       <ScrollToTop />
+      <GuideFab />
       <main className={`flex-1 ${user ? "md:ml-64 pb-20 md:pb-0" : ""} animate-fade`}>
         <InstallPrompt />
         <NetworkDiagnostic />
@@ -186,10 +191,14 @@ function AuthAwareRoutes() {
           <Route path="/flashcards" element={<ProtectedRoute><FlashcardsPage /></ProtectedRoute>} />
           <Route path="/study-partners" element={<ProtectedRoute><StudyPartnersPage /></ProtectedRoute>} />
           <Route path="/friends/chat/:pairId" element={<ProtectedRoute><FriendChat /></ProtectedRoute>} />
+          <Route path="/team/:teamId" element={<ProtectedRoute><TeamPage /></ProtectedRoute>} />
+          <Route path="/room" element={<ProtectedRoute><StudyRoom /></ProtectedRoute>} />
+          <Route path="/room/:code" element={<ProtectedRoute><StudyRoom /></ProtectedRoute>} />
           <Route path="/feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
           <Route path="/u/:uid" element={<ProtectedRoute><PublicProfile /></ProtectedRoute>} />
           <Route path="/reference" element={<ProtectedRoute><ReferencePage /></ProtectedRoute>} />
           <Route path="/guide/cbt" element={<ProtectedRoute><CBTGuidePage /></ProtectedRoute>} />
+          <Route path="/ielts" element={<IELTSPage />} />
           <Route path="/shared-test" element={<ProtectedRoute><SharedTestPage /></ProtectedRoute>} />
           <Route path="/assignment" element={<ProtectedRoute><AssignmentPage /></ProtectedRoute>} />
           <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />

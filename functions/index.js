@@ -60,7 +60,7 @@ exports.paystackWebhook = onRequest(
       }
 
       const now = admin.firestore.Timestamp.now();
-      const isYearly = plan === "pro_yearly" || plan === "proYearly";
+      const isYearly = String(plan).includes("yearly") || plan === "proYearly";
       const endDate = isYearly
         ? new Date(now.toDate().setFullYear(now.toDate().getFullYear() + 1))
         : new Date(now.toDate().setMonth(now.toDate().getMonth() + 1));
@@ -76,7 +76,42 @@ exports.paystackWebhook = onRequest(
             status: "verified",
             verifiedAt: now,
             paystackReference: reference,
+            teamId: metadata?.teamId || null,
           });
+
+          // Team purchase? Activate the team (payer gets first seat).
+          if (metadata?.teamId) {
+            const teamRef = db.collection("teams").doc(metadata.teamId);
+            const teamSnap = await tx.get(teamRef);
+            if (teamSnap.exists && teamSnap.data().status !== "active") {
+              const team = teamSnap.data();
+              const teamYearly = String(team.plan).includes("yearly");
+              const expiry = teamYearly
+                ? new Date(now.toDate().setFullYear(now.toDate().getFullYear() + 1))
+                : new Date(now.toDate().setMonth(now.toDate().getMonth() + 1));
+              tx.update(teamRef, {
+                status: "active",
+                reference,
+                amountPaid: amount / 100,
+                activatedAt: now,
+                members: admin.firestore.FieldValue.arrayUnion(userId),
+                seatsUsed: admin.firestore.FieldValue.increment(1),
+              });
+              tx.update(db.collection("users").doc(userId), {
+                subscription: {
+                  plan, status: "active", reference,
+                  startDate: now,
+                  endDate: admin.firestore.Timestamp.fromDate(expiry),
+                  autoRenew: false, viaTeam: metadata.teamId,
+                  webhookVerified: true, verifiedAt: now,
+                },
+                teamIds: admin.firestore.FieldValue.arrayUnion(metadata.teamId),
+              });
+            }
+            logger.info(`Team payment verified for team ${metadata.teamId}`, { reference, plan });
+            res.status(200).json({ status: "verified-team" });
+            return;
+          }
 
           const userRef = db.collection("users").doc(userId);
           tx.update(userRef, {

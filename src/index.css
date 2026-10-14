@@ -79,7 +79,11 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(520px 420px at 88% -6%, rgb(var(--primary-rgb) / 0.10), transparent 70%),
+    radial-gradient(460px 420px at 4% 106%, rgb(var(--accent-rgb) / 0.10), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
   color: var(--text);
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -193,6 +193,25 @@ export default function ProfilePage() {
           )}
           <Link to="/settings" className="px-3 py-1.5 rounded-lg border border-dashed border-border text-text-muted text-sm font-semibold">+ Edit</Link>
         </div>
+        {/* Unique sharable ID — friends add you with this */}
+        {user?.uid && (
+          <button
+            onClick={() => {
+              try {
+                navigator.clipboard.writeText(user.uid);
+                toast({ message: "Your ID copied — share it with friends to study together", type: "success" });
+              } catch {
+                toast({ message: user.uid, type: "info" });
+              }
+            }}
+            title="Tap to copy — friends add you with this ID"
+            style={{ background: "var(--bg-3)", border: "1px solid var(--border)", borderRadius: 10, padding: "8px 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: 8, fontFamily: "inherit", width: "100%" }}
+          >
+            <span style={{ fontSize: 11, fontWeight: 800, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>My ID</span>
+            <span className="wrap-anywhere" style={{ fontSize: 12, fontFamily: "monospace", color: "var(--primary)", fontWeight: 700 }}>{user.uid}</span>
+            <span style={{ marginLeft: "auto", fontSize: 11, color: "var(--text-muted)" }}>Tap to copy ⧉</span>
+          </button>
+        )}
         <div>
           {editingSchool ? (
             <div className="flex items-center gap-2">

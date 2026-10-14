@@ -9,6 +9,7 @@ import AvatarDisplay from "../components/Avatar/AvatarDisplay";
 import { isAdmin } from "../lib/activityLog";
 import { ArrowLeft, UserPlus, MessageCircle, Lock, Flame, Star, Trophy } from "lucide-react";
 import { ACHIEVEMENTS } from "../config/achievements";
+import { getActiveBadge } from "../lib/achievements";
 
 export default function PublicProfile() {
   const { uid } = useParams();
@@ -76,7 +77,9 @@ export default function PublicProfile() {
       <div className="glass-card p-6 md:p-8 flex flex-col sm:flex-row items-center gap-5">
         <AvatarDisplay profile={profile} user={{ displayName: profile.name, photoURL: profile.photoURL }} size={88} radius={24} />
         <div className="flex-1 text-center sm:text-left">
-          <h1 className="text-2xl font-black text-text">{profile.name || "Student"}</h1>
+          <h1 className="text-2xl font-black text-text">{profile.name || "Student"}
+            {(() => { const b = getActiveBadge(profile); return b ? <span style={{ fontSize: 13, fontWeight: 800, color: b.color, marginLeft: 8 }}>{b.label}</span> : null; })()}
+          </h1>
           <p className="text-sm text-text-muted">
             {(profile.exam || "JAMB")} candidate
             {profile.school ? ` · ${profile.school}` : ""}

@@ -21,6 +21,7 @@
   "createdAt": "2026-10-11T08:13:53.581Z",
   "highYield": false,
   "repeatedFrom": [
+   2023,
    2026
   ]
  },
@@ -567,6 +568,7 @@
    2020,
    2021,
    2022,
+   2024,
    2025
   ]
  },
@@ -598,6 +600,7 @@
    2020,
    2021,
    2022,
+   2024,
    2025
   ]
  },
@@ -658,6 +661,7 @@
    2020,
    2021,
    2022,
+   2024,
    2025
   ]
  },
@@ -717,6 +721,7 @@
    2020,
    2021,
    2022,
+   2024,
    2025
   ]
  },
@@ -1832,6 +1837,7 @@
   "repeatedFrom": [
    2019,
    2021,
+   2022,
    2025
   ]
  },
@@ -1861,6 +1867,7 @@
    2020,
    2021,
    2022,
+   2024,
    2025
   ]
  },
@@ -2134,6 +2141,7 @@
    2020,
    2021,
    2022,
+   2024,
    2025
   ]
  },
@@ -2269,6 +2277,7 @@
    2020,
    2021,
    2022,
+   2024,
    2025
   ]
  },
@@ -2379,6 +2388,7 @@
    2020,
    2021,
    2022,
+   2024,
    2025
   ]
  },
@@ -2463,6 +2473,7 @@
   "repeatedFrom": [
    2019,
    2021,
+   2022,
    2025
   ]
  },
@@ -2625,6 +2636,7 @@
   "repeatedFrom": [
    2019,
    2021,
+   2022,
    2025
   ]
  },
@@ -3386,6 +3398,120 @@
   "highYield": false,
   "repeatedFrom": [
    2025
+  ]
+ },
+ {
+  "id": "waec-2023-biol-005",
+  "subject": "Biology",
+  "topic": "Cell Biology",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "kind": "theory",
+  "question": "Describe the structure of the mammalian skin and explain how it regulates body temperature.",
+  "modelAnswer": "The skin has the epidermis (protection), dermis with sweat glands, hair follicles and blood vessels, plus fat beneath. In heat: sweat evaporates to cool the body and vessels dilate (flushing). In cold: no sweat, vessels constrict, hairs stand (goose pimples) trapping warm air.",
+  "explanation": "Focus on structure → function links for each layer.",
+  "source": "seed",
+  "createdAt": "2026-10-14T00:48:34.964Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023
+  ]
+ },
+ {
+  "id": "waec-2022-chem-004",
+  "subject": "Chemistry",
+  "topic": "Acids and Bases",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2022,
+  "difficulty": "medium",
+  "kind": "theory",
+  "question": "Describe how you would prepare a pure dry sample of zinc sulphate crystals starting from zinc oxide.",
+  "modelAnswer": "Add excess zinc oxide to warm dilute sulphuric acid and stir. Filter off unreacted oxide. Heat the filtrate to saturation, cool to crystallize, filter, wash with distilled water and dry between filter papers. Reaction: ZnO + H2SO4 → ZnSO4 + H2O.",
+  "explanation": "Standard soluble-salt preparation: excess base + acid, filter, crystallize.",
+  "source": "seed",
+  "createdAt": "2026-10-14T00:48:34.968Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2019,
+   2021,
+   2022,
+   2025
+  ]
+ },
+ {
+  "id": "waec-2024-phys-004",
+  "subject": "Physics",
+  "topic": "Mechanics",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "hard",
+  "kind": "theory",
+  "question": "State Newton's laws of motion and give one everyday example of each.",
+  "modelAnswer": "1st (inertia): objects keep their state unless forced — passengers lurch forward when a bus brakes. 2nd: F = ma — harder to push a loaded truck. 3rd: action–reaction — a rocket pushes gas down, gas pushes rocket up.",
+  "explanation": "Name each law, state it, and attach a concrete example.",
+  "source": "seed",
+  "createdAt": "2026-10-14T00:48:34.968Z",
+  "highYield": true,
+  "repeatedFrom": [
+   2018,
+   2020,
+   2021,
+   2022,
+   2024,
+   2025
+  ]
+ },
+ {
+  "id": "waec-2023-uoel-002",
+  "subject": "Use of English Language",
+  "topic": "Comprehension",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2023,
+  "difficulty": "medium",
+  "kind": "theory",
+  "question": "Write a short paragraph on 'The value of hard work', using at least one idiom and one simile.",
+  "modelAnswer": "Model: 'Hard work never goes to waste. Like a farmer who tills patiently before the rains, the diligent student sows effort daily and reaps success in due season — truly,success loves preparation.' Contains simile (like a farmer…), idiom-adjacent phrasing, unity of theme.",
+  "explanation": "Examiners reward clear theme, one idiom, one simile, correct tenses.",
+  "source": "seed",
+  "createdAt": "2026-10-14T00:48:34.968Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2023,
+   2026
+  ]
+ },
+ {
+  "id": "waec-2024-lite-001",
+  "subject": "Literature-in-English",
+  "topic": "Prose",
+  "exam": [
+   "WAEC"
+  ],
+  "year": 2024,
+  "difficulty": "hard",
+  "kind": "theory",
+  "question": "Discuss Okonkwo's fear of weakness as the engine of tragedy in Things Fall Apart.",
+  "modelAnswer": "Okonkwo's dread of resembling Unoka drives every excess: beating Ojiugo during peace week, killing Ikemefuna to seem manly, and suicide — the ultimate abomination. Achebe makes a virtue (industry) curdle into a flaw, so the hero falls by his own logic.",
+  "explanation": "Thesis + three textual moments + closing insight on tragic structure.",
+  "source": "seed",
+  "createdAt": "2026-10-14T00:48:34.968Z",
+  "highYield": false,
+  "repeatedFrom": [
+   2024
   ]
  }
 ]

@@ -1,10 +1,13 @@
 // src/pages/PastQuestionsPage.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getQuestionsFromBank } from "../data/questions/compat";
 import { predictLikelyQuestions as predictLikelyAI, getAIErrorIfRecent } from "../lib/ai";
 import { likelyTopics } from "../lib/likelyQuestions";
 import RepetitionBadge from "../components/QuestionBank/RepetitionBadge";
 import { useToast } from "../components/Toast";
+import { useAuth } from "../context/AuthContext";
+import { getUserProfile } from "../lib/userProfile";
+import { getEnabledExams } from "../lib/exams";
 import { JAMB_SUBJECTS, WAEC_SUBJECTS } from "../data/subjects";
 import { Sparkles, BookOpen, HelpCircle, Loader2 } from "lucide-react";
 import ProGate from "../components/ProGate";
@@ -22,7 +25,20 @@ export default function PastQuestionsPage() {
   const [loading, setLoading] = useState(false);
   const [predLoading, setPredLoading] = useState(false);
   const [revealed, setRevealed] = useState({});
+  const [enabledExams, setEnabledExams] = useState(["JAMB", "WAEC"]);
   const { isPro: proStatus } = useSubscription();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user) return;
+    getUserProfile(user.uid).then((p) => {
+      const list = getEnabledExams(p).filter((e) => ["JAMB", "WAEC", "NECO", "NABTEB"].includes(e));
+      if (list.length > 0) {
+        setEnabledExams(list);
+        setExam((prev) => (list.includes(prev) ? prev : list[0]));
+      }
+    }).catch(() => {});
+  }, [user]);
   
   if (!proStatus) return (
     <div className="max-w-4xl mx-auto p-6 md:p-10">
@@ -106,7 +122,7 @@ export default function PastQuestionsPage() {
         <div>
           <label className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-2 block">Exam Type</label>
           <div className="flex bg-bg-3 p-1 rounded-xl border border-border">
-            {["JAMB", "WAEC"].map(e => (
+            {enabledExams.map(e => (
               <button key={e} onClick={() => { setExam(e); setSubject(""); }}
                 className={`flex-1 py-2 rounded-lg font-bold text-sm transition-all ${exam === e ? "bg-primary text-black shadow-lg" : "text-text-muted"}`}
               >

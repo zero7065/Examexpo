@@ -55,3 +55,52 @@ export const PLANS = {
     ]
   }
 };
+
+// ─── Teams: one payer, N seats, single charge ───
+// Team per-seat rates are cheaper than individual; the monthly-equivalent
+// total is capped at ₦25,000 (classroom ceiling — extra seats are free).
+export const TEAM_MIN_SEATS = 2;
+export const TEAM_MAX_SEATS = 100;
+export const TEAM_MONTHLY_CAP_NGN = 25000;
+
+export const TEAM_PLANS = {
+  team_monthly: { name: "Team Monthly", pricePerSeat: 1000, interval: "monthly" },
+  team_yearly: { name: "Team Yearly", pricePerSeat: 8000, interval: "yearly" },
+};
+
+export function teamPrice(plan, seats) {
+  const t = TEAM_PLANS[plan] || TEAM_PLANS.team_monthly;
+  const n = Math.min(TEAM_MAX_SEATS, Math.max(TEAM_MIN_SEATS, Math.floor(seats || TEAM_MIN_SEATS)));
+  const monthlyEquiv = plan === "team_yearly"
+    ? (t.pricePerSeat * n) / 12
+    : t.pricePerSeat * n;
+  // Classroom ceiling applies to the monthly-equivalent charge
+  if (monthlyEquiv <= TEAM_MONTHLY_CAP_NGN) return t.pricePerSeat * n;
+  return plan === "team_yearly"
+    ? Math.round((TEAM_MONTHLY_CAP_NGN * 12) / 100) * 100
+    : TEAM_MONTHLY_CAP_NGN;
+}
+
+// ─── Multi-currency: Paystack-supported currencies ───
+// NGN amounts are the source of truth; other currencies convert at fixed,
+// slightly-conservative rates so payouts always cover the NGN price.
+export const CURRENCIES = {
+  NGN: { symbol: "₦", rate: 1, label: "Naira", minCustom: 3000 },
+  USD: { symbol: "$", rate: 0.00065, label: "US Dollar", minCustom: 2 },
+  GHS: { symbol: "₵", label: "Ghana Cedi", rate: 0.008, minCustom: 25 },
+  KES: { symbol: "KSh ", label: "Kenyan Shilling", rate: 0.084, minCustom: 260 },
+  ZAR: { symbol: "R", label: "Rand", rate: 0.012, minCustom: 36 },
+};
+
+export function convertFromNGN(ngn, currency) {
+  const c = CURRENCIES[currency] || CURRENCIES.NGN;
+  const units = ngn * c.rate;
+  // Round up to whole minor-friendly units (2dp for USD, 0dp others)
+  return currency === "USD" ? Math.ceil(units * 100) / 100 : Math.ceil(units);
+}
+
+export function formatMoney(ngn, currency = "NGN") {
+  const c = CURRENCIES[currency] || CURRENCIES.NGN;
+  const v = convertFromNGN(ngn, currency);
+  return `${c.symbol}${Number(v).toLocaleString()}`;
+}

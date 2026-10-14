@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getUserProfile } from "../lib/userProfile";
 import { getFilteredQuestions, getTopics, getAllSubjects, getTotalCount } from "../data/questions/compat";
+import { getEnabledExams } from "../lib/exams";
 import RepetitionBadge from "../components/QuestionBank/RepetitionBadge";
 import { ChevronRight, ChevronLeft, Search, BookOpen } from "lucide-react";
 
@@ -31,19 +32,30 @@ export default function QuestionBank() {
   }, [user]);
 
   const userSubjects = profile?.subjects || [];
+  const enabledExams = getEnabledExams(profile).filter((e) => ["JAMB", "WAEC", "NECO", "NABTEB"].includes(e));
+  const examOptions = ["ALL", ...enabledExams];
   const allSubjects = getAllSubjects();
   const subjectOptions = ["All Subjects", ...allSubjects.filter(s => userSubjects.includes(s) || !userSubjects.length)];
 
   const topics = filters.subject && filters.subject !== "All Subjects" ? getTopics(filters.subject) : [];
 
   const filtered = getFilteredQuestions(filters);
-  const totalPages = Math.ceil(filtered.length / perPage);
-  const paged = filtered.slice((page - 1) * perPage, page * perPage);
+  const totalPages = Math.ceil(filtered.length / perPage);  const paged = filtered.slice((page - 1) * perPage, page * perPage);
 
   function updateFilter(key, value) {
     setFilters(prev => ({ ...prev, [key]: value }));
     setPage(1);
   }
+
+  // If the chosen exam was switched off in Settings, fall back to ALL
+  useEffect(() => {
+    if (profile && filters.exam !== "ALL") {
+      const allowed = getEnabledExams(profile);
+      if (!allowed.includes(filters.exam)) {
+        setFilters(prev => ({ ...prev, exam: "ALL" }));
+      }
+    }
+  }, [profile]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleStartPractice() {
     const qs = filtered.slice(0, 20);
@@ -71,7 +83,7 @@ export default function QuestionBank() {
             </select>
           )}
 
-          {["ALL", "JAMB", "WAEC"].map(e => (
+          {examOptions.map(e => (
             <button key={e} onClick={() => updateFilter("exam", e)} style={{ padding: "6px 14px", borderRadius: 20, border: filters.exam === e ? "1px solid #6C3CE9" : "1px solid #333", background: filters.exam === e ? "rgba(108,60,233,0.2)" : "transparent", color: filters.exam === e ? "#fff" : "#888", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
               {e === "ALL" ? "ALL" : e}
             </button>
