@@ -164,34 +164,36 @@ export default function MockSummary() {
         {/* Review toggle */}
         {questions && (
           <>
-            <button onClick={() => setReviewMode(!reviewMode)} style={{ width: "100%", padding: "12px", borderRadius: 10, background: "#121218", border: "1px solid #1e1e2a", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 16, fontFamily: "inherit" }}>
+            <button onClick={() => setReviewMode(!reviewMode)} className="fold-toggle" aria-expanded={reviewMode}>
               {reviewMode ? <ChevronUp size={18} /> : <ChevronDown size={18} />} {reviewMode ? "Hide" : "Review All Answers"}
             </button>
-            {reviewMode && (
-              <div style={{ marginBottom: 24 }}>
-                {questions.map((q, i) => {
-                  const ua = answers?.[q.id];
-                  const isCorrect = ua === q.answer;
-                  return (
-                    <div key={q.id} style={{ background: "#121218", border: `1px solid ${isCorrect ? "rgba(74,222,128,0.2)" : "rgba(255,77,106,0.2)"}`, borderRadius: 10, padding: 14, marginBottom: 8 }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-                        <span style={{ fontSize: 11, color: "#888" }}>Q{i + 1} · {q.subject} · {q.topic}</span>
-                        {isCorrect ? <CheckCircle2 size={16} color="#4ADE80" /> : <XCircle size={16} color="#FF4D6A" />}
+            <div className={reviewMode ? "fold-body fold-open" : "fold-body"} style={{ marginBottom: reviewMode ? 24 : 0 }}>
+              <div>
+                <div>
+                  {questions.map((q, i) => {
+                    const ua = answers?.[q.id];
+                    const isCorrect = ua === q.answer;
+                    return (
+                      <div key={q.id} className={`fold-card ${isCorrect ? "fold-card-correct" : "fold-card-wrong"}`} style={{ marginBottom: 8 }}>
+                        <div className="fold-header" style={{ padding: 14, paddingBottom: 6, alignItems: "flex-start", cursor: "default" }}>
+                          <span style={{ fontSize: 11, color: "var(--text-muted)" }}>Q{i + 1} · {q.subject} · {q.topic}</span>
+                          {isCorrect ? <CheckCircle2 size={16} color="var(--success)" /> : <XCircle size={16} color="var(--danger)" />}
+                        </div>
+                        <p style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", margin: 0, padding: "0 14px 8px", lineHeight: 1.4 }}>{q.question}</p>
+                        <div style={{ padding: "0 14px 14px", display: "grid", gap: 3 }}>
+                          {Object.entries(q.options).map(([k, v]) => (
+                            <div key={k} className={`fold-opt ${k === q.answer ? "fold-opt-correct" : k === ua && k !== q.answer ? "fold-opt-wrong" : "fold-opt-muted"}`}>
+                              <span style={{ fontWeight: 700 }}>{k}:</span> {v}
+                              {k === q.answer && <CheckCircle2 size={12} color="var(--success)" />}
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                      <p style={{ fontSize: 13, fontWeight: 600, color: "#fff", margin: "0 0 8px", lineHeight: 1.4 }}>{q.question}</p>
-                      <div style={{ display: "grid", gap: 3 }}>
-                        {Object.entries(q.options).map(([k, v]) => (
-                          <div key={k} style={{ display: "flex", alignItems: "center", gap: 8, padding: "4px 8px", borderRadius: 4, background: k === q.answer ? "rgba(74,222,128,0.1)" : k === ua && k !== q.answer ? "rgba(255,77,106,0.1)" : "transparent", fontSize: 12, color: k === q.answer ? "#4ADE80" : k === ua ? "#FF4D6A" : "#aaa" }}>
-                            <span style={{ fontWeight: 700 }}>{k}:</span> {v}
-                            {k === q.answer && <CheckCircle2 size={12} color="#4ADE80" />}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            )}
+            </div>
           </>
         )}
 

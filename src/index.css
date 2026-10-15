@@ -316,6 +316,101 @@ img, video, canvas, svg { max-width: 100%; }
   border-color: rgb(var(--primary-rgb) / 0.6);
 }
 
+/* ─── Fold / accordion (FAQs, expandable question cards, answer reviews) ───
+   Structure only — cards keep their own skin (lp-bento-card, fold-card, …).
+   Body is always rendered; .fold-open animates grid-template-rows 0fr→1fr. */
+.fold { position: relative; }
+.fold-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  line-height: 1.45;
+}
+.fold-header:focus-visible {
+  outline: 2px solid rgb(var(--primary-rgb) / 0.7);
+  outline-offset: -2px;
+}
+.fold-chevron {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fold-header[aria-expanded="true"] .fold-chevron { transform: rotate(180deg); }
+.fold-chevron-side { transform: rotate(0deg) !important; }
+.fold-header[aria-expanded="true"] .fold-chevron-side { transform: rotate(90deg) !important; }
+.fold-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fold-open > .fold-body { grid-template-rows: 1fr; }
+.fold-body > * { overflow: hidden; min-height: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .fold-body, .fold-chevron { transition: none; }
+}
+
+/* App-page fold card: theme-aware (works in light + dark) */
+.fold-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.fold-card:hover { border-color: rgb(var(--primary-rgb) / 0.4); }
+.fold-card.fold-open {
+  border-color: rgb(var(--primary-rgb) / 0.55);
+  box-shadow: 0 0 0 1px rgb(var(--primary-rgb) / 0.12);
+}
+.fold-card-correct { border-color: rgb(var(--success-rgb) / 0.35) !important; }
+.fold-card-wrong { border-color: rgb(var(--danger-rgb) / 0.35) !important; }
+
+/* Full-width collapse toggle (e.g. "Review All Answers") */
+.fold-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  margin-bottom: 16px;
+}
+.fold-toggle:hover { border-color: rgb(var(--primary-rgb) / 0.45); }
+
+/* Answer option rows inside folds */
+.fold-opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+.fold-opt-correct { background: rgb(var(--success-rgb) / 0.12); color: var(--success); }
+.fold-opt-wrong { background: rgb(var(--danger-rgb) / 0.1); color: var(--danger); }
+.fold-opt-muted { color: var(--text-muted); }
+
+
 .btn-primary {
   display: inline-flex;
   align-items: center;

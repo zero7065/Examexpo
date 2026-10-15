@@ -12,7 +12,7 @@ import { shareOnWhatsApp } from "../components/WhatsAppShare";
 import { getQuestionsFromBank } from "../data/questions/compat";
 import {
   Users, UserPlus, Trash2, Trophy, Clock, Target,
-  Crown, Zap, MessageCircle, Play, X, ChevronDown,
+  Crown, Zap, MessageCircle, Play, X,
 } from "lucide-react";
 
 export default function StudyPartnersPage() {

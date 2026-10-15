@@ -65,8 +65,8 @@ function ReplyThread({ request, user, userName }) {
       </div>
       <p style={{ fontSize: 14, lineHeight: 1.6, margin: "0 0 10px" }}>{request.text}</p>
       <div style={{ display: "flex", gap: 8 }}>
-        <button onClick={() => setOpen((o) => !o)} className="btn-secondary" style={{ padding: "8px 14px", fontSize: 13 }}>
-          <MessageCircle size={14} /> {open ? "Hide" : "Discuss"} <ChevronDown size={13} style={{ transform: open ? "rotate(180deg)" : "none" }} />
+        <button onClick={() => setOpen((o) => !o)} className="btn-secondary" style={{ padding: "8px 14px", fontSize: 13 }} aria-expanded={open}>
+          <MessageCircle size={14} /> {open ? "Hide" : "Discuss"} <ChevronDown size={13} className="fold-chevron" style={{ transform: open ? "rotate(180deg)" : "none", color: "inherit" }} />
         </button>
         {request.uid === user?.uid && request.status !== "resolved" && (
           <button onClick={resolve} className="btn-secondary" style={{ padding: "8px 14px", fontSize: 13 }}>
@@ -75,21 +75,23 @@ function ReplyThread({ request, user, userName }) {
         )}
         <Link to={`/u/${request.uid}`} style={{ marginLeft: "auto", fontSize: 13, fontWeight: 700, color: "var(--primary)", alignSelf: "center" }}>Profile →</Link>
       </div>
-      {open && (
-        <div style={{ marginTop: 12, borderTop: "1px solid var(--border)", paddingTop: 12, display: "flex", flexDirection: "column", gap: 8 }}>
-          {replies.map((r) => (
-            <div key={r.id} style={{ background: "var(--bg-3)", borderRadius: 10, padding: "8px 12px" }}>
-              <div style={{ fontSize: 12, fontWeight: 800, color: "var(--primary)" }}>{r.name}</div>
-              <div style={{ fontSize: 13, lineHeight: 1.55 }}>{r.text}</div>
+      <div className={open ? "fold-body fold-open" : "fold-body"}>
+        <div>
+          <div style={{ marginTop: 12, borderTop: "1px solid var(--border)", paddingTop: 12, display: "flex", flexDirection: "column", gap: 8, paddingBottom: 4 }}>
+            {replies.map((r) => (
+              <div key={r.id} style={{ background: "var(--bg-3)", borderRadius: 10, padding: "8px 12px" }}>
+                <div style={{ fontSize: 12, fontWeight: 800, color: "var(--primary)" }}>{r.name}</div>
+                <div style={{ fontSize: 13, lineHeight: 1.55 }}>{r.text}</div>
+              </div>
+            ))}
+            <div style={{ display: "flex", gap: 8 }}>
+              <input value={text} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send()}
+                placeholder="Write a helpful reply…" className="input-field flex-1" />
+              <button onClick={send} className="btn-primary" style={{ padding: "10px 16px" }}><Send size={15} /></button>
             </div>
-          ))}
-          <div style={{ display: "flex", gap: 8 }}>
-            <input value={text} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send()}
-              placeholder="Write a helpful reply…" className="input-field flex-1" />
-            <button onClick={send} className="btn-primary" style={{ padding: "10px 16px" }}><Send size={15} /></button>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

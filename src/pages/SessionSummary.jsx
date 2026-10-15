@@ -226,24 +226,30 @@ export default function SessionSummary() {
               const isCorrect = userAns === q.answer;
               const isExpanded = expandedReview === q.id;
               return (
-                <div key={q.id} style={{ background: "#121218", border: `1px solid ${isCorrect ? "rgba(74,222,128,0.2)" : "rgba(255,77,106,0.2)"}`, borderRadius: 10, padding: 14, marginBottom: 8, cursor: "pointer" }} onClick={() => setExpandedReview(isExpanded ? null : q.id)}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-                    <span style={{ fontSize: 11, color: "#888" }}>Q{i + 1} · {q.topic}</span>
-                    {isCorrect ? <CheckCircle2 size={16} color="#4ADE80" /> : <XCircle size={16} color="#FF4D6A" />}
+                <div key={q.id} className={`fold-card fold${isExpanded ? " fold-open" : ""} ${isCorrect ? "fold-card-correct" : "fold-card-wrong"}`}
+                  style={{ cursor: "pointer", marginBottom: 8 }}
+                  onClick={() => setExpandedReview(isExpanded ? null : q.id)}>
+                  <div className="fold-header" style={{ padding: 14, paddingBottom: 4, alignItems: "flex-start" }} role="button" tabIndex={0}
+                    aria-expanded={isExpanded}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setExpandedReview(isExpanded ? null : q.id); } }}>
+                    <span style={{ fontSize: 11, color: "var(--text-muted)" }}>Q{i + 1} · {q.topic}</span>
+                    {isCorrect ? <CheckCircle2 size={16} color="var(--success)" /> : <XCircle size={16} color="var(--danger)" />}
                   </div>
-                  <p style={{ fontSize: 13, fontWeight: 600, color: "#fff", margin: 0, lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: isExpanded ? "unset" : 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{q.question}</p>
-                  {isExpanded && (
-                    <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 4 }}>
-                      {Object.entries(q.options).map(([k, v]) => (
-                        <div key={k} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 10px", borderRadius: 6, background: k === q.answer ? "rgba(74,222,128,0.08)" : k === userAns && k !== q.answer ? "rgba(255,77,106,0.08)" : "transparent", fontSize: 12, color: k === q.answer ? "#4ADE80" : k === userAns ? "#FF4D6A" : "#aaa" }}>
-                          <span style={{ fontWeight: 700 }}>{k}:</span> {v}
-                        </div>
-                      ))}
-                      {q.explanation && (
-                        <div style={{ marginTop: 6, padding: 8, borderRadius: 6, background: "rgba(108,60,233,0.1)", borderLeft: "2px solid #6C3CE9", fontSize: 12, color: "#ccc", lineHeight: 1.5 }}>{q.explanation}</div>
-                      )}
+                  <p style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", margin: 0, padding: "0 16px 8px", lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: isExpanded ? "unset" : 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{q.question}</p>
+                  <div className="fold-body">
+                    <div>
+                      <div style={{ padding: "6px 16px 14px", display: "flex", flexDirection: "column", gap: 4 }}>
+                        {Object.entries(q.options).map(([k, v]) => (
+                          <div key={k} className={`fold-opt ${k === q.answer ? "fold-opt-correct" : k === userAns && k !== q.answer ? "fold-opt-wrong" : "fold-opt-muted"}`}>
+                            <span style={{ fontWeight: 700 }}>{k}:</span> {v}
+                          </div>
+                        ))}
+                        {q.explanation && (
+                          <div style={{ marginTop: 6, padding: 8, borderRadius: 6, background: "rgb(var(--primary-rgb) / 0.1)", borderLeft: "2px solid var(--primary)", fontSize: 12, color: "var(--text)", lineHeight: 1.5 }}>{q.explanation}</div>
+                        )}
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}

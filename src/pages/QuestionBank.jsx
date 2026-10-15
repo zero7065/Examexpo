@@ -119,38 +119,44 @@ export default function QuestionBank() {
             {paged.map(q => {
               const isExpanded = expandedId === q.id;
               return (
-                <div key={q.id} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 12, padding: 16, cursor: "pointer" }} onClick={() => setExpandedId(isExpanded ? null : q.id)}>
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                <div key={q.id} className={`fold-card fold${isExpanded ? " fold-open" : ""}`}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setExpandedId(isExpanded ? null : q.id)}>
+                  <div className="fold-header" style={{ alignItems: "flex-start", padding: 16 }} role="button" tabIndex={0}
+                    aria-expanded={isExpanded}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setExpandedId(isExpanded ? null : q.id); } }}>
                     <div style={{ width: 10, height: 10, borderRadius: "50%", background: DIFFICULTY_COLORS[q.difficulty], marginTop: 6, flexShrink: 0 }} />
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: "#fff", marginBottom: 6, lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: isExpanded ? "unset" : 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{q.question}</div>
+                      <div style={{ fontSize: 14, fontWeight: 600, color: "var(--text)", marginBottom: 6, lineHeight: 1.4, display: "-webkit-box", WebkitLineClamp: isExpanded ? "unset" : 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{q.question}</div>
                       <div style={{ display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" }}>
-                        <span style={{ padding: "2px 8px", borderRadius: 10, background: "rgba(108,60,233,0.15)", color: "#6C3CE9", fontSize: 11, fontWeight: 600 }}>{q.topic}</span>
-                        <span style={{ padding: "2px 8px", borderRadius: 10, background: "rgba(255,255,255,0.05)", color: "#888", fontSize: 11, fontWeight: 500 }}>{q.year}</span>
-                        {q.exam.map(e => <span key={e} style={{ padding: "2px 8px", borderRadius: 10, background: "rgba(0,229,160,0.1)", color: "#00E5A0", fontSize: 11, fontWeight: 600 }}>{e}</span>)}
+                        <span style={{ padding: "2px 8px", borderRadius: 10, background: "rgb(var(--primary-rgb) / 0.15)", color: "var(--primary)", fontSize: 11, fontWeight: 600 }}>{q.topic}</span>
+                        <span style={{ padding: "2px 8px", borderRadius: 10, background: "rgb(var(--bg-3-rgb) / 0.8)", color: "var(--text-muted)", fontSize: 11, fontWeight: 500 }}>{q.year}</span>
+                        {q.exam.map(e => <span key={e} style={{ padding: "2px 8px", borderRadius: 10, background: "rgb(var(--success-rgb) / 0.12)", color: "var(--success)", fontSize: 11, fontWeight: 600 }}>{e}</span>)}
                         <RepetitionBadge question={q} />
                       </div>
                     </div>
-                    <ChevronRight size={18} color="#888" style={{ flexShrink: 0, transform: isExpanded ? "rotate(90deg)" : "none", transition: "transform 0.2s" }} />
+                    <ChevronRight size={18} className="fold-chevron fold-chevron-side" color="var(--text-muted)" />
                   </div>
 
-                  {isExpanded && (
-                    <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid #1e1e2a" }}>
-                      <div style={{ display: "grid", gap: 8 }}>
-                        {Object.entries(q.options).map(([key, val]) => (
-                          <div key={key} style={{ padding: "10px 14px", borderRadius: 8, border: key === q.answer ? "1.5px solid #4ADE80" : "1px solid #2a2a35", background: key === q.answer ? "rgba(74,222,128,0.08)" : "#1a1a1f", display: "flex", gap: 10, alignItems: "center" }}>
-                            <span style={{ width: 24, height: 24, borderRadius: 6, background: key === q.answer ? "#4ADE80" : "#333", color: key === q.answer ? "#000" : "#fff", fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{key}</span>
-                            <span style={{ fontSize: 13, color: key === q.answer ? "#4ADE80" : "#ccc" }}>{val}</span>
-                          </div>
-                        ))}
-                      </div>
-                      <div style={{ marginTop: 12, padding: 12, borderRadius: 8, background: "rgba(108,60,233,0.1)", borderLeft: "3px solid #6C3CE9" }}>
-                        <div style={{ fontSize: 10, fontWeight: 700, color: "#6C3CE9", textTransform: "uppercase", marginBottom: 6 }}>Explanation</div>
-                        <p style={{ fontSize: 13, color: "#ccc", lineHeight: 1.5, margin: 0 }}>{q.explanation}</p>
-                        {q.hint && <p style={{ fontSize: 12, color: "#D4A853", marginTop: 8, fontStyle: "italic" }}>💡 {q.hint}</p>}
+                  <div className="fold-body">
+                    <div>
+                      <div style={{ margin: "0 16px 16px", paddingTop: 16, borderTop: "1px solid var(--border)" }}>
+                        <div style={{ display: "grid", gap: 8 }}>
+                          {Object.entries(q.options).map(([key, val]) => (
+                            <div key={key} style={{ padding: "10px 14px", borderRadius: 8, border: key === q.answer ? "1.5px solid var(--success)" : "1px solid var(--border)", background: key === q.answer ? "rgb(var(--success-rgb) / 0.1)" : "var(--bg-3)", display: "flex", gap: 10, alignItems: "center" }}>
+                              <span style={{ width: 24, height: 24, borderRadius: 6, background: key === q.answer ? "var(--success)" : "var(--bg-3)", color: key === q.answer ? "#fff" : "var(--text)", fontSize: 12, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, border: key === q.answer ? "none" : "1px solid var(--border)" }}>{key}</span>
+                              <span style={{ fontSize: 13, color: key === q.answer ? "var(--success)" : "var(--text)" }}>{val}</span>
+                            </div>
+                          ))}
+                        </div>
+                        <div style={{ marginTop: 12, padding: 12, borderRadius: 8, background: "rgb(var(--primary-rgb) / 0.1)", borderLeft: "3px solid var(--primary)" }}>
+                          <div style={{ fontSize: 10, fontWeight: 700, color: "var(--primary)", textTransform: "uppercase", marginBottom: 6 }}>Explanation</div>
+                          <p style={{ fontSize: 13, color: "var(--text)", lineHeight: 1.5, margin: 0 }}>{q.explanation}</p>
+                          {q.hint && <p style={{ fontSize: 12, color: "var(--accent)", marginTop: 8, fontStyle: "italic" }}>💡 {q.hint}</p>}
+                        </div>
                       </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}

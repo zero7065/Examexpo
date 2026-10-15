@@ -151,12 +151,20 @@ export default function SchoolsLanding() {
           <h2 className="lp-h2" style={{ textAlign: "center", marginBottom: 36 }}>School <span className="lp-gradient-text">questions</span></h2>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {FAQS.map((f, i) => (
-              <div key={i} className="lp-bento-card" style={{ padding: "20px 24px", cursor: "pointer" }} onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+              <div key={i} className={`lp-bento-card fold${openFaq === i ? " fold-open" : ""}`} style={{ padding: 0, cursor: "pointer" }}
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                <div className="fold-header" style={{ padding: "20px 24px" }} role="button" tabIndex={0}
+                  aria-expanded={openFaq === i}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpenFaq(openFaq === i ? null : i); } }}
+                >
                   <h4 style={{ fontSize: 15, fontWeight: 600, margin: 0 }}>{f.q}</h4>
-                  <ChevronDown size={18} style={{ color: "var(--text-muted)", transform: openFaq === i ? "rotate(180deg)" : "none", transition: "transform 0.3s", flexShrink: 0 }} />
+                  <ChevronDown size={18} className="fold-chevron" />
                 </div>
-                {openFaq === i && <p style={{ fontSize: 14, color: "var(--text-muted)", lineHeight: 1.7, margin: "12px 0 0" }}>{f.a}</p>}
+                <div className="fold-body">
+                  <div>
+                    <p style={{ fontSize: 14, color: "var(--text-muted)", lineHeight: 1.7, margin: "0 24px 20px" }}>{f.a}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
