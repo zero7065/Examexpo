@@ -11,7 +11,7 @@ export const PAGE_TOURS = {
   "/practice": {
     title: "Practice Mode",
     steps: [
-      { target: "[data-tour='mode']", title: "Study Mode", content: "Choose Free Practice, Timed Mode, or CBT simulation." },
+      { target: "[data-tour='mode']", title: "Study Mode", content: "Choose Free Practice, Timed Mode, or Exam Mode." },
       { target: "[data-tour='subject']", title: "Select Subject", content: "Pick the subject you want to practice." },
       { target: "[data-tour='start']", title: "Start Session", content: "Click Start to begin your practice session." },
     ],
@@ -29,7 +29,7 @@ export const PAGE_TOURS = {
     title: "Mock Exam",
     steps: [
       { target: "[data-tour='exam-setup']", title: "Exam Setup", content: "Choose your exam type, subjects, and duration." },
-      { target: "[data-tour='start-exam']", title: "Start Exam", content: "Begin your timed mock exam simulation." },
+      { target: "[data-tour='start-exam']", title: "Start Exam", content: "Begin your timed exam session under real exam conditions." },
     ],
   },
   "/study-partners": {

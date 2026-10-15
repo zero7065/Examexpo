@@ -13,7 +13,7 @@ import { ImagePlus, RotateCcw, Loader2, ExternalLink } from "lucide-react";
 const SLOT_LABELS = {
   hero: "Hero phone shot",
   practice: "Practice screen",
-  cbt: "CBT simulator screen",
+  cbt: "Exam Mode screen",
   dashboard: "Dashboard screen",
   aiTutor: "AI Tutor screen",
 };

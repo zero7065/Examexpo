@@ -34,7 +34,7 @@ const HelpPage = () => {
     },
     {
       icon: <Zap size={24} />,
-      title: "CBT Simulator",
+      title: "Exam Mode",
       description: "Experience the real exam environment with timed sessions. Perfect for building speed and exam stamina. (Pro Feature)",
       action: "Start CBT",
       link: "/select?mode=cbt",
@@ -164,7 +164,7 @@ const HelpPage = () => {
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle size={16} className="text-accent" />
-                CBT Simulator mode
+                Exam Mode
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle size={16} className="text-accent" />

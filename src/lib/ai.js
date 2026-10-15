@@ -442,7 +442,7 @@ Include 5-8 topics ordered from foundations to final revision.`;
         { topic: "Foundation Review", description: "Revise basic concepts", duration: "2 hours", exercises: ["20 basic questions", "Review formulas"] },
         { topic: "Past Questions", description: "Solve 2018-2023 questions", duration: "3 hours", exercises: ["40 mixed questions", "Review explanations"] },
         { topic: "Weak Topics Focus", description: "Practice weak areas", duration: "2.5 hours", exercises: ["30 topic questions", "Note patterns"] },
-        { topic: "Mock Simulation", description: "CBT under timed conditions", duration: "2 hours", exercises: ["50 questions in 1hr 40mins", "Review score"] },
+        { topic: "Exam Mode Practice", description: "Timed exam conditions", duration: "2 hours", exercises: ["50 questions in 1hr 40mins", "Review score"] },
         { topic: "Final Review", description: "Review mistakes and summaries", duration: "2 hours", exercises: ["Review mistake log", "Read notes"] }
       ]
     };
@@ -502,7 +502,7 @@ export function heuristicSummary({ subject, correct, total, weakTopics = [] }) {
 export const GUIDE_ROUTES = [
   { path: "/dashboard", label: "Dashboard", keywords: ["home", "dashboard", "start", "overview"] },
   { path: "/select", label: "Practice", keywords: ["practice", "question", "start practicing", "answer", "quiz"] },
-  { path: "/mock-exam", label: "Mock Exam", keywords: ["mock", "cbt", "simulate", "exam simulation", "timed", "full exam"] },
+  { path: "/mock-exam", label: "Mock Exam", keywords: ["mock", "cbt", "exam mode", "timed", "full exam"] },
   { path: "/ai-tutor", label: "AI Tutor", keywords: ["ai", "tutor", "explain", "understand", "solve", "help me learn", "photo", "stuck"] },
   { path: "/study-plan", label: "Study Plan", keywords: ["plan", "schedule", "timetable", "organize", "routine", "study plan"] },
   { path: "/flashcards", label: "Flashcards", keywords: ["flashcard", "memorize", "remember", "revise", "recall"] },

@@ -20,7 +20,7 @@ const slides = [
   },
   {
     id: 3,
-    title: "CBT Simulator — Real Exam Feel",
+    title: "Exam Mode — Real Exam Feel",
     description: "Experience the actual Computer-Based Test environment. Timed sessions, real JAMB/WAEC interfaces, and instant scoring.",
     icon: GraduationCap,
     color: "#D4A853",

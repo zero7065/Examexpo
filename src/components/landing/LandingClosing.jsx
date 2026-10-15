@@ -87,7 +87,7 @@ const FOOT_COLS = [
     links: [
       { label: "Past Questions", href: "#features" },
       { label: "AI Tutor", href: "#features" },
-      { label: "CBT Simulator", href: "#features" },
+      { label: "Exam Mode", href: "#features" },
       { label: "Study Plans", href: "#features" },
     ],
   },

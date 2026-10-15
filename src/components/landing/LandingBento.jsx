@@ -72,7 +72,7 @@ function AnimatedStat({ value, suffix, decimals }) {
 const FEATURES = [
   { icon: BookOpen, title: "Real Past Questions", description: "JAMB, WAEC & NABTEB questions from 2017–2026 with detailed AI explanations." },
   { icon: Brain, title: "AI Tutor", description: "Get instant step-by-step explanations. Ask anything, anytime." },
-  { icon: GraduationCap, title: "CBT Simulator", description: "Real exam environment with timed sessions and instant scoring." },
+  { icon: GraduationCap, title: "Exam Mode", description: "Real exam environment with timed sessions and instant scoring." },
   { icon: TrendingUp, title: "Smart Analytics", description: "Track your strengths, weaknesses, and improvement over time." },
   { icon: Trophy, title: "Gamified Learning", description: "Earn XP, badges, and compete on leaderboards. Stay motivated." },
   { icon: Target, title: "Study Plans", description: "Personalized study schedules tailored to your exam date." },
