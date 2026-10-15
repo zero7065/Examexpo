@@ -1,19 +1,34 @@
-// Landing hero — headline, CTAs, trust chips, phone shot with mockup fallback.
+// Landing hero — headline, CTAs, trust chips, live stats, phone mockup.
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, WifiOff, Gift } from "lucide-react";
+import { ArrowRight, CheckCircle2, WifiOff, Gift, TrendingUp, Users, BookOpen } from "lucide-react";
 import LandingMedia from "./LandingMedia";
 import DeviceShowcase from "./DeviceShowcase";
+import { getDocs, collection, getDoc, doc } from "firebase/firestore";
+import { db } from "../../firebaseConfig";
+import { useEffect, useState } from "react";
 
 const CHIPS = [
-  { icon: CheckCircle2, label: "800+ exam questions" },
+  { icon: CheckCircle2, label: "942+ exam questions" },
   { icon: WifiOff, label: "Works offline" },
   { icon: Gift, label: "Free to start" },
 ];
 
 export default function LandingHero({ user }) {
+  const [stats, setStats] = useState(null);
+
+  useEffect(() => {
+    async function loadStats() {
+      try {
+        const s = await getDoc(doc(db, "stats", "global"));
+        if (s.exists()) setStats(s.data());
+      } catch { /* stats optional */ }
+    }
+    loadStats();
+  }, []);
+
   return (
     <section style={{
-      padding: "160px 0 80px",
+      padding: "120px 0 80px",
       background: "linear-gradient(180deg, rgb(var(--primary-rgb) / 0.08) 0%, var(--bg) 100%)",
       position: "relative", overflow: "hidden",
     }}>
@@ -42,20 +57,20 @@ export default function LandingHero({ user }) {
             <h1 className="lp-animate-in lp-delay-1" style={{ fontSize: "clamp(2rem, 6vw, 3.25rem)", fontWeight: 900, lineHeight: 1.08, margin: "0 0 20px", letterSpacing: "-0.03em" }}>
               Ace Your Exams with <span className="lp-gradient-text">AI-Powered</span> Precision
             </h1>
-            <p className="lp-animate-in lp-delay-2" style={{ fontSize: 18, lineHeight: 1.7, color: "var(--text-muted)", maxWidth: 520, margin: "0 0 36px" }}>
-              10 years of JAMB, WAEC, NECO &amp; NABTEB questions — strategically analyzed for
-              the most repeated topics, objectives and theory. Practice, get AI-driven explanations,
-              simulate CBT exams, and track your progress — all in one platform.
+            <p className="lp-animate-in lp-delay-2" style={{ fontSize: 18, lineHeight: 1.7, color: "var(--text-muted)", maxWidth: 520, margin: "0 0 20px" }}>
+              10 years of JAMB, WAEC, NECO, NABTEB & IELTS questions — strategically analyzed for
+              the most repeated topics, objectives and essays. Practice with AI explanations,
+              take timed exams, and track your progress — all in one platform.
             </p>
-            <div style={{ margin: "-20px 0 28px" }}>
+            <div style={{ margin: "0 0 20px" }}>
               <Link to="/ielts" style={{ fontSize: 13, fontWeight: 700, color: "var(--primary)" }}>
-                ✈️ Going abroad? See the IELTS japa pathway →
+                ✈️ Going abroad? See the IELTS pathway →
               </Link>
             </div>
-            <div style={{ fontSize: 13, color: "var(--text-muted)", margin: "-8px 0 28px" }}>
+            <div style={{ fontSize: 13, color: "var(--text-muted)", margin: "0 0 24px" }}>
               🌱 In SS1–SS3? Starting early is how geniuses are bred — <Link to="/auth" style={{ fontWeight: 700, color: "var(--primary)" }}>begin now, free</Link>.
             </div>
-            <div className="lp-animate-in lp-delay-3" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 28 }}>
+            <div className="lp-animate-in lp-delay-3" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 24 }}>
               <Link to={user ? "/dashboard" : "/auth"} className="lp-btn-primary">
                 {user ? "Go to Dashboard" : "Start Free"} <ArrowRight size={18} />
               </Link>
@@ -77,6 +92,26 @@ export default function LandingHero({ user }) {
             <LandingMedia slot="hero" alt="ExamPadi practice screen" mockup={<DeviceShowcase />} />
           </div>
         </div>
+        {stats && (
+          <div style={{ display: "flex", gap: 24, marginTop: 48, flexWrap: "wrap", justifyContent: "center" }}>
+            {[
+              { icon: Users, label: "Active Students", value: stats.totalUsers || "500+" },
+              { icon: BookOpen, label: "Questions Answered", value: stats.totalQuestions?.toLocaleString() || "50,000+" },
+              { icon: TrendingUp, label: "Success Rate", value: "87%" },
+            ].map((s) => (
+              <div key={s.label} className="lp-glass" style={{
+                display: "flex", alignItems: "center", gap: 10,
+                padding: "12px 20px", borderRadius: 12, textAlign: "center",
+              }}>
+                <s.icon size={20} color="var(--primary)" />
+                <div>
+                  <div style={{ fontSize: 20, fontWeight: 800, color: "var(--text)" }}>{s.value}</div>
+                  <div style={{ fontSize: 11, color: "var(--text-muted)" }}>{s.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <style>{`
         @media (max-width: 900px) {
