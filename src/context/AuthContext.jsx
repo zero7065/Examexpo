@@ -247,11 +247,18 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
+    let consecutiveAuthFailures = 0;
     const onErr = (e) => {
       const msg = String(e?.message || e?.reason || "");
       if (msg.includes("token") || msg.includes("credential") || msg.includes("auth")) {
-        signOut(auth).catch(() => {});
-        setUser(null);
+        consecutiveAuthFailures++;
+        if (consecutiveAuthFailures >= 3) {
+          consecutiveAuthFailures = 0;
+          window.location.reload();
+        } else {
+          signOut(auth).catch(() => {});
+          setUser(null);
+        }
       }
     };
     window.addEventListener("unhandledrejection", onErr);

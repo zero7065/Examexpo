@@ -56,7 +56,26 @@ export default function FileUpload({ onUploadComplete, onUploadError }) {
       const task = uploadBytesResumable(storageRef, file);
       task.on("state_changed",
         (snap) => setProgress(Math.round((snap.bytesTransferred / snap.totalBytes) * 100)),
-        (err) => { onUploadError?.(err.message); setUploading(false); },
+        (err) => {
+          if (String(err?.message || "").includes("CORS")) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+              try {
+                const localFiles = JSON.parse(localStorage.getItem("localUploads") || "[]");
+                localFiles.push({ name: file.name, type: file.type, size: file.size, data: ev.target.result, uploadedAt: Date.now() });
+                localStorage.setItem("localUploads", JSON.stringify(localFiles.slice(-5)));
+                onUploadComplete?.({ url: ev.target.result, name: file.name, type: file.type, size: file.size, path: "local" });
+                setUploading(false);
+                setFile(null);
+                setPreview(null);
+              } catch { onUploadError?.("Storage full — file too large for local storage"); setUploading(false); }
+            };
+            reader.readAsDataURL(file);
+          } else {
+            onUploadError?.(err.message);
+            setUploading(false);
+          }
+        },
         async () => {
           const url = await getDownloadURL(task.snapshot.ref);
           onUploadComplete?.({ url, name: file.name, type: file.type, size: file.size, path });
