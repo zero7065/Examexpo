@@ -138,7 +138,7 @@ export default function AdminDevSettings() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
           {Object.entries(settings.featureFlags).map(([key, val]) => (
             <div key={key} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 12px", borderRadius: 8, background: "#1a1a1f" }}>
-              <span style={{ color: "#ccc", fontSize: 13, textTransform: capitalize }}>{key.replace(/([A-Z])/g, " $1")}</span>
+              <span style={{ color: "#ccc", fontSize: 13, textTransform: "capitalize" }}>{key.replace(/([A-Z])/g, " $1")}</span>
               <button
                 onClick={() => setSettings({ ...settings, featureFlags: { ...settings.featureFlags, [key]: !val } })}
                 style={{ width: 36, height: 20, borderRadius: 10, border: "none", cursor: "pointer", background: val ? "#4ADE80" : "#333", position: "relative" }}
