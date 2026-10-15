@@ -15,6 +15,27 @@ const REVIEW_TABS = [
   { id: "rejected", label: "Rejected" },
 ];
 
+const ROOM_TABS = [
+  { id: "pending", label: "Pending" },
+  { id: "approved", label: "Live" },
+];
+
+function TabBar({ tabs, active, onChange }) {
+  return (
+    <div style={{ display: "flex", gap: 6, marginBottom: 12, flexWrap: "wrap" }}>
+      {tabs.map((t) => (
+        <button key={t.id} onClick={() => onChange(t.id)}
+          style={{ padding: "6px 12px", borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: "pointer",
+            background: active === t.id ? "var(--primary)" : "transparent",
+            border: `1px solid ${active === t.id ? "var(--primary)" : "var(--border)"}`,
+            color: active === t.id ? "#fff" : "var(--text-muted)" }}>
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function AdminContent() {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -45,7 +66,7 @@ export default function AdminContent() {
       await postUpdate({ title: uTitle, body: uBody, tag: uTag });
       setUTitle("");
       setUBody("");
-      toast({ message: "Update published — online users see it instantly 🔔", type: "success" });
+      toast({ message: "Update published — online users see it instantly", type: "success" });
     } catch (e) {
       toast({ message: e.message, type: "error" });
     }
@@ -99,28 +120,12 @@ export default function AdminContent() {
     }
   }
 
-  function TabBar({ tabs, active, onChange }) {
-    return (
-      <div style={{ display: "flex", gap: 6, marginBottom: 12, flexWrap: "wrap" }}>
-        {tabs.map((t) => (
-          <button key={t.id} onClick={() => onChange(t.id)}
-            style={{ padding: "6px 12px", borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: "pointer",
-              background: active === t.id ? "#6C3CE9" : "transparent",
-              border: `1px solid ${active === t.id ? "#6C3CE9" : "#2a2a36"}`,
-              color: active === t.id ? "#fff" : "#888" }}>
-            {t.label}
-          </button>
-        ))}
-      </div>
-    );
-  }
-
   return (
     <div style={{ display: "grid", gap: 24 }}>
       {/* Updates */}
       <section>
         <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-          <Megaphone size={16} color="#6C3CE9" /> Post an update
+          <Megaphone size={16} color="var(--primary)" /> Post an update
         </h3>
         <div style={{ display: "grid", gap: 8, marginBottom: 16 }}>
           <div style={{ display: "flex", gap: 8 }}>
@@ -133,13 +138,13 @@ export default function AdminContent() {
           <button onClick={publishUpdate} className="btn-primary" style={{ justifySelf: "start" }}><Plus size={15} /> Publish</button>
         </div>
         {updates.map((u) => (
-          <div key={u.id} style={{ display: "flex", gap: 10, alignItems: "center", padding: "10px 0", borderBottom: "1px solid #1e1e2a" }}>
-            <span style={{ fontSize: 10, fontWeight: 800, color: "#6C3CE9", textTransform: "uppercase" }}>{u.tag}</span>
+          <div key={u.id} style={{ display: "flex", gap: 10, alignItems: "center", padding: "10px 0", borderBottom: "1px solid var(--border)" }}>
+            <span style={{ fontSize: 10, fontWeight: 800, color: "var(--primary)", textTransform: "uppercase" }}>{u.tag}</span>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontWeight: 700, fontSize: 13 }}>{u.title}</div>
-              <div style={{ fontSize: 12, color: "#888" }}>{String(u.body).slice(0, 120)}</div>
+              <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{String(u.body).slice(0, 120)}</div>
             </div>
-            <button onClick={() => removeUpdate(u.id)} style={{ background: "none", border: "none", color: "#FF4D6A", cursor: "pointer" }}><Trash2 size={15} /></button>
+            <button onClick={() => removeUpdate(u.id)} style={{ background: "none", border: "none", color: "var(--danger)", cursor: "pointer" }}><Trash2 size={15} /></button>
           </div>
         ))}
       </section>
@@ -147,31 +152,31 @@ export default function AdminContent() {
       {/* Reviews moderation */}
       <section>
         <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-          <Star size={16} color="#D4A853" /> Review moderation
+          <Star size={16} color="var(--accent)" /> Review moderation
         </h3>
         <TabBar tabs={REVIEW_TABS} active={reviewTab} onChange={setReviewTab} />
         {reviewTab === "pending" && reviews.length === 0 && (
-          <p style={{ fontSize: 13, color: "#666" }}>Queue clear — nothing awaiting approval.</p>
+          <p style={{ fontSize: 13, color: "var(--text-muted)" }}>Queue clear — nothing awaiting approval.</p>
         )}
         {reviews.map((r) => (
-          <div key={r.id} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 12, padding: 14, marginBottom: 8 }}>
+          <div key={r.id} className="fold-card" style={{ borderRadius: 12, padding: 14, marginBottom: 8 }}>
             <div style={{ fontSize: 13, fontWeight: 700 }}>
-              {r.name} · {"★".repeat(r.rating || 5)} · <span style={{ color: "#666", fontWeight: 400, fontSize: 11 }}>{r.context || "community"}</span>
+              {r.name} · {"★".repeat(r.rating || 5)} · <span style={{ color: "var(--text-muted)", fontWeight: 400, fontSize: 11 }}>{r.context || "community"}</span>
             </div>
-            <div style={{ fontSize: 13, color: "#ccc", margin: "6px 0 10px" }}>{r.text}</div>
+            <div style={{ fontSize: 13, color: "var(--text)", margin: "6px 0 10px" }}>{r.text}</div>
             <div style={{ display: "flex", gap: 8 }}>
               {r.status !== "approved" && (
-                <button onClick={() => modReview(r.id, "approved")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "#4ADE80", border: "none", color: "#000", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                <button onClick={() => modReview(r.id, "approved")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "var(--success)", border: "none", color: "#fff", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
                   <Check size={13} /> Approve
                 </button>
               )}
               {r.status === "approved" && (
-                <button onClick={() => modReview(r.id, "pending")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid #D4A853", color: "#D4A853", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                <button onClick={() => modReview(r.id, "pending")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid var(--accent)", color: "var(--accent)", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
                   Unpublish
                 </button>
               )}
               {r.status !== "rejected" && (
-                <button onClick={() => modReview(r.id, "rejected")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid #FF4D6A", color: "#FF4D6A", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                <button onClick={() => modReview(r.id, "rejected")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid var(--danger)", color: "var(--danger)", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
                   <X size={13} /> Reject
                 </button>
               )}
@@ -183,33 +188,30 @@ export default function AdminContent() {
       {/* Study rooms moderation */}
       <section>
         <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-          <Users size={16} color="#00E5A0" /> Study rooms
+          <Users size={16} color="var(--success)" /> Study rooms
         </h3>
-        <TabBar
-          tabs={[{ id: "pending", label: "Pending" }, { id: "approved", label: "Live" }]}
-          active={roomTab} onChange={setRoomTab}
-        />
+        <TabBar tabs={ROOM_TABS} active={roomTab} onChange={setRoomTab} />
         {roomTab === "pending" && rooms.length === 0 && (
-          <p style={{ fontSize: 13, color: "#666" }}>No rooms awaiting approval.</p>
+          <p style={{ fontSize: 13, color: "var(--text-muted)" }}>No rooms awaiting approval.</p>
         )}
         {rooms.map((r) => (
-          <div key={r.id} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 12, padding: 14, marginBottom: 8, display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+          <div key={r.id} className="fold-card" style={{ borderRadius: 12, padding: 14, marginBottom: 8, display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
             <div style={{ flex: 1, minWidth: 160 }}>
               <div style={{ fontSize: 13, fontWeight: 700, fontFamily: "monospace" }}>{r.code}</div>
-              <div style={{ fontSize: 12, color: "#888" }}>{r.exam} · {r.subject} · host {r.hostName} · {r.memberCount || 1} member(s)</div>
+              <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{r.exam} · {r.subject} · host {r.hostName} · {r.memberCount || 1} member(s)</div>
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               {r.status !== "approved" && (
-                <button onClick={() => modRoom(r.code, "approved")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "#4ADE80", border: "none", color: "#000", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                <button onClick={() => modRoom(r.code, "approved")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "var(--success)", border: "none", color: "#fff", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
                   <Check size={13} /> Approve
                 </button>
               )}
               {r.status === "approved" && (
-                <button onClick={() => modRoom(r.code, "pending")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid #D4A853", color: "#D4A853", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                <button onClick={() => modRoom(r.code, "pending")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid var(--accent)", color: "var(--accent)", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
                   Unlist
                 </button>
               )}
-              <button onClick={() => removeRoom(r.code)} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid #FF4D6A", color: "#FF4D6A", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+              <button onClick={() => removeRoom(r.code)} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid var(--danger)", color: "var(--danger)", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
                 <Trash2 size={13} /> Delete
               </button>
             </div>
@@ -220,10 +222,10 @@ export default function AdminContent() {
       {/* Survey */}
       <section>
         <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-          <BarChart3 size={16} color="#00E5A0" /> Survey {survey ? `(live: ${survey.totalVotes || 0} votes)` : "(none live)"}
+          <BarChart3 size={16} color="var(--success)" /> Survey {survey ? `(live: ${survey.totalVotes || 0} votes)` : "(none live)"}
         </h3>
         {survey && (
-          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 12, padding: 14, marginBottom: 12 }}>
+          <div className="fold-card" style={{ borderRadius: 12, padding: 14, marginBottom: 12 }}>
             <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 8 }}>{survey.question}</div>
             {(survey.options || []).map((o, i) => {
               const v = (survey.votes || {})[i] || 0;
@@ -231,10 +233,10 @@ export default function AdminContent() {
               return (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                   <span style={{ fontSize: 12, width: 180, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{o}</span>
-                  <div style={{ flex: 1, height: 8, borderRadius: 4, background: "#1e1e2a", overflow: "hidden" }}>
-                    <div style={{ width: `${pct}%`, height: "100%", background: "#00E5A0" }} />
+                  <div style={{ flex: 1, height: 8, borderRadius: 4, background: "var(--bg-3)", overflow: "hidden" }}>
+                    <div style={{ width: `${pct}%`, height: "100%", background: "var(--success)" }} />
                   </div>
-                  <span style={{ fontSize: 12, color: "#888", width: 70 }}>{v} ({pct}%)</span>
+                  <span style={{ fontSize: 12, color: "var(--text-muted)", width: 70 }}>{v} ({pct}%)</span>
                 </div>
               );
             })}
