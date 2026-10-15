@@ -2,7 +2,7 @@
 // Unread state tracked locally (last-seen update id).
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { listUpdates } from "../lib/community";
+import { subscribeUpdates } from "../lib/community";
 import { Bell, X, Megaphone } from "lucide-react";
 
 const SEEN_KEY = "exampadi_updates_seen";
@@ -16,7 +16,8 @@ export default function NotificationPanel() {
   const [updates, setUpdates] = useState([]);
 
   useEffect(() => {
-    listUpdates(10).then(setUpdates).catch(() => {});
+    const unsub = subscribeUpdates(setUpdates, 10);
+    return () => unsub && unsub();
   }, []);
 
   const unread = updates.length > 0 && updates[0].id !== getSeen();

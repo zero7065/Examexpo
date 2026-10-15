@@ -1,4 +1,4 @@
-// Post-exam review nudge: once per session, rating + text → AI moderation.
+// Post-exam review nudge: once per session, rating + text → admin approval.
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "./Toast";
@@ -35,7 +35,7 @@ export default function ReviewPrompt({ sessionId, context = "", delayMs = 2500, 
         rating, text: text.trim(), context,
       });
       try { localStorage.setItem(`review-asked-${sessionId || "once"}`, "1"); } catch { /* private mode */ }
-      toast({ message: "Thanks! Your review is checked and goes live soon ⭐", type: "success" });
+      toast({ message: "Thanks! Your review appears once an admin approves it ⭐", type: "success" });
       setOpen(false);
       onDone && onDone(true);
     } catch (e) {

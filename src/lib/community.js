@@ -1,18 +1,17 @@
-// src/lib/community.js — reviews (AI-moderated), surveys, updates/notifications.
+// src/lib/community.js — reviews (admin-moderated), surveys, updates/notifications.
 import {
   doc, setDoc, getDoc, getDocs, addDoc, updateDoc, deleteDoc,
-  collection, query, where, orderBy, limit, serverTimestamp, increment, arrayUnion, arrayRemove,
+  collection, query, where, orderBy, limit, serverTimestamp, increment, arrayUnion, arrayRemove, onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import { askGroq } from "./ai";
 
 function needDb() {
   if (!db) throw new Error("Not available offline");
 }
 
 // ─── Reviews ───
-// Flow: user submits → status "pending" → AI moderation → approved/rejected.
-// Only approved reviews appear on the homepage/feed.
+// Flow: user submits → status "pending" → ADMIN approves → appears publicly.
+// Nothing a user posts ever goes public without an admin action.
 export async function submitReview({ uid, name, rating, text, context = "" }) {
   needDb();
   const clean = String(text || "").trim().slice(0, 500);
@@ -33,32 +32,7 @@ export async function submitReview({ uid, name, rating, text, context = "" }) {
     console.warn("submitReview failed:", e?.message);
     throw new Error("Could not submit review. Please try again.");
   });
-  moderateReview(ref.id, clean, r).catch(() => {});
   return ref.id;
-}
-
-// AI gatekeeper: approves genuine, safe, on-topic reviews.
-export async function moderateReview(reviewId, text, rating) {
-  needDb();
-  try {
-    const res = await askGroq(
-      "You moderate app reviews for a Nigerian exam-prep app. Return ONLY valid JSON.",
-      `Review (rating ${rating}/5): "${text}"\nReturn JSON exactly: {"approved": true|false, "reason": "<short>"}. Approve if genuine, safe, and about studying/exams/the app. Reject spam, abuse, hate, personal phone numbers or emails, ads, or gibberish.`,
-      { maxTokens: 150, temperature: 0.2 }
-    );
-    const jsonMatch = String(res).match(/\{[\s\S]*\}/);
-    const verdict = jsonMatch ? JSON.parse(jsonMatch[0]) : { approved: true };
-    await updateDoc(doc(db, "reviews", reviewId), {
-      status: verdict.approved ? "approved" : "rejected",
-      modReason: String(verdict.reason || "").slice(0, 200),
-      moderatedAt: serverTimestamp(),
-    });
-    return !!verdict.approved;
-  } catch (e) {
-    // AI down? Leave pending for admin eyes rather than publishing blindly.
-    console.warn("Review moderation deferred:", e?.message);
-    return null;
-  }
 }
 
 export async function listApprovedReviews(max = 24) {
@@ -67,6 +41,26 @@ export async function listApprovedReviews(max = 24) {
     query(collection(db, "reviews"), where("status", "==", "approved"), orderBy("createdAt", "desc"), limit(max))
   );
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+// Real-time approved reviews (Feed / landing). Calls back with [] on error.
+export function subscribeApprovedReviews(cb, max = 24) {
+  if (!db) { cb([]); return () => {}; }
+  return onSnapshot(
+    query(collection(db, "reviews"), where("status", "==", "approved"), orderBy("createdAt", "desc"), limit(max)),
+    (snap) => cb(snap.docs.map((d) => ({ id: d.id, ...d.data() }))),
+    () => cb([])
+  );
+}
+
+// Real-time admin moderation queue for one status (pending/approved/rejected).
+export function subscribeReviewQueue(status, cb, max = 40) {
+  if (!db) { cb([]); return () => {}; }
+  return onSnapshot(
+    query(collection(db, "reviews"), where("status", "==", status), orderBy("createdAt", "desc"), limit(max)),
+    (snap) => cb(snap.docs.map((d) => ({ id: d.id, ...d.data() }))),
+    () => cb([])
+  );
 }
 
 export async function toggleReviewLike(reviewId, uid) {
@@ -86,7 +80,11 @@ export async function toggleReviewLike(reviewId, uid) {
 export async function setReviewStatus(reviewId, status, adminUid, adminEmail) {
   needDb();
   const { logActivity } = await import("./activityLog");
-  await updateDoc(doc(db, "reviews", reviewId), { status });
+  await updateDoc(doc(db, "reviews", reviewId), {
+    status,
+    moderatedAt: serverTimestamp(),
+    moderatedBy: adminUid || null,
+  });
   await logActivity({
     action: "review_moderated", userId: adminUid, email: adminEmail,
     details: { reviewId, status, reason: "admin console" },
@@ -167,6 +165,16 @@ export async function listUpdates(max = 20) {
   needDb();
   const snap = await getDocs(query(collection(db, "updates"), orderBy("createdAt", "desc"), limit(max)));
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+}
+
+// Real-time admin-posted updates (Dashboard + notification panel).
+export function subscribeUpdates(cb, max = 20) {
+  if (!db) { cb([]); return () => {}; }
+  return onSnapshot(
+    query(collection(db, "updates"), orderBy("createdAt", "desc"), limit(max)),
+    (snap) => cb(snap.docs.map((d) => ({ id: d.id, ...d.data() }))),
+    () => cb([])
+  );
 }
 
 export async function deleteUpdate(id) {

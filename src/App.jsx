@@ -225,7 +225,7 @@ function AuthAwareRoutes() {
           <Route path="/teacher/register" element={<ProtectedRoute><TeacherRegister /></ProtectedRoute>} />
 
           {/* Teacher (role-gated) */}
-          <Route path="/teacher" element={<TeacherRoute />} />
+          <Route path="/teacher" element={<TeacherRoute><TeacherDashboard /></TeacherRoute>} />
           <Route path="/teacher/exam-generator" element={<TeacherRoute><ExamGenerator /></TeacherRoute>} />
           <Route path="/teacher/classroom" element={<TeacherRoute><ClassroomMode /></TeacherRoute>} />
           <Route path="/teacher/parent-reports" element={<TeacherRoute><ParentReports /></TeacherRoute>} />

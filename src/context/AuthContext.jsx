@@ -58,6 +58,7 @@ export function AuthProvider({ children }) {
     const MAX_RETRIES = 3;
 
     function startAuthListener() {
+      if (!auth) { setLoading(false); return; }
       timeout = setTimeout(() => {
         if (cancelled) return;
         if (retryCount < MAX_RETRIES) {

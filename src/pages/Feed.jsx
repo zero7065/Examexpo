@@ -8,7 +8,7 @@ import {
   subscribeReplies, resolveRequest, getTopStudents,
 } from "../lib/discussions";
 import {
-  listApprovedReviews, toggleReviewLike, submitReview,
+  subscribeApprovedReviews, toggleReviewLike, submitReview,
 } from "../lib/community";
 import AvatarDisplay from "../components/Avatar/AvatarDisplay";
 import { getActiveBadge } from "../lib/achievements";
@@ -112,8 +112,8 @@ export default function Feed() {
   useEffect(() => {
     getTopStudents(10).then(setTop).catch(() => {});
     const unsub = subscribeHelpRequests(setRequests, 30);
-    listApprovedReviews(12).then(setReviews).catch(() => {});
-    return () => unsub && unsub();
+    const unsubReviews = subscribeApprovedReviews(setReviews, 12);
+    return () => { unsub && unsub(); unsubReviews && unsubReviews(); };
   }, []);
 
   async function sendReview() {
@@ -129,7 +129,7 @@ export default function Feed() {
       });
       setReviewText("");
       setShowReviewForm(false);
-      toast({ message: "Review sent for AI check — it goes live once approved ⭐", type: "success" });
+      toast({ message: "Review submitted — it goes live after an admin approves it ⭐", type: "success" });
     } catch (e) {
       toast({ message: e.message || "Could not submit", type: "error" });
     } finally {
@@ -241,7 +241,7 @@ export default function Feed() {
               ))}
             </div>
             <textarea value={reviewText} onChange={(e) => setReviewText(e.target.value)} rows={3} maxLength={500}
-              placeholder="What do you think of ExamPadi? (shows with your name after AI check)" className="input-field" style={{ resize: "vertical" }} />
+              placeholder="What do you think of ExamPadi? (shows with your name after admin approval)" className="input-field" style={{ resize: "vertical" }} />
             <button onClick={sendReview} disabled={sendingReview} className="btn-primary w-full disabled:opacity-60">
               {sendingReview ? "Sending…" : "Submit review"}
             </button>

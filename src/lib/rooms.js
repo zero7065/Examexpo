@@ -3,8 +3,13 @@
 // A room = a code + a fixed question set + live per-member progress.
 // Creator generates questions once; joiners pull the same set and report
 // progress into the room doc (live via onSnapshot). No presence infra.
+//
+// Moderation: user-created rooms start status "pending" — only the host can
+// enter. They appear on the site (public listing / joinable) after an admin
+// approves them (status "approved").
 import {
-  doc, setDoc, getDoc, updateDoc,
+  doc, setDoc, getDoc, updateDoc, deleteDoc,
+  collection, query, where, orderBy, limit,
   serverTimestamp, onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
@@ -32,6 +37,7 @@ export async function createRoom({ subject, count = 10, exam = "JAMB", hostUid, 
     exam,
     hostUid,
     hostName: String(hostName || "Host").slice(0, 60),
+    status: "pending",
     questions: questions.map((q) => ({
       id: q.id,
       question: q.question,
@@ -50,9 +56,15 @@ export async function joinRoom(code, { uid, name }) {
   needDb();
   const clean = String(code || "").trim().toUpperCase();
   const ref = doc(db, "studyRooms", clean);
-  const snap = await getDoc(ref);
-  if (!snap.exists()) throw new Error("Room not found — check the code");
+  // Pending rooms are unreadable to non-hosts → getDoc may be denied.
+  const snap = await getDoc(ref).catch(() => null);
+  if (!snap || !snap.exists()) {
+    throw new Error("Room not found — or it's still awaiting admin approval.");
+  }
   const room = snap.data();
+  if (room.status !== "approved" && room.hostUid !== uid) {
+    throw new Error("This room is awaiting admin approval — the host can play now, others once approved.");
+  }
   await updateDoc(ref, {
     [`progress.${uid}`]: {
       name: String(name || "Student").slice(0, 60),
@@ -83,4 +95,60 @@ export async function findRoom(code) {
   needDb();
   const snap = await getDoc(doc(db, "studyRooms", String(code || "").trim().toUpperCase()));
   return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+}
+
+// Real-time public listing: only approved rooms appear on the site.
+export function subscribeApprovedRooms(cb, max = 20) {
+  if (!db) { cb([]); return () => {}; }
+  return onSnapshot(
+    query(collection(db, "studyRooms"), where("status", "==", "approved"), orderBy("createdAt", "desc"), limit(max)),
+    (snap) => cb(snap.docs.map((d) => {
+      const data = d.data();
+      return { id: d.id, code: data.code, subject: data.subject, exam: data.exam, hostName: data.hostName, createdAt: data.createdAt };
+    })),
+    () => cb([])
+  );
+}
+
+// Real-time admin moderation queue for one status (pending/approved/rejected).
+export function subscribeRoomQueue(status, cb, max = 40) {
+  if (!db) { cb([]); return () => {}; }
+  return onSnapshot(
+    query(collection(db, "studyRooms"), where("status", "==", status), orderBy("createdAt", "desc"), limit(max)),
+    (snap) => cb(snap.docs.map((d) => {
+      const data = d.data();
+      return {
+        id: d.id, code: data.code, subject: data.subject, exam: data.exam,
+        hostName: data.hostName, hostUid: data.hostUid, status: data.status,
+        memberCount: Object.keys(data.progress || {}).length, createdAt: data.createdAt,
+      };
+    })),
+    () => cb([])
+  );
+}
+
+export async function setRoomStatus(code, status, adminUid, adminEmail) {
+  needDb();
+  const clean = String(code || "").trim().toUpperCase();
+  await updateDoc(doc(db, "studyRooms", clean), {
+    status,
+    moderatedAt: serverTimestamp(),
+    moderatedBy: adminUid || null,
+  });
+  const { logActivity } = await import("./activityLog");
+  await logActivity({
+    action: "room_moderated", userId: adminUid, email: adminEmail,
+    details: { roomCode: clean, status },
+  }).catch(() => {});
+}
+
+export async function deleteRoom(code, adminUid, adminEmail) {
+  needDb();
+  const clean = String(code || "").trim().toUpperCase();
+  await deleteDoc(doc(db, "studyRooms", clean));
+  const { logActivity } = await import("./activityLog");
+  await logActivity({
+    action: "room_deleted", userId: adminUid, email: adminEmail,
+    details: { roomCode: clean },
+  }).catch(() => {});
 }

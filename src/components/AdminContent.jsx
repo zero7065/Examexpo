@@ -1,21 +1,28 @@
-// Admin content panel: post updates, moderate reviews, run surveys.
+// Admin content panel: post updates, moderate reviews + study rooms, run surveys.
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "./Toast";
 import {
-  postUpdate, listUpdates, deleteUpdate,
-  upsertSurvey, getActiveSurvey,
+  postUpdate, deleteUpdate, upsertSurvey, getActiveSurvey,
+  setReviewStatus, subscribeUpdates, subscribeReviewQueue,
 } from "../lib/community";
-import { collection, query, where, getDocs, limit } from "firebase/firestore";
-import { db } from "../firebaseConfig";
-import { setReviewStatus } from "../lib/community";
-import { Megaphone, Star, BarChart3, Trash2, Check, X, Plus } from "lucide-react";
+import { subscribeRoomQueue, setRoomStatus, deleteRoom } from "../lib/rooms";
+import { Megaphone, Star, BarChart3, Trash2, Check, X, Plus, Users } from "lucide-react";
+
+const REVIEW_TABS = [
+  { id: "pending", label: "Pending" },
+  { id: "approved", label: "Live" },
+  { id: "rejected", label: "Rejected" },
+];
 
 export default function AdminContent() {
   const { user } = useAuth();
   const { toast } = useToast();
   const [updates, setUpdates] = useState([]);
-  const [pending, setPending] = useState([]);
+  const [reviewTab, setReviewTab] = useState("pending");
+  const [reviews, setReviews] = useState([]);
+  const [roomTab, setRoomTab] = useState("pending");
+  const [rooms, setRooms] = useState([]);
   const [survey, setSurvey] = useState(null);
   const [uTitle, setUTitle] = useState("");
   const [uBody, setUBody] = useState("");
@@ -23,31 +30,22 @@ export default function AdminContent() {
   const [sQ, setSQ] = useState("");
   const [sOpts, setSOpts] = useState(["", "", "", ""]);
 
-  function load() {
-    listUpdates(20).then(setUpdates).catch(() => {});
-    getDocs(query(collection(db, "reviews"), where("status", "==", "pending"), limit(30)))
-      .then((s) => setPending(s.docs.map((d) => ({ id: d.id, ...d.data() }))))
-      .catch(() => {});
-    getActiveSurvey().then(setSurvey).catch(() => setSurvey(null));
-  }
-
   useEffect(() => {
-    let live = true;
-    listUpdates(20).then((u) => { if (live) setUpdates(u); }).catch(() => {});
-    getDocs(query(collection(db, "reviews"), where("status", "==", "pending"), limit(30)))
-      .then((s) => { if (live) setPending(s.docs.map((d) => ({ id: d.id, ...d.data() }))); })
-      .catch(() => {});
-    getActiveSurvey().then((s) => { if (live) setSurvey(s); }).catch(() => { if (live) setSurvey(null); });
-    return () => { live = false; };
-  }, []);
+    const subs = [
+      subscribeUpdates(setUpdates, 20),
+      subscribeReviewQueue(reviewTab, setReviews, 40),
+      subscribeRoomQueue(roomTab, setRooms, 40),
+    ];
+    getActiveSurvey().then(setSurvey).catch(() => setSurvey(null));
+    return () => subs.forEach((u) => u && u());
+  }, [reviewTab, roomTab]);
 
   async function publishUpdate() {
     try {
       await postUpdate({ title: uTitle, body: uBody, tag: uTag });
       setUTitle("");
       setUBody("");
-      toast({ message: "Update published — users see it in their notification panel 🔔", type: "success" });
-      load();
+      toast({ message: "Update published — online users see it instantly 🔔", type: "success" });
     } catch (e) {
       toast({ message: e.message, type: "error" });
     }
@@ -57,7 +55,6 @@ export default function AdminContent() {
     if (!window.confirm("Delete this update?")) return;
     try {
       await deleteUpdate(id);
-      load();
     } catch (e) {
       toast({ message: e.message, type: "error" });
     }
@@ -66,8 +63,26 @@ export default function AdminContent() {
   async function modReview(id, status) {
     try {
       await setReviewStatus(id, status, user.uid, user.email);
-      setPending((p) => p.filter((r) => r.id !== id));
-      toast({ message: `Review ${status}`, type: "success" });
+      toast({ message: `Review ${status}${status === "approved" ? " — now live" : ""}`, type: "success" });
+    } catch (e) {
+      toast({ message: e.message, type: "error" });
+    }
+  }
+
+  async function modRoom(code, status) {
+    try {
+      await setRoomStatus(code, status, user.uid, user.email);
+      toast({ message: `Room ${code} ${status}`, type: "success" });
+    } catch (e) {
+      toast({ message: e.message, type: "error" });
+    }
+  }
+
+  async function removeRoom(code) {
+    if (!window.confirm(`Delete room ${code} permanently?`)) return;
+    try {
+      await deleteRoom(code, user.uid, user.email);
+      toast({ message: `Room ${code} deleted`, type: "success" });
     } catch (e) {
       toast({ message: e.message, type: "error" });
     }
@@ -79,10 +94,25 @@ export default function AdminContent() {
       setSQ("");
       setSOpts(["", "", "", ""]);
       toast({ message: "Survey live — users see it after ~1 week of usage", type: "success" });
-      load();
     } catch (e) {
       toast({ message: e.message, type: "error" });
     }
+  }
+
+  function TabBar({ tabs, active, onChange }) {
+    return (
+      <div style={{ display: "flex", gap: 6, marginBottom: 12, flexWrap: "wrap" }}>
+        {tabs.map((t) => (
+          <button key={t.id} onClick={() => onChange(t.id)}
+            style={{ padding: "6px 12px", borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: "pointer",
+              background: active === t.id ? "#6C3CE9" : "transparent",
+              border: `1px solid ${active === t.id ? "#6C3CE9" : "#2a2a36"}`,
+              color: active === t.id ? "#fff" : "#888" }}>
+            {t.label}
+          </button>
+        ))}
+      </div>
+    );
   }
 
   return (
@@ -117,19 +147,70 @@ export default function AdminContent() {
       {/* Reviews moderation */}
       <section>
         <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
-          <Star size={16} color="#D4A853" /> Reviews awaiting check ({pending.length})
+          <Star size={16} color="#D4A853" /> Review moderation
         </h3>
-        {pending.length === 0 && <p style={{ fontSize: 13, color: "#666" }}>Queue clear — AI approved or posted nothing pending.</p>}
-        {pending.map((r) => (
+        <TabBar tabs={REVIEW_TABS} active={reviewTab} onChange={setReviewTab} />
+        {reviewTab === "pending" && reviews.length === 0 && (
+          <p style={{ fontSize: 13, color: "#666" }}>Queue clear — nothing awaiting approval.</p>
+        )}
+        {reviews.map((r) => (
           <div key={r.id} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 12, padding: 14, marginBottom: 8 }}>
-            <div style={{ fontSize: 13, fontWeight: 700 }}>{r.name} · {"★".repeat(r.rating || 5)}</div>
+            <div style={{ fontSize: 13, fontWeight: 700 }}>
+              {r.name} · {"★".repeat(r.rating || 5)} · <span style={{ color: "#666", fontWeight: 400, fontSize: 11 }}>{r.context || "community"}</span>
+            </div>
             <div style={{ fontSize: 13, color: "#ccc", margin: "6px 0 10px" }}>{r.text}</div>
             <div style={{ display: "flex", gap: 8 }}>
-              <button onClick={() => modReview(r.id, "approved")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "#4ADE80", border: "none", color: "#000", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
-                <Check size={13} /> Approve
-              </button>
-              <button onClick={() => modReview(r.id, "rejected")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid #FF4D6A", color: "#FF4D6A", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
-                <X size={13} /> Reject
+              {r.status !== "approved" && (
+                <button onClick={() => modReview(r.id, "approved")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "#4ADE80", border: "none", color: "#000", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                  <Check size={13} /> Approve
+                </button>
+              )}
+              {r.status === "approved" && (
+                <button onClick={() => modReview(r.id, "pending")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid #D4A853", color: "#D4A853", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                  Unpublish
+                </button>
+              )}
+              {r.status !== "rejected" && (
+                <button onClick={() => modReview(r.id, "rejected")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid #FF4D6A", color: "#FF4D6A", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                  <X size={13} /> Reject
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Study rooms moderation */}
+      <section>
+        <h3 style={{ fontSize: 15, fontWeight: 800, marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
+          <Users size={16} color="#00E5A0" /> Study rooms
+        </h3>
+        <TabBar
+          tabs={[{ id: "pending", label: "Pending" }, { id: "approved", label: "Live" }]}
+          active={roomTab} onChange={setRoomTab}
+        />
+        {roomTab === "pending" && rooms.length === 0 && (
+          <p style={{ fontSize: 13, color: "#666" }}>No rooms awaiting approval.</p>
+        )}
+        {rooms.map((r) => (
+          <div key={r.id} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 12, padding: 14, marginBottom: 8, display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+            <div style={{ flex: 1, minWidth: 160 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, fontFamily: "monospace" }}>{r.code}</div>
+              <div style={{ fontSize: 12, color: "#888" }}>{r.exam} · {r.subject} · host {r.hostName} · {r.memberCount || 1} member(s)</div>
+            </div>
+            <div style={{ display: "flex", gap: 8 }}>
+              {r.status !== "approved" && (
+                <button onClick={() => modRoom(r.code, "approved")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "#4ADE80", border: "none", color: "#000", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                  <Check size={13} /> Approve
+                </button>
+              )}
+              {r.status === "approved" && (
+                <button onClick={() => modRoom(r.code, "pending")} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid #D4A853", color: "#D4A853", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                  Unlist
+                </button>
+              )}
+              <button onClick={() => removeRoom(r.code)} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 8, background: "transparent", border: "1px solid #FF4D6A", color: "#FF4D6A", fontWeight: 700, fontSize: 12, cursor: "pointer" }}>
+                <Trash2 size={13} /> Delete
               </button>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
-import { createRoom, joinRoom, reportRoomProgress, subscribeRoom } from "../lib/rooms";
+import { createRoom, joinRoom, reportRoomProgress, subscribeRoom, subscribeApprovedRooms } from "../lib/rooms";
 import { JAMB_SUBJECTS } from "../data/subjects";
 import { ArrowLeft, Users, Copy, Check } from "lucide-react";
 
@@ -16,6 +16,12 @@ function Lobby() {
   const [count, setCount] = useState(10);
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
+  const [publicRooms, setPublicRooms] = useState([]);
+
+  useEffect(() => {
+    const unsub = subscribeApprovedRooms(setPublicRooms, 20);
+    return () => unsub && unsub();
+  }, []);
 
   async function handleCreate() {
     if (!user) return navigate("/auth");
@@ -25,19 +31,10 @@ function Lobby() {
         subject, count: Number(count) || 10, exam: "JAMB",
         hostUid: user.uid, hostName: user.displayName || "Student",
       });
-      toast({ message: `Room ${c} created — share the code!`, type: "success" });
+      toast({ message: `Room ${c} created — you can start now. It joins the public list once admin approves it.`, type: "success" });
       navigate(`/room/${c}`);
     } catch (e) {
-      const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-      let c = "ROOM-";
-      for (let i = 0; i < 6; i++) c += chars[Math.floor(Math.random() * chars.length)];
-      try {
-        const rooms = JSON.parse(localStorage.getItem("localRooms") || "[]");
-        rooms.push({ code: c, subject, count: Number(count) || 10, exam: "JAMB", hostUid: user.uid, hostName: user.displayName || "Student", createdAt: Date.now() });
-        localStorage.setItem("localRooms", JSON.stringify(rooms.slice(-20)));
-      } catch { /* storage full */ }
-      toast({ message: `Room ${c} created (local — will sync when online)`, type: "success" });
-      navigate(`/room/${c}`);
+      toast({ message: e.message || "Could not create room — check your connection", type: "error" });
     } finally {
       setBusy(false);
     }
@@ -82,6 +79,34 @@ function Lobby() {
           <button onClick={handleJoin} disabled={busy} className="btn-secondary px-6 disabled:opacity-60 whitespace-nowrap">Join</button>
         </div>
       </div>
+      {publicRooms.length > 0 && (
+        <div className="border-t border-border pt-6">
+          <h2 className="font-black text-text text-lg mb-1">Public rooms</h2>
+          <p className="text-sm text-text-muted mb-3">Approved by ExamPadi — open to everyone.</p>
+          <div className="space-y-2">
+            {publicRooms.map((r) => (
+              <div key={r.id} className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "var(--bg-3)", border: "1px solid var(--border)" }}>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-bold font-mono">{r.code}</div>
+                  <div className="text-xs text-text-muted">{r.exam} · {r.subject} · host {r.hostName}</div>
+                </div>
+                <button onClick={async () => {
+                  if (!user) return navigate("/auth");
+                  setBusy(true);
+                  try {
+                    await joinRoom(r.code, { uid: user.uid, name: user.displayName || "Student" });
+                    navigate(`/room/${r.code}`);
+                  } catch (e) {
+                    toast({ message: e.message || "Could not join room", type: "error" });
+                  } finally {
+                    setBusy(false);
+                  }
+                }} disabled={busy} className="btn-primary px-4 text-sm disabled:opacity-60">Join</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -133,10 +158,13 @@ function RoomView({ code }) {
   }
 
   if (room === null) {
-    return <div className="glass-card p-10 text-center text-text-muted">Room not found. Check the code.</div>;
+    return <div className="glass-card p-10 text-center text-text-muted">Room not found — or it's still awaiting admin approval.</div>;
   }
   if (!room) {
     return <div className="glass-card p-10 text-center text-text-muted">Joining room…</div>;
+  }
+  if (room.status !== "approved" && user && room.hostUid !== user.uid) {
+    return <div className="glass-card p-10 text-center text-text-muted">This room is awaiting approval by the ExamPadi team. The host can play now — you'll be able to join once it's approved.</div>;
   }
 
   const members = Object.entries(room.progress || {})

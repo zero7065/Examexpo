@@ -20,7 +20,7 @@ import NotificationPanel from "../components/NotificationPanel";
 import OnboardingTour from "../components/OnboardingTour";
 import { tourSeen } from "../lib/tour";
 import SurveyPrompt from "../components/SurveyPrompt";
-import { listUpdates } from "../lib/community";
+import { subscribeUpdates } from "../lib/community";
 import {
   Target, Calendar, CheckCircle, Zap, Send, ChevronRight, Crown, Bell, Megaphone
 } from "lucide-react";
@@ -49,7 +49,8 @@ export default function Dashboard() {
   const healthTip = dailyHealthTip(new Date().toISOString().split("T")[0]);
 
   useEffect(() => {
-    listUpdates(5).then(setUpdates).catch(() => {});
+    const unsub = subscribeUpdates(setUpdates, 5);
+    return () => unsub && unsub();
   }, []);
 
   // NOTE: admins intentionally land here like everyone else.
