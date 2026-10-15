@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { usePaystack } from "../hooks/usePaystack";
+import { useToast } from "./Toast";
 import { PLANS } from "../config/plans";
 import { X, Check, Crown, ChevronRight, Loader2, Zap, ShieldCheck, ArrowLeft } from "lucide-react";
 
 export default function ProUpgradeModal({ open, onClose, reason, dismissible }) {
-  const { user } = useAuth();
+  const { user, refreshProfile } = useAuth();
+  const { toast } = useToast();
   const navigate = useNavigate();
   const [billing, setBilling] = useState("yearly");
   const { initializePayment, loading, error: payError } = usePaystack();
@@ -43,12 +45,21 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
       navigate("/auth");
       return;
     }
-    await initializePayment({
+    const result = await initializePayment({
       plan,
       userEmail: user.email,
       userId: user.uid,
       userName: user.displayName || "Student",
+      onPaid: async (response) => {
+        try {
+          await refreshProfile();
+        } catch (_) {}
+        toast({ message: "Pro activated! Welcome to ExamPadi Pro", type: "success" });
+        onClose && onClose();
+        navigate("/payment/success", { state: { reference: response.reference, plan } });
+      },
     });
+    if (!result) return;
   }
 
   const monthlyEquiv = billing === "yearly"
@@ -145,7 +156,7 @@ export default function ProUpgradeModal({ open, onClose, reason, dismissible }) 
           }}>
             {[
               { id: "monthly", label: "Monthly" },
-              { id: "yearly", label: "Yearly", badge: "SAVE ₦6,000" },
+              { id: "yearly", label: "Yearly", badge: `SAVE ₦${(PLANS.pro_monthly.price * 12 - PLANS.pro_yearly.price).toLocaleString()}` },
             ].map((tab) => {
               const isActive = billing === tab.id;
               return (

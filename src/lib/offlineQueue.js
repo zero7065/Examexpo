@@ -50,6 +50,11 @@ export async function queueFirestoreWrite(path, data, { merge = true } = {}) {
     await setDoc(doc(db, path), data, { merge });
     return { queued: false };
   } catch (e) {
+    // Rules rejections never succeed on retry — replaying amplifies errors.
+    if (e?.code === "permission-denied") {
+      console.warn("Firestore write rejected by rules:", path);
+      return { queued: false, rejected: true };
+    }
     enqueue(op);
     console.warn("Firestore write queued (offline/degraded):", path, e?.code || e?.message);
     return { queued: true };
@@ -62,6 +67,10 @@ export async function queueFirestoreAdd(collectionPath, data) {
     await addDoc(collection(db, collectionPath), data);
     return { queued: false };
   } catch (e) {
+    if (e?.code === "permission-denied") {
+      console.warn("Firestore add rejected by rules:", collectionPath);
+      return { queued: false, rejected: true };
+    }
     enqueue(op);
     console.warn("Firestore add queued (offline/degraded):", collectionPath, e?.code || e?.message);
     return { queued: true };
@@ -87,6 +96,10 @@ export async function flushQueue() {
       }
       flushed++;
     } catch (e) {
+      if (e?.code === "permission-denied") {
+        // Permanent rejection — drop it so it stops failing forever.
+        continue;
+      }
       failed.push(op);
       // Stop on the first failure — network is likely still down.
       const idx = pending.indexOf(op);

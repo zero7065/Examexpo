@@ -30,11 +30,15 @@ const PaymentPage = () => {
   const [currency, setCurrency] = useState("NGN");
   const { initializePayment } = usePaystack();
 
+  const YEARLY = new Set(["pro_yearly", "ielts"]);
+  const PRO_SET = new Set(["pro_monthly", "pro_yearly", "ielts"]);
+
   const activatePro = async (planId, duration, reference) => {
     const expiryDate = new Date();
     expiryDate.setHours(23, 59, 59, 999);
     expiryDate.setDate(expiryDate.getDate() + duration);
 
+    let persisted = true;
     if (db && user) {
       let retries = 3;
       let activated = false;
@@ -48,6 +52,7 @@ const PaymentPage = () => {
               startDate: serverTimestamp(),
               endDate: expiryDate.toISOString(),
               autoRenew: true,
+              verified: true,
             },
           });
           activated = true;
@@ -55,9 +60,10 @@ const PaymentPage = () => {
           retries--;
           console.warn(`Subscription write failed (${retries} retries left):`, e?.message);
           if (retries === 0) {
-            toast({ message: "Payment received but activation failed. Please contact support — do NOT pay again.", type: "error" });
+            persisted = false;
+            toast({ message: "Payment received but activation failed. Press Verify on the next page — do NOT pay again.", type: "error", duration: 10000 });
           } else {
-            await new Promise((r) => setTimeout(r, 1000 * (3 - retries)));
+            await new Promise((r) => setTimeout(r, 1000 * (4 - retries)));
           }
         }
       }
@@ -65,12 +71,13 @@ const PaymentPage = () => {
 
     try {
       updateUser({
-        plan: planId.includes("pro") ? "pro" : "free",
+        plan: PRO_SET.has(planId) ? "pro" : "free",
         planExpiry: expiryDate.toISOString(),
       });
     } catch (e) {
       console.warn("Failed to update AuthContext:", e);
     }
+    return persisted;
   };
 
   const handlePayment = async (planKey) => {
@@ -92,11 +99,11 @@ const PaymentPage = () => {
         userName: user.displayName || "Student",
         currency,
         onPaid: async (response) => {
-          const duration = planKey === "pro_yearly" ? 365 : 30;
-          await activatePro(planKey, duration, response.reference);
-          logActivity({ action: "payment_success", userId: user.uid, email: user.email, details: { plan: planKey, reference: response.reference, amount: planConfig.price, currency } });
-          toast({ message: "Payment successful! You're now Pro", type: "success" });
-          navigate("/payment/success");
+          const duration = YEARLY.has(planKey) ? 365 : 30;
+          const persisted = await activatePro(planKey, duration, response.reference);
+          logActivity({ action: "payment_success", userId: user.uid, email: user.email, details: { plan: planKey, reference: response.reference, amount: planConfig.price, currency, persisted } });
+          if (persisted) toast({ message: "Payment successful! You're now Pro", type: "success" });
+          navigate("/payment/success", { state: { reference: response.reference, plan: planKey, activated: persisted } });
         },
       });
       if (!paidRef) {
@@ -104,7 +111,7 @@ const PaymentPage = () => {
       }
     } catch (err) {
       const msg = err.message || "Payment failed. Try again.";
-      if (msg !== "Payment cancelled") {
+      if (msg !== "Payment cancelled" && msg !== "SKIP_GENERIC_TOAST") {
         setPayError(msg);
         logActivity({ action: "payment_failed", userId: user.uid, email: user.email, details: { plan: planKey, error: msg } });
       }
@@ -115,7 +122,7 @@ const PaymentPage = () => {
 
   async function handleTeamPay() {
     if (!user) return navigate("/auth");
-    const seats = Math.min(100, Math.max(1, Math.floor(Number(teamSeats) || 1)));
+    const seats = Math.min(100, Math.max(2, Math.floor(Number(teamSeats) || 2)));
     const total = teamPrice(teamPlan, seats);
     setTeamPaying(true);
     try {
@@ -135,17 +142,22 @@ const PaymentPage = () => {
         currency,
         extraMetadata: { teamId, teamPurchase: true, seats },
         onPaid: async (response) => {
-          await activateTeam({
-            teamId,
-            payerUid: user.uid,
-            payerEmail: user.email,
-            reference: response.reference,
-            amountNaira: total,
-          });
+          try {
+            await activateTeam({
+              teamId,
+              payerUid: user.uid,
+              payerEmail: user.email,
+              reference: response.reference,
+              amountNaira: total,
+            });
+          } catch (e) {
+            toast({ message: e?.message || "Team activation failed. Contact support on WhatsApp +234 812 763 6057 — do NOT pay again.", type: "error", duration: 10000 });
+            throw new Error("SKIP_GENERIC_TOAST", { cause: e });
+          }
           setTeamCode(code);
           toast({ message: `Team activated! Share code ${code} with your group.`, type: "success" });
           logActivity({ action: "payment_success", userId: user.uid, email: user.email, details: { plan: teamPlan, teamId, seats, reference: response.reference, amount: total } });
-          navigate("/team/" + teamId);
+          navigate("/team/" + teamId, { state: { reference: response.reference } });
         },
       });
       if (!paidRef) {
@@ -185,7 +197,7 @@ const PaymentPage = () => {
       return;
     }
     // Convert to NGN for activation thresholds; Paystack charges the entered currency.
-    const amountNGN = Math.ceil(entered / cur.rate);
+    const amountNGN = Math.round(entered / cur.rate);
     setCustomPaying(true);
     try {
       const paidRef = await initializePayment({
@@ -197,7 +209,7 @@ const PaymentPage = () => {
         currency,
         extraMetadata: { customPayment: true, enteredAmount: entered },
       });
-      if (paidRef) navigate("/payment/success");
+      if (paidRef) navigate("/payment/success", { state: { reference: paidRef, plan: "pro_monthly" } });
     } catch (err) {
       toast({ message: err.message || "Payment failed.", type: "error" });
     } finally {
@@ -224,10 +236,11 @@ const PaymentPage = () => {
         </div>
       </header>
 
-      <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {[
           { key: "pro_monthly", ...CONFIG_PLANS.pro_monthly },
           { key: "pro_yearly", ...CONFIG_PLANS.pro_yearly },
+          { key: "ielts", ...CONFIG_PLANS.ielts },
         ].map((plan) => (
           <div
             key={plan.key}
@@ -249,6 +262,11 @@ const PaymentPage = () => {
               {plan.key === "pro_yearly" && (
                 <div className="text-primary font-black text-xs uppercase mt-2 tracking-widest">
                   Save ₦{(CONFIG_PLANS.pro_monthly.price * 12 - plan.price).toLocaleString()}
+                </div>
+              )}
+              {plan.key === "ielts" && (
+                <div className="text-accent font-black text-xs uppercase mt-2 tracking-widest">
+                  Full year · Study abroad ready
                 </div>
               )}
             </div>
@@ -282,7 +300,7 @@ const PaymentPage = () => {
           <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary"><Users size={22} /></div>
           <h2 className="text-2xl font-black text-text">Pay for Your Team</h2>
         </div>
-        <p className="text-text-muted mb-6">One payment covers everyone — classmates, tutorial group, family. Classroom ceiling: never more than ₦25,000. Each member redeems your team code and gets Pro until your plan expires. You occupy the first seat.</p>
+        <p className="text-text-muted mb-6">One payment covers everyone — classmates, tutorial group, family. Team Yearly is a flat {formatMoney(25000, currency)} for up to 100 seats; Team Monthly is {formatMoney(3000, currency)}/seat with 10% off at 10+ seats and 20% off at 15+ seats. Each member redeems your team code and gets Pro until your plan expires. You occupy the first seat.</p>
 
         <div className="grid md:grid-cols-2 gap-4 mb-4">
           <label className="text-sm font-bold text-text">Team name
@@ -332,7 +350,7 @@ const PaymentPage = () => {
         {/* Custom amount */}
         <div className="mt-6 pt-6 border-t border-border">
           <h3 className="font-black text-text mb-1">Pay a custom amount</h3>
-          <p className="text-text-muted text-sm mb-3">Any amount from {formatMoney(CONFIG_PLANS.pro_monthly.price, currency)} upward goes straight to our Paystack and activates Pro Monthly on your account.</p>
+          <p className="text-text-muted text-sm mb-3">Any amount from <strong className="text-text">{CURRENCIES[currency].symbol}{CURRENCIES[currency].minCustom.toLocaleString()}</strong> upward goes straight to our Paystack and activates Pro Monthly on your account.</p>
           <div className="flex gap-2">
             <input type="number" min={CURRENCIES[currency].minCustom} value={customAmount} onChange={(e) => setCustomAmount(e.target.value)} placeholder={`e.g. ${CURRENCIES[currency].minCustom * 2}`} className="input-field font-mono" />
             <button onClick={handleCustomPay} disabled={customPaying} className="btn-secondary px-6 whitespace-nowrap disabled:opacity-60">

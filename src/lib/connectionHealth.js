@@ -58,8 +58,9 @@ export async function checkConnectionHealth() {
     return true;
   }
 
+  // Probe a real GET endpoint — a body-less POST to /v1/token always returns 400.
   const checks = await Promise.all([
-    probe(`https://securetoken.googleapis.com/v1/token?key=${FIREBASE_KEY}`, { method: "POST" }),
+    probe(`https://identitytoolkit.googleapis.com/v1/projects?key=${FIREBASE_KEY}`),
   ]);
 
   const blocked = checks.filter((c) => !c).length;

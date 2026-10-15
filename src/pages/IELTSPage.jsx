@@ -2,11 +2,12 @@
 // starter practice, and how ExamPadi connects. Figures: IDP/official 2026 guidance.
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plane, GraduationCap, Briefcase, Home, AlertTriangle, BookOpen, Sparkles } from "lucide-react";
+import { ArrowLeft, Plane, GraduationCap, Briefcase, Home, AlertTriangle, BookOpen, Sparkles, Crown } from "lucide-react";
 import { getQuestionsFromBank } from "../data/questions/compat";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useNavigate } from "react-router-dom";
+import { usePaystack } from "../hooks/usePaystack";
 
 const FORMAT = [
   { skill: "Listening", detail: "4 sections · 40 Qs · ~30 min. Recording plays ONCE.", drill: "Read ahead during pauses; underline keywords." },
@@ -58,6 +59,33 @@ export default function IELTSPage() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [practicing, setPracticing] = useState(false);
+  const [buying, setBuying] = useState(false);
+  const { initializePayment } = usePaystack();
+
+  async function handleIeltsBuy() {
+    if (!user) {
+      toast({ message: "Sign in first — your plan is linked to your account.", type: "info" });
+      navigate("/auth");
+      return;
+    }
+    setBuying(true);
+    try {
+      const paidRef = await initializePayment({
+        plan: "ielts",
+        userEmail: user.email,
+        userId: user.uid,
+        userName: user.displayName || "Student",
+        currency: "NGN",
+        onPaid: async (response) => {
+          navigate("/payment/success", { state: { reference: response.reference, plan: "ielts" } });
+        },
+      });
+      if (!paidRef) setBuying(false);
+    } catch (e) {
+      console.error("IELTS purchase failed:", e);
+      setBuying(false);
+    }
+  }
 
   function startPractice() {
     const qs = getQuestionsFromBank({ subject: "Reading", exam: "IELTS", count: 12 });
@@ -92,6 +120,38 @@ export default function IELTSPage() {
           Here's the full map — and how to prepare inside ExamPadi.
         </p>
       </header>
+
+      {/* IELTS plan purchase */}
+      <section className="glass-card p-6" style={{ border: "1px solid rgb(var(--accent-rgb) / 0.35)" }}>
+        <div className="flex flex-wrap items-center gap-4 justify-between">
+          <div style={{ flex: "1 1 320px" }}>
+            <div className="flex items-center gap-2 mb-1">
+              <Crown size={18} className="text-accent" />
+              <h2 className="font-black text-text text-lg m-0">IELTS Preparation Plan — full year</h2>
+            </div>
+            <p className="text-sm text-text-muted mb-2">
+              Everything in Pro Yearly plus the complete IELTS bank, band calculator, AI writing feedback,
+              speaking drills and the visa requirement guide. One payment, 12 months.
+            </p>
+            <div className="flex items-baseline gap-2">
+              <span className="text-4xl font-black font-mono text-text">₦80,000</span>
+              <span className="text-text-muted font-bold text-sm">/ year</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2" style={{ minWidth: 220 }}>
+            <button
+              onClick={handleIeltsBuy}
+              disabled={buying}
+              className="btn-primary h-14 text-base"
+            >
+              {buying ? "Opening Paystack…" : "Get IELTS Plan ₦80,000/yr"}
+            </button>
+            <button onClick={() => navigate("/payment")} className="btn-secondary h-12 text-sm">
+              See all plans
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* Format */}
       <section>

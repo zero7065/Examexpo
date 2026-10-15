@@ -54,8 +54,8 @@ export async function deepDiagnostic() {
     { name: "Auth (identitytoolkit)", opts: { url: `https://identitytoolkit.googleapis.com/v1/projects?key=${FIREBASE_KEY}`, timeout: 8000 } },
     { name: "Auth (www.googleapis)", opts: { url: `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getProjectConfig?key=${FIREBASE_KEY}`, timeout: 8000 } },
 
-    // Token refresh (session persistence depends on this)
-    { name: "Secure Token (session refresh)", opts: { url: `https://securetoken.googleapis.com/v1/token?key=${FIREBASE_KEY}`, method: "POST", timeout: 8000 } },
+    // Token refresh host (plain GET to root — a POST to /v1/token without a body always 400s)
+    { name: "Secure Token (session refresh)", opts: { url: "https://securetoken.googleapis.com/", timeout: 8000 } },
 
     // Firestore (data sync depends on this)
     { name: "Firestore (data sync)", opts: { url: `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents/stats/global?key=${FIREBASE_KEY}`, timeout: 8000 } },

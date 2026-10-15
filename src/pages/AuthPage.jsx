@@ -117,7 +117,7 @@ export default function AuthPage() {
     const endpoints = [
       ["Auth API", "https://identitytoolkit.googleapis.com/v1/projects?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", "GET"],
       ["Firestore", "https://firestore.googleapis.com/v1/projects/jamb-tutor/databases/(default)/documents/stats/global?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", "GET"],
-      ["Token", "https://securetoken.googleapis.com/v1/token?key=AIzaSyDbXyJpW351DfqEyxwrsc4zZUNLcltaGQE", "POST"],
+      ["Tokens", "https://securetoken.googleapis.com/", "GET"],
     ];
 
     for (const [name, url, method] of endpoints) {

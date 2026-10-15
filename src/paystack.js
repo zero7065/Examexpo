@@ -82,6 +82,9 @@ export function loadPaystack() {
     script.onerror = () => {
       clearTimeout(timeout);
       loading = false;
+      // Remove the dead tag so the next attempt re-creates it instead of
+      // polling a failed script forever.
+      script.remove();
       const err = new Error("Failed to load Paystack script. Check your connection.");
       callbacks.forEach(cb => cb.reject(err));
       callbacks = [];
@@ -109,8 +112,16 @@ export function openPaystack({ key, email, amount, ref, currency, metadata, onSu
         ref: ref,
         currency: currency || "NGN",
         metadata: metadata || {},
-        callback: function(response) {
-          if (onSuccess) onSuccess(response);
+        callback: async function(response) {
+          // Await activation before resolving — otherwise the caller re-enables
+          // its Pay button while the purchase is still being processed.
+          try {
+            if (onSuccess) await onSuccess(response);
+          } catch (err) {
+            console.error("Paystack callback error:", err);
+            reject(err);
+            return;
+          }
           resolve(response);
         },
         onClose: function() {

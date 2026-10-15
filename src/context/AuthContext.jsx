@@ -51,17 +51,6 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const handleOnline = () => setIsOffline(false);
-    const handleOffline = () => setIsOffline(true);
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
-  }, []);
-
-  useEffect(() => {
     let timeout;
     let retryCount = 0;
     let unsubscribe;
@@ -252,18 +241,48 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     let consecutiveAuthFailures = 0;
+    let lastReload = 0;
+    // Only react to real Firebase auth error codes — substring matching on
+    // "auth"/"token" catches unrelated rejections and signs users out for nothing.
+    const RECOVERABLE = new Set([
+      "auth/invalid-refresh-token",
+      "auth/user-token-expired",
+      "auth/user-disabled",
+      "auth/invalid-credential",
+      "auth/network-request-failed",
+      "auth/quota-exceeded",
+      "TOKEN_REFRESH_FAILED",
+    ]);
+    function extractCode(e) {
+      const code = e?.code || e?.error?.code || "";
+      if (RECOVERABLE.has(code)) return code;
+      const msg = String(e?.message || e?.reason?.message || e?.error?.message || "");
+      const m = msg.match(/auth\/[a-z-]+/);
+      if (m && RECOVERABLE.has(m[0])) return m[0];
+      if (/refresh.?token/i.test(msg)) return "TOKEN_REFRESH_FAILED";
+      return null;
+    }
     const onErr = (e) => {
-      const msg = String(e?.message || e?.reason || "");
-      if (msg.includes("token") || msg.includes("credential") || msg.includes("auth")) {
-        consecutiveAuthFailures++;
-        if (consecutiveAuthFailures >= 3) {
-          consecutiveAuthFailures = 0;
-          window.location.reload();
-        } else {
-          signOut(auth).catch(() => {});
-          setUser(null);
-        }
+      const code = extractCode(e);
+      if (!code) return;
+      // Transient network failures never force a sign-out — Firestore would then
+      // evaluate rules with request.auth == null and throw permission errors.
+      if (code === "auth/network-request-failed") return;
+      const now = Date.now();
+      if (now - lastReload > 30000) consecutiveAuthFailures = 0;
+      consecutiveAuthFailures++;
+      if (consecutiveAuthFailures >= 3) {
+        consecutiveAuthFailures = 0;
+        lastReload = now;
+        window.location.reload();
+      } else if (code === "auth/invalid-credential" || code === "auth/user-token-expired" || code === "auth/invalid-refresh-token") {
+        signOut(auth).catch(() => {});
+        setUser(null);
       }
+      // decay after 30s of quiet so unrelated errors never accumulate
+      setTimeout(() => {
+        if (Date.now() - lastReload > 30000) consecutiveAuthFailures = 0;
+      }, 30000);
     };
     window.addEventListener("unhandledrejection", onErr);
     return () => window.removeEventListener("unhandledrejection", onErr);
