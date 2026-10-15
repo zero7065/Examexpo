@@ -62,31 +62,35 @@ export async function activateTeam({ teamId, payerUid, payerEmail, reference, am
   if (team.status === "active") return team;
 
   const expiry = teamExpiry(team.plan).toISOString();
-  await updateDoc(ref, {
-    status: "active",
-    reference: reference || null,
-    amountPaid: amountNaira || teamPrice(team.plan, team.seats),
-    activatedAt: serverTimestamp(),
-    members: arrayUnion(payerUid),
-    seatsUsed: increment(1),
-  });
-  // Payer's own Pro (first seat)
-  await updateDoc(doc(db, "users", payerUid), {
-    subscription: {
-      plan: team.plan,
+  try {
+    await updateDoc(ref, {
       status: "active",
-      reference: reference || `team-${teamId}`,
-      startDate: serverTimestamp(),
-      endDate: expiry,
-      autoRenew: false,
-      viaTeam: teamId,
-    },
-    teamIds: arrayUnion(teamId),
-  });
+      reference: reference || null,
+      amountPaid: amountNaira || teamPrice(team.plan, team.seats),
+      activatedAt: serverTimestamp(),
+      members: arrayUnion(payerUid),
+      seatsUsed: increment(1),
+    });
+    await updateDoc(doc(db, "users", payerUid), {
+      subscription: {
+        plan: team.plan,
+        status: "active",
+        reference: reference || `team-${teamId}`,
+        startDate: serverTimestamp(),
+        endDate: expiry,
+        autoRenew: false,
+        viaTeam: teamId,
+      },
+      teamIds: arrayUnion(teamId),
+    });
+  } catch (e) {
+    console.error("activateTeam failed:", e);
+    throw new Error("Team activation failed. Please contact support — do NOT pay again.");
+  }
   await logActivity({
     action: "team_activated", userId: payerUid, email: payerEmail,
     details: { teamId, plan: team.plan, seats: team.seats, reference },
-  });
+  }).catch(() => {});
   return { ...team, status: "active", expiry };
 }
 

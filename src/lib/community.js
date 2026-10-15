@@ -29,8 +29,10 @@ export async function submitReview({ uid, name, rating, text, context = "" }) {
     likes: [],
     likeCount: 0,
     createdAt: serverTimestamp(),
+  }).catch((e) => {
+    console.warn("submitReview failed:", e?.message);
+    throw new Error("Could not submit review. Please try again.");
   });
-  // Fire-and-forget AI moderation (never blocks the user)
   moderateReview(ref.id, clean, r).catch(() => {});
   return ref.id;
 }

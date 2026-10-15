@@ -36,19 +36,30 @@ const PaymentPage = () => {
     expiryDate.setDate(expiryDate.getDate() + duration);
 
     if (db && user) {
-      try {
-        await updateDoc(doc(db, "users", user.uid), {
-          subscription: {
-            plan: planId,
-            status: "active",
-            reference,
-            startDate: serverTimestamp(),
-            endDate: expiryDate.toISOString(),
-            autoRenew: true,
-          },
-        });
-      } catch (e) {
-        console.warn("Failed to write subscription:", e);
+      let retries = 3;
+      let activated = false;
+      while (retries > 0 && !activated) {
+        try {
+          await updateDoc(doc(db, "users", user.uid), {
+            subscription: {
+              plan: planId,
+              status: "active",
+              reference,
+              startDate: serverTimestamp(),
+              endDate: expiryDate.toISOString(),
+              autoRenew: true,
+            },
+          });
+          activated = true;
+        } catch (e) {
+          retries--;
+          console.warn(`Subscription write failed (${retries} retries left):`, e?.message);
+          if (retries === 0) {
+            toast({ message: "Payment received but activation failed. Please contact support — do NOT pay again.", type: "error" });
+          } else {
+            await new Promise((r) => setTimeout(r, 1000 * (3 - retries)));
+          }
+        }
       }
     }
 

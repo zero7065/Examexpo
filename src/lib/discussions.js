@@ -56,6 +56,9 @@ export async function postHelpRequest({ uid, name, subject, topic, text }) {
     status: "open",
     replyCount: 0,
     createdAt: serverTimestamp(),
+  }).catch((e) => {
+    console.warn("postHelpRequest failed:", e?.message);
+    throw new Error("Could not post help request. Please try again.");
   });
   return ref.id;
 }

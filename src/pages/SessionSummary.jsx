@@ -65,26 +65,33 @@ export default function SessionSummary() {
                 ok: data.answers?.[q.id] === q.answer,
               }))
             : [];
-          await addDoc(collection(db, "sessions"), {
-            userId: user.uid,
-            subject: data.subject,
-            score: data.score,
-            correct: data.correct,
-            wrong: data.wrong,
-            total: data.total,
-            timeSeconds: data.timeSeconds,
-            xpEarned: data.xpEarned,
-            weakTopics: data.weakTopics || [],
-            questionLog,
-            completedAt: serverTimestamp(),
-          });
-
-          await updateDoc(doc(db, "users", user.uid), {
-            totalQuestionsAnswered: increment(data.total),
-            totalSessions: increment(1),
-            totalXP: increment(data.xpEarned || 0),
-            lastActive: serverTimestamp(),
-          });
+          try {
+            await addDoc(collection(db, "sessions"), {
+              userId: user.uid,
+              subject: data.subject,
+              score: data.score,
+              correct: data.correct,
+              wrong: data.wrong,
+              total: data.total,
+              timeSeconds: data.timeSeconds,
+              xpEarned: data.xpEarned,
+              weakTopics: data.weakTopics || [],
+              questionLog,
+              completedAt: serverTimestamp(),
+            });
+          } catch (e) {
+            console.warn("Session save failed, using local:", e?.message);
+          }
+          try {
+            await updateDoc(doc(db, "users", user.uid), {
+              totalQuestionsAnswered: increment(data.total),
+              totalSessions: increment(1),
+              totalXP: increment(data.xpEarned || 0),
+              lastActive: serverTimestamp(),
+            });
+          } catch (e) {
+            console.warn("User stats update failed:", e?.message);
+          }
         }
 
         await updateStreak(user.uid);

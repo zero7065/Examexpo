@@ -220,15 +220,19 @@ export function AuthProvider({ children }) {
     const userDocRef = doc(db, "users", googleUser.uid);
     const existingDoc = await getDoc(userDocRef).catch(() => null);
     if (!existingDoc || !existingDoc.exists()) {
-      await setDoc(userDocRef, {
-        email: googleUser.email,
-        name: googleUser.displayName || "",
-        role: "user",
-        exam: null,
-        subjects: [],
-        onboarded: false,
-        createdAt: serverTimestamp(),
-      }, { merge: true });
+      try {
+        await setDoc(userDocRef, {
+          email: googleUser.email,
+          name: googleUser.displayName || "",
+          role: "user",
+          exam: null,
+          subjects: [],
+          onboarded: false,
+          createdAt: serverTimestamp(),
+        }, { merge: true });
+      } catch (e) {
+        console.warn("Google profile creation failed:", e?.message);
+      }
     }
     logActivity({ action: "register", userId: googleUser.uid, email: googleUser.email, details: { name: googleUser.displayName, provider: "google" } });
     setUser({ ...googleUser, displayName: googleUser.displayName });
