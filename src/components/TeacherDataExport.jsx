@@ -64,20 +64,20 @@ export default function TeacherDataExport({ roster, schoolName }) {
   }
 
   if (!roster.length) {
-    return <div style={{ color: "#666", fontSize: 13, padding: 16 }}>No students to export yet.</div>;
+    return <div style={{ color: "var(--text-muted)", fontSize: 13, padding: 16 }}>No students to export yet.</div>;
   }
 
   return (
-    <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 20 }}>
+    <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-        <FileText size={18} color="#6C3CE9" />
-        <span style={{ fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>Export Student Data</span>
+        <FileText size={18} color="var(--primary)" />
+        <span style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>Export Student Data</span>
       </div>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         <button onClick={downloadCSV} disabled={exporting} style={{ padding: "10px 20px", borderRadius: 8, background: "#4ADE80", border: "none", color: "#000", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
           <Download size={14} /> Download CSV
         </button>
-        <button onClick={downloadText} disabled={exporting} style={{ padding: "10px 20px", borderRadius: 8, background: "#D4A853", border: "none", color: "#000", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+        <button onClick={downloadText} disabled={exporting} style={{ padding: "10px 20px", borderRadius: 8, background: "var(--accent)", border: "none", color: "#000", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
           <FileText size={14} /> Download Report
         </button>
         <button onClick={shareWhatsApp} disabled={exporting} style={{ padding: "10px 20px", borderRadius: 8, background: "#25D366", border: "none", color: "#000", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>

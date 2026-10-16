@@ -151,12 +151,16 @@ const HelpPage = () => {
           <div className="space-y-4 border-2 border-accent/30 rounded-2xl p-6 bg-accent/5">
             <div className="flex items-center gap-3 text-xl font-bold text-accent">
               <div className="w-10 h-10 bg-accent/20 rounded-xl flex items-center justify-center">👑</div>
-              Pro Plan - ₦3,000/mo
+              Pro Plan - ₦3,500/mo
             </div>
             <ul className="space-y-3 text-text-muted">
               <li className="flex items-center gap-2">
                 <CheckCircle size={16} className="text-accent" />
                 Unlimited questions
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle size={16} className="text-accent" />
+                60–80 AI messages monthly
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle size={16} className="text-accent" />

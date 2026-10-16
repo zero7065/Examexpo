@@ -87,13 +87,13 @@ export default function SharedTestPage() {
       <div style={{ padding: "24px 16px", maxWidth: 500, margin: "0 auto", paddingTop: 80 }}>
         <div style={{
           textAlign: "center", padding: 32, borderRadius: 20,
-          background: "rgba(108,60,233,0.08)", border: "1px solid rgba(108,60,233,0.2)",
+          background: "rgb(var(--primary-rgb) / 0.08)", border: "1px solid rgb(var(--primary-rgb) / 0.2)",
           marginBottom: 24,
         }}>
           <Trophy size={48} color="#FFD700" style={{ marginBottom: 12 }} />
           <h2 style={{ fontSize: 22, fontWeight: 800, marginBottom: 8 }}>Test Complete!</h2>
-          <div style={{ fontSize: 48, fontWeight: 900, color: "#6C3CE9" }}>{results.score}%</div>
-          <div style={{ color: "#888", fontSize: 14, marginTop: 4 }}>
+          <div style={{ fontSize: 48, fontWeight: 900, color: "var(--primary)" }}>{results.score}%</div>
+          <div style={{ color: "var(--text-muted)", fontSize: 14, marginTop: 4 }}>
             {results.correct}/{results.total} correct · {formatTime(results.timeSeconds)}
           </div>
         </div>
@@ -106,7 +106,7 @@ export default function SharedTestPage() {
           }}>
             <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>Partner's Result</h3>
             <div style={{ fontSize: 36, fontWeight: 900, color: "#25D366" }}>{partnerResults.score}%</div>
-            <div style={{ color: "#888", fontSize: 13 }}>
+            <div style={{ color: "var(--text-muted)", fontSize: 13 }}>
               {partnerResults.correct}/{partnerResults.total} correct · {formatTime(partnerResults.timeSeconds)}
             </div>
             <div style={{
@@ -126,7 +126,7 @@ export default function SharedTestPage() {
         {!partnerResults && (
           <div style={{
             padding: 16, borderRadius: 12, textAlign: "center",
-            background: "rgba(255,255,255,0.04)", color: "#888", fontSize: 13, marginBottom: 24,
+            background: "rgba(255,255,255,0.04)", color: "var(--text-muted)", fontSize: 13, marginBottom: 24,
           }}>
             Waiting for partner to complete the test...
           </div>
@@ -136,7 +136,7 @@ export default function SharedTestPage() {
           onClick={() => navigate("/study-partners")}
           style={{
             width: "100%", padding: "14px", borderRadius: 14,
-            background: "linear-gradient(135deg, #6C3CE9, #9b59b6)",
+            background: "linear-gradient(135deg, var(--primary), var(--accent))",
             color: "#fff", fontWeight: 700, fontSize: 15,
             border: "none", cursor: "pointer", display: "flex",
             alignItems: "center", justifyContent: "center", gap: 8,
@@ -161,7 +161,7 @@ export default function SharedTestPage() {
         }}>
           <Clock size={16} style={{ verticalAlign: -3 }} /> {formatTime(timeLeft)}
         </span>
-        <span style={{ fontSize: 13, color: "#888" }}>
+        <span style={{ fontSize: 13, color: "var(--text-muted)" }}>
           {current + 1}/{questions.length}
         </span>
       </div>
@@ -170,7 +170,7 @@ export default function SharedTestPage() {
       <div style={{
         height: 4, borderRadius: 2, background: "rgba(255,255,255,0.08)", marginBottom: 24, overflow: "hidden",
       }}>
-        <div style={{ height: "100%", width: `${progress}%`, background: "#6C3CE9", borderRadius: 2, transition: "width 0.3s" }} />
+        <div style={{ height: "100%", width: `${progress}%`, background: "var(--primary)", borderRadius: 2, transition: "width 0.3s" }} />
       </div>
 
       {/* Question */}
@@ -183,7 +183,7 @@ export default function SharedTestPage() {
           {q.question}
         </p>
         {q.topic && (
-          <span style={{ fontSize: 11, color: "#6C3CE9", fontWeight: 600 }}>{q.topic}</span>
+          <span style={{ fontSize: 11, color: "var(--primary)", fontWeight: 600 }}>{q.topic}</span>
         )}
       </div>
 
@@ -197,16 +197,16 @@ export default function SharedTestPage() {
               display: "flex", alignItems: "center", gap: 12,
               padding: "14px 16px", borderRadius: 14,
               background: answers[q.id] === letter
-                ? "rgba(108,60,233,0.2)" : "rgba(255,255,255,0.04)",
+                ? "rgb(var(--primary-rgb) / 0.2)" : "rgba(255,255,255,0.04)",
               border: answers[q.id] === letter
-                ? "2px solid #6C3CE9" : "1px solid rgba(255,255,255,0.08)",
+                ? "2px solid var(--primary)" : "1px solid rgba(255,255,255,0.08)",
               color: "#fff", textAlign: "left", cursor: "pointer",
               fontSize: 14, transition: "all 0.2s",
             }}
           >
             <span style={{
               width: 30, height: 30, borderRadius: 8,
-              background: answers[q.id] === letter ? "#6C3CE9" : "rgba(255,255,255,0.08)",
+              background: answers[q.id] === letter ? "var(--primary)" : "rgba(255,255,255,0.08)",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontWeight: 700, fontSize: 13, flexShrink: 0,
             }}>
@@ -236,7 +236,7 @@ export default function SharedTestPage() {
             onClick={() => setCurrent(current + 1)}
             style={{
               flex: 1, padding: "14px", borderRadius: 14,
-              background: "linear-gradient(135deg, #6C3CE9, #9b59b6)",
+              background: "linear-gradient(135deg, var(--primary), var(--accent))",
               color: "#fff", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer",
             }}
           >

@@ -133,7 +133,7 @@ export default function StudyPartnersPage() {
 
   if (loading) {
     return (
-      <div style={{ padding: 24, textAlign: "center", color: "#888", paddingTop: 80 }}>
+      <div style={{ padding: 24, textAlign: "center", color: "var(--text-muted)", paddingTop: 80 }}>
         Loading study partners...
       </div>
     );
@@ -142,7 +142,7 @@ export default function StudyPartnersPage() {
   return (
     <div style={{ padding: "24px 16px", maxWidth: 600, margin: "0 auto", paddingTop: 80 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
-        <Users size={28} color="#6C3CE9" />
+        <Users size={28} color="var(--primary)" />
         <h1 style={{ fontSize: 24, fontWeight: 800 }}>Study Partners</h1>
       </div>
 
@@ -160,7 +160,7 @@ export default function StudyPartnersPage() {
               onClick={() => navigate("/room")}
               style={{
                 flex: 1, minWidth: 140, padding: "14px 16px", borderRadius: 14,
-                background: "linear-gradient(135deg, #00E5A0, #6C3CE9)",
+                background: "linear-gradient(135deg, var(--success), var(--primary))",
                 color: "#fff", fontWeight: 700, fontSize: 14,
                 border: "none", cursor: "pointer", display: "flex",
                 alignItems: "center", justifyContent: "center", gap: 8,
@@ -172,7 +172,7 @@ export default function StudyPartnersPage() {
               onClick={() => setShowAddModal(true)}
               style={{
                 flex: 1, minWidth: 140, padding: "14px 16px", borderRadius: 14,
-                background: "linear-gradient(135deg, #6C3CE9, #9b59b6)",
+                background: "linear-gradient(135deg, var(--primary), var(--accent))",
                 color: "#fff", fontWeight: 700, fontSize: 14,
                 border: "none", cursor: "pointer", display: "flex",
                 alignItems: "center", justifyContent: "center", gap: 8,
@@ -196,16 +196,16 @@ export default function StudyPartnersPage() {
 
           {/* Partners List */}
           <div style={{ marginBottom: 32 }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: "#ccc" }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: "var(--text)" }}>
               Your Partners ({partners.length})
             </h2>
             {partners.length === 0 ? (
               <div style={{
                 padding: 32, textAlign: "center", borderRadius: 16,
-                background: "rgba(108,60,233,0.08)", border: "1px solid rgba(108,60,233,0.2)",
+                background: "rgb(var(--primary-rgb) / 0.08)", border: "1px solid rgb(var(--primary-rgb) / 0.2)",
               }}>
-                <Users size={40} color="#6C3CE9" style={{ opacity: 0.5, marginBottom: 12 }} />
-                <p style={{ color: "#888", fontSize: 14 }}>
+                <Users size={40} color="var(--primary)" style={{ opacity: 0.5, marginBottom: 12 }} />
+                <p style={{ color: "var(--text-muted)", fontSize: 14 }}>
                   No partners yet. Add a friend by their User ID or invite them via WhatsApp!
                 </p>
               </div>
@@ -219,7 +219,7 @@ export default function StudyPartnersPage() {
                   }}>
                     <div style={{
                       width: 42, height: 42, borderRadius: "50%",
-                      background: "linear-gradient(135deg, #6C3CE9, #9b59b6)",
+                      background: "linear-gradient(135deg, var(--primary), var(--accent))",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       color: "#fff", fontWeight: 700, fontSize: 16,
                     }}>
@@ -227,7 +227,7 @@ export default function StudyPartnersPage() {
                     </div>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontWeight: 600, fontSize: 15 }}>{p.displayName || "Student"}</div>
-                      <div style={{ fontSize: 12, color: "#888" }}>
+                      <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
                         ⭐ {p.totalXP || p.xp || 0} XP · 🔥 {p.streak || 0} day streak
                       </div>
                     </div>
@@ -246,7 +246,7 @@ export default function StudyPartnersPage() {
                       onClick={() => { setSelectedPartner(p); setShowScheduleModal(true); }}
                       style={{
                         padding: "8px 14px", borderRadius: 10,
-                        background: "rgba(108,60,233,0.15)", color: "#6C3CE9",
+                        background: "rgb(var(--primary-rgb) / 0.15)", color: "var(--primary)",
                         fontWeight: 600, fontSize: 12, border: "none", cursor: "pointer",
                       }}
                     >
@@ -270,7 +270,7 @@ export default function StudyPartnersPage() {
 
           {/* Shared Tests */}
           <div style={{ marginBottom: 32 }}>
-            <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: "#ccc" }}>
+            <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: "var(--text)" }}>
               Shared Tests ({tests.length})
             </h2>
             {tests.length === 0 ? (
@@ -279,7 +279,7 @@ export default function StudyPartnersPage() {
                 background: "rgba(37,211,102,0.08)", border: "1px solid rgba(37,211,102,0.2)",
               }}>
                 <Target size={40} color="#25D366" style={{ opacity: 0.5, marginBottom: 12 }} />
-                <p style={{ color: "#888", fontSize: 14 }}>
+                <p style={{ color: "var(--text-muted)", fontSize: 14 }}>
                   No shared tests yet. Schedule a test with a partner!
                 </p>
               </div>
@@ -299,22 +299,22 @@ export default function StudyPartnersPage() {
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                         <div>
                           <div style={{ fontWeight: 700, fontSize: 14 }}>{t.subject}</div>
-                          <div style={{ fontSize: 12, color: "#888" }}>
+                          <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
                             {isCreator ? "Created by you" : `Created by ${t.creatorName}`}
                           </div>
                         </div>
                         <span style={{
                           padding: "4px 10px", borderRadius: 8, fontSize: 11, fontWeight: 700,
                           background: t.status === "completed" ? "rgba(52,199,89,0.15)" :
-                            t.status === "active" ? "rgba(255,204,0,0.15)" : "rgba(108,60,233,0.15)",
+                            t.status === "active" ? "rgba(255,204,0,0.15)" : "rgb(var(--primary-rgb) / 0.15)",
                           color: t.status === "completed" ? "#34c759" :
-                            t.status === "active" ? "#ffcc00" : "#6C3CE9",
+                            t.status === "active" ? "#ffcc00" : "var(--primary)",
                         }}>
                           {t.status === "completed" ? "Done" : t.status === "active" ? "In Progress" : "Pending"}
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", gap: 16, fontSize: 12, color: "#888", marginBottom: 10 }}>
+                      <div style={{ display: "flex", gap: 16, fontSize: 12, color: "var(--text-muted)", marginBottom: 10 }}>
                         <span>📝 {t.questionCount} Qs</span>
                         <span>⏱ {Math.floor(t.timeLimit / 60)}m</span>
                       </div>
@@ -324,7 +324,7 @@ export default function StudyPartnersPage() {
                           {myResult && (
                             <div style={{
                               padding: "8px 12px", borderRadius: 10,
-                              background: "rgba(108,60,233,0.1)", fontSize: 13,
+                              background: "rgb(var(--primary-rgb) / 0.1)", fontSize: 13,
                             }}>
                               You: <strong>{myResult.score}%</strong> ({myResult.correct}/{myResult.total})
                             </div>
@@ -345,7 +345,7 @@ export default function StudyPartnersPage() {
                           onClick={() => handleStartTest(t)}
                           style={{
                             padding: "10px 20px", borderRadius: 10,
-                            background: "linear-gradient(135deg, #6C3CE9, #9b59b6)",
+                            background: "linear-gradient(135deg, var(--primary), var(--accent))",
                             color: "#fff", fontWeight: 700, fontSize: 13,
                             border: "none", cursor: "pointer", display: "flex",
                             alignItems: "center", gap: 6,
@@ -364,7 +364,7 @@ export default function StudyPartnersPage() {
           {/* Partner Leaderboard */}
           {leaderboard.length > 0 && (
             <div style={{ marginBottom: 32 }}>
-              <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: "#ccc" }}>
+              <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: "var(--text)" }}>
                 Partner Leaderboard
               </h2>
               <div style={{
@@ -376,7 +376,7 @@ export default function StudyPartnersPage() {
                     display: "flex", alignItems: "center", gap: 12,
                     padding: "14px 16px",
                     background: entry.isMe
-                      ? "rgba(108,60,233,0.12)"
+                      ? "rgb(var(--primary-rgb) / 0.12)"
                       : i % 2 === 0 ? "rgba(255,255,255,0.02)" : "rgba(255,255,255,0.04)",
                     borderBottom: i < leaderboard.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
                   }}>
@@ -384,18 +384,18 @@ export default function StudyPartnersPage() {
                       width: 28, height: 28, borderRadius: "50%",
                       background: i === 0 ? "#FFD700" : i === 1 ? "#C0C0C0" : i === 2 ? "#CD7F32" : "rgba(255,255,255,0.1)",
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: 12, fontWeight: 800, color: i < 3 ? "#000" : "#888",
+                      fontSize: 12, fontWeight: 800, color: i < 3 ? "#000" : "var(--text-muted)",
                     }}>
                       {i + 1}
                     </div>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 600, fontSize: 14, color: entry.isMe ? "#6C3CE9" : "#fff" }}>
+                      <div style={{ fontWeight: 600, fontSize: 14, color: entry.isMe ? "var(--primary)" : "#fff" }}>
                         {entry.name} {entry.isMe && "(You)"}
                       </div>
                     </div>
                     <div style={{ textAlign: "right" }}>
                       <div style={{ fontWeight: 700, fontSize: 14 }}>⭐ {entry.xp} XP</div>
-                      <div style={{ fontSize: 11, color: "#888" }}>🔥 {entry.streak} day streak</div>
+                      <div style={{ fontSize: 11, color: "var(--text-muted)" }}>🔥 {entry.streak} day streak</div>
                     </div>
                   </div>
                 ))}
@@ -413,24 +413,24 @@ export default function StudyPartnersPage() {
           alignItems: "center", justifyContent: "center", padding: 16,
         }} onClick={() => setShowAddModal(false)}>
           <div style={{
-            background: "#1a1a2e", borderRadius: 20, padding: 28,
+            background: "var(--bg-2)", borderRadius: 20, padding: 28,
             width: "100%", maxWidth: 400, border: "1px solid rgba(255,255,255,0.1)",
           }} onClick={(e) => e.stopPropagation()}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
               <h3 style={{ fontSize: 18, fontWeight: 800 }}>Add Study Partner</h3>
-              <button onClick={() => setShowAddModal(false)} style={{ background: "none", border: "none", color: "#888", cursor: "pointer" }}>
+              <button onClick={() => setShowAddModal(false)} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer" }}>
                 <X size={20} />
               </button>
             </div>
 
-            <p style={{ color: "#888", fontSize: 13, marginBottom: 16 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: 13, marginBottom: 16 }}>
               Enter your friend's User ID to add them. Share your ID with friends so they can add you.
             </p>
 
-            <div style={{ background: "rgba(108,60,233,0.1)", borderRadius: 10, padding: "10px 14px", marginBottom: 16, cursor: "pointer" }}
+            <div style={{ background: "rgb(var(--primary-rgb) / 0.1)", borderRadius: 10, padding: "10px 14px", marginBottom: 16, cursor: "pointer" }}
               onClick={() => { navigator.clipboard.writeText(user.uid).then(() => toast({ message: "Your User ID copied!", type: "success" })); }}>
-              <div style={{ fontSize: 10, color: "#888", marginBottom: 2 }}>Your User ID (tap to copy):</div>
-              <div style={{ fontSize: 12, fontFamily: "monospace", color: "#6C3CE9", fontWeight: 700, wordBreak: "break-all" }}>{user.uid}</div>
+              <div style={{ fontSize: 10, color: "var(--text-muted)", marginBottom: 2 }}>Your User ID (tap to copy):</div>
+              <div style={{ fontSize: 12, fontFamily: "monospace", color: "var(--primary)", fontWeight: 700, wordBreak: "break-all" }}>{user.uid}</div>
             </div>
 
             <AddPartnerForm onSubmit={handleAddPartner} />
@@ -446,22 +446,22 @@ export default function StudyPartnersPage() {
           alignItems: "center", justifyContent: "center", padding: 16,
         }} onClick={() => setShowScheduleModal(false)}>
           <div style={{
-            background: "#1a1a2e", borderRadius: 20, padding: 28,
+            background: "var(--bg-2)", borderRadius: 20, padding: 28,
             width: "100%", maxWidth: 400, border: "1px solid rgba(255,255,255,0.1)",
           }} onClick={(e) => e.stopPropagation()}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
               <h3 style={{ fontSize: 18, fontWeight: 800 }}>Schedule Test</h3>
-              <button onClick={() => setShowScheduleModal(false)} style={{ background: "none", border: "none", color: "#888", cursor: "pointer" }}>
+              <button onClick={() => setShowScheduleModal(false)} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer" }}>
                 <X size={20} />
               </button>
             </div>
 
-            <p style={{ color: "#888", fontSize: 13, marginBottom: 16 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: 13, marginBottom: 16 }}>
               Challenge <strong>{selectedPartner.displayName || "Partner"}</strong> to a test!
             </p>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: 13, color: "#888", marginBottom: 6, display: "block" }}>Subject</label>
+              <label style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 6, display: "block" }}>Subject</label>
               <select
                 value={scheduleForm.subject}
                 onChange={(e) => setScheduleForm({ ...scheduleForm, subject: e.target.value })}
@@ -477,7 +477,7 @@ export default function StudyPartnersPage() {
 
             <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
               <div style={{ flex: 1 }}>
-                <label style={{ fontSize: 13, color: "#888", marginBottom: 6, display: "block" }}>Questions</label>
+                <label style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 6, display: "block" }}>Questions</label>
                 <select
                   value={scheduleForm.questionCount}
                   onChange={(e) => setScheduleForm({ ...scheduleForm, questionCount: parseInt(e.target.value) })}
@@ -494,7 +494,7 @@ export default function StudyPartnersPage() {
                 </select>
               </div>
               <div style={{ flex: 1 }}>
-                <label style={{ fontSize: 13, color: "#888", marginBottom: 6, display: "block" }}>Time Limit</label>
+                <label style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 6, display: "block" }}>Time Limit</label>
                 <select
                   value={scheduleForm.timeLimit}
                   onChange={(e) => setScheduleForm({ ...scheduleForm, timeLimit: parseInt(e.target.value) })}
@@ -516,7 +516,7 @@ export default function StudyPartnersPage() {
               onClick={handleScheduleTest}
               style={{
                 width: "100%", padding: "14px", borderRadius: 14,
-                background: "linear-gradient(135deg, #6C3CE9, #9b59b6)",
+                background: "linear-gradient(135deg, var(--primary), var(--accent))",
                 color: "#fff", fontWeight: 700, fontSize: 15,
                 border: "none", cursor: "pointer",
               }}
@@ -549,7 +549,7 @@ function AddPartnerForm({ onSubmit }) {
         onClick={() => onSubmit(uid)}
         style={{
           width: "100%", padding: "14px", borderRadius: 14,
-          background: "linear-gradient(135deg, #6C3CE9, #9b59b6)",
+          background: "linear-gradient(135deg, var(--primary), var(--accent))",
           color: "#fff", fontWeight: 700, fontSize: 15,
           border: "none", cursor: "pointer",
         }}

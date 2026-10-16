@@ -25,7 +25,7 @@ const WHY_FOR_YOU = [
   { icon: GraduationCap, title: "SS1 Students", body: "Start building foundations early. Master topics before they become exam pressure. By SS3, you're ahead of 90% of candidates." },
   { icon: Target, title: "SS2 Students", body: "Identify weak topics now. Fill gaps before they compound. Practice with real past questions from your target exam." },
   { icon: Award, title: "SS3 / Final Year", body: "Peak preparation mode. Timed exams, AI coaching, and strategic revision of the most repeated topics." },
-  { icon: Users, title: "School Groups", body: "Classroom plans from ₦3,000/student/month. Teacher dashboard, assignments, and AI-compiled performance reports." },
+  { icon: Users, title: "School Groups", body: "Classroom plans from ₦2,800/student/month. Teacher dashboard, assignments, and AI-compiled performance reports." },
   { icon: Plane, title: "Study Abroad", body: "IELTS preparation with band score calculator, writing feedback, and visa requirement guide. ₦80,000/year." },
   { icon: Globe, title: "International Students", body: "Pay in NGN, USD, GHS, KES, or ZAR. Same great experience, any currency." },
 ];
@@ -277,7 +277,7 @@ export function LandingTestimonials() {
             <div key={i} className={`lp-bento-card lp-animate-in lp-delay-${(i % 5) + 1}`}>
               <div style={{ display: "flex", gap: 2, marginBottom: 12 }}>
                 {Array.from({ length: 5 }).map((_, j) => (
-                  <Star key={j} size={16} color={j < (r.rating || 5) ? "#D4A853" : "#333"} fill={j < (r.rating || 5) ? "#D4A853" : "none"} />
+                  <Star key={j} size={16} color={j < (r.rating || 5) ? "var(--accent)" : "var(--border)"} fill={j < (r.rating || 5) ? "var(--accent)" : "none"} />
                 ))}
               </div>
               <p style={{ fontSize: 14, color: "var(--text)", lineHeight: 1.7, margin: "0 0 16px" }}>"{r.text}"</p>

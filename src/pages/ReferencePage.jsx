@@ -40,7 +40,7 @@ export default function ReferencePage() {
         <ArrowLeft size={16} /> Help
       </Link>
       <header>
-        <h1 className="h-1 flex items-center gap-2"><BookOpen size={26} className="text-primary" /> Reference Library</h1>
+        <h1 className="type-h1 flex items-center gap-2"><BookOpen size={26} className="text-primary" /> Reference Library</h1>
         <p className="lead">Formula sheets, constants, tables and grammar rules — searchable offline.</p>
       </header>
 

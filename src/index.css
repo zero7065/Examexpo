@@ -229,12 +229,15 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
   }
 }
 
-/* Responsive page padding via class */
+/* Responsive page padding via class — default max-width has ZERO specificity
+   (via :where) so page-level max-w-* utilities always win over it */
 .page-content {
   padding: 24px 32px;
   width: 100%;
-  max-width: 1280px;
   margin: 0 auto;
+}
+:where(.page-content) {
+  max-width: 1280px;
 }
 @media (max-width: 768px) {
   .page-content {
@@ -244,8 +247,8 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
 
 /* ─── Fluid type scale (futuristic, adaptive) ─── */
 .h-display { font-size: clamp(2rem, 5vw + 1rem, 3.5rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.08; }
-.h-1 { font-size: clamp(1.5rem, 3.5vw + 0.75rem, 2.25rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
-.h-2 { font-size: clamp(1.15rem, 2.5vw + 0.6rem, 1.5rem); font-weight: 800; letter-spacing: -0.01em; }
+.type-h1 { font-size: clamp(1.5rem, 3.5vw + 0.75rem, 2.25rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+.type-h2 { font-size: clamp(1.15rem, 2.5vw + 0.6rem, 1.5rem); font-weight: 800; letter-spacing: -0.01em; }
 .lead { font-size: clamp(0.95rem, 1.5vw + 0.7rem, 1.125rem); line-height: 1.7; color: var(--text-muted); }
 
 /* ─── Futuristic surfaces ─── */
@@ -571,30 +574,30 @@ img, video, canvas, svg { max-width: 100%; }
   }
 }
 
-/* ─── Jadai Studios Branding ─── */
-.jadai-brand {
-  background: linear-gradient(135deg, #6C3CE9 0%, #D4A853 50%, #6C3CE9 100%);
+/* ─── Brand shimmer (ExamPadi) ─── */
+.brand-shimmer {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: jadaiShimmer 4s ease-in-out infinite;
+  animation: brandShimmer 4s ease-in-out infinite;
   display: inline-block;
 }
 
-@keyframes jadaiShimmer {
+@keyframes brandShimmer {
   0% { background-position: 0% center; }
   50% { background-position: 100% center; }
   100% { background-position: 0% center; }
 }
 
-.jadai-brand-full {
-  background: linear-gradient(135deg, #6C3CE9 0%, #D4A853 50%, #6C3CE9 100%);
+.brand-shimmer-full {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--primary) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: jadaiShimmer 4s ease-in-out infinite;
+  animation: brandShimmer 4s ease-in-out infinite;
   display: inline-block;
   text-shadow: none;
 }

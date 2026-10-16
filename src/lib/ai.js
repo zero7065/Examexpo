@@ -1,8 +1,68 @@
 // src/lib/ai.js - Unified Groq AI client
 
 import { logTrainingEntry } from "./aiTraining";
+import { auth } from "../firebaseConfig";
+import { checkAILimit, trackAIMessage } from "./usageTracker";
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+
+// Thrown when the user has no AI credits left. Consumers can catch this to
+// show the upgrade/pack modal instead of a generic error.
+export class AILimitError extends Error {
+  constructor(message, info = {}) {
+    super(message);
+    this.name = "AILimitError";
+    this.code = "AI_LIMIT";
+    this.info = info;
+  }
+}
+
+// Central gate — run before every Groq call. Throws AILimitError when the
+// user is hard-stopped (monthly cap + no pack credits). Fires a soft-warning
+// event at 80% of the monthly cap. Fail-open: anonymous users and Firestore
+// errors never block the AI call.
+async function enforceAILimit(source) {
+  const uid = auth?.currentUser?.uid;
+  if (!uid) return { allowed: true };
+  let check;
+  try {
+    check = await checkAILimit(uid);
+  } catch {
+    return { allowed: true };
+  }
+  if (!check.allowed) {
+    throw new AILimitError(
+      check.isFree
+        ? "You've used all 3 free AI messages for today. Upgrade to Pro or buy a 50-message pack (₦1,500) to continue."
+        : `You've used all ${check.monthLimit} AI messages for this month. Upgrade to Pro or buy a 50-message pack (₦1,500) to continue.`,
+      { ...check, source }
+    );
+  }
+  if (check.softWarning && typeof window !== "undefined") {
+    try {
+      const now = Date.now();
+      if (now - _lastSoftWarningAt > 30 * 60 * 1000) {
+        _lastSoftWarningAt = now;
+        window.dispatchEvent(new CustomEvent("exampadi:ai-soft-warning", { detail: check }));
+      }
+    } catch { /* toast is best-effort */ }
+  }
+  return check;
+}
+let _lastSoftWarningAt = 0;
+
+// Record a successful AI call (usage + cost log). Fire-and-forget — never
+// blocks or fails the response.
+function trackAISuccess(source, data) {
+  const uid = auth?.currentUser?.uid;
+  if (!uid) return;
+  const usage = data?.usage;
+  trackAIMessage(uid, {
+    source,
+    model: data?.model || null,
+    tokens: usage ? usage.total_tokens ?? null : null,
+  }).catch(() => {});
+}
 
 // Verified against GET /openai/v1/models for this API key (Oct 2026).
 // Old models (llama-3.x, qwen3-32b, llama-4-scout) no longer exist for this key.
@@ -76,12 +136,16 @@ export function sanitizeAIResponse(text) {
     });
 }
 
-async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, temperature = 0.5) {
+async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, temperature = 0.5, opts = {}) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
   if (!key) {
     _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
     throw new Error("Groq API key not configured.");
   }
+
+  // Central gate — outside the model loop so AILimitError propagates immediately.
+  const source = opts.source || "ai";
+  await enforceAILimit(source);
 
   let lastError;
   for (const model of MODELS) {
@@ -108,6 +172,7 @@ async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, t
       if (res.ok) {
         const data = await res.json();
         _lastAIError = null;
+        trackAISuccess(source, data);
         return data.choices[0]?.message?.content?.trim() || "";
       }
 
@@ -124,12 +189,15 @@ async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, t
   throw lastError || new Error("All AI models failed");
 }
 
-async function callGroqChatWithFallback(systemPrompt, messages, maxTokens = 600, temperature = 0.8) {
+async function callGroqChatWithFallback(systemPrompt, messages, maxTokens = 600, temperature = 0.8, opts = {}) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
   if (!key) {
     _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
     throw new Error("Groq API key not configured.");
   }
+
+  const source = opts.source || "ai-chat";
+  await enforceAILimit(source);
 
   let lastError;
   for (const model of MODELS) {
@@ -155,6 +223,7 @@ async function callGroqChatWithFallback(systemPrompt, messages, maxTokens = 600,
       if (res.ok) {
         const data = await res.json();
         _lastAIError = null;
+        trackAISuccess(source, data);
         return data.choices[0]?.message?.content?.trim() || "";
       }
 
@@ -176,12 +245,14 @@ import { topWeakTopics, recentSummaries } from "./aiMemory";
 
 // ─── Vision chat (image-capable). ONLY tries the multimodal model —
 // gpt-oss/allam are text-only and cannot accept image payloads.
-async function callGroqVisionChat(systemPrompt, textMessages, images, maxTokens = 1000) {
+async function callGroqVisionChat(systemPrompt, textMessages, images, maxTokens = 1000, opts = {}) {
   const key = import.meta.env.VITE_GROQ_API_KEY;
   if (!key) {
     _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
     throw new Error("Groq API key not configured.");
   }
+  const source = opts.source || "ai-vision";
+  if (!opts.skipGate) await enforceAILimit(source);
   const imageList = (Array.isArray(images) ? images : images ? [images] : []).filter(Boolean).slice(0, 3);
   // Attach image(s) to the last user message (OpenAI content-array format)
   const msgs = textMessages.map((m) => ({ role: m.role, content: m.content }));
@@ -212,6 +283,7 @@ async function callGroqVisionChat(systemPrompt, textMessages, images, maxTokens 
     if (res.ok) {
       const data = await res.json();
       _lastAIError = null;
+      trackAISuccess(source, data);
       return data.choices[0]?.message?.content?.trim() || "";
     }
     const err = await res.json().catch(() => ({}));
@@ -226,13 +298,17 @@ async function callGroqVisionChat(systemPrompt, textMessages, images, maxTokens 
 // Accepts imageBase64 (string) or images (array, max 3) for multi-page docs.
 export async function askGroqVision({ systemPrompt, messages, imageBase64, images, maxTokens = 1000 }) {
   const list = images || (imageBase64 ? [imageBase64] : []);
+  // Gate once at the entry point so the retry below doesn't double-count.
+  await enforceAILimit("ai-vision");
   try {
-    return await callGroqVisionChat(systemPrompt, messages, list, maxTokens);
+    return await callGroqVisionChat(systemPrompt, messages, list, maxTokens, { skipGate: true });
   } catch (firstErr) {
+    // Do not retry on credit exhaustion — the retry would fail the same way.
+    if (firstErr?.code === "AI_LIMIT") throw firstErr;
     console.warn("[AI] Vision full-size failed, retrying downscaled:", firstErr.message);
     try {
       const smaller = await Promise.all(list.map((u) => downscaleDataUrl(u, 512)));
-      return await callGroqVisionChat(systemPrompt, messages, smaller, maxTokens);
+      return await callGroqVisionChat(systemPrompt, messages, smaller, maxTokens, { skipGate: true });
     } catch (e) {
       console.warn("[AI] Vision downscaled retry failed:", e.message);
       throw firstErr; // surface the original, more informative error
@@ -315,7 +391,7 @@ export function buildTutorSystemPrompt({ subject, userProfile, memory }) {
 
 // Generic single-prompt caller — used by question generators
 export async function askGroq(systemPrompt, userPrompt, opts = {}) {
-  const result = await callGroqWithFallback(systemPrompt, userPrompt, opts.maxTokens ?? 300, opts.temperature ?? 0.5);
+  const result = await callGroqWithFallback(systemPrompt, userPrompt, opts.maxTokens ?? 300, opts.temperature ?? 0.5, { source: opts.source || "askGroq" });
   const { user } = await import("../context/AuthContext").catch(() => ({}));
   logTrainingEntry({
     userId: user?.uid || "anonymous",
@@ -332,11 +408,12 @@ export async function explainAnswer({ question, options, userAnswer, correctAnsw
   const system = `You are a friendly Nigerian exam tutor for ${exam || "JAMB"}. Never say you are built by Google or mention Gemini. You are ExamPadi powered by Groq.`;
   const user = `Question: ${question}\nOptions: A) ${options.A} B) ${options.B} C) ${options.C} D) ${options.D}\nStudent answered: ${userAnswer}\nCorrect answer: ${correctAnswer}\nSubject: ${subject}\nExplain why ${correctAnswer} is correct in 3-4 sentences. End with a memory tip.`;
   try {
-    const result = await callGroqWithFallback(system, user, 300);
+    const result = await callGroqWithFallback(system, user, 300, 0.5, { source: "explainAnswer" });
     const { user: u } = await import("../context/AuthContext").catch(() => ({}));
     logTrainingEntry({ userId: u?.uid || "anonymous", userEmail: u?.email || "", type: "explainAnswer", systemPrompt: system, messages: [{ role: "user", content: user }, { role: "assistant", content: result }], metadata: { subject, exam } }).catch(() => {});
     return result;
   } catch (err) {
+    if (err?.code === "AI_LIMIT") throw err;
     console.warn("explainAnswer fallback:", err.message);
     return `The correct answer is ${correctAnswer}. In ${subject}, this concept is fundamental. Review your textbook and practice similar past questions to master this topic. Keep studying!`;
   }
@@ -354,11 +431,12 @@ Topic: ${topic}
 
 Give a clear, friendly explanation in 3-4 sentences. Explain WHY ${correctAnswer} is correct, and briefly why the student's choice was wrong. Use simple language suitable for SS3 Nigerian students. End with a memory tip.`;
   try {
-    const result = await callGroqWithFallback(system, prompt, 300);
+    const result = await callGroqWithFallback(system, prompt, 300, 0.5, { source: "explainQuestion" });
     const { user } = await import("../context/AuthContext").catch(() => ({}));
     logTrainingEntry({ userId: user?.uid || "anonymous", userEmail: user?.email || "", type: "explainQuestion", systemPrompt: system, messages: [{ role: "user", content: prompt }, { role: "assistant", content: result }], metadata: { subject, topic } }).catch(() => {});
     return result;
   } catch (e) {
+    if (e?.code === "AI_LIMIT") throw e;
     console.warn("explainQuestion fallback:", e.message);
     return `The correct answer is ${correctAnswer}. In ${subject}, this concept is fundamental. Review your textbook and practice similar past questions to master this topic. Keep studying!`;
   }
@@ -392,11 +470,12 @@ export async function chatWithTutor({ messages, subject, userProfile, memory = n
       logTrainingEntry({ userId: user?.uid || "anonymous", userEmail: user?.email || "", type: "chatWithTutor", systemPrompt, messages: [...chatMessages, { role: "assistant", content: result }], metadata: { subject, messageCount: messages.length } }).catch(() => {});
       return result;
     }
-    const result = await callGroqChatWithFallback(systemPrompt, chatMessages, 600, 0.8);
+    const result = await callGroqChatWithFallback(systemPrompt, chatMessages, 600, 0.8, { source: "tutor-chat" });
     const { user } = await import("../context/AuthContext").catch(() => ({}));
     logTrainingEntry({ userId: user?.uid || "anonymous", userEmail: user?.email || "", type: "chatWithTutor", systemPrompt, messages: [...chatMessages, { role: "assistant", content: result }], metadata: { subject, messageCount: messages.length } }).catch(() => {});
     return result;
   } catch (e) {
+    if (e?.code === "AI_LIMIT") throw e;
     console.warn("chatWithTutor fallback:", e.message);
     return `I'm ExamPadi Tutor. I can help with ${subject} questions. Please try asking again — I'm having temporary connectivity issues. In the meantime, review your notes and past questions on this topic.`;
   }
@@ -406,8 +485,9 @@ export async function getStudyTip(subject, weakTopics) {
   const system = "You are a JAMB/WAEC Nigerian exam coach.";
   const user = `Student is weak in ${subject}. Topics: ${weakTopics.join(", ")}. Give 3 tips.`;
   try {
-    return await callGroqWithFallback(system, user, 150);
+    return await callGroqWithFallback(system, user, 150, 0.5, { source: "study-tip" });
   } catch (err) {
+    if (err?.code === "AI_LIMIT") throw err;
     console.warn("getStudyTip fallback:", err.message);
     return `Focus on past questions for ${weakTopics[0]}. Practice consistently every day. Review your notes and join study groups.`;
   }
@@ -417,8 +497,9 @@ export async function getDailyQuote() {
   const system = "You write motivational quotes for Nigerian students.";
   const user = "Give one motivational quote.";
   try {
-    return await callGroqWithFallback(system, user, 50);
+    return await callGroqWithFallback(system, user, 50, 0.5, { source: "daily-quote" });
   } catch (err) {
+    if (err?.code === "AI_LIMIT") throw err;
     console.warn("getDailyQuote fallback:", err.message);
     return "Every question you practice today is a problem you won't face on exam day. Keep pushing!";
   }
@@ -428,9 +509,10 @@ export async function predictLikelyQuestions({ subject, exam, count = 6 }) {
   const system = `You are a ${exam} expert. Predict likely topics for ${subject}. Return ONLY valid JSON array, no markdown fences.`;
   const user = `Predict ${count} topics. Return JSON array like: [{"topic":"...","likelihood":"...","reason":"...","sampleQuestion":"..."}]`;
   try {
-    const res = await callGroqWithFallback(system, user, 800);
+    const res = await callGroqWithFallback(system, user, 800, 0.5, { source: "predict-questions" });
     return JSON.parse(stripJsonFences(res));
   } catch (err) {
+    if (err?.code === "AI_LIMIT") throw err;
     console.warn("predictLikelyQuestions fallback:", err.message);
     _lastAIError = { message: err.message, time: Date.now() };
     return [
@@ -447,9 +529,10 @@ export async function generateStudyPlan({ targetScore, examDate, currentLevel: _
 Return JSON exactly in this shape:
 {"totalDays": <number>, "topics": [{"topic": "<name>", "description": "<1-2 sentence plan>", "duration": "<e.g. 2 hours>", "exercises": ["<actionable task>", "..."]}]}
 Include 5-8 topics ordered from foundations to final revision.`;
-    const res = await callGroqWithFallback(system, user, 1500);
+    const res = await callGroqWithFallback(system, user, 1500, 0.5, { source: "study-plan" });
     return JSON.parse(stripJsonFences(res));
   } catch (err) {
+    if (err?.code === "AI_LIMIT") throw err;
     console.warn("generateStudyPlan fallback:", err.message);
     _lastAIError = { message: err.message, time: Date.now() };
     return {
@@ -471,7 +554,7 @@ export async function generateFlashcards({ subject, topic, count = 10, exam = "J
 Return JSON exactly in this shape:
 {"cards": [{"front": "<question or term, max 20 words>", "back": "<concise answer or definition, max 40 words>", "tag": "<topic>"}]}
 Cover the highest-yield facts, formulas, definitions and distinctions. No fluff.`;
-    const res = await callGroqWithFallback(system, user, 2000, 0.6);
+    const res = await callGroqWithFallback(system, user, 2000, 0.6, { source: "flashcards" });
     const parsed = JSON.parse(stripJsonFences(res));
     const cards = Array.isArray(parsed) ? parsed : parsed.cards;
     if (!Array.isArray(cards) || cards.length === 0) throw new Error("No flashcards returned");
@@ -479,6 +562,7 @@ Cover the highest-yield facts, formulas, definitions and distinctions. No fluff.
       .filter((c) => c && c.front && c.back)
       .map((c, i) => ({ id: i + 1, front: String(c.front), back: String(c.back), tag: c.tag || topic || subject }));
   } catch (err) {
+    if (err?.code === "AI_LIMIT") throw err;
     console.warn("generateFlashcards fallback:", err.message);
     _lastAIError = { message: err.message, time: Date.now() };
     return [];
@@ -491,7 +575,7 @@ Cover the highest-yield facts, formulas, definitions and distinctions. No fluff.
 export async function summarizeSessionGroq({ subject, correct, total, weakTopics = [] }) {
   const system = "You are a concise study coach. Return ONLY valid JSON, no markdown fences.";
   const user = `A student just finished a ${subject} practice session: ${correct}/${total} correct. Weak topics: ${weakTopics.join(", ") || "none identified"}. Return JSON exactly: {"bullets": ["<bullet 1>", "<bullet 2>", "<bullet 3>"], "weakTopic": "<single weakest topic or null>"}. Each bullet max 15 words, actionable and encouraging.`;
-  const res = await callGroqWithFallback(system, user, 300, 0.5);
+  const res = await callGroqWithFallback(system, user, 300, 0.5, { source: "session-summary" });
   const parsed = JSON.parse(stripJsonFences(res));
   if (!Array.isArray(parsed.bullets) || parsed.bullets.length === 0) throw new Error("Empty summary");
   return {
@@ -575,5 +659,5 @@ Progress, History, Leaderboard, Community Feed, Reference Library, IELTS Japa Pa
 max 120 words; plain simple language; if they need a human, point to Contact (WhatsApp). Never invent pages. Never say
 you are built by Google. You are ExamPadi powered by Groq.`;
   const user = `Student says: "${issueText}". Student exam: ${userProfile?.exam || "JAMB"}. Give the organized steps.`;
-  return callGroqWithFallback(system, user, 300, 0.5);
+  return callGroqWithFallback(system, user, 300, 0.5, { source: "guide" });
 }

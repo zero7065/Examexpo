@@ -7,7 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "./Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { matchGuideRoutes, askGuide, getAIErrorIfRecent } from "../lib/ai";
-import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
+import { checkAILimit } from "../lib/usageTracker";
 import { getUserProfile } from "../lib/userProfile";
 import { Compass, Sparkles, Loader2, ArrowRight, MapPin } from "lucide-react";
 
@@ -56,10 +56,9 @@ export default function GuideAssistant({ compact = false, onNavigate }) {
       if (!isPro && user) {
         const limit = await checkAILimit(user.uid);
         if (!limit.allowed) {
-          toast({ message: `Daily AI limit reached (${limit.used}/${limit.limit}). The instant guide above is still free!`, type: "warning" });
+          toast({ message: `AI limit reached. Upgrade to Pro — the instant guide above is still free!`, type: "warning" });
           return;
         }
-        trackAIMessage(user.uid);
       }
       let profile = null;
       if (user) {
@@ -74,8 +73,9 @@ export default function GuideAssistant({ compact = false, onNavigate }) {
       setAiAnswer(answer);
       // Refresh local matches too so buttons accompany the AI plan
       setMatched(matchGuideRoutes(issue));
-    } catch {
-      toast({ message: "Guide failed — check your connection", type: "error" });
+    } catch (e) {
+      if (e?.code === "AI_LIMIT") toast({ message: e.message, type: "warning" });
+      else toast({ message: "Guide failed — check your connection", type: "error" });
     } finally {
       setAiLoading(false);
     }

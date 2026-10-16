@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { getUserProfile } from "../lib/userProfile";
 import { useSubscription } from "../hooks/useSubscription";
-import { checkQuestionLimit } from "../lib/usageTracker";
+import { checkQuestionLimit, checkAILimit } from "../lib/usageTracker";
 import { getQuestionsFromBank } from "../data/questions/compat";
 import { getStudentMemory } from "../lib/aiMemory";
 import { analyzeLearning } from "../lib/learningLoop";
@@ -42,6 +42,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [showProModal, setShowProModal] = useState(false);
   const [questionsLeft, setQuestionsLeft] = useState({ used: 0, limit: 15 });
+  const [aiCredits, setAiCredits] = useState(null);
   const [subjectStats, setSubjectStats] = useState({});
   const [insights, setInsights] = useState([]);
   const [showTour, setShowTour] = useState(() => !tourSeen());
@@ -64,6 +65,7 @@ export default function Dashboard() {
           setProfile(data);
           const ql = await checkQuestionLimit(user.uid);
           setQuestionsLeft(ql);
+          checkAILimit(user.uid).then(l => setAiCredits(l)).catch(() => {});
 
           const sessionsRef = collection(db, "sessions");
           const q = query(sessionsRef, where("userId", "==", user.uid), limit(50));
@@ -120,8 +122,8 @@ export default function Dashboard() {
   function getScoreColor(score) {
     if (score < 200) return "#FF4D6A";
     if (score < 250) return "#FF9F43";
-    if (score < 320) return "#00E5A0";
-    return "#D4A853";
+    if (score < 320) return "var(--success)";
+    return "var(--accent)";
   }
 
   if (loading) {
@@ -167,20 +169,20 @@ export default function Dashboard() {
             justifyContent: "space-between", border: "1px solid #2a1a4a", position: "relative",
             overflow: "hidden", flexWrap: "wrap", gap: 12,
           }}>
-            <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 3, background: "#D4A853" }} />
+            <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 3, background: "var(--accent)" }} />
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <Crown size={20} color="#D4A853" />
+              <Crown size={20} color="var(--accent)" />
               <div>
                 <div style={{ color: "#fff", fontSize: 14, fontWeight: 600 }}>
                   🚀 You're on the Free plan
                 </div>
-                <div style={{ color: "#888", fontSize: 12 }}>Unlock everything with Pro</div>
+                <div style={{ color: "var(--text-muted)", fontSize: 12 }}>Unlock everything with Pro</div>
               </div>
             </div>
             <button
               onClick={() => setShowProModal(true)}
               style={{
-                background: "transparent", border: "1px solid #D4A853", color: "#D4A853",
+                background: "transparent", border: "1px solid var(--accent)", color: "var(--accent)",
                 padding: "8px 16px", borderRadius: 10, fontWeight: 700, fontSize: 13,
                 cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap",
               }}
@@ -197,13 +199,13 @@ export default function Dashboard() {
               {getGreeting()}, {user?.displayName?.split(" ")[0] || "Student"} 👋
             </h1>
           </div>
-            <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
               <span>🔥</span> <span style={{ fontWeight: 600 }}>{streak} day streak</span>
           </div>
           <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
             <NotificationPanel />
-            <div style={{ background: "#121218", border: "1px solid #1e1e2a", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
-              <Zap size={16} color="#D4A853" /> <span style={{ fontWeight: 600 }}>{xp} XP</span>
+            <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8 }}>
+              <Zap size={16} color="var(--accent)" /> <span style={{ fontWeight: 600 }}>{xp} XP</span>
             </div>
             {!isPro && (
               <div style={{
@@ -216,6 +218,18 @@ export default function Dashboard() {
                 </div>
               </div>
             )}
+            {!isPro && aiCredits?.available != null && (
+              <div
+                onClick={() => navigate("/ai-tutor")}
+                style={{
+                  background: "rgb(var(--primary-rgb) / 0.08)", border: "1px solid rgb(var(--primary-rgb) / 0.35)",
+                  padding: "8px 16px", borderRadius: 20, display: "flex", alignItems: "center", gap: 8, cursor: "pointer",
+                }}>
+                <div style={{ fontSize: 13, color: "var(--primary)", fontWeight: 500, display: "flex", alignItems: "center", gap: 6 }}>
+                  <span>{aiCredits.available} AI messages left</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -225,14 +239,14 @@ export default function Dashboard() {
             onClick={() => navigate("/admin")}
             style={{
               display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
-              background: "rgba(212,168,83,0.08)", border: "1px solid rgba(212,168,83,0.35)",
+              background: "rgb(var(--accent-rgb) / 0.08)", border: "1px solid rgb(var(--accent-rgb) / 0.35)",
               padding: "12px 18px", borderRadius: 14, marginBottom: 28,
             }}
           >
             <span style={{ fontSize: 20 }}>👑</span>
             <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 700, color: "#D4A853", fontSize: 14 }}>Admin Console</div>
-              <div style={{ fontSize: 12, color: "#888" }}>Manage users, schools, content and compliance →</div>
+              <div style={{ fontWeight: 700, color: "var(--accent)", fontSize: 14 }}>Admin Console</div>
+              <div style={{ fontSize: 12, color: "var(--text-muted)" }}>Manage users, schools, content and compliance →</div>
             </div>
           </div>
         )}
@@ -243,8 +257,8 @@ export default function Dashboard() {
             {insights.map(({ pattern, rx }, i) => (
               <div key={i} style={{
                 display: "flex", gap: 12, alignItems: "flex-start",
-                background: pattern.severity === "high" ? "rgba(255,77,106,0.07)" : "rgba(212,168,83,0.07)",
-                border: pattern.severity === "high" ? "1px solid rgba(255,77,106,0.3)" : "1px solid rgba(212,168,83,0.3)",
+                background: pattern.severity === "high" ? "rgba(255,77,106,0.07)" : "rgb(var(--accent-rgb) / 0.07)",
+                border: pattern.severity === "high" ? "1px solid rgba(255,77,106,0.3)" : "1px solid rgb(var(--accent-rgb) / 0.3)",
                 padding: "14px 16px", borderRadius: 14, flexWrap: "wrap",
               }}>
                 <span style={{ fontSize: 22 }}>🤖</span>
@@ -283,25 +297,25 @@ export default function Dashboard() {
         <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 20 }}>Your Subjects</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20, marginBottom: 40 }}>
           {subjects.length === 0 ? (
-             <p style={{ color: "#666" }}>No subjects selected. Go to settings to update.</p>
+             <p style={{ color: "var(--text-muted)" }}>No subjects selected. Go to settings to update.</p>
           ) : (
             subjects.map((subj) => (
               <div key={subj} style={{
-                background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 20,
+                background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, padding: 20,
                 transition: "all 0.2s", cursor: "pointer",
-                borderLeft: "4px solid #6C3CE9"
+                borderLeft: "4px solid var(--primary)"
               }}
               onClick={() => {
   const qs = getQuestionsFromBank({ subject: subj, count: 10, exam: profile?.exam || "JAMB" });
   navigate("/practice", { state: { questions: qs, subject: subj, mode: "practice" } });
 }}
               onMouseOver={(e) => {
-                e.currentTarget.style.boxShadow = "0 8px 32px rgba(108,60,233,0.15)";
-                e.currentTarget.style.borderColor = "#6C3CE9";
+                e.currentTarget.style.boxShadow = "0 8px 32px rgb(var(--primary-rgb) / 0.15)";
+                e.currentTarget.style.borderColor = "var(--primary)";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = "#1e1e2a";
+                e.currentTarget.style.borderColor = "var(--border)";
               }}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
@@ -310,15 +324,15 @@ export default function Dashboard() {
                     <span style={{ fontWeight: 600, fontSize: 16 }}>{subj}</span>
                   </div>
                 </div>
-                <div style={{ height: 6, background: "#1e1e2a", borderRadius: 3, marginBottom: 12, overflow: "hidden" }}>
+                <div style={{ height: 6, background: "var(--border)", borderRadius: 3, marginBottom: 12, overflow: "hidden" }}>
                   <div style={{
                     width: subjectStats[subj] ? `${Math.min(100, Math.round((subjectStats[subj].correct / Math.max(subjectStats[subj].done, 1)) * 100))}%` : "0%",
-                    height: "100%", background: "#6C3CE9", borderRadius: 3
+                    height: "100%", background: "var(--primary)", borderRadius: 3
                   }} />
                 </div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 13, color: "#888" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 13, color: "var(--text-muted)" }}>
                   <span>{subjectStats[subj]?.done || 0} questions done</span>
-                  <button style={{ background: "none", border: "none", color: "#6C3CE9", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+                  <button style={{ background: "none", border: "none", color: "var(--primary)", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
                     Start <ChevronRight size={14} />
                   </button>
                 </div>
@@ -335,16 +349,16 @@ export default function Dashboard() {
             borderRadius: 16, padding: "20px 16px", marginBottom: 40, display: "flex", alignItems: "center", justifyContent: "space-between",
             border: "1px solid #333", position: "relative", overflow: "hidden", cursor: "pointer", flexWrap: "wrap", gap: 12
           }}>
-          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 4, background: "#D4A853" }} />
+          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 4, background: "var(--accent)" }} />
           <div>
-            <div style={{ color: "#D4A853", fontWeight: 700, fontSize: 14, marginBottom: 4, display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{ color: "var(--accent)", fontWeight: 700, fontSize: 14, marginBottom: 4, display: "flex", alignItems: "center", gap: 8 }}>
               <Zap size={16} /> DAILY CHALLENGE
             </div>
             <div style={{ fontSize: 18, fontWeight: 600, color: "#fff", marginBottom: 4 }}>10 mixed questions</div>
-            <div style={{ color: "#888", fontSize: 13 }}>15 mins · 2x XP today</div>
+            <div style={{ color: "var(--text-muted)", fontSize: 13 }}>15 mins · 2x XP today</div>
           </div>
           <button style={{
-            background: "transparent", border: "1px solid #D4A853", color: "#D4A853", padding: "10px 20px", borderRadius: 10, fontWeight: 600, cursor: "pointer"
+            background: "transparent", border: "1px solid var(--accent)", color: "var(--accent)", padding: "10px 20px", borderRadius: 10, fontWeight: 600, cursor: "pointer"
           }}>
             Start Challenge →
           </button>
@@ -354,23 +368,23 @@ export default function Dashboard() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
           <div
             onClick={() => navigate("/ai-tutor")}
-            style={{ background: "#121218", border: "1px solid #6C3CE9", borderRadius: 16, padding: 24, cursor: "pointer" }}>
+            style={{ background: "var(--bg-2)", border: "1px solid var(--primary)", borderRadius: 16, padding: 24, cursor: "pointer" }}>
             <h3 style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Ask AI Tutor</h3>
-            <p style={{ color: "#888", fontSize: 13, marginBottom: 16 }}>Get instant explanations for any topic or question</p>
+            <p style={{ color: "var(--text-muted)", fontSize: 13, marginBottom: 16 }}>Get instant explanations for any topic or question</p>
             <div style={{ display: "flex", gap: 8 }}>
               <input type="text" placeholder="Ask anything... e.g. Explain Newton's 3rd law" readOnly style={{
                 flex: 1, background: "#0a0a0f", border: "1px solid #333", borderRadius: 8, padding: "10px 12px", color: "#fff", outline: "none", fontSize: 13
               }} />
-              <button style={{ background: "#6C3CE9", border: "none", borderRadius: 8, padding: "0 16px", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center" }}>
+              <button style={{ background: "var(--primary)", border: "none", borderRadius: 8, padding: "0 16px", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center" }}>
                 <Send size={16} />
               </button>
             </div>
           </div>
 
-          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 24, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, padding: 24, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
              <div style={{ fontSize: 32, marginBottom: 12 }}>🚀</div>
              <h3 style={{ fontSize: 16, fontWeight: 600, color: "#fff", marginBottom: 8 }}>No activity yet</h3>
-             <p style={{ color: "#666", fontSize: 13 }}>Start your first practice session!</p>
+             <p style={{ color: "var(--text-muted)", fontSize: 13 }}>Start your first practice session!</p>
           </div>
         </div>
       </div>
@@ -389,14 +403,14 @@ export default function Dashboard() {
 function StatCard({ icon: Icon, label, value, subtext, color }) {
   return (
     <div style={{
-      background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 20,
+      background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, padding: 20,
       borderLeft: `4px solid ${color}`, display: "flex", flexDirection: "column", gap: 8
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#888", fontSize: 13 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--text-muted)", fontSize: 13 }}>
         <Icon size={16} color={color} /> {label}
       </div>
       <div style={{ fontSize: 32, fontWeight: 800, color: "#fff" }}>{value}</div>
-      <div style={{ fontSize: 12, color: "#666" }}>{subtext}</div>
+      <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{subtext}</div>
     </div>
   );
 }

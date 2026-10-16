@@ -3,10 +3,10 @@ import { createContext, useContext, useState, useCallback } from "react";
 const ToastContext = createContext();
 
 const typeColors = {
-  success: "#00E5A0",
+  success: "var(--success)",
   error: "#FF4D6A",
   warning: "#FF9F43",
-  info: "#6C3CE9",
+  info: "var(--primary)",
 };
 
 export function ToastProvider({ children }) {
@@ -28,7 +28,7 @@ export function ToastProvider({ children }) {
       }}>
         {toasts.map(t => (
           <div key={t.id} style={{
-            background: "#1a1a1f",
+            background: "var(--bg-3)",
             border: "1px solid #333",
             borderRadius: 10,
             padding: "12px 18px",

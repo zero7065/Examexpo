@@ -88,21 +88,21 @@ export default function AdminAnalytics() {
   }
 
   if (loading) {
-    return <div style={{ color: "#888", padding: 24 }}><Loader2 className="animate-spin" /> Loading analytics...</div>;
+    return <div style={{ color: "var(--text-muted)", padding: 24 }}><Loader2 className="animate-spin" /> Loading analytics...</div>;
   }
 
   if (!data) {
-    return <div style={{ color: "#888", padding: 24 }}>Failed to load analytics.</div>;
+    return <div style={{ color: "var(--text-muted)", padding: 24 }}>Failed to load analytics.</div>;
   }
 
   const maxSessions = Math.max(...data.last7Days.map((d) => d.sessions), 1);
 
   return (
-    <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 20 }}>
+    <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <BarChart3 size={18} color="#6C3CE9" />
-          <span style={{ fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>Analytics Dashboard</span>
+          <BarChart3 size={18} color="var(--primary)" />
+          <span style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>Analytics Dashboard</span>
         </div>
         <button onClick={downloadCSV} style={{ padding: "8px 16px", borderRadius: 8, background: "#4ADE80", border: "none", color: "#000", fontWeight: 700, fontSize: 12, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
           <Download size={14} /> Export CSV
@@ -111,31 +111,31 @@ export default function AdminAnalytics() {
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 12, marginBottom: 20 }}>
         {[
-          { icon: Users, label: "Total Users", value: data.totalUsers, color: "#6C3CE9" },
+          { icon: Users, label: "Total Users", value: data.totalUsers, color: "var(--primary)" },
           { icon: CreditCard, label: "Pro Users", value: data.proUsers, color: "#4ADE80" },
-          { icon: Activity, label: "Sessions", value: data.totalSessions, color: "#D4A853" },
+          { icon: Activity, label: "Sessions", value: data.totalSessions, color: "var(--accent)" },
           { icon: TrendingUp, label: "Questions", value: data.totalQuestions, color: "#FF9F43" },
-          { icon: BarChart3, label: "AI Chats", value: data.aiInteractions, color: "#6C3CE9" },
+          { icon: BarChart3, label: "AI Chats", value: data.aiInteractions, color: "var(--primary)" },
           { icon: TrendingUp, label: "Avg Score", value: data.avgScore + "%", color: "#4ADE80" },
         ].map((s) => {
           const Icon = s.icon;
           return (
-            <div key={s.label} style={{ background: "#1a1a1f", borderRadius: 12, padding: 14, textAlign: "center" }}>
+            <div key={s.label} style={{ background: "var(--bg-3)", borderRadius: 12, padding: 14, textAlign: "center" }}>
               <Icon size={20} color={s.color} style={{ margin: "0 auto 6px" }} />
               <div style={{ fontSize: 22, fontWeight: 800, color: "#fff" }}>{s.value}</div>
-              <div style={{ fontSize: 11, color: "#888" }}>{s.label}</div>
+              <div style={{ fontSize: 11, color: "var(--text-muted)" }}>{s.label}</div>
             </div>
           );
         })}
       </div>
 
-      <div style={{ background: "#1a1a1f", borderRadius: 12, padding: 16 }}>
-        <div style={{ fontSize: 13, fontWeight: 700, color: "#888", marginBottom: 12, textTransform: "uppercase", letterSpacing: 1 }}>Sessions (Last 7 Days)</div>
+      <div style={{ background: "var(--bg-3)", borderRadius: 12, padding: 16 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: "var(--text-muted)", marginBottom: 12, textTransform: "uppercase", letterSpacing: 1 }}>Sessions (Last 7 Days)</div>
         <div style={{ display: "flex", alignItems: "flex-end", gap: 8, height: 100 }}>
           {data.last7Days.map((d) => (
             <div key={d.date} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-              <div style={{ width: "100%", maxWidth: 40, height: Math.max(4, (d.sessions / maxSessions) * 80), background: "linear-gradient(180deg, #6C3CE9, #9B59B6)", borderRadius: "4px 4px 0 0", transition: "height 0.3s" }} />
-              <span style={{ fontSize: 10, color: "#888" }}>{d.date}</span>
+              <div style={{ width: "100%", maxWidth: 40, height: Math.max(4, (d.sessions / maxSessions) * 80), background: "linear-gradient(180deg, var(--primary), var(--accent))", borderRadius: "4px 4px 0 0", transition: "height 0.3s" }} />
+              <span style={{ fontSize: 10, color: "var(--text-muted)" }}>{d.date}</span>
             </div>
           ))}
         </div>

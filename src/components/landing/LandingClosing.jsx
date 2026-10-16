@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { ChevronDown, ArrowRight } from "lucide-react";
 
 const FAQS = [
-  { q: "Is ExamPadi free?", a: "Yes! The free tier gives you 15 practice questions and 3 AI tutor messages every day, forever. Upgrade to Pro for unlimited access." },
+  { q: "Is ExamPadi free?", a: "Yes! The free tier gives you 15 practice questions and 3 AI tutor messages every day, forever. Upgrade to Pro for more AI messages and unlimited questions." },
   { q: "Which exams do you cover?", a: "JAMB (UTME), WAEC (SSCE & GCE), NECO and NABTEB, with questions from 2017 to 2026. Coverage is deepest for JAMB and grows every week." },
   { q: "How does the AI Tutor work?", a: "Ask any question in your subjects and get instant step-by-step explanations trained on the West African curriculum. You can even snap a photo of a question (Pro)." },
-  { q: "What do I get with Pro?", a: "Unlimited questions and AI chat, all subjects unlocked, full Exam Mode mocks, detailed analytics, offline mode and priority support — ₦3,000/month or ₦25,000/year." },
+  { q: "What do I get with Pro?", a: "Unlimited questions, 60–80 AI messages every month, all subjects unlocked, full Exam Mode mocks, detailed analytics, offline mode and priority support — ₦3,500/month or ₦28,000/year." },
   { q: "Does it work offline or on a weak network?", a: "Yes. Questions, progress and the app shell keep working offline, and anything you do syncs automatically when you're back. If your network blocks Google services, the app tells you and keeps working from cache." },
   { q: "Which subjects are available?", a: "English, Mathematics, Physics, Chemistry, Biology, Economics, Government, Geography, Agricultural Science, Literature, Commerce, CRS, Further Mathematics — and more on the way." },
   { q: "Can schools use ExamPadi?", a: "Yes — contact us on WhatsApp for bulk Pro seats, teacher oversight and onboarding support for your school or tutorial centre." },
@@ -124,10 +124,10 @@ const FOOT_COLS = [
 ];
 
 function FootLink({ label, href, external }) {
-  const style = { color: "#94a3b8", textDecoration: "none", fontSize: 13, transition: "color 0.2s" };
+  const style = { color: "var(--text-muted)", textDecoration: "none", fontSize: 13, transition: "color 0.2s" };
   const hover = {
-    onMouseOver: (e) => { e.currentTarget.style.color = "#fff"; },
-    onMouseOut: (e) => { e.currentTarget.style.color = "#94a3b8"; },
+    onMouseOver: (e) => { e.currentTarget.style.color = "var(--text)"; },
+    onMouseOut: (e) => { e.currentTarget.style.color = "var(--text-muted)"; },
   };
   if (external || href.startsWith("#")) {
     return <a href={href} style={style} {...hover} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{label}</a>;
@@ -137,13 +137,13 @@ function FootLink({ label, href, external }) {
 
 export function LandingFooter() {
   return (
-    <footer style={{ background: "#0f172a", color: "#94a3b8", padding: "48px 0 24px" }}>
+    <footer style={{ background: "var(--bg-2)", color: "var(--text-muted)", padding: "48px 0 24px", borderTop: "1px solid var(--border)" }}>
       <div className="lp-container">
         <div className="lp-foot-grid" style={{ display: "grid", gridTemplateColumns: "1.5fr repeat(5, 1fr)", gap: 32, marginBottom: 40 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
               <div style={{ width: 32, height: 32, borderRadius: 8, background: "var(--landing-gradient)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 16, color: "#fff" }}>E</div>
-              <span style={{ fontSize: 18, fontWeight: 800, color: "#fff" }}>
+              <span style={{ fontSize: 18, fontWeight: 800, color: "var(--text)" }}>
                 ExamPadi
               </span>
             </div>
@@ -153,7 +153,7 @@ export function LandingFooter() {
           </div>
           {FOOT_COLS.map((col) => (
             <div key={col.title}>
-              <h4 style={{ fontSize: 12, fontWeight: 700, color: "#fff", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{col.title}</h4>
+              <h4 style={{ fontSize: 12, fontWeight: 700, color: "var(--text)", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{col.title}</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {col.links.map((l) => (
                   <FootLink key={l.label} {...l} />
@@ -162,9 +162,9 @@ export function LandingFooter() {
             </div>
           ))}
         </div>
-        <div style={{ borderTop: "1px solid #1e293b", paddingTop: 20, textAlign: "center", fontSize: 12 }}>
+        <div style={{ borderTop: "1px solid var(--border)", paddingTop: 20, textAlign: "center", fontSize: 12 }}>
           <div style={{ marginBottom: 12 }}>
-            <span className="jadai-brand-full" style={{ fontWeight: 800, fontSize: 13, letterSpacing: "0.02em" }}>
+            <span className="brand-shimmer-full" style={{ fontWeight: 800, fontSize: 13, letterSpacing: "0.02em" }}>
               Developed by Jadai Studios
             </span>
           </div>

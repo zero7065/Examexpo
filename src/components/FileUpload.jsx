@@ -110,14 +110,14 @@ export default function FileUpload({ onUploadComplete, onUploadError }) {
   const fileType = file ? ALLOWED_TYPES[file.type] : null;
 
   return (
-    <div style={{ padding: 16, borderRadius: 12, background: "#1a1a1f", border: "1px solid #333" }}>
+    <div style={{ padding: 16, borderRadius: 12, background: "var(--bg-3)", border: "1px solid #333" }}>
       <input ref={inputRef} type="file" accept={Object.keys(ALLOWED_TYPES).join(",")} onChange={handleFileSelect} style={{ display: "none" }} />
 
       {!file ? (
-        <button onClick={() => inputRef.current?.click()} style={{ width: "100%", padding: 24, borderRadius: 12, background: "rgba(108,60,233,0.08)", border: "2px dashed rgba(108,60,233,0.3)", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
-          <Upload size={32} color="#6C3CE9" />
+        <button onClick={() => inputRef.current?.click()} style={{ width: "100%", padding: 24, borderRadius: 12, background: "rgb(var(--primary-rgb) / 0.08)", border: "2px dashed rgb(var(--primary-rgb) / 0.3)", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+          <Upload size={32} color="var(--primary)" />
           <span style={{ color: "#fff", fontSize: 14, fontWeight: 600 }}>Upload Document or Video</span>
-          <span style={{ color: "#888", fontSize: 12 }}>PDF, PNG, JPG, WEBP, MP4, WEBM — max 50MB</span>
+          <span style={{ color: "var(--text-muted)", fontSize: 12 }}>PDF, PNG, JPG, WEBP, MP4, WEBM — max 50MB</span>
         </button>
       ) : (
         <div>
@@ -125,16 +125,16 @@ export default function FileUpload({ onUploadComplete, onUploadError }) {
             {fileType === "image" && preview ? (
               <img src={preview} alt="Preview" style={{ width: 48, height: 48, borderRadius: 8, objectFit: "cover" }} />
             ) : fileType === "video" ? (
-              <Video size={32} color="#6C3CE9" />
+              <Video size={32} color="var(--primary)" />
             ) : (
-              <FileText size={32} color="#6C3CE9" />
+              <FileText size={32} color="var(--primary)" />
             )}
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ color: "#fff", fontSize: 13, fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{file.name}</div>
-              <div style={{ color: "#888", fontSize: 11 }}>{(file.size / 1024 / 1024).toFixed(1)} MB</div>
+              <div style={{ color: "var(--text-muted)", fontSize: 11 }}>{(file.size / 1024 / 1024).toFixed(1)} MB</div>
             </div>
             {!uploading && (
-              <button onClick={clear} style={{ background: "none", border: "none", color: "#888", cursor: "pointer", padding: 4 }}>
+              <button onClick={clear} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", padding: 4 }}>
                 <X size={18} />
               </button>
             )}
@@ -142,15 +142,15 @@ export default function FileUpload({ onUploadComplete, onUploadError }) {
 
           {uploading && (
             <div style={{ marginBottom: 12 }}>
-              <div style={{ height: 6, borderRadius: 3, background: "#333", overflow: "hidden" }}>
-                <div style={{ width: `${progress}%`, height: "100%", background: "#6C3CE9", borderRadius: 3, transition: "width 0.3s" }} />
+              <div style={{ height: 6, borderRadius: 3, background: "var(--border)", overflow: "hidden" }}>
+                <div style={{ width: `${progress}%`, height: "100%", background: "var(--primary)", borderRadius: 3, transition: "width 0.3s" }} />
               </div>
-              <div style={{ color: "#888", fontSize: 11, marginTop: 4, textAlign: "center" }}>{progress}% uploaded</div>
+              <div style={{ color: "var(--text-muted)", fontSize: 11, marginTop: 4, textAlign: "center" }}>{progress}% uploaded</div>
             </div>
           )}
 
           {!uploading && (
-            <button onClick={handleUpload} style={{ width: "100%", padding: 12, borderRadius: 8, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+            <button onClick={handleUpload} style={{ width: "100%", padding: 12, borderRadius: 8, background: "var(--primary)", border: "none", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
               <Upload size={16} /> Upload to AI Tutor
             </button>
           )}

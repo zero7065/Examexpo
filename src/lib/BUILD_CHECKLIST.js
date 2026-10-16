@@ -99,7 +99,7 @@ export const BUILD_CHECKLIST = {
     testingSteps: [
       '1. Use Paystack sandbox credentials (VITE_PAYSTACK_PUBLIC_KEY=pk_test_*)',
       '2. Navigate to /payment page',
-      '3. Click "Pay ₦3,000" for Pro Monthly',
+      '3. Click "Pay ₦3,500" for Pro Monthly',
       '4. Paystack modal should open',
       '5. Use test card: 4111 1111 1111 1111 (any future exp, any CVV)',
       '6. Verify user subscription updates in Firestore',
@@ -114,7 +114,7 @@ export const BUILD_CHECKLIST = {
       '✅ AITutor.jsx: Full chat interface with Pro gating',
       '✅ PracticeSession.jsx: "Ask AI" button with checkAILimit + trackAIMessage',
       '✅ explainQuestion() in gemini.js: Generates explanations with templates',
-      '✅ Daily limits: Free users get 5 AI messages/day, Pro unlimited',
+      '✅ Daily limits: Free users get 3 AI messages/day, Pro 60–80/month + packs',
       '✅ Session analytics: Weak topics tracked and displayed',
     ],
     testingSteps: [

@@ -150,7 +150,7 @@ export default function SessionSummary() {
   const { subject, mode, questions, answers, correct, wrong, total, score, timeSeconds, xpEarned, weakTopics } = data;
   const grade = score >= 80 ? "A" : score >= 65 ? "B" : score >= 50 ? "C" : "F";
   const headline = score >= 80 ? "Excellent! 🔥" : score >= 60 ? "Good effort! 💪" : "Keep pushing! 📚";
-  const conicColor = score >= 80 ? "#4ADE80" : score >= 60 ? "#D4A853" : score >= 40 ? "#FF9F43" : "#FF4D6A";
+  const conicColor = score >= 80 ? "#4ADE80" : score >= 60 ? "var(--accent)" : score >= 40 ? "#FF9F43" : "#FF4D6A";
 
   function formatTime(s) {
     const m = Math.floor(s / 60);
@@ -177,7 +177,7 @@ export default function SessionSummary() {
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <div style={{ position: "relative", width: 160, height: 160, margin: "0 auto 16px" }}>
             <svg width="160" height="160" viewBox="0 0 160 160">
-              <circle cx="80" cy="80" r="70" fill="none" stroke="#1e1e2a" strokeWidth="10" />
+              <circle cx="80" cy="80" r="70" fill="none" stroke="var(--border)" strokeWidth="10" />
               <circle cx="80" cy="80" r="70" fill="none" stroke={conicColor} strokeWidth="10" strokeDasharray={`${(score / 100) * 440} 440`} strokeLinecap="round" transform="rotate(-90 80 80)" style={{ transition: "stroke-dasharray 1s ease" }} />
             </svg>
             <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
@@ -193,12 +193,12 @@ export default function SessionSummary() {
           {[
             { label: "Correct", value: correct, color: "#4ADE80" },
             { label: "Wrong", value: wrong, color: "#FF4D6A" },
-            { label: "Time", value: formatTime(timeSeconds), color: "#6C3CE9" },
-            { label: "XP", value: `+${displayXP}`, color: "#D4A853" },
+            { label: "Time", value: formatTime(timeSeconds), color: "var(--primary)" },
+            { label: "XP", value: `+${displayXP}`, color: "var(--accent)" },
           ].map((s, i) => (
-            <div key={i} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 12, padding: "16px 12px", textAlign: "center" }}>
+            <div key={i} style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 12, padding: "16px 12px", textAlign: "center" }}>
               <div style={{ fontSize: 24, fontWeight: 800, color: s.color, fontFamily: "'JetBrains Mono', monospace" }}>{s.value}</div>
-              <div style={{ fontSize: 11, color: "#888", marginTop: 4 }}>{s.label}</div>
+              <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 4 }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -258,10 +258,10 @@ export default function SessionSummary() {
 
         {/* Action buttons */}
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          <button onClick={handlePracticeAgain} style={{ padding: 14, borderRadius: 12, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, fontFamily: "inherit" }}>
+          <button onClick={handlePracticeAgain} style={{ padding: 14, borderRadius: 12, background: "var(--primary)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, fontFamily: "inherit" }}>
             <RotateCcw size={18} /> Practice Again
           </button>
-          <button onClick={() => navigate("/dashboard")} style={{ padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>
+          <button onClick={() => navigate("/dashboard")} style={{ padding: 14, borderRadius: 12, background: "var(--bg-2)", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>
             <ArrowLeft size={18} style={{ verticalAlign: "middle", marginRight: 8 }} /> Back to Dashboard
           </button>
           <WhatsAppShareButton

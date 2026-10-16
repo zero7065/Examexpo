@@ -67,49 +67,49 @@ export default function QuestionBank() {
       <div className="page-content" style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ marginBottom: 8 }}>
           <h1 style={{ fontSize: 28, fontWeight: 800, margin: 0 }}>Question Bank</h1>
-          <p style={{ color: "#888", fontSize: 14, margin: "4px 0 0" }}>Browse {getTotalCount()} past questions across all subjects</p>
+          <p style={{ color: "var(--text-muted)", fontSize: 14, margin: "4px 0 0" }}>Browse {getTotalCount()} past questions across all subjects</p>
         </div>
 
         {/* Filter bar */}
-        <div style={{ background: "#0d0d12", borderBottom: "1px solid #1e1e2a", padding: 16, position: "sticky", top: 0, zIndex: 10, marginBottom: 20, borderRadius: 12, display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
-          <select value={filters.subject} onChange={e => updateFilter("subject", e.target.value)} style={{ background: "#1a1a1f", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 12px", fontSize: 13, outline: "none", fontFamily: "inherit" }}>
+        <div style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)", padding: 16, position: "sticky", top: 0, zIndex: 10, marginBottom: 20, borderRadius: 12, display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center" }}>
+          <select value={filters.subject} onChange={e => updateFilter("subject", e.target.value)} style={{ background: "var(--bg-3)", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 12px", fontSize: 13, outline: "none", fontFamily: "inherit" }}>
             {subjectOptions.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
 
           {topics.length > 0 && (
-            <select value={filters.topic} onChange={e => updateFilter("topic", e.target.value)} style={{ background: "#1a1a1f", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 12px", fontSize: 13, outline: "none", fontFamily: "inherit" }}>
+            <select value={filters.topic} onChange={e => updateFilter("topic", e.target.value)} style={{ background: "var(--bg-3)", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 12px", fontSize: 13, outline: "none", fontFamily: "inherit" }}>
               <option value="">All Topics</option>
               {topics.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           )}
 
           {examOptions.map(e => (
-            <button key={e} onClick={() => updateFilter("exam", e)} style={{ padding: "6px 14px", borderRadius: 20, border: filters.exam === e ? "1px solid #6C3CE9" : "1px solid #333", background: filters.exam === e ? "rgba(108,60,233,0.2)" : "transparent", color: filters.exam === e ? "#fff" : "#888", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+            <button key={e} onClick={() => updateFilter("exam", e)} style={{ padding: "6px 14px", borderRadius: 20, border: filters.exam === e ? "1px solid var(--primary)" : "1px solid #333", background: filters.exam === e ? "rgb(var(--primary-rgb) / 0.2)" : "transparent", color: filters.exam === e ? "#fff" : "var(--text-muted)", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
               {e === "ALL" ? "ALL" : e}
             </button>
           ))}
 
           {["ALL", "Easy", "Medium", "Hard"].map(d => (
-            <button key={d} onClick={() => updateFilter("difficulty", d)} style={{ padding: "6px 14px", borderRadius: 20, border: filters.difficulty === d ? "1px solid #6C3CE9" : "1px solid #333", background: filters.difficulty === d ? "rgba(108,60,233,0.2)" : "transparent", color: filters.difficulty === d ? "#fff" : "#888", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+            <button key={d} onClick={() => updateFilter("difficulty", d)} style={{ padding: "6px 14px", borderRadius: 20, border: filters.difficulty === d ? "1px solid var(--primary)" : "1px solid #333", background: filters.difficulty === d ? "rgb(var(--primary-rgb) / 0.2)" : "transparent", color: filters.difficulty === d ? "#fff" : "var(--text-muted)", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
               {d}
             </button>
           ))}
 
-          <input type="number" placeholder="From" value={filters.yearFrom} onChange={e => updateFilter("yearFrom", e.target.value)} style={{ width: 64, background: "#1a1a1f", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 10px", fontSize: 13, outline: "none", fontFamily: "inherit" }} />
-          <input type="number" placeholder="To" value={filters.yearTo} onChange={e => updateFilter("yearTo", e.target.value)} style={{ width: 64, background: "#1a1a1f", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 10px", fontSize: 13, outline: "none", fontFamily: "inherit" }} />
+          <input type="number" placeholder="From" value={filters.yearFrom} onChange={e => updateFilter("yearFrom", e.target.value)} style={{ width: 64, background: "var(--bg-3)", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 10px", fontSize: 13, outline: "none", fontFamily: "inherit" }} />
+          <input type="number" placeholder="To" value={filters.yearTo} onChange={e => updateFilter("yearTo", e.target.value)} style={{ width: 64, background: "var(--bg-3)", border: "1px solid #333", borderRadius: 8, color: "#fff", padding: "8px 10px", fontSize: 13, outline: "none", fontFamily: "inherit" }} />
 
-          <button onClick={() => updateFilter("highYieldOnly", !filters.highYieldOnly)} style={{ padding: "6px 14px", borderRadius: 20, border: filters.highYieldOnly ? "1px solid #f97316" : "1px solid #333", background: filters.highYieldOnly ? "rgba(249,115,22,0.15)" : "transparent", color: filters.highYieldOnly ? "#f97316" : "#888", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
+          <button onClick={() => updateFilter("highYieldOnly", !filters.highYieldOnly)} style={{ padding: "6px 14px", borderRadius: 20, border: filters.highYieldOnly ? "1px solid #f97316" : "1px solid #333", background: filters.highYieldOnly ? "rgba(249,115,22,0.15)" : "transparent", color: filters.highYieldOnly ? "#f97316" : "var(--text-muted)", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
             🔥 High-yield only
           </button>
 
-          <button onClick={handleStartPractice} style={{ marginLeft: "auto", padding: "10px 20px", borderRadius: 10, border: "none", background: "#6C3CE9", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
+          <button onClick={handleStartPractice} style={{ marginLeft: "auto", padding: "10px 20px", borderRadius: 10, border: "none", background: "var(--primary)", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
             Practice {filtered.length > 20 ? "20" : filtered.length} Questions <ChevronRight size={16} />
           </button>
         </div>
 
         {/* Question list */}
         {paged.length === 0 ? (
-          <div style={{ textAlign: "center", padding: 60, color: "#666" }}>
+          <div style={{ textAlign: "center", padding: 60, color: "var(--text-muted)" }}>
             <BookOpen size={48} style={{ opacity: 0.3, margin: "0 auto 16px", display: "block" }} />
             <h3 style={{ color: "#fff", fontWeight: 700, marginBottom: 8 }}>No questions found</h3>
             <p style={{ fontSize: 14 }}>Try adjusting your filters</p>
@@ -166,9 +166,9 @@ export default function QuestionBank() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 24, alignItems: "center" }}>
-            <button disabled={page <= 1} onClick={() => setPage(p => p - 1)} style={{ padding: "8px 16px", borderRadius: 8, background: "#1a1a1f", border: "1px solid #333", color: page <= 1 ? "#555" : "#fff", cursor: page <= 1 ? "not-allowed" : "pointer" }}><ChevronLeft size={16} /></button>
-            <span style={{ color: "#888", fontSize: 13 }}>Page {page} of {totalPages}</span>
-            <button disabled={page >= totalPages} onClick={() => setPage(p => p + 1)} style={{ padding: "8px 16px", borderRadius: 8, background: "#1a1a1f", border: "1px solid #333", color: page >= totalPages ? "#555" : "#fff", cursor: page >= totalPages ? "not-allowed" : "pointer" }}><ChevronRight size={16} /></button>
+            <button disabled={page <= 1} onClick={() => setPage(p => p - 1)} style={{ padding: "8px 16px", borderRadius: 8, background: "var(--bg-3)", border: "1px solid #333", color: page <= 1 ? "var(--text-muted)" : "#fff", cursor: page <= 1 ? "not-allowed" : "pointer" }}><ChevronLeft size={16} /></button>
+            <span style={{ color: "var(--text-muted)", fontSize: 13 }}>Page {page} of {totalPages}</span>
+            <button disabled={page >= totalPages} onClick={() => setPage(p => p + 1)} style={{ padding: "8px 16px", borderRadius: 8, background: "var(--bg-3)", border: "1px solid #333", color: page >= totalPages ? "var(--text-muted)" : "#fff", cursor: page >= totalPages ? "not-allowed" : "pointer" }}><ChevronRight size={16} /></button>
           </div>
         )}
       </div>

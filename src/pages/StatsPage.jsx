@@ -217,7 +217,7 @@ const StatsPage = () => {
               </div>
             </div>
             <button onClick={() => navigate("/payment")} className="btn-primary px-8">
-              Upgrade to Pro — ₦3,000/mo
+              Upgrade to Pro — ₦3,500/mo
             </button>
           </div>
         </div>
@@ -634,16 +634,16 @@ const ScoreChart = ({ sessions }) => {
     <div className="space-y-6">
       <div className="relative h-48 w-full">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full" preserveAspectRatio="none">
-          <line x1={padding} y1={padding} x2={padding + chartWidth} y2={padding} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
-          <line x1={padding} y1={padding + chartHeight / 2} x2={padding + chartWidth} y2={padding + chartHeight / 2} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
-          <line x1={padding} y1={padding + chartHeight} x2={padding + chartWidth} y2={padding + chartHeight} stroke="#333" strokeWidth="0.2" strokeDasharray="2" />
+          <line x1={padding} y1={padding} x2={padding + chartWidth} y2={padding} stroke="var(--border)" strokeWidth="0.2" strokeDasharray="2" />
+          <line x1={padding} y1={padding + chartHeight / 2} x2={padding + chartWidth} y2={padding + chartHeight / 2} stroke="var(--border)" strokeWidth="0.2" strokeDasharray="2" />
+          <line x1={padding} y1={padding + chartHeight} x2={padding + chartWidth} y2={padding + chartHeight} stroke="var(--border)" strokeWidth="0.2" strokeDasharray="2" />
 
           <path d={areaPath} fill="url(#scoreGradient)" opacity="0.3" />
 
           <polyline
             points={points}
             fill="none"
-            stroke="#00E5A0"
+            stroke="var(--success)"
             strokeWidth="1"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -654,7 +654,7 @@ const ScoreChart = ({ sessions }) => {
             const y = padding + chartHeight - (s.score / maxScore) * chartHeight;
             return (
               <g key={i}>
-                <circle cx={x} cy={y} r="2" fill="#00E5A0" />
+                <circle cx={x} cy={y} r="2" fill="var(--success)" />
                 <title>{`${s.subject}: ${s.score}%`}</title>
               </g>
             );
@@ -662,8 +662,8 @@ const ScoreChart = ({ sessions }) => {
 
           <defs>
             <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#00E5A0" />
-              <stop offset="100%" stopColor="#00E5A0" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--success)" />
+              <stop offset="100%" stopColor="var(--success)" stopOpacity="0" />
             </linearGradient>
           </defs>
         </svg>

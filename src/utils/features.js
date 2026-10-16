@@ -8,7 +8,7 @@ export const FEATURE_GATES = {
   shareQuestion: "free",         // sharing is free (marketing)
   basicStats: "free",            // total questions + streak only
 
-  // PRO — ₦3,000/month unlocks all of this
+  // PRO — ₦3,500/month unlocks all of this
   cbтSimulator: "pro",           // full 180-question CBT exam
   unlimitedQuestions: "pro",     // no 30/day cap
   unlimitedAI: "pro",            // unlimited Groq explanations

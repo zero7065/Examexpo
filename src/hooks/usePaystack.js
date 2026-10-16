@@ -8,6 +8,7 @@ import { useAuth } from "../context/AuthContext";
 
 const PRO_PLANS = new Set(["pro_monthly", "pro_yearly", "ielts"]);
 const YEARLY_PLANS = new Set(["pro_yearly", "ielts", "team_yearly"]);
+const PACK_PLANS = new Set(["ai_pack_50"]);
 
 export function rememberPaymentReference(reference, plan) {
   try {
@@ -30,6 +31,12 @@ export function readLastPayment() {
   } catch (_) {
     return null;
   }
+}
+
+function successToast(plan) {
+  if (PACK_PLANS.has(plan)) return "50 AI messages added to your balance.";
+  if (plan === "team_monthly" || plan === "team_yearly") return "Classroom plan active. Share your team code with your students.";
+  return "Pro activated! Welcome to ExamPadi Pro";
 }
 
 export function usePaystack() {
@@ -80,6 +87,18 @@ export function usePaystack() {
   }
 
   async function persistSubscription({ reference, plan, userId, verified }) {
+    // Credit packs: top up the bonus pool, never touch subscription.
+    if (PACK_PLANS.has(plan)) {
+      if (db && userId) {
+        const { increment } = await import("firebase/firestore");
+        try {
+          await updateDoc(doc(db, "users", userId), { aiPackCredits: increment(50) });
+        } catch (e) {
+          console.warn("AI pack write failed:", e?.code || e?.message);
+        }
+      }
+      return null;
+    }
     const endDate = calculateEndDate(plan);
     if (db && userId) {
       let retries = 3;
@@ -142,7 +161,7 @@ export function usePaystack() {
     if (v.unreachable) {
       toast({ message: "Payment received. Verifying with Paystack…", type: "info" });
     } else if (activatedByServer || v.ok) {
-      toast({ message: "Pro activated! Welcome to ExamPadi Pro", type: "success" });
+      toast({ message: successToast(effPlan), type: "success" });
     }
     return effPlan;
   }
@@ -176,13 +195,22 @@ export function usePaystack() {
 
     try {
       let paidRef = null;
+      // Partner Plan: attach the payer's school referral code so commissions
+      // are computed server-side from tx.metadata.
+      let partnerCode = extraMetadata?.partnerCode || null;
+      if (!partnerCode && userId) {
+        try {
+          const { getPartnerCodeForPayment } = await import("../lib/partner");
+          partnerCode = await getPartnerCodeForPayment(userId);
+        } catch { /* attribution is best-effort */ }
+      }
       await openPaystack({
         key: paystackKey,
         email: userEmail,
         amount: amountMinor,
         ref: reference,
         currency,
-        metadata: { userId, plan, userName, amountNaira, currency, ...(extraMetadata || {}) },
+        metadata: { userId, plan, userName, amountNaira, currency, ...(partnerCode ? { partnerCode } : {}), ...(extraMetadata || {}) },
         onSuccess: async function(response) {
           paidRef = response.reference;
           rememberPaymentReference(response.reference, plan);
@@ -199,10 +227,10 @@ export function usePaystack() {
             } else {
               if (v.activated) {
                 try { updateUser({ plan: PRO_PLANS.has(plan) ? "pro" : "free" }); } catch (_) {}
-                toast({ message: "Pro activated! Welcome to ExamPadi Pro", type: "success" });
+                toast({ message: successToast(plan), type: "success" });
               } else {
                 await persistSubscription({ reference: response.reference, plan, userId, verified: !!v.ok });
-                toast({ message: "Pro activated! Welcome to ExamPadi Pro", type: "success" });
+                toast({ message: successToast(plan), type: "success" });
               }
             }
           } catch (e) {

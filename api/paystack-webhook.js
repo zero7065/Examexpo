@@ -4,6 +4,7 @@
 // disabled (see `config` export) and the stream is read manually.
 
 import crypto from "crypto";
+import { recordCommission } from "./_commission.js";
 
 export const config = {
   api: { bodyParser: false },
@@ -22,6 +23,7 @@ function readRawBody(req) {
   });
 }
 
+let _adminLib = null;
 async function getDb() {
   const sa = process.env.FIREBASE_SERVICE_ACCOUNT;
   if (!sa) return null;
@@ -30,6 +32,7 @@ async function getDb() {
   if (!adminLib.apps.length) {
     adminLib.initializeApp({ credential: adminLib.credential.cert(JSON.parse(sa)) });
   }
+  _adminLib = adminLib;
   return adminLib.firestore();
 }
 
@@ -91,6 +94,7 @@ export default async function handler(req, res) {
     const db = await getDb();
     if (db && userId && plan && reference && amountMinor > 0) {
       const isTeam = plan === "team_monthly" || plan === "team_yearly";
+      const isPack = plan === "ai_pack_50";
       try {
         await db.collection("payments").doc(reference).set(
           {
@@ -105,7 +109,22 @@ export default async function handler(req, res) {
           },
           { merge: true }
         );
-        if (!isTeam) {
+        // Partner Plan: commission for any paid plan (idempotent by ref).
+        if (metadata.partnerCode && _adminLib) {
+          await recordCommission(_adminLib, db, {
+            reference,
+            userId,
+            plan,
+            ngn: amountMinor / 100,
+            partnerCode: metadata.partnerCode,
+          });
+        }
+        if (isPack) {
+          await db.collection("users").doc(userId).set(
+            { aiPackCredits: _adminLib.firestore.FieldValue.increment(50) },
+            { merge: true }
+          );
+        } else if (!isTeam) {
           await db.collection("users").doc(userId).set(
             {
               subscription: {

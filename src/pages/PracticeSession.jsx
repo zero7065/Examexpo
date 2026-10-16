@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
-import { checkQuestionLimit, trackQuestion, checkAILimit, trackAIMessage } from "../lib/usageTracker";
+import { checkQuestionLimit, trackQuestion, checkAILimit } from "../lib/usageTracker";
 import { explainQuestion, getAIErrorIfRecent } from "../lib/ai";
 import { bufferInteraction, flushMemory } from "../lib/aiMemory";
 import { motivatorFor } from "../data/wellness";
@@ -183,8 +183,6 @@ export default function PracticeSession() {
       if (loadingAI) return;
       setLoadingAI(current.id);
 
-      if (user && !isPro) trackAIMessage(user.uid);
-
       const explanation = await explainQuestion({
         question: current.question,
         options: current.options,
@@ -204,7 +202,13 @@ export default function PracticeSession() {
       setLoadingAI(null);
     } catch (e) {
       console.error("AI explanation failed:", e);
-      toast({ message: "Failed to get AI explanation. Please try again.", type: "error" });
+      if (e?.code === "AI_LIMIT") {
+        setProReason("ai");
+        setShowProModal(true);
+        toast({ message: e.message, type: "warning" });
+      } else {
+        toast({ message: "Failed to get AI explanation. Please try again.", type: "error" });
+      }
       setLoadingAI(null);
     }
   }
@@ -307,7 +311,7 @@ export default function PracticeSession() {
   }
 
   function getOptionStyle(key) {
-    const base = { padding: "14px 16px", borderRadius: 12, border: "1.5px solid #333", background: "#1a1a1f", cursor: "pointer", display: "flex", alignItems: "center", gap: 12, transition: "all 0.25s ease", textAlign: "left", fontFamily: "inherit" };
+    const base = { padding: "14px 16px", borderRadius: 12, border: "1.5px solid #333", background: "var(--bg-3)", cursor: "pointer", display: "flex", alignItems: "center", gap: 12, transition: "all 0.25s ease", textAlign: "left", fontFamily: "inherit" };
     const selected = answers[current?.id] === key;
     const isCorrect = key === current?.answer;
     const isEliminated = eliminated[current?.id]?.includes(key);
@@ -317,7 +321,7 @@ export default function PracticeSession() {
     }
 
     if (!revealed[current?.id]) {
-      if (selected) return { ...base, border: "1.5px solid #6C3CE9", background: "rgba(108,60,233,0.2)" };
+      if (selected) return { ...base, border: "1.5px solid var(--primary)", background: "rgb(var(--primary-rgb) / 0.2)" };
       return base;
     }
 
@@ -330,10 +334,10 @@ export default function PracticeSession() {
   function getBadgeStyle(key) {
     const selected = answers[current?.id] === key;
     const isCorrect = key === current?.answer;
-    if (!revealed[current?.id] && selected) return { background: "#6C3CE9", color: "#fff" };
+    if (!revealed[current?.id] && selected) return { background: "var(--primary)", color: "#fff" };
     if (revealed[current?.id] && isCorrect) return { background: "#4ADE80", color: "#000" };
     if (revealed[current?.id] && selected && !isCorrect) return { background: "#FF4D6A", color: "#fff" };
-    return { background: "#333", color: "#888" };
+    return { background: "var(--border)", color: "var(--text-muted)" };
   }
 
   if (limitBlocked) {
@@ -342,7 +346,7 @@ export default function PracticeSession() {
         <AlertCircle size={48} color="#FF4D6A" />
         <h2 style={{ color: "var(--text)", fontWeight: 700, fontSize: 22, margin: 0 }}>Daily Limit Reached</h2>
         <p style={{ color: "var(--text-muted)", fontSize: 14 }}>Upgrade to Pro for unlimited questions</p>
-        <button onClick={() => { setShowProModal(true); setProReason("questions"); }} style={{ padding: "12px 28px", borderRadius: 10, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 15 }}>
+        <button onClick={() => { setShowProModal(true); setProReason("questions"); }} style={{ padding: "12px 28px", borderRadius: 10, background: "var(--primary)", border: "none", color: "#fff", fontWeight: 700, cursor: "pointer", fontSize: 15 }}>
           Upgrade Now
         </button>
         <ProUpgradeModal open={showProModal} onClose={() => { setShowProModal(false); navigate("/dashboard"); }} reason="questions" dismissible />
@@ -358,32 +362,32 @@ export default function PracticeSession() {
         <div style={{ flex: 1, padding: "20px 24px", maxWidth: isDesktop ? "calc(100% - 220px)" : "100%" }}>
           {/* Progress + Timer */}
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
-            <div style={{ flex: 1, height: 6, background: "#1e1e2a", borderRadius: 3, overflow: "hidden" }}>
-              <div style={{ width: `${progressPct}%`, height: "100%", background: "#6C3CE9", borderRadius: 3, transition: "width 0.3s" }} />
+            <div style={{ flex: 1, height: 6, background: "var(--border)", borderRadius: 3, overflow: "hidden" }}>
+              <div style={{ width: `${progressPct}%`, height: "100%", background: "var(--primary)", borderRadius: 3, transition: "width 0.3s" }} />
             </div>
-            <span style={{ fontSize: 12, color: "#888", fontWeight: 500, whiteSpace: "nowrap" }}>{currentIndex + 1}/{questions.length}</span>
-            <span style={{ fontSize: 12, fontWeight: 700, color: "#D4A853", fontFamily: "'JetBrains Mono', monospace", minWidth: 60, textAlign: "right" }}>{formatTime(timeElapsed)}</span>
+            <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 500, whiteSpace: "nowrap" }}>{currentIndex + 1}/{questions.length}</span>
+            <span style={{ fontSize: 12, fontWeight: 700, color: "var(--accent)", fontFamily: "'JetBrains Mono', monospace", minWidth: 60, textAlign: "right" }}>{formatTime(timeElapsed)}</span>
           </div>
 
           {current && (
             <>
               {/* Question header */}
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
-                <span style={{ padding: "4px 12px", borderRadius: 8, background: "#6C3CE9", color: "#fff", fontSize: 11, fontWeight: 700 }}>Q{currentIndex + 1}</span>
-                <span style={{ color: "#666", fontSize: 12 }}>{current.subject} · {current.topic}</span>
+                <span style={{ padding: "4px 12px", borderRadius: 8, background: "var(--primary)", color: "#fff", fontSize: 11, fontWeight: 700 }}>Q{currentIndex + 1}</span>
+                <span style={{ color: "var(--text-muted)", fontSize: 12 }}>{current.subject} · {current.topic}</span>
                 <span style={{ width: 8, height: 8, borderRadius: "50%", background: current.difficulty === "easy" ? "#4ADE80" : current.difficulty === "medium" ? "#FF9F43" : "#FF4D6A" }} />
-                <span style={{ fontSize: 11, color: "#888", textTransform: "capitalize" }}>{current.difficulty}</span>
+                <span style={{ fontSize: 11, color: "var(--text-muted)", textTransform: "capitalize" }}>{current.difficulty}</span>
                 <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
                   <button
                     onClick={handleUseHint}
                     disabled={!!revealed[current.id] || !hintState.canUse}
-                    style={{ padding: "4px 12px", borderRadius: 8, background: "rgba(212,168,83,0.1)", border: "1px solid rgba(212,168,83,0.3)", color: hintState.canUse && !revealed[current.id] ? "#D4A853" : "#555", cursor: hintState.canUse && !revealed[current.id] ? "pointer" : "not-allowed", fontSize: 11, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}
+                    style={{ padding: "4px 12px", borderRadius: 8, background: "rgb(var(--accent-rgb) / 0.1)", border: "1px solid rgb(var(--accent-rgb) / 0.3)", color: hintState.canUse && !revealed[current.id] ? "var(--accent)" : "var(--text-muted)", cursor: hintState.canUse && !revealed[current.id] ? "pointer" : "not-allowed", fontSize: 11, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}
                   >
                     <Lightbulb size={12} /> Use Hint ({hintState.remaining})
                   </button>
                   <button
                     onClick={() => setWhiteboardOpen(true)}
-                    style={{ padding: "4px 12px", borderRadius: 8, background: "rgba(108,60,233,0.1)", border: "1px solid rgba(108,60,233,0.3)", color: "#6C3CE9", cursor: "pointer", fontSize: 11, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}
+                    style={{ padding: "4px 12px", borderRadius: 8, background: "rgb(var(--primary-rgb) / 0.1)", border: "1px solid rgb(var(--primary-rgb) / 0.3)", color: "var(--primary)", cursor: "pointer", fontSize: 11, fontWeight: 600, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}
                   >
                     <PenTool size={12} /> Whiteboard
                   </button>
@@ -395,7 +399,7 @@ export default function PracticeSession() {
 
               {current.kind === "theory" ? (
                 <div style={{ marginBottom: 24 }}>
-                  <div style={{ fontSize: 11, fontWeight: 800, color: "#D4A853", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>
+                  <div style={{ fontSize: 11, fontWeight: 800, color: "var(--accent)", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>
                     📝 Theory — write your answer, then compare
                   </div>
                   <textarea
@@ -404,17 +408,17 @@ export default function PracticeSession() {
                     disabled={!!revealed[current.id]}
                     rows={5}
                     placeholder="Write your answer here…"
-                    style={{ width: "100%", padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontSize: 14, outline: "none", resize: "vertical", fontFamily: "inherit", boxSizing: "border-box" }}
+                    style={{ width: "100%", padding: 14, borderRadius: 12, background: "var(--bg-2)", border: "1px solid #333", color: "#fff", fontSize: 14, outline: "none", resize: "vertical", fontFamily: "inherit", boxSizing: "border-box" }}
                   />
                   {!revealed[current.id] ? (
                     <button onClick={() => { setAnswers(prev => ({ ...prev, [current.id]: prev[current.id] || "REVIEWED" })); setRevealed(prev => ({ ...prev, [current.id]: true })); }}
-                      style={{ marginTop: 12, padding: "10px 20px", borderRadius: 10, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>
+                      style={{ marginTop: 12, padding: "10px 20px", borderRadius: 10, background: "var(--primary)", border: "none", color: "#fff", fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>
                       Show model answer
                     </button>
                   ) : (
-                    <div style={{ marginTop: 12, padding: 14, borderRadius: 10, background: "rgba(212,168,83,0.08)", borderLeft: "3px solid #D4A853" }}>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: "#D4A853", marginBottom: 6 }}>MODEL ANSWER — compare honestly</div>
-                      <p style={{ fontSize: 13, color: "#ccc", lineHeight: 1.7, margin: 0, whiteSpace: "pre-wrap" }}>{current.modelAnswer || current.explanation}</p>
+                    <div style={{ marginTop: 12, padding: 14, borderRadius: 10, background: "rgb(var(--accent-rgb) / 0.08)", borderLeft: "3px solid var(--accent)" }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: "var(--accent)", marginBottom: 6 }}>MODEL ANSWER — compare honestly</div>
+                      <p style={{ fontSize: 13, color: "var(--text)", lineHeight: 1.7, margin: 0, whiteSpace: "pre-wrap" }}>{current.modelAnswer || current.explanation}</p>
                     </div>
                   )}
                 </div>
@@ -440,22 +444,22 @@ export default function PracticeSession() {
                   {/* Hint */}
                   {current.hint && (
                     <div style={{ marginBottom: 12 }}>
-                      <button onClick={() => setShowHint(s => ({ ...s, [current.id]: !s[current.id] }))} style={{ padding: "8px 16px", borderRadius: 8, background: "rgba(212,168,83,0.1)", border: "1px solid rgba(212,168,83,0.3)", color: "#D4A853", cursor: "pointer", fontSize: 13, fontFamily: "inherit" }}>
+                      <button onClick={() => setShowHint(s => ({ ...s, [current.id]: !s[current.id] }))} style={{ padding: "8px 16px", borderRadius: 8, background: "rgb(var(--accent-rgb) / 0.1)", border: "1px solid rgb(var(--accent-rgb) / 0.3)", color: "var(--accent)", cursor: "pointer", fontSize: 13, fontFamily: "inherit" }}>
                         💡 {showHint[current.id] ? "Hide Hint" : "Show Hint"}
                       </button>
-                      {showHint[current.id] && <p style={{ margin: "8px 0 0", fontSize: 13, color: "#D4A853", fontStyle: "italic" }}>{current.hint}</p>}
+                      {showHint[current.id] && <p style={{ margin: "8px 0 0", fontSize: 13, color: "var(--accent)", fontStyle: "italic" }}>{current.hint}</p>}
                     </div>
                   )}
 
                   {/* AI Explain */}
-                  <button onClick={handleAskAI} disabled={loadingAI === current.id} style={{ padding: "10px 20px", borderRadius: 8, background: "transparent", border: "1.5px solid #6C3CE9", color: "#6C3CE9", cursor: "pointer", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
+                  <button onClick={handleAskAI} disabled={loadingAI === current.id} style={{ padding: "10px 20px", borderRadius: 8, background: "transparent", border: "1.5px solid var(--primary)", color: "var(--primary)", cursor: "pointer", fontSize: 13, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "inherit" }}>
                     <Sparkles size={16} /> {loadingAI === current.id ? "Loading..." : "Ask AI to Explain"}
                   </button>
 
                   {aiExplanations[current.id] && (
-                    <div style={{ marginTop: 12, padding: 14, borderRadius: 10, background: "#0d0d1a", borderLeft: "3px solid #6C3CE9" }}>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: "#D4A853", marginBottom: 6, display: "flex", alignItems: "center", gap: 4 }}><Sparkles size={14} /> AI Explanation</div>
-                      <p style={{ fontSize: 13, color: "#ccc", lineHeight: 1.6, margin: 0 }}>{aiExplanations[current.id]}</p>
+                    <div style={{ marginTop: 12, padding: 14, borderRadius: 10, background: "var(--bg)", borderLeft: "3px solid var(--primary)" }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: "var(--accent)", marginBottom: 6, display: "flex", alignItems: "center", gap: 4 }}><Sparkles size={14} /> AI Explanation</div>
+                      <p style={{ fontSize: 13, color: "var(--text)", lineHeight: 1.6, margin: 0 }}>{aiExplanations[current.id]}</p>
                     </div>
                   )}
                 </div>
@@ -463,12 +467,12 @@ export default function PracticeSession() {
 
               {/* Nav buttons */}
               <div style={{ display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
-                <button onClick={toggleFlag} style={{ padding: "8px 16px", borderRadius: 8, background: "transparent", border: `1px solid ${flagged.has(current.id) ? "#D4A853" : "#333"}`, color: flagged.has(current.id) ? "#D4A853" : "#888", cursor: "pointer", fontSize: 13, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 6 }}>
+                <button onClick={toggleFlag} style={{ padding: "8px 16px", borderRadius: 8, background: "transparent", border: `1px solid ${flagged.has(current.id) ? "var(--accent)" : "var(--border)"}`, color: flagged.has(current.id) ? "var(--accent)" : "var(--text-muted)", cursor: "pointer", fontSize: 13, fontFamily: "inherit", display: "flex", alignItems: "center", gap: 6 }}>
                   <Flag size={14} /> {flagged.has(current.id) ? "Flagged" : "Flag Question"}
                 </button>
                 <div style={{ display: "flex", gap: 8 }}>
                   {currentIndex < questions.length - 1 ? (
-                    <button onClick={() => goToQuestion(currentIndex + 1)} style={{ padding: "10px 20px", borderRadius: 8, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontSize: 14, fontFamily: "inherit" }}>
+                    <button onClick={() => goToQuestion(currentIndex + 1)} style={{ padding: "10px 20px", borderRadius: 8, background: "var(--primary)", border: "none", color: "#fff", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontSize: 14, fontFamily: "inherit" }}>
                       Next <ChevronRight size={16} />
                     </button>
                   ) : (
@@ -484,19 +488,19 @@ export default function PracticeSession() {
 
         {/* Right Panel - Navigator */}
         {isDesktop && (
-          <div style={{ width: 220, background: "#0d0d12", borderLeft: "1px solid #1e1e2a", padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>Questions</div>
+          <div style={{ width: 220, background: "var(--bg)", borderLeft: "1px solid var(--border)", padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>Questions</div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 6 }}>
               {questions.map((q, i) => {
                 const isCurrent = i === currentIndex;
                 const isAnswered = answers[q.id];
                 const isFlagged = flagged.has(q.id);
-                let bg = "#1a1a1f";
+                let bg = "var(--bg-3)";
                 let border = "1px solid #333";
-                if (isCurrent) { bg = "#1a1a1f"; border = "1.5px solid #fff"; }
-                if (isAnswered) { bg = "rgba(108,60,233,0.2)"; border = "1px solid #6C3CE9"; }
-                if (isFlagged) { bg = "rgba(212,168,83,0.15)"; border = "1px solid #D4A853"; }
-                if (isCurrent && isAnswered) { bg = "rgba(108,60,233,0.25)"; border = "1.5px solid #fff"; }
+                if (isCurrent) { bg = "var(--bg-3)"; border = "1.5px solid #fff"; }
+                if (isAnswered) { bg = "rgb(var(--primary-rgb) / 0.2)"; border = "1px solid var(--primary)"; }
+                if (isFlagged) { bg = "rgb(var(--accent-rgb) / 0.15)"; border = "1px solid var(--accent)"; }
+                if (isCurrent && isAnswered) { bg = "rgb(var(--primary-rgb) / 0.25)"; border = "1.5px solid #fff"; }
 
                 return (
                   <button key={q.id} onClick={() => goToQuestion(i)} style={{ width: 32, height: 32, borderRadius: 6, background: bg, border, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -506,8 +510,8 @@ export default function PracticeSession() {
               })}
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 4, marginTop: 8 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "#666" }}><div style={{ width: 8, height: 8, borderRadius: 2, background: "rgba(108,60,233,0.2)", border: "1px solid #6C3CE9" }} /> Answered</div>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "#666" }}><div style={{ width: 8, height: 8, borderRadius: 2, background: "rgba(212,168,83,0.15)", border: "1px solid #D4A853" }} /> Flagged</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--text-muted)" }}><div style={{ width: 8, height: 8, borderRadius: 2, background: "rgb(var(--primary-rgb) / 0.2)", border: "1px solid var(--primary)" }} /> Answered</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--text-muted)" }}><div style={{ width: 8, height: 8, borderRadius: 2, background: "rgb(var(--accent-rgb) / 0.15)", border: "1px solid var(--accent)" }} /> Flagged</div>
             </div>
             <button onClick={handleConfirmEnd} style={{ marginTop: "auto", padding: "10px", borderRadius: 8, background: "transparent", border: "1px solid #FF4D6A", color: "#FF4D6A", fontWeight: 600, fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}>
               End Session
@@ -522,10 +526,10 @@ export default function PracticeSession() {
         style={{
           position: "fixed", bottom: 24, right: 24, zIndex: 9998,
           width: 48, height: 48, borderRadius: "50%",
-          background: "#6C3CE9", border: "none", color: "#fff", cursor: "pointer",
+          background: "var(--primary)", border: "none", color: "#fff", cursor: "pointer",
           display: whiteboardOpen ? "none" : "flex",
           alignItems: "center", justifyContent: "center",
-          boxShadow: "0 4px 20px rgba(108,60,233,0.5)",
+          boxShadow: "0 4px 20px rgb(var(--primary-rgb) / 0.5)",
         }}
         title="Whiteboard & Calculator"
       >

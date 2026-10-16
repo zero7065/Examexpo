@@ -214,7 +214,7 @@ const Navbar = () => {
           )}
 
           <div className="text-center pt-2">
-            <span className="jadai-brand text-[10px] font-black tracking-wider opacity-60 hover:opacity-100 transition-opacity cursor-default">
+            <span className="brand-shimmer text-[10px] font-black tracking-wider opacity-60 hover:opacity-100 transition-opacity cursor-default">
               Developed by Jadai Studios
             </span>
           </div>

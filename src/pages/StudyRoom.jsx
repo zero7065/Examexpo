@@ -259,7 +259,7 @@ export default function StudyRoom() {
         <ArrowLeft size={16} /> Partners
       </Link>
       <header>
-        <h1 className="h-1">Study Room {code ? <span className="font-mono text-primary">· {code}</span> : ""}</h1>
+        <h1 className="type-h1">Study Room {code ? <span className="font-mono text-primary">· {code}</span> : ""}</h1>
         <p className="lead">Same questions, live progress. Perfect for tutorial groups and classrooms.</p>
       </header>
       {code ? <RoomView code={code} /> : <Lobby />}

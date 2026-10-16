@@ -82,7 +82,7 @@ export default function AdminUserView({ userId, onClose }) {
   if (loading) {
     return (
       <div style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.7)" }}>
-        <Loader2 size={32} color="#6C3CE9" style={{ animation: "spin 1s linear infinite" }} />
+        <Loader2 size={32} color="var(--primary)" style={{ animation: "spin 1s linear infinite" }} />
       </div>
     );
   }
@@ -93,39 +93,39 @@ export default function AdminUserView({ userId, onClose }) {
       <div className="glass-card" style={{ position: "relative", width: "100%", maxWidth: 640, maxHeight: "90vh", overflowY: "auto", padding: 24 }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
           <h3 style={{ color: "var(--text)", fontSize: 18, fontWeight: 800, margin: 0, display: "flex", alignItems: "center", gap: 8 }}>
-            <Eye size={20} color="#6C3CE9" /> Viewing as {profile?.name || "User"}
+            <Eye size={20} color="var(--primary)" /> Viewing as {profile?.name || "User"}
           </h3>
           <button onClick={onClose} style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", fontSize: 18 }}>✕</button>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
-          <div style={{ padding: 12, borderRadius: 8, background: "#1a1a1f" }}>
-            <div style={{ color: "#888", fontSize: 11, marginBottom: 4 }}>Email</div>
+          <div style={{ padding: 12, borderRadius: 8, background: "var(--bg-3)" }}>
+            <div style={{ color: "var(--text-muted)", fontSize: 11, marginBottom: 4 }}>Email</div>
             <div style={{ color: "#fff", fontSize: 13, fontWeight: 600 }}>{profile?.email || "—"}</div>
           </div>
-          <div style={{ padding: 12, borderRadius: 8, background: "#1a1a1f" }}>
-            <div style={{ color: "#888", fontSize: 11, marginBottom: 4 }}>Plan</div>
-            <div style={{ color: profile?.plan === "pro" ? "#4ADE80" : "#888", fontSize: 13, fontWeight: 600 }}>{profile?.plan === "pro" ? "Pro" : "Free"}</div>
+          <div style={{ padding: 12, borderRadius: 8, background: "var(--bg-3)" }}>
+            <div style={{ color: "var(--text-muted)", fontSize: 11, marginBottom: 4 }}>Plan</div>
+            <div style={{ color: profile?.plan === "pro" ? "#4ADE80" : "var(--text-muted)", fontSize: 13, fontWeight: 600 }}>{profile?.plan === "pro" ? "Pro" : "Free"}</div>
           </div>
-          <div style={{ padding: 12, borderRadius: 8, background: "#1a1a1f" }}>
-            <div style={{ color: "#888", fontSize: 11, marginBottom: 4 }}>XP</div>
+          <div style={{ padding: 12, borderRadius: 8, background: "var(--bg-3)" }}>
+            <div style={{ color: "var(--text-muted)", fontSize: 11, marginBottom: 4 }}>XP</div>
             <div style={{ color: "#fff", fontSize: 13, fontWeight: 600 }}>{profile?.totalXP || 0}</div>
           </div>
-          <div style={{ padding: 12, borderRadius: 8, background: "#1a1a1f" }}>
-            <div style={{ color: "#888", fontSize: 11, marginBottom: 4 }}>Streak</div>
+          <div style={{ padding: 12, borderRadius: 8, background: "var(--bg-3)" }}>
+            <div style={{ color: "var(--text-muted)", fontSize: 11, marginBottom: 4 }}>Streak</div>
             <div style={{ color: "#fff", fontSize: 13, fontWeight: 600 }}>{profile?.streak || 0} days</div>
           </div>
         </div>
 
         <div style={{ marginBottom: 16 }}>
-          <div style={{ color: "#888", fontSize: 12, fontWeight: 700, textTransform: "uppercase", marginBottom: 8 }}>Recent Sessions</div>
+          <div style={{ color: "var(--text-muted)", fontSize: 12, fontWeight: 700, textTransform: "uppercase", marginBottom: 8 }}>Recent Sessions</div>
           {sessions.length === 0 ? (
-            <div style={{ color: "#666", fontSize: 13 }}>No sessions yet</div>
+            <div style={{ color: "var(--text-muted)", fontSize: 13 }}>No sessions yet</div>
           ) : (
             sessions.slice(0, 5).map((s) => (
-              <div key={s.id} style={{ padding: 10, borderRadius: 8, background: "#1a1a1f", marginBottom: 6, display: "flex", justifyContent: "space-between" }}>
-                <span style={{ color: "#ccc", fontSize: 13 }}>{s.subject || "Practice"}</span>
-                <span style={{ color: "#888", fontSize: 12 }}>{s.correct || 0}/{s.total || 0} correct</span>
+              <div key={s.id} style={{ padding: 10, borderRadius: 8, background: "var(--bg-3)", marginBottom: 6, display: "flex", justifyContent: "space-between" }}>
+                <span style={{ color: "var(--text)", fontSize: 13 }}>{s.subject || "Practice"}</span>
+                <span style={{ color: "var(--text-muted)", fontSize: 12 }}>{s.correct || 0}/{s.total || 0} correct</span>
               </div>
             ))
           )}
@@ -138,7 +138,7 @@ export default function AdminUserView({ userId, onClose }) {
           <button onClick={revokePro} disabled={acting} style={{ padding: "10px 16px", borderRadius: 8, background: "#ef4444", border: "none", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
             <Ban size={14} /> Revoke Pro
           </button>
-          <button onClick={resetProgress} disabled={acting} style={{ padding: "10px 16px", borderRadius: 8, background: "#333", border: "none", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+          <button onClick={resetProgress} disabled={acting} style={{ padding: "10px 16px", borderRadius: 8, background: "var(--border)", border: "none", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
             <RefreshCw size={14} /> Reset Progress
           </button>
         </div>

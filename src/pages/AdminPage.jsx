@@ -152,21 +152,21 @@ export default function AdminPage() {
   }
 
   function getActionColor(action) {
-    if (!action) return "#888";
+    if (!action) return "var(--text-muted)";
     switch (action) {
       case "register": return "#4ADE80";
-      case "login": return "#6C3CE9";
+      case "login": return "var(--primary)";
       case "logout": return "#FF4D6A";
-      case "session_complete": return "#D4A853";
+      case "session_complete": return "var(--accent)";
       case "payment_success": return "#4ADE80";
       case "payment_failed": case "payment_initiated": return "#FF4D6A";
       case "payment": case "payment_pending": return "#FF9F43";
-      case "admin_pro_grant": return "#D4A853";
+      case "admin_pro_grant": return "var(--accent)";
       case "admin_pro_revoke": return "#FF4D6A";
-      case "question_answered": return "#6C3CE9";
+      case "question_answered": return "var(--primary)";
       case "mock_exam_complete": return "#4ADE80";
       case "assignment_created": case "assignment_completed": return "#00BFFF";
-      default: return "#888";
+      default: return "var(--text-muted)";
     }
   }
 
@@ -180,7 +180,7 @@ export default function AdminPage() {
       }
       return { label: "Expired", color: "#FF9F43" };
     }
-    return { label: "Free", color: "#888" };
+    return { label: "Free", color: "var(--text-muted)" };
   }
 
   async function assignPro(targetUser) {
@@ -268,7 +268,7 @@ export default function AdminPage() {
 
   if (loading) return (
     <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid #1e1e2a", borderTopColor: "#6C3CE9", animation: "spin 0.8s linear infinite" }} />
+      <div style={{ width: 32, height: 32, borderRadius: "50%", border: "3px solid var(--border)", borderTopColor: "var(--primary)", animation: "spin 0.8s linear infinite" }} />
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
@@ -282,16 +282,16 @@ export default function AdminPage() {
         {/* Header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <button onClick={() => navigate("/dashboard")} style={{ background: "#1e1e2a", border: "none", color: "#888", padding: "10px 14px", borderRadius: 10, cursor: "pointer" }}>
+            <button onClick={() => navigate("/dashboard")} style={{ background: "var(--border)", border: "none", color: "var(--text-muted)", padding: "10px 14px", borderRadius: 10, cursor: "pointer" }}>
               <ArrowLeft size={18} />
             </button>
-            <Shield size={28} color="#6C3CE9" />
+            <Shield size={28} color="var(--primary)" />
             <div>
               <h1 style={{ fontSize: 24, fontWeight: 800, margin: 0 }}>Management Console</h1>
-              <p style={{ fontSize: 12, color: "#666", margin: 0 }}>Manage users, assign Pro, monitor activity & payments</p>
+              <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0 }}>Manage users, assign Pro, monitor activity & payments</p>
             </div>
           </div>
-          <button onClick={fetchData} style={{ background: "#1e1e2a", border: "none", color: "#888", padding: "10px 14px", borderRadius: 10, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit", fontSize: 13 }}>
+          <button onClick={fetchData} style={{ background: "var(--border)", border: "none", color: "var(--text-muted)", padding: "10px 14px", borderRadius: 10, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, fontFamily: "inherit", fontSize: 13 }}>
             <RefreshCw size={16} /> Refresh
           </button>
         </div>
@@ -299,23 +299,23 @@ export default function AdminPage() {
         {/* Stats Cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16, marginBottom: 32 }}>
           {[
-            { label: "Total Users", value: stats.users, icon: Users, color: "#6C3CE9" },
-            { label: "Pro Users", value: stats.proUsers, icon: Crown, color: "#D4A853" },
+            { label: "Total Users", value: stats.users, icon: Users, color: "var(--primary)" },
+            { label: "Pro Users", value: stats.proUsers, icon: Crown, color: "var(--accent)" },
             { label: "Questions Answered", value: stats.totalQuestions.toLocaleString(), icon: BookOpen, color: "#4ADE80" },
             { label: "Sessions (recent 100)", value: stats.sessions, icon: ClipboardList, color: "#FF9F43" },
             { label: "Mock Exams (recent 100)", value: stats.mockExams, icon: Zap, color: "#FF4D6A" },
             { label: "Total XP Earned", value: stats.totalXP.toLocaleString(), icon: Award, color: "#00BFFF" },
-            { label: "Payments", value: stats.totalPayments, icon: CreditCard, color: "#D4A853" },
-            { label: "Activity Events", value: logs.length, icon: Activity, color: "#888" },
+            { label: "Payments", value: stats.totalPayments, icon: CreditCard, color: "var(--accent)" },
+            { label: "Activity Events", value: logs.length, icon: Activity, color: "var(--text-muted)" },
           ].map(({ label, value, icon: Icon, color }) => (
-            <div key={label} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 20 }}>
+            <div key={label} style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, padding: 20 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
                 <div style={{ width: 40, height: 40, borderRadius: 10, background: `${color}15`, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon size={20} color={color} />
                 </div>
               </div>
               <div style={{ fontSize: 28, fontWeight: 800, color: "#fff" }}>{value}</div>
-              <div style={{ fontSize: 12, color: "#888", marginTop: 4 }}>{label}</div>
+              <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>{label}</div>
             </div>
           ))}
         </div>
@@ -339,8 +339,8 @@ export default function AdminPage() {
           ].map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
               padding: "10px 20px", borderRadius: 10, border: "none", cursor: "pointer",
-              background: activeTab === tab.id ? "#6C3CE9" : "#1e1e2a",
-              color: activeTab === tab.id ? "#fff" : "#888",
+              background: activeTab === tab.id ? "var(--primary)" : "var(--border)",
+              color: activeTab === tab.id ? "#fff" : "var(--text-muted)",
               fontWeight: 600, fontSize: 13, fontFamily: "inherit", transition: "all 0.2s"
             }}>
               {tab.label}
@@ -351,7 +351,7 @@ export default function AdminPage() {
         {/* Search Bar */}
         {(activeTab === "users" || activeTab === "pro") && (
           <div style={{ marginBottom: 16, position: "relative" }}>
-            <Search size={16} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "#666" }} />
+            <Search size={16} style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)" }} />
             <input
               type="text"
               placeholder="Search users by name or email..."
@@ -359,7 +359,7 @@ export default function AdminPage() {
               onChange={e => setSearchQuery(e.target.value)}
               style={{
                 width: "100%", padding: "12px 16px 12px 40px", borderRadius: 12,
-                background: "#121218", border: "1px solid #1e1e2a", color: "#fff",
+                background: "var(--bg-2)", border: "1px solid var(--border)", color: "#fff",
                 fontSize: 14, outline: "none", fontFamily: "inherit", boxSizing: "border-box",
               }}
             />
@@ -367,43 +367,43 @@ export default function AdminPage() {
         )}
 
         {/* Network Diagnostic */}
-        <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 20, marginBottom: 20 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>Network Diagnostics</div>
+        <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, padding: 20, marginBottom: 20 }}>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1, marginBottom: 12 }}>Network Diagnostics</div>
           <NetworkDiagnostic />
         </div>
 
         {/* Activity Log Tab */}
         {activeTab === "overview" && (
-          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, overflow: "hidden" }}>
-            <div style={{ padding: 20, borderBottom: "1px solid #1e1e2a", fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>
+          <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, overflow: "hidden" }}>
+            <div style={{ padding: 20, borderBottom: "1px solid var(--border)", fontSize: 14, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>
               All Activity ({logs.length})
             </div>
             {logs.length === 0 ? (
-              <div style={{ padding: 40, textAlign: "center", color: "#666", fontSize: 14 }}>No activity logged yet.</div>
+              <div style={{ padding: 40, textAlign: "center", color: "var(--text-muted)", fontSize: 14 }}>No activity logged yet.</div>
             ) : (
               <div style={{ overflowX: "auto" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                   <thead>
-                    <tr style={{ borderBottom: "1px solid #1e1e2a" }}>
+                    <tr style={{ borderBottom: "1px solid var(--border)" }}>
                       {["Action", "User", "Email", "Details", "Time"].map(h => (
-                        <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "#666", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
+                        <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "var(--text-muted)", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {logs.map(log => (
-                      <tr key={log.id} style={{ borderBottom: "1px solid #1e1e2a" }}>
+                      <tr key={log.id} style={{ borderBottom: "1px solid var(--border)" }}>
                         <td style={{ padding: "12px 16px" }}>
                           <span style={{ padding: "4px 10px", borderRadius: 6, background: `${getActionColor(log.action)}15`, color: getActionColor(log.action), fontSize: 11, fontWeight: 700, textTransform: "uppercase" }}>
                             {log.action}
                           </span>
                         </td>
-                        <td style={{ padding: "12px 16px", color: "#ccc", fontWeight: 500 }}>{log.userId?.slice(0, 12)}...</td>
-                        <td style={{ padding: "12px 16px", color: "#888" }}>{log.email || "—"}</td>
-                        <td style={{ padding: "12px 16px", color: "#888", maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        <td style={{ padding: "12px 16px", color: "var(--text)", fontWeight: 500 }}>{log.userId?.slice(0, 12)}...</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-muted)" }}>{log.email || "—"}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-muted)", maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                           {log.details ? JSON.stringify(log.details).slice(0, 80) : "—"}
                         </td>
-                        <td style={{ padding: "12px 16px", color: "#666", whiteSpace: "nowrap" }}>{formatDate(log.timestamp)}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-muted)", whiteSpace: "nowrap" }}>{formatDate(log.timestamp)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -415,9 +415,9 @@ export default function AdminPage() {
 
         {/* Payment Tracking Tab */}
         {activeTab === "payments" && (
-          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, overflow: "hidden" }}>
-            <div style={{ padding: 20, borderBottom: "1px solid #1e1e2a", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>
+          <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, overflow: "hidden" }}>
+            <div style={{ padding: 20, borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>
                 Payment Activity ({paymentLogs.length})
               </span>
               <div style={{ display: "flex", gap: 16 }}>
@@ -433,38 +433,38 @@ export default function AdminPage() {
               </div>
             </div>
             {paymentLogs.length === 0 ? (
-              <div style={{ padding: 40, textAlign: "center", color: "#666", fontSize: 14 }}>No payment activity recorded.</div>
+              <div style={{ padding: 40, textAlign: "center", color: "var(--text-muted)", fontSize: 14 }}>No payment activity recorded.</div>
             ) : (
               <div style={{ overflowX: "auto" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                   <thead>
-                    <tr style={{ borderBottom: "1px solid #1e1e2a" }}>
+                    <tr style={{ borderBottom: "1px solid var(--border)" }}>
                       {["Status", "User", "Email", "Amount", "Reference", "Details", "Time"].map(h => (
-                        <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "#666", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
+                        <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "var(--text-muted)", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {paymentLogs.map(log => (
-                      <tr key={log.id} style={{ borderBottom: "1px solid #1e1e2a" }}>
+                      <tr key={log.id} style={{ borderBottom: "1px solid var(--border)" }}>
                         <td style={{ padding: "12px 16px" }}>
                           <span style={{ padding: "4px 10px", borderRadius: 6, background: `${getActionColor(log.action)}15`, color: getActionColor(log.action), fontSize: 11, fontWeight: 700, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 4 }}>
                             {log.action?.includes("success") ? <CheckCircle size={12} /> : log.action?.includes("failed") ? <XCircle size={12} /> : <Clock size={12} />}
                             {log.action}
                           </span>
                         </td>
-                        <td style={{ padding: "12px 16px", color: "#ccc", fontWeight: 500 }}>{log.userId?.slice(0, 12)}...</td>
-                        <td style={{ padding: "12px 16px", color: "#888" }}>{log.email || "—"}</td>
-                        <td style={{ padding: "12px 16px", color: "#D4A853", fontWeight: 600 }}>
+                        <td style={{ padding: "12px 16px", color: "var(--text)", fontWeight: 500 }}>{log.userId?.slice(0, 12)}...</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-muted)" }}>{log.email || "—"}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--accent)", fontWeight: 600 }}>
                           {log.details?.amount ? `₦${log.details.amount.toLocaleString()}` : log.details?.amount === 0 ? "₦0" : "—"}
                         </td>
-                        <td style={{ padding: "12px 16px", color: "#888", fontSize: 11, fontFamily: "monospace" }}>
+                        <td style={{ padding: "12px 16px", color: "var(--text-muted)", fontSize: 11, fontFamily: "monospace" }}>
                           {log.details?.reference || log.details?.paystackRef || "—"}
                         </td>
-                        <td style={{ padding: "12px 16px", color: "#888", maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        <td style={{ padding: "12px 16px", color: "var(--text-muted)", maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                           {log.details ? JSON.stringify(log.details).slice(0, 100) : "—"}
                         </td>
-                        <td style={{ padding: "12px 16px", color: "#666", whiteSpace: "nowrap" }}>{formatDate(log.timestamp)}</td>
+                        <td style={{ padding: "12px 16px", color: "var(--text-muted)", whiteSpace: "nowrap" }}>{formatDate(log.timestamp)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -476,19 +476,19 @@ export default function AdminPage() {
 
         {/* Users Tab */}
         {activeTab === "users" && (
-          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, overflow: "hidden" }}>
-            <div style={{ padding: 20, borderBottom: "1px solid #1e1e2a", fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>
+          <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, overflow: "hidden" }}>
+            <div style={{ padding: 20, borderBottom: "1px solid var(--border)", fontSize: 14, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>
               Registered Users ({filteredUsers.length})
             </div>
             {filteredUsers.length === 0 ? (
-              <div style={{ padding: 40, textAlign: "center", color: "#666", fontSize: 14 }}>No users found.</div>
+              <div style={{ padding: 40, textAlign: "center", color: "var(--text-muted)", fontSize: 14 }}>No users found.</div>
             ) : (
               <div style={{ overflowX: "auto" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                   <thead>
-                    <tr style={{ borderBottom: "1px solid #1e1e2a" }}>
+                    <tr style={{ borderBottom: "1px solid var(--border)" }}>
                       {["Name", "Email", "Exam", "Role", "Status", "Questions", "Sessions", "XP", "Level", "Joined", "Actions"].map(h => (
-                        <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "#666", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
+                        <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "var(--text-muted)", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -496,14 +496,14 @@ export default function AdminPage() {
                     {filteredUsers.map(u => {
                       const subStatus = getUserSubStatus(u);
                       return (
-                        <tr key={u.id} style={{ borderBottom: "1px solid #1e1e2a" }}>
+                        <tr key={u.id} style={{ borderBottom: "1px solid var(--border)" }}>
                           <td style={{ padding: "12px 16px", color: "#fff", fontWeight: 600 }}>{u.name || "—"}</td>
-                          <td style={{ padding: "12px 16px", color: "#888" }}>{u.email || "—"}</td>
+                          <td style={{ padding: "12px 16px", color: "var(--text-muted)" }}>{u.email || "—"}</td>
                           <td style={{ padding: "12px 16px" }}>
-                            <span style={{ padding: "2px 8px", borderRadius: 4, background: "rgba(108,60,233,0.15)", color: "#6C3CE9", fontSize: 11, fontWeight: 600 }}>{u.exam || "—"}</span>
+                            <span style={{ padding: "2px 8px", borderRadius: 4, background: "rgb(var(--primary-rgb) / 0.15)", color: "var(--primary)", fontSize: 11, fontWeight: 600 }}>{u.exam || "—"}</span>
                           </td>
                           <td style={{ padding: "12px 16px" }}>
-                            <span style={{ padding: "2px 8px", borderRadius: 4, background: u.role === "admin" ? "rgba(212,168,83,0.15)" : "rgba(255,255,255,0.05)", color: u.role === "admin" ? "#D4A853" : "#888", fontSize: 11, fontWeight: 600, textTransform: "capitalize" }}>
+                            <span style={{ padding: "2px 8px", borderRadius: 4, background: u.role === "admin" ? "rgb(var(--accent-rgb) / 0.15)" : "rgba(255,255,255,0.05)", color: u.role === "admin" ? "var(--accent)" : "var(--text-muted)", fontSize: 11, fontWeight: 600, textTransform: "capitalize" }}>
                               {u.role || "user"}
                             </span>
                           </td>
@@ -512,17 +512,17 @@ export default function AdminPage() {
                               {subStatus.label}{subStatus.daysLeft ? ` (${subStatus.daysLeft}d)` : ""}
                             </span>
                           </td>
-                          <td style={{ padding: "12px 16px", color: "#ccc", fontWeight: 500, fontSize: 12 }}>{u.totalQuestions || u.stats?.totalQuestions || 0}</td>
-                          <td style={{ padding: "12px 16px", color: "#ccc", fontWeight: 500, fontSize: 12 }}>{u.stats?.totalSessions || 0}</td>
-                          <td style={{ padding: "12px 16px", color: "#D4A853", fontWeight: 500, fontSize: 12 }}>{(u.xp || u.totalXP || 0).toLocaleString()}</td>
+                          <td style={{ padding: "12px 16px", color: "var(--text)", fontWeight: 500, fontSize: 12 }}>{u.totalQuestions || u.stats?.totalQuestions || 0}</td>
+                          <td style={{ padding: "12px 16px", color: "var(--text)", fontWeight: 500, fontSize: 12 }}>{u.stats?.totalSessions || 0}</td>
+                          <td style={{ padding: "12px 16px", color: "var(--accent)", fontWeight: 500, fontSize: 12 }}>{(u.xp || u.totalXP || 0).toLocaleString()}</td>
                           <td style={{ padding: "12px 16px", color: "#00BFFF", fontWeight: 500, fontSize: 12 }}>{u.level || 1}</td>
-                          <td style={{ padding: "12px 16px", color: "#666", whiteSpace: "nowrap" }}>{formatDate(u.createdAt)}</td>
+                          <td style={{ padding: "12px 16px", color: "var(--text-muted)", whiteSpace: "nowrap" }}>{formatDate(u.createdAt)}</td>
                           <td style={{ padding: "12px 16px", display: "flex", gap: 6 }}>
                             <button
                               onClick={() => { setSelectedUser(u); loadUserActivity(u); setActiveTab("userDetail"); }}
                               style={{
                                 padding: "6px 10px", borderRadius: 6, border: "none",
-                                background: "rgba(108,60,233,0.15)", color: "#6C3CE9",
+                                background: "rgb(var(--primary-rgb) / 0.15)", color: "var(--primary)",
                                 fontSize: 10, fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
                               }}
                             >
@@ -532,8 +532,8 @@ export default function AdminPage() {
                               onClick={() => { setAssignModal(u); setAssignDays(30); setAssignPlan("pro_monthly"); }}
                               style={{
                                 padding: "6px 14px", borderRadius: 8, border: "none",
-                                background: subStatus.label === "Pro" ? "rgba(212,168,83,0.15)" : "rgba(74,222,128,0.15)",
-                                color: subStatus.label === "Pro" ? "#D4A853" : "#4ADE80",
+                                background: subStatus.label === "Pro" ? "rgb(var(--accent-rgb) / 0.15)" : "rgba(74,222,128,0.15)",
+                                color: subStatus.label === "Pro" ? "var(--accent)" : "#4ADE80",
                                 fontSize: 11, fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
                                 transition: "all 0.2s",
                               }}
@@ -553,9 +553,9 @@ export default function AdminPage() {
 
         {/* Pro Management Tab */}
         {activeTab === "pro" && (
-          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, overflow: "hidden" }}>
-            <div style={{ padding: 20, borderBottom: "1px solid #1e1e2a", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>
+          <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, overflow: "hidden" }}>
+            <div style={{ padding: 20, borderBottom: "1px solid var(--border)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>
                 Pro Users ({filteredUsers.filter(u => getUserSubStatus(u).label === "Pro").length})
               </span>
               <span style={{ color: "#4ADE80", fontSize: 11, fontWeight: 600 }}>
@@ -563,14 +563,14 @@ export default function AdminPage() {
               </span>
             </div>
             {filteredUsers.filter(u => getUserSubStatus(u).label === "Pro").length === 0 ? (
-              <div style={{ padding: 40, textAlign: "center", color: "#666", fontSize: 14 }}>No active Pro users.</div>
+              <div style={{ padding: 40, textAlign: "center", color: "var(--text-muted)", fontSize: 14 }}>No active Pro users.</div>
             ) : (
               <div style={{ overflowX: "auto" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                   <thead>
-                    <tr style={{ borderBottom: "1px solid #1e1e2a" }}>
+                    <tr style={{ borderBottom: "1px solid var(--border)" }}>
                       {["Name", "Email", "Plan", "Days Left", "Features", "Granted By", "Actions"].map(h => (
-                        <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "#666", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
+                        <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "var(--text-muted)", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -581,11 +581,11 @@ export default function AdminPage() {
                       const daysLeft = end ? Math.max(0, Math.ceil((end - new Date()) / (1000 * 60 * 60 * 24))) : 0;
                       const features = sub?.proFeatures || u.proFeatures || {};
                       return (
-                        <tr key={u.id} style={{ borderBottom: "1px solid #1e1e2a" }}>
+                        <tr key={u.id} style={{ borderBottom: "1px solid var(--border)" }}>
                           <td style={{ padding: "12px 16px", color: "#fff", fontWeight: 600 }}>{u.name || "—"}</td>
-                          <td style={{ padding: "12px 16px", color: "#888" }}>{u.email || "—"}</td>
+                          <td style={{ padding: "12px 16px", color: "var(--text-muted)" }}>{u.email || "—"}</td>
                           <td style={{ padding: "12px 16px" }}>
-                            <span style={{ padding: "2px 8px", borderRadius: 4, background: "rgba(212,168,83,0.15)", color: "#D4A853", fontSize: 11, fontWeight: 600 }}>
+                            <span style={{ padding: "2px 8px", borderRadius: 4, background: "rgb(var(--accent-rgb) / 0.15)", color: "var(--accent)", fontSize: 11, fontWeight: 600 }}>
                               {sub?.plan || "—"}
                             </span>
                           </td>
@@ -600,14 +600,14 @@ export default function AdminPage() {
                                 <span key={key} style={{
                                   padding: "2px 6px", borderRadius: 4, fontSize: 9, fontWeight: 700,
                                   background: features[key] ? "rgba(74,222,128,0.15)" : "rgba(255,255,255,0.05)",
-                                  color: features[key] ? "#4ADE80" : "#555",
+                                  color: features[key] ? "#4ADE80" : "var(--text-muted)",
                                 }}>
                                   {key}
                                 </span>
                               ))}
                             </div>
                           </td>
-                          <td style={{ padding: "12px 16px", color: "#888", fontSize: 11 }}>
+                          <td style={{ padding: "12px 16px", color: "var(--text-muted)", fontSize: 11 }}>
                             {sub?.grantedByName || "Paystack"}
                           </td>
                           <td style={{ padding: "12px 16px", display: "flex", gap: 8 }}>
@@ -615,7 +615,7 @@ export default function AdminPage() {
                               onClick={() => { setAssignModal(u); setAssignDays(30); setAssignPlan("pro_monthly"); }}
                               style={{
                                 padding: "6px 12px", borderRadius: 6, border: "none",
-                                background: "rgba(108,60,233,0.15)", color: "#6C3CE9",
+                                background: "rgb(var(--primary-rgb) / 0.15)", color: "var(--primary)",
                                 fontSize: 11, fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
                               }}
                             >
@@ -686,21 +686,21 @@ export default function AdminPage() {
         {activeTab === "userDetail" && (
           <div style={{ display: "grid", gap: 20 }}>
             {!selectedUser ? (
-              <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 40, textAlign: "center", color: "#666", fontSize: 14 }}>
+              <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, padding: 40, textAlign: "center", color: "var(--text-muted)", fontSize: 14 }}>
                 Select a user from the Users tab to view their details.
               </div>
             ) : (
               <>
                 {/* User Profile Card */}
-                <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, padding: 24 }}>
+                <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, padding: 24 }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                      <div style={{ width: 56, height: 56, borderRadius: 14, background: "rgba(108,60,233,0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 800, color: "#6C3CE9" }}>
+                      <div style={{ width: 56, height: 56, borderRadius: 14, background: "rgb(var(--primary-rgb) / 0.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 800, color: "var(--primary)" }}>
                         {(selectedUser.name || selectedUser.email || "?")[0].toUpperCase()}
                       </div>
                       <div>
                         <h2 style={{ fontSize: 20, fontWeight: 800, margin: 0 }}>{selectedUser.name || "Unknown"}</h2>
-                        <p style={{ fontSize: 13, color: "#888", margin: 0 }}>{selectedUser.email}</p>
+                        <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0 }}>{selectedUser.email}</p>
                         <span style={{ padding: "2px 8px", borderRadius: 4, background: `${getUserSubStatus(selectedUser).color}15`, color: getUserSubStatus(selectedUser).color, fontSize: 11, fontWeight: 600, marginTop: 4, display: "inline-block" }}>
                           {getUserSubStatus(selectedUser).label}{getUserSubStatus(selectedUser).daysLeft ? ` (${getUserSubStatus(selectedUser).daysLeft}d)` : ""}
                         </span>
@@ -708,7 +708,7 @@ export default function AdminPage() {
                     </div>
                     <button onClick={() => { setAssignModal(selectedUser); setAssignDays(30); setAssignPlan("pro_monthly"); }} style={{
                       padding: "10px 20px", borderRadius: 10, border: "none",
-                      background: "linear-gradient(135deg, #6C3CE9, #D4A853)",
+                      background: "linear-gradient(135deg, var(--primary), var(--accent))",
                       color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
                     }}>
                       <Crown size={14} style={{ marginRight: 6 }} />
@@ -716,7 +716,7 @@ export default function AdminPage() {
                     </button>
                     <button onClick={() => setViewingAs(selectedUser)} style={{
                       padding: "10px 20px", borderRadius: 10, border: "1px solid #333",
-                      background: "#1e1e2a", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
+                      background: "var(--border)", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit",
                     }}>
                       <Eye size={14} style={{ marginRight: 6 }} />
                       View as User
@@ -725,15 +725,15 @@ export default function AdminPage() {
 
                   {/* Role & school editor */}
                   <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap", alignItems: "center" }}>
-                    <span style={{ fontSize: 12, color: "#888", fontWeight: 700 }}>ROLE:</span>
+                    <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 700 }}>ROLE:</span>
                     <select value={roleEdit.role} onChange={(e) => setRoleEdit((r) => ({ ...r, role: e.target.value }))}
-                      style={{ background: "#0d0d12", border: "1px solid #333", borderRadius: 8, padding: "8px 12px", color: "#fff", fontSize: 13, outline: "none", fontFamily: "inherit" }}>
+                      style={{ background: "var(--bg)", border: "1px solid #333", borderRadius: 8, padding: "8px 12px", color: "#fff", fontSize: 13, outline: "none", fontFamily: "inherit" }}>
                       <option value="user">Student (user)</option>
                       <option value="teacher">Teacher</option>
                     </select>
                     <input value={roleEdit.schoolId} onChange={(e) => setRoleEdit((r) => ({ ...r, schoolId: e.target.value }))}
                       placeholder="schoolId (for teachers)"
-                      style={{ background: "#0d0d12", border: "1px solid #333", borderRadius: 8, padding: "8px 12px", color: "#fff", fontSize: 13, outline: "none", fontFamily: "inherit", minWidth: 200 }} />
+                      style={{ background: "var(--bg)", border: "1px solid #333", borderRadius: 8, padding: "8px 12px", color: "#fff", fontSize: 13, outline: "none", fontFamily: "inherit", minWidth: 200 }} />
                     <button onClick={async () => {
                       try {
                         await updateDoc(doc(db, "users", selectedUser.id), { role: roleEdit.role, schoolId: roleEdit.schoolId.trim() || null });
@@ -744,7 +744,7 @@ export default function AdminPage() {
                       } catch (e) {
                         showToast(`Failed: ${e.message}`, "error");
                       }
-                    }} style={{ padding: "8px 18px", borderRadius: 8, background: "#1a1a1f", border: "1px solid #6C3CE9", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>
+                    }} style={{ padding: "8px 18px", borderRadius: 8, background: "var(--bg-3)", border: "1px solid var(--primary)", color: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>
                       Save role
                     </button>
                     {selectedUser.role === "teacher" && (
@@ -757,16 +757,16 @@ export default function AdminPage() {
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 12 }}>
                       {[
                         { label: "Questions", value: userStats.totalQuestions.toLocaleString(), icon: BookOpen, color: "#4ADE80" },
-                        { label: "Sessions", value: userStats.sessions, icon: ClipboardList, color: "#6C3CE9" },
+                        { label: "Sessions", value: userStats.sessions, icon: ClipboardList, color: "var(--primary)" },
                         { label: "Mock Exams", value: userStats.mockExams, icon: Zap, color: "#FF4D6A" },
-                        { label: "XP", value: userStats.xp.toLocaleString(), icon: Award, color: "#D4A853" },
+                        { label: "XP", value: userStats.xp.toLocaleString(), icon: Award, color: "var(--accent)" },
                         { label: "Level", value: userStats.level, icon: Crown, color: "#00BFFF" },
                         { label: "Streak", value: `${userStats.streak}d`, icon: Clock, color: "#FF9F43" },
                       ].map(({ label, value, icon: Icon, color }) => (
-                        <div key={label} style={{ background: "#0d0d12", borderRadius: 12, padding: 16, border: "1px solid #1e1e2a" }}>
+                        <div key={label} style={{ background: "var(--bg)", borderRadius: 12, padding: 16, border: "1px solid var(--border)" }}>
                           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
                             <Icon size={16} color={color} />
-                            <span style={{ fontSize: 11, color: "#666", textTransform: "uppercase", fontWeight: 600 }}>{label}</span>
+                            <span style={{ fontSize: 11, color: "var(--text-muted)", textTransform: "uppercase", fontWeight: 600 }}>{label}</span>
                           </div>
                           <div style={{ fontSize: 22, fontWeight: 800, color }}>{value}</div>
                         </div>
@@ -777,40 +777,40 @@ export default function AdminPage() {
 
                 {/* Assignment History */}
                 {userStats?.assignments?.length > 0 && (
-                  <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, overflow: "hidden" }}>
-                    <div style={{ padding: 20, borderBottom: "1px solid #1e1e2a", display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, overflow: "hidden" }}>
+                    <div style={{ padding: 20, borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 8 }}>
                       <ClipboardList size={16} color="#00BFFF" />
-                      <span style={{ fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>
+                      <span style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>
                         Assignment History ({userStats.assignments.length})
                       </span>
                     </div>
                     <div style={{ overflowX: "auto" }}>
                       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                         <thead>
-                          <tr style={{ borderBottom: "1px solid #1e1e2a" }}>
+                          <tr style={{ borderBottom: "1px solid var(--border)" }}>
                             {["Title", "Subject", "Status", "Score", "Assigned", "Completed"].map(h => (
-                              <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "#666", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
+                              <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "var(--text-muted)", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
                             ))}
                           </tr>
                         </thead>
                         <tbody>
                           {userStats.assignments.map((a, i) => (
-                            <tr key={i} style={{ borderBottom: "1px solid #1e1e2a" }}>
+                            <tr key={i} style={{ borderBottom: "1px solid var(--border)" }}>
                               <td style={{ padding: "12px 16px", color: "#fff", fontWeight: 600 }}>{a.title || "—"}</td>
-                              <td style={{ padding: "12px 16px", color: "#888" }}>{a.subject || "—"}</td>
+                              <td style={{ padding: "12px 16px", color: "var(--text-muted)" }}>{a.subject || "—"}</td>
                               <td style={{ padding: "12px 16px" }}>
                                 <span style={{
                                   padding: "2px 8px", borderRadius: 4, fontSize: 11, fontWeight: 600,
                                   background: a.status === "completed" ? "rgba(74,222,128,0.15)" : a.status === "in_progress" ? "rgba(255,159,67,0.15)" : "rgba(136,136,136,0.15)",
-                                  color: a.status === "completed" ? "#4ADE80" : a.status === "in_progress" ? "#FF9F43" : "#888",
+                                  color: a.status === "completed" ? "#4ADE80" : a.status === "in_progress" ? "#FF9F43" : "var(--text-muted)",
                                   textTransform: "capitalize"
                                 }}>
                                   {a.status || "pending"}
                                 </span>
                               </td>
-                              <td style={{ padding: "12px 16px", color: "#D4A853", fontWeight: 600 }}>{a.score != null ? `${a.score}%` : "—"}</td>
-                              <td style={{ padding: "12px 16px", color: "#666" }}>{formatDate(a.assignedAt || a.createdAt)}</td>
-                              <td style={{ padding: "12px 16px", color: "#666" }}>{formatDate(a.completedAt)}</td>
+                              <td style={{ padding: "12px 16px", color: "var(--accent)", fontWeight: 600 }}>{a.score != null ? `${a.score}%` : "—"}</td>
+                              <td style={{ padding: "12px 16px", color: "var(--text-muted)" }}>{formatDate(a.assignedAt || a.createdAt)}</td>
+                              <td style={{ padding: "12px 16px", color: "var(--text-muted)" }}>{formatDate(a.completedAt)}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -820,33 +820,33 @@ export default function AdminPage() {
                 )}
 
                 {/* User Activity */}
-                <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, overflow: "hidden" }}>
-                  <div style={{ padding: 20, borderBottom: "1px solid #1e1e2a", display: "flex", alignItems: "center", gap: 8 }}>
-                    <Activity size={16} color="#6C3CE9" />
-                    <span style={{ fontSize: 14, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>
+                <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, overflow: "hidden" }}>
+                  <div style={{ padding: 20, borderBottom: "1px solid var(--border)", display: "flex", alignItems: "center", gap: 8 }}>
+                    <Activity size={16} color="var(--primary)" />
+                    <span style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: 1 }}>
                       User Activity ({userActivity.length})
                     </span>
                   </div>
                   {userActivity.length === 0 ? (
-                    <div style={{ padding: 40, textAlign: "center", color: "#666", fontSize: 14 }}>No activity recorded for this user.</div>
+                    <div style={{ padding: 40, textAlign: "center", color: "var(--text-muted)", fontSize: 14 }}>No activity recorded for this user.</div>
                   ) : (
                     <div style={{ overflowX: "auto" }}>
                       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                         <thead>
-                          <tr style={{ borderBottom: "1px solid #1e1e2a" }}>
+                          <tr style={{ borderBottom: "1px solid var(--border)" }}>
                             {["Type", "Action", "Details", "Time"].map(h => (
-                              <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "#666", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
+                              <th key={h} style={{ padding: "12px 16px", textAlign: "left", color: "var(--text-muted)", fontWeight: 600, fontSize: 11, textTransform: "uppercase", letterSpacing: 1 }}>{h}</th>
                             ))}
                           </tr>
                         </thead>
                         <tbody>
                           {userActivity.map((item, idx) => (
-                            <tr key={item.id || idx} style={{ borderBottom: "1px solid #1e1e2a" }}>
+                            <tr key={item.id || idx} style={{ borderBottom: "1px solid var(--border)" }}>
                               <td style={{ padding: "12px 16px" }}>
                                 <span style={{
                                   padding: "4px 10px", borderRadius: 6, fontSize: 11, fontWeight: 700,
-                                  background: item.type === "session" ? "rgba(74,222,128,0.15)" : item.type === "mock" ? "rgba(255,77,106,0.15)" : "rgba(108,60,233,0.15)",
-                                  color: item.type === "session" ? "#4ADE80" : item.type === "mock" ? "#FF4D6A" : "#6C3CE9",
+                                  background: item.type === "session" ? "rgba(74,222,128,0.15)" : item.type === "mock" ? "rgba(255,77,106,0.15)" : "rgb(var(--primary-rgb) / 0.15)",
+                                  color: item.type === "session" ? "#4ADE80" : item.type === "mock" ? "#FF4D6A" : "var(--primary)",
                                   textTransform: "uppercase"
                                 }}>
                                   {item.type || "activity"}
@@ -857,10 +857,10 @@ export default function AdminPage() {
                                   {item.action || item.title || "—"}
                                 </span>
                               </td>
-                              <td style={{ padding: "12px 16px", color: "#888", maxWidth: 250, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                              <td style={{ padding: "12px 16px", color: "var(--text-muted)", maxWidth: 250, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                                 {item.details ? JSON.stringify(item.details).slice(0, 100) : item.score != null ? `Score: ${item.score}%` : "—"}
                               </td>
-                              <td style={{ padding: "12px 16px", color: "#666", whiteSpace: "nowrap" }}>{formatDate(item.timestamp || item.createdAt)}</td>
+                              <td style={{ padding: "12px 16px", color: "var(--text-muted)", whiteSpace: "nowrap" }}>{formatDate(item.timestamp || item.createdAt)}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -882,27 +882,27 @@ export default function AdminPage() {
           animation: "fadeIn 0.2s ease-out",
         }}>
           <div style={{
-            background: "#0d0d12", borderRadius: 20, padding: 32, maxWidth: 460, width: "100%",
-            border: "1px solid #1e1e2a", boxShadow: "0 24px 80px rgba(108,60,233,0.3)",
+            background: "var(--bg)", borderRadius: 20, padding: 32, maxWidth: 460, width: "100%",
+            border: "1px solid var(--border)", boxShadow: "0 24px 80px rgb(var(--primary-rgb) / 0.3)",
           }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <Crown size={22} color="#D4A853" />
+                <Crown size={22} color="var(--accent)" />
                 <h2 style={{ fontSize: 18, fontWeight: 800, margin: 0 }}>Grant Pro Access</h2>
               </div>
-              <button onClick={() => setAssignModal(null)} style={{ background: "#1a1a1f", border: "1px solid #333", color: "#888", width: 32, height: 32, borderRadius: "50%", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <button onClick={() => setAssignModal(null)} style={{ background: "var(--bg-3)", border: "1px solid #333", color: "var(--text-muted)", width: 32, height: 32, borderRadius: "50%", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <span style={{ fontSize: 16 }}>×</span>
               </button>
             </div>
 
-            <div style={{ background: "#121218", borderRadius: 12, padding: 16, marginBottom: 20, border: "1px solid #1e1e2a" }}>
-              <div style={{ color: "#888", fontSize: 12, marginBottom: 4 }}>Granting to:</div>
+            <div style={{ background: "var(--bg-2)", borderRadius: 12, padding: 16, marginBottom: 20, border: "1px solid var(--border)" }}>
+              <div style={{ color: "var(--text-muted)", fontSize: 12, marginBottom: 4 }}>Granting to:</div>
               <div style={{ color: "#fff", fontWeight: 600, fontSize: 14 }}>{assignModal.name || "Unknown"}</div>
-              <div style={{ color: "#888", fontSize: 12 }}>{assignModal.email}</div>
+              <div style={{ color: "var(--text-muted)", fontSize: 12 }}>{assignModal.email}</div>
             </div>
 
             {/* Features being unlocked */}
-            <div style={{ background: "#121218", borderRadius: 12, padding: 16, marginBottom: 20, border: "1px solid #1e1e2a" }}>
+            <div style={{ background: "var(--bg-2)", borderRadius: 12, padding: 16, marginBottom: 20, border: "1px solid var(--border)" }}>
               <div style={{ color: "#4ADE80", fontSize: 11, fontWeight: 700, marginBottom: 8, textTransform: "uppercase", letterSpacing: 1 }}>ALL Features Will Be Unlocked</div>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                 {Object.keys(FULL_PRO_FEATURES).map(key => (
@@ -914,7 +914,7 @@ export default function AdminPage() {
             </div>
 
             <div style={{ marginBottom: 16 }}>
-              <label style={{ color: "#888", fontSize: 12, fontWeight: 600, display: "block", marginBottom: 6 }}>Plan</label>
+              <label style={{ color: "var(--text-muted)", fontSize: 12, fontWeight: 600, display: "block", marginBottom: 6 }}>Plan</label>
               <div style={{ display: "flex", gap: 8 }}>
                 {[
                   { id: "pro_monthly", label: "Monthly", days: 30 },
@@ -923,8 +923,8 @@ export default function AdminPage() {
                 ].map(p => (
                   <button key={p.id} onClick={() => { setAssignPlan(p.id); if (p.days) setAssignDays(p.days); }} style={{
                     flex: 1, padding: "10px 8px", borderRadius: 10, border: "none", cursor: "pointer",
-                    background: assignPlan === p.id ? "#6C3CE9" : "#1a1a1f",
-                    color: assignPlan === p.id ? "#fff" : "#888",
+                    background: assignPlan === p.id ? "var(--primary)" : "var(--bg-3)",
+                    color: assignPlan === p.id ? "#fff" : "var(--text-muted)",
                     fontWeight: 600, fontSize: 12, fontFamily: "inherit", transition: "all 0.2s",
                   }}>
                     {p.label}
@@ -934,7 +934,7 @@ export default function AdminPage() {
             </div>
 
             <div style={{ marginBottom: 20 }}>
-              <label style={{ color: "#888", fontSize: 12, fontWeight: 600, display: "block", marginBottom: 6 }}>Duration (days)</label>
+              <label style={{ color: "var(--text-muted)", fontSize: 12, fontWeight: 600, display: "block", marginBottom: 6 }}>Duration (days)</label>
               <input
                 type="number"
                 value={assignDays}
@@ -942,7 +942,7 @@ export default function AdminPage() {
                 min={1}
                 style={{
                   width: "100%", padding: "12px 14px", borderRadius: 10,
-                  background: "#1a1a1f", border: "1px solid #333", color: "#fff",
+                  background: "var(--bg-3)", border: "1px solid #333", color: "#fff",
                   fontSize: 14, outline: "none", fontFamily: "inherit", boxSizing: "border-box",
                 }}
               />
@@ -951,14 +951,14 @@ export default function AdminPage() {
             <div style={{ display: "flex", gap: 10 }}>
               <button onClick={() => setAssignModal(null)} style={{
                 flex: 1, padding: "12px", borderRadius: 10, border: "1px solid #333",
-                background: "transparent", color: "#888", fontWeight: 600, fontSize: 14,
+                background: "transparent", color: "var(--text-muted)", fontWeight: 600, fontSize: 14,
                 cursor: "pointer", fontFamily: "inherit",
               }}>
                 Cancel
               </button>
               <button onClick={() => assignPro(assignModal)} disabled={assigning} style={{
                 flex: 1, padding: "12px", borderRadius: 10, border: "none",
-                background: "linear-gradient(135deg, #6C3CE9, #D4A853)",
+                background: "linear-gradient(135deg, var(--primary), var(--accent))",
                 color: "#fff", fontWeight: 700, fontSize: 14, cursor: assigning ? "not-allowed" : "pointer",
                 opacity: assigning ? 0.7 : 1, fontFamily: "inherit",
               }}>

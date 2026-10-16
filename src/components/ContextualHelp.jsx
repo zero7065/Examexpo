@@ -23,7 +23,7 @@ export default function ContextualHelp() {
     <>
       <button
         onClick={() => setOpen(true)}
-        style={{ position: "fixed", bottom: 80, right: 16, zIndex: 60, width: 40, height: 40, borderRadius: "50%", background: "#6C3CE9", border: "none", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgba(108,60,233,0.4)" }}
+        style={{ position: "fixed", bottom: 80, right: 16, zIndex: 60, width: 40, height: 40, borderRadius: "50%", background: "var(--primary)", border: "none", color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 12px rgb(var(--primary-rgb) / 0.4)" }}
         title={`Help: ${tour.title}`}
       >
         <HelpCircle size={20} />

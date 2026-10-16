@@ -54,6 +54,15 @@ export async function setSchoolStatus(schoolId, status, adminUid, teacherUid = n
     decidedAt: serverTimestamp(),
     decidedBy: adminUid,
   });
+  if (status === "approved") {
+    // Partner Plan: every approved school gets a referral code (idempotent).
+    try {
+      const { ensurePartnerEnrolled } = await import("./partner");
+      await ensurePartnerEnrolled(schoolId);
+    } catch (e) {
+      console.warn("Partner enrollment failed (non-fatal):", e?.message);
+    }
+  }
   if (status === "approved" && teacherUid) {
     await updateDoc(doc(db, "users", teacherUid), {
       role: "teacher",

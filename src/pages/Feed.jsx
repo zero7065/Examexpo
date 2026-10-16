@@ -179,7 +179,7 @@ export default function Feed() {
   return (
     <div className="page-content max-w-4xl mx-auto space-y-8">
       <header>
-        <h1 className="h-1">Community feed</h1>
+        <h1 className="type-h1">Community feed</h1>
         <p className="lead">Top students, open questions, and help from people who just solved them.</p>
       </header>
 

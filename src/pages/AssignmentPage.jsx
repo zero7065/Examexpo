@@ -144,7 +144,7 @@ export default function AssignmentPage() {
           justifyContent: "center",
         }}
       >
-        <p style={{ color: "#888" }}>Loading...</p>
+        <p style={{ color: "var(--text-muted)" }}>Loading...</p>
       </div>
     );
   }
@@ -167,8 +167,8 @@ export default function AssignmentPage() {
           style={{
             maxWidth: 440,
             width: "100%",
-            background: "#121218",
-            border: "1px solid #1e1e2a",
+            background: "var(--bg-2)",
+            border: "1px solid var(--border)",
             borderRadius: 24,
             padding: "40px 28px",
             textAlign: "center",
@@ -179,24 +179,24 @@ export default function AssignmentPage() {
               width: 64,
               height: 64,
               borderRadius: 16,
-              background: "rgba(108,60,233,0.15)",
+              background: "rgb(var(--primary-rgb) / 0.15)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               margin: "0 auto 20px",
             }}
           >
-            <AlertTriangle size={32} color="#6C3CE9" />
+            <AlertTriangle size={32} color="var(--primary)" />
           </div>
           <h1 style={{ fontSize: 22, fontWeight: 800, margin: "0 0 8px" }}>
             No Active Assignment
           </h1>
-          <p style={{ color: "#888", fontSize: 14, marginBottom: 24, lineHeight: 1.5 }}>
+          <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 24, lineHeight: 1.5 }}>
             Request a new assignment based on your weakest subject. 25 questions, 25 minutes, 35% to pass.
           </p>
           <div
             style={{
-              background: "#1a1a1f",
+              background: "var(--bg-3)",
               borderRadius: 12,
               padding: "14px 16px",
               marginBottom: 20,
@@ -205,12 +205,12 @@ export default function AssignmentPage() {
               fontSize: 13,
             }}
           >
-            <span style={{ color: "#888" }}>Time Limit</span>
+            <span style={{ color: "var(--text-muted)" }}>Time Limit</span>
             <span style={{ color: "#fff", fontWeight: 600 }}>25 minutes</span>
           </div>
           <div
             style={{
-              background: "#1a1a1f",
+              background: "var(--bg-3)",
               borderRadius: 12,
               padding: "14px 16px",
               marginBottom: 20,
@@ -219,13 +219,13 @@ export default function AssignmentPage() {
               fontSize: 13,
             }}
           >
-            <span style={{ color: "#888" }}>Questions</span>
+            <span style={{ color: "var(--text-muted)" }}>Questions</span>
             <span style={{ color: "#fff", fontWeight: 600 }}>25</span>
           </div>
           <div
             style={{
               background: "#1a1400",
-              border: "1px solid #D4A853",
+              border: "1px solid var(--accent)",
               borderRadius: 12,
               padding: "12px 16px",
               marginBottom: 20,
@@ -236,10 +236,10 @@ export default function AssignmentPage() {
           >
             <AlertTriangle
               size={16}
-              color="#D4A853"
+              color="var(--accent)"
               style={{ flexShrink: 0, marginTop: 2 }}
             />
-            <p style={{ color: "#D4A853", fontSize: 12, lineHeight: 1.5, margin: 0 }}>
+            <p style={{ color: "var(--accent)", fontSize: 12, lineHeight: 1.5, margin: 0 }}>
               You need at least 35% to pass. If you fail, a new assignment will be generated automatically.
             </p>
           </div>
@@ -250,7 +250,7 @@ export default function AssignmentPage() {
               padding: "14px",
               borderRadius: 14,
               border: "none",
-              background: "linear-gradient(135deg, #6C3CE9, #9B59B6)",
+              background: "linear-gradient(135deg, var(--primary), var(--accent))",
               color: "#fff",
               fontWeight: 700,
               fontSize: 16,
@@ -284,8 +284,8 @@ export default function AssignmentPage() {
           style={{
             maxWidth: 440,
             width: "100%",
-            background: "#121218",
-            border: "1px solid #1e1e2a",
+            background: "var(--bg-2)",
+            border: "1px solid var(--border)",
             borderRadius: 24,
             padding: "40px 28px",
             textAlign: "center",
@@ -314,7 +314,7 @@ export default function AssignmentPage() {
           <h1 style={{ fontSize: 22, fontWeight: 800, margin: "0 0 4px" }}>
             {passed ? "Assignment Passed!" : "Assignment Failed"}
           </h1>
-          <p style={{ color: "#888", fontSize: 14, marginBottom: 24 }}>
+          <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 24 }}>
             {passed
               ? "Great work! You earned 30 XP."
               : "You need at least 35% to pass. A new assignment has been generated."}
@@ -330,7 +330,7 @@ export default function AssignmentPage() {
           >
             <div
               style={{
-                background: "#1a1a1f",
+                background: "var(--bg-3)",
                 borderRadius: 12,
                 padding: 16,
                 textAlign: "center",
@@ -345,11 +345,11 @@ export default function AssignmentPage() {
               >
                 {result.score}%
               </div>
-              <div style={{ fontSize: 11, color: "#888", marginTop: 4 }}>Score</div>
+              <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 4 }}>Score</div>
             </div>
             <div
               style={{
-                background: "#1a1a1f",
+                background: "var(--bg-3)",
                 borderRadius: 12,
                 padding: 16,
                 textAlign: "center",
@@ -358,7 +358,7 @@ export default function AssignmentPage() {
               <div style={{ fontSize: 32, fontWeight: 800, color: "#fff" }}>
                 {result.correctCount}/{result.questions.length}
               </div>
-              <div style={{ fontSize: 11, color: "#888", marginTop: 4 }}>Correct</div>
+              <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 4 }}>Correct</div>
             </div>
           </div>
 
@@ -391,7 +391,7 @@ export default function AssignmentPage() {
                 padding: "14px",
                 borderRadius: 14,
                 border: "none",
-                background: "linear-gradient(135deg, #6C3CE9, #9B59B6)",
+                background: "linear-gradient(135deg, var(--primary), var(--accent))",
                 color: "#fff",
                 fontWeight: 700,
                 fontSize: 16,
@@ -412,7 +412,7 @@ export default function AssignmentPage() {
               borderRadius: 14,
               border: "1px solid #333",
               background: "transparent",
-              color: "#888",
+              color: "var(--text-muted)",
               fontWeight: 600,
               fontSize: 14,
               cursor: "pointer",
@@ -452,8 +452,8 @@ export default function AssignmentPage() {
             top: 0,
             left: 0,
             right: 0,
-            background: "#0d0d12",
-            borderBottom: "1px solid #1e1e2a",
+            background: "var(--bg)",
+            borderBottom: "1px solid var(--border)",
             zIndex: 50,
           }}
         >
@@ -471,7 +471,7 @@ export default function AssignmentPage() {
                   width: 28,
                   height: 28,
                   borderRadius: 6,
-                  background: "linear-gradient(135deg, #6C3CE9, #D4A853)",
+                  background: "linear-gradient(135deg, var(--primary), var(--accent))",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -486,8 +486,8 @@ export default function AssignmentPage() {
                   fontSize: 12,
                   padding: "2px 10px",
                   borderRadius: 6,
-                  background: "rgba(108,60,233,0.15)",
-                  color: "#6C3CE9",
+                  background: "rgb(var(--primary-rgb) / 0.15)",
+                  color: "var(--primary)",
                   fontWeight: 600,
                 }}
               >
@@ -520,9 +520,9 @@ export default function AssignmentPage() {
                 style={{
                   padding: "8px 12px",
                   borderRadius: 8,
-                  background: isOpen ? "rgba(108,60,233,0.2)" : "transparent",
-                  border: isOpen ? "1.5px solid #6C3CE9" : "1.5px solid #333",
-                  color: isOpen ? "#6C3CE9" : "#888",
+                  background: isOpen ? "rgb(var(--primary-rgb) / 0.2)" : "transparent",
+                  border: isOpen ? "1.5px solid var(--primary)" : "1.5px solid #333",
+                  color: isOpen ? "var(--primary)" : "var(--text-muted)",
                   fontWeight: 600,
                   fontSize: 12,
                   cursor: "pointer",
@@ -577,10 +577,10 @@ export default function AssignmentPage() {
                 marginBottom: 16,
               }}
             >
-              <span style={{ fontSize: 12, color: "#888", fontWeight: 500 }}>
+              <span style={{ fontSize: 12, color: "var(--text-muted)", fontWeight: 500 }}>
                 Question {currentIndex + 1} of {assignment.questions.length}
               </span>
-              <span style={{ fontSize: 12, color: "#888" }}>
+              <span style={{ fontSize: 12, color: "var(--text-muted)" }}>
                 {answeredCount} answered
               </span>
             </div>
@@ -590,7 +590,7 @@ export default function AssignmentPage() {
               style={{
                 width: "100%",
                 height: 3,
-                background: "#1e1e2a",
+                background: "var(--border)",
                 borderRadius: 2,
                 marginBottom: 20,
                 overflow: "hidden",
@@ -600,7 +600,7 @@ export default function AssignmentPage() {
                 style={{
                   height: "100%",
                   width: `${((currentIndex + 1) / assignment.questions.length) * 100}%`,
-                  background: "#6C3CE9",
+                  background: "var(--primary)",
                   borderRadius: 2,
                   transition: "width 0.3s",
                 }}
@@ -610,8 +610,8 @@ export default function AssignmentPage() {
             {/* Question card */}
             <div
               style={{
-                background: "#121218",
-                border: "1px solid #1e1e2a",
+                background: "var(--bg-2)",
+                border: "1px solid var(--border)",
                 borderRadius: 16,
                 padding: 24,
                 marginBottom: 16,
@@ -632,13 +632,13 @@ export default function AssignmentPage() {
               {current.explanation && showHint && (
                 <div
                   style={{
-                    background: "rgba(212,168,83,0.1)",
-                    border: "1px solid rgba(212,168,83,0.3)",
+                    background: "rgb(var(--accent-rgb) / 0.1)",
+                    border: "1px solid rgb(var(--accent-rgb) / 0.3)",
                     borderRadius: 10,
                     padding: "10px 14px",
                     marginBottom: 16,
                     fontSize: 13,
-                    color: "#D4A853",
+                    color: "var(--accent)",
                     lineHeight: 1.5,
                   }}
                 >
@@ -663,8 +663,8 @@ export default function AssignmentPage() {
                       style={{
                         padding: "14px 16px",
                         borderRadius: 12,
-                        border: sel ? "2px solid #6C3CE9" : "1.5px solid #333",
-                        background: sel ? "rgba(108,60,233,0.2)" : "#1a1a1f",
+                        border: sel ? "2px solid var(--primary)" : "1.5px solid #333",
+                        background: sel ? "rgb(var(--primary-rgb) / 0.2)" : "var(--bg-3)",
                         cursor: "pointer",
                         display: "flex",
                         alignItems: "center",
@@ -678,8 +678,8 @@ export default function AssignmentPage() {
                           width: 28,
                           height: 28,
                           borderRadius: 8,
-                          background: sel ? "#6C3CE9" : "#333",
-                          color: sel ? "#fff" : "#888",
+                          background: sel ? "var(--primary)" : "var(--border)",
+                          color: sel ? "#fff" : "var(--text-muted)",
                           fontSize: 12,
                           fontWeight: 700,
                           display: "flex",
@@ -690,7 +690,7 @@ export default function AssignmentPage() {
                       >
                         {key}
                       </span>
-                      <span style={{ fontSize: 14, color: "#ccc" }}>{val}</span>
+                      <span style={{ fontSize: 14, color: "var(--text)" }}>{val}</span>
                     </button>
                   );
                 })}
@@ -713,8 +713,8 @@ export default function AssignmentPage() {
                   padding: "8px 14px",
                   borderRadius: 8,
                   border: "1px solid #333",
-                  background: hintsUsed >= 5 ? "#1a1a1f" : "rgba(212,168,83,0.1)",
-                  color: hintsUsed >= 5 ? "#555" : "#D4A853",
+                  background: hintsUsed >= 5 ? "var(--bg-3)" : "rgb(var(--accent-rgb) / 0.1)",
+                  color: hintsUsed >= 5 ? "var(--text-muted)" : "var(--accent)",
                   fontWeight: 600,
                   fontSize: 12,
                   cursor: hintsUsed >= 5 ? "not-allowed" : "pointer",
@@ -739,9 +739,9 @@ export default function AssignmentPage() {
                 style={{
                   padding: "10px 20px",
                   borderRadius: 8,
-                  background: "#1a1a1f",
+                  background: "var(--bg-3)",
                   border: "1px solid #333",
-                  color: currentIndex === 0 ? "#555" : "#fff",
+                  color: currentIndex === 0 ? "var(--text-muted)" : "#fff",
                   cursor: currentIndex === 0 ? "not-allowed" : "pointer",
                   fontFamily: "inherit",
                   display: "flex",
@@ -760,7 +760,7 @@ export default function AssignmentPage() {
                   style={{
                     padding: "10px 20px",
                     borderRadius: 8,
-                    background: "#6C3CE9",
+                    background: "var(--primary)",
                     border: "none",
                     color: "#fff",
                     fontWeight: 600,
@@ -800,8 +800,8 @@ export default function AssignmentPage() {
           <div
             style={{
               width: 180,
-              background: "#0d0d12",
-              borderLeft: "1px solid #1e1e2a",
+              background: "var(--bg)",
+              borderLeft: "1px solid var(--border)",
               padding: 16,
               position: "fixed",
               right: isOpen ? "50%" : 0,
@@ -811,7 +811,7 @@ export default function AssignmentPage() {
               transition: "right 0.3s",
             }}
           >
-            <div style={{ fontSize: 12, color: "#888", marginBottom: 8 }}>
+            <div style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 8 }}>
               Answered: {answeredCount}/{assignment.questions.length}
             </div>
             <div
@@ -824,12 +824,12 @@ export default function AssignmentPage() {
             >
               {assignment.questions.map((_, i) => {
                 const a = answers[i];
-                let bg = "#1a1a1f";
+                let bg = "var(--bg-3)";
                 let border = "1px solid #333";
                 if (i === currentIndex) border = "1.5px solid #fff";
                 if (a) {
-                  bg = "#6C3CE9";
-                  border = "1px solid #6C3CE9";
+                  bg = "var(--primary)";
+                  border = "1px solid var(--primary)";
                 }
                 return (
                   <button
@@ -872,7 +872,7 @@ export default function AssignmentPage() {
               bottom: 0,
               background: "#fff",
               zIndex: 40,
-              borderLeft: "1px solid #1e1e2a",
+              borderLeft: "1px solid var(--border)",
             }}
           >
             <Whiteboard isOpen={isOpen} onClose={toggle} canvasRef={canvasRef} onClear={clear} />

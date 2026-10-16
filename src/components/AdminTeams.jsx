@@ -42,7 +42,7 @@ export default function AdminTeams() {
     }
   }
 
-  if (loading) return <div style={{ color: "#888", padding: 24 }}>Loading teams…</div>;
+  if (loading) return <div style={{ color: "var(--text-muted)", padding: 24 }}>Loading teams…</div>;
 
   async function handleGift() {
     const uids = giftIds.split(/[\s,]+/).map((s) => s.trim()).filter(Boolean);
@@ -65,14 +65,14 @@ export default function AdminTeams() {
 
   return (
     <div>
-      <p style={{ color: "#888", fontSize: 13, margin: "0 0 16px" }}>
+      <p style={{ color: "var(--text-muted)", fontSize: 13, margin: "0 0 16px" }}>
         Every paid group subscription. Revoking stops new joins — paid-up members keep Pro until expiry (no-refund policy).
       </p>
 
       {/* Batch gifts */}
-      <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 14, padding: 18, marginBottom: 20 }}>
+      <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 14, padding: 18, marginBottom: 20 }}>
         <h3 style={{ fontSize: 14, fontWeight: 800, marginBottom: 8, display: "flex", alignItems: "center", gap: 8 }}>
-          <Gift size={15} color="#D4A853" /> Batch-gift Pro
+          <Gift size={15} color="var(--accent)" /> Batch-gift Pro
         </h3>
         <textarea value={giftIds} onChange={(e) => setGiftIds(e.target.value)} rows={2}
           placeholder="Paste user UIDs — one per line or comma-separated"
@@ -90,30 +90,30 @@ export default function AdminTeams() {
           </button>
         </div>
       </div>
-      {teams.length === 0 && <div style={{ color: "#666", padding: 24, textAlign: "center" }}>No teams yet.</div>}
+      {teams.length === 0 && <div style={{ color: "var(--text-muted)", padding: 24, textAlign: "center" }}>No teams yet.</div>}
       <div style={{ display: "grid", gap: 12 }}>
         {teams.map((t) => (
-          <div key={t.id} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 14, padding: 18 }}>
+          <div key={t.id} style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 14, padding: 18 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-              <Users size={18} color="#6C3CE9" />
+              <Users size={18} color="var(--primary)" />
               <strong style={{ fontSize: 16 }}>{t.name}</strong>
               <span style={{
                 fontSize: 11, fontWeight: 700, padding: "2px 10px", borderRadius: 20,
                 background: t.status === "active" ? "rgba(74,222,128,0.12)" : t.status === "pending" ? "rgba(255,159,67,0.12)" : "rgba(255,77,106,0.12)",
                 color: t.status === "active" ? "#4ADE80" : t.status === "pending" ? "#FF9F43" : "#FF4D6A",
               }}>{t.status?.toUpperCase()}</span>
-              <span style={{ marginLeft: "auto", fontSize: 12, color: "#888" }}>
+              <span style={{ marginLeft: "auto", fontSize: 12, color: "var(--text-muted)" }}>
                 {t.plan} · {t.seatsUsed || 0}/{t.seats || 0} seats
                 {t.amountPaid ? ` · ₦${Number(t.amountPaid).toLocaleString()} paid` : ""}
               </span>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10, flexWrap: "wrap" }}>
-              <span style={{ fontSize: 12, color: "#888", display: "inline-flex", alignItems: "center", gap: 6 }}>
-                <Ticket size={13} /> <code style={{ color: "#D4A853", fontWeight: 700 }}>{t.code}</code>
+              <span style={{ fontSize: 12, color: "var(--text-muted)", display: "inline-flex", alignItems: "center", gap: 6 }}>
+                <Ticket size={13} /> <code style={{ color: "var(--accent)", fontWeight: 700 }}>{t.code}</code>
               </span>
-              <span style={{ fontSize: 12, color: "#666" }}>payer: {t.payerEmail || t.payerUid?.slice(0, 8)}</span>
+              <span style={{ fontSize: 12, color: "var(--text-muted)" }}>payer: {t.payerEmail || t.payerUid?.slice(0, 8)}</span>
               {(t.members || []).length > 0 && (
-                <span style={{ fontSize: 12, color: "#666" }}>· {t.members.length} member{t.members.length === 1 ? "" : "s"}</span>
+                <span style={{ fontSize: 12, color: "var(--text-muted)" }}>· {t.members.length} member{t.members.length === 1 ? "" : "s"}</span>
               )}
               {t.status === "active" && (
                 <button onClick={() => revoke(t.id)} style={{

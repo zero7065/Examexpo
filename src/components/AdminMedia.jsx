@@ -110,26 +110,26 @@ export default function AdminMedia() {
   }
 
   if (loading) {
-    return <div style={{ color: "#888", padding: 24 }}>Loading landing media…</div>;
+    return <div style={{ color: "var(--text-muted)", padding: 24 }}>Loading landing media…</div>;
   }
 
   return (
     <div>
-      <p style={{ color: "#888", fontSize: 13, margin: "0 0 16px", lineHeight: 1.6 }}>
+      <p style={{ color: "var(--text-muted)", fontSize: 13, margin: "0 0 16px", lineHeight: 1.6 }}>
         Upload landing page images. Each slot falls back automatically:
         your upload → bundled screenshot → code-drawn mockup.
         Images are compressed to ≤800px JPEG on upload.
       </p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
         {LANDING_SLOTS.map((slot) => (
-          <div key={slot} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 14, padding: 16 }}>
+          <div key={slot} style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 14, padding: 16 }}>
             <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 4 }}>{SLOT_LABELS[slot]}</div>
-            <div style={{ fontSize: 11, color: "#666", marginBottom: 12 }}>
+            <div style={{ fontSize: 11, color: "var(--text-muted)", marginBottom: 12 }}>
               {urls[slot] ? "Custom upload active" : `Bundled: ${BUNDLED_SHOTS[slot]}`}
             </div>
             <div style={{
               width: "100%", aspectRatio: "9/16", maxHeight: 220, borderRadius: 10,
-              background: "#0d0d12", border: "1px solid #1e1e2a", overflow: "hidden",
+              background: "var(--bg)", border: "1px solid var(--border)", overflow: "hidden",
               display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 12,
             }}>
               {(urls[slot] || BUNDLED_SHOTS[slot]) ? (
@@ -140,13 +140,13 @@ export default function AdminMedia() {
                   onError={(e) => { e.currentTarget.style.display = "none"; }}
                 />
               ) : (
-                <span style={{ color: "#444", fontSize: 12 }}>No image</span>
+                <span style={{ color: "var(--text-muted)", fontSize: 12 }}>No image</span>
               )}
             </div>
             <div style={{ display: "flex", gap: 8 }}>
               <label style={{
                 flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
-                padding: "10px", borderRadius: 10, background: "#6C3CE9", color: "#fff",
+                padding: "10px", borderRadius: 10, background: "var(--primary)", color: "#fff",
                 fontWeight: 700, fontSize: 12, cursor: "pointer",
               }}>
                 {uploading[slot] ? <Loader2 size={14} style={{ animation: "spin 0.8s linear infinite" }} /> : <ImagePlus size={14} />}
@@ -164,8 +164,8 @@ export default function AdminMedia() {
                   onClick={() => handleRevert(slot)}
                   title="Revert to bundled image"
                   style={{
-                    padding: "10px 12px", borderRadius: 10, background: "#1a1a1f",
-                    border: "1px solid #333", color: "#888", cursor: "pointer",
+                    padding: "10px 12px", borderRadius: 10, background: "var(--bg-3)",
+                    border: "1px solid #333", color: "var(--text-muted)", cursor: "pointer",
                     display: "flex", alignItems: "center",
                   }}
                 >
@@ -179,8 +179,8 @@ export default function AdminMedia() {
                   rel="noopener noreferrer"
                   title="Open full image"
                   style={{
-                    padding: "10px 12px", borderRadius: 10, background: "#1a1a1f",
-                    border: "1px solid #333", color: "#888",
+                    padding: "10px 12px", borderRadius: 10, background: "var(--bg-3)",
+                    border: "1px solid #333", color: "var(--text-muted)",
                     display: "flex", alignItems: "center",
                   }}
                 >

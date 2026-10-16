@@ -131,7 +131,7 @@ const Whiteboard = () => {
       ctx.lineWidth = PEN_SIZES[penSize];
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
-      ctx.strokeStyle = tool === "eraser" ? "#1a1a2e" : color;
+      ctx.strokeStyle = tool === "eraser" ? "var(--bg-2)" : color;
       ctx.lineTo(pos.x, pos.y);
       ctx.stroke();
     };
@@ -213,14 +213,14 @@ const Whiteboard = () => {
       width: 48,
       height: 48,
       borderRadius: "50%",
-      background: "#6C3CE9",
+      background: "var(--primary)",
       border: "none",
       color: "#fff",
       cursor: "pointer",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      boxShadow: "0 4px 20px rgba(108,60,233,0.5)",
+      boxShadow: "0 4px 20px rgb(var(--primary-rgb) / 0.5)",
       transition: "transform 0.2s, box-shadow 0.2s",
     },
     panel: {
@@ -229,7 +229,7 @@ const Whiteboard = () => {
       top: position.y,
       zIndex: 9999,
       width: isMinimized ? 280 : 340,
-      background: "#1a1a2e",
+      background: "var(--bg-2)",
       borderRadius: 12,
       border: "1px solid rgba(255,255,255,0.08)",
       boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
@@ -243,7 +243,7 @@ const Whiteboard = () => {
       alignItems: "center",
       justifyContent: "space-between",
       padding: "8px 12px",
-      background: "rgba(108,60,233,0.15)",
+      background: "rgb(var(--primary-rgb) / 0.15)",
       borderBottom: "1px solid rgba(255,255,255,0.06)",
       cursor: "grab",
       userSelect: "none",
@@ -267,7 +267,7 @@ const Whiteboard = () => {
       flexWrap: "wrap",
     },
     toolBtn: (active) => ({
-      background: active ? "#6C3CE9" : "rgba(255,255,255,0.06)",
+      background: active ? "var(--primary)" : "rgba(255,255,255,0.06)",
       border: "none",
       color: "#fff",
       cursor: "pointer",
@@ -287,7 +287,7 @@ const Whiteboard = () => {
       cursor: "pointer",
     }),
     sizeBtn: (active) => ({
-      background: active ? "#6C3CE9" : "rgba(255,255,255,0.06)",
+      background: active ? "var(--primary)" : "rgba(255,255,255,0.06)",
       border: "none",
       color: "#fff",
       cursor: "pointer",
@@ -305,7 +305,7 @@ const Whiteboard = () => {
       borderRadius: 8,
       border: "1px solid rgba(255,255,255,0.08)",
       cursor: "crosshair",
-      background: "#1a1a2e",
+      background: "var(--bg-2)",
       touchAction: "none",
     },
     calcSection: {
@@ -355,20 +355,20 @@ const Whiteboard = () => {
   const calcButtons = [
     { label: "C", action: "clear", bg: "#E53E3E" },
     { label: "\u232B", action: "backspace", bg: "rgba(255,255,255,0.1)" },
-    { label: "\u00F7", action: "\u00F7", bg: "rgba(108,60,233,0.4)" },
-    { label: "\u00D7", action: "\u00D7", bg: "rgba(108,60,233,0.4)" },
+    { label: "\u00F7", action: "\u00F7", bg: "rgb(var(--primary-rgb) / 0.4)" },
+    { label: "\u00D7", action: "\u00D7", bg: "rgb(var(--primary-rgb) / 0.4)" },
     { label: "7", action: "7" },
     { label: "8", action: "8" },
     { label: "9", action: "9" },
-    { label: "-", action: "-", bg: "rgba(108,60,233,0.4)" },
+    { label: "-", action: "-", bg: "rgb(var(--primary-rgb) / 0.4)" },
     { label: "4", action: "4" },
     { label: "5", action: "5" },
     { label: "6", action: "6" },
-    { label: "+", action: "+", bg: "rgba(108,60,233,0.4)" },
+    { label: "+", action: "+", bg: "rgb(var(--primary-rgb) / 0.4)" },
     { label: "1", action: "1" },
     { label: "2", action: "2" },
     { label: "3", action: "3" },
-    { label: "=", action: "=", bg: "#6C3CE9" },
+    { label: "=", action: "=", bg: "var(--primary)" },
     { label: "0", action: "0", span: 2 },
     { label: ".", action: "." },
   ];
@@ -380,11 +380,11 @@ const Whiteboard = () => {
         style={s.toggleBtn}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = "scale(1.1)";
-          e.currentTarget.style.boxShadow = "0 6px 28px rgba(108,60,233,0.7)";
+          e.currentTarget.style.boxShadow = "0 6px 28px rgb(var(--primary-rgb) / 0.7)";
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.transform = "scale(1)";
-          e.currentTarget.style.boxShadow = "0 4px 20px rgba(108,60,233,0.5)";
+          e.currentTarget.style.boxShadow = "0 4px 20px rgb(var(--primary-rgb) / 0.5)";
         }}
         title="Whiteboard & Calculator"
       >
@@ -399,7 +399,7 @@ const Whiteboard = () => {
             onTouchStart={handleDragStart}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <Pen size={14} style={{ color: "#6C3CE9" }} />
+              <Pen size={14} style={{ color: "var(--primary)" }} />
               <span style={{ fontSize: 13, fontWeight: 600 }}>Whiteboard</span>
             </div>
             <div style={{ display: "flex", gap: 2 }}>
@@ -479,7 +479,7 @@ const Whiteboard = () => {
                   <Trash2 size={12} />
                 </button>
                 <button
-                  style={{ ...s.toolBtn(false), marginLeft: 4, color: "#6C3CE9" }}
+                  style={{ ...s.toolBtn(false), marginLeft: 4, color: "var(--primary)" }}
                   onClick={() => {
                     const img = exportCanvas();
                     if (img) {

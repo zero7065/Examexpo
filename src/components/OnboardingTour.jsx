@@ -74,7 +74,7 @@ export default function OnboardingTour({ onClose }) {
         <div style={{ fontSize: 12, fontWeight: 800, color: "var(--primary)", letterSpacing: "0.08em", marginBottom: 6 }}>
           GUIDED TOUR · {i + 1}/{STEPS.length}
         </div>
-        <h2 className="h-2" style={{ marginBottom: 10 }}>{s.title}</h2>
+        <h2 className="type-h2" style={{ marginBottom: 10 }}>{s.title}</h2>
         <p className="text-sm text-text-muted" style={{ lineHeight: 1.7, margin: "0 0 20px" }}>{s.body}</p>
         <div style={{ display: "flex", gap: 6, justifyContent: "center", marginBottom: 20 }}>
           {STEPS.map((_, j) => (

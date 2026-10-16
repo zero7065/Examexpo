@@ -23,7 +23,7 @@ export default function Logo({ size = 36, animate = true, radius = 10 }) {
           </linearGradient>
           <linearGradient id="ep-logo-gold" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stopColor="#FFE9A8" />
-            <stop offset="1" stopColor="#D4A853" />
+            <stop offset="1" stopColor="var(--accent)" />
           </linearGradient>
         </defs>
 

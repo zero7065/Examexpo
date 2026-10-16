@@ -11,7 +11,7 @@ import { useFeatureOnlineGuard } from "../hooks/useOnlineStatus";
 import { checkRateLimit } from "../lib/rateLimiter";
 import { unlockAchievement } from "../lib/achievements";
 import { preprocessImage } from "../lib/vision";
-import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
+import { checkAILimit } from "../lib/usageTracker";
 import { logActivity } from "../lib/activityLog";
 import ProUpgradeModal from "../components/ProUpgradeModal";
 import MessageBubble from "../components/AITutor/MessageBubble";
@@ -62,7 +62,7 @@ export default function AITutor() {
     if (user) getUserProfile(user.uid).then(setProfile).catch(() => {});
     if (user) getStudentMemory(user.uid).then(setMemory).catch(() => {});
     if (user && !isPro) {
-      checkAILimit(user.uid).then(l => setAiUsage({ used: l.used, limit: l.limit })).catch(() => {});
+      checkAILimit(user.uid).then(l => setAiUsage(l)).catch(() => {});
     }
     if (user) getAISessions(user.uid).then(setSessions).catch(() => {});
   }, [user, isPro]);
@@ -186,7 +186,7 @@ export default function AITutor() {
       // Free-tier daily AI limit
       if (!isPro && user) {
         const limit = await checkAILimit(user.uid);
-        setAiUsage({ used: limit.used, limit: limit.limit });
+        setAiUsage(limit);
         if (!limit.allowed) { setShowProModal(true); return; }
       }
 
@@ -200,8 +200,8 @@ export default function AITutor() {
       setLoading(true);
 
       if (user && !isPro) {
-        trackAIMessage(user.uid);
-        setAiUsage(prev => prev ? { ...prev, used: prev.used + 1 } : prev);
+        // Usage is counted centrally by ai.js on a successful response.
+        setAiUsage(prev => prev ? { ...prev, used: Math.min(prev.limit, prev.used + 1), available: Math.max(0, (prev.available ?? 0) - 1) } : prev);
       }
 
       const allMsgs = [...messages, userMsg];
@@ -237,7 +237,14 @@ export default function AITutor() {
       logActivity({ action: "ai_chat", userId: user?.uid, email: user?.email, details: { subject: activeSubject, questionLength: userMsg.content.length, withImages: images.length, analyzeMode: useAnalyze } });
     } catch (e) {
       console.error("AI chat failed:", e);
-      toast({ message: "Failed to get AI response. Please try again.", type: "error" });
+      // Undo the optimistic counter — the message never went through.
+      setAiUsage(prev => prev ? { ...prev, used: Math.max(0, prev.used - 1), available: (prev.available ?? 0) + 1 } : prev);
+      if (e?.code === "AI_LIMIT") {
+        setShowProModal(true);
+        toast({ message: e.message, type: "warning" });
+      } else {
+        toast({ message: "Failed to get AI response. Please try again.", type: "error" });
+      }
       setLoading(false);
     }
   }
@@ -258,7 +265,7 @@ export default function AITutor() {
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Logo size={32} radius={9} />
           <span style={{ fontWeight: 700, fontSize: 16 }}>AI Tutor</span>
-          {isPro && <span style={{ fontSize: 10, fontWeight: 700, color: "#D4A853", background: "rgba(212,168,83,0.15)", padding: "2px 8px", borderRadius: 6 }}>PRO</span>}
+          {isPro && <span style={{ fontSize: 10, fontWeight: 700, color: "var(--accent)", background: "rgb(var(--accent-rgb) / 0.15)", padding: "2px 8px", borderRadius: 6 }}>PRO</span>}
           {weakCount > 0 && (
             <span title={memory?.preferredStyle ? `Learning style: ${memory.preferredStyle}` : "I remember your weak topics"} style={{ fontSize: 11, fontWeight: 600, color: "var(--primary)", background: "var(--primary-dim)", border: "1px solid var(--border)", padding: "4px 10px", borderRadius: 20, display: "inline-flex", alignItems: "center", gap: 4 }}>
               <Brain size={12} /> Remembering {weakCount} weak topic{weakCount === 1 ? "" : "s"}
@@ -266,13 +273,24 @@ export default function AITutor() {
           )}
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          {!isPro && aiUsage && (
-            <span style={{ fontSize: 11, fontWeight: 700, color: aiUsage.used >= aiUsage.limit ? "#ef4444" : "var(--text-muted)", background: "var(--bg-3)", border: "1px solid var(--border)", padding: "4px 10px", borderRadius: 6 }}>
-              AI {aiUsage.used}/{aiUsage.limit} today
-            </span>
-          )}
+          {!isPro && aiUsage && (() => {
+            const totalLeft = aiUsage.available;
+            if (totalLeft == null) return null;
+            const out = totalLeft <= 0;
+            const near = aiUsage.softWarning && !out;
+            return (
+              <span
+                title={aiUsage.isFree
+                  ? `${aiUsage.used}/${aiUsage.limit} AI messages today${aiUsage.packRemaining > 0 ? ` · ${aiUsage.packRemaining} pack credits` : ""}`
+                  : `${aiUsage.monthUsed}/${aiUsage.monthLimit} AI messages this month${aiUsage.packRemaining > 0 ? ` · ${aiUsage.packRemaining} pack credits` : ""}`}
+                style={{ fontSize: 11, fontWeight: 700, color: out ? "#ef4444" : near ? "var(--accent)" : "var(--text-muted)", background: "var(--bg-3)", border: "1px solid var(--border)", padding: "4px 10px", borderRadius: 6 }}
+              >
+                AI {totalLeft} left
+              </span>
+            );
+          })()}
           {!isPro && (
-            <button onClick={() => setShowProModal(true)} style={{ padding: "6px 12px", borderRadius: 6, border: "none", background: "linear-gradient(135deg, #6C3CE9, #9B59B6)", color: "#fff", fontWeight: 700, fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>
+            <button onClick={() => setShowProModal(true)} style={{ padding: "6px 12px", borderRadius: 6, border: "none", background: "linear-gradient(135deg, var(--primary), var(--accent))", color: "#fff", fontWeight: 700, fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>
               Go Pro
             </button>
           )}
@@ -316,7 +334,7 @@ export default function AITutor() {
       {/* Subject context pills */}
       <div style={{ display: "flex", gap: 6, padding: "8px 20px", background: "var(--bg)", borderBottom: "1px solid var(--border)", overflowX: "auto", flexShrink: 0 }}>
         {["General", ...userSubjects].map(s => (
-          <button key={s} onClick={() => setActiveSubject(s)} style={{ padding: "6px 14px", borderRadius: 8, border: "none", background: activeSubject === s ? "#6C3CE9" : "var(--bg-3)", color: activeSubject === s ? "#fff" : "var(--text-muted)", fontWeight: 600, fontSize: 12, cursor: "pointer", whiteSpace: "nowrap", fontFamily: "inherit" }}>
+          <button key={s} onClick={() => setActiveSubject(s)} style={{ padding: "6px 14px", borderRadius: 8, border: "none", background: activeSubject === s ? "var(--primary)" : "var(--bg-3)", color: activeSubject === s ? "#fff" : "var(--text-muted)", fontWeight: 600, fontSize: 12, cursor: "pointer", whiteSpace: "nowrap", fontFamily: "inherit" }}>
             {s}
           </button>
         ))}
@@ -399,7 +417,7 @@ export default function AITutor() {
               </button>
               <div style={{ position: "relative", flex: 1 }}>
               <textarea ref={textareaRef} value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKeyDown} placeholder={pendingImages.length > 0 ? (analyzeMode ? "What should I pull out of these pages?…" : "Describe what to solve…") : `Ask anything about ${activeSubject}…`} rows={1} style={{ width: "100%", padding: "12px 48px 12px 16px", borderRadius: 12, background: "var(--bg-3)", border: "1px solid var(--border)", color: "var(--text)", fontSize: 14, outline: "none", resize: "none", fontFamily: "inherit", boxSizing: "border-box" }} />
-              <button onClick={() => handleSend()} disabled={(!input.trim() && pendingImages.length === 0) || loading} style={{ position: "absolute", right: 6, bottom: 6, width: 36, height: 36, borderRadius: "50%", background: (input.trim() || pendingImages.length > 0) && !loading ? "#6C3CE9" : "#333", border: "none", color: (input.trim() || pendingImages.length > 0) && !loading ? "#fff" : "#666", cursor: (input.trim() || pendingImages.length > 0) && !loading ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <button onClick={() => handleSend()} disabled={(!input.trim() && pendingImages.length === 0) || loading} style={{ position: "absolute", right: 6, bottom: 6, width: 36, height: 36, borderRadius: "50%", background: (input.trim() || pendingImages.length > 0) && !loading ? "var(--primary)" : "var(--border)", border: "none", color: (input.trim() || pendingImages.length > 0) && !loading ? "#fff" : "var(--text-muted)", cursor: (input.trim() || pendingImages.length > 0) && !loading ? "pointer" : "not-allowed", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Send size={16} />
               </button>
               </div>

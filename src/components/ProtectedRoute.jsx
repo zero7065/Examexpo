@@ -20,7 +20,7 @@ export default function ProtectedRoute({ children }) {
           width: 40,
           height: 40,
           border: "3px solid #333",
-          borderTopColor: "#6C3CE9",
+          borderTopColor: "var(--primary)",
           borderRadius: "50%",
           animation: "spinner 0.8s linear infinite",
         }} />

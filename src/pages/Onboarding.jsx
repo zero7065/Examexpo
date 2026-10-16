@@ -93,8 +93,8 @@ export default function Onboarding() {
   function getScoreColor(score) {
     if (score < 200) return "#FF4D6A";
     if (score < 250) return "#FF9F43";
-    if (score < 320) return "#00E5A0";
-    return "#D4A853";
+    if (score < 320) return "var(--success)";
+    return "var(--accent)";
   }
 
   function getScoreLabel(score) {

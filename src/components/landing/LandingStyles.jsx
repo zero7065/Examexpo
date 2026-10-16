@@ -72,7 +72,7 @@ export default function LandingStyles() {
       .lp-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgb(var(--primary-rgb) / 0.45); }
       .lp-btn-ghost {
         display: inline-flex; align-items: center; gap: 8px;
-        padding: 16px 32px; border-radius: 14px; font-size: 16px; fontWeight: 700;
+        padding: 16px 32px; border-radius: 14px; font-size: 16px; font-weight: 700;
         background: rgb(var(--bg-2-rgb) / 0.72); color: var(--text); text-decoration: none;
         border: 1px solid rgb(var(--border-rgb) / 0.8);
         transition: all 0.2s;

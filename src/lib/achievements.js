@@ -14,7 +14,7 @@ export function getActiveBadge(profile) {
       ? new Date(profile.lastActive).getTime()
       : 0;
   if (last && Date.now() - last < 48 * 60 * 60 * 1000) {
-    return { label: "🟢 Active", color: "#00E5A0" };
+    return { label: "🟢 Active", color: "var(--success)" };
   }
   return null;
 }

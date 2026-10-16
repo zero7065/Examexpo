@@ -5,7 +5,7 @@ import { ShieldCheck } from "lucide-react";
 const SECTIONS = [
   {
     h: "1. Who We Are",
-    body: "ExamPadi is operated by Jadai Studios. We build AI-powered study tools for Nigerian students preparing for JAMB, WAEC, NECO and NABTEB exams. NDPR queries: jadai7065@gmail.com.",
+    body: "ExamPadi is operated by the ExamPadi team. We build AI-powered study tools for Nigerian students preparing for JAMB, WAEC, NECO and NABTEB exams. NDPR queries: jadai7065@gmail.com.",
   },
   {
     h: "2. Data We Collect",
@@ -35,7 +35,7 @@ const SECTIONS = [
     list: [
       "You — full access via Settings → Download my data",
       "Your teacher — only your class-level study stats, if your school enrolled you",
-      "Jadai Studios support — only when investigating an issue you reported",
+      "ExamPadi support — only when investigating an issue you reported",
       "Processors: Firebase/Google (hosting), Paystack (payments), Groq (AI)",
     ],
     body: "We do not sell personal data. Ever.",
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
       </div>
 
       <div className="mt-16 pt-8 border-t border-border text-center">
-        <p className="text-text-muted text-sm">© {new Date().getFullYear()} ExamPadi by Jadai Studios · <Link to="/terms" className="text-primary hover:underline">Terms of Service</Link></p>
+        <p className="text-text-muted text-sm">© {new Date().getFullYear()} ExamPadi · Built in Nigeria · <Link to="/terms" className="text-primary hover:underline">Terms of Service</Link></p>
       </div>
     </div>
   );

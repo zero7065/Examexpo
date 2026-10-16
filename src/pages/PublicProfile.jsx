@@ -46,7 +46,7 @@ export default function PublicProfile() {
   if (!profile) {
     return (
       <div className="page-content max-w-xl mx-auto text-center space-y-4">
-        <h1 className="h-1">Profile not found</h1>
+        <h1 className="type-h1">Profile not found</h1>
         <Link to="/feed" className="btn-secondary inline-flex px-5">Back to feed</Link>
       </div>
     );
@@ -61,7 +61,7 @@ export default function PublicProfile() {
       <div className="page-content max-w-xl mx-auto text-center space-y-4">
         <div className="glass-card p-10">
           <Lock size={36} className="mx-auto mb-3 text-text-muted" />
-          <h1 className="h-2">This profile is private</h1>
+          <h1 className="type-h2">This profile is private</h1>
           <p className="text-sm text-text-muted mt-2">@{profile.name || "Student"} hasn't turned on a public profile yet.</p>
           <Link to="/feed" className="btn-secondary inline-flex px-5 mt-4">Back to feed</Link>
         </div>

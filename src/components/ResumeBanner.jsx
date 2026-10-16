@@ -29,8 +29,8 @@ export default function ResumeBanner() {
 
   return (
     <div style={{
-      background: "linear-gradient(135deg, rgba(108,60,233,0.15), rgba(212,168,83,0.08))",
-      border: "1px solid rgba(108,60,233,0.3)",
+      background: "linear-gradient(135deg, rgb(var(--primary-rgb) / 0.15), rgb(var(--accent-rgb) / 0.08))",
+      border: "1px solid rgb(var(--primary-rgb) / 0.3)",
       borderRadius: 16,
       padding: "16px 20px",
       marginBottom: 24,
@@ -43,16 +43,16 @@ export default function ResumeBanner() {
       <div style={{ display: "flex", alignItems: "center", gap: 12, flex: 1 }}>
         <div style={{
           width: 40, height: 40, borderRadius: 10,
-          background: "rgba(108,60,233,0.2)",
+          background: "rgb(var(--primary-rgb) / 0.2)",
           display: "flex", alignItems: "center", justifyContent: "center",
         }}>
-          <Play size={18} color="#6C3CE9" fill="#6C3CE9" />
+          <Play size={18} color="var(--primary)" fill="var(--primary)" />
         </div>
         <div>
           <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>
             Resume {subject}
           </div>
-          <div style={{ fontSize: 12, color: "#888" }}>
+          <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
             {answered}/{total} answered · started{" "}
             {session.startTime ? formatAgo(session.startTime) : "today"}
           </div>
@@ -61,7 +61,7 @@ export default function ResumeBanner() {
       <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
         <button
           onClick={() => { localStorage.removeItem("exampadi_active_session"); setSession(null); }}
-          style={{ background: "none", border: "none", color: "#666", cursor: "pointer", padding: 4 }}
+          style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", padding: 4 }}
           aria-label="Dismiss"
         >
           <X size={18} />
@@ -69,7 +69,7 @@ export default function ResumeBanner() {
         <button
           onClick={() => navigate("/practice", { state: session })}
           style={{
-            padding: "10px 20px", borderRadius: 10, background: "#6C3CE9",
+            padding: "10px 20px", borderRadius: 10, background: "var(--primary)",
             border: "none", color: "#fff", fontWeight: 700, fontSize: 13,
             cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap",
           }}

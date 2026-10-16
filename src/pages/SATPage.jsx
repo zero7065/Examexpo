@@ -85,7 +85,7 @@ export default function SATPage() {
         }}>
           <GraduationCap size={13} /> US & INTERNATIONAL ADMISSIONS
         </div>
-        <h1 className="h-1">SAT: your score is <span className="fx-glow-text">scholarship money</span></h1>
+        <h1 className="type-h1">SAT: your score is <span className="fx-glow-text">scholarship money</span></h1>
         <p className="lead" style={{ maxWidth: 620, margin: "0 auto" }}>
           Every point above 1400 can unlock thousands of dollars in merit aid at US universities.
           The digital SAT is shorter, adaptive, and won on strategy — here's the full map,

@@ -40,25 +40,25 @@ export default function WelcomeModal() {
       animation: "fadeIn 0.3s ease",
     }}>
       <div style={{
-        background: "#121218", borderRadius: 24,
+        background: "var(--bg-2)", borderRadius: 24,
         padding: "48px 36px", maxWidth: 480, width: "100%",
         textAlign: "center", border: "1px solid #333",
-        boxShadow: "0 24px 80px rgba(108,60,233,0.15)",
+        boxShadow: "0 24px 80px rgb(var(--primary-rgb) / 0.15)",
         animation: "slideUp 0.4s cubic-bezier(0.34,1.56,0.64,1)",
       }}>
         <div style={{ fontSize: 56, marginBottom: 16, lineHeight: 1 }}>🎉</div>
 
-        <h1 style={{ color: "#6C3CE9", fontSize: 28, fontWeight: 800, marginBottom: 8 }}>
+        <h1 style={{ color: "var(--primary)", fontSize: 28, fontWeight: 800, marginBottom: 8 }}>
           Welcome to ExamPadi!
         </h1>
-        <p style={{ color: "#888", fontSize: 14, marginBottom: 24 }}>
+        <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 24 }}>
           {user?.name || "Student"}, your journey to exam success starts today.
         </p>
 
         <div style={{
-          background: "#6C3CE915", border: "1px solid #6C3CE933",
+          background: "var(--primary)15", border: "1px solid var(--primary)33",
           borderRadius: 14, padding: "20px 18px", marginBottom: 28,
-          borderLeft: "3px solid #6C3CE9",
+          borderLeft: "3px solid var(--primary)",
         }}>
           <p style={{ color: "#fff", fontSize: 15, lineHeight: 1.7, fontStyle: "italic", margin: 0 }}>
             "{speech}"
@@ -72,21 +72,21 @@ export default function WelcomeModal() {
             { icon: "📊", label: "Progress tracking", sub: "from day one" },
           ].map((item, i) => (
             <div key={i} style={{
-              background: "#1a1a1f", borderRadius: 12, padding: "14px 8px",
+              background: "var(--bg-3)", borderRadius: 12, padding: "14px 8px",
             }}>
               <div style={{ fontSize: 24, marginBottom: 4 }}>{item.icon}</div>
               <div style={{ color: "#fff", fontSize: 12, fontWeight: 700 }}>{item.label}</div>
-              <div style={{ color: "#888", fontSize: 11 }}>{item.sub}</div>
+              <div style={{ color: "var(--text-muted)", fontSize: 11 }}>{item.sub}</div>
             </div>
           ))}
         </div>
 
         <button onClick={handleClose} style={{
           width: "100%", padding: "16px", borderRadius: 12,
-          background: "#6C3CE9", border: "none",
+          background: "var(--primary)", border: "none",
           color: "#fff", fontWeight: 800, fontSize: 17,
           cursor: "pointer", fontFamily: "inherit",
-          boxShadow: "0 8px 24px rgba(108,60,233,0.3)",
+          boxShadow: "0 8px 24px rgb(var(--primary-rgb) / 0.3)",
         }}>
           Let's Start Practicing 🚀
         </button>

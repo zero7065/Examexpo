@@ -2,8 +2,8 @@ export default function LivePulse() {
   const items = [
     { value: "JAMB + WAEC", label: "exams covered", icon: "📚", color: "#4D9EFF" },
     { value: "10 Years", label: "past questions database", icon: "🏆", color: "#FFB800" },
-    { value: "25+", label: "subjects available", icon: "📝", color: "#00E5A0" },
-    { value: "Free", label: "to start today", icon: "🎯", color: "#6C3CE9" },
+    { value: "25+", label: "subjects available", icon: "📝", color: "var(--success)" },
+    { value: "Free", label: "to start today", icon: "🎯", color: "var(--primary)" },
   ];
 
   return (

@@ -95,13 +95,13 @@ export function WhatsAppHelpButton({ subject, score, style = {} }) {
       style={{
         display: "flex", alignItems: "center", gap: 8,
         padding: "10px 20px", borderRadius: 12,
-        background: "linear-gradient(135deg, #6C3CE9, #9b59b6)",
+        background: "linear-gradient(135deg, var(--primary), var(--accent))",
         color: "#fff", fontWeight: 700, fontSize: 14,
         border: "none", cursor: "pointer",
         transition: "transform 0.2s, box-shadow 0.2s",
         ...style,
       }}
-      onMouseEnter={(e) => { e.target.style.transform = "scale(1.03)"; e.target.style.boxShadow = "0 4px 20px rgba(108,60,233,0.4)"; }}
+      onMouseEnter={(e) => { e.target.style.transform = "scale(1.03)"; e.target.style.boxShadow = "0 4px 20px rgb(var(--primary-rgb) / 0.4)"; }}
       onMouseLeave={(e) => { e.target.style.transform = "scale(1)"; e.target.style.boxShadow = "none"; }}
     >
       <UserPlus size={18} />

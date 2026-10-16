@@ -163,8 +163,22 @@ export default function SchoolsLanding() {
                 <div className="fold-body">
                   <div>
                     <p style={{ fontSize: 14, color: "var(--text-muted)", lineHeight: 1.7, margin: "0 24px 20px" }}>{f.a}</p>
-                  </div>
-                </div>
+          </div>
+
+          {/* Partner Plan — schools earn while they refer */}
+          <div style={{ marginTop: 40, background: "linear-gradient(135deg, rgb(var(--primary-rgb) / 0.12), rgb(var(--accent-rgb) / 0.08))", border: "1px solid rgb(var(--primary-rgb) / 0.3)", borderRadius: 18, padding: "28px 32px", display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap" }}>
+            <div style={{ flex: 1, minWidth: 260 }}>
+              <div style={{ fontSize: 12, fontWeight: 800, color: "var(--primary)", letterSpacing: "0.08em", marginBottom: 6 }}>PARTNER PLAN — FREE</div>
+              <h3 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 8px", color: "var(--text)" }}>Your school earns 20% on every student you refer</h3>
+              <p style={{ fontSize: 14, color: "var(--text-muted)", margin: 0, maxWidth: 520 }}>
+                Share your school's referral link — when referred students buy Pro, IELTS, Classroom plans or AI credit packs, your school earns commission automatically. Rate rises to 25% after 100 paying referrals. The school itself pays ₦0 to join.
+              </p>
+            </div>
+            <Link to={user ? "/schools/partner" : "/auth"} className="lp-btn-primary" style={{ padding: "14px 28px", fontSize: 15, whiteSpace: "nowrap" }}>
+              {user ? "Open Partner Dashboard →" : "Register & start earning →"}
+            </Link>
+          </div>
+        </div>
               </div>
             ))}
           </div>

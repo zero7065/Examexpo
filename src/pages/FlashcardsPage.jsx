@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { generateFlashcards, getAIErrorIfRecent, isAIConfigured } from "../lib/ai";
-import { checkAILimit, trackAIMessage } from "../lib/usageTracker";
+import { checkAILimit } from "../lib/usageTracker";
 import { PLANS } from "../config/plans";
 import { unlockAchievement } from "../lib/achievements";
 import { JAMB_SUBJECTS, WAEC_SUBJECTS } from "../data/subjects";
@@ -40,10 +40,9 @@ export default function FlashcardsPage() {
     try {
       const limit = await checkAILimit(user?.uid);
       if (!limit.allowed) {
-        toast({ message: `Daily AI limit reached (${limit.used}/${limit.limit}). Upgrade to Pro for unlimited AI tools.`, type: "warning" });
+        toast({ message: `AI limit reached. Upgrade to Pro or buy a 50-message pack (₦1,500) to continue.`, type: "warning" });
         return;
       }
-      if (user) trackAIMessage(user.uid);
       const result = await generateFlashcards({ subject, topic: topic.trim() || null, count, exam });
       if (result.length === 0) {
         const aiErr = getAIErrorIfRecent();

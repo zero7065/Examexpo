@@ -5,12 +5,16 @@
 // GET /api/verify-payment?ref=EP-uid-123   (or POST { reference })
 
 import { PLANS, convertFromNGN, CURRENCIES, teamPrice } from "../src/config/plans.js";
+import { recordCommission } from "./_commission.js";
 
 const ALLOWED_CURRENCIES = new Set(Object.keys(CURRENCIES));
 const YEARLY_PLANS = new Set(["pro_yearly", "ielts", "team_yearly"]);
+// ai_pack_50 is a one-off credit grant — NOT a subscription (see activateOnServer).
+const PACK_PLANS = new Set(["ai_pack_50"]);
 const KNOWN_PLANS = new Set([
   "pro_monthly", "pro_yearly", "ielts",
   "team_monthly", "team_yearly",
+  "ai_pack_50",
 ]);
 
 function expectedCharge(meta) {
@@ -47,7 +51,7 @@ function endDateFor(plan) {
   return d;
 }
 
-async function activateOnServer({ userId, plan, reference }) {
+async function activateOnServer({ userId, plan, reference, partnerCode = null, ngn = 0 }) {
   const sa = process.env.FIREBASE_SERVICE_ACCOUNT;
   if (!sa || !userId) return false;
   try {
@@ -59,9 +63,33 @@ async function activateOnServer({ userId, plan, reference }) {
       });
     }
     const db = adminLib.firestore();
+    // Partner Plan: commission on ANY paid plan (pro, ielts, packs, teams).
+    if (partnerCode) {
+      await recordCommission(adminLib, db, { reference, userId, plan, ngn, partnerCode });
+    }
     const endDate = endDateFor(plan);
     const isTeam = plan === "team_monthly" || plan === "team_yearly";
     if (isTeam) return false;
+
+    // One-off AI credit packs: top up the bonus pool, never touch subscription.
+    if (PACK_PLANS.has(plan)) {
+      const bonus = plan === "ai_pack_50" ? 50 : 0;
+      if (bonus > 0) {
+        await db.collection("users").doc(userId).set(
+          { aiPackCredits: adminLib.firestore.FieldValue.increment(bonus) },
+          { merge: true }
+        );
+      }
+      await db.collection("payments").doc(reference).set(
+        {
+          reference, userId, plan, amount: null, verified: true,
+          source: "verify-api", grant: { aiPackCredits: bonus },
+          createdAt: adminLib.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: true }
+      );
+      return true;
+    }
 
     await db.collection("users").doc(userId).set(
       {
@@ -175,7 +203,20 @@ export default async function handler(req, res) {
     let activated = false;
     const isTeam = plan === "team_monthly" || plan === "team_yearly";
     if (!isTeam && userId) {
-      activated = await activateOnServer({ userId, plan, reference });
+      activated = await activateOnServer({ userId, plan, reference, partnerCode: meta.partnerCode || null, ngn: expected.ngn });
+    } else if (isTeam && userId && meta.partnerCode) {
+      // Team purchases skip subscription writes but still earn commission.
+      try {
+        const adminMod = await import("firebase-admin");
+        const adminLib = adminMod.default || adminMod;
+        const sa = process.env.FIREBASE_SERVICE_ACCOUNT;
+        if (sa && adminLib) {
+          if (!adminLib.apps.length) adminLib.initializeApp({ credential: adminLib.credential.cert(JSON.parse(sa)) });
+          await recordCommission(adminLib, adminLib.firestore(), { reference, userId, plan, ngn: expected.ngn, partnerCode: meta.partnerCode });
+        }
+      } catch (e) {
+        console.error("[verify-payment] team commission failed:", e?.message);
+      }
     }
 
     return res.status(200).json({

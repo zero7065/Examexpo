@@ -5,6 +5,7 @@ import { useToast } from "../components/Toast";
 import { getUserProfile } from "../lib/userProfile";
 import Logo from "../components/Logo";
 import { Eye, EyeOff } from "lucide-react";
+import { captureRefCodeFromUrl, attributePartnerRef } from "../lib/partner";
 
 export default function AuthPage() {
   const navigate = useNavigate();
@@ -18,8 +19,14 @@ export default function AuthPage() {
   const didRedirect = useRef(false);
 
   useEffect(() => {
+    // Partner Plan: stash ?ref=CODE from a school's referral link.
+    captureRefCodeFromUrl();
+  }, []);
+
+  useEffect(() => {
     if (user && !didRedirect.current) {
       didRedirect.current = true;
+      attributePartnerRef(user).catch(() => {});
       getUserProfile(user.uid)
         .then((profile) => {
           if (profile?.onboarded) {

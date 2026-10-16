@@ -12,8 +12,8 @@ export default function StudentsIllustration({ width = "100%", maxWidth = 460 })
           <stop offset="1" stopColor="#8FCE8F" />
         </linearGradient>
         <linearGradient id="st-top2" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#6C3CE9" />
-          <stop offset="1" stopColor="#9B59B6" />
+          <stop offset="0" stopColor="var(--primary)" />
+          <stop offset="1" stopColor="var(--accent)" />
         </linearGradient>
       </defs>
 
@@ -43,21 +43,21 @@ export default function StudentsIllustration({ width = "100%", maxWidth = 460 })
         <circle cx="174" cy="132" r="16" fill="#2A1A12" />
         <circle cx="150" cy="158" r="26" fill="#6B4226" />
         {/* hair band */}
-        <path d="M126 146 Q150 132 174 146" stroke="#D4A853" strokeWidth="5" fill="none" strokeLinecap="round" />
+        <path d="M126 146 Q150 132 174 146" stroke="var(--accent)" strokeWidth="5" fill="none" strokeLinecap="round" />
         {/* eyes + smile */}
         <circle cx="141" cy="157" r="3" fill="#14100C" />
         <circle cx="159" cy="157" r="3" fill="#14100C" />
         <path d="M141 169 Q150 175 159 169" stroke="#14100C" strokeWidth="2.5" fill="none" strokeLinecap="round" />
         {/* body: ankara top */}
         <path d="M112 262 Q114 210 132 196 L168 196 Q186 210 188 262 Z" fill="url(#st-top2)" />
-        <circle cx="141" cy="222" r="5" fill="#D4A853" />
-        <circle cx="159" cy="222" r="5" fill="#D4A853" />
+        <circle cx="141" cy="222" r="5" fill="var(--accent)" />
+        <circle cx="159" cy="222" r="5" fill="var(--accent)" />
         <circle cx="150" cy="238" r="5" fill="#FFE9A8" />
         {/* arms to book */}
         <path d="M120 230 Q150 244 182 228" stroke="#6B4226" strokeWidth="13" fill="none" strokeLinecap="round" />
         {/* open book */}
-        <path d="M124 236 Q150 226 150 226 Q150 226 176 236 L176 256 Q150 246 150 246 Q150 246 124 256 Z" fill="#F5F1E6" stroke="#D4A853" strokeWidth="2" />
-        <line x1="150" y1="226" x2="150" y2="246" stroke="#D4A853" strokeWidth="2" />
+        <path d="M124 236 Q150 226 150 226 Q150 226 176 236 L176 256 Q150 246 150 246 Q150 246 124 256 Z" fill="#F5F1E6" stroke="var(--accent)" strokeWidth="2" />
+        <line x1="150" y1="226" x2="150" y2="246" stroke="var(--accent)" strokeWidth="2" />
       </g>
 
       {/* student 2 (right, boy with fade + laptop) */}
@@ -73,7 +73,7 @@ export default function StudentsIllustration({ width = "100%", maxWidth = 460 })
         <rect x="252" y="232" width="64" height="40" rx="5" fill="#1B2430" stroke="var(--border)" strokeWidth="2" />
         <rect x="258" y="238" width="52" height="24" rx="3" fill="#6A9A6A" opacity="0.35" />
         <circle cx="270" cy="246" r="3" fill="#8FCE8F" />
-        <circle cx="282" cy="246" r="3" fill="#D4A853" />
+        <circle cx="282" cy="246" r="3" fill="var(--accent)" />
         <rect x="246" y="272" width="76" height="8" rx="4" fill="#1B2430" stroke="var(--border)" strokeWidth="2" />
         {/* arm */}
         <path d="M338 226 Q318 240 300 244" stroke="#3B2213" strokeWidth="12" fill="none" strokeLinecap="round" />

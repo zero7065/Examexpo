@@ -45,7 +45,7 @@ export default class ErrorBoundary extends Component {
               color: "#FF4D6A",
               fontSize: 13,
               marginBottom: 24,
-              background: "#1a1a1f",
+              background: "var(--bg-3)",
               padding: "12px 16px",
               borderRadius: 8,
               fontFamily: "monospace",
@@ -63,7 +63,7 @@ export default class ErrorBoundary extends Component {
                 style={{
                   padding: "14px 32px",
                   borderRadius: 12,
-                  background: "#6C3CE9",
+                  background: "var(--primary)",
                   border: "none",
                   fontWeight: 700,
                   fontSize: 15,
@@ -91,9 +91,9 @@ export default class ErrorBoundary extends Component {
                 Clear Cache & Reload
               </button>
             </div>
-            <p style={{ color: "#666", fontSize: 12, marginTop: 24, maxWidth: 400, lineHeight: 1.5 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: 12, marginTop: 24, maxWidth: 400, lineHeight: 1.5 }}>
               If this keeps happening, try the "Clear Cache" button above, then enable Email/Password at{' '}
-              <span style={{ color: "#D4A853" }}>Firebase Console → Authentication → Sign-in providers</span>.
+              <span style={{ color: "var(--accent)" }}>Firebase Console → Authentication → Sign-in providers</span>.
             </p>
           </div>
         </div>

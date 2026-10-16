@@ -80,7 +80,7 @@ export default function FriendChat() {
       <Link to="/study-partners" style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--text-muted)", fontSize: 14, fontWeight: 600, marginBottom: 12 }}>
         <ArrowLeft size={16} /> Partners
       </Link>
-      <h1 className="h-2" style={{ marginBottom: 12 }}>Friend discussion</h1>
+      <h1 className="type-h2" style={{ marginBottom: 12 }}>Friend discussion</h1>
 
       <div className="glass-card p-4 flex-1 flex flex-col" style={{ minHeight: 380 }}>
         <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 10, marginBottom: 12 }}>

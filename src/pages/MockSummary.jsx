@@ -12,7 +12,7 @@ import { WhatsAppShareButton } from "../components/WhatsAppShare";
 import ReviewPrompt from "../components/ReviewPrompt";
 import { shouldAskReview } from "../lib/community";
 
-const SCORE_COLORS = { low: "#FF4D6A", mid: "#FF9F43", good: "#00E5A0", elite: "#D4A853" };
+const SCORE_COLORS = { low: "#FF4D6A", mid: "#FF9F43", good: "var(--success)", elite: "var(--accent)" };
 
 function getScoreColor(score) {
   if (score < 200) return SCORE_COLORS.low;
@@ -97,7 +97,7 @@ export default function MockSummary() {
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <div style={{ position: "relative", width: 180, height: 180, margin: "0 auto 16px" }}>
             <svg width="180" height="180" viewBox="0 0 180 180">
-              <circle cx="90" cy="90" r="78" fill="none" stroke="#1e1e2a" strokeWidth="10" />
+              <circle cx="90" cy="90" r="78" fill="none" stroke="var(--border)" strokeWidth="10" />
               <circle cx="90" cy="90" r="78" fill="none" stroke={color} strokeWidth="10" strokeDasharray={`${(overallScore / 100) * 490} 490`} strokeLinecap="round" transform="rotate(-90 90 90)" style={{ transition: "stroke-dasharray 1s ease" }} />
             </svg>
             <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
@@ -108,22 +108,22 @@ export default function MockSummary() {
           {examType === "JAMB UTME" && (
             <div style={{ fontSize: 22, fontWeight: 800, color }}>JAMB Score: {jamb400Score}/400</div>
           )}
-          <div style={{ fontSize: 14, color: "#888", marginTop: 4 }}>{correct} correct · {wrong} wrong · {skipped} skipped</div>
+          <div style={{ fontSize: 14, color: "var(--text-muted)", marginTop: 4 }}>{correct} correct · {wrong} wrong · {skipped} skipped</div>
         </div>
 
         {/* Subject breakdown table */}
         {subjects?.length > 0 && (
-          <div style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 16, overflow: "hidden", marginBottom: 24 }}>
-            <div style={{ padding: "12px 16px", borderBottom: "1px solid #1e1e2a", fontSize: 13, fontWeight: 700, color: "#888", textTransform: "uppercase" }}>Subject Breakdown</div>
+          <div style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 16, overflow: "hidden", marginBottom: 24 }}>
+            <div style={{ padding: "12px 16px", borderBottom: "1px solid var(--border)", fontSize: 13, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase" }}>Subject Breakdown</div>
             {subjects.map((s, i) => {
               const sb = subjectBreakdown?.[s] || { correct: 0, wrong: 0, skipped: 0, score: 0 };
               const g = getGrade(sb.score);
               return (
-                <div key={s} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr 60px", gap: 8, padding: "12px 16px", background: i % 2 === 0 ? "#121218" : "#0d0d12", alignItems: "center", fontSize: 13 }}>
+                <div key={s} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr 60px", gap: 8, padding: "12px 16px", background: i % 2 === 0 ? "var(--bg-2)" : "var(--bg)", alignItems: "center", fontSize: 13 }}>
                   <div style={{ fontWeight: 600, color: "#fff" }}>{s}</div>
                   <div style={{ color: "#4ADE80" }}>{sb.correct}</div>
                   <div style={{ color: "#FF4D6A" }}>{sb.wrong}</div>
-                  <div style={{ color: "#888" }}>{sb.skipped}</div>
+                  <div style={{ color: "var(--text-muted)" }}>{sb.skipped}</div>
                   <div style={{ color: "#fff", fontWeight: 700 }}>{sb.score}%</div>
                   <div style={{ padding: "2px 8px", borderRadius: 6, background: `${g.color}22`, color: g.color, fontWeight: 700, fontSize: 12, textAlign: "center" }}>{g.letter}</div>
                 </div>
@@ -140,8 +140,8 @@ export default function MockSummary() {
             { icon: <Clock size={16} />, label: "Avg Time/Question", value: `${avgSeconds}s`, badge: null },
             { icon: <CheckCircle2 size={16} />, label: "XP Earned", value: `+${displayXP}`, badge: "gold" },
           ].map((item, i) => (
-            <div key={i} style={{ background: "#121218", border: "1px solid #1e1e2a", borderRadius: 12, padding: "14px 16px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "#888", marginBottom: 6 }}>{item.icon} {item.label}</div>
+            <div key={i} style={{ background: "var(--bg-2)", border: "1px solid var(--border)", borderRadius: 12, padding: "14px 16px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "var(--text-muted)", marginBottom: 6 }}>{item.icon} {item.label}</div>
               <div style={{ fontWeight: 700, color: "#fff", fontSize: 16 }}>{item.value}</div>
             </div>
           ))}
@@ -199,9 +199,9 @@ export default function MockSummary() {
 
         {/* Action buttons */}
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          <button onClick={handleRetake} style={{ padding: 14, borderRadius: 12, background: "#6C3CE9", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "inherit" }}><RotateCcw size={18} style={{ verticalAlign: "middle", marginRight: 8 }} /> Retake Exam</button>
-          {weakTopics?.length > 0 && <button onClick={() => navigate("/practice", { state: { questions: getRandomQuestions(subjects?.[0] || "Biology", 10), subject: subjects?.[0] || "Biology", mode: "practice" } })} style={{ padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Practice Weak Topics</button>}
-          <button onClick={() => navigate("/dashboard")} style={{ padding: 14, borderRadius: 12, background: "#121218", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}><ArrowLeft size={18} style={{ verticalAlign: "middle", marginRight: 8 }} /> Back to Dashboard</button>
+          <button onClick={handleRetake} style={{ padding: 14, borderRadius: 12, background: "var(--primary)", border: "none", color: "#fff", fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "inherit" }}><RotateCcw size={18} style={{ verticalAlign: "middle", marginRight: 8 }} /> Retake Exam</button>
+          {weakTopics?.length > 0 && <button onClick={() => navigate("/practice", { state: { questions: getRandomQuestions(subjects?.[0] || "Biology", 10), subject: subjects?.[0] || "Biology", mode: "practice" } })} style={{ padding: 14, borderRadius: 12, background: "var(--bg-2)", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Practice Weak Topics</button>}
+          <button onClick={() => navigate("/dashboard")} style={{ padding: 14, borderRadius: 12, background: "var(--bg-2)", border: "1px solid #333", color: "#fff", fontWeight: 600, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}><ArrowLeft size={18} style={{ verticalAlign: "middle", marginRight: 8 }} /> Back to Dashboard</button>
           <WhatsAppShareButton
             result={{ percentageScore: overallScore || 0, correctAnswers: correct || 0, totalQuestions: totalQuestions || 0, timeSpentSeconds: timeUsed || 0 }}
             type="mock"

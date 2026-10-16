@@ -55,10 +55,10 @@ export default function InstallPrompt() {
     <div style={{
       position: "fixed", bottom: 80, left: 12, right: 12, zIndex: 8888,
       maxWidth: 420, margin: "0 auto",
-      background: "linear-gradient(135deg, #121218 0%, #1a1a2e 100%)",
-      border: "1px solid rgba(108,60,233,0.3)", borderRadius: 16,
+      background: "linear-gradient(135deg, var(--bg-2) 0%, var(--bg-2) 100%)",
+      border: "1px solid rgb(var(--primary-rgb) / 0.3)", borderRadius: 16,
       padding: "16px 18px", display: "flex", alignItems: "center", gap: 12,
-      boxShadow: "0 8px 32px rgba(108,60,233,0.15), 0 4px 16px rgba(0,0,0,0.3)",
+      boxShadow: "0 8px 32px rgb(var(--primary-rgb) / 0.15), 0 4px 16px rgba(0,0,0,0.3)",
       animation: "slideUp 0.4s ease-out",
     }}>
       <style>{`
@@ -66,7 +66,7 @@ export default function InstallPrompt() {
       `}</style>
       <div style={{
         width: 44, height: 44, borderRadius: 12,
-        background: "linear-gradient(135deg, #6C3CE9, #9b59b6)",
+        background: "linear-gradient(135deg, var(--primary), var(--accent))",
         display: "flex", alignItems: "center", justifyContent: "center",
         fontSize: 22, flexShrink: 0,
       }}>
@@ -76,21 +76,21 @@ export default function InstallPrompt() {
         <p style={{ color: "#fff", fontWeight: 700, margin: 0, fontSize: 14, lineHeight: 1.3 }}>
           Install ExamPadi
         </p>
-        <p style={{ color: "#888", fontSize: 12, margin: "2px 0 0", lineHeight: 1.3 }}>
+        <p style={{ color: "var(--text-muted)", fontSize: 12, margin: "2px 0 0", lineHeight: 1.3 }}>
           Quick access from your home screen
         </p>
       </div>
       <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
         <button onClick={handleDismiss} style={{
           padding: "8px 12px", borderRadius: 10, border: "1px solid #333",
-          background: "none", color: "#888", cursor: "pointer", fontSize: 13,
+          background: "none", color: "var(--text-muted)", cursor: "pointer", fontSize: 13,
           fontFamily: "inherit", fontWeight: 600,
         }}>
           Later
         </button>
         <button onClick={handleInstall} style={{
           padding: "8px 14px", borderRadius: 10, border: "none",
-          background: "#6C3CE9", color: "#fff", fontWeight: 700,
+          background: "var(--primary)", color: "#fff", fontWeight: 700,
           cursor: "pointer", fontSize: 13, fontFamily: "inherit",
         }}>
           Install

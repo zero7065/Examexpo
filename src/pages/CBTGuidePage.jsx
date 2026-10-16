@@ -218,7 +218,7 @@ export default function CBTGuidePage() {
         }}>
           <Sparkles size={13} /> FIRST TIME WITH A COMPUTER? START HERE
         </div>
-        <h1 className="h-1">How JAMB CBT <span className="fx-glow-text">actually works</span></h1>
+        <h1 className="type-h1">How JAMB CBT <span className="fx-glow-text">actually works</span></h1>
         <p className="lead" style={{ maxWidth: 600, margin: "0 auto" }}>
           A picture-by-picture walkthrough of the computer exam — then a safe demo
           where you can press every button before the real day.
@@ -239,7 +239,7 @@ export default function CBTGuidePage() {
       </div>
 
       <div>
-        <h2 className="h-2" style={{ marginBottom: 12 }}>Interactive demo <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-muted)" }}>— press everything, nothing breaks</span></h2>
+        <h2 className="type-h2" style={{ marginBottom: 12 }}>Interactive demo <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-muted)" }}>— press everything, nothing breaks</span></h2>
         <MiniDemo />
       </div>
 

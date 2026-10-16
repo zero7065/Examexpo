@@ -13,7 +13,7 @@ function getResultTier(percentage) {
     confetti: true,
   };
   if (percentage >= 70) return {
-    emoji: "🔥", title: "EXCELLENT!", color: "#00E5A0",
+    emoji: "🔥", title: "EXCELLENT!", color: "var(--success)",
     message: "Strong result! You're well above average. A little more practice and you're unstoppable.",
     badge: "High Performer",
     confetti: false,
@@ -25,7 +25,7 @@ function getResultTier(percentage) {
     confetti: false,
   };
   if (percentage >= 50) return {
-    emoji: "📚", title: "KEEP GOING!", color: "#9B59B6",
+    emoji: "📚", title: "KEEP GOING!", color: "var(--accent)",
     message: "You're halfway there. Review the questions you got wrong and practice those topics again.",
     badge: "In Progress",
     confetti: false,
@@ -41,7 +41,7 @@ function getResultTier(percentage) {
 // Confetti component (CSS only, no package needed):
 function Confetti() {
   const pieces = Array.from({ length: 40 }, (_, i) => i);
-  const colors = ["#FFB800", "#00E5A0", "#FF6B6B", "#4D9EFF", "#9B59B6"];
+  const colors = ["#FFB800", "var(--success)", "#FF6B6B", "#4D9EFF", "var(--accent)"];
   return (
     <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 9999, overflow: "hidden" }}>
       {pieces.map(i => (

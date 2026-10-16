@@ -21,7 +21,7 @@ export default function ProGate({ children, reason }) {
         }}>
           <div style={{
             width: 48, height: 48, borderRadius: "50%",
-            background: "rgba(108,60,233,0.2)", border: "1px solid rgba(108,60,233,0.3)",
+            background: "rgb(var(--primary-rgb) / 0.2)", border: "1px solid rgb(var(--primary-rgb) / 0.3)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <span style={{ fontSize: 22 }}>🔒</span>
@@ -31,7 +31,7 @@ export default function ProGate({ children, reason }) {
             onClick={() => setShowModal(true)}
             style={{
               padding: "10px 24px", borderRadius: 10, border: "none",
-              background: "linear-gradient(135deg, #6C3CE9, #9B59B6)",
+              background: "linear-gradient(135deg, var(--primary), var(--accent))",
               color: "#fff", fontWeight: 700, fontSize: 14, cursor: "pointer",
               fontFamily: "inherit", transition: "all 0.2s",
             }}

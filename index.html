@@ -8,7 +8,7 @@
   <title>ExamPadi — Pass JAMB, WAEC & NABTEB First Try</title>
   <meta name="description" content="Practice real JAMB, WAEC & NABTEB past questions from 2014–2026. AI explanations for every answer. Free Exam Mode. Trusted by Nigerian students." />
   <meta name="keywords" content="JAMB past questions, WAEC past questions, NABTEB, Nigerian exam prep, CBT practice, JAMB 2026, WAEC 2026" />
-  <meta name="author" content="Jadai Studios" />
+  <meta name="author" content="ExamPadi · Built in Nigeria" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://exampadi.jadai.dev/" />
 
@@ -32,13 +32,13 @@
 
   <!-- PWA -->
   <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#6C3CE9" />
+  <meta name="theme-color" content="var(--primary)" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="ExamPadi" />
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-  <link rel="mask-icon" href="/favicon.svg" color="#6C3CE9" />
+  <link rel="mask-icon" href="/favicon.svg" color="var(--primary)" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -59,7 +59,7 @@
       var t = localStorage.getItem("ep-theme") || "dark";
       document.documentElement.setAttribute("data-theme", t);
       var m = document.querySelector('meta[name="theme-color"]');
-      if (m) m.setAttribute("content", t === "dark" ? "#0f0f12" : "#6C3CE9");
+      if (m) m.setAttribute("content", t === "dark" ? "#0f0f12" : "var(--primary)");
     } catch (e) {}
   </script>
 </head>

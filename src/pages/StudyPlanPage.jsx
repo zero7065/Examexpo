@@ -148,7 +148,7 @@ const StudyPlanPage = () => {
           </div>
 
           <button onClick={() => navigate("/payment")} className="btn-primary w-full py-4 text-lg">
-            Unlock AI Study Plan - ₦3,000/mo
+            Unlock AI Study Plan - ₦3,500/mo
           </button>
         </div>
       </div>

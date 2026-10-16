@@ -113,7 +113,7 @@ export default function IELTSPage() {
         }}>
           <Plane size={13} /> JAPA PATHWAY · STUDY · WORK · MIGRATE
         </div>
-        <h1 className="h-1">IELTS: one band can decide <span className="fx-glow-text">your visa</span></h1>
+        <h1 className="type-h1">IELTS: one band can decide <span className="fx-glow-text">your visa</span></h1>
         <p className="lead" style={{ maxWidth: 620, margin: "0 auto" }}>
           Every year, Nigerians lose admissions and visa windows to a 0.5 band shortfall.
           A failed attempt costs ~$200, weeks of waiting, and sometimes the entire application season.

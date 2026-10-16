@@ -17,6 +17,7 @@ import OfflineIndicator from "./components/OfflineIndicator";
 import ContextualHelp from "./components/ContextualHelp";
 import NewUserChecklist from "./components/NewUserChecklist";
 import { flushTrainingQueue } from "./lib/aiTraining";
+import { useToast } from "./components/Toast";
 
 import GuideFab from "./components/GuideFab";
 
@@ -67,6 +68,7 @@ const ExamGenerator = lazy(() => import("./pages/schools/ExamGenerator"));
 const ClassroomMode = lazy(() => import("./pages/schools/ClassroomMode"));
 const ParentReports = lazy(() => import("./pages/schools/ParentReports"));
 const JoinClass = lazy(() => import("./pages/schools/JoinClass"));
+const PartnerDashboard = lazy(() => import("./pages/schools/PartnerDashboard"));
 const DataExport = lazy(() => import("./pages/compliance/DataExport"));
 const FriendChat = lazy(() => import("./pages/FriendChat"));
 const TeamPage = lazy(() => import("./pages/TeamPage"));
@@ -91,6 +93,23 @@ function AuthAwareRoutes() {
   const { updateAvailable, applyUpdate } = useServiceWorkerUpdate();
   useBackButton();
   const location = useLocation();
+  const { toast } = useToast();
+
+  // 80% AI-credit soft warning — dispatched centrally from lib/ai.js.
+  useEffect(() => {
+    if (!user) return;
+    const onSoft = (e) => {
+      const c = e?.detail || {};
+      toast({
+        message: `Heads up: only ${c.available ?? "?"} AI messages left this cycle. When they run out, upgrade to Pro or grab a 50-message pack (₦1,500).`,
+        type: "warning",
+        duration: 7000,
+      });
+    };
+    window.addEventListener("exampadi:ai-soft-warning", onSoft);
+    return () => window.removeEventListener("exampadi:ai-soft-warning", onSoft);
+  }, [user, toast]);
+
 
   useEffect(() => {
     if (loading) { document.title = "ExamPadi"; return; }
@@ -120,6 +139,7 @@ function AuthAwareRoutes() {
       "/ielts": "IELTS Prep — ExamPadi",
       "/sat": "SAT Prep — ExamPadi",
       "/schools/signup": "Register School — ExamPadi",
+      "/schools/partner": "Partner Dashboard — ExamPadi",
       "/teacher": "Teacher Dashboard — ExamPadi",
       "/teacher/exam-generator": "Exam Generator — ExamPadi",
       "/teacher/classroom": "Classroom Mode — ExamPadi",
@@ -165,9 +185,9 @@ function AuthAwareRoutes() {
         <ContextualHelp />
         <NewUserChecklist />
         {updateAvailable && (
-          <div style={{ position: "fixed", bottom: 16, left: "50%", transform: "translateX(-50%)", zIndex: 200, background: "#1a1a2e", border: "1px solid #6C3CE9", borderRadius: 12, padding: "12px 20px", display: "flex", alignItems: "center", gap: 12, boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}>
+          <div style={{ position: "fixed", bottom: 16, left: "50%", transform: "translateX(-50%)", zIndex: 200, background: "var(--bg-2)", border: "1px solid var(--primary)", borderRadius: 12, padding: "12px 20px", display: "flex", alignItems: "center", gap: 12, boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}>
             <span style={{ color: "#fff", fontSize: 14, fontWeight: 600 }}>New version available</span>
-            <button onClick={applyUpdate} style={{ background: "#6C3CE9", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Update</button>
+            <button onClick={applyUpdate} style={{ background: "var(--primary)", color: "#fff", border: "none", borderRadius: 8, padding: "8px 16px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>Update</button>
           </div>
         )}
         <Suspense fallback={<PageLoader />}>
@@ -226,6 +246,7 @@ function AuthAwareRoutes() {
           {/* Schools (public) */}
           <Route path="/schools" element={<SchoolsLanding />} />
           <Route path="/schools/signup" element={<SchoolSignup />} />
+          <Route path="/schools/partner" element={<ProtectedRoute><PartnerDashboard /></ProtectedRoute>} />
           <Route path="/teacher/register" element={<ProtectedRoute><TeacherRegister /></ProtectedRoute>} />
 
           {/* Teacher (role-gated) */}
@@ -249,7 +270,7 @@ function AuthAwareRoutes() {
             position: "fixed", bottom: 12, right: 16, zIndex: 40,
             pointerEvents: "none",
           }}>
-            <span className="jadai-brand" style={{
+            <span className="brand-shimmer" style={{
               fontSize: 9, fontWeight: 800, letterSpacing: "0.12em",
               textTransform: "uppercase", opacity: 0.4,
               fontFamily: "'Inter', system-ui, sans-serif",

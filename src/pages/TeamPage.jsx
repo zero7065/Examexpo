@@ -124,7 +124,7 @@ export default function TeamPage() {
   if (!team) {
     return (
       <div className="page-content max-w-xl mx-auto text-center space-y-4">
-        <h1 className="h-1">Team not found</h1>
+        <h1 className="type-h1">Team not found</h1>
         <Link to="/payment" className="btn-secondary inline-flex px-5">Back to payment</Link>
       </div>
     );

@@ -28,23 +28,23 @@ export default function NotificationPrompt() {
 
   return (
     <div style={{
-      background: "#121218", border: "1px solid rgba(108,60,233,0.3)", borderRadius: 12,
+      background: "var(--bg-2)", border: "1px solid rgb(var(--primary-rgb) / 0.3)", borderRadius: 12,
       padding: "12px 16px", marginBottom: 16, display: "flex", alignItems: "center",
       gap: 12, position: "relative",
     }}>
-      <Bell size={20} color="#6C3CE9" />
-      <div style={{ flex: 1, fontSize: 13, color: "#ccc" }}>
+      <Bell size={20} color="var(--primary)" />
+      <div style={{ flex: 1, fontSize: 13, color: "var(--text)" }}>
         Get study reminders and streak alerts
       </div>
       <button onClick={handleEnable} style={{
-        padding: "6px 14px", borderRadius: 8, background: "#6C3CE9", border: "none",
+        padding: "6px 14px", borderRadius: 8, background: "var(--primary)", border: "none",
         color: "#fff", fontWeight: 600, fontSize: 12, cursor: "pointer", fontFamily: "inherit",
       }}>
         Enable
       </button>
       <button
         onClick={() => { localStorage.setItem("ep-notif-dismissed", "true"); setDismissed(true); }}
-        style={{ background: "none", border: "none", color: "#666", cursor: "pointer", padding: 2 }}
+        style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer", padding: 2 }}
         aria-label="Dismiss"
       >
         <X size={16} />

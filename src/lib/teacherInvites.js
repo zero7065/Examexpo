@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, query, where, doc, updateDoc, getDoc, deleteDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 const COLLECTION = "teacherInvites";
@@ -12,12 +12,13 @@ function generateCode() {
   return code;
 }
 
-export async function createTeacherInvite({ schoolName, createdBy, createdByName, expiresInDays = 30 }) {
+export async function createTeacherInvite({ schoolId = null, schoolName, createdBy, createdByName, expiresInDays = 30 }) {
   if (!db) throw new Error("Database not available");
   const code = generateCode();
   const expiresAt = new Date(Date.now() + expiresInDays * 24 * 60 * 60 * 1000).toISOString();
   const ref = await addDoc(collection(db, COLLECTION), {
     code,
+    schoolId,
     schoolName,
     createdBy,
     createdByName,
@@ -27,7 +28,7 @@ export async function createTeacherInvite({ schoolName, createdBy, createdByName
     usedAt: null,
     createdAt: serverTimestamp(),
   });
-  return { id: ref.id, code, schoolName, expiresAt };
+  return { id: ref.id, code, schoolId, schoolName, expiresAt };
 }
 
 export async function listTeacherInvites() {
@@ -36,7 +37,7 @@ export async function listTeacherInvites() {
   return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
 }
 
-export async function redeemTeacherInvite(code, userId, userEmail) {
+export async function redeemTeacherInvite(code, userId) {
   if (!db) throw new Error("Database not available");
   const snap = await getDocs(query(collection(db, COLLECTION), where("code", "==", code.toUpperCase())));
   if (snap.empty) throw new Error("Invalid invite code");

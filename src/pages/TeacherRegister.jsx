@@ -22,10 +22,12 @@ export default function TeacherRegister() {
     }
     setLoading(true);
     try {
-      const invite = await redeemTeacherInvite(code.trim(), user.uid, user.email);
+      const invite = await redeemTeacherInvite(code.trim(), user.uid);
       await updateDoc(doc(db, "users", user.uid), {
         role: "teacher",
-        schoolId: invite.schoolName,
+        // schoolId must be the school DOC id so rules (isTeacherOfSchool)
+        // and class queries line up. Legacy invites only carry the name.
+        schoolId: invite.schoolId || invite.schoolName,
         schoolName: invite.schoolName,
       });
       setRedeemed(invite);
@@ -61,7 +63,7 @@ export default function TeacherRegister() {
           <ArrowLeft size={16} /> Back
         </button>
         <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-          <GraduationCap size={32} color="#6C3CE9" />
+          <GraduationCap size={32} color="var(--primary)" />
           <h1 style={{ color: "var(--text)", fontSize: 24, fontWeight: 800, margin: 0 }}>Teacher Registration</h1>
         </div>
         <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 24 }}>
@@ -71,7 +73,7 @@ export default function TeacherRegister() {
           value={code}
           onChange={(e) => setCode(e.target.value.toUpperCase())}
           placeholder="TEACH-XXXX-XXXX"
-          style={{ width: "100%", padding: "14px 16px", borderRadius: 12, background: "#1a1a1f", border: "1px solid #333", color: "#fff", fontSize: 16, fontWeight: 700, letterSpacing: 2, textAlign: "center", outline: "none", marginBottom: 16, boxSizing: "border-box" }}
+          style={{ width: "100%", padding: "14px 16px", borderRadius: 12, background: "var(--bg-3)", border: "1px solid #333", color: "#fff", fontSize: 16, fontWeight: 700, letterSpacing: 2, textAlign: "center", outline: "none", marginBottom: 16, boxSizing: "border-box" }}
         />
         <button
           onClick={handleRedeem}

@@ -222,7 +222,7 @@ const PaymentPage = () => {
       <header className="text-center space-y-6">
         <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-5 py-2 rounded-full font-black text-[10px] uppercase tracking-widest border border-accent/20">
           <Crown size={14} />
-          <span>Go Unlimited with ExamPadi Pro</span>
+          <span>Go Pro with ExamPadi</span>
         </div>
         <h1 className="text-4xl md:text-6xl font-black text-text tracking-tight">Unlock Your Full Potential</h1>
         <p className="text-text-muted text-xl max-w-2xl mx-auto font-medium">Don't let the daily question limit hold you back. Join the 300+ score squad today.</p>
@@ -300,7 +300,7 @@ const PaymentPage = () => {
           <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary"><Users size={22} /></div>
           <h2 className="text-2xl font-black text-text">Pay for Your Team</h2>
         </div>
-        <p className="text-text-muted mb-6">One payment covers everyone — classmates, tutorial group, family. Team Yearly is a flat {formatMoney(25000, currency)} for up to 100 seats; Team Monthly is {formatMoney(3000, currency)}/seat with 10% off at 10+ seats and 20% off at 15+ seats. Each member redeems your team code and gets Pro until your plan expires. You occupy the first seat.</p>
+        <p className="text-text-muted mb-6">One payment covers everyone — classmates, tutorial group, family. Classroom Monthly is {formatMoney(2800, currency)}/seat with 10% off at 10+ seats and 20% off at 15+ seats; Classroom Yearly is {formatMoney(28000, currency)}/seat with a locked {formatMoney(22000, currency)}/seat at 15+ seats. Each member redeems your team code and gets Pro until your plan expires. You occupy the first seat.</p>
 
         <div className="grid md:grid-cols-2 gap-4 mb-4">
           <label className="text-sm font-bold text-text">Team name
@@ -308,8 +308,8 @@ const PaymentPage = () => {
           </label>
           <label className="text-sm font-bold text-text">Plan
             <select value={teamPlan} onChange={(e) => setTeamPlan(e.target.value)} className="input-field mt-2">
-              <option value="team_monthly">Team Monthly — {formatMoney(3000, currency)}/seat/mo</option>
-              <option value="team_yearly">Team Yearly — {formatMoney(25000, currency)} total</option>
+              <option value="team_monthly">Classroom Monthly — {formatMoney(2800, currency)}/seat/mo</option>
+              <option value="team_yearly">Classroom Yearly — {formatMoney(28000, currency)}/seat/yr</option>
             </select>
           </label>
         </div>
