@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Upload, FileText, Video, X, Loader2, CheckCircle, Image as ImageIcon } from "lucide-react";
+import { Upload, FileText, Video, X } from "lucide-react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getAppStorage } from "../firebaseConfig";
 
@@ -44,10 +44,35 @@ export default function FileUpload({ onUploadComplete, onUploadError }) {
     }
   }
 
+  function saveLocalFallback(errMsg) {
+    // Works even when Firebase Storage is unavailable/permission-denied.
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const localFiles = JSON.parse(localStorage.getItem("localUploads") || "[]");
+        localFiles.push({ name: file.name, type: file.type, size: file.size, data: ev.target.result, uploadedAt: Date.now() });
+        localStorage.setItem("localUploads", JSON.stringify(localFiles.slice(-5)));
+        onUploadComplete?.({ url: ev.target.result, name: file.name, type: file.type, size: file.size, path: "local" });
+        setUploading(false);
+        setFile(null);
+        setPreview(null);
+      } catch {
+        onUploadError?.(`Upload failed (${errMsg}) and the file is too large to save locally. Try a smaller image.`);
+        setUploading(false);
+      }
+    };
+    reader.onerror = () => { onUploadError?.(`Upload failed: ${errMsg}`); setUploading(false); };
+    reader.readAsDataURL(file);
+  }
+
   async function handleUpload() {
     if (!file) return;
     const storage = getAppStorage();
-    if (!storage) { onUploadError?.("Storage not available"); return; }
+    if (!storage) {
+      // No Storage configured yet — save locally so the flow never dead-ends.
+      saveLocalFallback("cloud storage unavailable");
+      return;
+    }
     setUploading(true);
     setProgress(0);
     try {
@@ -57,24 +82,8 @@ export default function FileUpload({ onUploadComplete, onUploadError }) {
       task.on("state_changed",
         (snap) => setProgress(Math.round((snap.bytesTransferred / snap.totalBytes) * 100)),
         (err) => {
-          if (String(err?.message || "").includes("CORS")) {
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-              try {
-                const localFiles = JSON.parse(localStorage.getItem("localUploads") || "[]");
-                localFiles.push({ name: file.name, type: file.type, size: file.size, data: ev.target.result, uploadedAt: Date.now() });
-                localStorage.setItem("localUploads", JSON.stringify(localFiles.slice(-5)));
-                onUploadComplete?.({ url: ev.target.result, name: file.name, type: file.type, size: file.size, path: "local" });
-                setUploading(false);
-                setFile(null);
-                setPreview(null);
-              } catch { onUploadError?.("Storage full — file too large for local storage"); setUploading(false); }
-            };
-            reader.readAsDataURL(file);
-          } else {
-            onUploadError?.(err.message);
-            setUploading(false);
-          }
+          console.warn("[FileUpload] Cloud upload failed, falling back to local:", err?.message);
+          saveLocalFallback(err?.code || err?.message || "storage error");
         },
         async () => {
           const url = await getDownloadURL(task.snapshot.ref);
