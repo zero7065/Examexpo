@@ -11,8 +11,9 @@ import neco from "./master-bank/neco.json";
 import nabteb from "./master-bank/nabteb.json";
 import postutme from "./master-bank/postutme.json";
 import ielts from "./master-bank/ielts.json";
+import sat from "./master-bank/sat.json";
 
-const BANKS = { JAMB: jamb, WAEC: waec, NECO: neco, NABTEB: nabteb, "POST-UTME": postutme, IELTS: ielts };
+const BANKS = { JAMB: jamb, WAEC: waec, NECO: neco, NABTEB: nabteb, "POST-UTME": postutme, IELTS: ielts, SAT: sat };
 
 function normExam(exam) {
   const e = String(exam || "JAMB").toUpperCase();
@@ -39,6 +40,7 @@ const LAZY_LOADERS = {
   NABTEB: () => import("./master-bank/nabteb.json"),
   "POST-UTME": () => import("./master-bank/postutme.json"),
   IELTS: () => import("./master-bank/ielts.json"),
+  SAT: () => import("./master-bank/sat.json"),
 };
 
 export async function loadBank(exam = "JAMB") {

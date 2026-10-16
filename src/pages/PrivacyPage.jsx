@@ -5,7 +5,7 @@ import { ShieldCheck } from "lucide-react";
 const SECTIONS = [
   {
     h: "1. Who We Are",
-    body: "ExamPadi AI is operated by Jadai Studios. We build AI-powered study tools for Nigerian students preparing for JAMB, WAEC, NECO and NABTEB exams. NDPR queries: jadai7065@gmail.com.",
+    body: "ExamPadi is operated by Jadai Studios. We build AI-powered study tools for Nigerian students preparing for JAMB, WAEC, NECO and NABTEB exams. NDPR queries: jadai7065@gmail.com.",
   },
   {
     h: "2. Data We Collect",
@@ -52,7 +52,7 @@ const SECTIONS = [
   },
   {
     h: "7. Children & Schools",
-    body: "ExamPadi AI is intended for students aged 13 and above (16+ for government/school deployments, or younger with verifiable school/parental consent). Schools act as co-controllers for data they submit (rosters, class lists). We do not knowingly collect data from children under 13; contact us for immediate removal.",
+    body: "ExamPadi is intended for students aged 13 and above (16+ for government/school deployments, or younger with verifiable school/parental consent). Schools act as co-controllers for data they submit (rosters, class lists). We do not knowingly collect data from children under 13; contact us for immediate removal.",
   },
   {
     h: "8. Retention",
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
       </div>
 
       <div className="mt-16 pt-8 border-t border-border text-center">
-        <p className="text-text-muted text-sm">© {new Date().getFullYear()} ExamPadi AI by Jadai Studios · <Link to="/terms" className="text-primary hover:underline">Terms of Service</Link></p>
+        <p className="text-text-muted text-sm">© {new Date().getFullYear()} ExamPadi by Jadai Studios · <Link to="/terms" className="text-primary hover:underline">Terms of Service</Link></p>
       </div>
     </div>
   );

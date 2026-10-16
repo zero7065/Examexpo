@@ -10,7 +10,7 @@ function buildShareUrl(path) {
 }
 
 export function shareOnWhatsApp({ title, text, url }) {
-  const message = `${title}\n\n${text}\n\n${url ? `🔗 ${url}` : ""}\n\n— ExamPadi AI`.trim();
+  const message = `${title}\n\n${text}\n\n${url ? `🔗 ${url}` : ""}\n\n— ExamPadi`.trim();
   const encoded = encodeURIComponent(message);
   window.open(`https://wa.me/?text=${encoded}`, "_blank");
 }
@@ -31,7 +31,7 @@ export function WhatsAppShareButton({ result, type = "result", style = {} }) {
     let url = "";
 
     if (type === "result" && result) {
-      title = `🎯 ${name} just scored ${result.percentageScore}% on ExamPadi AI!`;
+      title = `🎯 ${name} just scored ${result.percentageScore}% on ExamPadi!`;
       text = `✅ ${result.correctAnswers}/${result.totalQuestions} correct\n⏱ ${Math.floor(result.timeSpentSeconds / 60)}m ${result.timeSpentSeconds % 60}s`;
       url = buildShareUrl("/auth");
     } else if (type === "progress" && result) {
@@ -43,7 +43,7 @@ export function WhatsAppShareButton({ result, type = "result", style = {} }) {
       text = `✅ ${result.correctAnswers}/${result.totalQuestions} correct\n⏱ ${Math.floor((result.timeSpentSeconds || 0) / 60)}m`;
       url = buildShareUrl("/auth");
     } else {
-      title = `Check out ExamPadi AI — the best exam prep app!`;
+      title = `Check out ExamPadi — the best exam prep app!`;
       text = `Practice past questions, take mock exams, and get AI-powered explanations. Join me!`;
       url = buildShareUrl("/auth");
     }
@@ -84,7 +84,7 @@ export function WhatsAppHelpButton({ subject, score, style = {} }) {
     }
 
     const name = user.displayName || "A student";
-    const message = `Hi! I need help studying for ${subject || "my exams"} on ExamPadi AI.\n\nI scored ${score || "low"}% and could use a study partner.\n\nCan you help me study? Download ExamPadi AI and add me as your study partner!\n\n🔗 ${buildShareUrl("/auth")}`;
+    const message = `Hi! I need help studying for ${subject || "my exams"} on ExamPadi.\n\nI scored ${score || "low"}% and could use a study partner.\n\nCan you help me study? Download ExamPadi and add me as your study partner!\n\n🔗 ${buildShareUrl("/auth")}`;
     const encoded = encodeURIComponent(message);
     window.open(`https://wa.me/?text=${encoded}`, "_blank");
   }

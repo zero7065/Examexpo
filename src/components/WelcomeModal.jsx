@@ -49,7 +49,7 @@ export default function WelcomeModal() {
         <div style={{ fontSize: 56, marginBottom: 16, lineHeight: 1 }}>🎉</div>
 
         <h1 style={{ color: "#6C3CE9", fontSize: 28, fontWeight: 800, marginBottom: 8 }}>
-          Welcome to ExamPadi AI!
+          Welcome to ExamPadi!
         </h1>
         <p style={{ color: "#888", fontSize: 14, marginBottom: 24 }}>
           {user?.name || "Student"}, your journey to exam success starts today.

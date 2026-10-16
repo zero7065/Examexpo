@@ -164,7 +164,7 @@ export default function SessionSummary() {
   }
 
   function handleShare() {
-    const text = `I scored ${score}% on ${subject} JAMB practice on ExamPadi AI 🔥 Try it free: exampadi.com`;
+    const text = `I scored ${score}% on ${subject} JAMB practice on ExamPadi 🔥 Try it free: exampadi.com`;
     if (navigator.share) { navigator.share({ title: "ExamPadi Score", text }).catch(() => {}); }
     else { navigator.clipboard.writeText(text); toast({ message: "Copied! Share with friends 🎉", type: "success" }); }
   }

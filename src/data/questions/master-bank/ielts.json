@@ -734,5 +734,1367 @@
       2024,
       2023
     ]
+  },
+  {
+    "id": "ielts-2024-read-010",
+    "subject": "Reading",
+    "topic": "True False Not Given",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "A statement says 'Rivers are the largest store of fresh water on Earth.' The passage says 'Groundwater holds more fresh water than all the world's rivers combined.' What is the correct answer?",
+    "options": {
+      "A": "FALSE",
+      "B": "TRUE",
+      "C": "NOT GIVEN",
+      "D": "PARTLY TRUE"
+    },
+    "correctAnswer": "A",
+    "explanation": "FALSE is used when the passage directly contradicts the statement. Since groundwater holds more than all rivers, the claim about rivers is untrue."
+  },
+  {
+    "id": "ielts-2024-read-011",
+    "subject": "Reading",
+    "topic": "Yes No Not Given",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "How does YES/NO/NOT GIVEN differ from TRUE/FALSE/NOT GIVEN in IELTS Reading?",
+    "options": {
+      "A": "It tests the writer's views or claims rather than objective facts",
+      "B": "It is answered using only the first paragraph",
+      "C": "It has no NOT GIVEN option",
+      "D": "It only appears in the General Training test"
+    },
+    "correctAnswer": "A",
+    "explanation": "YES/NO/NOT GIVEN asks whether statements agree with the writer's opinions or claims, while TRUE/FALSE/NOT GIVEN checks factual information in the passage."
+  },
+  {
+    "id": "ielts-2024-read-012",
+    "subject": "Reading",
+    "topic": "Matching Headings",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "In matching headings, if two headings seem to fit one paragraph, which should you choose?",
+    "options": {
+      "A": "The heading containing words repeated most often in the paragraph",
+      "B": "The heading that matches only a supporting detail",
+      "C": "The first heading in the list",
+      "D": "The heading that captures the paragraph's overall main idea"
+    },
+    "correctAnswer": "D",
+    "explanation": "Headings are matched to the main idea, not to details or repeated words. Skim the whole paragraph first, then pick the heading that covers its central point."
+  },
+  {
+    "id": "ielts-2024-read-013",
+    "subject": "Reading",
+    "topic": "Word Limits",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "The instruction reads 'NO MORE THAN TWO WORDS AND/OR A NUMBER'. Which answer breaks this rule?",
+    "options": {
+      "A": "15 June",
+      "B": "solar energy",
+      "C": "two weeks",
+      "D": "the third floor"
+    },
+    "correctAnswer": "D",
+    "explanation": "Count every word including articles like the, so the third floor is three words and would be marked wrong. Two words plus a number is the maximum allowed.",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2024-read-014",
+    "subject": "Reading",
+    "topic": "Summary Completion",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Before choosing a word for a gap in summary completion, you should first check:",
+    "options": {
+      "A": "How many letters the word has",
+      "B": "Whether the word appears in the passage's first sentence",
+      "C": "What part of speech the gap requires, such as a noun, verb or adjective",
+      "D": "Whether the word is printed in bold type"
+    },
+    "correctAnswer": "C",
+    "explanation": "The grammar around the gap tells you which word form fits, and the passage supplies the exact wording. Matching the part of speech eliminates most wrong choices."
+  },
+  {
+    "id": "ielts-2025-read-010",
+    "subject": "Reading",
+    "topic": "Multiple Choice",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "What makes an option a typical distractor in Reading multiple choice?",
+    "options": {
+      "A": "It uses an idea from the passage that answers a different question",
+      "B": "It paraphrases the correct idea accurately",
+      "C": "It is the shortest option in the list",
+      "D": "It repeats the question stem word for word"
+    },
+    "correctAnswer": "A",
+    "explanation": "Distractors often use real words from the passage but answer a neighbouring question. Check that the option answers the exact question asked."
+  },
+  {
+    "id": "ielts-2025-read-011",
+    "subject": "Reading",
+    "topic": "Short Answer",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Instruction: 'NO MORE THAN THREE WORDS.' Question: 'When does the guided tour start?' Passage: 'The guided tour begins at half past nine in the morning.' Which answer is acceptable?",
+    "options": {
+      "A": "at half past nine in the morning",
+      "B": "the guided tour begins",
+      "C": "half past nine",
+      "D": "in the morning of the tour"
+    },
+    "correctAnswer": "C",
+    "explanation": "Short answers must fit the word limit and answer the question directly. Half past nine is three words, while the fuller phrases exceed the limit."
+  },
+  {
+    "id": "ielts-2025-read-012",
+    "subject": "Reading",
+    "topic": "Skimming",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "What should you do in your first two or three minutes with a Reading passage?",
+    "options": {
+      "A": "Translate every paragraph into your first language",
+      "B": "Skim for the main idea and paragraph structure",
+      "C": "Answer the questions from memory",
+      "D": "Memorise every technical term"
+    },
+    "correctAnswer": "B",
+    "explanation": "A quick skim of the title, first sentences and overall structure helps you locate information fast later, which matters when you have only 60 minutes."
+  },
+  {
+    "id": "ielts-2025-read-013",
+    "subject": "Reading",
+    "topic": "Academic vs General",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "How does General Training Reading usually differ from Academic Reading?",
+    "options": {
+      "A": "It uses longer university research articles",
+      "B": "It has no time limit",
+      "C": "Academic Reading uses adverts, notices and timetables",
+      "D": "It uses shorter everyday and workplace texts such as adverts, notices and timetables"
+    },
+    "correctAnswer": "D",
+    "explanation": "Both tests last 60 minutes for 40 questions, but General Training draws on real-life and workplace texts while Academic uses scholarly passages."
+  },
+  {
+    "id": "ielts-2025-read-014",
+    "subject": "Reading",
+    "topic": "True False Not Given",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "You know from your own knowledge that Abuja became Nigeria's capital city in 1991, but the passage never mentions it. The correct answer is:",
+    "options": {
+      "A": "TRUE",
+      "B": "FALSE",
+      "C": "PARTLY TRUE",
+      "D": "NOT GIVEN"
+    },
+    "correctAnswer": "D",
+    "explanation": "Never bring outside knowledge into the test. If the passage does not state the information, the answer is NOT GIVEN no matter what you already know.",
+    "highYield": true,
+    "repeatedFrom": [
+      2025,
+      2024,
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2026-read-001",
+    "subject": "Reading",
+    "topic": "Scanning",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Scanning a Reading passage means:",
+    "options": {
+      "A": "Reading slowly to judge the writer's tone",
+      "B": "Running your eyes quickly over the text to locate specific facts or words",
+      "C": "Reading only the final paragraph",
+      "D": "Answering every question twice"
+    },
+    "correctAnswer": "B",
+    "explanation": "Scanning finds particular details such as names, dates or figures, while skimming finds the main idea. Scan only after you know which paragraph to search."
+  },
+  {
+    "id": "ielts-2026-read-002",
+    "subject": "Reading",
+    "topic": "Question Order",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "For most Reading question types, such as TRUE/FALSE/NOT GIVEN and sentence completion, the answers usually:",
+    "options": {
+      "A": "All come from the first paragraph",
+      "B": "Appear in reverse order",
+      "C": "Follow the same order as the information in the passage",
+      "D": "Are spread randomly across the whole passage"
+    },
+    "correctAnswer": "C",
+    "explanation": "Questions follow passage order, so once you have found the answer to question 1 you know question 2 comes later. Matching tasks are the usual exception."
+  },
+  {
+    "id": "ielts-2026-read-003",
+    "subject": "Reading",
+    "topic": "Word Limits",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "The instruction says 'WRITE ONE WORD ONLY'. Which answer would be marked wrong?",
+    "options": {
+      "A": "coastline",
+      "B": "the coastline",
+      "C": "erosion",
+      "D": "rainfall"
+    },
+    "correctAnswer": "B",
+    "explanation": "Articles count as words, so the coastline is two words and breaks the rule. Always check the word limit before you write your answer."
+  },
+  {
+    "id": "ielts-2026-read-004",
+    "subject": "Reading",
+    "topic": "Matching Headings",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Why are you usually given more headings than there are paragraphs in matching headings?",
+    "options": {
+      "A": "Because headings are reused for each paragraph",
+      "B": "Because there is always one heading for every sentence",
+      "C": "Because extra headings act as distractors you must eliminate",
+      "D": "To increase the word count of the test"
+    },
+    "correctAnswer": "C",
+    "explanation": "Unused headings are deliberate traps that repeat words from the passage. Eliminate headings as you use them and beware of word-matching tricks."
+  },
+  {
+    "id": "ielts-2026-read-005",
+    "subject": "Reading",
+    "topic": "Marking",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "How is IELTS Academic Reading marked?",
+    "options": {
+      "A": "Each correct answer scores one mark out of 40",
+      "B": "Each question is worth a different number of marks",
+      "C": "Correct answers score two marks each",
+      "D": "Each wrong answer removes one mark"
+    },
+    "correctAnswer": "A",
+    "explanation": "There are 40 questions and each correct answer earns one mark with no negative marking, so never leave a question blank."
+  },
+  {
+    "id": "ielts-2024-list-010",
+    "subject": "Listening",
+    "topic": "Section 2",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "IELTS Listening Section 2 usually features:",
+    "options": {
+      "A": "A monologue by one speaker in a social context",
+      "B": "A conversation between two students",
+      "C": "An academic lecture with slides",
+      "D": "A panel of four speakers"
+    },
+    "correctAnswer": "A",
+    "explanation": "Section 2 is a single-speaker talk in a social setting, such as a guide explaining a facility. Expect form, note and map labelling questions."
+  },
+  {
+    "id": "ielts-2024-list-011",
+    "subject": "Listening",
+    "topic": "Form Completion",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "In form completion, your answer must match:",
+    "options": {
+      "A": "The length of the line printed on the paper",
+      "B": "The accent of the speaker",
+      "C": "The grammar of the sentence and the wording of the field heading",
+      "D": "The number of times the word is repeated"
+    },
+    "correctAnswer": "C",
+    "explanation": "Read the field heading and the sentence around the gap first. They tell you whether you need a name, a number or a noun, which is your prediction strategy at work."
+  },
+  {
+    "id": "ielts-2024-list-012",
+    "subject": "Listening",
+    "topic": "Spelling",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "You hear the surname 'Okafor' written on a form. If you write 'Okafer', your answer is:",
+    "options": {
+      "A": "Accepted because the sound is nearly the same",
+      "B": "Accepted if the first letter is correct",
+      "C": "Marked incorrect",
+      "D": "Given half a mark"
+    },
+    "correctAnswer": "C",
+    "explanation": "Listening spelling must be exact, especially for names. If the speaker spells a word out, write each letter exactly as it is given."
+  },
+  {
+    "id": "ielts-2024-list-013",
+    "subject": "Listening",
+    "topic": "Distractors",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "The speaker says, 'The meeting was originally on Tuesday, but it has been moved to Thursday.' The correct answer is:",
+    "options": {
+      "A": "Tuesday",
+      "B": "Wednesday",
+      "C": "Friday",
+      "D": "Thursday"
+    },
+    "correctAnswer": "D",
+    "explanation": "Speakers often give a wrong detail first and then correct it. Wait for the final decision before committing, because the first mention is usually the trap.",
+    "highYield": true,
+    "repeatedFrom": [
+      2024,
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2024-list-014",
+    "subject": "Listening",
+    "topic": "Signposting",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "You hear: 'Having said that, there are some disadvantages.' This signpost tells you the speaker is about to:",
+    "options": {
+      "A": "Repeat the previous point",
+      "B": "Introduce a contrasting idea",
+      "C": "Read out a list of names",
+      "D": "End the recording"
+    },
+    "correctAnswer": "B",
+    "explanation": "Signposting language signals a change of direction. Phrases like 'having said that' warn you that a contrasting point and often a new answer are coming."
+  },
+  {
+    "id": "ielts-2025-list-010",
+    "subject": "Listening",
+    "topic": "Prediction Strategy",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "What should you do with the pause before each Listening section begins?",
+    "options": {
+      "A": "Copy answers from the previous section",
+      "B": "Predict the type of word each gap needs, such as a name, number or noun",
+      "C": "Rest until the audio starts",
+      "D": "Write full sentences in the gaps"
+    },
+    "correctAnswer": "B",
+    "explanation": "Predicting whether each gap needs a date, a price or a plural noun lets you recognise the answer the moment you hear it.",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2025-list-011",
+    "subject": "Listening",
+    "topic": "Numbers",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "You hear the speaker say 'double three, double four'. Which number did they give?",
+    "options": {
+      "A": "3344",
+      "B": "3434",
+      "C": "3334",
+      "D": "4433"
+    },
+    "correctAnswer": "A",
+    "explanation": "Double three means 33 and double four means 44, so the number is 3344. Write digits rather than words to save time."
+  },
+  {
+    "id": "ielts-2025-list-012",
+    "subject": "Listening",
+    "topic": "Plurals",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "The recording says 'two booklets' but you write 'booklet'. What happens?",
+    "options": {
+      "A": "You receive a warning",
+      "B": "You are given half a mark",
+      "C": "The examiner accepts it",
+      "D": "Your answer is marked wrong"
+    },
+    "correctAnswer": "D",
+    "explanation": "A missing plural costs you the whole mark. Use the grammar around the gap to check whether the word should end in -s."
+  },
+  {
+    "id": "ielts-2025-list-013",
+    "subject": "Listening",
+    "topic": "Map Labelling",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "When labelling a map or floor plan in Listening, your best tactic is to:",
+    "options": {
+      "A": "Follow the speaker's route using direction words such as opposite, beyond and next to",
+      "B": "Label every building before the audio starts",
+      "C": "Guess from the name of the building",
+      "D": "Always start from the bottom of the map"
+    },
+    "correctAnswer": "A",
+    "explanation": "Map tasks follow the speaker's route, so track position words carefully and start from the point the speaker names first, such as the entrance."
+  },
+  {
+    "id": "ielts-2025-list-014",
+    "subject": "Listening",
+    "topic": "Notes Completion",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "In note or table completion, the wording printed on your paper is usually:",
+    "options": {
+      "A": "Identical to what the speaker says",
+      "B": "A paraphrase of what the speaker says",
+      "C": "Unrelated to the recording",
+      "D": "Written in the opposite order only"
+    },
+    "correctAnswer": "B",
+    "explanation": "The questions restate the audio in different words, so listen for meaning and synonyms rather than waiting for the exact phrase."
+  },
+  {
+    "id": "ielts-2026-list-001",
+    "subject": "Listening",
+    "topic": "Section 4",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "What is unusual about Listening Section 4 compared with the other sections?",
+    "options": {
+      "A": "It has a pause after every sentence",
+      "B": "It is always a conversation between two people",
+      "C": "A video is played while you listen",
+      "D": "There is no break in the middle of the recording to check answers"
+    },
+    "correctAnswer": "D",
+    "explanation": "Section 4 plays continuously, so you must keep following the signposting with no mid-section pause. You only get checking time after it ends."
+  },
+  {
+    "id": "ielts-2026-list-002",
+    "subject": "Listening",
+    "topic": "Multiple Choice Traps",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "In Listening multiple choice, the wrong options often:",
+    "options": {
+      "A": "Contain only random unrelated ideas",
+      "B": "Contain words you actually hear, leading you away from the real answer",
+      "C": "Are always longer than the correct option",
+      "D": "Come from the Reading test"
+    },
+    "correctAnswer": "B",
+    "explanation": "Distractors use word association: you hear a word from an option and pick it, but only the option matching the speaker's final point is right."
+  },
+  {
+    "id": "ielts-2026-list-003",
+    "subject": "Listening",
+    "topic": "Spelling",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "A speaker spells a name: 'B-R-O-O-K-E'. Which written form is correct?",
+    "options": {
+      "A": "Broke",
+      "B": "Brock",
+      "C": "Brooke",
+      "D": "Brookes"
+    },
+    "correctAnswer": "C",
+    "explanation": "Write exactly the letters you hear in order, including doubled letters. Brooke has both o's and the final e, so the other forms are wrong."
+  },
+  {
+    "id": "ielts-2026-list-004",
+    "subject": "Listening",
+    "topic": "Number Formats",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "You hear: 'zero eight zero, triple three, five six, seven two.' Which is the correct number?",
+    "options": {
+      "A": "080335672",
+      "B": "0803335762",
+      "C": "0803335672",
+      "D": "0833335672"
+    },
+    "correctAnswer": "C",
+    "explanation": "Triple three gives 333, so the digits are 0, 8, 0, 3, 3, 3, 5, 6, 7, 2, written as the continuous number 0803335672."
+  },
+  {
+    "id": "ielts-2026-list-005",
+    "subject": "Listening",
+    "topic": "Answer Location",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "You hear: 'Now, moving on to accommodation costs.' This tells you that:",
+    "options": {
+      "A": "You should move on to the next set of questions",
+      "B": "Your previous answers are wrong",
+      "C": "The recording has ended",
+      "D": "You should skip the next section"
+    },
+    "correctAnswer": "A",
+    "explanation": "Signposts mark the point where answers move forward, so shift your eyes to the next block of questions the moment the topic changes."
+  },
+  {
+    "id": "ielts-2024-writ-010",
+    "subject": "Writing",
+    "topic": "Task 1 Overview",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "In IELTS Writing Task 1, the overview paragraph should:",
+    "options": {
+      "A": "Summarise the main trends or stages without listing every figure",
+      "B": "List every number from the chart",
+      "C": "Give your personal opinion on the data",
+      "D": "Apologise for the short word count"
+    },
+    "correctAnswer": "A",
+    "explanation": "An overview states the two or three biggest trends or the main stages of a process. Without one you cannot reach band 6 for Task Achievement.",
+    "highYield": true,
+    "repeatedFrom": [
+      2024,
+      2023,
+      2022
+    ]
+  },
+  {
+    "id": "ielts-2024-writ-011",
+    "subject": "Writing",
+    "topic": "Line Graphs",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Which phrase correctly describes a line that rises steeply?",
+    "options": {
+      "A": "Remained stable",
+      "B": "Plunged dramatically",
+      "C": "Fluctuated slightly",
+      "D": "Rose sharply"
+    },
+    "correctAnswer": "D",
+    "explanation": "Match the verb to the movement and add an adverb for speed: rose sharply shows a steep climb, while plunged means a steep fall."
+  },
+  {
+    "id": "ielts-2024-writ-012",
+    "subject": "Writing",
+    "topic": "Comparisons",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Which sentence makes a correct comparison for Task 1?",
+    "options": {
+      "A": "The figure of Lagos was bigger than Kano",
+      "B": "The figure for Lagos was more higher than Kano",
+      "C": "Lagos figure was most higher than Kano",
+      "D": "The figure for Lagos was higher than that of Kano"
+    },
+    "correctAnswer": "D",
+    "explanation": "Use 'the figure for X was higher than that of Y'. The word that replaces a repeated noun, and never combine -er with more."
+  },
+  {
+    "id": "ielts-2024-writ-013",
+    "subject": "Writing",
+    "topic": "Process Diagrams",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Which tense and voice are normally used to describe a process diagram?",
+    "options": {
+      "A": "Past perfect with active voice",
+      "B": "Present simple passive, for example 'is heated' and 'are packed'",
+      "C": "Future continuous",
+      "D": "Present perfect continuous"
+    },
+    "correctAnswer": "B",
+    "explanation": "Processes are described objectively and out of time, so use the present simple passive because the focus is on the action, not who performs it."
+  },
+  {
+    "id": "ielts-2024-writ-014",
+    "subject": "Writing",
+    "topic": "Pie Charts",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Which is the best opening paraphrase for 'The pie chart shows the percentage of households with internet access'?",
+    "options": {
+      "A": "I think the pie chart is about internet access",
+      "B": "In this essay I will discuss internet access",
+      "C": "The pie chart illustrates the proportion of households that had internet access",
+      "D": "As we all know, internet access is important"
+    },
+    "correctAnswer": "C",
+    "explanation": "Task 1 openings must paraphrase the task wording with academic verbs such as illustrates or depicts, and must not include personal opinion."
+  },
+  {
+    "id": "ielts-2025-writ-010",
+    "subject": "Writing",
+    "topic": "Map Descriptions",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "What should a Task 1 map report mainly describe?",
+    "options": {
+      "A": "The colour scheme of the map",
+      "B": "Your favourite building on the map",
+      "C": "Every single structure in equal detail",
+      "D": "How the place changed over time, using location language such as replaced, converted and was added"
+    },
+    "correctAnswer": "D",
+    "explanation": "Map tasks compare changes over time, so group your paragraphs by area and use precise location language rather than describing every detail."
+  },
+  {
+    "id": "ielts-2025-writ-011",
+    "subject": "Writing",
+    "topic": "Data Language",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Which sentence uses 'account for' correctly?",
+    "options": {
+      "A": "Solar power accounted for 30 per cent of the total",
+      "B": "Solar power was accounted 30 per cent for",
+      "C": "30 per cent accounted solar power of total",
+      "D": "Solar power for accounted the 30 per cent"
+    },
+    "correctAnswer": "A",
+    "explanation": "Account for is a fixed phrasal verb meaning make up a portion, so it needs its object after it: X accounted for 30 per cent of the total."
+  },
+  {
+    "id": "ielts-2025-writ-012",
+    "subject": "Writing",
+    "topic": "Time Management",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "How should you divide the 60 minutes of the Writing test?",
+    "options": {
+      "A": "40 minutes on Task 1 and 20 minutes on Task 2",
+      "B": "20 minutes on Task 1 and 40 minutes on Task 2",
+      "C": "30 minutes on each task",
+      "D": "Task 2 only, since Task 1 is optional"
+    },
+    "correctAnswer": "B",
+    "explanation": "Task 2 is worth twice as much as Task 1, so give it about 40 minutes and finish Task 1 within 20, then check both for errors.",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2025-writ-013",
+    "subject": "Writing",
+    "topic": "Opinion Essays",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "In an opinion (agree or disagree) Task 2 essay, you should:",
+    "options": {
+      "A": "Give equal weight to both sides",
+      "B": "Change your position in the conclusion",
+      "C": "State a clear position in the introduction and support it throughout",
+      "D": "Give three arguments with no examples"
+    },
+    "correctAnswer": "C",
+    "explanation": "An opinion essay needs one clear position maintained from introduction to conclusion, with each body paragraph supporting that same view."
+  },
+  {
+    "id": "ielts-2025-writ-014",
+    "subject": "Writing",
+    "topic": "Discussion Essays",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "A 'discuss both views' Task 2 essay requires you to:",
+    "options": {
+      "A": "Present only your own view",
+      "B": "Examine both views fairly and give your opinion if the question asks for it",
+      "C": "Ignore one of the views",
+      "D": "Write two completely separate essays"
+    },
+    "correctAnswer": "B",
+    "explanation": "You must give both sides equal coverage in the body paragraphs, then add your opinion in the conclusion when the question requests it."
+  },
+  {
+    "id": "ielts-2026-writ-001",
+    "subject": "Writing",
+    "topic": "Problem Solution",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Which is the most logical body-paragraph plan for a problem-solution essay?",
+    "options": {
+      "A": "List all solutions first, then the problems",
+      "B": "Repeat one problem and its solution four times",
+      "C": "Use no clear grouping of ideas",
+      "D": "Devote one body paragraph to the problems and the next to the solutions"
+    },
+    "correctAnswer": "D",
+    "explanation": "Grouping problems in one paragraph and solutions in the next makes your essay easy to follow, which directly lifts your Coherence and Cohesion band."
+  },
+  {
+    "id": "ielts-2026-writ-002",
+    "subject": "Writing",
+    "topic": "Band Killers",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Which of these is a common 'band killer' in IELTS Writing?",
+    "options": {
+      "A": "Memorised or rehearsed sentences that do not answer the question",
+      "B": "Using a range of linking words",
+      "C": "Writing 280 words in Task 2",
+      "D": "Maintaining a formal academic tone"
+    },
+    "correctAnswer": "A",
+    "explanation": "Examiners spot memorised templates and award no credit for language that does not answer the question, so every sentence must address the task.",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-writ-003",
+    "subject": "Writing",
+    "topic": "Cohesion",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "What can happen if you start almost every sentence with 'Moreover', 'Furthermore' or 'Additionally'?",
+    "options": {
+      "A": "Your Task Response score increases",
+      "B": "The examiner requires it for band 9",
+      "C": "Your writing feels mechanical and your Cohesion score suffers",
+      "D": "Your word count is reduced"
+    },
+    "correctAnswer": "C",
+    "explanation": "Linking words should serve the logic, not appear in every sentence. Overusing them sounds mechanical, so vary your cohesive devices."
+  },
+  {
+    "id": "ielts-2026-writ-004",
+    "subject": "Writing",
+    "topic": "Introduction",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "A strong Task 2 introduction consists of:",
+    "options": {
+      "A": "A paraphrase of the question and a clear thesis statement",
+      "B": "A dictionary definition and a joke",
+      "C": "Two copies of the exact question wording",
+      "D": "Your full argument with all examples"
+    },
+    "correctAnswer": "A",
+    "explanation": "Paraphrase the topic in your own words and finish with a thesis that signals your position or the essay's plan."
+  },
+  {
+    "id": "ielts-2026-writ-005",
+    "subject": "Writing",
+    "topic": "Lexical Resource",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Which habit most improves your Lexical Resource band?",
+    "options": {
+      "A": "Using as many idioms as possible",
+      "B": "Paraphrasing common words with precise alternatives, such as using substantial instead of big",
+      "C": "Repeating the same keyword to show precision",
+      "D": "Translating idioms directly from your first language"
+    },
+    "correctAnswer": "B",
+    "explanation": "Band 7+ rewards less common words used accurately and naturally, so paraphrase deliberately and avoid word repetition."
+  },
+  {
+    "id": "ielts-2024-spea-010",
+    "subject": "Speaking",
+    "topic": "Part 1",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "How long should a Speaking Part 1 answer be?",
+    "options": {
+      "A": "One or two sentences with a reason or detail",
+      "B": "A five-minute speech",
+      "C": "Yes or no with nothing more",
+      "D": "A memorised paragraph"
+    },
+    "correctAnswer": "A",
+    "explanation": "Part 1 answers should be short but developed: give a direct answer plus a brief reason so the examiner can hear your range."
+  },
+  {
+    "id": "ielts-2024-spea-011",
+    "subject": "Speaking",
+    "topic": "Part 2 Preparation",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "During the 1 minute of preparation for Part 2, you should:",
+    "options": {
+      "A": "Write out full sentences for every bullet point",
+      "B": "Jot down quick keywords for each bullet point",
+      "C": "Ignore the bullet points on the card",
+      "D": "Practise your opening sentence out loud"
+    },
+    "correctAnswer": "B",
+    "explanation": "Keywords let you cover every bullet point in the 1-2 minute talk. Full sentences waste preparation time and sound memorised."
+  },
+  {
+    "id": "ielts-2024-spea-012",
+    "subject": "Speaking",
+    "topic": "Filler Words",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Which response keeps you speaking fluently when you need time to think?",
+    "options": {
+      "A": "A ten-second silence",
+      "B": "Starting your answer again from the beginning each time",
+      "C": "Saying 'That's a good question, I'd say...' while you plan",
+      "D": "Switching to your first language"
+    },
+    "correctAnswer": "C",
+    "explanation": "Natural fillers such as well, I'd say and let me think keep the flow going, while long silences and self-interruptions hurt your Fluency score."
+  },
+  {
+    "id": "ielts-2024-spea-013",
+    "subject": "Speaking",
+    "topic": "Band Descriptors",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "How are the four Speaking assessment criteria weighted?",
+    "options": {
+      "A": "Fluency counts for 100 per cent",
+      "B": "Pronunciation counts for 50 per cent",
+      "C": "Grammar counts for 75 per cent",
+      "D": "All four criteria count equally at 25 per cent each"
+    },
+    "correctAnswer": "D",
+    "explanation": "Fluency and Coherence, Lexical Resource, Grammatical Range and Accuracy, and Pronunciation are each worth 25 per cent, so train all four."
+  },
+  {
+    "id": "ielts-2025-spea-010",
+    "subject": "Speaking",
+    "topic": "Pronunciation",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Which feature most helps the examiner understand you?",
+    "options": {
+      "A": "Speaking as fast as possible",
+      "B": "Clear word and sentence stress on key words",
+      "C": "Copying the examiner's accent exactly",
+      "D": "Dropping your voice at the end of sentences"
+    },
+    "correctAnswer": "B",
+    "explanation": "Pronunciation is marked for clarity and the ability to be understood throughout, and correct stress on key words carries most of that meaning."
+  },
+  {
+    "id": "ielts-2025-spea-011",
+    "subject": "Speaking",
+    "topic": "Extending Answers",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Which is the best Part 1 answer to 'Do you enjoy cooking?'",
+    "options": {
+      "A": "'Yes, because it relaxes me. I usually make jollof rice at weekends'",
+      "B": "'Yes.'",
+      "C": "'Why do you ask?'",
+      "D": "'Cooking is a topic about food.'"
+    },
+    "correctAnswer": "A",
+    "explanation": "Extend with a reason and a specific example. This shows range and fluency, while a one-word answer gives the examiner nothing to score."
+  },
+  {
+    "id": "ielts-2025-spea-012",
+    "subject": "Speaking",
+    "topic": "Memorisation",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "What can happen if the examiner suspects you memorised your answers?",
+    "options": {
+      "A": "You receive bonus points",
+      "B": "Nothing, because memorising is encouraged",
+      "C": "Your answers may be discounted and your band limited",
+      "D": "The test is cancelled immediately"
+    },
+    "correctAnswer": "C",
+    "explanation": "Examiners can identify rehearsed scripts and stop you or limit your band for Fluency and Coherence, so prepare ideas rather than whole answers.",
+    "highYield": true,
+    "repeatedFrom": [
+      2025,
+      2024
+    ]
+  },
+  {
+    "id": "ielts-2025-spea-013",
+    "subject": "Speaking",
+    "topic": "Part 3 Development",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Which answer shows the level of development expected in Part 3?",
+    "options": {
+      "A": "A memorised speech on an unrelated topic",
+      "B": "One short sentence about yourself only",
+      "C": "A simple 'I agree' with no reason",
+      "D": "A developed idea with a reason, an example and a consequence"
+    },
+    "correctAnswer": "D",
+    "explanation": "Part 3 is abstract and analytical, so develop each point with a reason, an example and where it leads, rather than only personal experience."
+  },
+  {
+    "id": "ielts-2026-spea-001",
+    "subject": "Speaking",
+    "topic": "Part 1 Topics",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Which is a typical Speaking Part 1 topic?",
+    "options": {
+      "A": "Your home and accommodation",
+      "B": "Advanced nuclear physics",
+      "C": "National tax legislation",
+      "D": "Writing a ten-page lab report"
+    },
+    "correctAnswer": "A",
+    "explanation": "Part 1 uses familiar everyday topics such as home, work or study, food, weather and hobbies, so practise short answers on these."
+  },
+  {
+    "id": "ielts-2026-spea-002",
+    "subject": "Speaking",
+    "topic": "Fluency Strategies",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "If you cannot think of a word during the Speaking test, you should:",
+    "options": {
+      "A": "Stay silent for twenty seconds",
+      "B": "Apologise and ask to restart the question",
+      "C": "Paraphrase around it, for example 'the thing you use to cook', and keep going",
+      "D": "Jump ahead to Part 3"
+    },
+    "correctAnswer": "C",
+    "explanation": "Talking round the word keeps you fluent and can even earn credit for flexible paraphrasing, while long pauses damage your score."
+  },
+  {
+    "id": "ielts-2026-spea-003",
+    "subject": "Speaking",
+    "topic": "Linking Ideas",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Which is the best way to link ideas in Part 3?",
+    "options": {
+      "A": "Chaining everything with 'and... and... and...'",
+      "B": "'That's an interesting point. I'd say it depends on, for example, how wealthy a country is'",
+      "C": "Filling every pause with 'err' and 'hmm'",
+      "D": "Repeating the examiner's question word for word"
+    },
+    "correctAnswer": "B",
+    "explanation": "Signposting your structure with phrases such as 'it depends on' and 'for example' shows coherent development, which examiners reward in Part 3."
+  },
+  {
+    "id": "ielts-2026-spea-004",
+    "subject": "Speaking",
+    "topic": "Part 2 Topics",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Which of these is a typical Speaking Part 2 cue card task?",
+    "options": {
+      "A": "Solving a calculus equation",
+      "B": "Designing a bridge",
+      "C": "Writing a laboratory report",
+      "D": "Describing a person you admire"
+    },
+    "correctAnswer": "D",
+    "explanation": "Part 2 asks you to describe a person, place, object, event or experience over 1-2 minutes using the bullet points on the card."
+  },
+  {
+    "id": "ielts-2024-voca-010",
+    "subject": "Vocabulary",
+    "topic": "Academic Word List",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Which word belongs to the Academic Word List and is common in Task 2 essays?",
+    "options": {
+      "A": "analyse",
+      "B": "gadget",
+      "C": "yummy",
+      "D": "chat"
+    },
+    "correctAnswer": "A",
+    "explanation": "Analyse is a high-frequency academic verb used across subjects. Words from the Academic Word List strongly support a band 7 Lexical Resource score."
+  },
+  {
+    "id": "ielts-2024-voca-011",
+    "subject": "Vocabulary",
+    "topic": "Paraphrasing",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Examiners reward paraphrasing. Which is the best paraphrase of 'a big increase'?",
+    "options": {
+      "A": "a large rise",
+      "B": "a big big change",
+      "C": "many increase",
+      "D": "the increase of big"
+    },
+    "correctAnswer": "A",
+    "explanation": "A large rise expresses the same idea with different words, which is exactly what paraphrasing means in Reading, Writing and Speaking."
+  },
+  {
+    "id": "ielts-2024-voca-012",
+    "subject": "Vocabulary",
+    "topic": "Collocations",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Which is the correct collocation?",
+    "options": {
+      "A": "commit a mistake",
+      "B": "make research",
+      "C": "conduct research",
+      "D": "do a research"
+    },
+    "correctAnswer": "C",
+    "explanation": "Conduct research is the natural word partnership. Examiners look for collocations like this when awarding band 7 or above for Lexical Resource.",
+    "highYield": true,
+    "repeatedFrom": [
+      2024,
+      2023
+    ]
+  },
+  {
+    "id": "ielts-2025-voca-010",
+    "subject": "Vocabulary",
+    "topic": "Education Vocabulary",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "The phrase 'to drop out of school' means:",
+    "options": {
+      "A": "To fail an examination",
+      "B": "To leave school before completing your studies",
+      "C": "To repeat a class",
+      "D": "To finish top of the class"
+    },
+    "correctAnswer": "B",
+    "explanation": "Drop out means to leave a course or institution early. Education topics appear often in IELTS, so learn such phrasal verbs as fixed chunks."
+  },
+  {
+    "id": "ielts-2025-voca-011",
+    "subject": "Vocabulary",
+    "topic": "Environment Vocabulary",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Which word refers to harmful substances released into the air?",
+    "options": {
+      "A": "Erosion",
+      "B": "Emissions",
+      "C": "Photosynthesis",
+      "D": "Harvest"
+    },
+    "correctAnswer": "B",
+    "explanation": "Emissions are gases or particles released into the air, often paired with carbon or greenhouse. This is core vocabulary for environment essays."
+  },
+  {
+    "id": "ielts-2025-voca-012",
+    "subject": "Vocabulary",
+    "topic": "Word Formation",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "In the word 'unemployment', the prefix 'un-' carries which meaning?",
+    "options": {
+      "A": "Before",
+      "B": "Again",
+      "C": "Not or without",
+      "D": "Inside"
+    },
+    "correctAnswer": "C",
+    "explanation": "The prefix un- means not, so unemployment is a lack of work. Knowing prefixes, suffixes and roots lets you decode unfamiliar words quickly."
+  },
+  {
+    "id": "ielts-2026-voca-001",
+    "subject": "Vocabulary",
+    "topic": "Health Vocabulary",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Which word describes a disease that spreads across a whole country or the world?",
+    "options": {
+      "A": "Treatment",
+      "B": "Clinic",
+      "C": "Recovery",
+      "D": "Pandemic"
+    },
+    "correctAnswer": "D",
+    "explanation": "A pandemic spreads widely across countries, while an epidemic stays in one region. Health is a frequent IELTS theme in all four skills."
+  },
+  {
+    "id": "ielts-2026-voca-002",
+    "subject": "Vocabulary",
+    "topic": "Synonyms",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Which set is the best range of alternatives to 'important' for academic writing?",
+    "options": {
+      "A": "nice, good, cool, great",
+      "B": "big, huge, giant, massive",
+      "C": "very, really, super, so",
+      "D": "crucial, significant, vital, paramount"
+    },
+    "correctAnswer": "D",
+    "explanation": "These are precise academic synonyms of important. Repeating one simple word or overusing intensifiers limits your Lexical Resource band."
+  },
+  {
+    "id": "ielts-2025-gram-010",
+    "subject": "Grammar",
+    "topic": "Articles",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Choose the correct article: '_____ United Kingdom lies off the north-west coast of Europe.'",
+    "options": {
+      "A": "A",
+      "B": "An",
+      "C": "No article is needed",
+      "D": "The"
+    },
+    "correctAnswer": "D",
+    "explanation": "Use the before country names containing a common noun or plural, such as the United Kingdom, the Netherlands and the Philippines."
+  },
+  {
+    "id": "ielts-2025-gram-011",
+    "subject": "Grammar",
+    "topic": "Subject Verb Agreement",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Choose the correct verb: 'Neither the teacher nor the students _____ ready for the mock exam.'",
+    "options": {
+      "A": "are",
+      "B": "is",
+      "C": "was",
+      "D": "has"
+    },
+    "correctAnswer": "A",
+    "explanation": "With neither...nor, the verb agrees with the subject closest to it. Students is plural, so the correct form is are.",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-gram-001",
+    "subject": "Grammar",
+    "topic": "Prepositions",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Choose the correct preposition: 'The graph shows a sharp rise _____ the number of international students.'",
+    "options": {
+      "A": "at",
+      "B": "on",
+      "C": "of",
+      "D": "in"
+    },
+    "correctAnswer": "D",
+    "explanation": "The fixed pattern is a rise in something. Use in for what increases, while of would be used to describe the size of the rise."
+  },
+  {
+    "id": "ielts-2026-gram-002",
+    "subject": "Grammar",
+    "topic": "Conditionals",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Which is the correct first conditional structure?",
+    "options": {
+      "A": "If + past simple, would + base verb",
+      "B": "If + present simple, will + base verb",
+      "C": "If + will, present simple",
+      "D": "If + present simple, would + base verb"
+    },
+    "correctAnswer": "B",
+    "explanation": "The first conditional describes a likely future result: If + present simple, will + base verb. Never put will after if."
+  },
+  {
+    "id": "ielts-2026-gram-003",
+    "subject": "Grammar",
+    "topic": "Relative Clauses",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Complete the sentence: 'Students _____ study regularly usually perform better.'",
+    "options": {
+      "A": "which",
+      "B": "whom",
+      "C": "who",
+      "D": "whose"
+    },
+    "correctAnswer": "C",
+    "explanation": "Use who when the relative pronoun is the subject of the clause for people, whom for objects, which for things and whose for possession."
   }
 ]

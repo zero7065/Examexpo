@@ -1,0 +1,1032 @@
+[
+  {
+    "id": "sat-2023-read-001",
+    "subject": "Reading",
+    "topic": "Main Idea",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Passage: 'City planners once believed that adding lanes to busy roads would ease traffic. Studies later showed that wider roads often attracted more drivers, leaving commuters in the same delays.' What is the main idea of the passage?",
+    "options": {
+      "A": "Adding road lanes does not necessarily reduce traffic delays.",
+      "B": "City planners have stopped studying traffic.",
+      "C": "Commuters prefer narrow roads to wide ones.",
+      "D": "Studies about traffic are usually unreliable."
+    },
+    "correctAnswer": "A",
+    "explanation": "The passage contrasts planners' belief with study results: wider roads attract more drivers, so extra lanes fail to ease congestion."
+  },
+  {
+    "id": "sat-2024-read-002",
+    "subject": "Reading",
+    "topic": "Command of Evidence",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Passage: 'When the city cut the library's budget, many assumed the weekend reading programs would close. Instead, volunteer docents ran them, and attendance rose that year.' Which choice best supports the conclusion that the reading programs succeeded despite funding cuts?",
+    "options": {
+      "A": "Libraries across the country face similar budget pressures.",
+      "B": "Attendance increased while volunteers, not paid staff, ran the programs after the budget was cut.",
+      "C": "Volunteers often enjoy working with children.",
+      "D": "Weekend programs are more popular than weekday programs."
+    },
+    "correctAnswer": "B",
+    "explanation": "Command of Evidence asks for the detail that most directly proves the claim, and rising attendance under budget cuts shows the programs succeeded anyway.",
+    "highYield": true
+  },
+  {
+    "id": "sat-2025-read-003",
+    "subject": "Reading",
+    "topic": "Words in Context",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Passage: 'The professor's explanation of the eclipse was so lucid that even the first-year students followed every step.' As used in the passage, 'lucid' most nearly means:",
+    "options": {
+      "A": "confusing",
+      "B": "brief",
+      "C": "clear",
+      "D": "scientific"
+    },
+    "correctAnswer": "C",
+    "explanation": "'Lucid' describes speech or writing that is easy to understand, so 'clear' is the closest meaning in this context."
+  },
+  {
+    "id": "sat-2023-read-004",
+    "subject": "Reading",
+    "topic": "Inference",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Passage: 'Marcus handed his umbrella to the stranger waiting under the awning, then stepped into the downpour and ran for the bus.' It can be reasonably inferred that Marcus:",
+    "options": {
+      "A": "disliked the stranger.",
+      "B": "had forgotten his own appointment.",
+      "C": "expected the rain to stop immediately.",
+      "D": "was in a hurry but still willing to help someone."
+    },
+    "correctAnswer": "D",
+    "explanation": "Giving away his umbrella shows kindness while running for the bus shows he was rushed, so both details support option D."
+  },
+  {
+    "id": "sat-2024-read-005",
+    "subject": "Reading",
+    "topic": "Main Idea",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Passage: 'After city rooftops were planted with native wildflowers, counts of honeybees and bumblebees climbed steadily, suggesting that urban spaces can support pollinators when the right plants are available.' Which statement best expresses the main idea?",
+    "options": {
+      "A": "Bees now prefer cities to the countryside.",
+      "B": "Urban areas can support pollinators when suitable plants are grown there.",
+      "C": "Wildflowers cannot survive anywhere except rooftops.",
+      "D": "Bumblebees outnumber honeybees in every city."
+    },
+    "correctAnswer": "B",
+    "explanation": "The rising bee counts after planting wildflowers support the central idea that cities can sustain pollinators when the right plants grow there."
+  },
+  {
+    "id": "sat-2025-read-006",
+    "subject": "Reading",
+    "topic": "Words in Context",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Passage: 'The critic's review of the new novel was so acerbic that the author publicly vowed never to read it.' As used in the passage, 'acerbic' most nearly means:",
+    "options": {
+      "A": "praiseful",
+      "B": "humorous",
+      "C": "bitingly critical",
+      "D": "detailed"
+    },
+    "correctAnswer": "C",
+    "explanation": "'Acerbic' means sharp and harsh in tone, which explains the author's strong reaction, so 'bitingly critical' fits best."
+  },
+  {
+    "id": "sat-2023-read-007",
+    "subject": "Reading",
+    "topic": "Command of Evidence",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Passage: 'By 1920 most American farms had at least one tractor, yet the number of horses on farms did not drop sharply until the 1940s.' Which choice provides the best evidence for the idea that tractors replaced horses slowly?",
+    "options": {
+      "A": "Farms had tractors by 1920, but horse numbers fell sharply only in the 1940s.",
+      "B": "Tractors were first invented in the nineteenth century.",
+      "C": "American farms grew larger over the course of the century.",
+      "D": "Horses require daily feeding and shelter."
+    },
+    "correctAnswer": "A",
+    "explanation": "The gap between tractor adoption in 1920 and the horse decline in the 1940s is the direct evidence that the replacement happened gradually."
+  },
+  {
+    "id": "sat-2024-read-008",
+    "subject": "Reading",
+    "topic": "Inference",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Passage: 'Nobody had mentioned the missing trophy, yet when Coach Rivera entered the locker room, every player suddenly found somewhere else to look.' It can be inferred that the players:",
+    "options": {
+      "A": "were proud of the trophy.",
+      "B": "disliked Coach Rivera.",
+      "C": "were focused on the next practice.",
+      "D": "knew more about the trophy's disappearance than they were willing to say."
+    },
+    "correctAnswer": "D",
+    "explanation": "Their coordinated avoidance before anything was said suggests they were hiding knowledge of what happened to the trophy."
+  },
+  {
+    "id": "sat-2025-read-009",
+    "subject": "Reading",
+    "topic": "Paired Passages",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "Passage 1: 'Homework builds discipline and reinforces what students learn in class.' Passage 2: 'Excessive homework eats into family time and raises stress while producing little academic gain.' A student summarizing both passages would most reasonably conclude that they:",
+    "options": {
+      "A": "agree that schools should ban homework entirely.",
+      "B": "disagree about whether homework's benefits outweigh its costs.",
+      "C": "focus on completely different school subjects.",
+      "D": "both argue for doubling the amount of homework."
+    },
+    "correctAnswer": "B",
+    "explanation": "Passage 1 stresses homework's benefits while Passage 2 stresses its costs, so the two disagree about the overall trade-off."
+  },
+  {
+    "id": "sat-2023-read-010",
+    "subject": "Reading",
+    "topic": "Words in Context",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Passage: 'The hikers were loath to continue once the trail vanished into thick fog.' As used in the passage, 'loath' most nearly means:",
+    "options": {
+      "A": "eager",
+      "B": "unable",
+      "C": "unwilling",
+      "D": "prepared"
+    },
+    "correctAnswer": "C",
+    "explanation": "'Loath' means reluctant or unwilling, which explains why the hikers hesitated to go on."
+  },
+  {
+    "id": "sat-2024-read-011",
+    "subject": "Reading",
+    "topic": "Command of Evidence",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Passage: 'In a survey of two hundred students, those who ate breakfast before class reported higher concentration than those who skipped it, though the survey did not control for sleep habits.' Which choice best supports the survey's reported finding?",
+    "options": {
+      "A": "Breakfast is often called the most important meal of the day.",
+      "B": "The survey included exactly two hundred students.",
+      "C": "Students who skipped breakfast often slept late.",
+      "D": "Students who ate breakfast reported higher concentration than those who skipped it."
+    },
+    "correctAnswer": "D",
+    "explanation": "The best evidence for a finding is the reported result itself: breakfast eaters said they concentrated more than students who skipped the meal."
+  },
+  {
+    "id": "sat-2025-read-012",
+    "subject": "Reading",
+    "topic": "Main Idea",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Passage: 'Seed libraries let gardeners borrow heirloom seeds, grow them, and return new seeds at harvest, preserving varieties that supermarkets never sell.' Which of the following best states the main idea of the passage?",
+    "options": {
+      "A": "Supermarkets refuse to sell any heirloom vegetables.",
+      "B": "Gardeners can only borrow seeds from public libraries.",
+      "C": "Seed libraries help preserve plant varieties that are otherwise unavailable.",
+      "D": "Heirloom seeds grow faster than hybrid seeds."
+    },
+    "correctAnswer": "C",
+    "explanation": "The passage centers on how seed loans keep rare varieties alive, so option C captures its main point."
+  },
+  {
+    "id": "sat-2023-read-013",
+    "subject": "Reading",
+    "topic": "Command of Evidence",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "hard",
+    "question": "Passage: 'Twice as many birds were counted in the restored wetland as in the drained field next door, even though both areas were surveyed on the same mornings.' Which finding, if true, would most directly support the passage's claim?",
+    "options": {
+      "A": "The same survey methods were used in both areas, and the wetland consistently showed about twice the bird count.",
+      "B": "Wetlands are common in many parts of the country.",
+      "C": "Birds are difficult to count accurately.",
+      "D": "The drained field is privately owned."
+    },
+    "correctAnswer": "A",
+    "explanation": "Strong evidence repeats the comparison under identical conditions, directly confirming the two-to-one difference in bird counts.",
+    "highYield": true
+  },
+  {
+    "id": "sat-2024-read-014",
+    "subject": "Reading",
+    "topic": "Words in Context",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Passage: 'The two neighbors reconciled after years of arguing over the fence and soon exchanged holiday cards.' As used in the passage, 'reconciled' most nearly means:",
+    "options": {
+      "A": "moved away",
+      "B": "restored friendly relations",
+      "C": "repaired the fence",
+      "D": "continued the argument"
+    },
+    "correctAnswer": "B",
+    "explanation": "In context, reconciling ends a dispute, and the holiday cards show that friendly relations were restored."
+  },
+  {
+    "id": "sat-2025-read-015",
+    "subject": "Reading",
+    "topic": "Inference",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Passage: 'The museum's new evening hours drew mostly college students, prompting the director to add a weekend lecture series aimed at older visitors.' It can be inferred that the director:",
+    "options": {
+      "A": "plans to close the museum during the day.",
+      "B": "believes college students visit too often.",
+      "C": "has abolished the evening hours.",
+      "D": "wants to attract visitors who were not coming during the evening hours."
+    },
+    "correctAnswer": "D",
+    "explanation": "Adding a series aimed at older visitors implies the evening crowds skewed young and the director wants a broader audience."
+  },
+  {
+    "id": "sat-2023-read-016",
+    "subject": "Reading",
+    "topic": "Main Idea",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Passage: 'When a city planted trees along its hottest streets, residents reported lower summer discomfort, and energy bills in nearby homes fell slightly.' Which idea is best supported by the passage?",
+    "options": {
+      "A": "Street trees can reduce urban heat and lower nearby cooling costs.",
+      "B": "Trees are the cheapest form of air conditioning.",
+      "C": "Residents disliked the new trees.",
+      "D": "Energy bills always fall by large amounts in summer."
+    },
+    "correctAnswer": "A",
+    "explanation": "Reported improvements in comfort plus slightly lower bills support the idea that street trees cool neighborhoods."
+  },
+  {
+    "id": "sat-2024-read-017",
+    "subject": "Reading",
+    "topic": "Paired Passages",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Passage 1: 'Public transit reduces congestion and pollution, so cities should invest more in buses and trains.' Passage 2: 'Transit routes rarely serve suburban workers, so most commuters will keep driving no matter how much cities spend.' A student noting the relationship between the passages would say that Passage 2:",
+    "options": {
+      "A": "proves every claim in Passage 1.",
+      "B": "changes the subject to suburban weather.",
+      "C": "raises a limitation that qualifies the investment urged in Passage 1.",
+      "D": "agrees completely with Passage 1's recommendation."
+    },
+    "correctAnswer": "C",
+    "explanation": "Passage 2 does not deny transit benefits; it points out a coverage gap that limits how effective extra investment would be."
+  },
+  {
+    "id": "sat-2025-read-018",
+    "subject": "Reading",
+    "topic": "Words in Context",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "Passage: 'Because the instructions were terse, the volunteers finished assembling the shelves in minutes.' As used in the passage, 'terse' most nearly means:",
+    "options": {
+      "A": "polite",
+      "B": "confusing",
+      "C": "long-winded",
+      "D": "concise"
+    },
+    "correctAnswer": "D",
+    "explanation": "'Terse' means brief and to the point, which is why the volunteers could follow the instructions quickly."
+  },
+  {
+    "id": "sat-2023-read-019",
+    "subject": "Reading",
+    "topic": "Command of Evidence",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Passage: 'Students in the after-school coding club scored higher on the school's logic test than students who did not join, though the club attracted volunteers who already liked puzzles.' Which statement best reveals a possible weakness in the conclusion?",
+    "options": {
+      "A": "Club members were volunteers who already enjoyed puzzles before joining.",
+      "B": "The logic test was given in the spring.",
+      "C": "The coding club met twice each week.",
+      "D": "Some students joined the club in its second year."
+    },
+    "correctAnswer": "A",
+    "explanation": "Pre-existing puzzle lovers would likely score higher anyway, so the result may reflect self-selection rather than the club itself."
+  },
+  {
+    "id": "sat-2024-read-020",
+    "subject": "Reading",
+    "topic": "Inference",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Passage: 'The bakery sold out of bread by nine every morning, so the owner started arriving an hour earlier to prepare a second batch.' It can be inferred that the owner:",
+    "options": {
+      "A": "was planning to close the bakery.",
+      "B": "wanted to meet demand that the first batch could not satisfy.",
+      "C": "had stopped baking bread altogether.",
+      "D": "arrived later than the previous owner."
+    },
+    "correctAnswer": "B",
+    "explanation": "Baking more after selling out shows demand exceeded the first batch, so the owner started earlier to supply it."
+  },
+  {
+    "id": "sat-2023-writ-001",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Which sentence is grammatically correct?",
+    "options": {
+      "A": "The box of chocolates sit on the table.",
+      "B": "The box of chocolates sits on the table.",
+      "C": "The box of chocolates are sitting on the table.",
+      "D": "The box of chocolates have sat on the table."
+    },
+    "correctAnswer": "B",
+    "explanation": "The subject is 'box' (singular), not 'chocolates', so it takes the singular verb 'sits'.",
+    "highYield": true
+  },
+  {
+    "id": "sat-2024-writ-002",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Which sentence uses pronouns correctly?",
+    "options": {
+      "A": "Mina and I presented the poster to her and me.",
+      "B": "Mina and me presented the poster to she and I.",
+      "C": "Her and I presented the poster to Mina and I.",
+      "D": "Mina and I presented the poster to she and we."
+    },
+    "correctAnswer": "A",
+    "explanation": "'Mina and I' is the subject of the sentence, while 'her and me' are objects of the preposition 'to', so only A uses the correct cases."
+  },
+  {
+    "id": "sat-2025-writ-003",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Which sentence avoids a comma splice?",
+    "options": {
+      "A": "The rain fell all night, the streets were flooded by morning.",
+      "B": "The rain fell all night, the streets flooding by morning.",
+      "C": "The rain fell all night; the streets were flooded by morning.",
+      "D": "The rain fell all night the streets, were flooded by morning."
+    },
+    "correctAnswer": "C",
+    "explanation": "Two independent clauses cannot be joined by only a comma, so a semicolon (or a comma plus a conjunction) is required."
+  },
+  {
+    "id": "sat-2023-writ-004",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Which sentence maintains consistent verb tense?",
+    "options": {
+      "A": "She opened the door, walked across the room, and sat down.",
+      "B": "She opens the door, walked across the room, and sits down.",
+      "C": "She opened the door, walks across the room, and was sitting down.",
+      "D": "She opening the door, walked across the room, and sat down."
+    },
+    "correctAnswer": "A",
+    "explanation": "All three actions happen in sequence in the past, so they should all use the past tense: opened, walked, sat."
+  },
+  {
+    "id": "sat-2024-writ-005",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Which sentence uses the semicolon correctly?",
+    "options": {
+      "A": "The chef bought; onions, garlic, and thyme.",
+      "B": "The chef bought onions; and also garlic and thyme.",
+      "C": "Because the chef bought onions; everyone else bought bread.",
+      "D": "The chef bought onions and garlic; the rest of the ingredients arrived later."
+    },
+    "correctAnswer": "D",
+    "explanation": "A semicolon joins two closely related independent clauses, as in D, but it cannot separate a verb from its objects."
+  },
+  {
+    "id": "sat-2025-writ-006",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "Which sentence uses pronouns clearly?",
+    "options": {
+      "A": "When Ana met Bea, she was nervous.",
+      "B": "Ana felt nervous when she met Bea.",
+      "C": "Ana told Bea that she was late.",
+      "D": "Ana and Bea, she said, was nervous."
+    },
+    "correctAnswer": "B",
+    "explanation": "In B, 'she' clearly refers to Ana because the pronoun sits in its own clause with Ana as the subject, removing all ambiguity."
+  },
+  {
+    "id": "sat-2023-writ-007",
+    "subject": "Writing",
+    "topic": "Transitions",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "hard",
+    "question": "The city invested in solar panels; ______, its electricity costs fell sharply over the next decade. Which transition best completes the sentence?",
+    "options": {
+      "A": "however",
+      "B": "for example",
+      "C": "as a result",
+      "D": "nevertheless"
+    },
+    "correctAnswer": "C",
+    "explanation": "The second clause states a consequence of the first, so the cause-and-effect transition 'as a result' fits best.",
+    "highYield": true
+  },
+  {
+    "id": "sat-2024-writ-008",
+    "subject": "Writing",
+    "topic": "Rhetoric",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "A student writes: 'The community garden opened in May. Tomatoes, peppers, and herbs grew in raised beds. Visitors could take home whatever they needed.' Which sentence, if added, would most logically support the paragraph's point about the garden's success?",
+    "options": {
+      "A": "By August, the garden had produced more than two hundred pounds of vegetables.",
+      "B": "The garden's fence was painted green.",
+      "C": "Many cities have more than one community garden.",
+      "D": "Some people dislike tomatoes."
+    },
+    "correctAnswer": "A",
+    "explanation": "A concrete production total directly supports the idea that the garden succeeded, while the other choices are irrelevant to the paragraph."
+  },
+  {
+    "id": "sat-2025-writ-009",
+    "subject": "Writing",
+    "topic": "Rhetoric",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "In a paragraph about the invention of the printing press, which sentence is least relevant and should be deleted?",
+    "options": {
+      "A": "Gutenberg's press made it possible to produce books quickly and cheaply.",
+      "B": "Before the press, books were copied by hand, so few people owned them.",
+      "C": "The spread of printed material helped literacy rates rise across Europe.",
+      "D": "Today's fastest printers can produce thousands of pages per hour."
+    },
+    "correctAnswer": "D",
+    "explanation": "The paragraph concerns the historical impact of the early printing press, so a detail about modern printers is off-topic."
+  },
+  {
+    "id": "sat-2023-writ-010",
+    "subject": "Writing",
+    "topic": "Transitions",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Early bicycles were heavy and difficult to steer. ______, modern designs are lightweight and easy to handle. Which transition best shows the contrast between the two sentences?",
+    "options": {
+      "A": "Similarly",
+      "B": "In contrast",
+      "C": "For instance",
+      "D": "Therefore"
+    },
+    "correctAnswer": "B",
+    "explanation": "The sentences describe opposite qualities, so a contrast transition like 'In contrast' signals the shift for the reader."
+  },
+  {
+    "id": "sat-2024-writ-011",
+    "subject": "Writing",
+    "topic": "Rhetoric",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "Paragraph: (1) The river flooded every spring. (2) Engineers designed a new flood barrier. (3) The old wooden posts had rotted over decades. (4) Since its completion, no home in the valley has flooded. Where should the following sentence go: 'These posts had once held the riverbank in place.'?",
+    "options": {
+      "A": "After sentence 1",
+      "B": "After sentence 4",
+      "C": "After sentence 3",
+      "D": "Before sentence 2"
+    },
+    "correctAnswer": "C",
+    "explanation": "The pronoun 'these posts' must follow its antecedent, so the sentence belongs directly after sentence 3, which mentions the old wooden posts."
+  },
+  {
+    "id": "sat-2025-writ-012",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "easy",
+    "question": "Which sentence is punctuated correctly?",
+    "options": {
+      "A": "The teachers opinion was that it's members deserved a raise.",
+      "B": "The teacher's opinion was that it's members deserved a raise.",
+      "C": "The teachers opinion was that its members deserved a raise.",
+      "D": "The teacher's opinion was that its members deserved a raise."
+    },
+    "correctAnswer": "D",
+    "explanation": "'Teacher's' shows possession, while 'its' (with no apostrophe) is the possessive form; 'it's' would mean 'it is'."
+  },
+  {
+    "id": "sat-2023-writ-013",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Which sentence uses parallel structure?",
+    "options": {
+      "A": "She likes hiking, to swim, and bicycle rides.",
+      "B": "She likes hiking, swimming, and riding bicycles.",
+      "C": "She likes to hike, swimming, and rode a bicycle.",
+      "D": "She likes hikes, to swim, and biking was fun."
+    },
+    "correctAnswer": "B",
+    "explanation": "All three items in B are gerunds (hiking, swimming, riding), so the list is grammatically parallel."
+  },
+  {
+    "id": "sat-2024-writ-014",
+    "subject": "Writing",
+    "topic": "Rhetoric",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "Which sequence arranges the sentences into a logical paragraph? (1) As a result, the company moved its offices downtown. (2) The old warehouse had poor lighting and no air conditioning. (3) Employees complained about the heat during summer. (4) The warehouse lease also expired in June.",
+    "options": {
+      "A": "1-2-3-4",
+      "B": "1-3-2-4",
+      "C": "3-4-2-1",
+      "D": "2-3-4-1"
+    },
+    "correctAnswer": "D",
+    "explanation": "A logical order presents the problem, evidence of the problem, an additional issue, and finally the outcome, which is 2-3-4-1."
+  },
+  {
+    "id": "sat-2025-writ-015",
+    "subject": "Writing",
+    "topic": "Transitions",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "The museum offers free admission on the first Sunday of each month; ______, visitors should still reserve a timed entry slot online. Which transition best completes the sentence?",
+    "options": {
+      "A": "even so",
+      "B": "in other words",
+      "C": "for instance",
+      "D": "on the contrary"
+    },
+    "correctAnswer": "A",
+    "explanation": "The second clause states a requirement despite the free admission, so the concessive transition 'even so' fits best.",
+    "highYield": true
+  },
+  {
+    "id": "sat-2023-writ-016",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Which sentence is punctuated correctly?",
+    "options": {
+      "A": "After the lecture the students, discussed it eagerly.",
+      "B": "After the lecture the students discussed it eagerly.",
+      "C": "After the lecture, the students discussed it eagerly.",
+      "D": "After, the lecture the students discussed it eagerly."
+    },
+    "correctAnswer": "C",
+    "explanation": "An introductory phrase should be followed by a comma, and the rest of the sentence needs no additional commas."
+  },
+  {
+    "id": "sat-2024-writ-017",
+    "subject": "Writing",
+    "topic": "Rhetoric",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "A writer wants to add the sentence 'The new policy took effect in September.' Where does it belong most logically? Paragraph: (1) The school board approved a revised attendance rule in June. (2) Parents received letters explaining the changes. (3) Under the rule, students need a note for every absence.",
+    "options": {
+      "A": "Before sentence 1",
+      "B": "After sentence 2",
+      "C": "After sentence 3",
+      "D": "After sentence 1"
+    },
+    "correctAnswer": "D",
+    "explanation": "The sentence states when the approved rule started, so it logically follows sentence 1's account of the board's approval."
+  },
+  {
+    "id": "sat-2025-writ-018",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Which sentence uses the correct pronoun?",
+    "options": {
+      "A": "The coach, whom everyone respects, led the team to victory.",
+      "B": "The coach, who everyone respects, led the team to victory.",
+      "C": "The coach, whom led the team to victory, received the award.",
+      "D": "The trophy was given to who scored the last goal."
+    },
+    "correctAnswer": "A",
+    "explanation": "'Whom' is the object form, and in 'whom everyone respects' the coach is the object of 'respects', so A is correct."
+  },
+  {
+    "id": "sat-2023-writ-019",
+    "subject": "Writing",
+    "topic": "Rhetoric",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "hard",
+    "question": "A paragraph argues that city bike lanes reduce traffic accidents. Which sentence most strengthens the argument?",
+    "options": {
+      "A": "Bike lanes are often painted green.",
+      "B": "Some cyclists prefer riding at night.",
+      "C": "After a protected lane was added on Main Street, cyclist injuries there fell by forty percent.",
+      "D": "Many drivers also ride bicycles on weekends."
+    },
+    "correctAnswer": "C",
+    "explanation": "A specific statistic showing injuries dropped after a lane was added directly supports the claim that lanes reduce accidents."
+  },
+  {
+    "id": "sat-2024-writ-020",
+    "subject": "Writing",
+    "topic": "Standard English Conventions",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "Which sentence uses the correct verb form?",
+    "options": {
+      "A": "She has went to the market already.",
+      "B": "She has gone to the market already.",
+      "C": "She have gone to the market already.",
+      "D": "She had went to the market already."
+    },
+    "correctAnswer": "B",
+    "explanation": "The present perfect tense uses 'has' plus the past participle 'gone', not the simple past form 'went'."
+  },
+  {
+    "id": "sat-2023-math-001",
+    "subject": "Math",
+    "topic": "Linear Equations",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "Solve for x: 3x + 7 = 22",
+    "options": {
+      "A": "x = 3",
+      "B": "x = 4",
+      "C": "x = 5",
+      "D": "x = 7"
+    },
+    "correctAnswer": "C",
+    "explanation": "Subtract 7 from both sides to get 3x = 15, then divide by 3, so x = 5.",
+    "highYield": true
+  },
+  {
+    "id": "sat-2024-math-002",
+    "subject": "Math",
+    "topic": "Percentages",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "A jacket priced at $80 is discounted by 25%. What is the sale price?",
+    "options": {
+      "A": "$15",
+      "B": "$60",
+      "C": "$65",
+      "D": "$75"
+    },
+    "correctAnswer": "B",
+    "explanation": "25% of 80 is 20, so the discount is $20 and the sale price is 80 - 20 = $60."
+  },
+  {
+    "id": "sat-2025-math-003",
+    "subject": "Math",
+    "topic": "Systems of Equations",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "If x + y = 10 and x - y = 4, what is the value of x?",
+    "options": {
+      "A": "7",
+      "B": "6",
+      "C": "5",
+      "D": "3"
+    },
+    "correctAnswer": "A",
+    "explanation": "Add the two equations: 2x = 14, so x = 7 (and y = 3)."
+  },
+  {
+    "id": "sat-2023-math-004",
+    "subject": "Math",
+    "topic": "Inequalities",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "Which of the following values satisfies the inequality 2x - 5 > 7?",
+    "options": {
+      "A": "x = 5",
+      "B": "x = 6",
+      "C": "x = 4",
+      "D": "x = 7"
+    },
+    "correctAnswer": "D",
+    "explanation": "Adding 5 to both sides gives 2x > 12, so x > 6; among the choices, only x = 7 satisfies the inequality."
+  },
+  {
+    "id": "sat-2024-math-005",
+    "subject": "Math",
+    "topic": "Geometry and Trigonometry",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "A triangle has a base of 12 cm and a height of 5 cm. What is its area in cm²?",
+    "options": {
+      "A": "30",
+      "B": "60",
+      "C": "17",
+      "D": "35"
+    },
+    "correctAnswer": "A",
+    "explanation": "The area of a triangle is ½ × base × height = ½ × 12 × 5 = 30 cm².",
+    "highYield": true
+  },
+  {
+    "id": "sat-2025-math-006",
+    "subject": "Math",
+    "topic": "Advanced Math",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "Simplify: 2³ × 2⁴",
+    "options": {
+      "A": "2¹²",
+      "B": "4⁷",
+      "C": "2⁷",
+      "D": "2"
+    },
+    "correctAnswer": "C",
+    "explanation": "When multiplying powers with the same base, add the exponents: 3 + 4 = 7, so the result is 2⁷ (= 128)."
+  },
+  {
+    "id": "sat-2023-math-007",
+    "subject": "Math",
+    "topic": "Ratios and Proportions",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "A recipe uses flour and sugar in the ratio 5:2. If 500 g of flour is used, how many grams of sugar are needed?",
+    "options": {
+      "A": "50 g",
+      "B": "200 g",
+      "C": "250 g",
+      "D": "100 g"
+    },
+    "correctAnswer": "B",
+    "explanation": "The ratio 5:2 means each part is 500 ÷ 5 = 100 g, so the sugar needed is 2 × 100 = 200 g."
+  },
+  {
+    "id": "sat-2024-math-008",
+    "subject": "Math",
+    "topic": "Advanced Math",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "What are the solutions of x² - 5x + 6 = 0?",
+    "options": {
+      "A": "x = 1 or x = 6",
+      "B": "x = -2 or x = -3",
+      "C": "x = 0 or x = 5",
+      "D": "x = 2 or x = 3"
+    },
+    "correctAnswer": "D",
+    "explanation": "Factor the quadratic as (x - 2)(x - 3) = 0, so the solutions are x = 2 and x = 3."
+  },
+  {
+    "id": "sat-2025-math-009",
+    "subject": "Math",
+    "topic": "Problem Solving and Data Analysis",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "What is the median of the data set: 4, 9, 7, 2, 8, 5, 6?",
+    "options": {
+      "A": "6",
+      "B": "5",
+      "C": "7",
+      "D": "4.5"
+    },
+    "correctAnswer": "A",
+    "explanation": "Order the values (2, 4, 5, 6, 7, 8, 9); the middle value of the seven numbers is 6.",
+    "highYield": true
+  },
+  {
+    "id": "sat-2023-math-010",
+    "subject": "Math",
+    "topic": "Problem Solving and Data Analysis",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "easy",
+    "question": "A car travels 180 miles in 3 hours. At this rate, how far will it travel in 5 hours?",
+    "options": {
+      "A": "240 miles",
+      "B": "270 miles",
+      "C": "300 miles",
+      "D": "360 miles"
+    },
+    "correctAnswer": "C",
+    "explanation": "The car's rate is 180 ÷ 3 = 60 mph, so in 5 hours it travels 60 × 5 = 300 miles."
+  },
+  {
+    "id": "sat-2024-math-011",
+    "subject": "Math",
+    "topic": "Advanced Math",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "If f(x) = 2x² - 3, what is f(4)?",
+    "options": {
+      "A": "13",
+      "B": "29",
+      "C": "32",
+      "D": "35"
+    },
+    "correctAnswer": "B",
+    "explanation": "Substitute x = 4: 2(4²) - 3 = 2(16) - 3 = 32 - 3 = 29."
+  },
+  {
+    "id": "sat-2025-math-012",
+    "subject": "Math",
+    "topic": "Geometry and Trigonometry",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "hard",
+    "question": "A circle has a radius of 6 cm. What is its circumference in terms of π?",
+    "options": {
+      "A": "36π cm",
+      "B": "24π cm",
+      "C": "6π cm",
+      "D": "12π cm"
+    },
+    "correctAnswer": "D",
+    "explanation": "Circumference equals 2πr, so 2π × 6 = 12π cm."
+  },
+  {
+    "id": "sat-2023-math-013",
+    "subject": "Math",
+    "topic": "Problem Solving and Data Analysis",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "hard",
+    "question": "A bag contains 3 red, 4 blue, and 3 green marbles. What is the probability of drawing a blue marble?",
+    "options": {
+      "A": "1/2",
+      "B": "3/10",
+      "C": "2/5",
+      "D": "1/4"
+    },
+    "correctAnswer": "C",
+    "explanation": "There are 10 marbles in total and 4 are blue, so the probability is 4/10, which simplifies to 2/5."
+  },
+  {
+    "id": "sat-2024-math-014",
+    "subject": "Math",
+    "topic": "Percentages",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "easy",
+    "question": "What is 15% of 200?",
+    "options": {
+      "A": "30",
+      "B": "15",
+      "C": "20",
+      "D": "45"
+    },
+    "correctAnswer": "A",
+    "explanation": "15% of 200 = 0.15 × 200 = 30.",
+    "highYield": true
+  },
+  {
+    "id": "sat-2025-math-015",
+    "subject": "Math",
+    "topic": "Geometry and Trigonometry",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "In a right triangle, the side opposite a 30° angle is 5 cm and the hypotenuse is 10 cm. What is sin 30°?",
+    "options": {
+      "A": "√3/2",
+      "B": "2",
+      "C": "√3",
+      "D": "1/2"
+    },
+    "correctAnswer": "D",
+    "explanation": "Sine is the opposite side divided by the hypotenuse, so sin 30° = 5/10 = 1/2."
+  },
+  {
+    "id": "sat-2023-math-016",
+    "subject": "Math",
+    "topic": "Linear Equations",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "medium",
+    "question": "What is the slope of the line passing through the points (2, 3) and (6, 11)?",
+    "options": {
+      "A": "1/2",
+      "B": "2",
+      "C": "4",
+      "D": "1/4"
+    },
+    "correctAnswer": "B",
+    "explanation": "Slope = (11 - 3) ÷ (6 - 2) = 8 ÷ 4 = 2."
+  },
+  {
+    "id": "sat-2024-math-017",
+    "subject": "Math",
+    "topic": "Advanced Math",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "hard",
+    "question": "What is the vertex of the parabola y = x² - 6x + 5?",
+    "options": {
+      "A": "(-3, -4)",
+      "B": "(6, 5)",
+      "C": "(3, -4)",
+      "D": "(3, 4)"
+    },
+    "correctAnswer": "C",
+    "explanation": "The x-coordinate of the vertex is -b/2a = 6/2 = 3; substituting gives y = 9 - 18 + 5 = -4.",
+    "highYield": true
+  },
+  {
+    "id": "sat-2025-math-018",
+    "subject": "Math",
+    "topic": "Problem Solving and Data Analysis",
+    "exam": ["SAT"],
+    "year": 2025,
+    "difficulty": "medium",
+    "question": "The mean of five numbers is 12. If one of the numbers, 20, is removed, what is the mean of the remaining four numbers?",
+    "options": {
+      "A": "8",
+      "B": "10",
+      "C": "12",
+      "D": "14"
+    },
+    "correctAnswer": "B",
+    "explanation": "The five numbers sum to 5 × 12 = 60; after removing 20 the sum is 40, and 40 ÷ 4 = 10."
+  },
+  {
+    "id": "sat-2023-math-019",
+    "subject": "Math",
+    "topic": "Geometry and Trigonometry",
+    "exam": ["SAT"],
+    "year": 2023,
+    "difficulty": "hard",
+    "question": "A cylindrical can has a radius of 4 cm and a height of 9 cm. What is its volume in terms of π?",
+    "options": {
+      "A": "36π cm³",
+      "B": "112π cm³",
+      "C": "72π cm³",
+      "D": "144π cm³"
+    },
+    "correctAnswer": "D",
+    "explanation": "The volume of a cylinder is πr²h = π × 4² × 9 = 144π cm³."
+  },
+  {
+    "id": "sat-2024-math-020",
+    "subject": "Math",
+    "topic": "Ratios and Proportions",
+    "exam": ["SAT"],
+    "year": 2024,
+    "difficulty": "medium",
+    "question": "If 3 notebooks cost $7.50, how much do 8 notebooks cost at the same rate?",
+    "options": {
+      "A": "$20.00",
+      "B": "$18.00",
+      "C": "$24.00",
+      "D": "$16.00"
+    },
+    "correctAnswer": "A",
+    "explanation": "One notebook costs 7.50 ÷ 3 = $2.50, so 8 notebooks cost 8 × 2.50 = $20.00."
+  }
+]

@@ -1,4 +1,4 @@
-# ExamPadi AI
+# ExamPadi
 
 JAMB/WAEC/NECO/NABTEB exam prep app with AI-powered tutoring, Pro subscriptions, and adaptive practice.
 

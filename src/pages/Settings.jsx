@@ -80,6 +80,12 @@ function Toggle({ value, onChange }) {  return (
   );
 }
 
+const DEFAULT_PREFERENCES = {
+  sessionLength: 10, questionOrder: "random", showHints: false, autoAdvance: false,
+  dailyReminder: true, streakAlerts: true, newQuestions: true,
+  showIntlExams: false, // IELTS/SAT hidden from the menu until turned on
+};
+
 export default function Settings() {
   const { user } = useAuth();
   const { isPro, daysLeft, loading: subLoading } = useSubscription();
@@ -92,7 +98,7 @@ export default function Settings() {
   const [targetInput, setTargetInput] = useState("");
   const [selectedSubjects, setSelectedSubjects] = useState([]);
   const [enabledExams, setEnabledExams] = useState([...ALL_EXAMS]);
-  const [preferences, setPreferences] = useState({ sessionLength: 10, questionOrder: "random", showHints: false, autoAdvance: false, dailyReminder: true, streakAlerts: true, newQuestions: true });
+  const [preferences, setPreferences] = useState(DEFAULT_PREFERENCES);
   const [showExamModal, setShowExamModal] = useState(false);
   const [showProModal, setShowProModal] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
@@ -128,7 +134,7 @@ export default function Settings() {
     }
   }
 
-  useEffect(() => { document.title = "Settings — ExamPadi AI"; }, []);
+  useEffect(() => { document.title = "Settings — ExamPadi"; }, []);
 
   useEffect(() => {
     if (user) getUserProfile(user.uid).then(p => {
@@ -139,7 +145,7 @@ export default function Settings() {
       }
       setNameInput(user.displayName || "");
       setTargetInput(String(p?.targetScore || 280));
-      if (p?.preferences) setPreferences(p.preferences);
+      if (p?.preferences) setPreferences({ ...DEFAULT_PREFERENCES, ...p.preferences });
     }).catch(() => {});
   }, [user]);
 
@@ -235,6 +241,12 @@ export default function Settings() {
           <Row label="Target Score" value={String(profile?.targetScore || 280)}>
             <input type="number" min={150} max={400} value={targetInput} onChange={e => handleTargetSave(e.target.value)} style={{ width: 80, background: "#1a1a1f", border: "1px solid #333", borderRadius: 6, padding: "6px 10px", color: "#fff", fontSize: 13, textAlign: "center", outline: "none", fontFamily: "inherit" }} />
           </Row>
+          <ToggleRow
+            label="Show IELTS & SAT in menu"
+            value={preferences.showIntlExams}
+            onChange={v => handlePref("showIntlExams", v)}
+          />
+          <p style={{ color: "#555", fontSize: 11, marginTop: 4 }}>Hidden by default — switch on if you're preparing to study or take exams abroad.</p>
         </Section>
 
         {/* Appearance */}

@@ -39,7 +39,8 @@ import {
   ShieldCheck,
   Newspaper,
   LibraryBig,
-  MonitorPlay
+  MonitorPlay,
+  Plane
 } from "lucide-react";
 
 const Navbar = () => {
@@ -51,6 +52,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [moreOpen, setMoreOpen] = useState(false);
+
+  // IELTS/SAT are international exams — hidden from the menu by default,
+  // revealed when the student turns them on in Settings → Profile.
+  const showIntlExams = profile?.preferences?.showIntlExams === true;
 
   // Organized navigation: grouped sections so students AND teachers
   // find things fast. Flat navItems derived below for active-state logic.
@@ -65,6 +70,10 @@ const Navbar = () => {
         { name: "Study Plan", path: "/study-plan", icon: FileText },
         { name: "CBT Guide", path: "/guide/cbt", icon: MonitorPlay },
         { name: "Reference", path: "/reference", icon: LibraryBig },
+        ...(showIntlExams ? [
+          { name: "IELTS", path: "/ielts", icon: Plane },
+          { name: "SAT", path: "/sat", icon: GraduationCap },
+        ] : []),
       ],
     },
     {
@@ -144,7 +153,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between mb-6 px-2 shrink-0">
           <Link to="/" className="flex items-center gap-3">
             <Logo size={32} radius={9} />
-            <h1 className="text-xl font-black tracking-tight text-text">ExamPadi <span className="text-primary">AI</span></h1>
+            <h1 className="text-xl font-black tracking-tight text-text">ExamPadi</h1>
           </Link>
           <button
             onClick={toggle}

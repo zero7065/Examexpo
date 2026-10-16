@@ -28,7 +28,7 @@ function canUseHint(examId, userId) {
 function requestFriendHelp(userId, userName, subject, examId) {
   const origin = window.location.origin;
   const message =
-    `Hey! I need help with ${subject} on ExamPadi AI. Can you assist me?\n\n` +
+    `Hey! I need help with ${subject} on ExamPadi. Can you assist me?\n\n` +
     `Exam: ${examId}\n` +
     `Click to help: ${origin}/help-request?exam=${examId}&from=${userId}`;
 

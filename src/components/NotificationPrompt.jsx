@@ -19,7 +19,7 @@ export default function NotificationPrompt() {
     localStorage.setItem("ep-notif-dismissed", "true");
     setDismissed(true);
     if (result === "granted") {
-      new Notification("ExamPadi AI", {
+      new Notification("ExamPadi", {
         body: "We'll remind you to study and keep your streak alive!",
         icon: "/pwa-192x192.png",
       });

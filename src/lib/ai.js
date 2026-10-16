@@ -42,6 +42,22 @@ function stripJsonFences(text) {
   return cleaned.trim();
 }
 
+// Fetch with a hard timeout so a stalled network never leaves the UI spinning.
+async function groqFetch(url, options, timeoutMs = 45000) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: ctrl.signal });
+  } catch (e) {
+    if (e?.name === "AbortError") {
+      throw new Error(`AI request timed out after ${Math.round(timeoutMs / 1000)}s — check your connection and try again.`, { cause: e });
+    }
+    throw e;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export function sanitizeAIResponse(text) {
   if (!text) return text;
   return text
@@ -72,7 +88,7 @@ async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, t
     try {
       // gpt-oss models are reasoning models — reasoning tokens count toward max_tokens
       const tokens = model.startsWith("openai/gpt-oss") ? maxTokens + 2000 : maxTokens;
-      const res = await fetch(GROQ_API_URL, {
+      const res = await groqFetch(GROQ_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +135,7 @@ async function callGroqChatWithFallback(systemPrompt, messages, maxTokens = 600,
   for (const model of MODELS) {
     try {
       const tokens = model.startsWith("openai/gpt-oss") ? maxTokens + 2000 : maxTokens;
-      const res = await fetch(GROQ_API_URL, {
+      const res = await groqFetch(GROQ_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -188,7 +204,7 @@ async function callGroqVisionChat(systemPrompt, textMessages, images, maxTokens 
     temperature: 0.6,
   };
   try {
-    const res = await fetch(GROQ_API_URL, {
+    const res = await groqFetch(GROQ_API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
       body: JSON.stringify(body),
@@ -226,7 +242,7 @@ export async function askGroqVision({ systemPrompt, messages, imageBase64, image
 
 // Document analysis: OCR + key points + likely exam questions from up to 3 pages.
 export async function analyzeDocument({ images, subject = "General", instruction = "" }) {
-  const system = `You are ExamPadi AI, a Nigerian exam tutor. Analyze the attached document photo(s) — class notes, textbook pages, or past questions. Respond in 3 short sections: 1) "What this says" (2-3 sentence summary), 2) "Key points to memorize" (up to 5 bullets), 3) "Likely exam questions" (3 questions a JAMB/WAEC examiner could set from this, with one-line answers). Plain simple language. Never say you are built by Google.`;
+  const system = `You are ExamPadi, a Nigerian exam tutor. Analyze the attached document photo(s) — class notes, textbook pages, or past questions. Respond in 3 short sections: 1) "What this says" (2-3 sentence summary), 2) "Key points to memorize" (up to 5 bullets), 3) "Likely exam questions" (3 questions a JAMB/WAEC examiner could set from this, with one-line answers). Plain simple language. Never say you are built by Google.`;
   const user = instruction.trim()
     || `Analyze this ${subject} document for exam prep.`;
   return askGroqVision({
@@ -251,7 +267,7 @@ export function buildTutorSystemPrompt({ subject, userProfile, memory }) {
   const sums = recentSummaries(memory, 3);
 
   const lines = [
-    "You are ExamPadi AI Tutor — an expert, friendly Nigerian exam tutor specializing in JAMB, WAEC, NECO and NABTEB.",
+    "You are ExamPadi Tutor — an expert, friendly Nigerian exam tutor specializing in JAMB, WAEC, NECO and NABTEB.",
     "",
     "Student profile:",
     `- Name: ${userProfile?.name || "Student"}`,
@@ -293,7 +309,7 @@ export function buildTutorSystemPrompt({ subject, userProfile, memory }) {
     });
   }
 
-  lines.push("", "Never say you are built by Google or mention Gemini. You are ExamPadi AI powered by Groq.");
+  lines.push("", "Never say you are built by Google or mention Gemini. You are ExamPadi powered by Groq.");
   return lines.join("\n");
 }
 
@@ -313,7 +329,7 @@ export async function askGroq(systemPrompt, userPrompt, opts = {}) {
 }
 
 export async function explainAnswer({ question, options, userAnswer, correctAnswer, subject, exam }) {
-  const system = `You are a friendly Nigerian exam tutor for ${exam || "JAMB"}. Never say you are built by Google or mention Gemini. You are ExamPadi AI powered by Groq.`;
+  const system = `You are a friendly Nigerian exam tutor for ${exam || "JAMB"}. Never say you are built by Google or mention Gemini. You are ExamPadi powered by Groq.`;
   const user = `Question: ${question}\nOptions: A) ${options.A} B) ${options.B} C) ${options.C} D) ${options.D}\nStudent answered: ${userAnswer}\nCorrect answer: ${correctAnswer}\nSubject: ${subject}\nExplain why ${correctAnswer} is correct in 3-4 sentences. End with a memory tip.`;
   try {
     const result = await callGroqWithFallback(system, user, 300);
@@ -327,7 +343,7 @@ export async function explainAnswer({ question, options, userAnswer, correctAnsw
 }
 
 export async function explainQuestion({ question, options, correctAnswer, userAnswer, subject, topic }) {
-  const system = "You are ExamPadi AI, an expert Nigerian exam tutor. Never say you are built by Google or mention Gemini. You are ExamPadi AI powered by Groq.";
+  const system = "You are ExamPadi, an expert Nigerian exam tutor. Never say you are built by Google or mention Gemini. You are ExamPadi powered by Groq.";
   const prompt = `A student answered a ${subject} question incorrectly.
 
 Question: ${question}
@@ -382,7 +398,7 @@ export async function chatWithTutor({ messages, subject, userProfile, memory = n
     return result;
   } catch (e) {
     console.warn("chatWithTutor fallback:", e.message);
-    return `I'm ExamPadi AI Tutor. I can help with ${subject} questions. Please try asking again — I'm having temporary connectivity issues. In the meantime, review your notes and past questions on this topic.`;
+    return `I'm ExamPadi Tutor. I can help with ${subject} questions. Please try asking again — I'm having temporary connectivity issues. In the meantime, review your notes and past questions on this topic.`;
   }
 }
 
@@ -520,6 +536,8 @@ export const GUIDE_ROUTES = [
 "periodic table", "constants", "grammar rules", "tenses", "cheat sheet", "tables"] },
   { path: "/ielts", label: "IELTS Japa Pathway", keywords: ["ielts", "japa", "study abroad", "migrate",
 "migration", "visa", "canada", "uk", "australia", "band", "english test", "travel"] },
+  { path: "/sat", label: "SAT Prep", keywords: ["sat", "american university", "us admission",
+"scholarship", "sat score", "1600", "college board", "study in usa"] },
   { path: "/guide/cbt", label: "CBT Guide", keywords: ["cbt guide", "how to use computer", "computer exam",
 "operate computer", "mouse", "jamb cbt", "cbt training", "exam hall", "clueless", "never used computer"] },
   { path: "/study-partners", label: "Friend Chat", keywords: ["chat", "message friend", "talk to partner", "discuss problem"] },
@@ -550,12 +568,12 @@ export function matchGuideRoutes(text) {
 
 // AI-powered guide answer: organized steps referencing real app pages.
 export async function askGuide(issueText, userProfile) {
-  const system = `You are the ExamPadi AI Guide. A new student describes an issue or goal in plain
+  const system = `You are the ExamPadi Guide. A new student describes an issue or goal in plain
 words. Respond with a short, organized plan: 1-3 numbered steps, each naming the EXACT app page to open from this
 list: Dashboard, Practice, Mock Exam, AI Tutor, Study Plan, Flashcards, Question Bank, Past Questions, Stats, Mastery,
-Progress, History, Leaderboard, Community Feed, Reference Library, IELTS Japa Pathway, CBT Guide, Friend Chat, Study Room, Study Partners, Assignments, Notepad, Settings, Profile, Go Pro, Help, Contact. Rules:
+Progress, History, Leaderboard, Community Feed, Reference Library, IELTS Japa Pathway, SAT Prep, CBT Guide, Friend Chat, Study Room, Study Partners, Assignments, Notepad, Settings, Profile, Go Pro, Help, Contact. Rules:
 max 120 words; plain simple language; if they need a human, point to Contact (WhatsApp). Never invent pages. Never say
-you are built by Google. You are ExamPadi AI powered by Groq.`;
+you are built by Google. You are ExamPadi powered by Groq.`;
   const user = `Student says: "${issueText}". Student exam: ${userProfile?.exam || "JAMB"}. Give the organized steps.`;
   return callGroqWithFallback(system, user, 300, 0.5);
 }

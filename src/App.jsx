@@ -76,6 +76,7 @@ const PublicProfile = lazy(() => import("./pages/PublicProfile"));
 const ReferencePage = lazy(() => import("./pages/ReferencePage"));
 const CBTGuidePage = lazy(() => import("./pages/CBTGuidePage"));
 const IELTSPage = lazy(() => import("./pages/IELTSPage"));
+const SATPage = lazy(() => import("./pages/SATPage"));
 
 function PageLoader() {
   return (
@@ -92,7 +93,7 @@ function AuthAwareRoutes() {
   const location = useLocation();
 
   useEffect(() => {
-    if (loading) { document.title = "ExamPadi AI"; return; }
+    if (loading) { document.title = "ExamPadi"; return; }
     const titles = {
       "/": "ExamPadi — Your Personal Tutor Buddy",
       "/auth": "Sign In — ExamPadi",
@@ -116,6 +117,8 @@ function AuthAwareRoutes() {
       "/assignment": "Assignment — ExamPadi",
       "/flashcards": "Flashcards — ExamPadi",
       "/schools": "For Schools — ExamPadi",
+      "/ielts": "IELTS Prep — ExamPadi",
+      "/sat": "SAT Prep — ExamPadi",
       "/schools/signup": "Register School — ExamPadi",
       "/teacher": "Teacher Dashboard — ExamPadi",
       "/teacher/exam-generator": "Exam Generator — ExamPadi",
@@ -213,6 +216,7 @@ function AuthAwareRoutes() {
           <Route path="/reference" element={<ProtectedRoute><ReferencePage /></ProtectedRoute>} />
           <Route path="/guide/cbt" element={<ProtectedRoute><CBTGuidePage /></ProtectedRoute>} />
           <Route path="/ielts" element={<IELTSPage />} />
+          <Route path="/sat" element={<SATPage />} />
           <Route path="/shared-test" element={<ProtectedRoute><SharedTestPage /></ProtectedRoute>} />
           <Route path="/assignment" element={<ProtectedRoute><AssignmentPage /></ProtectedRoute>} />
           <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />

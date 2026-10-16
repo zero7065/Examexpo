@@ -97,7 +97,7 @@ const HelpPage = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 md:p-10 space-y-10 animate-fade">
       <header className="text-center">
-        <h1 className="text-4xl font-black mb-4">How to Use ExamPadi AI</h1>
+        <h1 className="text-4xl font-black mb-4">How to Use ExamPadi</h1>
         <p className="text-text-muted text-lg max-w-2xl mx-auto">
           Your complete guide to mastering JAMB and WAEC exams
         </p>

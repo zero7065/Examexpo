@@ -213,7 +213,7 @@ export const BUILD_CHECKLIST = {
 };
 
 // Helper: Print checklist to console
-if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+if (typeof window !== 'undefined' && import.meta.env.DEV) {
   console.log('📋 BUILD & DEPLOYMENT CHECKLIST:', BUILD_CHECKLIST);
 }
 

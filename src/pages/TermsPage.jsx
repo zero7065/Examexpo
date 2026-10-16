@@ -5,11 +5,11 @@ import { FileText } from "lucide-react";
 const SECTIONS = [
   {
     h: "1. Acceptance",
-    body: "By creating an account on ExamPadi AI, you agree to these Terms. If you do not agree, do not use the platform. School users additionally accept their school's acceptable-use policy.",
+    body: "By creating an account on ExamPadi, you agree to these Terms. If you do not agree, do not use the platform. School users additionally accept their school's acceptable-use policy.",
   },
   {
     h: "2. Service Description",
-    body: "ExamPadi AI provides AI-powered past questions, study tools and exam preparation for JAMB, WAEC, NECO, NABTEB and POST-UTME, operated by Jadai Studios. Features evolve; we may add, change or retire features with notice.",
+    body: "ExamPadi provides AI-powered past questions, study tools and exam preparation for JAMB, WAEC, NECO, NABTEB and POST-UTME, operated by Jadai Studios. Features evolve; we may add, change or retire features with notice.",
   },
   {
     h: "3. Eligibility & Age",
@@ -58,7 +58,7 @@ const SECTIONS = [
   },
   {
     h: "10. Limitation of Liability",
-    body: "ExamPadi AI and Jadai Studios are not liable for exam results, academic outcomes, or indirect damages. The service is provided “as is”. Maximum aggregate liability is capped at fees you paid in the preceding 12 months.",
+    body: "ExamPadi and Jadai Studios are not liable for exam results, academic outcomes, or indirect damages. The service is provided “as is”. Maximum aggregate liability is capped at fees you paid in the preceding 12 months.",
   },
   {
     h: "11. Governing Law",
@@ -102,7 +102,7 @@ export default function TermsPage() {
       </div>
 
       <div className="mt-16 pt-8 border-t border-border text-center">
-        <p className="text-text-muted text-sm">© {new Date().getFullYear()} ExamPadi AI by Jadai Studios · <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link></p>
+        <p className="text-text-muted text-sm">© {new Date().getFullYear()} ExamPadi by Jadai Studios · <Link to="/privacy" className="text-primary hover:underline">Privacy Policy</Link></p>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-# ExamPadi AI — Deployment Guide
+# ExamPadi — Deployment Guide
 
 ## Prerequisites
 

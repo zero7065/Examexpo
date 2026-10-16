@@ -1,4 +1,4 @@
-# ExamPadi AI — Launch Summary
+# ExamPadi — Launch Summary
 
 **Status:** Production Ready
 **Date:** September 9, 2026

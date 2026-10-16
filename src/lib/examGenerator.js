@@ -58,7 +58,7 @@ export async function buildExamPdf({ schoolName, subject, examBody, timeLimit, q
   });
 
   pdf.setFontSize(8);
-  pdf.text(`Generated with ExamPadi AI · ${new Date().toLocaleDateString()}`, W / 2, pdf.internal.pageSize.getHeight() - 10, { align: "center" });
+  pdf.text(`Generated with ExamPadi · ${new Date().toLocaleDateString()}`, W / 2, pdf.internal.pageSize.getHeight() - 10, { align: "center" });
 
   return pdf;
 }

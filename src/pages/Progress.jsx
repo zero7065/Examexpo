@@ -38,7 +38,7 @@ export default function Progress() {
   const [mockPage, setMockPage] = useState(1);
   const animRefs = useRef([]);
 
-  useEffect(() => { document.title = "Progress — ExamPadi AI"; }, []);
+  useEffect(() => { document.title = "Progress — ExamPadi"; }, []);
 
   useEffect(() => {
     async function fetch() {

@@ -178,7 +178,7 @@ export default function AuthPage() {
             <Logo size={56} radius={16} />
           </div>
           <h1 style={{ color: "var(--text)", fontSize: 24, fontWeight: 800, margin: 0 }}>
-            ExamPadi AI
+            ExamPadi
           </h1>
           <p style={{ color: "var(--text-muted)", fontSize: 14, marginTop: 4 }}>
             {mode === "signup" ? "Create your account — it's free" : mode === "forgot" ? "Reset your password" : "Welcome back, let's practice"}

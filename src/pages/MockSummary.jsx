@@ -83,7 +83,7 @@ export default function MockSummary() {
   function handleRetake() { const allQs = []; subjects.forEach(s => { const qs = getRandomQuestions(s, 45); allQs.push(...qs); }); navigate("/practice", { state: { questions: allQs.sort(() => Math.random() - 0.5), subject: subjects.join(", "), mode: "practice" } }); }
 
   function handleShare() {
-    const text = `I scored ${jamb400Score}/400 on a ${examType} Mock Exam on ExamPadi AI 🎯 Try it free: exampadi.com`;
+    const text = `I scored ${jamb400Score}/400 on a ${examType} Mock Exam on ExamPadi 🎯 Try it free: exampadi.com`;
     if (navigator.share) navigator.share({ title: "ExamPadi Score", text }).catch(() => {});
     else { navigator.clipboard.writeText(text); toast({ message: "Copied! Share with friends 🎉", type: "success" }); }
   }

@@ -1,4 +1,4 @@
-# ExamPadi AI — Quick Start
+# ExamPadi — Quick Start
 
 ## Setup (2 minutes)
 

@@ -12,7 +12,7 @@ export default function WhiteboardAI({ imageBase64, onClose }) {
     setLoading(true);
     setAnalysis(null);
     try {
-      const system = "You are ExamPadi AI, an expert Nigerian exam tutor. Analyze the student's whiteboard work shown in the image. Identify: 1) What they did correctly, 2) What they did wrong, 3) Step-by-step correct approach, 4) A comparison showing the difference between their method and the correct method. Be encouraging and specific. Use simple language.";
+      const system = "You are ExamPadi, an expert Nigerian exam tutor. Analyze the student's whiteboard work shown in the image. Identify: 1) What they did correctly, 2) What they did wrong, 3) Step-by-step correct approach, 4) A comparison showing the difference between their method and the correct method. Be encouraging and specific. Use simple language.";
       const result = await askGroqVision({
         systemPrompt: system,
         messages: [{ role: "user", content: prompt || "Analyze this whiteboard work" }],

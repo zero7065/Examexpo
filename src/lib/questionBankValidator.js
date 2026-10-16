@@ -97,7 +97,7 @@ function analyzeQuestionsIndex() {
 }
 
 // Log validation on app load (if imported in main.jsx)
-if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+if (typeof window !== 'undefined' && import.meta.env.DEV) {
   console.log('📚 Question Bank Validation Report:', validateQuestionBank());
 }
 

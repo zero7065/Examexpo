@@ -102,7 +102,7 @@ export default function StudyPartnersPage() {
 
   function handleInviteWhatsApp() {
     const base = window.location.origin;
-    const message = `Hey! Join me on ExamPadi AI as my study partner. We can schedule tests and compare scores!\n\nDownload here: ${base}/auth\n\nMy User ID: ${user.uid}`;
+    const message = `Hey! Join me on ExamPadi as my study partner. We can schedule tests and compare scores!\n\nDownload here: ${base}/auth\n\nMy User ID: ${user.uid}`;
     shareOnWhatsApp({ title: "", text: message, url: "" });
   }
 

@@ -75,7 +75,7 @@ export default function ResultPage() {
   const [copied, setCopied] = useState(false);
 
   const handleShare = () => {
-    const shareText = `🎉 I just scored ${percentage}% on ExamPadi AI!\n\nTarget: 300+ in JAMB\nStudy hard, dream big! 💪\n\n#ExamPadiAI #JAMB2026 #StudyTips`;
+    const shareText = `🎉 I just scored ${percentage}% on ExamPadi!\n\nTarget: 300+ in JAMB\nStudy hard, dream big! 💪\n\n#ExamPadi #JAMB2026 #StudyTips`;
     
     if (navigator.share) {
       navigator.share({

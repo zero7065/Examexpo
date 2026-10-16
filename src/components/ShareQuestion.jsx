@@ -5,7 +5,7 @@ export default function ShareQuestion({ question, options, correctAnswer, explan
   const { toast } = useToast();
 
   function buildShareText() {
-    return `🎓 *ExamPadi AI — ${subject} Question*\n\n` +
+    return `🎓 *ExamPadi — ${subject} Question*\n\n` +
       `📝 ${question}\n\n` +
       `A) ${options.A}\nB) ${options.B}\nC) ${options.C}\nD) ${options.D}\n\n` +
       `✅ Answer: ${correctAnswer}\n` +
@@ -27,7 +27,7 @@ export default function ShareQuestion({ question, options, correctAnswer, explan
 
   function shareNative() {
     if (navigator.share) {
-      navigator.share({ title: "ExamPadi AI Question", text: buildShareText() })
+      navigator.share({ title: "ExamPadi Question", text: buildShareText() })
         .catch(() => copyToClipboard());
     } else {
       copyToClipboard();

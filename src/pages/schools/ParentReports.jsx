@@ -104,7 +104,7 @@ export default function ParentReports() {
       ];
       lines.forEach((ln, j) => pdf.text(ln, 20, 48 + j * 10));
       pdf.setFontSize(9);
-      pdf.text(`ExamPadi AI · ${new Date().toLocaleDateString()}`, W / 2, pdf.internal.pageSize.getHeight() - 12, { align: "center" });
+      pdf.text(`ExamPadi · ${new Date().toLocaleDateString()}`, W / 2, pdf.internal.pageSize.getHeight() - 12, { align: "center" });
     });
     return pdf;
   }

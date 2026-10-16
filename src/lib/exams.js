@@ -1,6 +1,6 @@
 // src/lib/exams.js — customizable exam list. Users can switch OFF exams
 // they don't write in Settings; every exam picker in the app filters itself.
-export const ALL_EXAMS = ["JAMB", "WAEC", "NECO", "NABTEB", "POST-UTME", "IELTS"];
+export const ALL_EXAMS = ["JAMB", "WAEC", "NECO", "NABTEB", "POST-UTME", "IELTS", "SAT"];
 
 export function getEnabledExams(profile) {
   const list = profile?.examsEnabled;

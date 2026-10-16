@@ -22,7 +22,7 @@ export default function LandingNav({ user }) {
         <Link to="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
           <div style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center" }}><Logo size={36} radius={10} /></div>
           <span style={{ fontSize: 20, fontWeight: 800, color: "var(--text)" }}>
-            ExamPadi <span style={{ color: "var(--primary)" }}>AI</span>
+            ExamPadi
             <span className="jadai-brand-full" style={{ fontSize: 9, marginLeft: 8, letterSpacing: "0.08em", verticalAlign: "super" }}>by Jadai</span>
           </span>
         </Link>

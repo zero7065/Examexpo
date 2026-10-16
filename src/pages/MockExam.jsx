@@ -186,8 +186,8 @@ export default function MockExam() {
     return (
       <div style={{ minHeight: "100vh", background: "var(--bg)", fontFamily: "'Inter', system-ui, sans-serif", color: "var(--text)", padding: "32px 24px", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ maxWidth: 560, width: "100%", background: "#121218", border: "1px solid #1e1e2a", borderRadius: 24, padding: "32px 28px" }}>
-          <h1 style={{ fontSize: 24, fontWeight: 800, margin: "0 0 4px", textAlign: "center" }}>Mock CBT Exam</h1>
-          <p style={{ color: "#888", fontSize: 14, textAlign: "center", margin: "0 0 24px" }}>Simulate real exam conditions</p>
+          <h1 style={{ fontSize: 24, fontWeight: 800, margin: "0 0 4px", textAlign: "center" }}>Mock Exam Mode</h1>
+          <p style={{ color: "#888", fontSize: 14, textAlign: "center", margin: "0 0 24px" }}>Real exam conditions, timed to the minute</p>
 
           {/* Exam type */}
           <label style={{ fontSize: 11, fontWeight: 700, color: "#888", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8, display: "block" }}>Exam Type</label>
@@ -236,7 +236,7 @@ export default function MockExam() {
           {/* Warning */}
           <div style={{ background: "#1a1400", border: "1px solid #D4A853", borderRadius: 12, padding: "12px 16px", marginBottom: 20, display: "flex", gap: 10, alignItems: "flex-start" }}>
             <AlertTriangle size={18} color="#D4A853" style={{ flexShrink: 0, marginTop: 2 }} />
-            <p style={{ color: "#D4A853", fontSize: 12, lineHeight: 1.5, margin: 0 }}>Once started, the timer cannot be paused. Answers cannot be changed after submission. This simulates real exam conditions.</p>
+            <p style={{ color: "#D4A853", fontSize: 12, lineHeight: 1.5, margin: 0 }}>Once started, the timer cannot be paused. Answers cannot be changed after submission. Exactly like exam day.</p>
           </div>
 
           {/* CTA */}

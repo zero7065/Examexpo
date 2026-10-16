@@ -328,7 +328,7 @@ export default function AITutor() {
             {messages.length === 0 && !loading && (
               <div style={{ textAlign: "center", paddingTop: 60 }}>
                 <div style={{ fontSize: 40, marginBottom: 16 }}>✨</div>
-                <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 8px" }}>Hi {user?.displayName?.split(" ")[0] || "Student"}! I'm your ExamPadi AI Tutor</h2>
+                <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 8px" }}>Hi {user?.displayName?.split(" ")[0] || "Student"}! I'm your ExamPadi Tutor</h2>
                 <p style={{ color: "var(--text-muted)", fontSize: 14, margin: "0 auto 24px", maxWidth: 400 }}>Ask me anything about your subjects — or snap a photo of a question with 📷. I can explain topics, solve questions, make study plans, and more.</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 400, margin: "0 auto" }}>
                   {QUICK_PROMPTS.map(p => (

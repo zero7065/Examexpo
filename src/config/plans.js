@@ -63,7 +63,7 @@ export const PLANS = {
     badge: "IELTS — Study Abroad Ready",
     features: [
       "Everything in Pro Yearly",
-      "Full IELTS question bank (132+ questions)",
+      "Full IELTS question bank (100 questions)",
       "IELTS band score calculator",
       "Writing task feedback (AI)",
       "Speaking practice prompts",

@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BANK_DIR = path.resolve(__dirname, "..", "src", "data", "questions", "master-bank");
 
-const EXAMS = new Set(["JAMB", "WAEC", "NECO", "NABTEB", "POST-UTME", "IELTS"]);
+const EXAMS = new Set(["JAMB", "WAEC", "NECO", "NABTEB", "POST-UTME", "IELTS", "SAT"]);
 const DIFFS = new Set(["easy", "medium", "hard"]);
 
 async function main() {

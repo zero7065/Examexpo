@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { ChevronDown, ArrowRight } from "lucide-react";
 
 const FAQS = [
-  { q: "Is ExamPadi AI free?", a: "Yes! The free tier gives you 15 practice questions and 3 AI tutor messages every day, forever. Upgrade to Pro for unlimited access." },
+  { q: "Is ExamPadi free?", a: "Yes! The free tier gives you 15 practice questions and 3 AI tutor messages every day, forever. Upgrade to Pro for unlimited access." },
   { q: "Which exams do you cover?", a: "JAMB (UTME), WAEC (SSCE & GCE), NECO and NABTEB, with questions from 2017 to 2026. Coverage is deepest for JAMB and grows every week." },
   { q: "How does the AI Tutor work?", a: "Ask any question in your subjects and get instant step-by-step explanations trained on the West African curriculum. You can even snap a photo of a question (Pro)." },
-  { q: "What do I get with Pro?", a: "Unlimited questions and AI chat, all subjects unlocked, full CBT mock exams, detailed analytics, offline mode and priority support — ₦3,000/month or ₦25,000/year." },
+  { q: "What do I get with Pro?", a: "Unlimited questions and AI chat, all subjects unlocked, full Exam Mode mocks, detailed analytics, offline mode and priority support — ₦3,000/month or ₦25,000/year." },
   { q: "Does it work offline or on a weak network?", a: "Yes. Questions, progress and the app shell keep working offline, and anything you do syncs automatically when you're back. If your network blocks Google services, the app tells you and keeps working from cache." },
   { q: "Which subjects are available?", a: "English, Mathematics, Physics, Chemistry, Biology, Economics, Government, Geography, Agricultural Science, Literature, Commerce, CRS, Further Mathematics — and more on the way." },
   { q: "Can schools use ExamPadi?", a: "Yes — contact us on WhatsApp for bulk Pro seats, teacher oversight and onboarding support for your school or tutorial centre." },
@@ -57,7 +57,7 @@ export function LandingCta({ user }) {
           Ready to Ace Your Exams?
         </h2>
           <p className="lp-animate-in lp-delay-1" style={{ fontSize: 16, opacity: 0.85, maxWidth: 480, margin: "0 auto 32px", lineHeight: 1.7 }}>
-            Join thousands of students already preparing smarter with ExamPadi AI.
+            Join thousands of students already preparing smarter with ExamPadi.
             Start free, upgrade when you're ready.
           </p>
         <div className="lp-animate-in lp-delay-2">
@@ -144,7 +144,7 @@ export function LandingFooter() {
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
               <div style={{ width: 32, height: 32, borderRadius: 8, background: "var(--landing-gradient)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 16, color: "#fff" }}>E</div>
               <span style={{ fontSize: 18, fontWeight: 800, color: "#fff" }}>
-                ExamPadi <span style={{ color: "#a78bfa" }}>AI</span>
+                ExamPadi
               </span>
             </div>
             <p style={{ fontSize: 13, lineHeight: 1.7, maxWidth: 240 }}>
@@ -168,7 +168,7 @@ export function LandingFooter() {
               Developed by Jadai Studios
             </span>
           </div>
-          &copy; {new Date().getFullYear()} ExamPadi AI. All rights reserved.
+          &copy; {new Date().getFullYear()} ExamPadi. All rights reserved.
         </div>
       </div>
       <style>{`@media (max-width: 900px) { .lp-foot-grid { grid-template-columns: 1fr 1fr !important; } }`}</style>

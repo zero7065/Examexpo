@@ -97,7 +97,7 @@ export function LandingIELTS() {
               visa-specific band requirements.
             </p>
             <ul style={{ margin: "0 0 24px", paddingLeft: 20, fontSize: 14, lineHeight: 2, color: "var(--text-muted)" }}>
-              <li><strong className="text-text">30+ real IELTS questions</strong> — Academic & General</li>
+              <li><strong className="text-text">100 real IELTS questions</strong> — Academic & General</li>
               <li><strong className="text-text">Band score calculator</strong> — know your target</li>
               <li><strong className="text-text">Writing task feedback</strong> — AI reviews your essays</li>
               <li><strong className="text-text">Visa requirement guide</strong> — study, work, migration</li>

@@ -83,12 +83,17 @@ const useWhiteboard = () => {
     toggle,
     canvasRef,
     clear,
+    showAI,
+    setShowAI,
+    aiImage,
+    setAiImage,
+    exportCanvas,
     calculator: { calcInput, calcDisplay },
   };
 };
 
 const Whiteboard = () => {
-  const { isOpen, toggle, canvasRef, clear, calculator } = useWhiteboard();
+  const { isOpen, toggle, canvasRef, clear, showAI, setShowAI, aiImage, setAiImage, exportCanvas, calculator } = useWhiteboard();
   const [color, setColor] = useState("#000000");
   const [penSize, setPenSize] = useState("medium");
   const [tool, setTool] = useState("pen");

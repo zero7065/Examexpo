@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function NotFoundPage() {
   const navigate = useNavigate();
-  useEffect(() => { document.title = "404 — ExamPadi AI"; }, []);
+  useEffect(() => { document.title = "404 — ExamPadi"; }, []);
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, fontFamily: "'Inter', system-ui, sans-serif" }}>

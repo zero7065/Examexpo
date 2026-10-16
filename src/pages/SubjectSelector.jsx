@@ -132,7 +132,7 @@ const SubjectSelector = () => {
               <div className="flex bg-bg-3 p-1.5 rounded-2xl border border-border">
                 {[
                   { id: "practice", label: "Practice", icon: <BookOpen size={16} /> },
-                  { id: "cbt", label: "CBT Sim", icon: <Zap size={16} /> }
+                  { id: "cbt", label: "Exam Mode", icon: <Zap size={16} /> }
                 ].map(m => (
                   <button 
                     key={m.id} 
