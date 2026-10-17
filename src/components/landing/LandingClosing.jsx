@@ -1,7 +1,8 @@
 // FAQ (8 items) + final CTA + 5-column footer.
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, ArrowRight } from "lucide-react";
+import { loadBranding } from "../../lib/branding";
 
 const FAQS = [
   { q: "Is ExamPadi free?", a: "Yes! The free tier gives you 15 practice questions and 3 AI tutor messages every day, forever. Upgrade to Pro for more AI messages and unlimited questions." },
@@ -112,15 +113,6 @@ const FOOT_COLS = [
       { label: "Help Center", href: "/help" },
     ],
   },
-  {
-    title: "Connect",
-    links: [
-      { label: "WhatsApp", href: "https://wa.me/2348127636057", external: true },
-      { label: "Email Us", href: "mailto:jadai7065@gmail.com", external: true },
-      { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
-    ],
-  },
 ];
 
 function FootLink({ label, href, external }) {
@@ -136,6 +128,28 @@ function FootLink({ label, href, external }) {
 }
 
 export function LandingFooter() {
+  const [branding, setBranding] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadBranding().then((b) => { setBranding(b); setLoading(false); });
+  }, []);
+
+  if (loading || !branding) {
+    return (
+      <footer style={{ background: "var(--bg-2)", color: "var(--text-muted)", padding: "48px 0 24px", borderTop: "1px solid var(--border)" }}>
+        <div className="lp-container" style={{ textAlign: "center", padding: "20px 0" }}>
+          <span style={{ fontSize: 12 }}>ExamPadi · Built in Nigeria</span>
+        </div>
+      </footer>
+    );
+  }
+
+  const waLink = branding.contactWhatsApp || "https://wa.me/2348127636057";
+  const email = branding.contactEmail || "jadai7065@gmail.com";
+  const footerText = branding.footerText || "Developed by Jadai Studios";
+  const siteName = branding.siteName || "ExamPadi";
+
   return (
     <footer style={{ background: "var(--bg-2)", color: "var(--text-muted)", padding: "48px 0 24px", borderTop: "1px solid var(--border)" }}>
       <div className="lp-container">
@@ -143,9 +157,7 @@ export function LandingFooter() {
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
               <div style={{ width: 32, height: 32, borderRadius: 8, background: "var(--landing-gradient)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: 16, color: "#fff" }}>E</div>
-              <span style={{ fontSize: 18, fontWeight: 800, color: "var(--text)" }}>
-                ExamPadi
-              </span>
+              <span style={{ fontSize: 18, fontWeight: 800, color: "var(--text)" }}>{siteName}</span>
             </div>
             <p style={{ fontSize: 13, lineHeight: 1.7, maxWidth: 240 }}>
               The smartest way for West African students to prepare for JAMB, WAEC, NECO, NABTEB &amp; POST-UTME exams.
@@ -161,14 +173,27 @@ export function LandingFooter() {
               </div>
             </div>
           ))}
+          <div>
+            <h4 style={{ fontSize: 12, fontWeight: 700, color: "var(--text)", margin: "0 0 16px", textTransform: "uppercase", letterSpacing: "0.05em" }}>Contact</h4>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <a href={`mailto:${email}`} style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: 13 }}>
+                📧 {email}
+              </a>
+              <a href={waLink} target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: 13 }}>
+                📱 WhatsApp {branding.contactPhone}
+              </a>
+              <a href="/privacy" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: 13 }}>Privacy</a>
+              <a href="/terms" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: 13 }}>Terms</a>
+            </div>
+          </div>
         </div>
         <div style={{ borderTop: "1px solid var(--border)", paddingTop: 20, textAlign: "center", fontSize: 12 }}>
           <div style={{ marginBottom: 12 }}>
             <span className="brand-shimmer-full" style={{ fontWeight: 800, fontSize: 13, letterSpacing: "0.02em" }}>
-              Developed by Jadai Studios
+              {footerText}
             </span>
           </div>
-          &copy; {new Date().getFullYear()} ExamPadi. All rights reserved.
+          &copy; {new Date().getFullYear()} {siteName}. All rights reserved.
         </div>
       </div>
       <style>{`@media (max-width: 900px) { .lp-foot-grid { grid-template-columns: 1fr 1fr !important; } }`}</style>

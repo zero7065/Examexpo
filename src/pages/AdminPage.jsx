@@ -14,6 +14,7 @@ import NetworkDiagnostic from "../components/NetworkDiagnostic";
 import AdminTrainingData from "../components/AdminTrainingData";
 import AdminTeachers from "../components/AdminTeachers";
 import AdminDevSettings from "../components/AdminDevSettings";
+import AdminBranding from "../components/AdminBranding";
 import AdminUserView from "../components/AdminUserView";
 import AdminAnalytics from "../components/AdminAnalytics";
 
@@ -334,6 +335,7 @@ export default function AdminPage() {
             { id: "training", label: "AI Training Data" },
             { id: "teachers", label: "Teacher Invites" },
             { id: "dev", label: "Developer" },
+            { id: "branding", label: "Branding" },
             { id: "analytics", label: "Analytics" },
             { id: "userDetail", label: "User Details" },
           ].map(tab => (
@@ -656,6 +658,9 @@ export default function AdminPage() {
         {activeTab === "dev" && (
           <AdminDevSettings />
         )}
+
+        {/* Branding Tab */}
+        {activeTab === "branding" && <AdminBranding />}
 
         {/* Analytics Tab */}
         {activeTab === "analytics" && (

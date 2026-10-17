@@ -6,6 +6,7 @@ import { getUserProfile } from "../lib/userProfile";
 import Logo from "../components/Logo";
 import { Eye, EyeOff } from "lucide-react";
 import { captureRefCodeFromUrl, attributePartnerRef } from "../lib/partner";
+import { loadBranding } from "../lib/branding";
 
 export default function AuthPage() {
   const navigate = useNavigate();
@@ -17,6 +18,11 @@ export default function AuthPage() {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const didRedirect = useRef(false);
+  const [branding, setBranding] = useState(null);
+
+  useEffect(() => {
+    loadBranding().then((b) => setBranding(b));
+  }, []);
 
   useEffect(() => {
     // Partner Plan: stash ?ref=CODE from a school's referral link.
@@ -165,7 +171,11 @@ export default function AuthPage() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "var(--bg)",
+      background: branding?.backgroundImageUrl
+        ? `linear-gradient(rgba(7,18,12,0.75), rgba(7,18,12,0.75)), url(${branding.backgroundImageUrl})`
+        : "var(--bg)",
+      backgroundSize: branding?.backgroundImageUrl ? "cover" : "auto",
+      backgroundPosition: branding?.backgroundImageUrl ? "center" : "center",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
