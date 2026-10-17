@@ -10,6 +10,19 @@ import { aiLimitsFor } from "../src/config/plans.js";
 import { getFirebase } from "./_firebase.js";
 
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
+
+// OpenAI doesn't host Groq's qwen/gpt-oss/allam models — map to nearest OpenAI equivalent.
+const OPENAI_MODEL_MAP = new Map([
+  ["qwen/qwen3.8-27b", "gpt-4o-mini"],
+  ["openai/gpt-oss-120b", "gpt-4o"],
+  ["openai/gpt-oss-20b", "gpt-4o-mini"],
+  ["allam-2-7b", "gpt-4o-mini"],
+]);
+
+function openaiModelFor(model) {
+  return OPENAI_MODEL_MAP.get(model) || "gpt-4o-mini";
+}
 
 // Must match MODELS in src/lib/ai.js and VISION_MODEL in src/lib/vision.js.
 // Allowlist, never a passthrough — otherwise this becomes an open proxy.
@@ -112,6 +125,8 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: { message: "AI is not configured on the server (GROQ_API_KEY)." } });
   }
 
+  const openaiKey = process.env.OPENAI_API_KEY;
+
   const fb = getFirebase();
   if (!fb) {
     return res.status(500).json({ error: { message: "AI backend unavailable." } });
@@ -175,28 +190,50 @@ export default async function handler(req, res) {
     });
   }
 
-  // ── Forward to Groq
-  let upstream;
-  try {
-    upstream = await fetch(GROQ_URL, {
+  // ── Forward to Groq (primary), fall back to OpenAI
+  async function fetchProvider(url, authKey, model, messages, maxTokens, temperature) {
+    const res = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${authKey}` },
       body: JSON.stringify({
         model,
-        messages: body.messages,
+        messages,
         max_tokens: maxTokens,
         temperature,
       }),
       signal: AbortSignal.timeout(45_000),
     });
-  } catch (e) {
-    const timedOut = e?.name === "TimeoutError" || e?.name === "AbortError";
-    return res.status(502).json({
-      error: { message: timedOut ? "AI request timed out — check your connection and try again." : "AI service unreachable — try again shortly." },
-    });
+    const json = await res.json().catch(() => null);
+    return { res, json, ok: res.ok && !!json };
   }
 
-  const data = await upstream.json().catch(() => null);
+  let upstream;
+  let data;
+
+  // 1) Try Groq first
+  try {
+    const result = await fetchProvider(GROQ_URL, key, model, body.messages, maxTokens, temperature);
+    upstream = result.res;
+    data = result.json;
+  } catch {
+    // Groq network error — fall through to OpenAI fallback
+    upstream = null;
+    data = null;
+  }
+
+  // 2) If Groq failed (network, 5xx, or invalid response), try OpenAI fallback
+  if (!upstream?.ok || !data) {
+    if (!openaiKey) {
+      return res.status(502).json({ error: { message: "AI services unavailable — no fallback provider configured." } });
+    }
+    try {
+      const result = await fetchProvider(OPENAI_URL, openaiKey, openaiModelFor(model), body.messages, maxTokens, temperature);
+      upstream = result.res;
+      data = result.json;
+    } catch {
+      return res.status(502).json({ error: { message: "AI services unreachable — try again shortly." } });
+    }
+  }
 
   if (!upstream.ok || !data) {
     const msg = data?.error?.message || `AI error (${upstream.status})`;
