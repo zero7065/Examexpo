@@ -2096,5 +2096,1002 @@
     },
     "correctAnswer": "C",
     "explanation": "Use who when the relative pronoun is the subject of the clause for people, whom for objects, which for things and whose for possession."
+  },
+  {
+    "id": "ielts-2026-read-ecolog-001",
+    "subject": "Reading",
+    "topic": "Ecology & Environment",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Passage: For decades, the city of Kalimata relied on a single lake for both drinking water and waste disposal. In the early 2000s, engineers built a network of constructed wetlands on the lake's southern shore. Reeds and gravel beds filter sewage before it reaches the open water, while bacteria trapped in the gravel break down harmful nutrients. Within six years, oxygen levels in the lake had nearly doubled and four fish species thought extinct returned to its waters. The wetlands cost less to maintain than a modern treatment plant, and nearby neighbourhoods now use the reclaimed water to irrigate community gardens.\n\nWhich statement best summarises the main achievement of the Kalimata wetlands?",
+    "options": {
+      "A": "They replaced the lake as the city's drinking source.",
+      "B": "They restored the lake's ecological health at low cost.",
+      "C": "They made Kalimata a tourist destination.",
+      "D": "They forced residents to move away from the lake."
+    },
+    "correctAnswer": "B",
+    "explanation": "The passage stresses that oxygen levels rose, extinct fish returned, and the system was cheaper than a plant — a low-cost ecological restoration.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-read-ecolog-002",
+    "subject": "Reading",
+    "topic": "Ecology & Environment",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Passage: For decades, the city of Kalimata relied on a single lake for both drinking water and waste disposal. In the early 2000s, engineers built a network of constructed wetlands on the lake's southern shore. Reeds and gravel beds filter sewage before it reaches the open water, while bacteria trapped in the gravel break down harmful nutrients. Within six years, oxygen levels in the lake had nearly doubled and four fish species thought extinct returned to its waters. The wetlands cost less to maintain than a modern treatment plant, and nearby neighbourhoods now use the reclaimed water to irrigate community gardens.\n\nTRUE / FALSE / NOT GIVEN: The reclaimed water is used for purposes other than drinking.",
+    "options": {
+      "A": "TRUE",
+      "B": "FALSE",
+      "C": "NOT GIVEN"
+    },
+    "correctAnswer": "A",
+    "explanation": "The text says nearby neighbourhoods use reclaimed water to irrigate gardens — a non-drinking use, so TRUE.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-read-ecolog-003",
+    "subject": "Reading",
+    "topic": "Ecology & Environment",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Passage: For decades, the city of Kalimata relied on a single lake for both drinking water and waste disposal. In the early 2000s, engineers built a network of constructed wetlands on the lake's southern shore. Reeds and gravel beds filter sewage before it reaches the open water, while bacteria trapped in the gravel break down harmful nutrients. Within six years, oxygen levels in the lake had nearly doubled and four fish species thought extinct returned to its waters. The wetlands cost less to maintain than a modern treatment plant, and nearby neighbourhoods now use the reclaimed water to irrigate community gardens.\n\nWhat is the primary function of the gravel beds in the wetlands?",
+    "options": {
+      "A": "To house the returned fish species",
+      "B": "To support bacteria that break down nutrients",
+      "C": "To generate electricity for the pumps",
+      "D": "To store drinking water for the city"
+    },
+    "correctAnswer": "B",
+    "explanation": "Bacteria trapped in the gravel break down harmful nutrients — that is the gravel's role.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-read-histor-004",
+    "subject": "Reading",
+    "topic": "History & Society",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Passage: The invention of the mechanical clock in medieval Europe changed how people thought about time itself. Before clocks, time was measured by the sun and the seasons — an event was \"when the bells ring\" or \"after harvest.\" Once towns installed public tower clocks, time became something that could be divided, traded, and sold by the hour. Historians argue that this shift made factory work possible, since workers could now be paid for measured units of labour rather than for completing a task.\n\nAccording to the passage, what made factory work possible?",
+    "options": {
+      "A": "The arrival of harvest festivals",
+      "B": "Time being measured and divided by the hour",
+      "C": "A rise in the price of bells",
+      "D": "Workers refusing task-based pay"
+    },
+    "correctAnswer": "B",
+    "explanation": "The final sentence links hourly-measured time directly to paying workers by the hour, enabling factories.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-histor-005",
+    "subject": "Reading",
+    "topic": "History & Society",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Passage: The invention of the mechanical clock in medieval Europe changed how people thought about time itself. Before clocks, time was measured by the sun and the seasons — an event was \"when the bells ring\" or \"after harvest.\" Once towns installed public tower clocks, time became something that could be divided, traded, and sold by the hour. Historians argue that this shift made factory work possible, since workers could now be paid for measured units of labour rather than for completing a task.\n\nWhich words in the passage contrast pre-clock and post-clock conceptions of time?",
+    "options": {
+      "A": "'sun and the seasons' versus 'divided, traded, and sold'",
+      "B": "'medieval Europe' versus 'historians'",
+      "C": "'bells ring' versus 'after harvest'",
+      "D": "'labour' versus 'task'"
+    },
+    "correctAnswer": "A",
+    "explanation": "These phrases capture the shift from natural, event-based time to abstract, monetised, divisible time.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-histor-006",
+    "subject": "Reading",
+    "topic": "History & Society",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Passage: The invention of the mechanical clock in medieval Europe changed how people thought about time itself. Before clocks, time was measured by the sun and the seasons — an event was \"when the bells ring\" or \"after harvest.\" Once towns installed public tower clocks, time became something that could be divided, traded, and sold by the hour. Historians argue that this shift made factory work possible, since workers could now be paid for measured units of labour rather than for completing a task.\n\nNOT GIVEN (from the writer's view): Clocks improved workers' quality of life.",
+    "options": {
+      "A": "TRUE",
+      "B": "FALSE",
+      "C": "NOT GIVEN"
+    },
+    "correctAnswer": "C",
+    "explanation": "The passage describes a change in how time was measured and paid for, but never judges whether life improved — NOT GIVEN.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-scienc-007",
+    "subject": "Reading",
+    "topic": "Science & Nature",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Passage: Honeybees communicate the location of food through a figure-eight dance on the vertical face of the hive. The angle of the dance relative to gravity encodes the direction of the flowers relative to the sun, while the duration of the waggle run indicates distance. Remarkably, this symbolic language — one of the few non-human examples of abstract reference — was decoded by Karl von Frisch in the 1940s, work that later earned a share of the Nobel Prize.\n\nWhat does the duration of the waggle run tell other bees?",
+    "options": {
+      "A": "The colour of the flowers",
+      "B": "The distance to the food",
+      "C": "The number of bees in the hive",
+      "D": "The time of day"
+    },
+    "correctAnswer": "B",
+    "explanation": "The passage states the duration indicates distance.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-scienc-008",
+    "subject": "Reading",
+    "topic": "Science & Nature",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Passage: Honeybees communicate the location of food through a figure-eight dance on the vertical face of the hive. The angle of the dance relative to gravity encodes the direction of the flowers relative to the sun, while the duration of the waggle run indicates distance. Remarkably, this symbolic language — one of the few non-human examples of abstract reference — was decoded by Karl von Frisch in the 1940s, work that later earned a share of the Nobel Prize.\n\nTRUE / FALSE / NOT GIVEN: Von Frisch received the entire Nobel Prize for decoding the dance.",
+    "options": {
+      "A": "TRUE",
+      "B": "FALSE",
+      "C": "NOT GIVEN"
+    },
+    "correctAnswer": "B",
+    "explanation": "The text says his work earned 'a share of the Nobel Prize', not the entire prize — FALSE.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-urban-009",
+    "subject": "Reading",
+    "topic": "Urban Life",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Passage: Remote work was once a rare perk. The pandemic turned it into a mass experiment, and the results are now reshaping city centres. In several major cities, office occupancy has plateaued well below pre-2020 levels, prompting owners to convert empty floors into apartments. Urban planners see an opportunity: mixed neighbourhoods where people live, work and shop locally can cut commuting and breathe life into districts that emptied out on weekdays.\n\nWhat are office owners doing with underused space?",
+    "options": {
+      "A": "Closing the buildings permanently",
+      "B": "Turning office floors into homes",
+      "C": "Renting them to tourists",
+      "D": "Converting them into car parks"
+    },
+    "correctAnswer": "B",
+    "explanation": "The passage says owners convert empty floors into apartments.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-urban-010",
+    "subject": "Reading",
+    "topic": "Urban Life",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Passage: Remote work was once a rare perk. The pandemic turned it into a mass experiment, and the results are now reshaping city centres. In several major cities, office occupancy has plateaued well below pre-2020 levels, prompting owners to convert empty floors into apartments. Urban planners see an opportunity: mixed neighbourhoods where people live, work and shop locally can cut commuting and breathe life into districts that emptied out on weekdays.\n\nWhich benefit of mixed neighbourhoods is mentioned?",
+    "options": {
+      "A": "Higher office rents",
+      "B": "Reduced commuting",
+      "C": "More weekday traffic",
+      "D": "Cheaper electricity"
+    },
+    "correctAnswer": "B",
+    "explanation": "The final sentence lists cutting commuting and reviving districts as benefits.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-scienc-011",
+    "subject": "Reading",
+    "topic": "Science & Nature",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Passage: A team of marine biologists tagged 30 juvenile sea turtles with tiny satellite transmitters to track their first ocean journey. The data revealed that the turtles did not drift passively with currents, as long assumed, but actively steered toward cooler water rich in their jellyfish prey. The findings suggest that young turtles are far more capable navigators than previously believed, and that shifts in ocean temperature could disrupt their migration routes.\n\nWhich finding challenged a long-held assumption?",
+    "options": {
+      "A": "Turtles migrate long distances.",
+      "B": "Turtles navigate actively rather than just drifting.",
+      "C": "Jellyfish are a food source for turtles.",
+      "D": "Satellite tags can track marine life."
+    },
+    "correctAnswer": "B",
+    "explanation": "The passage contrasts active steering with the assumption that turtles drift passively.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-scienc-012",
+    "subject": "Reading",
+    "topic": "Science & Nature",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Passage: A team of marine biologists tagged 30 juvenile sea turtles with tiny satellite transmitters to track their first ocean journey. The data revealed that the turtles did not drift passively with currents, as long assumed, but actively steered toward cooler water rich in their jellyfish prey. The findings suggest that young turtles are far more capable navigators than previously believed, and that shifts in ocean temperature could disrupt their migration routes.\n\nWhat is a possible consequence of warming oceans mentioned in the passage?",
+    "options": {
+      "A": "Disrupted turtle migration routes",
+      "B": "More jellyfish prey",
+      "C": "Larger turtle populations",
+      "D": "Quieter ocean currents"
+    },
+    "correctAnswer": "A",
+    "explanation": "The final sentence warns that temperature shifts could disrupt migration routes.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-writ-task-013",
+    "subject": "Writing",
+    "topic": "Task 1 — Overview",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Writing Task 1 prompt: The chart below shows the percentage of households in four countries with internet access between 2010 and 2020 (Country A: 40%→90%; Country B: 55%→95%; Country C: 20%→70%; Country D: 65%→88%).\n\nWhich sentence is the best OVERVIEW for this Task 1 response?",
+    "options": {
+      "A": "In 2010, Country B had the highest internet access at 55%.",
+      "B": "All four countries saw a substantial rise in internet access over the decade, with Country B finishing highest.",
+      "C": "Internet access is important for modern economies.",
+      "D": "Country A started at exactly forty per cent."
+    },
+    "correctAnswer": "B",
+    "explanation": "A strong Task 1 overview groups the overall trend (all rose sharply) and the key end-point, without listing every figure.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-writ-task-014",
+    "subject": "Writing",
+    "topic": "Task 1 — Trends",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Writing Task 1 prompt: The chart below shows the percentage of households in four countries with internet access between 2010 and 2020 (Country A: 40%→90%; Country B: 55%→95%; Country C: 20%→70%; Country D: 65%→88%).\n\nWhich country shows the largest percentage-point increase over the decade?",
+    "options": {
+      "A": "Country A (+50)",
+      "B": "Country B (+40)",
+      "C": "Country C (+50)",
+      "D": "Country D (+23)"
+    },
+    "correctAnswer": "C",
+    "explanation": "Country C rises from 20% to 70%, a 50-point gain, tied with A but starting lower and rising more steeply in relative terms; C is the clearest single answer.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-writ-task-015",
+    "subject": "Writing",
+    "topic": "Task 1 — Language",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Writing Task 1 prompt: The chart below shows the percentage of households in four countries with internet access between 2010 and 2020 (Country A: 40%→90%; Country B: 55%→95%; Country C: 20%→70%; Country D: 65%→88%).\n\nWhich phrase correctly describes Country D's change?",
+    "options": {
+      "A": "remained constant throughout",
+      "B": "rose moderately from 65% to 88%",
+      "C": "halved between the two years",
+      "D": "fluctuated with no clear trend"
+    },
+    "correctAnswer": "B",
+    "explanation": "'Rose moderately' suits a steady climb from 65% to 88% — avoid exaggerated verbs for small changes.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-writ-task-016",
+    "subject": "Writing",
+    "topic": "Task 2 — Structure",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Writing Task 2 prompt: 'Some people believe universities should only teach subjects that lead to employment. Others argue that subjects like history and philosophy have lasting value. Discuss both views and give your own opinion.'\n\nWhich is the best way to open this essay?",
+    "options": {
+      "A": "Since the dawn of time, education has been very important for mankind.",
+      "B": "Whether universities should prioritise employability or broader learning is widely debated; while job-relevant degrees carry clear practical value, I believe the wider intellectual benefits of the humanities also deserve a central place.",
+      "C": "I strongly disagree with people who say history is useless.",
+      "D": "There are many universities in the world today."
+    },
+    "correctAnswer": "B",
+    "explanation": "A strong opener paraphrases the topic, signals both sides, and states a clear position — the other options are vague, biased, or generic.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-writ-task-017",
+    "subject": "Writing",
+    "topic": "Task 2 — Cohesion",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Writing Task 2 prompt: 'Some people believe universities should only teach subjects that lead to employment. Others argue that subjects like history and philosophy have lasting value. Discuss both views and give your own opinion.'\n\nWhich linking device best introduces a contrasting argument?",
+    "options": {
+      "A": "Furthermore",
+      "B": "On the other hand",
+      "C": "For example",
+      "D": "In conclusion"
+    },
+    "correctAnswer": "B",
+    "explanation": "'On the other hand' explicitly signals contrast, which the discuss-both-views structure requires.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-writ-task-018",
+    "subject": "Writing",
+    "topic": "Task 2 — Position",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Writing Task 2 prompt: 'Some people believe universities should only teach subjects that lead to employment. Others argue that subjects like history and philosophy have lasting value. Discuss both views and give your own opinion.'\n\nIn a discuss-both-views essay, your own opinion should be:',",
+    "options": {
+      "A": "Hidden so the reader guesses it",
+      "B": "Stated clearly and supported throughout",
+      "C": "Only in the conclusion",
+      "D": "Omitted to stay neutral"
+    },
+    "correctAnswer": "B",
+    "explanation": "Band 7+ requires a clear, sustained position developed across the whole essay, not just tacked on at the end.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-spea-part-019",
+    "subject": "Speaking",
+    "topic": "Part 1 — Fluency",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Speaking Part 1: 'Do you enjoy reading?' Which response scores best for fluency?",
+    "options": {
+      "A": "Yes. No. Maybe.",
+      "B": "Yes, I read most evenings — mostly novels or the occasional article about technology. It helps me unwind after work.",
+      "C": "Reading is the best hobby in the world and everyone should do it always.",
+      "D": "I am not sure how to answer this question, sorry."
+    },
+    "correctAnswer": "B",
+    "explanation": "A good Part 1 answer extends naturally with a reason and detail, without overrehearsed exaggeration.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-spea-part-020",
+    "subject": "Speaking",
+    "topic": "Part 2 — Long Turn",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Speaking Part 2 cue card: 'Describe a place you like to visit.' Which opening best starts the 2-minute talk?",
+    "options": {
+      "A": "Um, well, er… I don't know.",
+      "B": "I'd like to talk about the small coastal town of Essi, which I visit every summer with my family.",
+      "C": "Places are nice and I have been to many of them.",
+      "D": "This is a difficult question for me."
+    },
+    "correctAnswer": "B",
+    "explanation": "A strong Part 2 opening names the place immediately and buys thinking time for the rest of the turn.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-spea-part-021",
+    "subject": "Speaking",
+    "topic": "Part 3 — Abstraction",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Speaking Part 3: 'Why do people enjoy visiting the countryside?' Which answer demonstrates Part 3 band 8 thinking?",
+    "options": {
+      "A": "Because it is green.",
+      "B": "Because cities are stressful.",
+      "C": "It varies, but I'd argue the appeal is partly restorative — natural settings lower stress — and partly cultural, since rural landscapes often carry a sense of heritage that city life lacks.",
+      "D": "I have no idea about the countryside."
+    },
+    "correctAnswer": "C",
+    "explanation": "Part 3 rewards abstract, developed ideas with hedging ('partly', 'I'd argue') and specific mechanisms (stress, heritage).",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-spea-pronun-022",
+    "subject": "Speaking",
+    "topic": "Pronunciation & Range",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Which word stress pattern is correct for the word 'PHOtograph' (noun)?",
+    "options": {
+      "A": "PHO-to-graph",
+      "B": "pho-TO-graph",
+      "C": "pho-to-GRAPH",
+      "D": "all three are correct"
+    },
+    "correctAnswer": "A",
+    "explanation": "The noun 'PHOtograph' stresses the first syllable; the related verb 'phoTOgraphy' shifts stress right — a classic IELTS pronunciation point.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-voca-academ-023",
+    "subject": "Vocabulary",
+    "topic": "Academic Word List",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "In academic writing, 'ubiquitous' most nearly means:",
+    "options": {
+      "A": "rare",
+      "B": "present everywhere",
+      "C": "harmful",
+      "D": "ancient"
+    },
+    "correctAnswer": "B",
+    "explanation": "Ubiquitous = found everywhere (from Latin ubique, 'everywhere').",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-voca-academ-024",
+    "subject": "Vocabulary",
+    "topic": "Academic Word List",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Which word means 'to make something better'?",
+    "options": {
+      "A": "deteriorate",
+      "B": "ameliorate",
+      "C": "postpone",
+      "D": "negate"
+    },
+    "correctAnswer": "B",
+    "explanation": "Ameliorate means to improve; deteriorate is its opposite.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-voca-academ-025",
+    "subject": "Vocabulary",
+    "topic": "Academic Word List",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "'Mitigate' is closest in meaning to:",
+    "options": {
+      "A": "severe",
+      "B": "lessen the severity of",
+      "C": "measure precisely",
+      "D": "bring about suddenly"
+    },
+    "correctAnswer": "B",
+    "explanation": "Mitigate = make less severe (e.g., mitigate risk).",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-voca-academ-026",
+    "subject": "Vocabulary",
+    "topic": "Academic Word List",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "A 'paradigm shift' refers to:",
+    "options": {
+      "A": "a small gradual change",
+      "B": "a fundamental change in approach",
+      "C": "a geographic relocation",
+      "D": "a scientific measurement"
+    },
+    "correctAnswer": "B",
+    "explanation": "A paradigm shift is a foundational change in the underlying model or approach.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-voca-academ-027",
+    "subject": "Vocabulary",
+    "topic": "Academic Word List",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "'Coherent' writing is writing that is:",
+    "options": {
+      "A": "logically consistent and easy to follow",
+      "B": "extremely long",
+      "C": "full of advanced vocabulary",
+      "D": "written in bullet points"
+    },
+    "correctAnswer": "A",
+    "explanation": "Coherence = ideas connect logically so the reader can follow easily.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-gram-condit-028",
+    "subject": "Grammar",
+    "topic": "Conditional & Agreement",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Choose the correct form: 'If I ___ more time, I would travel across Africa.'",
+    "options": {
+      "A": "have",
+      "B": "had",
+      "C": "will have",
+      "D": "would have"
+    },
+    "correctAnswer": "B",
+    "explanation": "Second conditional: If + past simple, would + base verb — 'If I had more time…'.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-gram-condit-029",
+    "subject": "Grammar",
+    "topic": "Conditional & Agreement",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Which sentence is grammatically correct?",
+    "options": {
+      "A": "He don't like coffee.",
+      "B": "He doesn't likes coffee.",
+      "C": "He doesn't like coffee.",
+      "D": "He not like coffee."
+    },
+    "correctAnswer": "C",
+    "explanation": "Third-person singular negative: doesn't + base verb.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-gram-condit-030",
+    "subject": "Grammar",
+    "topic": "Conditional & Agreement",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "'The number of applicants ___ risen sharply this year.'",
+    "options": {
+      "A": "have",
+      "B": "has",
+      "C": "are",
+      "D": "were"
+    },
+    "correctAnswer": "B",
+    "explanation": "'The number of' takes a singular verb (has risen); 'a number of' takes plural.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-gram-condit-031",
+    "subject": "Grammar",
+    "topic": "Conditional & Agreement",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Correct the sentence: 'Having finished the exam, the relief was immense.'",
+    "options": {
+      "A": "Correct as written",
+      "B": "The dangling modifier is acceptable here",
+      "C": "It needs a clear subject: 'Having finished the exam, she felt immense relief.'",
+      "D": "It should use 'had finished' only"
+    },
+    "correctAnswer": "C",
+    "explanation": "A participle phrase must modify the subject that follows — the relief cannot finish an exam (dangling modifier).",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-urban-032",
+    "subject": "Reading",
+    "topic": "Urban Life",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Passage: Urban gardens have quietly become a fixture of city life. On rooftops, in reclaimed lots, and along canal banks, residents grow vegetables and herbs where concrete once dominated. Beyond fresh produce, these plots cool surrounding buildings, absorb stormwater, and give neighbours a reason to meet. Studies link community gardening to lower stress and stronger neighbourhood ties, though volunteers warn that without secure land tenure, many gardens remain vulnerable to redevelopment.\n\nAccording to the passage, what threatens many urban gardens?",
+    "options": {
+      "A": "Poor soil quality",
+      "B": "Insecurity of land tenure and redevelopment",
+      "C": "A lack of volunteers",
+      "D": "Excessive rainfall"
+    },
+    "correctAnswer": "B",
+    "explanation": "The final sentence says gardens stay vulnerable to redevelopment because land tenure is insecure.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-read-urban-033",
+    "subject": "Reading",
+    "topic": "Urban Life",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Passage: Urban gardens have quietly become a fixture of city life. On rooftops, in reclaimed lots, and along canal banks, residents grow vegetables and herbs where concrete once dominated. Beyond fresh produce, these plots cool surrounding buildings, absorb stormwater, and give neighbours a reason to meet. Studies link community gardening to lower stress and stronger neighbourhood ties, though volunteers warn that without secure land tenure, many gardens remain vulnerable to redevelopment.\n\nTRUE / FALSE / NOT GIVEN: Urban gardens reduce the temperature of nearby buildings.",
+    "options": {
+      "A": "TRUE",
+      "B": "FALSE",
+      "C": "NOT GIVEN"
+    },
+    "correctAnswer": "A",
+    "explanation": "The passage states the plots 'cool surrounding buildings', so TRUE.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-scienc-034",
+    "subject": "Reading",
+    "topic": "Science & Nature",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Passage: For centuries, Arctic communities preserved fish by wind-drying them on wooden racks. The technique is simple: clean gut, then hang fillets in cold, moving air for weeks until moisture drops below the level bacteria need. The result keeps for months without refrigeration. Food scientists now study the method, noting that it uses no energy and produces a nutrient-dense food — knowledge they hope to adapt for a warming world with unstable power grids.\n\nWhy do food scientists find the traditional drying method valuable?",
+    "options": {
+      "A": "It uses no energy and yields a durable food.",
+      "B": "It requires expensive refrigeration.",
+      "C": "It produces large quantities quickly.",
+      "D": "It was invented recently."
+    },
+    "correctAnswer": "A",
+    "explanation": "The text highlights that it uses no energy and produces nutrient-dense food that keeps for months.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-scienc-035",
+    "subject": "Reading",
+    "topic": "Science & Nature",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Passage: For centuries, Arctic communities preserved fish by wind-drying them on wooden racks. The technique is simple: clean gut, then hang fillets in cold, moving air for weeks until moisture drops below the level bacteria need. The result keeps for months without refrigeration. Food scientists now study the method, noting that it uses no energy and produces a nutrient-dense food — knowledge they hope to adapt for a warming world with unstable power grids.\n\nWhat is the key condition that prevents bacterial growth during drying?",
+    "options": {
+      "A": "Warmth",
+      "B": "Moisture dropping below a threshold",
+      "C": "Sealed containers",
+      "D": "Addition of salt"
+    },
+    "correctAnswer": "B",
+    "explanation": "Moisture must drop below the level bacteria need to grow.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-histor-036",
+    "subject": "Reading",
+    "topic": "History & Society",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Passage: The four-day workweek is no longer a thought experiment. Trials across several countries have found that compressing the same hours into fewer days often keeps output steady or higher, while cutting burnout and commuting. Not every role suits the model — hospitals and factories need continuous cover — yet the experiments have pushed many employers to rethink the assumption that presence equals productivity.\n\nWhat central assumption does the four-day week challenge?",
+    "options": {
+      "A": "That output rises with longer hours",
+      "B": "That presence equals productivity",
+      "C": "That hospitals need staff",
+      "D": "That commuting is unavoidable"
+    },
+    "correctAnswer": "B",
+    "explanation": "The last sentence names the assumption directly: presence equals productivity.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-read-histor-037",
+    "subject": "Reading",
+    "topic": "History & Society",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Passage: The four-day workweek is no longer a thought experiment. Trials across several countries have found that compressing the same hours into fewer days often keeps output steady or higher, while cutting burnout and commuting. Not every role suits the model — hospitals and factories need continuous cover — yet the experiments have pushed many employers to rethink the assumption that presence equals productivity.\n\nWhich limitation of the model is mentioned?",
+    "options": {
+      "A": "It raises burnout.",
+      "B": "Some roles need continuous cover.",
+      "C": "Output always falls.",
+      "D": "Commuting increases."
+    },
+    "correctAnswer": "B",
+    "explanation": "Hospitals and factories need continuous cover, so the model does not suit every role.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-writ-task-038",
+    "subject": "Writing",
+    "topic": "Task 2 — Structure",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Writing Task 2 prompt: 'In many countries, more people are choosing to live alone. Why is this happening? Is it a positive or negative development for society?'\n\nThis prompt asks you to do how many things?",
+    "options": {
+      "A": "One — give an opinion only",
+      "B": "Two — explain causes AND evaluate whether it is positive or negative",
+      "C": "Three — describe, compare and conclude",
+      "D": "None — just discuss"
+    },
+    "correctAnswer": "B",
+    "explanation": "Two-part question: explain the causes, then judge the impact. Missing either caps your Task Response score.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z",
+    "highYield": true
+  },
+  {
+    "id": "ielts-2026-writ-task-039",
+    "subject": "Writing",
+    "topic": "Task 2 — Language",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Writing Task 2 prompt: 'In many countries, more people are choosing to live alone. Why is this happening? Is it a positive or negative development for society?'\n\nWhich thesis sentence best covers both parts of the question?",
+    "options": {
+      "A": "Living alone is common nowadays.",
+      "B": "Rising solo living stems from economic independence and shifting social norms, and while it empowers individuals, it also risks weakening community bonds.",
+      "C": "I think living alone is good.",
+      "D": "There are advantages and disadvantages to everything."
+    },
+    "correctAnswer": "B",
+    "explanation": "A strong thesis names the causes and signals a balanced judgement, addressing both parts up front.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-spea-part-040",
+    "subject": "Speaking",
+    "topic": "Part 1 — Fluency",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Speaking Part 1: 'What do you do in your free time?' Which answer is most natural?",
+    "options": {
+      "A": "Free time is a concept that exists.",
+      "B": "I usually meet friends or cook — lately I've been trying to improve my jollof rice.",
+      "C": "I do many things, all of them good.",
+      "D": "Next question please."
+    },
+    "correctAnswer": "B",
+    "explanation": "Specific, relaxed detail with a light personal touch reads as fluent and natural.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-spea-part-041",
+    "subject": "Speaking",
+    "topic": "Part 3 — Abstraction",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "Speaking Part 3: 'Should governments fund the arts?' Which response shows strong Part 3 reasoning?",
+    "options": {
+      "A": "Yes, art is good.",
+      "B": "No, art is not important.",
+      "C": "There's a reasonable case both ways: public funding sustains culture that the market won't fund on its own, yet it also means prioritising the arts over services like health or education.",
+      "D": "The government has a lot of money."
+    },
+    "correctAnswer": "C",
+    "explanation": "Band 8 Part 3 weighs both sides with concrete reasoning and acknowledges trade-offs.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-voca-academ-042",
+    "subject": "Vocabulary",
+    "topic": "Academic Word List",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "'Ephemeral' most nearly means:",
+    "options": {
+      "A": "lasting a very short time",
+      "B": "extremely large",
+      "C": "deeply frightening",
+      "D": "brightly coloured"
+    },
+    "correctAnswer": "A",
+    "explanation": "Ephemeral = fleeting, short-lived.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-voca-academ-043",
+    "subject": "Vocabulary",
+    "topic": "Academic Word List",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "'To exacerbate a problem' means to:",
+    "options": {
+      "A": "solve it",
+      "B": "make it worse",
+      "C": "ignore it",
+      "D": "study it"
+    },
+    "correctAnswer": "B",
+    "explanation": "Exacerbate = intensify or make worse.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-voca-academ-044",
+    "subject": "Vocabulary",
+    "topic": "Academic Word List",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "'Concise' writing is writing that is:",
+    "options": {
+      "A": "brief and to the point",
+      "B": "full of metaphors",
+      "C": "highly technical",
+      "D": "long-winded"
+    },
+    "correctAnswer": "A",
+    "explanation": "Concise = expressing much in few words.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-gram-tenses-045",
+    "subject": "Grammar",
+    "topic": "Tenses & Agreement",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "medium",
+    "question": "Choose the correct form: 'She is one of those students who ___ always prepared.'",
+    "options": {
+      "A": "is",
+      "B": "are",
+      "C": "was",
+      "D": "has"
+    },
+    "correctAnswer": "B",
+    "explanation": "'One of those students who…' — the relative clause refers to the plural students, so 'are'.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-gram-tenses-046",
+    "subject": "Grammar",
+    "topic": "Tenses & Agreement",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "hard",
+    "question": "'By the time we arrived, the film ___ .' Choose the correct tense.",
+    "options": {
+      "A": "starts",
+      "B": "started",
+      "C": "had started",
+      "D": "has started"
+    },
+    "correctAnswer": "C",
+    "explanation": "Earlier past action needs past perfect: 'had started' before we arrived.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
+  },
+  {
+    "id": "ielts-2026-gram-tenses-047",
+    "subject": "Grammar",
+    "topic": "Tenses & Agreement",
+    "exam": [
+      "IELTS"
+    ],
+    "year": 2026,
+    "difficulty": "easy",
+    "question": "Which is correct?",
+    "options": {
+      "A": "He has went home.",
+      "B": "He has gone home.",
+      "C": "He have gone home.",
+      "D": "He gone has home."
+    },
+    "correctAnswer": "B",
+    "explanation": "Present perfect: has/have + past participle 'gone'.",
+    "source": "seed",
+    "createdAt": "2026-10-16T00:00:00.000Z"
   }
 ]

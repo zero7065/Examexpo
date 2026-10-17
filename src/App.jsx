@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { StudyProvider } from "./context/StudyContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -16,6 +16,7 @@ import { useServiceWorkerUpdate } from "./hooks/useServiceWorkerUpdate";
 import OfflineIndicator from "./components/OfflineIndicator";
 import ContextualHelp from "./components/ContextualHelp";
 import NewUserChecklist from "./components/NewUserChecklist";
+import ConsentBar from "./components/ConsentBar";
 import { flushTrainingQueue } from "./lib/aiTraining";
 import { useToast } from "./components/Toast";
 
@@ -184,6 +185,7 @@ function AuthAwareRoutes() {
         <OfflineIndicator />
         <ContextualHelp />
         <NewUserChecklist />
+        <ConsentBar />
         {updateAvailable && (
           <div style={{ position: "fixed", bottom: 16, left: "50%", transform: "translateX(-50%)", zIndex: 200, background: "var(--bg-2)", border: "1px solid var(--primary)", borderRadius: 12, padding: "12px 20px", display: "flex", alignItems: "center", gap: 12, boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}>
             <span style={{ color: "#fff", fontSize: 14, fontWeight: 600 }}>New version available</span>

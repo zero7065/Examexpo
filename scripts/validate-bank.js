@@ -54,10 +54,18 @@ async function main() {
         if (!q.modelAnswer || !String(q.modelAnswer).trim()) errors.push(`${where}: theory needs modelAnswer`);
       } else {
         const opts = q.options || {};
-        ["A", "B", "C", "D"].forEach((k) => {
-          if (!opts[k] || !String(opts[k]).trim()) errors.push(`${where}: empty option ${k}`);
-        });
-        if (!["A", "B", "C", "D"].includes(q.correctAnswer)) errors.push(`${where}: bad correctAnswer ${q.correctAnswer}`);
+        const keys = Object.keys(opts);
+        // Most questions use A–D. IELTS TRUE/FALSE/NOT GIVEN items legitimately
+        // have exactly three options (A–C); allow those, otherwise require A–D.
+        const isTfng = keys.length === 3 && ["A", "B", "C"].every((k) => opts[k] && String(opts[k]).trim());
+        if (isTfng) {
+          if (!["A", "B", "C"].includes(q.correctAnswer)) errors.push(`${where}: bad TFNG correctAnswer ${q.correctAnswer}`);
+        } else {
+          ["A", "B", "C", "D"].forEach((k) => {
+            if (!opts[k] || !String(opts[k]).trim()) errors.push(`${where}: empty option ${k}`);
+          });
+          if (!["A", "B", "C", "D"].includes(q.correctAnswer)) errors.push(`${where}: bad correctAnswer ${q.correctAnswer}`);
+        }
       }
       if (!q.explanation || !String(q.explanation).trim()) errors.push(`${where}: empty explanation`);
       if (q.repeatedFrom !== undefined && !Array.isArray(q.repeatedFrom)) errors.push(`${where}: repeatedFrom must be an array`);

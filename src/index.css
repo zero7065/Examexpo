@@ -200,6 +200,13 @@ h6 {
   padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
 }
 
+/* Toasts: sit above the mobile bottom nav bar; centered higher on desktop */
+@media (max-width: 768px) {
+  .toast-stack {
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
 /* Reduce motion (Settings → Appearance) */
 html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after {
   animation-duration: 0.001s !important;

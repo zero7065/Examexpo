@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, GraduationCap, Calculator, BookOpen, Sparkles, AlertTriangle, Target, Timer, TrendingUp } from "lucide-react";
-import { getQuestionsFromBank } from "../data/questions/compat";
+import { getQuestionsFromBank, countBankQuestions } from "../data/questions/compat";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 
@@ -60,8 +60,9 @@ export default function SATPage() {
   function startPractice() {
     const rw = getQuestionsFromBank({ subject: "Reading", exam: "SAT", count: 6 });
     const wr = getQuestionsFromBank({ subject: "Writing", exam: "SAT", count: 4 });
-    const all = [...rw, ...wr].slice(0, 10);
-    const fallback = all.length >= 5 ? all : getQuestionsFromBank({ subject: "Math", exam: "SAT", count: 10 });
+    const ma = getQuestionsFromBank({ subject: "Math", exam: "SAT", count: 6 });
+    const all = [...rw, ...wr, ...ma].filter(Boolean);
+    const fallback = all.length >= 5 ? all : getQuestionsFromBank({ exam: "SAT", count: 12 });
     if (!fallback || fallback.length === 0) {
       toast({ message: "SAT starter set is loading — ask the AI Tutor meanwhile", type: "info" });
       navigate("/ai-tutor");
@@ -188,7 +189,7 @@ export default function SATPage() {
       <section className="glass-card p-6 text-center" style={{ borderColor: "rgb(var(--primary-rgb) / 0.4)" }}>
         <h2 className="font-black text-text mb-2">Prepare inside ExamPadi</h2>
         <p className="text-sm text-text-muted mb-4" style={{ maxWidth: 520, margin: "0 auto 16px" }}>
-          SAT question bank with AI explanations for every answer, section tactics, and a tutor that drills your weakest skill first.
+          A {countBankQuestions("SAT")}-question SAT bank across Reading and Writing and Math, with AI explanations for every answer, section tactics, and a tutor that drills your weakest skill first.
         </p>
         <div className="flex gap-2 justify-center flex-wrap">
           <button onClick={startPractice} className="btn-primary" disabled={practicing}>

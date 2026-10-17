@@ -8,7 +8,11 @@
 //
 // Behavior contract: identical signatures and filtering semantics; only the
 // underlying pool is larger (both legacy banks unified).
-import { getAllBankQuestions } from "./master";
+import { getAllBankQuestions, getBank } from "./master";
+
+export function countBankQuestions(exam) {
+  return getBank(exam).length;
+}
 
 // ─── Aliases (superset of both legacy maps) ───
 const SUBJECT_ALIASES = {

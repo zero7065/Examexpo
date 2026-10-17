@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Plane, GraduationCap, Briefcase, Home, AlertTriangle, BookOpen, Sparkles, Crown } from "lucide-react";
-import { getQuestionsFromBank } from "../data/questions/compat";
+import { getQuestionsFromBank, countBankQuestions } from "../data/questions/compat";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useNavigate } from "react-router-dom";
@@ -89,15 +89,19 @@ export default function IELTSPage() {
   }
 
   function startPractice() {
-    const qs = getQuestionsFromBank({ subject: "Reading", exam: "IELTS", count: 12 });
-    const all = qs.length > 0 ? qs : getQuestionsFromBank({ subject: "Grammar", exam: "IELTS", count: 12 });
-    if (all.length === 0) {
+    // Sample across all four IELTS skills so a set reflects the real exam.
+    const parts = ["Reading", "Writing", "Speaking", "Grammar"].map((s) =>
+      getQuestionsFromBank({ subject: s, exam: "IELTS", count: 3 })
+    );
+    const all = parts.flat().filter(Boolean);
+    const qs = all.length >= 4 ? all : getQuestionsFromBank({ subject: "Reading", exam: "IELTS", count: 12 });
+    if (qs.length === 0) {
       toast({ message: "IELTS starter set is loading — try the AI Tutor meanwhile", type: "info" });
       navigate("/ai-tutor");
       return;
     }
     setPracticing(true);
-    navigate("/practice", { state: { questions: all, subject: "IELTS Practice", mode: "practice" } });
+    navigate("/practice", { state: { questions: qs, subject: "IELTS Practice", mode: "practice" } });
   }
 
   return (
@@ -240,7 +244,7 @@ export default function IELTSPage() {
       <section className="glass-card p-6 text-center" style={{ borderColor: "rgb(var(--primary-rgb) / 0.4)" }}>
         <h2 className="font-black text-text mb-2">Prepare inside ExamPadi</h2>
         <p className="text-sm text-text-muted mb-4" style={{ maxWidth: 520, margin: "0 auto 16px" }}>
-          Full IELTS question bank, AI explanations for every answer, writing feedback, and a tutor that drills your weakest skill first.
+          A {countBankQuestions("IELTS")}-question IELTS bank spanning Reading, Writing, Speaking, Listening, Grammar and Vocabulary — with AI explanations for every answer, band-targeted feedback, and a tutor that drills your weakest skill first.
         </p>
         <div className="flex gap-2 justify-center flex-wrap">
           <button onClick={startPractice} className="btn-primary" disabled={practicing}>

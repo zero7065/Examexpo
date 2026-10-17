@@ -1,6 +1,6 @@
 // src/components/Navbar.jsx
 import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSubscription } from "../hooks/useSubscription";
 import { useTheme } from "../context/ThemeContext";
@@ -44,12 +44,11 @@ import {
 } from "lucide-react";
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { isPro: proStatus, profile } = useSubscription();
   const isTeacher = profile?.role === "teacher" || isAdmin(user);
   const isAdminUser = isAdmin(user);
   const { theme, toggle } = useTheme();
-  const navigate = useNavigate();
   const location = useLocation();
   const [moreOpen, setMoreOpen] = useState(false);
 
@@ -117,8 +116,6 @@ const Navbar = () => {
     },
   ] : [];
 
-  const navItems = navSections.flatMap((s) => s.items);
-
   const mobilePrimary = user ? [
     { name: "Home", path: "/dashboard", icon: LayoutDashboard },
     { name: "Practice", path: "/select", icon: Zap },
@@ -126,9 +123,15 @@ const Navbar = () => {
     { name: "Stats", path: "/stats", icon: BarChart3 },
   ] : [];
 
-  const moreItems = user
-    ? navItems.filter(i => !mobilePrimary.some(p => p.path === i.path))
+  const moreSections = user
+    ? navSections
+        .map((s) => ({
+          ...s,
+          items: s.items.filter(i => !mobilePrimary.some(p => p.path === i.path)),
+        }))
+        .filter(s => s.items.length > 0)
     : [];
+  const moreItems = moreSections.flatMap((s) => s.items);
   const isMoreActive = user && moreItems.some(i => location.pathname === i.path);
 
   // Guest mobile top bar (rendered even when logged out)
@@ -215,7 +218,7 @@ const Navbar = () => {
 
           <div className="text-center pt-2">
             <span className="brand-shimmer text-[10px] font-black tracking-wider opacity-60 hover:opacity-100 transition-opacity cursor-default">
-              Developed by Jadai Studios
+              ExamPadi · Built in Nigeria
             </span>
           </div>
         </div>
@@ -230,24 +233,24 @@ const Navbar = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-all flex-1 ${
+              className={`flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-lg transition-all flex-1 min-w-0 ${
                 isActive ? "text-primary scale-105" : "text-text-muted"
               }`}
             >
               <Icon size={22} />
-              <span className="text-[10px] font-bold">{item.name}</span>
+              <span className="text-[10px] font-bold truncate w-full text-center">{item.name}</span>
             </Link>
           );
         })}
         <button
           onClick={() => setMoreOpen(true)}
           aria-label="More"
-          className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-all flex-1 ${
+          className={`flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-lg transition-all flex-1 min-w-0 ${
             isMoreActive ? "text-primary scale-105" : "text-text-muted"
           }`}
         >
           <Menu size={22} />
-          <span className="text-[10px] font-bold">More</span>
+          <span className="text-[10px] font-bold truncate w-full text-center">More</span>
         </button>
       </nav>
 
@@ -276,30 +279,39 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              {moreItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.path;
-                const isLocked = item.requiresPro && !proStatus;
-                return (
-                  <Link
-                    key={item.path}
-                    to={isLocked ? "/payment" : item.path}
-                    onClick={() => setMoreOpen(false)}
-                    className={`flex items-center gap-2.5 px-4 py-3.5 rounded-xl font-bold text-sm transition-all ${
-                      isActive
-                        ? "bg-primary text-black"
-                        : isLocked
-                        ? "bg-subtle/50 text-text-muted/60"
-                        : "bg-subtle text-text-muted"
-                    }`}
-                  >
-                    <Icon size={18} className={isLocked ? "opacity-50" : ""} />
-                    <span className="truncate">{item.name}</span>
-                    {isLocked && <span className="ml-auto text-xs">🔒</span>}
-                  </Link>
-                );
-              })}
+            <div className="space-y-4">
+              {moreSections.map((section) => (
+                <div key={section.title}>
+                  <div className="px-1 mb-2 text-[10px] font-black uppercase tracking-widest text-text-muted/70">
+                    {section.title}
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {section.items.map((item) => {
+                      const Icon = item.icon;
+                      const isActive = location.pathname === item.path;
+                      const isLocked = item.requiresPro && !proStatus;
+                      return (
+                        <Link
+                          key={item.path}
+                          to={isLocked ? "/payment" : item.path}
+                          onClick={() => setMoreOpen(false)}
+                          className={`flex items-center gap-2.5 px-4 py-3.5 rounded-xl font-bold text-sm transition-all ${
+                            isActive
+                              ? "bg-primary text-black"
+                              : isLocked
+                              ? "bg-subtle/50 text-text-muted/60"
+                              : "bg-subtle text-text-muted"
+                          }`}
+                        >
+                          <Icon size={18} className={`shrink-0 ${isLocked ? "opacity-50" : ""}`} />
+                          <span className="truncate">{item.name}</span>
+                          {isLocked && <span className="ml-auto text-xs">🔒</span>}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
 
             {!proStatus && (

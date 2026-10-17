@@ -12,16 +12,16 @@ const typeColors = {
 export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
-  const toast = useCallback(({ message, type = "info" }) => {
+  const toast = useCallback(({ message, type = "info", duration = 3000 }) => {
     const id = Date.now() + Math.random();
     setToasts(t => [...t, { id, message, type }]);
-    setTimeout(() => setToasts(t => t.filter(x => x.id !== id)), 3000);
+    setTimeout(() => setToasts(t => t.filter(x => x.id !== id)), duration);
   }, []);
 
   return (
     <ToastContext.Provider value={{ toast }}>
       {children}
-      <div style={{
+      <div className="toast-stack" style={{
         position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)",
         zIndex: 9999, display: "flex", flexDirection: "column", gap: 8,
         maxWidth: 400, width: "calc(100vw - 48px)",

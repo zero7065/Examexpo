@@ -393,14 +393,21 @@ service cloud.firestore {
       allow create: if request.auth != null
         && request.auth.uid == request.resource.data.uid
         && request.resource.data.status == "pending";
-      // author may ONLY like/unlike (never change status); admin moderates.
+      // Liking is open to every signed-in user (likeReview from the Feed).
+      // Constraints: only likes/likeCount change; the caller's own uid must
+      // be the single membership toggle; likeCount must equal likes.size()
+      // so counters cannot be inflated.
       allow update: if request.auth != null && (
         isAdmin()
         || (
-          request.auth.uid == resource.data.uid
-          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["likes", "likeCount"])
-          && (request.auth.uid in request.resource.data.get("likes", [])
-              || request.auth.uid in resource.data.get("likes", []))
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(["likes", "likeCount"])
+          && ((request.auth.uid in request.resource.data.get("likes", [])
+                && !(request.auth.uid in resource.data.get("likes", [])))
+              || (!(request.auth.uid in request.resource.data.get("likes", []))
+                && request.auth.uid in resource.data.get("likes", [])))
+          && request.resource.data.get("likes", []).size() == resource.data.get("likes", []).size()
+              + ((request.auth.uid in request.resource.data.get("likes", [])) ? 1 : -1)
+          && request.resource.data.get("likeCount", 0) == request.resource.data.get("likes", []).size()
         )
       );
       allow delete: if request.auth != null && (
