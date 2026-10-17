@@ -7,12 +7,17 @@
 // Moderation: user-created rooms start status "pending" — only the host can
 // enter. They appear on the site (public listing / joinable) after an admin
 // approves them (status "approved").
+//
+// Answer keys: room docs deliberately carry NO correctAnswer and NO
+// explanations (an explanation can give the answer away). The key for each
+// question lives in studyRooms/{code}/key/{qid}, readable by NO client
+// (firestore.rules) — only api/room-answer.js grades answers server-side.
 import {
-  doc, setDoc, getDoc, updateDoc, deleteDoc,
+  doc, getDoc, updateDoc, deleteDoc, writeBatch,
   collection, query, where, orderBy, limit,
   serverTimestamp, onSnapshot,
 } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db, auth } from "../firebaseConfig";
 import { getQuestionsFromBank } from "../data/questions/compat";
 
 function needDb() {
@@ -31,7 +36,12 @@ export async function createRoom({ subject, count = 10, exam = "JAMB", hostUid, 
   const questions = getQuestionsFromBank({ subject, count, exam });
   if (questions.length === 0) throw new Error("No questions available for this subject yet");
   const code = makeCode();
-  await setDoc(doc(db, "studyRooms", code), {
+  const roomRef = doc(db, "studyRooms", code);
+  const batch = writeBatch(db);
+  // Room doc = everything players may see. NO answer key, NO explanations
+  // (an explanation can give the answer away). The key goes to
+  // studyRooms/{code}/key/{qid}, which firestore.rules denies to all clients.
+  batch.set(roomRef, {
     code,
     subject,
     exam,
@@ -42,13 +52,18 @@ export async function createRoom({ subject, count = 10, exam = "JAMB", hostUid, 
       id: q.id,
       question: q.question,
       options: q.options,
-      correctAnswer: q.correctAnswer || q.answer,
       topic: q.topic || "",
-      explanation: q.explanation || "",
     })),
     progress: { [hostUid]: { name: hostName || "Host", answered: 0, correct: 0, total: questions.length, updatedAt: serverTimestamp() } },
     createdAt: serverTimestamp(),
   });
+  questions.forEach((q) => {
+    batch.set(doc(roomRef, "key", String(q.id)), {
+      correct: String(q.correctAnswer || q.answer || "").toUpperCase().trim(),
+      explanation: q.explanation || "",
+    });
+  });
+  await batch.commit();
   return { code, total: questions.length };
 }
 
@@ -65,6 +80,12 @@ export async function joinRoom(code, { uid, name }) {
   if (room.status !== "approved" && room.hostUid !== uid) {
     throw new Error("This room is awaiting admin approval — the host can play now, others once approved.");
   }
+  // Idempotent: joining twice (e.g. refresh) must never reset a score, and
+  // firestore.rules allows the progress write only when the user is not yet
+  // a member — consistent by construction.
+  if (room.progress?.[uid]) {
+    return { id: snap.id, ...room };
+  }
   await updateDoc(ref, {
     [`progress.${uid}`]: {
       name: String(name || "Student").slice(0, 60),
@@ -77,11 +98,26 @@ export async function joinRoom(code, { uid, name }) {
   return { id: snap.id, ...room };
 }
 
-export async function reportRoomProgress(code, { uid, name, answered, correct, total }) {
-  needDb();
-  await updateDoc(doc(db, "studyRooms", code), {
-    [`progress.${uid}`]: { name, answered, correct, total, updatedAt: serverTimestamp() },
-  }).catch(() => {});
+// Server-side grading (api/room-answer.js). The answer key is never readable
+// from the client, so the server compares the pick, updates progress, and
+// returns the verdict for display. The room subscription picks up the new
+// progress live — no client-side counter writes.
+export async function submitRoomAnswer(code, { questionId, answer }) {
+  const u = auth?.currentUser;
+  if (!u) throw new Error("Sign in to answer");
+  const token = await u.getIdToken();
+  const res = await fetch("/api/room-answer", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify({
+      roomCode: String(code || "").trim().toUpperCase(),
+      questionId: String(questionId || ""),
+      answer: String(answer || ""),
+    }),
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(data?.error?.message || "Could not grade that answer");
+  return data;
 }
 
 export function subscribeRoom(code, cb) {

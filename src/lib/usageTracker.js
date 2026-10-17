@@ -4,10 +4,12 @@
 
 import { doc, getDoc, updateDoc, increment, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-import { PLANS, aiLimitsFor, AI_SOFT_WARNING_PCT } from "../config/plans";
+import { PLANS, aiLimitsFor, AI_SOFT_WARNING_PCT, CLASSROOM_AI_PER_STUDENT } from "../config/plans";
 
 // Plans that unlock Pro perks (Classroom members inherit Pro limits).
 const PRO_PLAN_IDS = new Set(["pro_monthly", "pro_yearly", "ielts", "team_monthly", "team_yearly"]);
+// Classroom plans draw from a shared per-team AI pool instead of a per-user cap.
+const TEAM_PLAN_IDS = new Set(["team_monthly", "team_yearly"]);
 
 function activePlanOf(data) {
   const sub = data?.subscription;
@@ -88,6 +90,24 @@ export async function checkQuestionLimit(userId) {
   }
 }
 
+/** Read the shared AI usage pool for a team/classroom plan. */
+async function teamPoolStatus(teamId, monthKey) {
+  const teamRef = doc(db, 'teams', teamId);
+  const teamSnap = await getDoc(teamRef);
+
+  if (!teamSnap.exists()) {
+    return { used: 0, limit: 0, exhausted: true };
+  }
+
+  const teamData = teamSnap.data();
+  const pool = teamData?.aiPool || {};
+  const used = Number(pool[monthKey] || 0);
+  const seatCount = Math.max(1, Number(teamData?.seatsUsed || 1));
+  const limit = seatCount * CLASSROOM_AI_PER_STUDENT;
+
+  return { used, limit, exhausted: used >= limit };
+}
+
 // ─── AI credit tracking ───
 // Returns a rich object:
 //   { allowed, used, limit, remaining, monthUsed, monthLimit, packRemaining,
@@ -112,6 +132,31 @@ export async function checkAILimit(userId) {
 
     const today = getToday();
     const monthKey = getMonthKey();
+
+    // ─── Classroom / School: pooled AI allowance ───
+    // 300 messages per seat, shared across every member of the team. Gated on
+    // the team doc so no individual student can exhaust the class allowance.
+    if (TEAM_PLAN_IDS.has(planId) && data.viaTeam) {
+      const pool = await teamPoolStatus(data.viaTeam, monthKey);
+      const hardStop = pool.exhausted && packCredits <= 0;
+      return {
+        allowed: !hardStop,
+        used: pool.used,
+        limit: pool.limit,
+        remaining: Math.max(0, pool.limit - pool.used),
+        available: Math.max(0, pool.limit - pool.used) + packCredits,
+        monthUsed: pool.used,
+        monthLimit: pool.limit,
+        packRemaining: packCredits,
+        softWarning: !hardStop && pool.used >= Math.floor(pool.limit * AI_SOFT_WARNING_PCT),
+        hardStop,
+        plan: planId,
+        dailyCap: limits.dailyCap || Infinity,
+        isFree: false,
+        pooled: true,
+        reason: hardStop ? "hard-stop" : "ok",
+      };
+    }
 
     // Daily counters (reset at WAT midnight)
     const lastAIDay = data.lastAIDay || "";
@@ -205,6 +250,13 @@ export async function trackAIMessage(userId, meta = {}) {
       : monthUsed >= (limits.perMonth || Infinity);
     if (overBase) {
       update.aiPackCredits = increment(-1);
+    }
+
+    // Classroom members also drain the shared team pool (300/seat).
+    if (TEAM_PLAN_IDS.has(planId) && data.viaTeam) {
+      const teamRef = doc(db, 'teams', data.viaTeam);
+      const fieldPath = `aiPool.${monthKey}`;
+      await updateDoc(teamRef, { [fieldPath]: increment(1) }).catch(() => {});
     }
 
     await updateDoc(usageRef, update);

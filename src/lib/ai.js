@@ -1,10 +1,12 @@
-// src/lib/ai.js - Unified Groq AI client
+// src/lib/ai.js - Unified Groq AI client.
+//
+// All model calls go through our own server proxy (POST /api/ai). The Groq
+// key lives only in the server env (GROQ_API_KEY) — Vite inlines any
+// VITE_-prefixed var into the public bundle, so it must never carry a secret.
 
 import { logTrainingEntry } from "./aiTraining";
 import { auth } from "../firebaseConfig";
-import { checkAILimit, trackAIMessage } from "./usageTracker";
-
-const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+import { checkAILimit } from "./usageTracker";
 
 // Thrown when the user has no AI credits left. Consumers can catch this to
 // show the upgrade/pack modal instead of a generic error.
@@ -51,18 +53,9 @@ async function enforceAILimit(source) {
 }
 let _lastSoftWarningAt = 0;
 
-// Record a successful AI call (usage + cost log). Fire-and-forget — never
-// blocks or fails the response.
-function trackAISuccess(source, data) {
-  const uid = auth?.currentUser?.uid;
-  if (!uid) return;
-  const usage = data?.usage;
-  trackAIMessage(uid, {
-    source,
-    model: data?.model || null,
-    tokens: usage ? usage.total_tokens ?? null : null,
-  }).catch(() => {});
-}
+// NOTE: usage is no longer booked here. The server proxy (api/ai.js) is the
+// single authority — it enforces the credit limit and writes the counters
+// after a successful Groq response, so the client gate above is UX only.
 
 // Verified against GET /openai/v1/models for this API key (Oct 2026).
 // Old models (llama-3.x, qwen3-32b, llama-4-scout) no longer exist for this key.
@@ -90,7 +83,45 @@ export function clearAIError() {
 }
 
 export function isAIConfigured() {
-  return Boolean(import.meta.env.VITE_GROQ_API_KEY);
+  // The Groq key now lives only on the server (api/ai.js, GROQ_API_KEY).
+  // The client cannot preflight it — real errors surface per call.
+  return true;
+}
+
+// POST to our own server proxy. The Groq key never touches the browser; the
+// server verifies our Firebase ID token, enforces the credit limit, forwards
+// to Groq, then books usage. Throws AILimitError on 402 so the existing
+// upgrade-modal flow keeps working.
+async function postAI({ model, messages, max_tokens, temperature, source, timeoutMs = 45000 }) {
+  let token = null;
+  try {
+    token = auth?.currentUser ? await auth.currentUser.getIdToken() : null;
+  } catch {
+    token = null;
+  }
+  if (!token) throw new Error("Sign in to use the AI tutor.");
+
+  const res = await groqFetch("/api/ai", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ model, messages, max_tokens, temperature, source }),
+  }, timeoutMs);
+
+  const data = await res.json().catch(() => null);
+
+  if (res.status === 402 || data?.code === "AI_LIMIT") {
+    throw new AILimitError(
+      data?.error?.message || "You have used all your AI messages for this period.",
+      { ...(data?.info || {}), source }
+    );
+  }
+  if (res.status === 401) {
+    throw new Error(data?.error?.message || "Your session expired — sign in again to use the AI tutor.");
+  }
+  if (!res.ok) {
+    throw new Error(data?.error?.message || `AI error (${res.status})`);
+  }
+  return data;
 }
 
 function stripJsonFences(text) {
@@ -137,12 +168,6 @@ export function sanitizeAIResponse(text) {
 }
 
 async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, temperature = 0.5, opts = {}) {
-  const key = import.meta.env.VITE_GROQ_API_KEY;
-  if (!key) {
-    _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
-    throw new Error("Groq API key not configured.");
-  }
-
   // Central gate — outside the model loop so AILimitError propagates immediately.
   const source = opts.source || "ai";
   await enforceAILimit(source);
@@ -152,36 +177,21 @@ async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, t
     try {
       // gpt-oss models are reasoning models — reasoning tokens count toward max_tokens
       const tokens = model.startsWith("openai/gpt-oss") ? maxTokens + 2000 : maxTokens;
-      const res = await groqFetch(GROQ_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${key}`,
-        },
-        body: JSON.stringify({
-          model,
-          messages: [
-            { role: "system", content: systemPrompt },
-            { role: "user", content: userPrompt },
-          ],
-          max_tokens: tokens,
-          temperature,
-        }),
+      const data = await postAI({
+        model,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
+        max_tokens: tokens,
+        temperature,
+        source,
       });
-
-      if (res.ok) {
-        const data = await res.json();
-        _lastAIError = null;
-        trackAISuccess(source, data);
-        return data.choices[0]?.message?.content?.trim() || "";
-      }
-
-      const err = await res.json().catch(() => ({}));
-      const msg = err.error?.message || `Groq error: ${res.status}`;
-      console.warn(`[AI] Model ${model} failed: ${msg}`);
-      lastError = new Error(msg);
+      _lastAIError = null;
+      return data.choices[0]?.message?.content?.trim() || "";
     } catch (e) {
-      console.warn(`[AI] Model ${model} network error:`, e.message);
+      if (e?.code === "AI_LIMIT") throw e; // credit exhaustion — no point trying other models
+      console.warn(`[AI] Model ${model} failed:`, e.message);
       lastError = e;
     }
   }
@@ -190,12 +200,6 @@ async function callGroqWithFallback(systemPrompt, userPrompt, maxTokens = 300, t
 }
 
 async function callGroqChatWithFallback(systemPrompt, messages, maxTokens = 600, temperature = 0.8, opts = {}) {
-  const key = import.meta.env.VITE_GROQ_API_KEY;
-  if (!key) {
-    _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
-    throw new Error("Groq API key not configured.");
-  }
-
   const source = opts.source || "ai-chat";
   await enforceAILimit(source);
 
@@ -203,36 +207,21 @@ async function callGroqChatWithFallback(systemPrompt, messages, maxTokens = 600,
   for (const model of MODELS) {
     try {
       const tokens = model.startsWith("openai/gpt-oss") ? maxTokens + 2000 : maxTokens;
-      const res = await groqFetch(GROQ_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${key}`,
-        },
-        body: JSON.stringify({
-          model,
-          messages: [
-            { role: "system", content: systemPrompt },
-            ...messages,
-          ],
-          max_tokens: tokens,
-          temperature,
-        }),
+      const data = await postAI({
+        model,
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...messages,
+        ],
+        max_tokens: tokens,
+        temperature,
+        source,
       });
-
-      if (res.ok) {
-        const data = await res.json();
-        _lastAIError = null;
-        trackAISuccess(source, data);
-        return data.choices[0]?.message?.content?.trim() || "";
-      }
-
-      const err = await res.json().catch(() => ({}));
-      const msg = err.error?.message || `Groq error: ${res.status}`;
-      console.warn(`[AI] Model ${model} failed: ${msg}`);
-      lastError = new Error(msg);
+      _lastAIError = null;
+      return data.choices[0]?.message?.content?.trim() || "";
     } catch (e) {
-      console.warn(`[AI] Model ${model} network error:`, e.message);
+      if (e?.code === "AI_LIMIT") throw e;
+      console.warn(`[AI] Model ${model} failed:`, e.message);
       lastError = e;
     }
   }
@@ -246,11 +235,6 @@ import { topWeakTopics, recentSummaries } from "./aiMemory";
 // ─── Vision chat (image-capable). ONLY tries the multimodal model —
 // gpt-oss/allam are text-only and cannot accept image payloads.
 async function callGroqVisionChat(systemPrompt, textMessages, images, maxTokens = 1000, opts = {}) {
-  const key = import.meta.env.VITE_GROQ_API_KEY;
-  if (!key) {
-    _lastAIError = { message: "Groq API key not configured. Add VITE_GROQ_API_KEY to environment variables.", time: Date.now() };
-    throw new Error("Groq API key not configured.");
-  }
   const source = opts.source || "ai-vision";
   if (!opts.skipGate) await enforceAILimit(source);
   const imageList = (Array.isArray(images) ? images : images ? [images] : []).filter(Boolean).slice(0, 3);
@@ -268,26 +252,18 @@ async function callGroqVisionChat(systemPrompt, textMessages, images, maxTokens 
       break;
     }
   }
-  const body = {
-    model: VISION_MODEL,
-    messages: [{ role: "system", content: systemPrompt }, ...msgs],
-    max_tokens: maxTokens,
-    temperature: 0.6,
-  };
   try {
-    const res = await groqFetch(GROQ_API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-      body: JSON.stringify(body),
+    const data = await postAI({
+      model: VISION_MODEL,
+      messages: [{ role: "system", content: systemPrompt }, ...msgs],
+      max_tokens: maxTokens,
+      temperature: 0.6,
+      source,
+      // Vision payloads carry base64 images — give the server room to work.
+      timeoutMs: 75000,
     });
-    if (res.ok) {
-      const data = await res.json();
-      _lastAIError = null;
-      trackAISuccess(source, data);
-      return data.choices[0]?.message?.content?.trim() || "";
-    }
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error?.message || `Groq error: ${res.status}`);
+    _lastAIError = null;
+    return data.choices[0]?.message?.content?.trim() || "";
   } catch (e) {
     _lastAIError = { message: e.message, time: Date.now() };
     throw e;

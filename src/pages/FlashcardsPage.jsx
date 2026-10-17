@@ -1,8 +1,8 @@
 // src/pages/FlashcardsPage.jsx - AI flashcard revision
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
-import { generateFlashcards, getAIErrorIfRecent, isAIConfigured } from "../lib/ai";
+import { generateFlashcards, getAIErrorIfRecent } from "../lib/ai";
 import { checkAILimit } from "../lib/usageTracker";
 import { PLANS } from "../config/plans";
 import { unlockAchievement } from "../lib/achievements";
@@ -21,12 +21,6 @@ export default function FlashcardsPage() {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState({});
-
-  useEffect(() => {
-    if (!isAIConfigured()) {
-      toast({ message: "AI unavailable: VITE_GROQ_API_KEY not configured", type: "error" });
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const subjects = exam === "JAMB" ? JAMB_SUBJECTS : WAEC_SUBJECTS;
 

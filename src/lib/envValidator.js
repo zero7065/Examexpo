@@ -7,17 +7,30 @@ const REQUIRED_ENVS = {
   VITE_FIREBASE_API_KEY: { required: false, desc: 'Firebase API Key for auth/database' },
   VITE_FIREBASE_AUTH_DOMAIN: { required: false, desc: 'Firebase auth domain' },
   VITE_FIREBASE_PROJECT_ID: { required: false, desc: 'Firebase project ID' },
-  VITE_GROQ_API_KEY: { required: false, desc: 'Groq API key for AI tutor and explanations' },
   VITE_PAYSTACK_PUBLIC_KEY: { required: false, desc: 'Paystack public sandbox/live key for payments' },
   VITE_SENTRY_DSN: { required: false, desc: 'Sentry DSN for error tracking' },
   VITE_GA_MEASUREMENT_ID: { required: false, desc: 'Google Analytics measurement ID' },
 };
 
 const FEATURE_FLAGS = {
-  AI_TUTOR: ['VITE_GROQ_API_KEY'],
+  // AI runs through our server proxy (api/ai.js), which holds GROQ_API_KEY
+  // server-side. Nothing client-side to check, so the tutor is always on.
+  AI_TUTOR: [],
   PAYMENTS: ['VITE_PAYSTACK_PUBLIC_KEY'],
   ERROR_TRACKING: ['VITE_SENTRY_DSN'],
   ANALYTICS: ['VITE_GA_MEASUREMENT_ID'],
+};
+
+// Static lookup — NEVER read import.meta.env with a dynamic key: Vite cannot
+// replace that expression, so it bundles the ENTIRE env object (secrets and
+// all) into the public JS. Add each var here explicitly instead.
+const ENV_VALUES = {
+  VITE_FIREBASE_API_KEY: import.meta.env.VITE_FIREBASE_API_KEY,
+  VITE_FIREBASE_AUTH_DOMAIN: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  VITE_FIREBASE_PROJECT_ID: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  VITE_PAYSTACK_PUBLIC_KEY: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
+  VITE_SENTRY_DSN: import.meta.env.VITE_SENTRY_DSN,
+  VITE_GA_MEASUREMENT_ID: import.meta.env.VITE_GA_MEASUREMENT_ID,
 };
 
 export function validateEnvironment() {
@@ -26,7 +39,7 @@ export function validateEnvironment() {
   const configured = {};
 
   for (const [key, meta] of Object.entries(REQUIRED_ENVS)) {
-    const value = import.meta.env[key];
+    const value = ENV_VALUES[key];
     if (!value) {
       missing.push({ key, ...meta });
       if (meta.required) {
@@ -42,7 +55,8 @@ export function validateEnvironment() {
   // Feature availability
   const features = {};
   for (const [feature, envKeys] of Object.entries(FEATURE_FLAGS)) {
-    features[feature] = envKeys.some(key => import.meta.env[key]);
+    // Empty list = no client-side requirement (always available).
+    features[feature] = envKeys.length === 0 || envKeys.some(key => ENV_VALUES[key]);
   }
 
   return {

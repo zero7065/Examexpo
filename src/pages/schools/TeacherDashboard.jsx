@@ -68,35 +68,47 @@ export default function TeacherDashboard() {
       setLoading(true);
       try {
         const cls = await getClass(classId);
-        const uids = cls?.students || [];
-        const rows = [];
+        const uids = (cls?.students || []).slice(0, 60);
         const topicCounts = {};
-        for (const uid of uids.slice(0, 60)) {
-          const [prof, sesSnap] = await Promise.all([
-            getUserProfile(uid).catch(() => null),
-            getDocs(query(collection(db, "sessions"), where("userId", "==", uid), limit(20))).catch(() => ({ docs: [] })),
-          ]);
+
+        // Firestore allows 50 concurrent reads per getDocs batch; run 25
+        // students at a time so the 2-reads-per-student load never trips the
+        // limit. A serial loop here used to take ~120 round-trips.
+        const CHUNK = 25;
+        const rows = [];
+        for (let i = 0; i < uids.length; i += CHUNK) {
           if (cancelled) return;
-          const agg = {};
-          sesSnap.docs.forEach((d) => {
-            const logs = d.data().questionLog || [];
-            logs.forEach((l) => {
-              const key = l.t || "General";
-              agg[key] = agg[key] || { c: 0, t: 0 };
-              agg[key].t += 1;
-              if (l.ok) agg[key].c += 1;
-              topicCounts[key] = (topicCounts[key] || 0) + 1;
-            });
-          });
-          rows.push({
-            uid,
-            name: prof?.name || "Student",
-            photoURL: prof?.photoURL || null,
-            avatarPreset: prof?.avatarPreset || null,
-            xp: prof?.totalXP || 0,
-            streak: prof?.streak || 0,
-            topics: agg,
-          });
+          const chunk = uids.slice(i, i + CHUNK);
+          const chunkRows = await Promise.all(
+            chunk.map(async (uid) => {
+              const [prof, sesSnap] = await Promise.all([
+                getUserProfile(uid).catch(() => null),
+                getDocs(query(collection(db, "sessions"), where("userId", "==", uid), limit(20)))
+                  .catch(() => ({ docs: [] })),
+              ]);
+              const agg = {};
+              sesSnap.docs.forEach((d) => {
+                const logs = d.data().questionLog || [];
+                logs.forEach((l) => {
+                  const key = l.t || "General";
+                  agg[key] = agg[key] || { c: 0, t: 0 };
+                  agg[key].t += 1;
+                  if (l.ok) agg[key].c += 1;
+                  topicCounts[key] = (topicCounts[key] || 0) + 1;
+                });
+              });
+              return {
+                uid,
+                name: prof?.name || "Student",
+                photoURL: prof?.photoURL || null,
+                avatarPreset: prof?.avatarPreset || null,
+                xp: prof?.totalXP || 0,
+                streak: prof?.streak || 0,
+                topics: agg,
+              };
+            })
+          );
+          rows.push(...chunkRows);
         }
         if (cancelled) return;
         rows.sort((a, b) => a.name.localeCompare(b.name));

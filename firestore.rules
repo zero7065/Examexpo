@@ -356,29 +356,39 @@ service cloud.firestore {
         || request.auth.uid == resource.data.hostUid
         || resource.data.status == "approved"
       );
+      // Progress is server-owned (api/room-answer.js, Admin SDK bypasses
+      // rules): the client never grades itself or writes counters. A client
+      // may only add its own zeroed progress entry exactly once — joining.
+      // Existing members are frozen; status changes are admin-only.
       allow update: if request.auth != null && (
-        // Admin: full control (approve/reject/progress).
         isAdmin()
-        // Host: any change on own room EXCEPT moderation status.
         || (
-          request.auth.uid == resource.data.hostUid
-          && !request.resource.data.diff(resource.data).affectedKeys().hasAny(["status"])
-        )
-        // Members of approved rooms: may only touch progress, keep the member
-        // set stable (joining adds exactly their own key).
-        || (
-          resource.data.status == "approved"
-          && !request.resource.data.diff(resource.data).affectedKeys().hasAny(["status"])
-          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["progress"])
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(["progress"])
+          && !(request.auth.uid in resource.data.get("progress", {}))
           && request.resource.data.progress.keys().hasAll(resource.data.get("progress", {}).keys())
-          && (
-            request.auth.uid in resource.data.get("progress", {}).keys()
-              ? request.resource.data.progress.keys().size() == resource.data.get("progress", {}).keys().size()
-              : request.resource.data.progress.keys().size() == resource.data.get("progress", {}).keys().size() + 1
-          )
+          && request.resource.data.progress.keys().size() == resource.data.get("progress", {}).keys().size() + 1
+          && request.resource.data.progress[request.auth.uid].answered == 0
+          && request.resource.data.progress[request.auth.uid].correct == 0
+          && request.resource.data.progress[request.auth.uid].name
+          && request.resource.data.progress[request.auth.uid].total > 0
         )
       );
       allow delete: if isAdmin() || request.auth.uid == resource.data.hostUid;
+
+      // Answer keys: never readable by any client (host can't peek via the
+      // console either). Only the host who created the room may seed keys,
+      // once each. Grading happens server-side via Admin SDK (bypasses rules).
+      match /key/{qid} {
+        allow read, list: if false;
+        allow create: if request.auth != null
+          && request.auth.uid == get(/databases/$(database)/documents/studyRooms/$(code)).data.hostUid;
+        allow update, delete: if false;
+      }
+
+      // Graded responses: server-only (dedup + source of truth for verdicts).
+      match /responses/{uid} {
+        allow read, list, create, update, delete: if false;
+      }
     }
 
     // ─── REVIEWS (admin-moderated: nothing public until admin approves) ───

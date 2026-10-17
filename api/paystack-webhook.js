@@ -5,6 +5,9 @@
 
 import crypto from "crypto";
 import { recordCommission } from "./_commission.js";
+import { getFirebase } from "./_firebase.js";
+import { endDateFor, isTeamPlan, isPackPlan, AI_PACK_MESSAGES } from "./_plans.js";
+import { provisionTeam } from "./_provision.js";
 
 export const config = {
   api: { bodyParser: false },
@@ -21,27 +24,6 @@ function readRawBody(req) {
     req.on("end", () => resolve(Buffer.from(data, "utf8")));
     req.on("error", reject);
   });
-}
-
-let _adminLib = null;
-async function getDb() {
-  const sa = process.env.FIREBASE_SERVICE_ACCOUNT;
-  if (!sa) return null;
-  const admin = await import("firebase-admin");
-  const adminLib = admin.default || admin;
-  if (!adminLib.apps.length) {
-    adminLib.initializeApp({ credential: adminLib.credential.cert(JSON.parse(sa)) });
-  }
-  _adminLib = adminLib;
-  return adminLib.firestore();
-}
-
-function endDateFor(plan) {
-  const d = new Date();
-  if (plan === "pro_yearly" || plan === "ielts") d.setFullYear(d.getFullYear() + 1);
-  else d.setDate(d.getDate() + 30);
-  d.setHours(23, 59, 59, 999);
-  return d;
 }
 
 export default async function handler(req, res) {
@@ -91,10 +73,12 @@ export default async function handler(req, res) {
       `[webhook] charge.success ref=${reference} user=${userId} plan=${plan} amount=${amountMinor} ${data.currency || ""}`
     );
 
-    const db = await getDb();
+    const fb = getFirebase();
+    const db = fb ? fb.db : null;
     if (db && userId && plan && reference && amountMinor > 0) {
-      const isTeam = plan === "team_monthly" || plan === "team_yearly";
-      const isPack = plan === "ai_pack_50";
+      const adminLib = fb.admin;
+      const isTeam = isTeamPlan(plan);
+      const isPack = isPackPlan(plan);
       try {
         await db.collection("payments").doc(reference).set(
           {
@@ -113,11 +97,11 @@ export default async function handler(req, res) {
         // Use the NGN base from metadata (client always sends the NGN price);
         // fall back to the raw amount only for NGN charges so USD/GHS/KES/ZAR
         // payments don't get commissions computed on the foreign amount.
-        if (metadata.partnerCode && _adminLib) {
+        if (metadata.partnerCode) {
           const ngnBase = Number(metadata.amountNaira) > 0
             ? Number(metadata.amountNaira)
             : ((data.currency || "NGN") === "NGN" ? amountMinor / 100 : 0);
-          await recordCommission(_adminLib, db, {
+          await recordCommission(adminLib, db, {
             reference,
             userId,
             plan,
@@ -125,12 +109,24 @@ export default async function handler(req, res) {
             partnerCode: metadata.partnerCode,
           });
         }
-        if (isPack) {
+        if (isTeam) {
+          // Provision the classroom server-side so the school's purchase is
+          // never lost if the client never reopens the tab. Idempotent.
+          await provisionTeam(adminLib, db, {
+            teamId: metadata.teamId || null,
+            userId,
+            userEmail: metadata.userEmail || (data.customer && data.customer.email) || null,
+            plan,
+            seats: metadata.seats,
+            reference,
+            ngn: Number(metadata.amountNaira) > 0 ? Number(metadata.amountNaira) : amountMinor / 100,
+          });
+        } else if (isPack) {
           await db.collection("users").doc(userId).set(
-            { aiPackCredits: _adminLib.firestore.FieldValue.increment(50) },
+            { aiPackCredits: adminLib.firestore.FieldValue.increment(AI_PACK_MESSAGES) },
             { merge: true }
           );
-        } else if (!isTeam) {
+        } else {
           await db.collection("users").doc(userId).set(
             {
               subscription: {

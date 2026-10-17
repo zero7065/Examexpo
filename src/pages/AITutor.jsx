@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useSubscription } from "../hooks/useSubscription";
 import { getUserProfile } from "../lib/userProfile";
-import { chatWithTutor, analyzeDocument, getLastAIError, isAIConfigured, sanitizeAIResponse } from "../lib/ai";
+import { chatWithTutor, analyzeDocument, getLastAIError } from "../lib/ai";
 import { getStudentMemory, topWeakTopics } from "../lib/aiMemory";
 import { appendToAISession, getAISessions, createAISession, deleteAISession, getAISession } from "../lib/aiSessions";
 import { useFeatureOnlineGuard } from "../hooks/useOnlineStatus";
@@ -322,12 +322,6 @@ export default function AITutor() {
               </div>
             ))
           )}
-        </div>
-      )}
-
-      {!isAIConfigured() && (
-        <div style={{ background: "rgba(239,68,68,0.12)", borderBottom: "1px solid rgba(239,68,68,0.35)", padding: "10px 20px", color: "#ef4444", fontSize: 13, fontWeight: 600, flexShrink: 0 }}>
-          AI key missing — add VITE_GROQ_API_KEY in your environment (Vercel dashboard or .env)
         </div>
       )}
 

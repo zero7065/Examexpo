@@ -19,8 +19,9 @@ export default defineConfig([
     },
   },
   {
-    // Node CLI scripts: allow process, __dirname, console, fetch, setTimeout
-    files: ['scripts/**/*.js', 'functions/**/*.js'],
+    // Node code: CLI scripts, serverless API functions, Cloud Functions.
+    // These legitimately use process/Buffer/__dirname/console/fetch/setTimeout.
+    files: ['scripts/**/*.js', 'functions/**/*.js', 'api/**/*.js'],
     languageOptions: {
       globals: { ...globals.node },
     },

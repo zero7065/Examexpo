@@ -24,7 +24,7 @@ export const BUILD_CHECKLIST = {
     status: 'NEEDS_CONFIG',
     required: [
       'VITE_PAYSTACK_PUBLIC_KEY - for payment processing',
-      'VITE_GEMINI_API_KEY or VITE_GROQ_API_KEY - for AI explanations',
+      'GROQ_API_KEY (server env on Vercel) - for AI explanations',
       'VITE_FIREBASE_* (x4) - for Firebase setup',
       'VITE_SENTRY_DSN - for error tracking (optional)',
       'VITE_GA_MEASUREMENT_ID - for analytics (optional)',
@@ -118,7 +118,7 @@ export const BUILD_CHECKLIST = {
       '✅ Session analytics: Weak topics tracked and displayed',
     ],
     testingSteps: [
-      '1. Add VITE_GEMINI_API_KEY or VITE_GROQ_API_KEY to .env',
+      '1. Set GROQ_API_KEY in the server env (Vercel project settings)',
       '2. For free user: Should show 5 daily AI limit',
       '3. Go to PracticeSession and click "Ask AI to Explain"',
       '4. Verify explanation loads and message count decrements',

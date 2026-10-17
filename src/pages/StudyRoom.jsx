@@ -1,10 +1,10 @@
 // src/pages/StudyRoom.jsx — shared study rooms: one code, same questions,
 // live progress bars for everyone inside. Lobby (create/join) + room view.
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
-import { createRoom, joinRoom, reportRoomProgress, subscribeRoom, subscribeApprovedRooms } from "../lib/rooms";
+import { createRoom, joinRoom, submitRoomAnswer, subscribeRoom, subscribeApprovedRooms } from "../lib/rooms";
 import { JAMB_SUBJECTS } from "../data/subjects";
 import { ArrowLeft, Users, Copy, Check } from "lucide-react";
 
@@ -116,9 +116,10 @@ function RoomView({ code }) {
   const { toast } = useToast();
   const [room, setRoom] = useState(null);
   const [answers, setAnswers] = useState({});
+  const [results, setResults] = useState({});
+  const [grading, setGrading] = useState(null);
   const [idx, setIdx] = useState(0);
   const [copied, setCopied] = useState(false);
-  const reportTimer = useRef(null);
 
   useEffect(() => {
     if (!user) return;
@@ -131,18 +132,27 @@ function RoomView({ code }) {
   const questions = room?.questions || [];
   const q = questions[idx];
 
-  function answer(letter) {
-    if (!q || answers[q.id] !== undefined) return;
+  async function answer(letter) {
+    if (!q || answers[q.id] !== undefined || grading) return;
     const next = { ...answers, [q.id]: letter };
     setAnswers(next);
-    const correct = questions.filter((x) => next[x.id] === (x.correctAnswer || x.answer)).length;
-    clearTimeout(reportTimer.current);
-    reportTimer.current = setTimeout(() => {
-      reportRoomProgress(code, {
-        uid: user.uid, name: user.displayName || "Student",
-        answered: Object.keys(next).length, correct, total: questions.length,
+    setGrading(q.id);
+    try {
+      // Server grades against the hidden key and updates progress; the room
+      // subscription streams the new leaderboard live.
+      const verdict = await submitRoomAnswer(code, { questionId: q.id, answer: letter });
+      setResults((r) => ({ ...r, [q.id]: verdict }));
+    } catch (e) {
+      // Un-answer so the student can retry; nothing was counted.
+      setAnswers((prev) => {
+        const copy = { ...prev };
+        delete copy[q.id];
+        return copy;
       });
-    }, 800);
+      toast({ message: e.message || "Could not grade that answer — try again", type: "error" });
+    } finally {
+      setGrading(null);
+    }
   }
 
   function copyLink() {
@@ -224,7 +234,10 @@ function RoomView({ code }) {
             {Object.entries(q.options || {}).map(([letter, text]) => {
               const picked = answers[q.id];
               const done = picked !== undefined;
-              const isRight = letter === (q.correctAnswer || q.answer);
+              // results[q.id] comes from the server verdict (api/room-answer).
+              // New rooms never embed correctAnswer — grading is server-only.
+              const correctLetter = results[q.id]?.correctAnswer;
+              const isRight = done && correctLetter ? letter === correctLetter : letter === (q.correctAnswer || q.answer);
               return (
                 <button key={letter} onClick={() => answer(letter)} disabled={done}
                   style={{

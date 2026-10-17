@@ -32,7 +32,7 @@ export const PLANS = {
     features: [
       "Unlimited practice questions",
       "All subjects unlocked",
-      "AI Tutor — 60 messages/month",
+      "AI Tutor — 150 messages/month",
       "Full Mock Exams",
       "Detailed performance analytics",
       "Offline mode",
@@ -49,7 +49,7 @@ export const PLANS = {
     badge: "RECOMMENDED — Save ₦14,000",
     features: [
       "Everything in Pro Monthly",
-      "AI Tutor — 80 messages/month",
+      "AI Tutor — 250 messages/month",
       "14-day money-back if you use under 30 AI messages",
       "Early access to new features",
       "Exclusive leaderboard badge",
@@ -64,7 +64,7 @@ export const PLANS = {
     badge: "IELTS — Study Abroad Ready",
     features: [
       "Everything in Pro Yearly",
-      "AI Tutor — 80 messages/month",
+      "AI Tutor — 250 messages/month",
       "Full IELTS question bank (100 questions)",
       "IELTS band score calculator",
       "Speaking practice prompts",
@@ -93,11 +93,21 @@ export const PLANS = {
 // after the plan allowance. Free = plain daily counter.
 export const AI_LIMITS = {
   free: { perDay: 3, perMonth: 0, dailyCap: 3 },
-  pro_monthly: { perDay: 0, perMonth: 60, dailyCap: 7 },
-  pro_yearly: { perDay: 0, perMonth: 80, dailyCap: 9 },
-  ielts: { perDay: 0, perMonth: 80, dailyCap: 9 },
-  default: { perDay: 0, perMonth: 60, dailyCap: 7 },
+  // Paid monthly caps follow the plan allow/limit list: Monthly Pro 150,
+  // Yearly Pro 250, IELTS 250. dailyCap is a soft pacing guide so a student
+  // cannot burn the full monthly allowance in week 1; it is not a hard block.
+  pro_monthly: { perDay: 0, perMonth: 150, dailyCap: 12 },
+  pro_yearly: { perDay: 0, perMonth: 250, dailyCap: 16 },
+  ielts: { perDay: 0, perMonth: 250, dailyCap: 16 },
+  // Classroom members inherit Pro limits per seat; the 300/student pooled
+  // allowance is enforced server-side via the team pool (see teamAiPool).
+  team_monthly: { perDay: 0, perMonth: 150, dailyCap: 12 },
+  team_yearly: { perDay: 0, perMonth: 150, dailyCap: 12 },
+  default: { perDay: 0, perMonth: 150, dailyCap: 12 },
 };
+
+// Classroom / School: 300 AI messages per student, pooled across the team.
+export const CLASSROOM_AI_PER_STUDENT = 300;
 
 export const AI_PACK_MESSAGES = 50;
 export const AI_SOFT_WARNING_PCT = 0.8;
