@@ -110,12 +110,18 @@ export default async function handler(req, res) {
           { merge: true }
         );
         // Partner Plan: commission for any paid plan (idempotent by ref).
+        // Use the NGN base from metadata (client always sends the NGN price);
+        // fall back to the raw amount only for NGN charges so USD/GHS/KES/ZAR
+        // payments don't get commissions computed on the foreign amount.
         if (metadata.partnerCode && _adminLib) {
+          const ngnBase = Number(metadata.amountNaira) > 0
+            ? Number(metadata.amountNaira)
+            : ((data.currency || "NGN") === "NGN" ? amountMinor / 100 : 0);
           await recordCommission(_adminLib, db, {
             reference,
             userId,
             plan,
-            ngn: amountMinor / 100,
+            ngn: ngnBase,
             partnerCode: metadata.partnerCode,
           });
         }

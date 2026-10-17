@@ -6,7 +6,7 @@ import { useToast } from "../components/Toast";
 import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { usePaystack } from "../hooks/usePaystack";
-import { PLANS as CONFIG_PLANS, CURRENCIES, formatMoney, teamPrice } from "../config/plans";
+import { PLANS as CONFIG_PLANS, TEAM_PLANS, CURRENCIES, formatMoney, teamPrice } from "../config/plans";
 import { Check, Crown, Zap, ShieldCheck, Sparkles, ChevronRight, Loader2, Award, Users, Ticket } from "lucide-react";
 import { logActivity } from "../lib/activityLog";
 import { createTeamDraft, activateTeam, joinTeamByCode } from "../lib/teams";
@@ -300,7 +300,7 @@ const PaymentPage = () => {
           <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center text-primary"><Users size={22} /></div>
           <h2 className="text-2xl font-black text-text">Pay for Your Team</h2>
         </div>
-        <p className="text-text-muted mb-6">One payment covers everyone — classmates, tutorial group, family. Classroom Monthly is {formatMoney(2800, currency)}/seat with 10% off at 10+ seats and 20% off at 15+ seats; Classroom Yearly is {formatMoney(28000, currency)}/seat with a locked {formatMoney(22000, currency)}/seat at 15+ seats. Each member redeems your team code and gets Pro until your plan expires. You occupy the first seat.</p>
+        <p className="text-text-muted mb-6">One payment covers everyone — classmates, tutorial group, family. Classroom Monthly is {formatMoney(TEAM_PLANS.team_monthly.pricePerSeat, currency)}/seat with 10% off at 10+ seats and 20% off at 15+ seats; Classroom Yearly is {formatMoney(TEAM_PLANS.team_yearly.pricePerSeat, currency)}/seat with a locked {formatMoney(22000, currency)}/seat at 15+ seats. Each member redeems your team code and gets Pro until your plan expires. You occupy the first seat.</p>
 
         <div className="grid md:grid-cols-2 gap-4 mb-4">
           <label className="text-sm font-bold text-text">Team name
@@ -308,8 +308,8 @@ const PaymentPage = () => {
           </label>
           <label className="text-sm font-bold text-text">Plan
             <select value={teamPlan} onChange={(e) => setTeamPlan(e.target.value)} className="input-field mt-2">
-              <option value="team_monthly">Classroom Monthly — {formatMoney(2800, currency)}/seat/mo</option>
-              <option value="team_yearly">Classroom Yearly — {formatMoney(28000, currency)}/seat/yr</option>
+              <option value="team_monthly">Classroom Monthly — {formatMoney(TEAM_PLANS.team_monthly.pricePerSeat, currency)}/seat/mo</option>
+              <option value="team_yearly">Classroom Yearly — {formatMoney(TEAM_PLANS.team_yearly.pricePerSeat, currency)}/seat/yr</option>
             </select>
           </label>
         </div>

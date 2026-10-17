@@ -8,6 +8,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import { useNavigate } from "react-router-dom";
 import { usePaystack } from "../hooks/usePaystack";
+import { PLANS, formatMoney } from "../config/plans";
 
 const FORMAT = [
   { skill: "Listening", detail: "4 sections · 40 Qs · ~30 min. Recording plays ONCE.", drill: "Read ahead during pauses; underline keywords." },
@@ -134,7 +135,7 @@ export default function IELTSPage() {
               speaking drills and the visa requirement guide. One payment, 12 months.
             </p>
             <div className="flex items-baseline gap-2">
-              <span className="text-4xl font-black font-mono text-text">₦80,000</span>
+              <span className="text-4xl font-black font-mono text-text">{formatMoney(PLANS.ielts.price, "NGN")}</span>
               <span className="text-text-muted font-bold text-sm">/ year</span>
             </div>
           </div>
@@ -144,7 +145,7 @@ export default function IELTSPage() {
               disabled={buying}
               className="btn-primary h-14 text-base"
             >
-              {buying ? "Opening Paystack…" : "Get IELTS Plan ₦80,000/yr"}
+              {buying ? "Opening Paystack…" : `Get IELTS Plan ${formatMoney(PLANS.ielts.price, "NGN")}/yr`}
             </button>
             <button onClick={() => navigate("/payment")} className="btn-secondary h-12 text-sm">
               See all plans
